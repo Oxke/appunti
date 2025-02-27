@@ -1,0 +1,237 @@
+\input{preamble_geo2.tex}
+
+\title{Appunti di Geometria 2}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/Geo2}{\texttt{Oxke/appunti/Geo2}}}
+\date{Secondo semestre, 2024 \-- 2025, prof. Lidia Stoppino e Leone Slavich}
+
+\begin{document}
+
+\maketitle
+
+Il corso è diviso in due parti: geometria differenziale (tenuto da Slavich) e
+gruppo fondamentale (tenuto dalla Stoppino). Ci sono esercitazioni di geometria
+differenziale.
+Ci sono vari libri consigliati:
+\begin{itemize}[label = --]
+    \item Abate \-- Tovena, \emph{Curve e superfici}, Springer
+    \item M. D. Do Carmo, \emph{Differential Geometry of Curves and Surfaces},
+        Prentice Hall
+    \item E. Sernesi, \emph{Geometria 2}, Bollati Boringhieri
+    \item Dispense del prof. Ghigi (sulle quali è stato disegnato il corso,
+        almeno per la parte di geometria differenziale)
+\end{itemize}
+
+\chapter{Geometria Differenziale}
+Il corso di geometria differenziale studierà curve e superfici in
+\(\mathbb{R}^3\) definiti \textbf{analiticamente} tramite funzione
+\(C^{\infty}\) \emph{(lisce)}. Studiamo la \textbf{geometria locale} e infine
+(verso la fine del corso) la \textbf{geometria globale}, in particolare il
+teorema di Gauss-Bonnet.
+
+\section{Definizioni e proprietà iniziali}
+\subsection{Funzioni lisce}
+
+Sia \(I = {(a,b)} \subseteq \mathbb{R} \) intervallo aperto (anche possibilmente
+\(a = -\infty\) o \(b = +\infty\)). Sia 
+\[
+    C^{0}{(I)} = \{f : I \to \mathbb{R} : f \text{ è continua\footnote{si veda
+    Geometria 1 per definizione e studio della continuità} su }I\}
+\]
+\begin{definition}{Derivabile}
+    Diciamo che \(f \in C^{0}{(I)}\) è derivabile se \(\forall x_{0} \in I\),  
+    \[
+        \lim_{x \to x_{0}} \frac{f{(x)} - f{(x_{0})}}{x - x_{0}} = c =:
+        f'{(x_{0})} \quad ; \quad c \in \mathbb{R}
+    \]
+\end{definition}
+Ora procediamo definendo ricorsivamente le funzioni \(C^{k}{(I)}\).
+\begin{definition}{Classe \(C^{k}\) }
+    Per ogni \(k\ge 1\), diciamo che \(f \in C^{k}{(I)}\) se \(f\) è derivabile
+    e \(f' \in C^{k-1}{(I)}\)
+\end{definition}
+Dunque, ad esempio \(f \in C^{1}{(I)}\) se \(f\) è derivabile su \(I\) e la sua
+derivata \(f'\) è continua su \(I\).
+Detto più colloquialmente, una funzione \(f \in C^{k}{(I)}\) è una funzione
+derivabile (almeno) \(k\) volte, e tale che la sua derivata \(i\)-esima
+\(f^{{(i)}}\) è continua per ogni \(i = 0, \dots, k\).
+\begin{remark}
+    \[
+        C_{0} \supset C^{1} \supset C^{2} \supset \dots \supset C^{i} \supset
+        C^{i+1} \supseteq  \dots
+    \]
+\end{remark}
+\begin{definition}{funzioni lisce}
+    \[
+        C^{\infty}{(I)} = \bigcap_{k=0}^{\infty} C^{k}{(I)} = \text{insieme
+        delle \textbf{funzioni lisce}}
+    \]
+\end{definition}
+
+\begin{theorem}[Proprietà delle classi \(C^{k}\)]\label{thm:proprieta_Ck}
+    Sia \(k \in \mathbb{N} \cup \{+\infty\} \). Se \(f, g \in C^{k}{(I)}\) e
+    \(\lambda \in \mathbb{R}\), allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(f + g \in C^{k}{(I)}\) 
+    \item \(\lambda f \in C^{k}{(I)}\)
+    \item \(f\cdot g \in C^{k}{(I)}\)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    1.~e 2.~sono semplici. Per 3.~si procede per induzione su \(k\).
+
+    Nel caso base \(k = 0\) il prodotto di due funzioni continue è anch'esso
+    una funzione continua, che è vero.
+
+    Supponiamo ora che 3.~valga per \(k-1\). Siano \(f, g \in C^{k}{(I)}\).
+    Allora \((f\cdot g)' = f' \cdot g + f \cdot g'\) che è somma di funzioni
+    \(C^{k-1}\) per ipotesi induttiva e perché \(C^{k} \subset C^{k-1}\), e
+    dunque \((f\cdot g)' \in C^{k-1}\) da cui segue che \(f\cdot g \in C^{k}\).
+
+    Infine possiamo concludere per \(k = +\infty\) perché vale per tutti i \(k
+    \in \mathbb{N}\).
+\end{proof}
+
+Dal teorema~\ref{thm:proprieta_Ck} segue che \(C^{k}{(I)}\) è uno spazio
+vettoriale (con operazione di somma e moltiplicazione per scalare) e inoltre
+\(C^{k} {(I)}\) contiene le funzioni costanti e allora \(C^{k}{(i)}\) con
+operazioni di somma e moltiplicazione puntuale è un anello. Da queste due segue
+che \(C^{k}{(I)}\) è una \(\mathbb{R}\)-algebra.
+
+\begin{example}\label{ex:liscia_non_analitica}
+    Esistono funzioni \textbf{lisce} che \textbf{non} sono \textbf{analitiche}.
+    In particolare esistono funzioni lisce che sono nulle su un aperto ma non
+    nulle dappertutto (differentemente da quanto succede sulle funzioni
+    olomorfe). Un esempio di tale funzione è 
+    \begin{align*}
+        f : \mathbb{R} &\longrightarrow \mathbb{R} \\
+        x &\longmapsto f (x) = \begin{cases}
+            0 & x \le 0 \\
+            e^{-\frac{1}{x^2}} & x > 0
+        \end{cases}
+    \end{align*}
+    
+    Questa è una funzione \(C^{\infty}{(\mathbb{R})}\) che non può essere
+    analitica perché contraddirebbe il teorema del prolungamento.
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -3, xmax= 3,
+                ymin= -1, ymax = 1.5,
+                axis lines = middle,
+                width = 0.8\textwidth,
+            ]
+            \addplot[domain=-3:3, samples=100]{exp(-1/x^2) * (x > 0)};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Grafico della funzione \(f(x)\)
+        dell'esempio~\ref{ex:liscia_non_analitica}}\label{fig:liscia_non_analitica} 
+    \end{figure}
+    Similmente si possono costruire funzioni costanti in aperti, raccordate in
+    modo \(C^{\infty}\) e ovviamente non analitiche.
+\end{example}
+\begin{proposition}[Composizione]\label{prp:composizione_ck}
+    La composizione di funzioni \(C^{\infty}\) è \(C^{\infty}\). Sia \(f : I \to
+    \mathbb{R}\) e \(g : J \to \mathbb{R}\). Allora se \(f \in C^{\infty}{(I)}\)
+    e \(g \in C^{\infty}{(J)}\) e \(f{(I)} \subseteq J \) (ossia si possono
+    comporre), allora \(g \circ f : I \to \mathbb{R}\) è ben definita e 
+    \[
+        g \circ f \in C^{\infty}{(I)}
+    \]
+\end{proposition}
+\begin{proof}
+    Lo dimostriamo per \(k \in \mathbb{N}\) invece che \(k = \infty\), segue
+    naturalmente il caso enunciato. Per \(k = 0\) è ovvio.
+
+    Supponiamo che valga per \(k-1\). Allora siano \(f, g \in C^{k}\) e
+    tali che \(f{(I)} \subseteq J \). Allora \({(g \circ f)}' = {(g' \circ f)}
+    \cdot f'\) che è prodotto di funzioni \(C^{k-1}\) per ipotesi induttiva e
+    per il teorema~\ref{thm:proprieta_Ck} segue che \(g \circ f \in C^{k}{(I)}\).
+\end{proof}
+
+\subsection{Diffeomorfismi}
+\begin{definition}{Diffeomorfismo}
+    Un diffeomorfismo è un isomorfismo nella categoria delle funzioni lisce.
+\end{definition}
+Informalmente, un diffeomorfismo è un omeomorfismo \(C^{\infty}\). 
+\begin{definition}{Diffeomorfismo}
+    Siano \(I, J \subseteq \mathbb{R} \) intervalli aperti in \(\mathbb{R}\).
+    Allora \(f : I \to J\) è un \textbf{diffeomorfismo} se
+\begin{enumerate}[label = \arabic*.]
+    \item \(f \in C^{\infty}{(I)}\) 
+    \item \(f\) è biettiva
+    \item \(f^{-1} \in C^{\infty}{(J)}\)
+\end{enumerate}
+\end{definition}
+\begin{remark}
+    La terza condizione \textbf{non} è ridondante. Infatti sia \(I = J =
+    \mathbb{R}\) e \(f{(x)} = x^{3}\) che è chiaramente \(C^{\infty}\) e
+    biunivoca. Tuttavia \(f^{-1}{(x)} = \sqrt[3]{x}\) non è derivabile in \(0\),
+poiché \(f'(0) = 0\) e \({f^{-1}}'(y) = \frac{1}{f'{(x)}}\) se \(f{(x)} = y\)
+per ogni \(x \in \mathbb{R}\) tale che \({f^{-1}}'{(y)}\) sia ben definita.
+\end{remark}
+\begin{remark}
+    Se \(I\) e \(J\) sono intervalli aperti di \(\mathbb{R}\) e \(f : I\to J\) è
+    diffeomorfismo, allora \(f'{(x)} \neq 0\) per ogni \(x \in I\). Infatti
+    sappiamo che
+    \begin{equation}\label{eq:derivata_inversa}
+        {f^{-1}}'(y) = \frac{1}{f'{(x)}} \quad ; \quad f{(x)} = y \quad
+        \forall x \in J 
+    \end{equation}
+    dunque \(f'{(x)}\) non può essere nullo, poiché significherebbe che
+    \(f^{-1}\) non è derivabile in \(y = f^{-1}{(x)}\).
+\end{remark}
+\begin{lemma}
+    Sia \(I \subseteq \mathbb{R}\) un intervallo aperto. Sia \(f : I \to
+    \mathbb{R}\) una funzione liscia e tale che \(f'{(x)} \neq 0\) per ogni \(x
+    \in I\). Allora \(f{(I)} = J\) è un intervallo aperto e \(f : I \to J\) è un
+    diffeomorfismo.
+\end{lemma}
+\begin{proof}
+    Sia \(f\) come nell'enunciato. Allora \(f' : I \to \mathbb{R}\) è continua
+    su \(I\) e non si annulla mai. Segue che \(f'\) ha segno costante su \(I\)
+    (\(f' > 0\) oppure \(f' < 0\)).
+
+    Assumiamo \(f' > 0\) su \(I\). Allora \(f\) è strettamente crescente e
+    dunque iniettiva. Allora \(f : I \to f{(I)} =: J\) è biettiva. Inoltre \(J\)
+    è un intervallo aperto in \(\mathbb{R}\). Infatti è chiaramente intervallo
+    (è connesso) in quanto immagine continua di un connesso (intervallo).  Sia
+    ora \(y_{0} \in J\) e sia \(x_{0} \in I\) tale che \(f{(x_{0})} = y_{0}\).
+    Sia \(\varepsilon > 0\) tale che \([x_{0} - \varepsilon, x_{0} +
+    \varepsilon] \subseteq I \). Poiché \(f\) è strettamente crescente, segue
+    che 
+    \[
+        f{(x_{0}-\varepsilon)} < f{(x_{0})} < f{(x_{0}+\varepsilon)}
+    \]
+    sapendo già che \(J\) è un intervallo, segue che \[I\supseteq
+    [f{(x_{0}-\varepsilon)}, f{(x_{0} + \varepsilon)}] \text{ è un intorno di
+\(y_{0}\)}\]
+    Rimane solo da vedere che la funzione \(f^{-1} : J \to I\) è
+    \(C^{\infty}\). Notiamo intento che \(f^{-1}\) è continua, poiché \(f\) è aperta.
+    Inoltre sappiamo che \(f^{-1}\) è derivabile poiché è l'inversa di una
+    funzione derivabile con derivata e vale
+    l'equazione~\eqref{eq:derivata_inversa} per ogni \(y \in J\).
+
+    Sia \(u : {(0, +\infty)} \to {(0, +\infty)}\) definita da \(u{(x)} = 1/x\) è
+    un diffeomorfismo e da~\ref{eq:derivata_inversa} abbiamo che
+    \[
+        {f^{-1}}' = u \circ f' \circ f^{-1}
+    \]
+    e quindi se assumiamo induttivamente che se \(f^{-1} \in C^{k}\) allora ne
+    consegue dalla proposizione~\ref{prp:composizione_ck} che \({f^{-1}}' \in
+    C^{k}\) e dunque \(f^{-1} \in C^{k+1}\) 
+
+\end{proof}
+
+\subsection{Curve}
+\begin{definition}{Curva parametrica}
+    Sia \(\alpha : I \to \mathbb{R}^{3}\) una funzione 
+    \(t \mapsto (\alpha_{1}(t), \alpha_{2}(t), \alpha_{3}(t)) \) con \(I\)
+    intervallo aperto.
+    
+    Allora se \(\alpha_{1}, \alpha_{2}, \alpha_{3}\) sono funzioni lisce la
+    funzione \(\alpha\) è detta \textbf{curva} parametrizzata in \(\mathbb{R}^3\) 
+\end{definition}
+\end{document}
+

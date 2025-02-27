@@ -1,0 +1,214 @@
+\input{../preamble_appunti.tex}
+
+\title{Appunti di Meccanica Razionale}
+\author{Osea}
+\date{Secondo semestre, 2024 \-- 2025, prof. Ada Pulvirenti}
+
+\begin{document}
+
+\maketitle
+
+Testo di riferimento: \emph{Meccanica Analitica} di Fasano Marmi, più lungo e
+preciso. Mentre il testo \emph{Meccanica Classica} di Goldstein è il testo
+classico dei fisici. 
+
+\section{Spazio-Tempo-Moto}
+\subsection{Moto}
+Studiare il moto in meccanica significa studiare la funzione \(I = [0, T) \to
+\mathcal{E}\), con \(t \mapsto P(t)\), dove \(\mathcal{E}\) e \(I\) sono
+rispettivamente lo spazio della meccanica classica e un intervallo incluso
+nell'asse dei tempi, e entrambi sono spazi affini euclidei.
+\begin{notebox}
+    Nella meccanica classica il \textbf{tempo} è \textbf{assoluto}, ovvero è
+    indipendente dallo stato di moto dell'osservatore.
+\end{notebox}
+\begin{definition}{Spazio affine}
+    Uno spazio affine reale di dimensione \(n\) è un insieme \(\mathbb{A} ^n\) i
+    cui elementi sono detti punti, dotato delle seguenti strutture:
+\begin{enumerate}[label = \arabic*.]
+    \item Uno spazio vettoriale reale di dimensione \(n\), \(V\), detto spazio
+        delle traslazioni (o dei vettori liberi)
+\item Un'applicazione \(\varphi : \mathbb{A}^{n} \times  \mathbb{A}^{n} \to
+        V\); \(P, Q \mapsto P - Q\)  con le seguenti proprietà
+        \begin{enumerate}[label = \alph*.]
+            \item \(\forall (P, v) \in  A^{n} \times  V\) esiste un unico punto
+                \(Q\) tale che \(Q - P = \mathbf{v} \) 
+            \item \((P - Q) + (Q - R) = P - R\) per ogni \(P, Q, R \in
+                \mathbb{A}^{n}\) 
+        \end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\begin{definition}{Retta}
+    Una \textbf{retta} in \(\mathbb{A}^{n}\) passante per un dato punto \(P\) e
+    con direzione \(\mathbf{v} \) è il sottospazio affine \(P + \Span{\mathbf{v} } \) ed è
+    parametrizzata da \(t \mapsto P + t \mathbf{v} \) 
+\end{definition}
+
+\begin{definition}{Vettore applicato}
+    Una coppia ordinata \({(P, \mathbf{u} )} \in \mathbb{A}^{n} \times V\) si dice vettore
+    applicato a \(P\).
+\end{definition}
+
+\begin{definition}{Sistema di riferimento}
+    Indicheremo con sistema di riferimento affine in \(\mathbb{A}^{n}\) un
+    insieme 
+    \[
+      \Sigma = \{O \in \mathbb{A}^{n} ; \mathbf{v} _{1}, \mathbf{v} _{2}, \dots,
+      \mathbf{v} _{n}\} \quad ;
+      \quad {\{\mathbf{v} _{i}\}}_{i = 1, \dots, n} \text{ base di } V
+    \]
+\end{definition}
+\begin{remark}
+    Allora ogni punto \(P\) rispetto a \(\Sigma\) è individuato da \\\(P - O =
+    x_{1}\mathbf{v} _{1} +~\dots + x_{n}\mathbf{v} _{n}\) 
+\end{remark}
+
+\begin{definition}{Spazio euclideo}
+    Uno spazio affine reale di dimensione \(n\), \textbf{dotato di prodotto
+    scalare} su \(V\) si dice spazio \textbf{affine euclideo}
+\end{definition}
+
+Dal prodotto scalare possiamo definire la distanza tra due punti di
+\(\mathbb{A}^{n}\) come
+\[
+d(P, Q) = \|P - Q\| = \sqrt{\langle P - Q, P - Q \rangle} = \sqrt{{(P -
+    Q)} \cdot {(P - Q)}}
+\]
+e la nozione di angolo tra due vettori \(\mathbf{u} , \mathbf{v}  \neq 0\) come il valore \(\alpha
+\in [0, \pi]\) tale che
+\[
+  \cos \alpha = \frac{\mathbf{u}  \cdot \mathbf{v} }{\|\mathbf{u} \| \|\mathbf{v} \|}
+\]
+(notare che per Schwarz risulta che effettivamente tale valore esiste)
+
+Comunemente ci ricondurremo a utilizzare un sistema di riferimento
+\textbf{ortonormale}, ossia che ha come base una base ortonormale dello spazio.
+In particolare \(\mathcal{E}\) è uno spazio affine reale euclideo di dimensione
+3, e dunque useremo il sistema di riferimento
+\[
+    \Sigma = \{O, \mathbf{e} _{1}, \mathbf{e} _{2}, \mathbf{e} _{3}\} \quad ; \quad \mathbf{e} _{i} \cdot \mathbf{e} _{j} =
+    \delta_{ij} \quad \forall i, j = 1, 2, 3
+\]
+Studiare il moto significherà studiare la relazione \(t \mapsto P(t)\) funzione
+\([0, T) \to \mathcal{E}\). Introdotto \(\Sigma\), possiamo scrivere allora che
+il problema è ricondotto a studiare la funzione \([0, T) \to \mathbb{R}^{3}\)
+tale che \(t \mapsto (x_{1}, x_{2}, x_{3})\) e tale che \(P(t) = x_{1} \mathbf{e} _{1} +
+x_{2} \mathbf{e} _{2} + x_{3} \mathbf{e} _{3}\).
+
+\begin{definition}{Coordinate Curvilinee}
+Sia \(Q \subseteq \mathbb{R}^{n} \). Consideriamo un'applicazione \(\mathbf{x} :
+Q \to D \subseteq \mathbb{R}^{n} \) tale che 
+\[
+  \mathbf{q} = \begin{pmatrix}
+      q_{1} \\
+      \vdots  \\
+      q_n
+  \end{pmatrix} \mapsto \mathbf{x} {(\mathbf{q} )} = \begin{pmatrix}
+      x_{1}{(q_{1}, \dots, q_{n})} \\
+      \vdots \\
+      x_{n}{(q_{1}, \dots, q_{n})}
+  \end{pmatrix}
+\]
+che gode delle seguenti proprietà:
+\begin{enumerate}[label = \arabic*.]
+    \item \(\mathbf{x}  \in C^{1}{(Q)}\) 
+    \item La matrice Jacobiana \(J\mathbf{x} \) abbia rango massimo
+\end{enumerate}
+Allora \(\mathbf{x} \) rappresenta un sistema di coordinate su \(D\) che sono
+dette \emph{coordinate curvilinee}
+\end{definition}
+I vettori colonna della matrice \(J\mathbf{x} \), ossia
+\[
+  \mathbf{u}_i = \frac{\partial \mathbf{x} }{\partial q_{i}} \quad \forall i =
+  1, \dots, n
+\]
+sono una base per \(V\) che viene chiamata \textbf{base locale}.
+
+La base locale è ortogonale se \(\mathbf{u}_i \cdot \mathbf{u}_j = 0\) per ogni
+\(i \neq j\). Vogliamo ora operare Gram-Schmidt per ottenere una base
+ortonormale \(\{\tilde{\mathbf{u}}_i\} \) a partire da una base generica
+\(\{\mathbf{u}_i\}\). 
+
+\begin{remark}
+    I vettori \(\mathbf{u}_i\) della base locale sono in ogni punto \(P\)
+    tangenti alla rispettiva linea coordinata \(\mathbf{x} {(q_{i})} = \mathbf{x}(q_{1}, \dots, q_{i},
+    \dots, q_{n})\), dove tutte le coordinate sono fissate tranne \(q_{i}\).
+    Allora \(\mathbf{u}_i = \frac{\partial \mathbf{x} }{\partial q_{i}}\) è
+    tangente alla linea coordinata \(\mathbf{x} {(q_{i})}\).
+\end{remark}
+
+\begin{example}[Coordinate polari nel piano]
+    Prendiamo \(Q = {(0, +\infty)} \times  [0, 2\pi)\) e \(\mathbf{q} = {(q_{1},
+    q_{2})} = {(r, \theta)}\). Allora 
+    \[
+      \mathbf{x} {(r, \theta)} = \begin{pmatrix}
+          x_{1}{(r, \theta)}=r \cos \theta \\
+          x_{1}{(r, \theta)}=r \sin \theta
+      \end{pmatrix} \in C^{1}
+    \]
+    E la base locale è 
+    \[
+        \mathbf{u}_1 = \frac{\partial \mathbf{x} }{\partial r} = \begin{pmatrix}
+            \cos \theta \\
+            \sin \theta
+        \end{pmatrix} \quad ; \quad \mathbf{u}_2 = \frac{\partial \mathbf{x}}{\partial \theta} = \begin{pmatrix}
+            -r \sin \theta \\
+            r \cos \theta
+        \end{pmatrix}
+    \]
+    ed evidentemente \(\mathbf{u}_1 \cdot \mathbf{u}_2 = 0\) dunque la base
+    locale è ortogonale. Per ottenere una base ortonormale dunque prendiamo
+    \[
+      \mathbf{e}_r = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|} = \mathbf{u}_1 \quad
+      ; \quad \mathbf{e}_\theta = \frac{\mathbf{u}_2}{\|\mathbf{u}_2\|} =
+      \frac{1}{r} \mathbf{u}_2 
+    \]
+    Osserviamo che effettivamente \(\mathbf{e}_r\) è tangente alla linea
+    coordinata corrispondente (fisso \(\theta\)) e \(\mathbf{e}_\theta\) è
+    tangente alla linea coordinata corrispondente (fisso \(r\)).
+\end{example}
+\begin{example}[Coordinate sferiche]
+    \[
+        Q = {(0, +\infty)} \times [0, 2\pi) \times (0, \pi) \subseteq
+        \mathbb{R}^3 \quad ; \quad \mathbf{q} = {(q_1, q_2, q_3)} = {(r, \theta,
+        \varphi)}
+    \]
+    \[
+      \mathbf{x} {(\mathbf{q} )} = \begin{pmatrix}
+          x_{1}{(r, \theta, \varphi)} = r \sin \theta \cos \varphi  \\
+          x_{2}{(r, \theta, \varphi)} = r \sin \theta \sin \varphi  \\
+          x_{3}{(r, \theta, \varphi)} = r \cos \theta
+      \end{pmatrix} : Q \to \mathcal{E} \sminus \{\text{ asse \(z\)}\} 
+    \]
+    che è chiaramente di classe \(C^{1}\) e ha Jacobiano di rango massimo. La
+    base locale è
+    \begin{align*}
+      \mathbf{u}_1 = \frac{\partial \mathbf{x} }{\partial r} = \begin{pmatrix}
+          \sin \theta \cos \varphi \\
+          \sin \theta \sin \varphi \\
+          \cos \theta
+          \end{pmatrix} \quad &; \quad \mathbf{u}_2 = \frac{\partial \mathbf{x}
+          }{\partial \varphi } = \begin{pmatrix}
+          - r \sin \theta \sin \varphi \\
+          r \sin \theta \cos \varphi \\
+          0
+      \end{pmatrix} \quad ; \\ \mathbf{u}_3 = \frac{\partial \mathbf{x}
+      }{\partial \theta} &= \begin{pmatrix}
+          r \cos \theta \cos \varphi \\
+          r \cos \theta \sin \varphi \\
+          -r\sin \theta
+      \end{pmatrix}
+    \end{align*}
+
+    e dunque la base locale è ortogonale. Per ottenere una base ortonormale
+    prendiamo, per ogni \(\mathbf{u} _{i}\), il vettore \(\mathbf{u}_i /
+    \|\mathbf{u} _i\|\), ossia
+    \[
+      \mathbf{e}_r = \mathbf{u}_1 \quad ; \quad \mathbf{e}_\varphi =
+      \frac{\mathbf{u}_2}{r \sin\theta} \quad ;  \quad \mathbf{e}_\theta =
+      \frac{\mathbf{u}_3}{r}
+    \]
+\end{example}
+\end{document}
+

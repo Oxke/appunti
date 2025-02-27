@@ -1,0 +1,186 @@
+\input{../preamble_appunti.tex}
+
+\title{Appunti di Algebra 2}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/Algebra2}{\texttt{Oxke/appunti/Algebra2}}}
+
+\date{Secondo semestre, 2024 \-- 2025, prof. Paola Frediani}
+
+\begin{document}
+\maketitle
+
+I testi preferiti sono
+\begin{itemize}[label = --]
+    \item \textit{Algebra}, di Michael Artin
+    \item \emph{Algebra}, di Herstein
+\end{itemize}
+
+\section{Azioni di gruppi su insiemi}
+Chiameremo \(G\) un gruppo e \(S\) un insieme
+\begin{definition}
+    Un'azione (sinistra) di \(G\) su \(S\) e un'applicazione
+    \[
+      F : G\times S \to S
+    \]
+    tale che
+\begin{enumerate}[label = \roman*)]
+    \item \(F(e, s) = s\) per ogni \(s \in S\)
+    \item \(\forall g, h \in G\) e \(\forall s \in S\) vale \(F{(g, F{(h, s)})}
+        = F{(gh, s)}\) 
+\end{enumerate}
+\end{definition}
+Si usa anche la notazione \(F{(g, s)} =: g{(s)}\) che permette la scrittura più
+concisa
+\[
+  e{(s)} = s \quad \text{ e } \quad g{(h{(s)})} = {(gh)}{(s)} \quad \forall s
+  \in S, \quad \forall g, h \in  G
+\]
+\begin{proposition}\label{prop:azione_biiezione}
+    Per ogni \(g \in G\), l'applicazione \(F_g : S \to S\) definita da
+    \(F_g{(s)} = F{(g, s)} = g{(s)}\) è una biiezione
+\end{proposition}
+\begin{proof}
+    \({(Fg)}^{-1} = F_{g^{-1}}\) infatti 
+    \[
+      F_g \circ F_{g^{-1}} {(s)} = g{(g^{-1}{(s)})} \overset{(ii)}{=} e{(s)}
+      \overset{(i)}{=} s
+    \]
+    e analogamente per l'altra composizione
+\end{proof}
+
+\begin{proposition}
+
+L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
+\(S{(S)}\) il gruppo delle permutazioni di \(S\) è un omomorfismo di gruppi.
+\end{proposition}
+\begin{proof}
+\[
+    \psi{(gh)}= F_{gh} \overset{(ii)}{=} F_g \circ F_h = \psi{(g)} \circ
+    \psi{(h)}
+\]
+\end{proof}
+\begin{definition}{Azione fedele}
+    Un'azione \(F : G \times S \to S\) si dice \textbf{fedele} se \(\psi\) è
+    iniettivo
+\end{definition}
+\begin{remark}
+    Ovvero se e solo se \(\text{Ker}\psi = \{e\} \iff (\psi{(g)} = \text{Id}_S
+    \iff g = e)\) 
+\end{remark}
+
+\begin{example}
+    Se \(S = G\) il gruppo stesso e sia
+    \[
+        m : G \times G \to G \quad \text{ con } \quad m{(g, h)} = gh
+    \]
+    la moltiplicazione a sinistra. Allora \(m\) è un'azione sinistra, infatti
+\begin{enumerate}[label = \roman*)]
+    \item \(m {(e, h)} = eh = h\) per ogni \(h \in G\) 
+    \item \(m {(gg', h)} = {(g g')}h = g{(g'h)} = m {(g, g'h)}\) per ogni \(g,
+        g', h \in G\) 
+\end{enumerate}
+    Inoltre \(m\) è un'azione fedele, infatti 
+    \[
+        \psi{(g)}{(h)} = h \forall h \in G \iff gh = h \implies g = e
+    \]
+    \begin{remark}
+        Se \(G\) è un gruppo finito, con \(\# G = n\) allora \(S{(G)} \cong S_n\)
+        e poiché \(\psi\) è iniettivo, \(G \cong \psi{(G)} < S{(G)} \cong S_n\)
+        il teorema di Cayley
+    \end{remark}
+\end{example}
+\begin{example}
+    Sempre con \(G = S\) possiamo considerare l'azione di coniugio
+    \[
+        \varphi : G \times G \to G \quad \text{ con } \quad \varphi{(g, h)} =
+        ghg^{-1}
+    \]
+    \begin{enumerate}[label = \roman*)]
+        \item \(\varphi{(e, h)} = ehe^{-1} = h\) per ogni \(h \in G\)
+        \item \(\varphi {(g g', h)} = {(g g')}h {( g g' )}^{-1} = g g' h g'^{-1}
+            g^{-1} = g{(\varphi {(g', h)})} g ^{-1} = \varphi {(g, \varphi {(g',
+            h)})}\) 
+    \end{enumerate}
+    \(\psi : G \to S(G)\) e \(\text{Im} \psi = \text{Inn} {(G)} <
+    \text{Aut}{(G)}\). Non è necessariamente un'azione fedele, infatti
+    \[
+        \text{Ker}{(\psi)} = \{g \in G : \forall h \in G \quad ghg^{-1} = h\} =
+        Z(G)
+    \]
+    da cui per il primo teorema di isomorfismo
+    \[
+      G / Z{(G)} = \text{Inn}{(G)}
+    \]
+\end{example}
+\begin{example}
+    Con \(G = S_n\) e \(S = \{1, \dots, n\} \) allora la funzione
+    \[
+        (\sigma, i) \mapsto \sigma{(i)}
+    \]
+    è ovviamente un'azione
+\end{example}
+\begin{example}
+    Preso \(G \cong \mathbb{Z} / 2 \mathbb{Z} \cong \{1, \sigma\} \) con
+    \(\sigma^2 = 1\)  e \(S = \mathbb{C}\) allora la funzione
+    \[
+        F : G \times \mathbb{C} \to \mathbb{C} \quad \text{ con } \quad F{(1,
+        z)} = z \quad \text{ e } \quad F{(\sigma, z)} = \overline{z} \quad
+        \forall z \in \mathbb{C}
+    \]
+    è un'azione.
+\end{example}
+\begin{definition}{Orbita e Stabilizzatore}
+    Sia \(F : G \times  S \to S\) un'azione di un gruppo \(G\) su \(S\). Allora
+    per ogni \(s \in S\) si definisce \textbf{orbita} di \(s\) l'insieme
+    \[
+        O_s = \{g{(s)} : g \in G\}
+    \]
+    e si definisce \textbf{stabilizzatore} di \(s\) l'insieme
+    \[
+        \text{stab}{(s)} = \{g \in G : g{(s)} = s\}
+    \]
+\end{definition}
+\begin{example}
+    Nell'esempio dell'azione di coniugio lo stabilizzatore di \(h\) è
+    \[
+        \text{stab}_h = \{g \in G : ghg^{-1} = h\} = \{g \in G : gh = hg\} =
+        C_G{(h)}
+    \]
+\end{example}
+
+\begin{proposition}
+
+Le orbite \(O_s\) per un'azione di \(G\) sono classi di equivalenza per la
+relazione di equivalenza su \(S\) seguente:
+\[
+  S \sim S' \iff \exists g \in G : s' = g{(s)} = F{(g, s)}
+\]
+\end{proposition}
+\begin{proof}
+\(\sim\) è in effetti una relazione di equivalenza, infatti:
+\begin{itemize}[label = --]
+    \item \emph{riflessiva}: \(s = e{(s)}\)
+    \item \emph{simmetrica}: se \(s' = g{(s)}\) allora \(s = g^{-1}{(s')}\)
+        perché \({(F_g)}^{-1} = F_{g^{-1}} \) 
+    \item \emph{transitiva}: se \(s' = g{(s)}\) e \(s'' = h{(s')}\) allora
+        \(s'' = h{(s')} = h{(g{(s)})} \overset{(ii)}{=} {(hg)}{(s)}\)
+\end{itemize}
+
+Ne segue chiaramente che \(O_s = {[s]}_\sim \) e allora \(\displaystyle S = \coprod_{s \in S}
+O_s\) 
+\end{proof}
+\begin{proposition}
+    \(\text{stab}_s < G\) 
+\end{proposition}
+\begin{proof}
+    Supponiamo \(g, h \in \text{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
+    consegue che
+    \[
+      F{(gh, s)} = F{(g, F{(h, s)})} 
+    \]
+\end{proof}
+
+
+
+\end{document}
+
