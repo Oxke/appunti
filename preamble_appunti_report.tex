@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[notitlepage]{report}
 \usepackage{layout}
 \usepackage[a4paper, centering, total={5in,9in}]{geometry}
 \usepackage[T1]{fontenc}
@@ -34,10 +34,10 @@
 }
 
 \newcounter{theo}[section]\setcounter{theo}{0}
-\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{section}.\arabic{theo}}
 
 \newcounter{excounter}[section]\setcounter{excounter}{0}
-\renewcommand{\theexcounter}{\arabic{section}.\arabic{excounter}}
+\renewcommand{\theexcounter}{\arabic{chapter}.\arabic{section}.\arabic{excounter}}
 
 \numberwithin{equation}{section}
 

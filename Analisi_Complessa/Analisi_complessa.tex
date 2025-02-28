@@ -1,12 +1,16 @@
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Analisi 3 \-- Analisi Complessa}
-\author{Osea}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/Analisi_Complessa}{\texttt{Oxke/appunti/Analisi\_Complessa}}}
 \date{Primo semestre A.A. 2024 \-- 2025, prof. Enrico Vitali}
 
 \begin{document}
 
 \maketitle
+
+\tableofcontents
+\newpage
 
 \section{Convergenza puntuale e uniforme}
 Sia \(E\) un'insieme (non vuoto) e \(\{f_{n}\} \) una successione di funzioni
@@ -365,7 +369,7 @@ totalmente convergente è
 \sum_{n=1}^{\infty} -1 \cdot \frac{{(-1)}^{n}}{n}
 \]
 dove \(f_{n}(x)\) è costante per ogni \(n\). Allora la serie converge
-uniformenenente in \(\mathbb{R}\) ovviamente perché è costante e converge in
+uniformemente in \(\mathbb{R}\) ovviamente perché è costante e converge in
 quanto a segno alternato, ma non converge totalmente perché la serie armonica
 diverge.
 \end{example}
@@ -2377,7 +2381,7 @@ dice che \(z=a\) è un polo di \textbf{ordine} \(N\)
     Mostrare che \(f{(z)} = e^{\frac{1}{z}}\) ha una singolarità essenziale in
     \(z=0\) 
 \end{eser}
-\begin{theorem}[Casorata-Weierstrass]\label{thm:casorata-weierstrass}
+\begin{theorem}[Casorati-Weierstrass]\label{thm:casorata-weierstrass}
     Sia \(f \in \mathcal{H}{(D^*_r{(a)})}\) con \(z=a\) singolarità essenziale.
     Allora l'immagine di \(f\) è densa in \(\mathbb{C}\) 
 \end{theorem}
@@ -2430,7 +2434,60 @@ Geometricamente \(\hat{\mathbb{C}}\) può essere visto come una sfera (detta
     \label{fig:sfera-di-riemann}
 \end{figure}
 
+Ora possiamo estendere la nozione di singolarità a \(\infty\) riconducendoci ai
+casi noti mediante la trasformazione \(\hat{\mathbb{C}} \to \hat{\mathbb{C}}\): \(z \mapsto
+\frac{1}{z}\) per \(z \in \mathbb{C}\) e scambia \(\infty\) e \(0\).
+
+Sia dunque \(f\) una funzione olomorfa in \(\mathbb{C} \sminus \overline{D}_{1/r}{(0)}
+\). Allora la funzione \(\tilde{f}{(\zeta)} = f{(1/\zeta)}\) è olomorfa in
+\(D_{r} ^{*} {(0)}\) e quindi possiamo studiare il tipo di singolarità che
+presenta in \(\zeta=0\) 
+\begin{definition}{}
+    Diciamo che \(f\) ha una singolarità eliminabile, un polo o una singolarità
+    essenziale in \(z = \infty\) se tale è la singolarità in \(\zeta=0\) di \(\tilde{f}\) 
+\end{definition}
+Consideriamo dunque lo sviluppo di Laurent di \(\tilde{f}\) relativo
+all'origine:
+\begin{equation}\label{eq:sviluppo-laurent-inf}
+    \tilde{f}{(\zeta)} = \dots + \tilde{c}_{-2}\zeta^{-2} +
+    \tilde{c}_{-1}\zeta^{-1} + \tilde{c}_{0} + \tilde{c}_{1} \zeta + \tilde{c}_2
+    \zeta^2 + \dots \quad \forall \zeta \in D_{r}^{*}{(0)}
+\end{equation}
+allora
+\begin{equation*}
+    f{(z)} = \dots + \tilde{c}_2 z^{-2} + \tilde{c}_1 z^{-1} + \tilde{c}_0 +
+    \tilde{c}_{-1}z + \tilde{c}_{-2}z^2 + \dots \quad \forall z \in \mathbb{C}
+    \sminus \overline{D}_{1/r}{(0)}
+\end{equation*}
+Abbiamo visto che per una funzione olomorfa in un disco \(D^{*}_R{(a)}\) nel
+calcolo dell'integrale lungo una circonferenza \(\partial D_{\rho} {(a)}\)
+l'unico termine dello sviluppo di Laurent che non ha contributo nullo è il
+termine \(c_{-1}\). Ricordiamo che in tali casi la circonferenza è orientata in
+senso antiorario, lasciando la singolarità sempre alla sinistra. Ne consegue che
+necessariamente per lasciare la singolarità a sinistra, se la singolarità è
+\(\infty\) è necessario percorrere la circonferenza in senso orario. Integrando
+per serie la serie di Laurent di \(f\) otteniamo
+\[
+  \int_{-\partial D_{\rho} {(0)}} f{(z)} \,dz = \sum_{m=-\infty}^{\infty}
+  \tilde{c}_{-m} \int_{-\partial D_\rho {(0)}} z^{-m} \,dz = - 2\pi i
+  \tilde{c}_1 \quad \text{per } \rho > \frac{1}{r}
+\]
+Il che motiva dunque la seguente definizione:
+\begin{definition}{Residuo in \(\infty\) }
+    Sia \(f\) olomorfa all'esterno di un disco \(\overline{D}_{1 /r} {(0)}\) e
+    sia~\ref{eq:sviluppo-laurent-inf} lo sviluppo di Laurent di \(\tilde{f} :
+    \zeta \mapsto f{(\frac{1}{\zeta})}\) relativo al punto \(\zeta = 0\).
+    Chiamiamo \textbf{residuo} di \(f\) in \(\infty\) il valore
+    \[
+        \text{Res}{(f, \infty)} = -\tilde{c}_1
+    \]
+    
+\end{definition}
+
 \subsection{Residui}
+Nel calcolo dei residui di una funzione possono essere utili le seguenti
+osservazioni
+
 \begin{proposition}\label{prop:residuo-1frac}
     Sia \(f \in \mathcal{H}{(D^{*}_r{(a)})}\) della forma
     \[
@@ -2496,8 +2553,8 @@ poli di ordine superiore
         \phi{(z)} := {(z-a)}^{k}f{(z)} = c_{-k} + c_{-k+1}{(z-a)} +~\dots +
         c_{-1} {(z-a)}^{k-1} + \dots
     \]
-    e quindi il residuo \(\mathrm{Res} (f, a) \) è il coefficiente dello
-    sviluppo di Taylor di \(\phi\) in \(a\), ossi
+    e quindi il residuo \(\mathrm{Res} (f, a) \) è il coefficiente di
+    \({(z-a)}^{k-1}\) nello sviluppo di Taylor di \(\phi\) in \(a\), ossia
     \[
         \mathrm{Res} (f, a) = c_{-1} = \frac{\phi^{{(k-1)}}{(a)}}{(k-1)!}
     \]
@@ -2551,7 +2608,7 @@ una funzione logaritmo. Possiamo dunque limitarne il dominio
 Il motivo per cui non si definisce sul semiasse negativo è per evitare la
 discontinuità. Vorremmo infatti che tale funzione fosse olomorfa. Lo è.
 Mostriamo infatti che \(\log z\) è una primitiva di \(\frac{1}{z}\) in
-\(\mathbb{C} - (-\infty, 0]\). \(\frac{1}{z}\) è olomorfa su \(\Omega =
+\(\mathbb{C} \sminus (-\infty, 0]\). \(\frac{1}{z}\) è olomorfa su \(\Omega =
 \mathbb{C} \sminus (-\infty, 0]\) che è semplicemente connesso, dunque ha
 primitiva, data da:
 \[
@@ -2669,7 +2726,7 @@ semplicemente connesso, ossia vale il teorema
     \]
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary}\label{cor:indice-avvolgimento}
     Siano \(\Omega, f\) come sopra, sia \(\gamma\) una curva chiusa in
     \(\Omega\). Allora
     \[
@@ -2685,7 +2742,7 @@ semplicemente connesso, ossia vale il teorema
 \textbf{Caso particolare:} Sia \(a \in \mathbb{C}\) e sia \(\gamma\) una curva
 chiusa che non passa per \(a\). Sia \(f{(z)} = z-a\), con \(z \in \mathbb{C}
 \sminus \{a\} =: \Omega\) (notare \(\Omega\) non semplicemente connesso). Allora
-dal corollario
+per il corollario~\ref{cor:indice-avvolgimento}
 \[
     \int _{\gamma} \frac{1}{z-a} \,dz = 2\pi i k \quad k \in \mathbb{Z}
 \]
@@ -2703,7 +2760,7 @@ e quindi
 Valgono alcune proprietà:
 \begin{itemize}[label = --]
     \item \(n{(\gamma; \cdot )}\) è costante sulle componenti connesse di
-        \(\mathbb{C} - \gamma\), infatti la funzione \(a \to n{(\gamma; a)}\)  è
+        \(\mathbb{C} - \gamma\), infatti la funzione \(a \mapsto n{(\gamma; a)}\)  è
         continua ed ha valori in \(\mathbb{Z}\). 
     \item \(n{(\gamma; \cdot )}\) è nullo su \(\Omega_\infty\), infatti sia
         \(D\) un disco contenente \(\gamma\) e sia \(a \not\in \overline{D}\).
@@ -2721,7 +2778,69 @@ Valgono alcune proprietà:
     \label{fig:indice-di-avvolgimento}
 \end{figure}
 
-% TODO : MANCA UN SACCO DI ROBA
+\subsection{Teorema dei residui}
+\begin{theorem}\label{thm:residui}
+    Sia \(\Omega \subseteq \mathbb{C} \) aperto. Sia \(E\) un sottoinsieme
+    chiuso e discreto di \(\Omega\). Sia \(\gamma\) una curva chiusa in \(\Omega
+    \sminus E\) che sia omotopa a una costante come curva in \(\Omega\). 
+
+    Sia \(f \in \mathcal{H}{(\Omega \sminus E)}\). Allora l'insieme \(\{a \in E
+    : n{(\gamma, a)} \neq 0\} \) è finito e 
+    \[
+        \int _{\gamma} f = 2\pi i \sum_{a \in E} n{(\gamma, a)}
+        \mathrm{Res} (f, a)
+    \]
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{eser}
+    Sia \(\Gamma : \mathbb{C} \sminus \mathbb{Z}_{\le 0} \to \mathbb{C}\) la
+    funzione \(\Gamma\) di Eulero. Ricordiamo che \(\Gamma\) è olomorfa su
+    \(\mathbb{C} \sminus \mathbb{Z}_{\le 0}\) e che
+    \(\Gamma{(1)} = 1\) e \(z\Gamma{(z)} = \Gamma{(z+1)} \).
+
+    Per \(n \in \mathbb{N}\) fissato, sia \(\gamma_{n} : [0, 1] \to \mathbb{C}\)
+    definita da
+    \[
+      \gamma_{n} = \begin{cases}
+          x_{1}{(t)} + i\cos{(\pi x_{1}{(t)})} & t \in [0, 1/2]\\
+          x_{2}{(t)} - i\cos{(\pi x_{2}{(t)})} & t \in [1/2, 1]
+      \end{cases}
+    \]
+    con \(\displaystyle x_{1}{(t)} = \frac{1}{2} - 2nt\) e \(\displaystyle
+    x_{2}{(t)} = x_{1}{(1- t)}\).
+
+    Calcolare 
+    \[
+        \lim_{n \to \infty} \int _{\gamma_{n}} \Gamma
+    \]
+    \tcblower
+    Notare che 
+    \begin{equation*}
+      \Gamma{(z)} = \frac{\Gamma{(z + n + 1)}}{z{(z+1)}\dots{(z+n)}} \quad
+      \forall n \in \mathbb{N}
+    \end{equation*}
+    Infatti per \(n = 0\) è banale e il passo induttivo è ovvio moltiplicando
+    numeratore e denominatore per \(z+n+1\).
+    Allora abbiamo, per \(n \in \mathbb{N}\) 
+    \begin{align*}
+        \mathrm{Res}{(\Gamma, -n)} &= \lim_{z \to -n} {(z+n)}\Gamma{(z)} =
+        \frac{\Gamma{(z + n + 1)}}{z{(z+1)}\dots{(z+n-1)}}\Big|_{z = -n} =
+    \\ &= \frac{\Gamma{(1)}}{-n(-n+1)\dots{(-1)}} = \frac{{(-1)}^{n}}{n!}
+    \end{align*}
+    Ora basti notare che la funzione \(\gamma_{n}\) non è altro che una curva
+    che avvolge una volta i poli pari in senso antiorario e i poli dispari in
+    senso orario, per \(k = 0, -1, \dots, -n\).
+    Allora, per il teorema dei residui (\ref{thm:residui})
+    \[
+      \int _{\gamma_{n}} \Gamma = 2\pi i \sum_{k=0}^{-n} {(-1)}^{k} \cdot
+      \frac{{(-1)}^{k}}{(-k)!} = 2\pi i \sum_{k=0}^{n} \frac{1}{k!}
+      \overset{n \to \infty}{\longrightarrow} 2\pi e \,i
+    \]
+    
+\end{eser}
 
 \begin{theorem}
     Sia \(g\) olomorfa ad eccezione di un numero finito di punti, su un aperto
@@ -2776,7 +2895,7 @@ Valgono alcune proprietà:
     Consideriamo 
     \[
       \int _{\gamma_{2}} e^{i\omega z}g{(z)} \,dz \overset{z = R + it}{=}
-      \int_{0}^{M}e^{i\omega{(R+it)}}g{(R+it)}  \,d t =: I_{2}
+      \int_{0}^{M}e^{i\omega{(R+it)}}g{(R+it)} i \,d t =: I_{2}
     \]
     \[
       |I_{2}| \le \varepsilon \int_{0}^{M} \left| e^{i\omega R} \right|
@@ -2791,7 +2910,7 @@ Valgono alcune proprietà:
     \begin{align*}
       \int _{\gamma_{3}} e^{i\omega z}g{(z)} \,dz \overset{z=t+Mi}{=} \int _{R}
       ^{-S}e^{i\omega(t+Mi)}g{(t+Mi)}\,dt =: I_{3} \\
-      |I_3| \le \varepsilon \int_{-S}^{R} e^{i\omega M} \,dt = \varepsilon
+      |I_3| \le \varepsilon \int_{-S}^{R} e^{-\omega M} \,dt = \varepsilon
       e^{-\omega M}{(R+S)} 
     \end{align*}
     Fissati \(R\) e \(S\) si prenda quindi \(M\) tale che
@@ -2820,6 +2939,7 @@ Valgono alcune proprietà:
     \[
       I = \int_{-\infty}^{\infty} \frac{x^3\sin x}{{(x^2 + 1)}^2} \,dx 
     \]
+    \tcblower
     Si osserva che
     \[
         I = \Im {(J)}, \quad J = \int_{-\infty}^{\infty} e^{ix}
@@ -2956,11 +3076,13 @@ Allora \(f\) è integrabile (in valor principale) su \(R\) e
     \]
 \end{eser}
 
+
+
 \subsection{Altri risultati}
 
 \begin{theorem}[Prolungamento analitico]\label{thm:prolungamento-analitico}
     Sia \(\Omega \subseteq \mathbb{C} \) un aperto connesso e \(f\) olomorfa su
-    \(\Omega\). Se esiste \(U \mathbb{C} \Omega\) aperto tale che \(f \equiv 0\)
+    \(\Omega\). Se esiste \(U \subseteq  \Omega\) aperto tale che \(f \equiv 0\)
     su \(U\) allora \(f \equiv 0\) su \(\Omega\).
 \end{theorem}
 \begin{proof}
@@ -3274,5 +3396,4 @@ B\) risulta
     costante \(0\) e quindi \(\int_{\gamma} \omega = 0\), ossia \(\omega\) è
     esatta 
 \end{proof}
-
 \end{document}

@@ -17,7 +17,7 @@ I testi preferiti sono
 
 \section{Azioni di gruppi su insiemi}
 Chiameremo \(G\) un gruppo e \(S\) un insieme
-\begin{definition}
+\begin{definition}{Azione di gruppo}
     Un'azione (sinistra) di \(G\) su \(S\) e un'applicazione
     \[
       F : G\times S \to S
@@ -37,10 +37,12 @@ concisa
 \]
 \begin{proposition}\label{prop:azione_biiezione}
     Per ogni \(g \in G\), l'applicazione \(F_g : S \to S\) definita da
-    \(F_g{(s)} = F{(g, s)} = g{(s)}\) è una biiezione
+    \(F_g{(s)} = F{(g, s)} = g{(s)}\) è una biiezione e in particolare
+    \begin{equation}\label{eq:azione_inversa}
+        F_g^{-1} = F_{g^{-1}}
+    \end{equation}
 \end{proposition}
 \begin{proof}
-    \({(Fg)}^{-1} = F_{g^{-1}}\) infatti 
     \[
       F_g \circ F_{g^{-1}} {(s)} = g{(g^{-1}{(s)})} \overset{(ii)}{=} e{(s)}
       \overset{(i)}{=} s
@@ -64,7 +66,7 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
     iniettivo
 \end{definition}
 \begin{remark}
-    Ovvero se e solo se \(\text{Ker}\psi = \{e\} \iff (\psi{(g)} = \text{Id}_S
+    Ovvero se e solo se \(\mathrm{Ker}\psi = \{e\} \iff (\psi{(g)} = \mathrm{Id}_S
     \iff g = e)\) 
 \end{remark}
 
@@ -81,12 +83,12 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
 \end{enumerate}
     Inoltre \(m\) è un'azione fedele, infatti 
     \[
-        \psi{(g)}{(h)} = h \forall h \in G \iff gh = h \implies g = e
+        \psi{(g)}{(h)} = h \quad\forall h \in G \iff gh = h \implies g = e
     \]
     \begin{remark}
         Se \(G\) è un gruppo finito, con \(\# G = n\) allora \(S{(G)} \cong S_n\)
-        e poiché \(\psi\) è iniettivo, \(G \cong \psi{(G)} < S{(G)} \cong S_n\)
-        il teorema di Cayley
+        e poiché \(\psi\) è iniettivo, \(G \cong \psi{(G)} <  S{(G)} \cong S_n\)
+        il teorema di Cayley.
     \end{remark}
 \end{example}
 \begin{example}
@@ -101,15 +103,15 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
             g^{-1} = g{(\varphi {(g', h)})} g ^{-1} = \varphi {(g, \varphi {(g',
             h)})}\) 
     \end{enumerate}
-    \(\psi : G \to S(G)\) e \(\text{Im} \psi = \text{Inn} {(G)} <
-    \text{Aut}{(G)}\). Non è necessariamente un'azione fedele, infatti
+    \(\psi : G \to S(G)\) e \(\mathrm{Im} \psi = \mathrm{Inn} {(G)} <
+    \mathrm{Aut}{(G)}\). Non è necessariamente un'azione fedele, infatti
     \[
-        \text{Ker}{(\psi)} = \{g \in G : \forall h \in G \quad ghg^{-1} = h\} =
+        \mathrm{Ker}{(\psi)} = \{g \in G : \forall h \in G \quad ghg^{-1} = h\} =
         Z(G)
     \]
     da cui per il primo teorema di isomorfismo
     \[
-      G / Z{(G)} = \text{Inn}{(G)}
+      G / Z{(G)} = \mathrm{Inn}{(G)}
     \]
 \end{example}
 \begin{example}
@@ -137,13 +139,13 @@ L'applicazione \(\psi : G \to S(S) = \{f : S\to S \text{ biunivoche}\}\) dove
     \]
     e si definisce \textbf{stabilizzatore} di \(s\) l'insieme
     \[
-        \text{stab}{(s)} = \{g \in G : g{(s)} = s\}
+        \mathrm{stab}_s = \{g \in G : g{(s)} = s\}
     \]
 \end{definition}
 \begin{example}
     Nell'esempio dell'azione di coniugio lo stabilizzatore di \(h\) è
     \[
-        \text{stab}_h = \{g \in G : ghg^{-1} = h\} = \{g \in G : gh = hg\} =
+        \mathrm{stab}_h = \{g \in G : ghg^{-1} = h\} = \{g \in G : gh = hg\} =
         C_G{(h)}
     \]
 \end{example}
@@ -161,7 +163,7 @@ relazione di equivalenza su \(S\) seguente:
 \begin{itemize}[label = --]
     \item \emph{riflessiva}: \(s = e{(s)}\)
     \item \emph{simmetrica}: se \(s' = g{(s)}\) allora \(s = g^{-1}{(s')}\)
-        perché \({(F_g)}^{-1} = F_{g^{-1}} \) 
+        per la proposizione~\ref{prop:azione_biiezione}
     \item \emph{transitiva}: se \(s' = g{(s)}\) e \(s'' = h{(s')}\) allora
         \(s'' = h{(s')} = h{(g{(s)})} \overset{(ii)}{=} {(hg)}{(s)}\)
 \end{itemize}
@@ -171,13 +173,15 @@ O_s\)
 \end{proof}
 % TODO separa in a parte corollario e reffalo in dopo
 \begin{proposition}
-    \(\text{stab}_s < G\) 
+    \(\mathrm{stab}_s < G\) 
 \end{proposition}
 \begin{proof}
-    Supponiamo \(g, h \in \text{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
+    Supponiamo \(g, h \in \mathrm{stab}_s\). Allora \(g{(s)} = h{(s)} = s\), ne
     consegue che
     \[
-      F{(gh, s)} = F{(g, F{(h, s)})} 
+        F_{gh^{-1}} {(s)} = F_{g} {(F_{h^{-1}} {(s)})}
+        \overset{\eqref{eq:azione_inversa}}{=} F_g {(F^{-1}_h{(s)})} =
+        F_g {(s)} = s
     \]
 \end{proof}
 

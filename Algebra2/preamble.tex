@@ -1,10 +1,11 @@
 \documentclass{article}
 \usepackage{layout}
-\usepackage[a4paper, centering, total={5in,9in}]{geometry}
+\usepackage[a4paper, total={5in,9in}]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
 \usepackage{mathtools}
 \usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cancel}
@@ -19,7 +20,6 @@
 \usepackage{transparent}
 \usepackage{enumitem}
 \usepackage[colorlinks]{hyperref}
-\usepackage{titling}
 
 \newcommand*{\sminus}{\raisebox{1.3pt}{$\smallsetminus$}}
 
@@ -33,6 +33,8 @@
     \import{./figures/}{#2.pdf_tex}
 }
 
+\pdfsuppresswarningpagegroup=1
+
 \newcounter{theo}[section]\setcounter{theo}{0}
 \renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
 
@@ -41,25 +43,57 @@
 
 \numberwithin{equation}{section}
 
-\definecolor{thmblue}{RGB}{78, 68, 243}
-\newtcolorbox{theorem}[1][]{
-    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
-    colback=blue!1, colframe=blue!30,
-    title=Teorema~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
-    coltitle=thmblue!80, fonttitle=\bfseries,
-    attach boxed title to top left={xshift=3mm,yshift=-3mm},
-    boxed title style={colback=blue!5}
-}
+\newenvironment{theorem}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
+            {\strut Teorema~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=blue!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
+        % nobreak=false
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
 
-\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
-\newtcolorbox{lemmao}[1][]{
-    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
-    colback=applegreen!1, colframe=applegreen!30,
-    title=Lemma~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
-    coltitle=applegreen!115, fonttitle=\bfseries,
-    attach boxed title to top left={xshift=3mm,yshift=-3mm},
-    boxed title style={colback=applegreen!5}
-}
+% \newenvironment{definition}[1][]{
+%     \refstepcounter{theo}
+%      \ifstrempty{#1}
+%     {\mdfsetup{
+%         frametitle={
+%             \tikz[baseline=(current bounding box.east),outer sep=0pt]
+%             \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+%             {\strut Definizione~\thetheo};}
+%         }
+%     }{\mdfsetup{
+%         frametitle={
+%             \tikz[baseline=(current bounding box.east),outer sep=0pt]
+%             \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
+%             {\strut Definizione~\thetheo:~#1};}
+%         }
+%     }
+%     \mdfsetup{
+%         roundcorner=10pt,
+%         innertopmargin=10pt,linecolor=violet!20,
+%         linewidth=2pt,topline=true,
+%         frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
+%         nobreak=true
+%     }
+% \begin{mdframed}[]\relax}{
+% \end{mdframed}}
 
 \newtcolorbox[auto counter, number within=section]{definition}[2][]{
     colframe=violet!0,
@@ -80,6 +114,32 @@
     borderline west={2pt}{-5pt}{violet!40},
     #1
 }
+
+\newenvironment{lemmao}[1][]{
+    \refstepcounter{theo}
+     \ifstrempty{#1}
+    {\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
+            {\strut Lemma~\thetheo};}
+        }
+    }{\mdfsetup{
+        frametitle={
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
+            {\strut Lemma~\thetheo:~#1};}
+        }
+    }
+    \mdfsetup{
+        roundcorner=10pt,
+        innertopmargin=10pt,linecolor=green!20,
+        linewidth=2pt,topline=true,
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
+        % nobreak=true
+    }
+\begin{mdframed}[]\relax}{
+\end{mdframed}}
 
 \theoremstyle{plain}
 \newtheorem{lemma}[theo]{Lemma}

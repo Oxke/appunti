@@ -1,6 +1,7 @@
 \input{../preamble_appunti.tex}
 \title{Appunti di Analisi 3 \-- Equazioni Differenziali}
-\author{Osea}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/Analisi_Complessa}{\texttt{Oxke/appunti/Analisi\_Complessa}}}
 \date{Primo semestre A.A. 2024 \-- 2025, prof. Enrico Vitali}
 \begin{document}
 
@@ -3152,7 +3153,8 @@ autovalore. Infatti se \(v \in V\)
 con \(Tv = 0\) e quindi \(T^{s}v = 0\) allora \(v \in \ker T^{s}\) e sappiamo
 che \(\ker T^{s} \cap \mathrm{Im} T^{s} = \{0\}\) dunque \(v = 0\). Riassumendo
 abbiamo
-\begin{lemmao}[Separazione degli autovalori o dec.~di Fitting]
+\begin{lemmao}[Separazione degli autovalori o dec.~di
+    Fitting]\label{lemma:fitting}
     Se \(T : V \to V\) è un operatore lineare su \(V\) allora esiste \(s \in
     \mathbb{N}\)
     tale che
@@ -3167,7 +3169,7 @@ abbiamo
     Inoltre su \(\ker T^{s}\) non vi sono autovalori di \(T\) diversi da 0, mentre su
     \(\mathrm{Im} T^{s}\) non vi sono autovalori nulli.
 \end{lemmao}
-Fissimo \(T : V \to V\) e \(\lambda \in \mathbb{K} = \mathbb{C}\).
+Fissiamo \(T : V \to V\) e \(\lambda \in \mathbb{K} = \mathbb{C}\).
 L'applicazione \(T = \lambda I\) allora:
 \begin{itemize}[label = --]
     \item ha 0 come autovalore se e solo se \(T\) ha
@@ -3742,7 +3744,7 @@ Allora viene naturale chiedersi se uno possa studiare la stabilità di
     \[
       Df{(k\pi, 0)} = \begin{pmatrix}
           0 & 1 \\
-          -\omega^2\cosk\pi & -2a
+          -\omega^2\cos k\pi & -2a
       \end{pmatrix}
     \]
     e dopo un paio di conti viene fuori che \(\lambda_{1, 2} = -a \pm \sqrt{a^2
