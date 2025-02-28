@@ -1,3 +1,4 @@
+%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Meccanica Razionale}
@@ -461,8 +462,11 @@ dove la seconda è trovata dalle altre due e da \(\mathbf{n} = \mathbf{b} \times
 Dal precedente marchingegno possiamo riscrivere la velocità e l'accelerazione
 nella terna intrinseca come, se \(P = P{(s{(t)})}\) 
 \begin{align*}
-    \mathbf{v}  &= \frac{d\mathbf{x} }{dt} = \dot{s} \mathbf{t}\\
-    \mathbf{a} &= % TODO finire
+    \mathbf{v}  &= \frac{d\mathbf{x} }{dt} = \frac{d\mathbf{x} }{ds}
+    \frac{ds}{dt} = \dot{s} \mathbf{t}\\
+    \mathbf{a} &= \frac{d\mathbf{v} }{dt} = \frac{d}{dt} (\dot{s} \mathbf{t}) =
+    \ddot{s} \mathbf{t} + \dot{s} \frac{d\mathbf{t} }{ds} \frac{ds}{dt} =
+    \ddot{s} \mathbf{t} + \dot{s}^2 k \mathbf{n}
 \end{align*}
 
 

@@ -1,3 +1,4 @@
+%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Algebra 2}
@@ -241,9 +242,10 @@ O_s\)
         G} \frac{\# G}{\# C{(g)}}
     \]
     inoltre se \(g \in Z{(G)}\) allora \(C{(g)} = G\) e dunque
-    \[
-        \# G = \# Z + \sum_{[g] \in G\sminus Z} \# O_g
-    \]
+    \begin{equation}\label{eq:formula_classi}
+        \# G = \# Z + \sum_{[g] \in G\sminus Z} \# O_g = \# Z + \sum_{[g] \in G
+        \sminus Z} \frac{\# G}{\# C{(g)}}
+    \end{equation}
 \end{corollary}
 \begin{theorem}
     Sia \(G\) un gruppo tale che \(\# G = p^{n}\) con \(p\) primo. Allora
@@ -254,7 +256,7 @@ O_s\)
     \[
         p^{n} = \# G = \# Z + \sum_{[g] \in G\sminus Z} \# \frac{p^{n}}{p^{n_a}}
     \]
-    ne deduciamo che \(p | \#Z\) 
+    ne deduciamo che \(p \mid \#Z\) 
 \end{proof}
 \begin{corollary}
     Sia \(G\) un gruppo di cardinalità \(p^2\), con \(p\) primo. Allora \(G\) è
@@ -282,7 +284,7 @@ O_s\)
     transitiva su \(V \sminus \{0\}\)  
 \end{example}
 \begin{theorem}[Cauchy per gruppi abeliani]
-    Sia \(G\) un gruppo abeliano finito e \(p\) un primo tale che \(p | \# G\).
+    Sia \(G\) un gruppo abeliano finito e \(p\) un primo tale che \(p \mid \# G\).
     Allora 
     \[
       \exists e\neq a \in G \text{ tale che } a^{p} = e
@@ -305,8 +307,8 @@ O_s\)
     di ordine \(p\).
 
     Supponiamo ora che \(G\) abbia qualche sottogruppo non banale. Sia \(N < G\)
-    con \(\{e\} \neq N \neq G\). Allora se \(p | \# N\) per ipotesi induttiva si
-    conclude. Se invece \(p\not| \# N\) allora \(G / N\) è un gruppo abeliano
+    con \(\{e\} \neq N \neq G\). Allora se \(p \mid \# N\) per ipotesi induttiva si
+    conclude. Se invece \(p\nmid \# N\) allora \(G / N\) è un gruppo abeliano
     con \(\# G / N < \# G\) e quindi per ipotesi induttiva (infatti \(G/N\) ha
     ordine multiplo di \(p\) poiché \(N\) non lo è) esiste \(bN \in G/N\), \(b
     \not\in N\) e tale che \(b^{p} \in N\). Allora \(b^{p\#N} = e\) e ci resta
@@ -324,7 +326,7 @@ O_s\)
     assurdo perché \(b \not\in N\).
 \end{proof}
 \begin{theorem}[Cauchy]
-    Sia \(G\) è un gruppo finito e \(p\) è un primo tale che \(p | \# G\).
+    Sia \(G\) è un gruppo finito e \(p\) è un primo tale che \(p \mid \# G\).
     Allora
     \[
         \exists a \in G \text{ tale che } \# \langle a \rangle = p
@@ -332,22 +334,19 @@ O_s\)
 \end{theorem}
 \begin{proof}
     Vogliamo procedere per induzione su \(\#G\). Se \(\#G = 2\) è già
-    dimostrato. Se esiste \(H < G\) tale che \(p | \# H\) concludo per ipotesi
+    dimostrato. Se esiste \(H < G\) tale che \(p \mid \# H\) concludo per ipotesi
     induttiva.
 
     Supponiamo dunque che \(p\) non divide l'ordine di nessun sottogruppo
-    proprio di \(G\). Dalla formula delle classi
-    \[
-        \# G = \# Z{(G)} + \sum_{[a] \in G\sminus Z{(G)}} \frac{\# G}{\# C{(a)}}
-    \]
+    proprio di \(G\). Nella formula delle classi~\eqref{eq:formula_classi},
     tutti i termini della serie sono divisibili per \(p\), infatti se \(a
-    \not\in Z\), \(C{(a)}\neq G\) è un sottogruppo proprio e quindi \(p \not{|}
-    \# C{(a)}\). Allora \(p | \# Z\) ma quindi \(Z = G\) e quindi \(G\) è
+    \not\in Z\), \(C{(a)}\neq G\) è un sottogruppo proprio e quindi \(p \nmid
+    \# C{(a)}\). Allora \(p \mid \# Z\) ma quindi \(Z = G\) e quindi \(G\) è
     abeliano. Concludiamo con il teorema di Cauchy per gruppi abeliani.
 \end{proof}
 \begin{theorem}[Sylow (prima parte)]
     Sia \(G\) un gruppo finito e \(p\) un primo tale che esiste \(\mathbb{Z} \ni
-    m \ge 1\)  tale che \(p^{m} | \# G\) ma \(p^{m+1} \not{|} G\). Allora
+    m \ge 1\)  tale che \(p^{m} \mid \# G\) ma \(p^{m+1} \nmid G\). Allora
     \[
         \exists H < G \text{ tale che } \# H = p^{m}
     \]
@@ -358,19 +357,16 @@ O_s\)
     cardinalità minore di \(G\). Se \(m=1\) allora ci si riduce al teorema di
     Cauchy. Supponiamo ora che \(m \ge 2\) e \(\#G \ge 3\).
 
-    Se esiste \(H < G\) proprio con \(p^{m} | \# G\) allora concludo per ipotesi
+    Se esiste \(H < G\) proprio con \(p^{m} \mid \# G\) allora concludo per ipotesi
     induttiva.
 
-    Supponiamo dunque che \(p^{m} \not{|} \# K\) per ogni \(K < G\) proprio.
+    Supponiamo dunque che \(p^{m} \nmid \# K\) per ogni \(K < G\) proprio.
 
-    \[
-        \# G = \# Z{(G)} + \sum_{[a] \in G\sminus Z{(G)}} \frac{\# G}{\# C{(a)}}
-    \]
-    nuovamente come nel teorema di Cauchy, otteniamo che \(p | \# Z\) e quindi
-    per il teorema di Cauchy abbiamo che esiste \(e \neq b \in Z\) tale che
-    \(b^{p} = e\). Allora \(\Span{b} \trianglelefteq G\). 
+    Come nel teorema di Cauchy usiamo~\eqref{eq:formula_classi}, otteniamo che
+    \(p \mid \# Z\) e quindi per il teorema di Cauchy abbiamo che esiste \(e \neq b
+    \in Z\) tale che \(b^{p} = e\). Allora \(\Span{b} \trianglelefteq G\). 
 
-    Ma allora poiché \(\# (G / \Span{b} ) = \# G / p\) abbiamo che \(p^{m-1} |
+    Ma allora poiché \(\# (G / \Span{b} ) = \# G / p\) abbiamo che \(p^{m-1} \mid
     \# {(G / \Span{b} )}\) e dunque per ipotesi induttiva esiste \(\overline{S}
     < G / \Span{b} \) tale che \(\# \overline{S} = p^{m-1}\). Allora \(S = \pi
     ^{-1}{(\overline{S})}\) è un sottogruppo di \(G\) e \(\overline{S} = S /
