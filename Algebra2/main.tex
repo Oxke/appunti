@@ -275,8 +275,106 @@ O_s\)
 \begin{example}
     Se prendo \(GL{(V)}\) il gruppo lineare delle trasformazioni invertibili su
     uno spazio vettoriale \(V\), allora l'azione \({(T, v)} \mapsto Tv\) è
-    transitiva. 
+    transitiva su \(V \sminus \{0\}\)  
 \end{example}
+\begin{theorem}[Cauchy per gruppi abeliani]
+    Sia \(G\) un gruppo abeliano finito e \(p\) un primo tale che \(p | \# G\).
+    Allora 
+    \[
+      \exists e\neq a \in G \text{ tale che } a^{p} = e
+    \]
+\end{theorem}
+\begin{proof}
+    Procediamo per induzione su \(n = \# G\).
+    Se \(2 = \# G\) allora \(G = \{e, a\} \) e dunque \(a^2 = e\). Supponiamo
+    ora \(\# G \ge 3\).
+
+    Se \(G\) non ha sottogruppi \(e \neq H \neq G\) allora \(G\) è ciclico di
+    ordine primo. Infatti se \(G\) non è ciclico allora esistono due elementi
+    \(e\neq g_{1}, g_{2}\) e \(g_{2} \not\in \Span{g_{1}} \). Ma allora
+    \(\{e\} \neq \Span{g_{1}} \neq G\) è un sottogruppo. Dunque \(G\) è
+    ciclico, inoltre è di ordine primo perché se così non fosse (ad esempio \(n
+    = ab\)) allora \(\{e\} \neq \Span{g^{a}} \neq G\) è un sottogruppo, con
+    \(g\) tale che \(<g> = G\).
+
+    Allora se \(G\) non ha sottogruppi propri esistono \(p-1\) elementi in \(G\)
+    di ordine \(p\).
+
+    Supponiamo ora che \(G\) abbia qualche sottogruppo non banale. Sia \(N < G\)
+    con \(\{e\} \neq N \neq G\). Allora se \(p | \# N\) per ipotesi induttiva si
+    conclude. Se invece \(p\not| \# N\) allora \(G / N\) è un gruppo abeliano
+    con \(\# G / N < \# G\) e quindi per ipotesi induttiva (infatti \(G/N\) ha
+    ordine multiplo di \(p\) poiché \(N\) non lo è) esiste \(bN \in G/N\), \(b
+    \not\in N\) e tale che \(b^{p} \in N\). Allora \(b^{p\#N} = e\) e ci resta
+    solo da dimostrare che \(c := b^{\#N} \neq e\).
+
+    Supponiamo che \(c = b^{\#N} = e\). Sappiamo che \(MCD(p, \#N) = 1\) e
+    dunque per il teorema di Bézout esistono \(\alpha, \beta \in \mathbb{Z}\)
+    tali che \(\alpha p + \beta \#N = 1\).
+    Allora 
+    \[
+      bN = {(bN)}^{\alpha p + \beta\# N} = {(bN)}^{\alpha p} \cdot {(bN)}^{\beta
+      \#N}
+    \]
+    e poiché \(b^{p} \in N\) e \(b^{\#N} = e\) otteniamo che \(bN = N\) che è
+    assurdo perché \(b \not\in N\).
+\end{proof}
+\begin{theorem}[Cauchy]
+    Sia \(G\) è un gruppo finito e \(p\) è un primo tale che \(p | \# G\).
+    Allora
+    \[
+        \exists a \in G \text{ tale che } \# \langle a \rangle = p
+    \]
+\end{theorem}
+\begin{proof}
+    Vogliamo procedere per induzione su \(\#G\). Se \(\#G = 2\) è già
+    dimostrato. Se esiste \(H < G\) tale che \(p | \# H\) concludo per ipotesi
+    induttiva.
+
+    Supponiamo dunque che \(p\) non divide l'ordine di nessun sottogruppo
+    proprio di \(G\). Dalla formula delle classi
+    \[
+        \# G = \# Z{(G)} + \sum_{[a] \in G\sminus Z{(G)}} \frac{\# G}{\# C{(a)}}
+    \]
+    tutti i termini della serie sono divisibili per \(p\), infatti se \(a
+    \not\in Z\), \(C{(a)}\neq G\) è un sottogruppo proprio e quindi \(p \not{|}
+    \# C{(a)}\). Allora \(p | \# Z\) ma quindi \(Z = G\) e quindi \(G\) è
+    abeliano. Concludiamo con il teorema di Cauchy per gruppi abeliani.
+\end{proof}
+\begin{theorem}[Sylow (prima parte)]
+    Sia \(G\) un gruppo finito e \(p\) un primo tale che esiste \(\mathbb{Z} \ni
+    m \ge 1\)  tale che \(p^{m} | \# G\) ma \(p^{m+1} \not{|} G\). Allora
+    \[
+        \exists H < G \text{ tale che } \# H = p^{m}
+    \]
+\end{theorem}
+\begin{proof}
+    Procediamo per induzione su \(\# G\) e su \(m\). Se \(\# G = 2\) allora \(H = G\).
+    Supponiamo ora \(\#G > 2\) e il risultato vero per ogni gruppo di
+    cardinalità minore di \(G\). Se \(m=1\) allora ci si riduce al teorema di
+    Cauchy. Supponiamo ora che \(m \ge 2\) e \(\#G \ge 3\).
+
+    Se esiste \(H < G\) proprio con \(p^{m} | \# G\) allora concludo per ipotesi
+    induttiva.
+
+    Supponiamo dunque che \(p^{m} \not{|} \# K\) per ogni \(K < G\) proprio.
+
+    \[
+        \# G = \# Z{(G)} + \sum_{[a] \in G\sminus Z{(G)}} \frac{\# G}{\# C{(a)}}
+    \]
+    nuovamente come nel teorema di Cauchy, otteniamo che \(p | \# Z\) e quindi
+    per il teorema di Cauchy abbiamo che esiste \(e \neq b \in Z\) tale che
+    \(b^{p} = e\). Allora \(\Span{b} \trianglelefteq G\). 
+
+    Ma allora poiché \(\# (G / \Span{b} ) = \# G / p\) abbiamo che \(p^{m-1} |
+    \# {(G / \Span{b} )}\) e dunque per ipotesi induttiva esiste \(\overline{S}
+    < G / \Span{b} \) tale che \(\# \overline{S} = p^{m-1}\). Allora \(S = \pi
+    ^{-1}{(\overline{S})}\) è un sottogruppo di \(G\) e \(\overline{S} = S /
+    B\). Ne consegue infine che \(\# S = p^{m}\).
+\end{proof}
+\begin{remark}
+    Il sottogruppo \(H\) viene detto \(p\)-sottogruppo di Sylow di \(G\).
+\end{remark}
 
 
 \end{document}

@@ -75,7 +75,7 @@ Dal prodotto scalare possiamo definire la distanza tra due punti di
 d(P, Q) = \|P - Q\| = \sqrt{\langle P - Q, P - Q \rangle} = \sqrt{{(P -
     Q)} \cdot {(P - Q)}}
 \]
-e la nozione di angolo tra due vettori \(\mathbf{u} , \mathbf{v}  \neq 0\) come il valore \(\alpha
+e la nozione di angolo tra due vettori \(\mathbf{u} , \mathbf{v}  \neq \mathbf{0} \) come il valore \(\alpha
 \in [0, \pi]\) tale che
 \[
   \cos \alpha = \frac{\mathbf{u}  \cdot \mathbf{v} }{\|\mathbf{u} \| \|\mathbf{v} \|}
@@ -125,7 +125,7 @@ I vettori colonna della matrice \(J\mathbf{x} \), ossia
 \]
 sono una base per \(V\) che viene chiamata \textbf{base locale}.
 
-La base locale è ortogonale se \(\mathbf{u}_i \cdot \mathbf{u}_j = 0\) per ogni
+La base locale è ortogonale se \(\mathbf{u}_i \cdot \mathbf{u}_j = \mathbf{0} \) per ogni
 \(i \neq j\). Vogliamo ora operare Gram-Schmidt per ottenere una base
 ortonormale \(\{\tilde{\mathbf{u}}_i\} \) a partire da una base generica
 \(\{\mathbf{u}_i\}\). 
@@ -157,7 +157,7 @@ ortonormale \(\{\tilde{\mathbf{u}}_i\} \) a partire da una base generica
             r \cos \theta
         \end{pmatrix}
     \]
-    ed evidentemente \(\mathbf{u}_1 \cdot \mathbf{u}_2 = 0\) dunque la base
+    ed evidentemente \(\mathbf{u}_1 \cdot \mathbf{u}_2 = \mathbf{0} \) dunque la base
     locale è ortogonale. Per ottenere una base ortonormale dunque prendiamo
     \[
       \mathbf{e}_r = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|} = \mathbf{u}_1 \quad
@@ -210,5 +210,261 @@ ortonormale \(\{\tilde{\mathbf{u}}_i\} \) a partire da una base generica
       \frac{\mathbf{u}_3}{r}
     \]
 \end{example}
+\paragraph{Orientazione dello spazio}
+Lo spazio vettoriale \(V\) soggiacente lo spazio affine \(\mathcal{E}\) è
+orientabile.
+
+Sia \(\mathcal{B}\) l'insieme di tutte le basi di \(V\). Date \(A, B \in
+\mathcal{B}\), sia \(\mathcal{M}_A^{B}\) la matrice di cambio base da \(A\) a
+\(B\). Allora \(\det \mathcal{M}_A^{B} \neq 0\). Allora la relazione 
+\[
+    A \sim B \iff \det \mathcal{M}_A^{B} > 0
+\]
+è una relazione di equivalenza su \(\mathcal{B}\). Tale relazione partiziona
+\(\mathcal{E}\) in due classi, dette \textbf{classi di orientazione}: la base
+destrorsa e la base sinistrorsa.
+\paragraph{Prodotto vettoriale} Il prodotto vettoriale è un'operazione binaria 
+\begin{align*}
+    \times : V \times V &\longrightarrow V \\
+    \mathbf{u} , \mathbf{v}  &\longmapsto \mathbf{u} \times  \mathbf{v}=
+    \mathbf{w} 
+\end{align*}
+tale che, se l'angolo tra \(\mathbf{v} \) e \(\mathbf{u}\) è \(\alpha\), allora
+\begin{itemize}[label = --]
+    \item \(\mathbf{w} \) ha modulo pari a \(|\mathbf{u} | |\mathbf{v} | \sin \alpha\) 
+    \item \(\mathbf{w} \) ha direzione perpendicolare al piano di \(\mathbf{v}
+        \) e \(\mathbf{u} \) 
+    \item \(\mathbf{w} \) ha verso tale che \(\mathbf{u} \), \(\mathbf{v} \),
+        \(\mathbf{w} \) formano una base destrorsa
+\end{itemize}
+e ha le seguenti proprietà:
+\begin{enumerate}[label = \arabic*.]
+    \item \emph{antisimmetria}: \(\mathbf{u} \times \mathbf{v} = - \mathbf{v}
+        \times \mathbf{u}\)
+    \item \emph{linearità}: \((\lambda \mathbf{u} ) \times \mathbf{v} = \lambda
+        (\mathbf{u} \times \mathbf{v} )\) e \((\mathbf{u} + \mathbf{v} ) \times
+        \mathbf{w} = \mathbf{u} \times \mathbf{w} + \mathbf{v} \times \mathbf{w}\)
+    \item \textbf{non} è associativo
+\end{enumerate}
+\paragraph{Prodotto misto} Il prodotto misto tra \(\mathbf{u} \), \(\mathbf{v}
+\) e \(\mathbf{w} \) è definito da \(\mathbf{u} \times \mathbf{v} \cdot \mathbf{w} \) 
+\paragraph{Doppio prodotto vettoriale} Dati \(\mathbf{u} , \mathbf{v} ,
+\mathbf{w}  \in V\), si chiama doppio prodotto vettoriale il vettore
+\({(\mathbf{u}  \times \mathbf{v} )} \times \mathbf{w} \) e vale la proprietà
+\[
+  {(\mathbf{u} \times \mathbf{v} )} \times \mathbf{w}  = {(\mathbf{u} \cdot
+  \mathbf{w} )}\mathbf{v} - {(\mathbf{v} \cdot \mathbf{w} )}\mathbf{u} 
+\]
+\paragraph{Equazione vettoriale}
+Dati \(\mathbf{a} , \mathbf{b}  \in V\), determinare i vettori \(\mathbf{x} \)
+tali che
+\begin{equation}\label{eq:equazione_vettoriale}
+  \mathbf{x}  \times  \mathbf{a} = \mathbf{b} 
+\end{equation}
+Nel caso degenere in cui \(\mathbf{a} = \mathbf{b} = \mathbf{0}\), l'equazione è
+un'identità. Se \(\mathbf{a} = \mathbf{0} \) e \(\mathbf{b} \neq \mathbf{0}  \) allora non esiste
+una soluzione. Infine se \(\mathbf{a} \neq \mathbf{0}\) e \(\mathbf{b} = \mathbf{0}  \) allora
+\(\mathbf{x}  = \lambda \mathbf{a} \) per ogni \(\lambda \in \mathbb{R}\) 
+
+\begin{proposition}
+    Siano \(\mathbf{a} , \mathbf{b} \in V \) con \(\mathbf{a} \neq \mathbf{0} \) e \(b
+    \neq \mathbf{0} \). Allora l'equazione vettoriale~\eqref{eq:equazione_vettoriale} ha
+    soluzione se e solo se \(\mathbf{b} \cdot \mathbf{a}  = \mathbf{0} \) 
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(\mathbf{x} \) soluzione di \(\mathbf{x} \times
+        \mathbf{a} = \mathbf{b}\). Moltiplicando scalarmente per \(\mathbf{a} \)
+        ambo i membri otteniamo
+        \[
+          \mathbf{0}  = \mathbf{x}  \times \mathbf{a} \cdot \mathbf{a} = \mathbf{b} * \mathbf{a} 
+        \]
+    \item[\(\impliedby \)] Sia \(\mathbf{b}\cdot \mathbf{a} = \mathbf{0} \). Allora
+        \[
+          {(\mathbf{a} \times \mathbf{b})}\times \mathbf{a}  = a^2 \mathbf{b} -
+          \cancel{{(\mathbf{b}\cdot \mathbf{a} )}}\mathbf{a} 
+        \]
+        da cui otteniamo
+        \[
+          \mathbf{b} = \frac{1}{a^2} {\left( {(\mathbf{a} \times
+          \mathbf{b})}\times \mathbf{a}  \right)} 
+        \]
+        ma allora
+        \[
+          \mathbf{x}  \times \mathbf{a} = \frac{1}{a^2}  {\left( {(\mathbf{a} \times
+          \mathbf{b})}\times \mathbf{a}  \right)} \iff {\left( \mathbf{x} -
+  \frac{1}{a^2}{(\mathbf{a} \times \mathbf{b})} \right)} \times \mathbf{a} = \mathbf{0} 
+        \]
+        che ha soluzione 
+        \[
+            \mathbf{x}  = \frac{1}{a^2}{(a \times b)} + \lambda \mathbf{a} \quad
+            \forall \lambda \in \mathbb{R}
+        \]
+\end{itemize}
+\end{proof}
+
+\section{Cinematica del punto}
+Sia \(\mathcal{E}\) uno spazio euclideo, \(P\) un punto in modo nello spazio
+\(\mathcal{E}\). Sia \(I \subseteq \mathbb{R} \) e studiare il moto significa
+studiare la relazione \(I \ni t \mapsto P{(t)}\) e in particolare fissando un
+sistema di riferimento \(\Sigma = \{\mathbf{O} , \mathbf{e}_1, \mathbf{e}_2,
+\mathbf{e}_3\}\) studiamo la relazione \(t \mapsto P{(t)} - \mathbf{O} =:
+\mathbf{x} {(t)} =: \mathbf{r} {(t)}\).
+
+L'immagine in \(\mathcal{E}\) dell'applicazione \(t \mapsto P{(t)}\) si dice
+\textbf{traiettoria} del punto \(P\).
+
+\begin{definition}{Velocità}
+    Scelto \(\mathbf{x}{(t)}\) il raggio descrivente il moto di un punto \(P\)
+    nel sistema di riferimento \(\Sigma\), la \textbf{velocità} del punto \(P\)
+    è
+    \[
+        \mathbf{v}{(t)}|_\Sigma := \mathbf{\dot{x}}{(t)}|_\Sigma = \frac{d}{dt} \mathbf{x}
+        {(t)}|_\Sigma = \dot{x_{1}} \mathbf{e}_1 + \dot{x_{2}} \mathbf{e}_2 +
+        \dot{x_{3}} \mathbf{e}_3
+    \]
+    Similmente si definisce l'accelerazione 
+    \[
+        \mathbf{a} |_\Sigma = \mathbf{\ddot{x}}|_\Sigma = \frac{d}{dt}
+        \mathbf{v}|_\Sigma
+    \]
+\end{definition}
+Se si effettua il cambio di coordinate \(\mathbf{x} = \mathbf{x} {(\mathbf{q}
+{(t)})}\) allora il moto è descritto da 
+\[
+    \mathbf{v} = \sum_{i=1}^{n} \frac{\partial \mathbf{x} }{\partial q_{i}}
+    \dot{q_{i}} = \mathbf{u} \cdot \mathbf{\dot{q}} 
+\]
+\begin{example}[Coordinate polari nel piano \(\mathcal{E}_2\) ]
+    \(\mathbf{x}  = \mathbf{x} {(r, \theta)}\) e dunque
+    \begin{align*}
+        \mathbf{v} &= \dot{r} \mathbf{u}_r + \dot{\theta} \mathbf{u}_\theta =
+        \dot{r} \mathbf{e}_r + r \dot{\theta} \mathbf{e}_\theta\\
+        \mathbf{a} &= \ddot{r} \mathbf{e}_r + \dot{r} {\left(
+        \frac{d}{dt}\mathbf{e}_r  \right)} + \dot{r} \dot{\theta}
+        \mathbf{e}_\theta + r \ddot{\theta} \mathbf{e}_\theta + r \ddot{\theta}
+        \frac{d}{dt}\mathbf{e}_\theta = \\
+                   &= \ddot{r} \mathbf{e}_r = \dot{r} \mathbf{e}_r +
+                   \dot{r}\dot{\theta} \mathbf{e}_\theta + \dot{r} \dot{\theta}
+                   \mathbf{e}_\theta + r\ddot{\theta}\mathbf{e}_\theta -
+                   r\dot{\theta}^2 \mathbf{e}_r = \\
+                   &= {\left( \ddot{r} - r \theta^2 \right)} \mathbf{e}_r +
+                   {\left( r\ddot{\theta} + 2 \dot{r}\dot{\theta} \right)}
+                   \mathbf{e} _\theta
+    \end{align*}
+    che è la scomposizione in accelerazione radiale e trasversa
+\end{example}
+
+\begin{remark}
+    Se \(\mathbf{b} \) è un versore allora \(\frac{d\mathbf{b} }{dt} \cdot
+    \mathbf{b} = 0\) (perché \(\mathbf{b} \) ha modulo costante, quindi come fa
+    a cambiare in modulo? Deve cambiare solo in verso)
+\end{remark}
+\begin{eser}
+    Calcolare la velocità e l'accelerazione in coordinate sferiche (esprimendola
+    in base locale) e in coordinate cilindriche
+\end{eser}
+
+\subsection{Curve parametrizzate}
+Vogliamo studiare il moto del punto \(P\) su una curva assegnata. Sappiamo
+dunque la traiettoria del punto assegnato. Supponiamo di essere nello spazio
+affine euclideo \(\mathcal{E}_3\). Supponiamo dunque di avere una curva
+\(\gamma: {(a, b)} \to \mathbb{R}^3\) e dunque \(\gamma{(t)} = \mathbf{x} {(t)}\) 
+\begin{definition}{Parametrizzazione in lunghezza d'arco}
+    È possibile parametrizzare la curva \(\gamma\) nel modo
+    \[
+        s{(t)} = \int_{a}^{t} \|\mathbf{\dot{x}}{(\tau)}\| d\tau
+    \]
+    che descrive la posizione in una dimensione, descrivendo la lunghezza
+    percorsa sulla curva.
+    e dunque \(\mathbf{x} = \mathbf{x} {(s)}\) 
+\end{definition}
+\begin{remark}
+    \(|s'{(t)}| = |\mathbf{x}'{(t)}|\) 
+\end{remark}
+\begin{definition}{Versore tangente}
+    Il versore tangente alla curva \(\gamma\) è
+    \[
+        \mathbf{t} {(t)} =
+        \frac{\mathbf{\dot{x}}{(t)}}{\|\mathbf{\dot{x}}{(t)}\|} =
+        \frac{d\mathbf{x} {(s)}}{ds}
+    \]
+    dove ovviamente la prima uguaglianza vale se \(\mathbf{\dot{x}}{(t)} \neq
+    0\)
+\end{definition}
+
+\begin{definition}{Versore normale}
+    Il versore normale alla curva \(\gamma\) è definito, nei punti in cui
+    \(\frac{d\mathbf{t} }{ds} \neq 0\) come 
+    \[
+        \mathbf{n} {(t)} := \frac{\frac{d\mathbf{t} }{ds}}{\left\|\frac{d\mathbf{t}
+        }{ds}\right\|} = \frac{\frac{d^2 \mathbf{x} }{ds^2}}{\left\|\frac{d^2 \mathbf{x}
+    }{ds}\right\|}
+    \]
+
+\end{definition}
+\begin{definition}{Curvatura}
+    La quantità \(k{(s)} = \left\|\frac{d^2 \mathbf{x} }{ds^2}\right\|\) si dice
+    \emph{curvatura} e il suo inverso moltiplicativo \(R\) si dice \emph{raggio di
+    curvatura}. 
+\end{definition}
+\begin{definition}{Piano Osculatore}
+    Il piano individuato dai versori \(\mathbf{t} \) e \(\mathbf{n} \) si dice
+    \emph{piano osculatore}
+\end{definition}
+\begin{definition}{Versore binormale}
+    Il versore \(\mathbf{b} = \mathbf{t}  \times  \mathbf{n} \) viene detto
+    \emph{versore della binomiale}
+\end{definition}
+
+\begin{definition}{Terna intrinseca}
+    La terna \(\{\mathbf{t} , \mathbf{n} , \mathbf{b} \}\) è detta terna
+    intrinseca alla curva \(\gamma\) se
+    \begin{itemize}
+        \item \(\mathbf{t} \) è il versore tangente
+        \item \(\mathbf{n} \) è il versore normale
+        \item \(\mathbf{b} \) è il versore binormale
+    \end{itemize}
+    e viene anche chiamato \emph{riferimento di Frenet}
+
+\end{definition}
+
+Possiamo osservare che \(\frac{d\mathbf{b} }{ds}\) è normale a
+\(\mathbf{b}{(s)}\) e inoltre
+\begin{align*}
+    \frac{d\mathbf{b} }{ds} &= \frac{d}{ds}(\mathbf{t}  \times  \mathbf{n} ) =
+    \frac{d\mathbf{t} }{ds} \times  \mathbf{n}  + \mathbf{t}  \times
+    \frac{d\mathbf{n} }{ds} = -k \mathbf{n}  \times  \mathbf{n}  + \mathbf{t}
+    \times \frac{d\mathbf{n} }{ds}=\\
+    &= \frac{d\mathbf{n} }{ds}
+\end{align*}
+E dunque dato che è normale sia a \(\mathbf{b}\) che a \(\mathbf{t} \) allora
+deve essere proporzionale a \(\mathbf{n} \) e in particolare la seguente è una
+buona definizione
+\begin{definition}{Torsione}
+    La funzione \(\tau = \tau{(s)}\) tale che
+    \[
+        \frac{d\mathbf{b}{(s)} }{ds} = \tau{(s)} \mathbf{n}{(s)}
+    \]
+    è detta \emph{torsione} della curva \(\gamma\)
+\end{definition}
+
+Riassumendo, le seguenti vengono dette \emph{formule di Frenet}:
+\begin{align*}
+    \frac{d\mathbf{t} }{ds} &= k \mathbf{n}  \\
+    \frac{d\mathbf{n} }{ds} &= -k \mathbf{t}  - \tau \mathbf{b}  \\
+    \frac{d\mathbf{b} }{ds} &= \tau \mathbf{n}
+\end{align*}
+dove la seconda è trovata dalle altre due e da \(\mathbf{n} = \mathbf{b} \times
+\mathbf{t} \) 
+
+Dal precedente marchingegno possiamo riscrivere la velocità e l'accelerazione
+nella terna intrinseca come, se \(P = P{(s{(t)})}\) 
+\begin{align*}
+    \mathbf{v}  &= \frac{d\mathbf{x} }{dt} = \dot{s} \mathbf{t}\\
+    \mathbf{a} &= % TODO finire
+\end{align*}
+
+
 \end{document}
 
