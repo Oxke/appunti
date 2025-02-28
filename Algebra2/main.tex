@@ -169,6 +169,7 @@ relazione di equivalenza su \(S\) seguente:
 Ne segue chiaramente che \(O_s = {[s]}_\sim \) e allora \(\displaystyle S = \coprod_{s \in S}
 O_s\) 
 \end{proof}
+% TODO separa in a parte corollario e reffalo in dopo
 \begin{proposition}
     \(\text{stab}_s < G\) 
 \end{proposition}
@@ -180,7 +181,102 @@ O_s\)
     \]
 \end{proof}
 
+\begin{definition}{Azione transitiva}
+    Un'azione \(F : G \times S \to S \) si dice \textbf{transitiva} se per ogni
+    \(s, s' \in S\) esiste \(g \in G\) tale che \(s' = g{(s)}\)
+\end{definition}
+
+\begin{proposition}
+    Sia \(F : G \times  S \to S\) un'azione di gruppo. Allora fissato un \(s \in
+    S\), consideriamo \(O_s \subseteq   S\) e \(H := \mathrm{stab}_s < G\). Allora esiste
+    un'applicazione naturale biettiva
+    \begin{align*}
+        \Phi: G / H &\longrightarrow O_s \\
+        gH &\longmapsto \Phi(gH) = g{(s)} = F(g, s)
+    \end{align*}
+    Inoltre per ogni \(C \in G / H\), \(g{(\Phi{(C)})} = \Phi{(g{(C)})}\) dove
+    la prima azione è quella di \(G\) su \(O_s\) e la seconda è quella di \(G\)
+    su \(G / H\)
+\end{proposition}
+\begin{proof} \(\) 
+    \begin{itemize}[label = --]
+        \item \emph{Ben definita}: se \(aH = bH\) allora \(b^{-1}a \in H\) e
+            quindi esiste un \(h \in H\) tale che \(b^{-1}a = h\) e quindi \(a =
+            bh\). Allora \(F{(a, s)} = F{(bh, s)} = F{(b, F{(h, s)})}\) =
+            \(F{(b, s)}\) 
+        \item \emph{Iniettiva}: supponiamo che esistano \(a, b \in G\) tali che
+            \(\Phi{(aH)} = \Phi{(bH)}\), allora \(F{(a, s)} = F{(b, s)}\) ma
+            allora
+            \[
+                F{(b^{-1}a, s)} = F{(b^{-1}, F{(a, s)})} = F{(b^{-1}, F{(b,
+                s)})} = F{(b^{-1}b, s)} = F{(e, s)} = s
+            \]
+            e quindi \(b^{-1}a \in H \iff aH = bH\) 
+        \item \emph{Suriettiva}: per ogni \(s' \in O_s\) esiste \(g \in G\) tale
+            che \(s' = g{(s)}\) e quindi \(s' = g{(s)} = \Phi(gH)\)
+    \end{itemize}
+\end{proof}
+\begin{corollary}
+    Se \(G\) è un gruppo finito e ho un'azione \(F : G \times S \to S\), allora
+    per ogni \(s \in S\) vale \(\# O_s = [G : \text{stab}_s]\) o
+    equivalentemente
+    \[
+        \# G = \# O_s \cdot \# \mathrm{stab}_s
+    \]
+    e inoltre
+    \[
+        \# G = \sum_{[s] \in S} \# O_s
+    \]
+\end{corollary}
+\begin{corollary}\label{cor:classi_coniugio}
+    Sia \(F : G \times G \to G\) l'azione di coniugio \({(g, h)} \mapsto
+    ghg^{-1}\). Ricordiamo che \(\mathrm{stab}_a = C{(a)}\) e la formula delle
+    classi si traduce in 
+    \[
+        \# G = \# C{(a)} \cdot \# O_a = \sum_{[g] \in G} \# O_g = \sum_{[g] \in
+        G} \frac{\# G}{\# C{(g)}}
+    \]
+    inoltre se \(g \in Z{(G)}\) allora \(C{(g)} = G\) e dunque
+    \[
+        \# G = \# Z + \sum_{[g] \in G\sminus Z} \# O_g
+    \]
+\end{corollary}
+\begin{theorem}
+    Sia \(G\) un gruppo tale che \(\# G = p^{n}\) con \(p\) primo. Allora
+    \(Z{(G)} \neq \{e\} \) 
+\end{theorem}
+\begin{proof}
+    Se \(a \not\in Z\) allora \(C{(a)} = p^{n_a}\) con \(n_a < n\) e quindi da
+    \[
+        p^{n} = \# G = \# Z + \sum_{[g] \in G\sminus Z} \# \frac{p^{n}}{p^{n_a}}
+    \]
+    ne deduciamo che \(p | \#Z\) 
+\end{proof}
+\begin{corollary}
+    Sia \(G\) un gruppo di cardinalità \(p^2\), con \(p\) primo. Allora \(G\) è
+    abeliano.
+\end{corollary}
+\begin{proof}
+    Per il teorema sappiamo che \(Z \neq \{e\} \) e quindi \(\# Z = p\) oppure
+    \(\# Z = p^2\). Nel secondo caso \(G = Z\) e quindi è abeliano. Nel primo
+    caso invece esiste un \(a \in G \sminus Z\) e dunque \(C{(a)} \neq G\). Ma
+    \[
+        \{e\} < Z < C{(a)} < G
+    \]
+    e quindi \(C{(a)} = Z\) per cardinalità che è assurdo perché \(a \in
+    C{(a)}\) e \(a \not\in Z\).
+\end{proof}
+\begin{example}
+    Riprendendo l'esempio della moltiplicazione a sinistra \(m : G \times G \to
+    G\). Allora \(m\) è un'azione transitiva. Infatti per ogni \(g', g'' \in G\) se
+    prendo \(h = {(g')}^{-1} g''\) allora \(m {(g', h)} = g'{(g'^{-1} g'')} =
+    g''\) 
+\end{example}
+\begin{example}
+    Se prendo \(GL{(V)}\) il gruppo lineare delle trasformazioni invertibili su
+    uno spazio vettoriale \(V\), allora l'azione \({(T, v)} \mapsto Tv\) è
+    transitiva. 
+\end{example}
 
 
 \end{document}
-
