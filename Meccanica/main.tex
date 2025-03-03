@@ -1,4 +1,3 @@
-%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Meccanica Razionale}
@@ -405,7 +404,7 @@ affine euclideo \(\mathcal{E}_3\). Supponiamo dunque di avere una curva
 
 \end{definition}
 \begin{definition}{Curvatura}
-    La quantità \(k{(s)} = \left\|\frac{d^2 \mathbf{x} }{ds^2}\right\|\) si dice
+    La quantità \(\kappa{(s)} = \left\|\frac{d^2 \mathbf{x} }{ds^2}\right\|\) si dice
     \emph{curvatura} e il suo inverso moltiplicativo \(R\) si dice \emph{raggio di
     curvatura}. 
 \end{definition}
@@ -435,7 +434,7 @@ Possiamo osservare che \(\frac{d\mathbf{b} }{ds}\) è normale a
 \begin{align*}
     \frac{d\mathbf{b} }{ds} &= \frac{d}{ds}(\mathbf{t}  \times  \mathbf{n} ) =
     \frac{d\mathbf{t} }{ds} \times  \mathbf{n}  + \mathbf{t}  \times
-    \frac{d\mathbf{n} }{ds} = -k \mathbf{n}  \times  \mathbf{n}  + \mathbf{t}
+    \frac{d\mathbf{n} }{ds} = -\kappa \mathbf{n}  \times  \mathbf{n}  + \mathbf{t}
     \times \frac{d\mathbf{n} }{ds}=\\
     &= \frac{d\mathbf{n} }{ds}
 \end{align*}
@@ -452,8 +451,8 @@ buona definizione
 
 Riassumendo, le seguenti vengono dette \emph{formule di Frenet}:
 \begin{align*}
-    \frac{d\mathbf{t} }{ds} &= k \mathbf{n}  \\
-    \frac{d\mathbf{n} }{ds} &= -k \mathbf{t}  - \tau \mathbf{b}  \\
+    \frac{d\mathbf{t} }{ds} &= \kappa \mathbf{n}  \\
+    \frac{d\mathbf{n} }{ds} &= -\kappa \mathbf{t}  - \tau \mathbf{b}  \\
     \frac{d\mathbf{b} }{ds} &= \tau \mathbf{n}
 \end{align*}
 dove la seconda è trovata dalle altre due e da \(\mathbf{n} = \mathbf{b} \times
@@ -461,13 +460,164 @@ dove la seconda è trovata dalle altre due e da \(\mathbf{n} = \mathbf{b} \times
 
 Dal precedente marchingegno possiamo riscrivere la velocità e l'accelerazione
 nella terna intrinseca come, se \(P = P{(s{(t)})}\) 
-\begin{align*}
+\begin{align}\label{eq:velocita_accelerazione}
     \mathbf{v}  &= \frac{d\mathbf{x} }{dt} = \frac{d\mathbf{x} }{ds}
     \frac{ds}{dt} = \dot{s} \mathbf{t}\\
     \mathbf{a} &= \frac{d\mathbf{v} }{dt} = \frac{d}{dt} (\dot{s} \mathbf{t}) =
     \ddot{s} \mathbf{t} + \dot{s} \frac{d\mathbf{t} }{ds} \frac{ds}{dt} =
-    \ddot{s} \mathbf{t} + \dot{s}^2 k \mathbf{n}
-\end{align*}
+    \ddot{s} \mathbf{t} + \dot{s}^2 \kappa \mathbf{n}
+\end{align}
+
+\begin{example}[Curvatura rispetto a un parametro \(\lambda\)]
+    Supponiamo \(P = P{(\lambda)}\). Dimostriamo che vale la seguente formula
+    \[
+        \kappa = \frac{|P' \times P''|}{|P'|^3}
+    \]
+    \begin{proof}
+        Ci vogliamo ricondurre all'ascissa curvilinea \(s\). Nel caso in cui
+        \(\mathbf{r} = \mathbf{r} {(s)}\) otteniamo
+        \begin{equation}\label{eq:curvatura_s}
+          \left\|\frac{d\mathbf{r} }{ds} \times  \frac{d^2\mathbf{r}
+          }{ds^2}\right\| =
+          \|\mathbf{t} {(s)} \times \kappa{(s)}\mathbf{n} {(s)}\| =
+          |\kappa{(s)}|
+        \end{equation}
+        se ora consideriamo \(s = s{(\lambda)}\) abbiamo 
+        \begin{align*}
+            \frac{d\mathbf{r} }{ds} &= \frac{d\mathbf{r} }{d\lambda}
+          \frac{d\lambda}{ds} = \frac{d\mathbf{r} }{d\lambda} \frac{1}{s'} \\
+            \frac{d^2 \mathbf{r} }{ds^2} &= \frac{d}{ds} {\left(
+            \frac{d\mathbf{r} }{ds} \right)} = \frac{1}{s'} \frac{d}{d\lambda}
+            {\left( \frac{1}{s'} \frac{d\mathbf{r} }{d\lambda} \right)} =
+            \frac{1}{s'} {\left( \frac{1}{s'} \frac{d^2\mathbf{r}
+            }{d\lambda^2} + \frac{d\mathbf{r} }{d\lambda} \frac{-s''}{{(s')}^2} \right)} 
+        \end{align*}
+        E dunque l'equazione~\eqref{eq:curvatura_s} diventa (i calcoli sono
+        lasciati al lettore come esercizio)
+        \[
+          \left\|\frac{d\mathbf{r} }{ds} \times  \frac{d^2 \mathbf{r}
+          }{ds^2}\right\| =
+          \kappa{(s)} = \left\| \frac{\mathbf{r} ' \times  \mathbf{r} ''
+          }{s'^3}\right\|
+        \]
+    \end{proof}
+\end{example}
+
+\begin{example}[\(\gamma\) grafico di una funzione \(y = f{(x)}\) ]
+    Risulta naturale parametrizzare la curva \(\gamma\) come
+    \[
+        P - O = \mathbf{r} {(x)} = x \mathbf{\hat{i}} + f{(x)} \mathbf{\hat{j}}
+    \]
+    e dunque
+    \[
+      \kappa{(x)} = \frac{|f''{(x)}|}{{\left( \sqrt{1 + {(f'{(x)})}^2} \right)} }
+    \]
+\end{example}
+
+\begin{eser}
+    Sia \(P\) descrivente con velocità costante in modulo la curva che in un
+    sistema di coordinate cilindriche \(\rho, \theta, z\) ha equazione
+    \[
+      \begin{cases}
+          \rho = k \theta \\
+          z = h \theta
+      \end{cases}
+    \]
+    Determinare \(|\mathbf{a} {(p)}|\) 
+    \tcblower
+
+    Suggerimento: usare la~\eqref{eq:velocita_accelerazione} osservando che \(\ddot{s} = 0\).  
+\end{eser}
+
+\begin{eser}[Triedrio di Frenet per un'elica cilindrica]
+Sia \(\gamma\) l'elica cilindrica di equazione
+\[
+  \begin{cases}
+      x = R \cos\phi \\
+      y = R\sin\varphi \\
+      z = a \varphi 
+  \end{cases}
+\]
+Calcolare \(s, \mathbf{t}, \mathbf{n} , \mathbf{b} \). Similmente calcolare \(s,
+\mathbf{t} , \mathbf{n} , \mathbf{b}\) per il grafico della curva \(y = x^2\) 
+\end{eser}
+
+\subsection{Cinematica dei moti centrali}
+\begin{definition}{Moto centrale}
+    Un punto \(P\) si muove di moto centrale rspetto a un polo fisso \(O\)  se
+    durante il moto, risulta \(\mathbf{a} {(P{(t)})}\) è parallelo a \(P{(t)} -
+    O\) 
+\end{definition}
+Il moto centrale ha diverse proprietà, di seguito ne elencheremo alcune
+\begin{enumerate}[label = \arabic*.]
+    \item Il moto centrale è un \textbf{moto piano}. Infatti se \(\mathbf{a} \)
+        è parallelo a \(\mathbf{r} \) allora 
+        \[
+          \mathbf{a}  \times  \mathbf{r}  = \mathbf{0} \implies \frac{d}{dt}
+          {\left(  \mathbf{v}  \times \mathbf{r}  \right)} = \frac{d\mathbf{v}
+          }{dt} \times  \mathbf{r} + \mathbf{v} \times \frac{d\mathbf{r} }{dt} =
+          \mathbf{0} 
+        \]
+        infatti \(\frac{d\mathbf{r} }{dt} = \mathbf{v} \). La precedente
+        condizione ha la forte condizione che \(\mathbf{v}  \times \mathbf{r} =
+        \mathbf{c}\). In particolare deduciamo che
+        \[
+            \mathbf{v} \times \mathbf{r} \cdot \mathbf{r}  = \mathbf{c} \cdot
+            \mathbf{r} = 0
+        \]
+        e dunque il moto è piano. Se poi \(\mathbf{c} = \mathbf{0}\) il moto è
+        rettilineo. 
+    \item Il moto si svolge con \textbf{velocità areolare costante}. In
+        particolare definiamo il vettore velocità areolare
+        \[
+          \mathbf{A} {(O)} = \frac{1}{2}{(P - O)} \times \mathbf{v}
+          \overset{\text{coord. polari}}{=} \frac{1}{2} {\left( {(r
+          \mathbf{e}_r)} \times {(\dot{r} \mathbf{e} _r + r \dot{\theta}
+\mathbf{e} _\theta)}  \right)} = \frac{1}{2} r^2 \dot{\theta} \hat{\mathbf{k} }
+        \]
+        la velocità areolare ha la seguente interpretazione geometrica.
+        Considerando infatti l'area \(A{(\theta)}\) spazzata dal raggio vettore 
+        \[
+          A{(\theta)} = \frac{1}{2}\int_0^{\theta} r^2\,d\theta \implies
+          \dot{A}{(\theta)} =
+          \frac{1}{2}r^2\dot{\theta}
+        \]
+        Se il moto è centrale allora \(\mathbf{a}  = a_r\mathbf{e}_r\) 
+        e dunque \(a_\theta = r\ddot{\theta} + 2\dot{r}\dot{\theta} = 0\).
+        Infine
+        \[
+            \frac{d}{dt}{\left( r^2\dot{\theta} \right)} =
+            2r\dot{r}\dot{\theta} + r^2\ddot{\theta} = ra_\theta = 0
+        \]
+    \item Vale la \textbf{formula di Binet}, che mostra la dipendenza di \(r\)
+        solo da \(\theta\). Ricordando \(\mathbf{a} =a_r
+        \mathbf{e}_r\) e \(r^2\dot{\theta} = c\) abbiamo
+        \begin{align*}
+            \dot{r} &= \frac{dr}{dt} = \frac{dr}{d\theta}\dot{\theta} =
+          \frac{c}{r^2} \frac{dr}{d\theta} = -c \frac{d}{d\theta} {\left(
+          \frac{1}{r} \right)} \\
+            \ddot{r} &= \frac{d}{dt}\dot{r} = \frac{d}{dt} {\left( -c
+            \frac{d}{d\theta}{\left( \frac{1}{r} \right)}  \right)} =
+            \frac{d}{d\theta} {\left( -c \frac{d}{d\theta}{\left( \frac{1}{r}
+            \right)}  \right)} \frac{c}{r^2}
+        \end{align*}
+        da cui finalmente
+        \begin{equation}\label{eq:binet}
+        a_r = \ddot{r} - r\dot{\theta}^2 = -\frac{c^2}{r^2} {\left(
+        \frac{d^2}{d\theta^2}{\left( \frac{1}{r} \right)} + \frac{1}{r} \right)} 
+        \end{equation}
+
+\end{enumerate}
+
+\section{Dinamica del punto materiale}
+Ogni cambiamento dello stato di moto di un punto \(P\) è dovuto all'interazione
+fra \(P\) e altri punti. 
+
+\begin{definition}{Sistema inerziale}
+    Si chiama \textbf{inerziale} un riferimento rispetto al quale un punto \(P\)
+    isolato ha accelerazione nulla in ogni istante.
+\end{definition}
+
 
 
 \end{document}
