@@ -1,4 +1,4 @@
-%! TEX program = lualatex
+%! TEX program = pdflatex
 \input{../preamble_appunti_report.tex}
 
 \title{Appunti di Geometria 2}
@@ -231,7 +231,7 @@ per ogni \(x \in \mathbb{R}\) tale che \({f^{-1}}'{(y)}\) sia ben definita.
 \end{proof}
 
 \subsection{Curve}
-\begin{definition}{Curva parametrica}
+\begin{definition}[label=def:curva]{Curva parametrizzata}
     Sia \(\alpha : I \to \mathbb{R}^{3}\) una funzione 
     \(t \mapsto (\alpha_{1}(t), \alpha_{2}(t), \alpha_{3}(t)) \) con \(I\)
     intervallo aperto.
@@ -239,5 +239,197 @@ per ogni \(x \in \mathbb{R}\) tale che \({f^{-1}}'{(y)}\) sia ben definita.
     Allora se \(\alpha_{1}, \alpha_{2}, \alpha_{3}\) sono funzioni lisce la
     funzione \(\alpha\) è detta \textbf{curva} parametrizzata in \(\mathbb{R}^3\) 
 \end{definition}
+In generale se una funzione \(\alpha : I \to \mathbb{R}^{n}\) verrà chiamata
+\emph{funzione vettoriale} e ha come componenti \(n\) \emph{funzioni scalari}
+\(a_{i} : I \to \mathbb{R}\). Con questa terminologia allora una curva
+parametrizzata è una funzione vettoriale in \(\mathbb{R}^{3}\) con componenti
+\(C^{\infty}{(I)}\).
+\begin{example}[Retta in \(\mathbb{R}^{3}\) ]\label{ex:retta}
+    Ovviamente in forma parametrica
+    \[
+        \alpha{(t)} = \mathbf{p}_{0} + t\mathbf{v} \quad ; \quad \mathbf{p}_{0},
+        \mathbf{v} \in \mathbb{R}^3 \text{ fissati e \(t \in \mathbb{R}\)}
+    \]
+    e dunque \(\alpha_{1}{(t)} = p_{0_{1}} + t v_{1}\) e simili per le altre due
+    componenti, e sono tutte funzioni lisce.
+\end{example}
+\begin{example}
+    In \(\mathbb{R}^{2}\) prendiamo \(C = \{{(x,y)} \in \mathbb{R}^2 :
+    {(x-x_{0})}^2 + {(y-y_{0})}^2 = r^2\} \) è una circonferenza di raggio \(r
+    \in \mathbb{R}_{> 0} \) e centro \({(x_{0}, y_{0})} \in \mathbb{R}^2\). Una
+    possibile parametrizzazione è
+    \[
+      \alpha{(t)} = (x_{0} + r\cos{t}, y_{0} + r\sin{t}) \quad ; \quad t \in
+      \mathbb{R}
+    \]
+    In questo caso avremmo potuto prendere anche \(I = [0, 2\pi]\), non è un
+    problema che \(\alpha\) non sia iniettiva
+\end{example}
+
+La definizione~\ref{def:curva} è molto generale e non richiede che la curva sia
+come ci piacerebbe immaginarcela. Infatti anche se la curva è \(C^{\infty}\),
+possiamo costruirne una che abbia un punto angoloso, anche se ha
+parametrizzazione \(C^{\infty}\). Un esempio è visto
+nell'esempio~\ref{ex:liscia_angolosa}. Inoltre vorremmo avere una definizione
+più bella di curva, che dipenda meno dalla parametrizzazione scelta.
+
+\begin{definition}{Vettore tangente}
+    Data \(\alpha: I \to \mathbb{R}^3\) una curva parametrizzata, fissato un
+    punto \(t \in I\), definiamo il \textbf{vettore tangente} ad \(\alpha\) al
+    tempo \(t\) come
+    \[
+      \dot{\alpha}{(t)} = \frac{d \alpha}{dt} {(t)} = \begin{pmatrix}
+          \alpha_{1}'{(t)} \\ \alpha_{2}'{(t)} \\ \alpha_{3}'{(t)}
+      \end{pmatrix}
+    \]
+\end{definition}
+\begin{remark}
+    Intuitivamente (nella visione cinematica della curva parametrizzata), il
+    vettore tangente rappresenta la velocità della particella che si muove lungo
+    la curva 
+\end{remark}
+\begin{remark}
+    Una retta ha tante parametrizzazioni diverse 
+\end{remark}
+Fissiamo due diverse parametrizzazioni della stessa retta \(r\):
+\begin{equation*}
+    \alpha{(t)} = \mathbf{p}_0 + t\mathbf{v} \quad ; \quad \beta{(t)} =
+    \mathbf{q}_0 + t\mathbf{w}
+\end{equation*}
+Allora \(\alpha\) e \(\beta\) definiscono la stessa retta se e solo se \(\mathbf{v} 
+\parallel \mathbf{w} \parallel \mathbf{q}_0 - \mathbf{p}_0\) sono paralleli.
+Equivalentemente
+\[
+  \mathbf{q}_0 = \alpha{(t_{0})} \quad e \quad \mathbf{w}  = \lambda \mathbf{v} 
+\]
+ma allora
+\[
+  \beta{(s)} = \mathbf{q}_0 + s\mathbf{w}  = \alpha{(t_{0})} +
+  s{(\lambda\mathbf{v} )} = \mathbf{p}_0 + t_{0}\mathbf{v} +\lambda s \mathbf{v}
+  = \mathbf{p}_0 + {(t_{0}+\lambda s)} \mathbf{v}  = \alpha{(t_{0} + \lambda s)} 
+\]
+ossia \(\beta = \alpha\circ h\) con \(h{(s)} = t_{0}+\lambda s\) è una funzione
+liscia con derivata mai nulla, dunque un diffeomorfismo. Questo motiva la
+seguente definizione
+
+\begin{definition}{Riparametrizzazione}
+    Sia \(\alpha:I \to \mathbb{R}^3\) una curva parametrizzata e \(h : J\to I\)
+    un diffeomorfismo. Allora \(\beta := \alpha\circ h : J \to \mathbb{R}^3\) è
+    una \textbf{riparametrizzazione} di \(\alpha\) 
+\end{definition}
+\begin{remark}
+    \(h'= 0\) significa che \(\dot{\beta}{(t)} = 0 \iff \dot{\alpha}{(t)}
+    =0\). Se \(h'> 0\) allora la curva viene percorsa nello stesso verso.
+\end{remark}
+A noi interessano le curve parametrizzate \emph{a meno di riparametrizzazione}.
+Questo suggerisce di introdurre una classe di equivalenza sulle curve
+parametrizzate
+\begin{definition}{Equivalenza tra curve}
+    Siano \(\alpha : I \to \mathbb{R}^3\) e \(\beta : J \to \mathbb{R}^3\)
+    curve parametrizzate. Allora \(\alpha\) e \(\beta\) sono \textbf{equivalenti}
+    se esiste un diffeomorfismo \(h : J \to I\) tale che \(\beta = \alpha \circ
+    h\). In altre parole \(\alpha\) e \(\beta\) sono \textbf{equivalenti} se e
+    solo se \(\beta\) è una riparametrizzazione di \(\alpha\).
+
+    La notazione che si usa è allora \(\alpha \sim \beta\)
+\end{definition}
+\begin{note}
+    La relazione di equivalenza \(\sim\) è una relazione di equivalenza. Infatti
+    è ovviamente simmetrica per il diffeomorfismo \(t \mapsto t\), è simmetrica
+    mediante il diffeomorfismo \(h^{-1}\) ed è transitiva perché la composizione
+    di due diffeomorfismi è un diffeomorfismo.
+\end{note}
+\begin{definition}{Curve geometriche}
+    L'insieme delle curve geometriche è l'insieme delle classi di equivalenza
+    delle curve parametrizzate rispetto alla relazione di equivalenza \(\sim\) 
+    di riparametrizzazione.
+\end{definition}
+Per ogni curva geometrica, vogliamo trovare una curva parametrizzata in
+parametrizzazione ``canonica''.
+\begin{definition}{Parametrizzazione per lunghezza d'arco}
+    Data \(\alpha : I \to \mathbb{R}^3\) una curva parametrizzata, \(\alpha\) è
+    detta \textbf{parametrizzata per lunghezza d'arco} (o \emph{parametrizzata
+    per ascissa curvilinea}) se 
+    \[
+      \|\dot{a}{(t)}\| = 1 \quad \forall t \in I
+    \]
+\end{definition}
+Ora la questione è capire se è possibile riparametrizzare una curva in modo che
+abbia parametrizzazione per lunghezza d'arco. Per quanto osservato prima è
+necessario che \(\dot{\alpha}{(t)} \neq \mathbf{0}\), infatti \(\dot{\beta}{(s)} =
+\dot{\alpha}{(t)} \cdot h'{(s)}\). Vogliamo ora mostrare che questa condizione è
+sufficiente. 
+\begin{definition}{Curva regolare}
+    Una curva parametrizzata \(\alpha : I \to \mathbb{R}^3\) si dice
+    \textbf{regolare} se \(\alpha{(t)} \neq \mathbf{0} \) per ogni \(t \in I\) 
+\end{definition}
+
+\begin{theorem}[regolare \(\iff \exists\) riparam.~per lunghezza
+    d'arco]\label{thm:regolare_parametrizzata}
+    Sia \(\alpha : I \to \mathbb{R}^3\) una curva parametrizzata regolare.
+    Allora \(\exists h : J \to I\) diffeomorfismo tale che \(\beta = \alpha
+    \circ h : J \to \mathbb{R}\) è una parametrizzazione per lunghezza d'arco.
+\end{theorem}
+Prima di procedere alla dimostrazione facciamo una piccola digressione sulle
+lunghezze di una curva. Data \(\alpha: I \to \mathbb{R}^3\) una curva
+parametrizzata. Fisso \([c,d] \subseteq I \)  intervallo chiuso. Allora
+l'\emph{arco di curva} \(\alpha|_{[c, d]} : [c, d] \to \mathbb{R}\) ha lunghezza
+che si calcola come
+\[
+    L{(\alpha|_{[c,d]} )} = \int_{c}^{d} \|\dot{\alpha}{(\tau)}\| \,d \tau
+\]
+per continuità della norma l'integranda è continua e dunque
+integrabile. In particolare le somme di Riemann di questo integrale
+corrispondono alle lunghezza delle curve poligonali che approssimano la curva,
+il sup di esse è dunque il valore cercato.
+
+\begin{proof}[Dimostrazione del teorema~\ref{thm:regolare_parametrizzata}]
+    Sia \(\alpha : I\to \mathbb{R}^3\). Fisso \(t_{0} \in I\) e definisco \(h :
+    I \to \mathbb{R}\) tramite
+    \[
+      h{(t)} = \int_{t_{0}}^{t} \|\dot{\alpha}{(\tau)}\| \,d \tau
+    \]
+    allora \(h{(I)} = J \subseteq \mathbb{R}  \) è un intervallo aperto. Inoltre
+    \(h : I \to J\) è un diffeomorfismo e \(\beta = \alpha \circ h^{-1} : J \to
+    \mathbb{R}^3\) è una riparametrizzazione con ascissa curvilinea.
+
+    Infatti:
+\begin{enumerate}[label = \arabic*.]
+    \item \(h\) è \(C^{\infty}\). Infatti \(t \mapsto \|\dot{\alpha}{(t)}\|\) è
+        \(C^{\infty}\) in quanto composizione di funzioni lisce. Infatti è
+        radice di un valore che non è mai nullo, dunque la radice è definibile
+        da \({(0, +\infty)}\) e allora \(C^{\infty}\).
+
+        Allora per il teorema fondamentale del calcolo integrale, \(h\) è
+        \(C^{\infty}\) 
+    \item \(h'{(t)} = \|\dot{\alpha}{(t)}\| > 0\), dunque \(h\) è diffeomorfismo
+        e \(J\) è aperto.
+    \item \(\beta = \alpha \circ h^{-1} : J \to \mathbb{R}^3\) è \(C^{\infty}\)
+        e
+        \[
+            \dot{\beta}{(s)} = \dot{\alpha}{(h^{-1}{(s)})} \cdot
+            {(h^{-1})}'{(s)} =
+            \frac{\dot{\alpha}{(h^{-1}{(s)})}}{h'{(h^{-1}{(s)})}} =
+            \frac{\dot{\alpha}{(h^{-1}{(s)})}}{\|\dot{\alpha}{(h^{-1}{(s)})}\|}
+        \]
+        e dunque \(\|\dot{\beta}\| = 1\) 
+\end{enumerate}
+\end{proof}
+
+Il teorema~\ref{thm:regolare_parametrizzata} è la motivazione per cui
+sceglieremo di lavorare con curve regolari.
+
+\begin{example}
+    \(C = \{{(x, y)} \in \mathbb{R}^2 : x \ge 0, y\ge 0, xy=0\}\) è l'unione dei
+    semiassi positivi. Allora due fatti sono veri:
+\begin{enumerate}[label = \arabic*.]
+    \item È possibile trovare una curva parametrizzata liscia con \(\alpha : I
+        \to R^2\) tale che \(\alpha{(I)} = C\) 
+    \item Non esiste una curva regolare tale che \(\alpha{(I)} = C\)
+\end{enumerate}
+dunque le curve regolari sono l'oggetto giusto per studiare la geometria delle
+curve che appaiono geometricamente lisce.
+\end{example}
+
 \end{document}
 
