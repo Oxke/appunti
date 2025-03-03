@@ -1,3 +1,4 @@
+%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 \title{Appunti di Analisi 3 \-- Equazioni Differenziali}
 \author{Github Repository:
@@ -140,8 +141,8 @@ Se poniamo \(x(0) = x_{0}\) otteniamo \(x_{0} = -\frac{1}{c}\) da cui \(c =
     Posso riscrivere la precedente soluzione nella forma 
     \[
         x(t) =
-        \sqrt{c_{1}^2+c_{2}^2}(\frac{c_{1}}{\sqrt{c_{1}^2+c_{2}^2}}\cos(\omega
-        t) + \frac{c_{2}}{\sqrt{c_{1}^2+c_{2}^2}}\sin(\omega t))
+        \sqrt{c_{1}^2+c_{2}^2}\left(\frac{c_{1}}{\sqrt{c_{1}^2+c_{2}^2}}\cos(\omega
+        t) + \frac{c_{2}}{\sqrt{c_{1}^2+c_{2}^2}}\sin(\omega t)\right)
     \]
     dove i coefficienti di seno e coseno sono le coordinate di un punto sulla
     circonferenza unitaria, quindi sono coseno e seno di un angolo \(\varphi\),
@@ -358,7 +359,7 @@ Dove abbiamo introdotto la variabile \(v(t) = x'(t)\). A questo punto il sistema
 può essere scritto in forma vettoriale come \(\mathbf{x}(t) = (x(t), v(t))\), e
 quindi \(\mathbf{x}'(t) = \mathbf{f}(t, \mathbf{x}) = (v(t), f(t, x(t), v(t)))\) 
 
-Analogalmente equazioni di ordine superiore possono essere ricondotte a sistemi
+Analogamente equazioni di ordine superiore possono essere ricondotte a sistemi
 di primo ordine introducendo le variabili \(x_{i} = x^{(i)}\) dove \(x^{(i)}\) è
 la \(i\)-esima derivata di \(x\). Il sistema che analizzeremo sarà quindi
 \[
@@ -791,10 +792,10 @@ rispetto alla prima. Allora
     quindi otteniamo che \(x\) è soluzione di \((P)\).
 
     Ora procediamo con l'unicità. Sia \(z : J \to \mathbb{R}^{N}\) una soluzione
-    di \((P)\). Considieriamo i valori di \(t \in J \cap [t_{0}, t_{0} +
-    \alpha]\) e analogalmente per \(t \le  t0\) e vogliamo mostrare che \(z(t) =
-    x(t)\) con \(x(\cdot )\) la soluzione costruita primala soluzione costruita
-    prima. Allora abbiamo per ipotesi che
+    di \((P)\). Consideriamo i valori di \(t \in J \cap [t_{0}, t_{0} +
+    \alpha]\) e analogamente per \(t \le  t0\) e vogliamo mostrare che \(z(t) =
+    x(t)\) con \(x(\cdot )\) la soluzione costruita prima. Allora abbiamo per
+    ipotesi che
     \[
         z(t) = x_{0} + \int_{t_{0}}^{t} f(s, z(s)) ds
     \]
