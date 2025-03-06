@@ -1,3 +1,4 @@
+%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Meccanica Razionale}
@@ -474,7 +475,7 @@ nella terna intrinseca come, se \(P = P{(s{(t)})}\)
         \kappa = \frac{|P' \times P''|}{|P'|^3}
     \]
     \begin{proof}
-        Ci vogliamo ricondurre all'ascissa curvilinea \(s\). Nel caso in cui
+        Ci vogliamo ricondurre all'ascissa curvilinea \(s\). Se
         \(\mathbf{r} = \mathbf{r} {(s)}\) otteniamo
         \begin{equation}\label{eq:curvatura_s}
           \left\|\frac{d\mathbf{r} }{ds} \times  \frac{d^2\mathbf{r}
@@ -485,21 +486,26 @@ nella terna intrinseca come, se \(P = P{(s{(t)})}\)
         se ora consideriamo \(s = s{(\lambda)}\) abbiamo 
         \begin{align*}
             \frac{d\mathbf{r} }{ds} &= \frac{d\mathbf{r} }{d\lambda}
-          \frac{d\lambda}{ds} = \frac{d\mathbf{r} }{d\lambda} \frac{1}{s'} \\
+          \frac{d\lambda}{ds} = \frac{d\mathbf{r} }{d\lambda} \frac{1}{s'} =
+          \frac{\mathbf{\dot{r}} }{s'}\\
             \frac{d^2 \mathbf{r} }{ds^2} &= \frac{d}{ds} {\left(
             \frac{d\mathbf{r} }{ds} \right)} = \frac{1}{s'} \frac{d}{d\lambda}
             {\left( \frac{1}{s'} \frac{d\mathbf{r} }{d\lambda} \right)} =
             \frac{1}{s'} {\left( \frac{1}{s'} \frac{d^2\mathbf{r}
-            }{d\lambda^2} + \frac{d\mathbf{r} }{d\lambda} \frac{-s''}{{(s')}^2} \right)} 
+            }{d\lambda^2} + \frac{d\mathbf{r} }{d\lambda} \frac{-s''}{{(s')}^2}
+    \right)} = \frac{s' \mathbf{\ddot{r}}  - s'' \mathbf{\dot{r}}}{s'^3}
         \end{align*}
-        E dunque l'equazione~\eqref{eq:curvatura_s} diventa (i calcoli sono
-        lasciati al lettore come esercizio)
-        \[
-          \left\|\frac{d\mathbf{r} }{ds} \times  \frac{d^2 \mathbf{r}
-          }{ds^2}\right\| =
-          \kappa{(s)} = \left\| \frac{\mathbf{r} ' \times  \mathbf{r} ''
+        E dunque l'equazione~\eqref{eq:curvatura_s} diventa 
+        \begin{align*}
+            \kappa{(s)} &= \left\|\frac{d\mathbf{r} }{ds} \times  \frac{d^2 \mathbf{r}
+          }{ds^2}\right\| = \left\| \frac{1}{s'^{4}} {(\mathbf{\dot{r}} \times
+          {(s' \mathbf{\ddot{r}} - s'' \mathbf{\dot{r}} )})}  \right\|
+          = \left\| \frac{1}{s'^{4}} {(s' \mathbf{\dot{r}} \times
+              \mathbf{\ddot{r}} - s'' \cancel{\mathbf{\dot{r}} \times
+              \mathbf{\dot{r}}})}\right\| =
+          \\ &= \left\| \frac{\mathbf{\dot{r}} \times  \mathbf{\ddot{r}}
           }{s'^3}\right\|
-        \]
+        \end{align*}
     \end{proof}
 \end{example}
 

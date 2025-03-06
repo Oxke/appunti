@@ -1,3 +1,4 @@
+%! TEX program = lualatex
 \input{../preamble_appunti.tex}
 
 \title{Appunti di Analisi 3 \-- Analisi Complessa}
@@ -788,7 +789,7 @@ Non è vero che ogni funzione \(C^{\infty}\) sia sviluppabile in serie di Taylor
                 ymin= -1, ymax = 2,
                 axis lines = middle,
             ]
-            \addplot[domain=-4:4, samples=100]{ e^(-(1/x^2))};
+            \addplot[domain=-4:4, samples=100]{e^(-(1/x^2))};
             \end{axis}
         \end{tikzpicture}
         \caption{\(\displaystyle e^{-\frac{1}{x^2}}\)}
@@ -831,7 +832,7 @@ Sia \(\Omega \subseteq \mathbb{C}\) aperto, \(f : \Omega \to \mathbb{C}\)
     Sia \(a \in \Omega\). Diciamo che \(f\)  è \(\mathbb{C}-\)differenziabile in
     \(z=a\) se esiste
     \begin{equation}
-        \lim_{z \to a} \frac{f(z) = f(a)}{z - a} = f'(a)
+        \lim_{z \to a} \frac{f(z) - f(a)}{z - a} = f'(a)
     \end{equation}
     o equivalentemente
     \begin{align}
@@ -1748,10 +1749,10 @@ convergenza di tale serie di potenze.
         f{(z)} &= \frac{1}{2 \pi i} \int_{\partial D_{\rho} {(a)}}
         \sum_{n=0}^{\infty} \frac{f{(\zeta)}}{\zeta -a} {\left( \frac{z-a}{\zeta
     -a} \right)}^{n} d \zeta = \\ &= \sum_{n=0}^{\infty} {\left( \frac{1}{2\pi i}
-                \int_{D_\rho{(a)}} \frac{f{(\zeta)}}{{(\zeta-a)}^{n+1}} d
+                \int_{\partial D_\rho{(a)}} \frac{f{(\zeta)}}{{(\zeta-a)}^{n+1}} d
         \zeta\right)} {(z-a)}^{n}
     \end{align*}
-    e quindi questa deve essere la serie di taylor
+    e quindi questa deve essere la serie di Taylor
 \end{proof}
 Dalla dimostrazione scende anche che
 \[
@@ -1759,7 +1760,7 @@ Dalla dimostrazione scende anche che
     {(a)}} \frac{f{(\zeta)}}{{(\zeta - a)}^{n+1}} d \zeta
 \]
 e poiché la funzione integranda è olomorfa in \(\Omega \sminus \{a\} \) e le
-curve \(\partial D\) e \(\partial D_{rho}{(a)} \) sono omotope, per \(D\)
+curve \(\partial D\) e \(\partial D_{\rho}{(a)} \) sono omotope, per \(D\)
 qualsiasi \(a \in D \subseteq \overline{D} \subseteq \Omega  \)  si ottiene il seguente corollario
 \begin{corollary}
     Sia \(\overline{D} \subseteq \Omega \) disco chiuso. Allora per ogni \(z \in
@@ -1849,13 +1850,14 @@ intendiamo
 cioè diremo che la serie~\eqref{eq:serie-bilatera} converge (uniformemente,
 assolutamente, ecc) se tali sono le serie~\eqref{eq:serie-bilatera-2}.
 
-Siano \(0 \le r_{1} < r_{2} < +\infty\) e \(a \in \mathbb{C}\). Consideriamo
+\begin{theorem}[Sviluppo di Laurent]
+Siano \(0 \le r_{1} < r_{2} < +\infty\) e \(a \in \mathbb{C}\).
+Consideriamo\footnote{Nel caso di \(r_{1} = 0, r_{2}= r\) allora si indica anche
+    \(D^{*}_r{(a)} = D_r{(a)} \sminus \{a\} \)}
 \[
     \Omega = \{z \in \mathbb{C}: r_{1} < |z-a| < r_{2}\} 
 \]
-Nel caso di \(r_{1} = 0, r_{2}= r\) allora si indica anche \(D^{*}_r{(a)} =
-D_r{(a)} \sminus \{a\} \) 
-\begin{theorem}
+
     Sia \(f \in \mathcal{H}{(\Omega)}\). Allora esiste unica una successione
     \(c_{n}\) tale che 
     \[
@@ -2005,7 +2007,7 @@ per \(\rho\) arbitrario con \(r_{1} < \rho < r_{2}\) e allora
         \sum_{m=-1}^{-\infty} c_{m} {(z-a)}^{m} = \sum_{n=-1}^{\infty} c_{-n}
         {(z-a)}^{-n} = \sum_{n=1}^{\infty} c_{-n} \zeta^{n}
     \]
-    con \(\zeta - \frac{1}{z-a}\). L'ultima serie è una serie di potenze e
+    con \(\zeta = \frac{1}{z-a}\). L'ultima serie è una serie di potenze e
     converge per \(|\zeta| \in (\frac{1}{r_{2}}, \frac{1}{r_{1}})\) con la
     convenzione \(\frac{1}{0} = \infty\) e \(\frac{1}{\infty} = 0\) e quindi il
     raggio di convergenza è \(R \ge \frac{1}{r_{1}}\) per cui converge in modo
@@ -2386,7 +2388,7 @@ dice che \(z=a\) è un polo di \textbf{ordine} \(N\)
     Allora l'immagine di \(f\) è densa in \(\mathbb{C}\) 
 \end{theorem}
 \begin{proof}
-    Per assurdo supponiamo che esista un \(w \in \mathbb{C}\) e \(\rho > 0\)
+    Per assurdo supponiamo che esista un \(w \in \mathbb{C}\) e \(r > 0\)
     tali che
 \[
     D_\rho{(w)} \cap f{(D^{*}_r{(a)})} = \varnothing
@@ -2394,7 +2396,7 @@ dice che \(z=a\) è un polo di \textbf{ordine} \(N\)
     Allora \(\displaystyle \frac{1}{f-w}\) è ben definita in tutto \(D^{*}_r{(a)}\) ed è
     limitata, dunque per il teorema~\ref{thm:estensione-riemann} di estensione
     di Riemann, esiste \(\varphi  \in \mathcal{H}{(D_r{(a)})}\) con
-    \(\displaystyle \varphi = \frac{1}{f - w}\) se \(z\neq a\). Ne segue che
+    \(\displaystyle \varphi{(z)} = \frac{1}{f{(z)} - w}\) se \(z\neq a\). Ne segue che
     \(f-w\) è meromorfa che è assurdo, perché \(f\) ha una singolarità
     essenziale
 \end{proof}
