@@ -376,5 +376,116 @@ O_s\)
     Il sottogruppo \(H\) viene detto \(p\)-sottogruppo di Sylow di \(G\).
 \end{remark}
 
+% TODO: aggiungere due lezioni mancanti
+
+\section{Gruppi di permutazioni}
+\begin{definition}{Definizioni riguardo alle permutazioni}
+    Una permutazione \(\sigma \in S_n\) si dice \textbf{pari}se si può scrivere
+    come prodotto di un numero pari di trasposizioni. Questo è ben definito
+    perché esiste un unico omomorfismo \(\varepsilon : S_n \to \mathbb{Z} / 2\)
+    \(\varepsilon(\sigma) = 1\) se \(\sigma\) è una trasposizione. Tale
+    omomorfismo è detto \textbf{segno} della permutazione.
+
+    Il \textbf{gruppo alterno} \(A_n\) è il nucleo di \(\varepsilon\).
+\end{definition}
+Poiché \(A_{n}\) ha indice 2 in \(S_{n}\), \(A_{n} \trianglelefteq S_{n} \).
+
+\begin{remark}[Ogni \(\sigma \in A_{n}\) si può esprimere come prodotto di
+    3-cicli] Basta mostrare che ogni prodotto di 2 trasposizioni è scrivibile
+    come prodotto di 3-cicli. Se \(\sigma = (a\, b)(b\, c) = (a\, b\, c)\) è
+    facile. Se invece \(\sigma = (a\, b)(c\, d)\) disgiunti allora \(\sigma =
+    (c\,b\,a)(a\,c\,d)\). Notando che i 3-cicli sono pari si conclude anche che il
+    sottogruppo generato dai 3-cicli è esattamente \(A_{n}\) 
+\end{remark}
+
+\begin{example}[Per \(n \ge 5\) tutti i 3-cicli sono tra loro coniugati in
+    \(A_{n}\)] Prendiamo \(\sigma  = (i\,j\,k)\) e \(\sigma' = (i'\,j'\,k')\) due
+    3-cicli. Allora esiste \(\gamma \in S_{n}\) tale che \(\gamma \sigma
+    \gamma^{-1} = \sigma'\). Supponiamo \(\gamma \not\in A_{n}\). Siccome \(n
+    \ge 5\) allora esistono \(r, s \in \{1, \dots, n\} \sminus \{i, j, k\}  \).
+    Ma allora \(\theta = \gamma\cdot {(r\, s)} \in A\cap \) e \(\theta \sigma
+    \theta^{-1} = \sigma'\)
+\end{example}
+\begin{eser}[2 elementi coniugati in \(S_{5}\) ma non in \(A_{5}\)] 
+    Mostrare che \({(1\,2\,3\,4\,5)}\) e \({(2\,1\,3\,4\,5)}\) non sono
+    coniugati in \(A_{5}\) (ma lo sono in \(S_{5}\)).
+\end{eser}
+
+\begin{definition}{Gruppo semplice}
+    \(G\) si dice \textbf{semplice} se gli unici sottogruppi normali sono
+    \(\{e\} \) e \(G\) stesso.
+\end{definition}
+
+\begin{theorem}
+    \(\forall n \ge 5\), \(A_{n}\) è semplice
+\end{theorem}
+\begin{proof}
+Sia \(N \trianglelefteq A_{n}\) con \(N \neq \{e\} \). Dimostriamo che \(N\)
+contiene un 3-ciclo \(\sigma\) allora \(N\) contiene tutti i coniugati di
+\(\sigma\) perché è normale. 
+
+Sia \(\sigma \in N\) con \(\sigma \neq 1\) con il massimo numero di punti
+fissi. Vogliamo mostrare che \(\sigma\) è un 3-ciclo.
+
+Consideriamo l'azione \(\Span{\sigma} \times \{1, \dots, n\} \to \{1, \dots, n\}
+\) data da \({(\sigma^{k}, i)} \mapsto \sigma^{k}{(i)}\). Siccome \(\sigma \neq
+e\) esiste un \(i\) tale che \(\sigma{(i)} = j \neq i\). Dunque \(O_i \ni \{i,
+j\} \) e quindi \(\# O_i \ge  2\).
+
+\begin{enumerate}[label = \arabic*.]
+    \item Supponiamo che tutte le orbite di elementi non fissati da \(\sigma\)
+        abbiano cardinalità 2. Poiché \(\sigma\) è pari ci devono essere almeno
+        2 orbite \(O_i, O_r\) di cardinalità 2 (porta ad assurdo) % TODO assurdo
+\end{enumerate}
+Quindi esiste almeno un'orbita di \(\Span{\sigma} \) con 3 elementi \(i, j, k\).
+Se \(\sigma = {(i\,j\,k)}\) ho finito. Altrimenti, \(\sigma\) necessariamente
+deve muovere altri due elementi, essendo pari. Siano essi \(r\) e \(s\). Allora
+prendiamo \(\tau = {(k\,r\,s)}\). A questo punto
+\[
+    \sigma' = \underbrace{\tau \sigma \tau^{-1}}_{\in N} \,\, \sigma^{-1} \in N
+\] 
+Allora tutti i punti fissi di \(\sigma\) lo sono anche per \(\sigma'\) e inoltre
+\(\sigma'{(j)} = j\) che non è punto fisso di \(\sigma\), dunque \(\sigma'\) ha
+più punti fissi di \sigma, assurdo.
+\end{proof}
+\begin{example}[\(A_{4}\) non è semplice]
+    \(A_{4} = \{e, (1\,2\,3), (1\,3\,2), (1\,2\,4), (1\,4\,2),\\ (2\,3\,4),
+    (2\,4\,3), (1\,3\,4), (1\,4\,3), (2\,3\,4), (2\,4\,3), (3\,4\,2),
+    (3\,2\,4)\}\) e \(H = \{e, (1\,2)(3\,4), \\(1\,3)(2\,4), (1\,4)(2\,3)\}\) è
+    normale in \(A_{4}\) e non è \(\{e\} \) o \(A_{4}\). Infatti è l'unione
+    dell'intera classe di coniugio del tipo di due trasposizioni disgiunte (e
+    l'identità).
+\end{example}
+
+\begin{definition}{Gruppo risolubile}
+    Un gruppo \(G\) si dice \textbf{risolubile} se esiste una catena di
+    sottogruppi 
+    \[
+      \{e\}  = G_{0} \trianglelefteq G_{1} \trianglelefteq G_{2} <~\dots
+      \trianglelefteq G_{n} = G
+    \]
+    dove tutti i quozienti \(G_{i+1} / G_{i} \) sono abeliani per ogni \( i = 0,
+    \dots, n-1\) 
+\end{definition}
+\begin{remark}
+    Non è detto che \(G_{i} \trianglelefteq G\) per ogni \(i\).  
+\end{remark}
+\begin{example}[Gruppi abeliani]
+    Ogni gruppo abeliano è risolubile, con la catena \(\{1\} \trianglelefteq G\) 
+\end{example}
+\begin{example}[\(S_3\) ]
+    \(S_{3}\) è risolubile con la catena
+    \[
+        \{1\} \trianglelefteq A_{3} \trianglelefteq S_{3} 
+    \]
+    Infatti \(S_{3} / A_{3} \cong \mathbb{Z} / 2\mathbb{Z}\) è abeliano e
+    \(A_{3} / \{1\} \cong \mathbb{Z} / 3\mathbb{Z}\) è abeliano.
+\end{example}
+\begin{example}{\(D_{n}\)}
+    \(D_{n}\) è risolubile con la catena
+    \[
+        \{1\}  \trianglelefteq \langle r \rangle \trianglelefteq D_{n}
+    \]
+\end{example}
 
 \end{document}
