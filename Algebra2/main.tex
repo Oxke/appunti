@@ -481,11 +481,83 @@ più punti fissi di \sigma, assurdo.
     Infatti \(S_{3} / A_{3} \cong \mathbb{Z} / 2\mathbb{Z}\) è abeliano e
     \(A_{3} / \{1\} \cong \mathbb{Z} / 3\mathbb{Z}\) è abeliano.
 \end{example}
-\begin{example}{\(D_{n}\)}
+\begin{example}
     \(D_{n}\) è risolubile con la catena
     \[
         \{1\}  \trianglelefteq \langle r \rangle \trianglelefteq D_{n}
     \]
+    Infatti \(D_{n} = \Span{r, s \mid r^{n} = 1, s ^2 = 2, rs = sr^{-1} } =
+    \Span{r} \rtimes_\varphi \Span{s}  \)
 \end{example}
+\begin{example}
+    \(S_{4}\) è risolubile con la catena
+    \[
+        \{1\} \trianglelefteq V_4 \trianglelefteq A_{4} \trianglelefteq S_{4}
+    \]
+    con \(V_{4}\) il gruppo di Klein (in particolare anche \(A_{4}\) è
+    risolubile). Notare l'osservazione precedente: Il sottogruppo
+    \(\Span{{(1\,2)}{(3\,4)}} \) è normale in \(V_{4}\) ma non in \(S_{4}\) 
+\end{example}
+
+\paragraph{Gruppi di ordine 12}
+Vogliamo mostrare che esistono esattamente 5 classi di isomorfismo di gruppi di
+ordine 12:
+\begin{itemize}[label = --]
+    \item \(\mathbb{Z} / 12\mathbb{Z}\)
+    \item \(\mathbb{Z} / 2\mathbb{Z} \times \mathbb{Z} / 6\mathbb{Z}\)
+    \item \(D_{6}\) 
+    \item \(A_{4}\) 
+    \item \(\Span{x, y \mid x^4 = 1, y^3=1, xyx^{-1} = y^2} = \mathbb{Z} / 3
+        \mathbb{Z} \rtimes \mathbb{Z}/ 4 \mathbb{Z}\) 
+\end{itemize}
+\begin{proof}
+    \(12 = 2^2 \cdot 3\) quindi per il teorema di Sylow esiste un 2-Sylow e un
+    3-Sylow. Sia \(H\) un 2-Sylow e \(K\) un 3-Sylow. Allora \(H \cong
+    \mathbb{Z}_2 \times \mathbb{Z}_2\) oppure \(H \cong \mathbb{Z}_4\), \(K
+    \cong \mathbb{Z}_3\). Per il teorema di Sylow il numero \(r\) di 2-Sylow
+    deve essere 1 oppure 3. % TODO: controlla
+    Inoltre \(s\) il numero di 3-Sylow deve essere 1 oppure 4. % TODO: controlla
+
+    Ora necessariamente \(H \trianglelefteq G\) oppure \(K \trianglelefteq G\).
+    Infatti supponiamo che \(K\) non sia normale in \(G\), allora esistono 4
+    3-Sylow tra loro coniugati. % TODO: Integrare
+    Li chiamiamo \(K_{1}, K_{2}, K_{3}, K_{4}\). Allora poiché 3 è primo,
+    \(K_{i} \cap K_{j} = \{1\} \) per ogni \(i\neq j\). Allora
+    \(\# \bigcup_{i=1}^{4} K_{i} = 9 \)  ma quindi gli unici elementi che non
+    prende sono 3 elementi. Allora \(H\), un 2-Sylow, deve contenere tali 3
+    elementi. Essendocene uno solo, è normale. Ora possiamo procedere nei casi
+    seguenti:
+\begin{enumerate}[label = \arabic*.]
+    \item \(H \trianglelefteq G\) e \(K \trianglelefteq G\).
+
+        Allora \(H \cap K = \{e\} \). \(HK < G\) e \(\# HK = \frac{\# H \cdot \#
+        K}{\# H \cap K} = 12\). Allora \(HK = G\) e \(G \cong H \times K\)
+        tramite l'isomorfismo \({(h, k)} \mapsto hk\) 
+
+        Allora ne consegue che \(G \cong \mathbb{Z}_4 \times \mathbb{Z}_3 =
+        \mathbb{Z}_{12} \) oppure \(G \cong \mathbb{Z}_2 \times \mathbb{Z}_2
+        \times \mathbb{Z}_3 \cong \mathbb{Z}_2 \times \mathbb{Z}_6\) 
+
+    \item \(K\) non è normale e \(H \triangleleft G\).
+
+    Sia \(\psi : G \to A{(S)} \cong S_{4}\).
+    Allora \(\mathrm{Stab}_{K_{i}}  = \{g \in G : gK_{i}g^{-1} = K_{i}\} =
+    N{(K_{i})}\). Ma allora \(\# N{(K_{i})} = 3\) (formula delle classi) e
+    poiché \(K_{i} \subseteq N{(K_{i})} \) e ha la stessa cardinalità, essi
+    coincidono. 
+     Ma allora \(\mathrm{Ker}\psi = \{e\} \) e \(\psi\) è iniettivo.
+
+     \(G\) ha 4 3-Sylow e dunque ha \(8\) elementi di ordine 3. Ma questi sono
+     anche tutti i 3-cicli di \(S_{4}\), e dunque per cardinalità \(G \cong A_{4}\)  
+
+     \item \(K \triangleleft G\) e \(H\) non è normale.
+        
+        
+\end{enumerate}
+
+
+
+\end{proof}
+
 
 \end{document}
