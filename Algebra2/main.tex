@@ -554,10 +554,131 @@ ordine 12:
         
         
 \end{enumerate}
-
-
-
+% TODO: completare + lezione mancante
 \end{proof}
+
+\begin{definition}{}
+     Sia \(G\) un gruppo abeliano di ordine \(p^{n}\) con \(p\) primo. Allora
+     \(G \cong A_{1}\times \dots A_k\) con \(\Span{a_{i}} = A_{i}\) e
+     \(o{(a_{i})} = p^{n_{i}}\) e \( n_{1} \ge n_{2} \ge \dots \ge n_k > 0\).
+
+     Allora gli \(n_{i}\) si dicono invarianti di \(G\) e 
+     \[
+       \# G = p^{n} = p^{n_{1}} \cdot \dots \cdot p^{n_{k}}
+     \]
+     gli invarianti danno una partizione di \(n\).
+\end{definition}
+\begin{remark}
+\(\forall  m \in \mathbb{Z}\quad G{(m)} = \{x \in G: x^{m} = e\} \le  G\) 
+\end{remark}
+
+\begin{lemma}\label{lem:2}
+    Sia \(G\) un gruppo abeliano come nella definizione precedente. Sia \(m \in
+    \mathbb{Z}\) tale che \(n_t > m \ge n_{t+1} \). Allora
+    \[
+      G{(p^{m})} \cong B_{1} \times \dots \times B_{t} \times A_{t+1} \times
+      \dots \times A_{k}
+    \]
+    dove \(B_{i}\) è ciclico di ordine \(p^{m}\) e 
+    \[
+      \# G{(p^{m})} = p^{u} \quad u = tn + \sum_{j=t+1}^{k} n_{j} 
+    \]
+\end{lemma}
+\begin{proof}
+    %TODO fare tutta la dimostrazione
+\end{proof}
+\begin{corollary}
+    Nelle ipotesi del lemma~\ref{lem:2}, \(\# G{(p)} = p^{k}\) 
+\end{corollary}
+
+\begin{theorem}[Classificazione]
+    Due gruppi abeliani di ordine \(p^{n}\), con \(p\) primo sono isomorfi se e
+    solo se hanno gli stessi invarianti.
+
+    Equivalentemente se \(G\) e \(G'\) sono due gruppi abeliani con \(\#G = \#G'
+    = p^{n}\) e
+    \begin{align*}
+        G &\cong A_{1} \times \dots \times A_{k} \quad A_{i} = \Span{a_{i}}
+        \quad {(o{(a_{i})} = p^{n_{i}})} \quad n_{1} \ge n_{2} \ge \dots \ge n_k
+        > 0\\ 
+        G' &\cong A'_{1} \times \dots \times A'_{s} \quad A'_{i} = \Span{a'_{i}}
+        \quad o{(a_{i}')} = p^{n_{i}'} \quad n_{1}' \ge n_{2}' \ge \dots \ge n_s' > 0
+    \end{align*}
+\end{theorem}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Se \(G \cong G'\) allora \(G{(p)} \cong G'{(p)}\) e
+        dunque \(\# G{(p)} = \# G'(p)\) e quindi \(k = s\).
+
+        Supponiamo ora che esista un \(i\)  tale che \(n_{i} \neq h_{i}\). Sia
+        \(t\) il primo tale intero, supponendo che \(m := n_t > h_t\) 
+        Sia \(H = \{x^{p^{m}} : x \in G\} \le G\) perché \(G\) è abeliano e \(H'
+        = \{x'^{p^{m}} : x' \in G\} \le G\) perché \(G'\) è abeliano.
+    \item[\(\impliedby \)] se \(k = s\) e \(n_{i} = n_{i}'\) \(\forall i\)
+        allora \begin{align*}
+            \Phi: G &\longrightarrow G' \\
+        {(a_{1}^{\alpha_{1}} \dots a_k^{\alpha_k})} &\longmapsto
+        \Phi({(a_{1}^{\alpha_{1}} \dots a_k^{\alpha_kk})}) =
+            {(a_{1}'^{\alpha_{1}} \dots a_{k}'^{\alpha_{k}})} 
+        \end{align*}
+\end{itemize}
+\end{proof}
+\begin{corollary}
+    Il numero di classi di isomorfismo di gruppi abeliani di ordine \(p^{n}\) è
+    il numero di partizioni di \(n\)
+\end{corollary}
+\begin{corollary}
+    Il numero di classi di isomorfismo di gruppi abeliani di ordine
+    \(p_{1}^{\alpha_{1}} \cdot \dots \cdot p_r^{\alpha_r}\) con \(p_{i}\) primi
+    distinti è uguale a \(p{(\alpha_{i})}\cdot \dots \cdot p^{\alpha_r}\) dove
+    \(p^{\alpha_{i}}\) è il numero di partizioni di \(\alpha_{i}\) 
+\end{corollary}
+\begin{example}
+    I gruppi abeliani di ordine \(8\) sono \(3\), infatti \(8 = 2^{3}\) e \(3\)
+    ha 3 partizioni:
+\begin{itemize}[label = --]
+    \item \(3 = 3 \implies C_8\)
+    \item \(3 = 2+1 \implies C_4 \times C_2 \)
+    \item \(3 = 1 + 1 + 1 \implies C_{2} \times C_{2} \times C_{2}\) 
+\end{itemize}
+che per il teorema sono sicuramente non isomorfi e tutti.
+\end{example}
+\begin{example}
+    I gruppi abeliani di ordine \(12\) sono 2, infatti \(12 = 2^{2}\cdot 3\) e
+    le partizioni di 2 sono 2: \(2 = 2\) e \(2 = 1 + 1\), e i gruppi sono
+    \(C_{2}\times C_{2}\times C_{3}\) e \(C_{4} \times C_{3}\) 
+\end{example}
+\begin{eser}
+    Elencare i gruppi abeliani di ordine 36
+\end{eser}
+
+\begin{eser}
+    Supponiamo di avere un gruppo \(G\) di ordine \(1125 = 3^2 \cdot
+    5^3\)a tale che un suo 5-Sylow sia ciclico. Allora:
+\begin{itemize}[label = --]
+    \item Mostrare che \(G\) è abeliano
+    \item Determinare tutte le classi di isomorfismo possibili per \(G\)  
+\end{itemize}
+\tcblower
+Esiste solo un 5-Sylow, infatti \(1+5k \mid 3^2 \iff k = 0\) e quindi è normale.
+Per questioni di ordine deve essere quindi che \(G \cong H \rtimes_\varphi  K\) con
+\(H\) il 5-Sylow e \(K\) un 3-Sylow.
+Allora sapendo che \(H\) è ciclico, \(\mathrm{Aut}{(G)} = {C_{125}}^{\star}\)
+che ha ordine \(\varphi{(125)} = 100\). Allora \(\mathrm{Im}{(\varphi)} <
+\mathrm{Aut}{(H)}\) ma inoltre \(\mathrm{Im}{(\varphi )}< K\) e dunque
+necessariamente \(\# \mathrm{Im}{(\varphi )} = 1\) e quindi \(G \cong H \times
+K\) è abeliano.
+
+Sapendo che \(K\) è abeliano di ordine 9 possiamo trovare le due possibili
+classi di isomorfismo, ossia \(C_{1125} \) e \(C_{375} \times C_{3}\)
+\end{eser}
+
+
+
+
+
+
+
 
 
 \end{document}
