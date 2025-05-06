@@ -1,0 +1,186 @@
+\input{../preamble_appunti.tex}
+
+\title{appunti di Fondamntenti della Matematica}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/FondamentiMatematica}{\texttt{Oxke/appunti/FondamentiMatematica}}}
+
+\date{Secondo semestre, 2024 \-- 2025, prof. Rosso}
+
+\begin{document}
+
+\maketitle
+
+\section{Geometria di Hilbert}
+
+\begin{enumerate}[label = I\arabic*.]
+    \item Per due punti \(A, B\) esiste sempre una retta che li contiene
+        entrambi.
+    \item Per due punti \(A, B\) esiste al più una retta che li contiene
+        entrambi.
+    \item Su una retta esistono almeno due punti. Esistono almeno tre punti che
+        non appartengono alla stessa retta
+    \item Per tre punti \(A, B, C\) che non appartengono ad una stessa retta c'è
+        sempre un piano \(\alpha\) che li contiene. Per ogni piano esiste un
+        punto che gli appartiene.
+    \item Per tre punti \(A, B, C\) che non appartengono ad una stessa retta c'è
+        al più un piano che li contiene
+    \item Se \(A, B, C\) appartengono alla retta \(r\) e \(A, B\) appartengono
+        ad un piano \(\alpha\) allora \(r\) è interamente contenuta in \(\alpha\) 
+    \item Se due piani \(\alpha\) e \(\beta\) hanno un punto \(A\) in comune
+        allora essi hanno almeno un altro punto \(B\) in comune.
+    \item Esistono almeno quattro punti che non appartengono ad uno stesso
+        piano.
+\end{enumerate}
+
+Ne consegue che due rette o hanno un punto in comune o non ne hanno affatto. Due
+piani o non hanno punti in comune oppure hanno una retta in comune e nessun
+punto al di fuori di essa.
+
+Dati un piano ed una retta che non appartenga al piano, essi o non hanno punti
+in comune o ne hanno uno.
+
+Possiamo costruire due sottoinsiemi minimali degli assiomi precedenti 
+\subsection{Geometria astratta}
+Consideriamo un insieme \(\mathcal{P}\) di punti e un insieme \(\mathcal{R}\) di rette
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall \) coppia di punti \(A, B \in \mathcal{P}\) esiste \(r \in
+        \mathcal{R}\) tale che \(A \in r\) e \(B \in r\) 
+    \item Ogni \(r \in \mathcal{R}\) contiene almeno due punti
+\end{enumerate}
+Vogliamo ora costruire un modello di tale geometria.
+\begin{example}[Geometria sferica]
+    Sia \(\mathcal{P} = \{{(x,y,z)} \in \mathbb{R}^3 : x^2 + y^2 +z^2 = 1\} =
+    S^2 \) e come rette prendiamo i cerchi massimi, quindi le intersezioni tra
+    la sfera e i piani passanti per l'origine: \(r \in \mathcal{R} \iff r =
+    \{{(x, y, z)} \in S^2 \} : ax + by : cz = 0 \) per qualche \(a, b, c \in \mathbb{R}\) 
+
+    Quindi non c'è l'unicità della retta passante per due punti, infatti se si
+    prendono due punti antipodali infinite rette li contengono
+\end{example}
+\subsection{Geometria di incidenza}
+Una geometria astratta è detta \textbf{geometria di incidenza} se 
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall A, B \in \mathcal{P}, \quad \exists ! r \in \mathcal{R}: A,
+        B \in r \) 
+    \item \(\exists\)ono almeno tre punti \(A, B , C \in \mathcal{P}\) non
+        appartenenti ad una stessa retta
+\end{enumerate}
+
+\begin{example}[Geometria euclidea]
+    Sia \(\mathcal{P}= R^2\) e le rette di forma \(ax + by + q = 0\) per \(a, b,
+    q \in \mathbb{R}\) non tutti nulli.
+\end{example}
+
+\begin{example}[Geometria iperbolica - semipiano di Poincaré]
+    Consideriamo ora \(\mathcal{P} = \{{(x,y)} \in \mathbb{R}^2 : y > 0\} \) e
+    \(\mathcal{R} = \mathcal{R}_a \cup \mathcal{R}_{c, r} \) con \(\mathcal{R}_a
+    = \{{(x,y)} \in \mathbb{R}^2 : x = a \land y > 0\} \) e \(\mathcal{R}_{c, r}
+    = \{{(x,y)} \in R^2 : y > 0 \land {(x-c)}^2 + y^2 = r^2\} \) 
+
+    Quindi in pratica le rette sono o le rette verticali oppure le
+    semicirconferenze con centro sull'asse delle ascisse.
+\end{example}
+
+\begin{example}
+Proviamo a costruire ora un modello finito. Sia \(\mathcal{P}_3 = \{A, B, C\} \),
+e \(\mathcal{R}_3 = \{\{A, B\} , \{A, C\} , \{B, C\} \} \). 
+Ogni coppia di rette ha intersezione non vuota.
+
+Similmente \(\mathcal{P}_4 = \{A, B, C, D\} \) e \\ \(\mathcal{R}_4 = \{\{A, B\} ,
+\{A, C\} , \{A, D\} , \{B, C\} , \{B, D\} , \{C, D\} \} \). 
+Esistono coppie di rette che non hanno intersezione, ad esempio \(\{A, B\} \cap
+\{C, D\} = \emptyset\), ma ogni retta ha una e solo una retta parallela.
+
+Infine \(\mathcal{P}_5 = \{A, B, C, D\} \) e \(\mathcal{R}_5 =
+\binom{\mathcal{P}_5}{2} \) ossia ogni possibile coppia di punti. In tal caso
+\(\{A, B\}\) è parallela sia a \(\{C, D\} \) che a \(\{C, E\} \).
+\end{example}
+
+Una geometria di incidenza soddisfa la proprietà \textbf{euclidea} (o
+parabolica) delle parallele se
+presa \(r \in \mathcal{R}\) e \(p \not\in r\) allora 
+\[
+  \exists  ! s \in \mathcal{R} : P \in s \land r \cap s = \emptyset \quad
+  (\text{ es  } \mathcal{P}_3, \mathcal{R}_3)
+\]
+
+Una geometria di incidenza soddisfa la proprietà \textbf{ellittica} delle
+parallele se \(r \in s\) e \(p \not\in  r\) allora
+\[
+  \not \exists s \in \mathcal{R} : P \in s \land r \cap s = \emptyset \quad
+    (\text{ es  } \mathcal{P}_4, \mathcal{R}_4)
+\]
+
+Una geometria di incidenza soddisfa la proprietà \textbf{iperbolica} delle
+parallele se \(r \in s\) e \(p \not\in  r\) allora
+\[
+  \exists \text{ almeno due } s_{1}, s_{2} \in \mathcal{R} : P \in s_{1}, s_{2}
+  \land r \cap s = \emptyset = r \cap s_{2} \quad (\text{ es  }\mathcal{P}_5, 
+    \mathcal{R}_5)
+\]
+
+\begin{eser}
+    Mostrare la validità degli assiomi negli esempi proposti
+\end{eser}
+
+Per arrivare a \textbf{piano proiettivo} aggiungiamo due assiomi:
+\begin{enumerate}[label = \Roman*.]
+    \item Unicità retta congiungente due punti
+    \item Ogni retta contiene almeno tre punti
+\end{enumerate}
+
+Il più piccolo piano proiettivo è il piano di Fano, contenente 7 punti:
+\(\mathcal{P} = \{A, B, C, D, E, F, G\} \)  
+e 7 rette:
+\[\mathcal{R} = \{\{A, B, C\}, \{A, D, E\}, \{A, F, G\}, \{B, D, F\}, \{B, E, G\},
+\{C, D, G\}, \{C, E, F\} \} \]
+
+\section{Assiomi di ordinamento}
+\begin{proposition}[Pons Asinorum]
+    Sia \(ABC\) un triangolo. Se \(AB = AC\) allora \(\hat{B} = \hat{C}\) 
+\end{proposition}
+\begin{proof}
+    Traccio la bisettrice di \(\hat{A}\) che ha piede in \(D\) e determino i due
+    triangoli  \(ABD\) e \(ACD\). Hanno due angoli e un lato in comune, quindi
+    sono congruenti. Di conseguenza \(\hat{B} = \hat{C}\) in quanto elementi
+    corrispondenti di triangoli congruenti.
+\end{proof}
+
+Il problema della precedente dimostrazione (eccetto il fatto che non abbiamo
+ancora presentato i criteri di congruenza) è che non sappiamo necessariamente
+che \(D\) è compreso tra \(B\) e \(C\). Questo motiva gli assiomi di
+ordinamento. Useremo la notazione \(A - B - C\) per indicare che \(B\) sta tra
+\(A\) e \(C\) (ed è sulla stessa retta di \(A\) e \(C\).
+
+\begin{enumerate}[label = O\arabic*.]
+    \item Se \(A - B - C\) allora \(A, B, C\) sono allineati e \(C - B - A\) 
+    \item Dati due punti \(B\) e \(D\) esistono due punti \(A, C, E\) su
+        \(\overline{BD}\) tali che \(A - B - D\), \(B - C - D\) e \(B - D - E\) 
+
+        In pratica se ho \( B - D\) allora \( A - B - C - D - E\) e posso quindi
+        prolungare il segmento \(BD\) sia a sinistra che a destra, e posso
+        trovare un punto \(C\) nel mezzo del segmento.
+    \item Dati \(A, B, C\) appartenenti ad una stessa retta, allora esiste un
+        unico punto che sta tra gli altri due. In altre parola esattamente una
+        tra \(A - B - C\), \(A - C - B\), \(B - C - A\) è vera.
+\end{enumerate}
+
+Ma cos'è il segmento \(AB\)? È definito come 
+\begin{definition}{Segmento e semirette}
+    Dati due punti \(A, B \in \mathcal{P}\), 
+    \(AB = \{A, B\} \cup \{C : A - C - B\} \)  
+
+    \(\vec{AB} = AB \cup \{C : A - B - C\} \) 
+
+    \(\vec{BA} = AB \cup \{C : C - A - B\} \) 
+\end{definition}
+
+Ne consegue che \(\vec{AB} \cap \vec{BA} = AB\) e \(\vec{AB} \cup \vec{BA} =
+\overline{AB}\) 
+
+
+
+
+\end{document}
+
+

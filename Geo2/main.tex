@@ -434,6 +434,344 @@ curve che appaiono geometricamente lisce.
 \begin{example}[Curva liscia con punto angoloso]\label{ex:liscia_angolosa}
     Sia \(\alpha : I \to \mathbb{R}^2\) definita da
 \end{example}
-\end{document}
     
+\chapter{Geometria algebrica}
+\begin{definition}{Omotopia}
+    Siano \(X\) e \(Y\) spazi topologici. Siano \(\alpha, \beta : X \to Y\)
+    funzioni continue. Diciamo che \(\alpha\) e \(\beta\) sono \textbf{omotope}
+    se esiste una funzione continua \(H : X \times I \to Y\) tale che
+    \begin{align*}
+        H{(x, 0)} &= \alpha{(x)} \\
+        H{(x, 1)} &= \beta{(x)}
+    \end{align*} 
+\end{definition}
+
+\begin{proposition}
+    Siano \(X, Y, Z\) spazi topologici. Esistano quattro applicazioni \(f_{i} :
+    X \to Y\) e \(g_{i}: X \to Y\) con \(i = 0, 1\) continue tali che \(f_{0}
+    \sim f_{1}\) e \(g_{0} \sim g_{1}\). Allora \(g_{0} \circ f_{0} \sim g_{1}
+    \circ f_{1}\) 
+\end{proposition}
+\begin{proof}
+    Siano \(H_{0} : X \times I \to Y\)  e \(H_{1} : Y \times I \to Z\) le
+    omotopie tra \(f_{i}\) e \(g_{i}\). Vogliamo trovare \(H : X \times I \to Z\)
+    omotopia. La funzione \(H(x, t) = H_{1}(H_{0}{(x, t)}, t)\) è tale funzione.
+    È infatti continua e chiaramente % TODO: finire
+\end{proof}
+\begin{definition}{Spazi omotopicamente equivalenti}
+    Siano \(X\) e \(Y\) spazi topologici. Diciamo che \(X\) è omotopicamente
+    equivalente a \(Y\) (denotato \(X \approx Y\)) se esistono due applicazioni
+    \(\varphi : X \to Y\) e \(\psi : Y \to  X\) continue tali che \(\psi \circ
+    \varphi \sim \mathrm{Id}_X\) e \(\varphi \circ \psi \sim \mathrm{Id}_Y\) 
+\end{definition}
+
+\begin{remark}
+    Chiaramente \(X \overset{omeo}{=} Y \implies X \approx Y\). Infatti preso
+    l'omeomorfismo \(\varphi \) e \(\varphi ^{-1}\) come funzioni \(\varphi \) e
+    \(\psi\) allora le loro composizioni sono proprio le identità degli spazi.
+\end{remark}
+\begin{remark}
+    L'equivalenza omotopica è una relazione di equivalenza
+\end{remark}
+
+\begin{example}
+    \(D^2\) e \(\{P\}\) sono omotopicamente equivalenti.
+    \(\varphi : D^2 \to \{P\} \) è per forza l'applicazione costante.
+    Mentre \(\psi: P \mapsto (0,0)\) (potrei scegliere qualsiasi altro punto per
+    convessità, è per comodità che ne scegliamo il centro). Chiaramente non si
+    tratta di omeomorfismi ma abbiamo che \(\varphi \circ \psi =
+    \mathrm{Id}_{\{P\} } \) dunque ok, mentre \(\psi \circ \varphi : D^2 \to D^2
+    \) è l'applicazione costante in \({(0,0)}\). Poiché possiamo prendere
+    l'applicazione \(H : D^2 \times I : D^2\) data da \(H(\mathbf{x} , t) = t
+    \mathbf{x} \) che è un'omotopia, ne segue che \(D^2 \approx \{P\} \) 
+\end{example}
+
+\begin{example}
+    Una generalizzazione semplice del precedente esempio. Ogni convesso \(X\) di
+    \(\mathbb{R}^{n}\) è omotopicamente equivalente al punto (singoletto). Basta
+    infatti prendere come funzione quella tale che ogni \(H(x, \cdot )\) sia un
+    segmento da \(x\) a un punto di \(X\).
+
+    Più genericamente si può prendere uno stellato, e l'equivalenza omotopica
+    vale soltanto per la funzione costante che manda ogni \(x\) in
+    \(\overline{x}\), con \(\overline{x}\) il punto tale per cui \(X\) è
+    stellato. 
+
+    Ne consegue che tutti i sottospazi stellati di \(\mathbb{R}^{n}\) sono
+    omotopicamente equivalenti.
+\end{example}
+\begin{definition}{Contraibilità}
+    Uno spazio si dice \textbf{contraibile} se è omotopicamente equivalente a un
+    punto.
+\end{definition}
+\begin{note}
+    In tutti gli esempi fatti finora di spazi contraibili (convessi e stellati
+    di \(\mathbb{R}^{n}\)), l'omotopia tra \(\mathrm{Id}_X\) e
+    \(C_{\overline{x}} \) è relativa a \(\overline{x}\), che rimane costante
+    lungo l'omotopia.
+\end{note}
+
+Una buona parte del corso sarà dimostrare che alcuni spazi \textbf{non} sono
+contraibili. Con strumenti molto più potenti arriveremo a dimostrare in modo
+veloce, ad esempio, che \(S^{1}\) non è contraibile. 
+
+\begin{example}
+    \(C = [-1, 1] \times S^{1}\)  è omotopicamente equivalente a \(S^{1}\).
+    Prendiamo \(\varphi : C \to \{0\} \times S^{1}\) come \({(x, y, z)} \mapsto
+    (0, y, z)\) invece per \(\psi\) prendiamo l'inclusione. Una composizione è
+    l'identità, e l'altra è la proiezione, la cui omotopia è chiaramente \(H(x,
+    y, z, t) = (tx, y, z)\). Chiaramente \(S^{1}\) è omeomorfo a \(\{0\} \times
+    S_{1}\) come sottospazio di \(C\).
+\end{example}
+
+\begin{eser}
+    Verificare che il nastro di Möbius è omotopicamente equivalente a \(S^{1}\).
+
+    \tcblower
+
+    % TODO: completare
+\end{eser}
+
+\begin{remark}
+    Ne consegue dall'esercizio e dall'esempio precedenti che il cilindro e il
+    nastro di Möbius sono omotopicamente equivalenti.
+\end{remark}
+
+\begin{definition}{Proprietà omotopica}
+    Una proprietà di spazi topologici si dice omotopica se è costante sulle
+    classi di equivalenza omotopica.
+
+    In altre parole, se \(X \approx Y\) e \(P(X)\) allora \(P(Y)\) 
+\end{definition}
+
+\(\mathbb{R}\) è convesso, dunque è omotopicamente equivalente al punto. Poiché
+il primo non è compatto ma il secondo sì, la compattezza non è una proprietà
+omotopica.
+
+\begin{definition}{lcpa}
+    Lo spazio topologico \(X\) si dice \textbf{localmente connesso per archi} se
+    per ogni punto \(x \in X\) esiste un sistema fondamentale di intorni aperti
+    di \(X\) connessi per archi.
+\end{definition}
+\begin{note}
+    cioè per ogni \(x \in X\) e \(\forall U\) intorno di \(x\) esiste \(A\)
+    aperto connesso per archi tale che \(x \in A \subseteq U \) 
+\end{note}
+
+\begin{eser}
+    Mostrare che cpa non implica lcpa.
+
+    In particolare mostrare che \(X = \{{(x,y)} \in \mathbb{R}^2 : \frac{x}{y} \in
+    \mathbb{Q} \lor \frac{y}{x} \in \mathbb{Q}\} \cup \{{(0,0)}\} \) è cpa ma
+    non lcpa.
+\end{eser}
+
+\begin{proposition}
+    Sia \(\alpha : I \to X\) un laccio, dunque \(\alpha{(0)} = \alpha{(1)}\).
+    Allora \(\alpha\) induce un'applicazione continua \(\overline{\alpha} :
+    S^{1} \to X\).
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJJIl0sWzEsMCwiWCJdLFswLDEsIkkvXFxzZXR7MCwxfSBcXG92ZXJzZXR7XFx0ZXh0e29tZW99fXtcXGFwcHJveH0gU14xIl0sWzAsMSwiXFxhbHBoYSJdLFswLDIsIlxccGkiLDJdLFsyLDEsIlxcb3ZlcmxpbmV7XFxhbHBoYX0iLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	I & X \\
+	{I/\{0,1\} \overset{\text{omeo}}{\approx} S^1}
+	\arrow["\alpha", from=1-1, to=1-2]
+	\arrow["\pi"', from=1-1, to=2-1]
+	\arrow["{\overline{\alpha}}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+Questo per la proprietà universale della topologia quoziente.
+
+Vogliamo \(\overline{F} : S^{1}\times  I \to X\) un omotopia tra
+\(\overline{\alpha}\) e \(c_{x_{0}} \) 
+\[\begin{tikzcd}
+	I \times I & X \\
+	{S^1 \times I}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["\pi \times \mathrm{Id}_I"', from=1-1, to=2-1]
+	\arrow["{\overline{F}}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+e di nuovo esiste continua per la proprietà universale.
+Per la commutatività dei due diagrammi, abbiamo che \(\overline{F}{(x, 0)} =
+\overline{\alpha}{(x)}\) e \(\overline{F}{(x, 1)} \equiv x_{0}\).
+\end{proposition}
+
+\begin{proposition}
+    Viceversa, 
+    se ho \(f: S^{1} \to X\) applicazione e \(p \in S^{1}\) tale che \(f
+    \approx_p c_{f{(p)}} \) con \(c_{f{(p)}} \) l'applicazione costante in
+    \(f{(p)}\), allora esiste un cammino \(\alpha : I \to X\) tale che \(a{(I)}
+    = S^{1}\), \(a{(0)}= a{(1)} = p\) e \(\varepsilon \alpha \sim
+    \varepsilon_{f{(p)}} \) 
+\end{proposition}
+
+\begin{proposition}
+    Sia \(C \subseteq \mathbb{R}^{n} \) un convesso. Allora \(\forall f : X \to
+    C\) applicazione continua, con \(X\) uno spazio topologico qualsiasi e
+    \(\forall \overline{y} \in C\) allora \(f \approx c_{\overline{y}}  : X \to
+    C\). 
+\end{proposition}
+\begin{proof}
+    Costruiamo esplicitamente l'omotopia. 
+    \(F{(x, t)} = {(1-t)}f{(x)} + t\overline{y}\). Per convessità sta in \(C\)
+    ed è chiaramente continua. Inoltre \(F{(x, 0)} = f{(x)}\) e \(F{(x, 1)} =
+    \overline{y}\) 
+\end{proof}
+Similmente per uno spazio \(S\) stellato, esiste un punto \(\overline{y} \in S\)
+tale che la stessa formula funzioni.
+
+Ne consegue una potente proprietà:
+\begin{lemma}
+    Sia \(X\) uno spazio topologico e \(S \subseteq \mathbb{R}^{n} \) uno
+    stellato con centro \(\overline{y}\). Sia \(f : X \to S\) continua. Allora
+    \(f\) è omotopa a \(c_{\overline{y}} \).
+\end{lemma}
+\begin{corollary}
+    Prendendo \(X = S\) e \(f = \mathrm{Id}_S\) otteniamo che \(S\) è
+    contraibile
+\end{corollary}
+
+\begin{eser}[\(\star\)]
+\begin{enumerate}[label = \arabic*.]
+    \item Mostrare che la contraibilità è una proprietà topologica.
+    \item Mostrare che se \(f: \mathbb{R}^{n} \to \mathbb{R}^{m}\) è una funzione
+    continua, allora \(\Gamma_f = \{{(x, y)} \in \mathbb{R}^{n}\times
+    \mathbb{R}^{m}: y = f{(x)}\}  \) è contraibile
+\end{enumerate}
+\end{eser}
+
+\begin{eser}
+    Mostrare che il nastro di Möbius è omotopicamente equivalente a \(S^{1}\) 
+    \tcblower
+    \(M = [-1,1]^2 / \sim \) con \({(x,y)}\sim {(x', y')} \) se e solo se
+    \({(x,y)} = {(x',y')}\) oppure \(\{x, x'\} = \{1, -1\}  \) e \(y = -y'\).
+
+    Scegliamo \(F : [-1,1]^2 \times  I \to [-1,1]^2\) data da \(F{(x, y, t)} =
+    {(x, ty)}\) che è un'omotopia tra \(\mathrm{Id}_{[-1,1]^2} \) e \(r : [-1,
+    1]^2 \to [-1, 1] \times \{0\} \), \(r{(x,y)} = {(x, 0)}\). 
+
+    Vogliamo ora vedere \(\pi \circ F\) è costante sulle fibre di \(\pi \times
+    \mathrm{Id}_I\) .% https://q.uiver.app/#q=WzAsNCxbMCwwLCJbLTEsMV1eMiBcXHRpbWVzIEkiXSxbMSwwLCJbLTEsMV1eMiJdLFsxLDEsIk0iXSxbMCwxLCJNXFx0aW1lcyBJIl0sWzAsMywiXFxwaSBcXHRpbWVzIFxcbWF0aHJte0lkfSIsMl0sWzAsMiwiXFxwaSBcXGNpcmMgRiIsMV0sWzMsMiwiXFxvdmVybGluZXtGfSIsMl0sWzAsMSwiRiJdLFsxLDIsIlxccGkiLDJdXQ==
+\[\begin{tikzcd}
+	{[-1,1]^2 \times I} & {[-1,1]^2} \\
+	{M\times I} & M
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{\pi \times \mathrm{Id}}"', from=1-1, to=2-1]
+	\arrow["{\pi \circ F}"{description}, from=1-1, to=2-2]
+	\arrow["\pi"', from=1-2, to=2-2]
+	\arrow["{\overline{F}}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{eser}
+
+\begin{proposition}\label{prop:lcpa_compcpa_aperte}
+    Se uno spazio topologico \(X\) è localmente connesso per archi allora le
+    sue componenti connesse per archi sono aperte.
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(X\) lcpa. Allora sia \(x \in C\), con \(C\) una
+        componente connessa per archi di \(X\). Allora esiste un sistema
+        fondamentale di intorni aperti di \(x\) connessi per archi.
+
+        Sia \(A\) un intorno aperto cpa di \(x\). Allora per ogni \(y \in A\),
+        \(y\) è connesse a \(x\) da un arco. Poiché \(A \subseteq C\), \(C\) è
+        aperto.
+    \item[\( \)] Se le componenti cpa sono aperte è vero che \(\forall
+        x \in X\) esiste \(A\) aperto cpa intorno di \(x\) (basti prendere la
+        componente cpa che contiene \(x\)). Non è detto però che \(X\) sia lcpa.
+\end{itemize}
+\end{proof}
+\begin{proposition}\label{prop:lcpa-compcpa_compc}
+    Sia \(X\) lcpa. Allora le componenti connesse coincidono con le componenti
+    connesse per archi.
+\end{proposition}
+\begin{proof}
+    Sia \(C\) una componente connessa per archi di \(X\). Per la
+    proposizione~\ref{prop:lcpa_compcpa_aperte} \(C\) è aperta. Inoltre
+    ovviamente è connessa. Poiché è unione disgiunta delle componenti connesse
+    per archi, \(C = X \sminus \coprod_{\alpha \in A} C_{\alpha} \) e dunque
+    \(C\) è anche chiusa. Ne consegue che \(C\) è componente connessa.
+\end{proof}
+
+\begin{theorem}\label{thm:conn-lcpa_cpa}
+    Sia \(X\) uno spazio topologico connesso e localmente connesso per archi.
+    Allora \(X\) è connesso per archi
+\end{theorem}
+\begin{proof}
+    \(X\) è l'unica componente connessa e per la
+    proposizione~\ref{prop:lcpa-compcpa_compc} è l'unica componente connessa per
+    archi. Dunque \(X\) è connessa per archi.
+\end{proof}
+
+\begin{proposition}\label{prop:contr_cpa}
+    Se \(X\) è contraibile, allora è connesso per archi
+\end{proposition}
+\begin{proof}
+    Sia \(X \approx \{P\} \). Allora sia \(\varphi : X \to \{P\} \) e \(\psi :
+    \{P\} \to X\) tale che \(\varphi \circ \psi \approx \mathrm{Id}_P\) e \(\psi
+    \circ \varphi = \mathrm{Id}_X\). Dunque esiste \(\overline{x} \in X\) tale
+    che \(c_{\overline{x}} : X \to X\) è omotopa a \(\mathrm{Id}_X\). Abbiamo
+    dunque che esiste \(F : X \times I \to X\) continua tale che \(F{(x, 0)} =
+    x\) e \(F{(x, 1)} = \overline{x}\) per ogni \(x \in X \).
+
+    Vogliamo mostrare ora che ogni punto \(x \in X\) è connesso per archi a
+    \(\overline{x}\). Possiamo prendere \(\alpha{(t)} := F{(x, t)}\) che è
+    esattamente un arco da \(x\) a \(\overline{x}\). 
+\end{proof}
+
+\begin{theorem}
+    Siano \(X\) e \(Y\) spazi topologici omotopicamente equivalente e sia \(f :
+    X \to Y\) un'equivalenza omotopica\footnote{Si dice che \(f\) è un'equivalenza omotopica se rappresenta una delle due
+    funzioni \(\varphi \) o \(\psi\) nella definizione di equivalenza
+omotopica.}.
+
+    Allora \(f\) induce una biiezione dall'insieme delle componenti connesse per
+    archi di \(X\) all'insieme delle componenti connesse per archi di \(Y\).
+\end{theorem}
+\begin{note}
+    Indicata con \(\sim \) la relazione di equivalenza della connessione per
+    archi, l'insieme delle componenti connesse per archi di \(X\) si indica
+    \(\pi_0{(X)} = X / \sim \) 
+\end{note}
+    \begin{lemma}\label{help:omotopia_composizione}
+        Siano \(X, Y, Z\) spazi topologici e \(f, g\) applicazioni continue.
+        Allora \({(g \circ f)}_\# = g_\# \circ f_\#\) 
+    \end{lemma}
+    \begin{proof}
+        Sia \(C\) una componente connessa per archi di \(X\), cioè \(C \in
+        \pi_{0}{(X)}\). Allora \(f_\#{(C)}\)  è la componente cpa di \(Y\) che
+        contiene \(f{(C)}\).  La componente \(g_\# {(f_\#{(C)})}\) è la
+        componente di \(Z\) che contiene l'immagine di \(g\) della componente
+        connessa di \(Y\) che contiene \(f{(C)}\). Ma allora se contiene tutta
+        la componente connessa necessariamente deve contenere \(g{(f{(C)})}\).
+        Ne consegue la tesi.
+    \end{proof}
+    
+    \begin{lemma}\label{help:omotodiesis}
+        Siano \(X\) e \(Y\) due spazi topologici. Allora se \(f, g : Z \to W\)
+        sono due applicazioni con \(f \approx g\), allora \(f_\# = g_\#\)
+    \end{lemma}
+    \begin{proof}
+        Sia \(F: X \times I \to Y\) l'omotopia, quindi \(F{(x, 0)} = f{(x)}\) e
+    \(F{(x, 1)} = g{(x)}\). Sia \(C \in \pi_{0}{(X)}\), allora \(C \times I\) è
+    prodotto di connessi per archi e dunque è connesso per archi. Ma allora
+    \(f{(C)}, g{(C)}  \subseteq F{(C \times I)} \subseteq Y  \) che è connesso per archi
+    ma allora necessariamente \(f_\# {(C)} = F_\#{(C \times I)} =g_\#{(C)}\).
+    \end{proof}
+\begin{proof}[Dimostrazione del teorema~\ref{thm:conn-lcpa_cpa}]
+    Usando \(f\) vogliamo definire un'applicazione \\\(f_\# : \pi_{0}{(X)} \to 
+    \pi_{0}{(Y)}\). Sia \(C\) una componente cpa di \(X\). Allora \(f{(C)}
+    \subseteq Y \) è un cpa in \(Y\), ed è dunque contenuto in esattamente una 
+    componente connessa per archi di \(Y\), che quindi usiamo per definire
+    \(f_\# {(C)}\). Vogliamo vedere che \(f_\#\) è iniettiva e suriettiva.
+    Sappiamo che esiste \(g : Y \to X\) tale che \(f \circ g \approx
+    \mathrm{Id}_Y\) e \(g \circ f \approx \mathrm{Id}_X\).
+
+
+    Usando i lemmi, abbiamo che \( \mathrm{Id}_{\pi_{0}{(X)}} =
+    {(\mathrm{Id}_X)}_\# \overset{\ref{help:omotodiesis}}{=} {(g \circ f)}_\#
+    \overset{\ref{help:omotopia_composizione}}{=} g_\# \circ f_\#\) da cui
+    necessariamente \(f_\#\) è iniettiva. Prendendo la composizione al
+    contrario, abbiamo invece che \(f_\#\) è suriettiva.
+\end{proof}
+
+\end{document}
 

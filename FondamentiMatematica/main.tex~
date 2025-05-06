@@ -1,0 +1,38 @@
+\input{~/.config/nvim/templates/preamble_appunti.tex}
+
+\title{Fondamntenti della Matematica}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/FondamentiMatematica}{\texttt{Oxke/appunti/FondamentiMatematica}}}
+
+\date{ semestre, 2024 \-- 2025, prof.}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}[label = \arabic*.]
+    \item Per due punti \(A, B\) esiste sempre una retta che li contiene
+        entrambi.
+    \item Per due punti \(A, B\) esiste al più una retta che li contiene
+        entrambi.
+    \item Su una retta esistono almeno due punti. Esistono almeno tre punti che
+        non appartengono alla stessa retta
+    \item Per tre punti \(A, B, C\) che non appartengono ad una stessa retta c'è
+        sempre un piano \(\alpha\) che li contiene. Per ogni piano esiste un
+        punto che gli appartiene.
+    \item Per tre punti \(A, B, C\) che non appartengono ad una stessa retta c'è
+        al più un piano che li contiene
+    \item Se \(A, B, C\) appartengono alla retta \(r\) e \(A, B\) appartengono
+        ad un piano \(\alpha\) allora \(r\) è interamente contenuta in \(\alpha\) 
+    \item Se due piani \(\alpha\) e \(\beta\) hanno un punto \(A\) in comune
+        allora essi hanno almeno un altro punto \(B\) in comune.
+    \item Esistono almeno quattro punti che non appartengono ad uno stesso
+        piano.
+\end{enumerate}
+
+Ne consegue che due rette o hanno un punto in comune o non ne hanno affatto. Due
+piani o non hanno punti in comune oppure hanno una retta in comune e nessun
+punto al di fuori di essa.
+
+\end{document}
+
