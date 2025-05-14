@@ -444,19 +444,41 @@ curve che appaiono geometricamente lisce.
         H{(x, 0)} &= \alpha{(x)} \\
         H{(x, 1)} &= \beta{(x)}
     \end{align*} 
+    denoteremo l'omotopia con la notazione \(\alpha \approx \beta\) 
 \end{definition}
+
+\begin{definition}{Omotopia relativa a un sottospazio}
+    Sia \(X\) uno spazio topologico, siano \(\alpha, \beta : X \to
+    X\) funzioni omotope con omotopia \(H\). Sia \(A \subseteq X \). Se 
+    \[
+      \forall t \in I, \quad \forall a \in A \quad H(a, t) = a \text{ o
+      equivalentemente } H|_{A \times I} = i \circ P_A
+    \]
+    Con \(P_A : A \times I \to A\) la proiezione \({(a, t)} \mapsto a\) e \(i :
+    A \hookrightarrow X\) l'inclusione.
+    Allora diremo che \(\alpha\) e \(\beta\) sono \textbf{omotope relativamente
+    ad \(A\)} e lo denoteremo con \(\alpha \approx_A \beta\) 
+\end{definition}
+
 
 \begin{proposition}
     Siano \(X, Y, Z\) spazi topologici. Esistano quattro applicazioni \(f_{i} :
-    X \to Y\) e \(g_{i}: X \to Y\) con \(i = 0, 1\) continue tali che \(f_{0}
+    X \to Y\) e \(g_{i}: Y \to Z\) con \(i = 0, 1\) continue tali che \(f_{0}
     \sim f_{1}\) e \(g_{0} \sim g_{1}\). Allora \(g_{0} \circ f_{0} \sim g_{1}
     \circ f_{1}\) 
 \end{proposition}
 \begin{proof}
-    Siano \(H_{0} : X \times I \to Y\)  e \(H_{1} : Y \times I \to Z\) le
-    omotopie tra \(f_{i}\) e \(g_{i}\). Vogliamo trovare \(H : X \times I \to Z\)
-    omotopia. La funzione \(H(x, t) = H_{1}(H_{0}{(x, t)}, t)\) è tale funzione.
-    È infatti continua e chiaramente % TODO: finire
+    Siano \(F : X \times I \to Y\)  e \(G : Y \times I \to Z\) le
+    omotopie rispettivamente tra le \(f_{i}\) e tra le \(g_{i}\). Vogliamo
+    trovare \(H : X \times I \to Z\)
+    omotopia. La funzione \(H(x, t) = G(F{(x, t)}, t)\) è tale funzione.
+    È infatti continua in quanto composizione di funzioni continue e chiaramente
+    \begin{align*}
+      H(x, 0) = G{(F{(x, 0)}, 0)} = G{(f_{0}{(x)}, 0)} = g_{0}{(f_{0}{(x)})} =
+      {(g_{0} \circ f_{0})}{(x)} \\
+      H{(x, 1)} = G{(F{(x, 1)}, 1)} = G{(f_{1}{(x)}, 1)} = g_{1}{(f_{1}{(x)})} =
+      {(g_{1} \circ f_{1})}{(x)}
+    \end{align*}
 \end{proof}
 \begin{definition}{Spazi omotopicamente equivalenti}
     Siano \(X\) e \(Y\) spazi topologici. Diciamo che \(X\) è omotopicamente
@@ -773,5 +795,541 @@ omotopica.}.
     contrario, abbiamo invece che \(f_\#\) è suriettiva.
 \end{proof}
 
-\end{document}
+\section{Retrazione}
+In molti casi in precedenza, per mostrare una equivalenza omotopica, una delle
+funzioni \(\varphi \circ \psi\) o viceversa è una deformazione continua a un
+sottoinsieme dello spazio. Questo motiva il concetto di retratto di
+deformazione, che vogliamo definire formalmente in questa sezione. 
 
+\begin{definition}{Retrazione}
+    Siano \(X\) e \(Y\) spazi topologici. Sia \(A \subseteq X\) un sottoinsieme
+    di \(X\). Diciamo che \(r : X \to A\) è una \textbf{retrazione} se è continua
+    e \(r{(a)} = a\) per ogni \(a \in A\), ovvero \(r|_A = \mathrm{Id}_A\) 
+\end{definition}
+
+\begin{example}
+    \(X = D^2\) e \(A = \{{(0,0)}\} \), allora \(r : D^2 \to \{{(0,0)}\} \)
+    costante è una retrazione.
+
+    Più genericamente preso un qualsiasi spazio topologico \(X\), per ogni
+    \(\overline{x} \in X\) l'applicazione costante \(X \to \{\overline{x}\} \) è
+    una retrazione
+\end{example}
+
+\begin{example}
+    Preso \(X = S^{1} \times I\) e \(r : S^{1} \times  I \to S^{1} \times \{0\}
+    \) definita da \(r{(\mathbf{x} , t)} = {(\mathbf{x} , 0)}\) è una retrazione
+\end{example}
+
+\begin{definition}{Retratto di deformazione}
+    Sia \(A \subseteq X \) con \(X\) spazio topologico. Allora \(A\) si dice
+    \textbf{retratto di deformazione} se \(\exists r : X \to A\) retrazione
+    (ossia \(r\) è continua e \(r \circ i = \mathrm{Id}_A\)) e \(i\circ r
+    \approx \mathrm{Id}_X\) 
+
+    \tcbline
+
+    \(A\) è detto \textbf{retratto \emph{forte} di deformazione} se è un
+    retratto di deformazione e \(i \circ r \approx_A \mathrm{Id}_X\) 
+
+    \tcbline
+
+    \(A\) si dice \textbf{retratto \emph{debole} di deformazione} se \(\exists r
+    : X \to A\) continua tale che \(r \circ i \approx \mathrm{Id}_A\) e \(i
+    \circ r \approx \mathrm{Id}_X\) 
+\end{definition}
+\begin{remark}
+    In tutti i casi di retrazione di deformazione \(i\) e \(r\) sono equivalenze
+    omotopiche.
+    In particolare se \(A\) è retratto (anche solo debole) di deformazione di
+    \(X\) allora \(A\) è omotopicamente equivalente a \(X\).
+\end{remark}
+
+\begin{example}
+    L'esempio del cilindro \(r : X := S^{1} \times I \to S^{1} \times \{0\} =: A \)
+    definito da \(r{(x, y, z)} = {(x, y, 0)}\). Allora \(r \circ i =
+    \mathrm{Id}_A\) chiaramente e \(i \circ r {(x, y, z)} = {(x,y,0)} \in
+    S^{1}\times I\). Allora \(F(x, y, z, t) = {(x, y, tz)}\) è l'omotopia tra
+    \(i\circ r\) e \(\mathrm{Id}_X\). Inoltre \(F|_{A \times I}{(x, y, 0, t)} =
+    {(x, y, 0)}\) e quindi per ogni \(t\), \(F|_{A \times \{t\} } =
+    \mathrm{Id}_A\) 
+\end{example}
+
+\begin{example}
+    L'insieme \(X \subseteq \mathbb{R}^2 \) dell'unione delle rette \(ax + by =
+    0\) con \(a, b \in \mathbb{Z}\) non entrambi nulli è contraibile. In
+    particolare \({(0,0)}\) è un suo retratto di deformazione forte, infatti \(r
+    : X \to \{(0,0)\}\) è una retrazione forte, con omotopia \(i \circ r
+    \approx_{{(0,0)}} 
+    \mathrm{Id}_X\) data da \(F{(x, y, t)} = t{(x,y)}\).
+
+    Lo stesso ragionamento si può applicare a qualsiasi stellato, per il punto
+    di origine.
+
+    Se invece di prendere \({(0,0)}\) si prende un altro punto
+    \({(\overline{x},\overline{y})} \in X\) abbiamo che anch'esso è retratto di
+    deformazione, infatti (consideriamo ora \(r : X \to \{(\overline{x},
+    \overline{y})\}\) che è chiaramente una retrazione) e presa l'applicazione 
+    \[
+      H{(x, y, t)} = \begin{cases}
+          (1 - 2t){(x, y)} & t \le \frac{1}{2} \\
+          {(2t - 1)}{(\overline{x}, \overline{y})} & t \ge \frac{1}{2}
+      \end{cases}
+    \]
+    questa è continua e \(H{(\cdot , \cdot , 0)} = \mathrm{Id}_X\) e \(H{(\cdot,
+    \cdot , 1)} = i \circ r\). Tuttavia non mostra una retrazione forte, infatti
+    \(H{(\overline{x}, \overline{y}, \frac{1}{2})} = {(0,0)}\) ad esempio.
+
+    Più precisamente \({(\overline{x}, \overline{y})}\) \textbf{non} è retratto
+    di deformazione forte di \(X\), se \({(\overline{x},
+    \overline{y})} \neq {(0,0)}\) . Sia infatti \(d = \|{(\overline{x},
+    \overline{y})}\|\). Sia ora
+    \[
+      A_k = B_{d\cdot 2^{-k}}{(\overline{x}, \overline{y})}, \quad \forall k \in
+      \mathbb{N}_{> 0} 
+    \]
+    e sia \({(x_{k}, y_{k})} \in A_\kappa\) un punto tale che sia su un diverso
+    segmento di retta rispetto a quello di \({(\overline{x}, \overline{y})}\).
+    Ogni \(A_k\) è attraversato da infinite rette, quindi questo è possibile.
+    Inoltre, poiché \(H{(x_\kappa, y_\kappa, \cdot )}\) è un arco da
+    \({(x_\kappa, y_\kappa)}\) a \({(\overline{x}, \overline{y})}\), esiste per
+    ogni \(k\) un \(t_k\) tale che \(H{(x_\kappa, y_\kappa, t_\kappa)} =
+    {(0,0)}\). Finalmente notiamo che, denotando \(\overline{t} := \limsup_{k
+    \to \infty} t_\kappa\) abbiamo che
+    \[
+      \limsup_{k \to \infty} {(x_\kappa, y_\kappa, t_\kappa)} = {(\overline{x},
+      \overline{y}, \overline{t})}
+    \]
+    e dunque
+    \[
+      \lim_{k \to \infty} H{(x_k, y_k, t_k)} = {(0,0)} \neq {(\overline{x},
+      \overline{y})} = H{(\overline{x}, \overline{y}, \overline{t})} =
+      H{(\limsup_{k \to \infty} {(x_k, y_k, t_k)})}
+    \]
+\end{example}
+
+Ovviamente non tutte le retrazioni portano a un retratto di deformazione.
+Infatti se così fosse tutti i punti di tutti gli spazi sarebbero retratti di
+deformazione, e quindi tutti gli spazi sarebbero contraibili, cosa che non è
+vera, come vedremo. In particolare mostreremo che \(S^{1}\) non è contraibile, e
+quindi nessun suo punto è retratto di deformazione. 
+
+\begin{example}
+    Sia \(X = \mathbb{R}^2 \sminus \{{(0,0)}\} \). Sia \(A = S^{1}\). Allora la
+    retrazione che ``dimentica la norma del vettore e tiene solo la fase'' è \(r
+    : \mathbb{R}^2 \sminus \{\mathbf{0} \} \to S^{1}\) data da \(r{(x, y)} = {(x,y)} /
+    \|{(x,y)}\|\). Allora chiaramente \(r \circ i = \mathrm{Id}_{S^{1}} \)  e
+    \[
+        (i \circ r){(x, y)} = \frac{(x,y)}{\|{(x,y)}\|} \in \mathbb{R}^2 \sminus
+        \{\mathbf{0} \} 
+    \]
+    che è omotopa a \(\mathrm{Id}_X\) tramite il segmento
+    \[
+      F{(\mathbf{x} ,t)} = {(1-t)}\frac{\mathbf{x} }{\|\mathbf{x} \|} +
+      t\mathbf{x}  = {\mathbf{x} }{\left(
+      {t + \frac{1-t}{\|\mathbf{x} \|}}\right)} 
+    \]
+    che fissa \(S^{1}\) 
+\end{example}
+
+
+\begin{example}
+    Sia \(X = \mathbb{R}^2 - \{P, Q\} \) con \(P\) e \(Q\) due punti distinti,
+    ad esempio sia \(P = {(-1, 0)}\) e \(Q = {(1, 0)}\).
+    \[
+      r{(x,y)} = \begin{cases}
+      \begin{cases}
+          \displaystyle{\frac{(x-1, y)}{\|{(x-1, y)}\|} + {(1,0)}} & \{x \ge 1\} \cup
+          \overline{B_{1}}{(1,0)} \\
+          \displaystyle\left(x, \mathrm{sgn} {(y)} \sqrt{x{(2-x)}}\right) & \{x \le 1\} \sminus
+          B_{1}{(1,0)} \\
+      \end{cases}
+       & \text{se }x \ge 0 \\
+          {(-1, 1)} \cdot  r{(-x, y)} & \text{se }x \le 0
+      \end{cases}
+  \]
+  Anche se avessimo scelto come retratto altri sottospazi, avrebbe funzionato.
+  In particolare il pillolone e il peso manuale per scarsi sono entrambi
+  retratti di deformazione, e quindi i tre sono omotopicamente equivalenti (come
+  esercizio si può mostrare che non sono omeomorfi).
+\end{example}
+
+\begin{proposition}
+    Sia \(X\) spazio topologico \(T_{2}\). Se \(A\) è un suo retratto allora
+    \(A\) è chiuso.
+\end{proposition}
+\begin{proof}
+    Sia \(r : X \to A\) una retrazione, quindi \(r|_A = \mathrm{Id}_A\).
+    Consideriamo \(\Gamma  = {(i \circ r, \mathrm{Id}_X)} : X \to X \times X)\).
+    Allora \(\Gamma^{-1} {(\Delta)} = \{x \in X : x = r{(x)}\} = A\) con
+    \(\Delta \subseteq X \times X \) la diagonale. Allora poiché \(X\) è
+    \(T_{2}\), \(\Delta\) è chiusa, e dunque \(A\) pure.
+\end{proof}
+\begin{example}
+    \(B_{1}{(0,0)}\) non è retratto di \(\mathbb{R}^2\) perché non è chiuso,
+    anche se è omeomorfo.
+\end{example}
+
+\begin{definition}
+    Sia \(X\) uno spazio topologico e \(x_{0} \in X\). Allora definiamo il
+    \textbf{gruppo fondamentale} di \(X\) in \(x_{0}\) come
+    \[
+      \pi_1{(X, x_{0})} = \{\alpha : I \to X \text{ arco } x_{0} \to
+      x_{0}\} / \sim
+    \]
+    con \(\sim\) la relazione di equivalenza di cammini \(\alpha \sim \beta\) se
+    \(\alpha \approx_{[0,1]} \beta \) 
+\end{definition}
+\begin{proposition}
+    La precedente è una buona definizione, ossia \(\pi_{1}{(X, x_{0})}\) è un
+    gruppo.
+\end{proposition}
+\begin{proof}
+    La composizione di due cammini è un cammino ed è associativa, l'inverso di
+    un cammino è un cammino, la costante \(x_{0}\) è un cammino.
+\end{proof}
+
+\begin{proposition}
+Se abbiamo uno spazio topologico \(X\)  con \(x_{0}\) e \(x_{1}\) connesse da un
+arco \(\gamma\) allora esiste un isomorfismo di gruppi
+\[
+  \mu_{\gamma} : \pi_{1}{(X, x_{0})} \to \pi_{1}{(X, x_{1})}
+\]
+\end{proposition}
+Specifichiamo che l'isomorfismo non è \emph{canonico}, nel senso che ve ne sono
+molti possibilmente e non ce n'è uno privilegiato. Tuttavia vale la seguente
+\begin{eser}
+    Presi \(\gamma, \gamma' : I \to X\) cammini tra \(x_{0}\) e \(x_{1}\) allora
+    \(\mu_\gamma = \mu_{\gamma'} \iff [\gamma * \gamma'] \in Z(\pi{(X, x_{0})})\) 
+\end{eser}
+Ne consegue che se \(\pi{(X, x_{0})}\) con \(X\) cpa è abeliano allora \(\forall
+x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\) 
+
+\begin{remark}
+    sia \(x\) uno spazio topologico, \(x_{0} \in x\). sia \(c\) una componente
+    cpa che contiene \(x_{0}\). allora \(\pi_{1}{(x, x_{0})} \cong \pi_{1}{(c,
+    x_{0})}\). 
+\end{remark}
+
+\subsection{funtorialità di \(\pi_{1}\)}
+    Sia \(f : x \to y\) continua tra spazi topologici. Fissiamo \(x_{0} \in x\)
+    \begin{theorem}
+        \(f\) induce un omomorfismo di gruppi
+        \[
+          f_{*} : \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, f{(x_{0})})}
+        \]
+    \end{theorem}
+    
+    \begin{proof}
+    \[\begin{tikzcd}
+        & X \\
+        I & Y
+        \arrow["f", from=1-2, to=2-2]
+        \arrow["\alpha", from=2-1, to=1-2]
+        \arrow["{f \circ \alpha}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Prendiamo \([\alpha] \in \pi_{1}{(X, x_{0})}\). Definiamo \(f_*{([\alpha])}
+    := [f \circ \alpha]\). Effettivamente
+    \begin{align*}
+      f \circ \alpha : I \to Y \text{ continua } \\
+      {(f \circ \alpha)}{(0)} = f{(x_{0})} = {(f \circ \alpha)}{(1)}
+    \end{align*}
+    dunque \(f \circ \alpha\) è un laccio in \(Y\) con punto base
+    \(f{(x_{0})}\). 
+
+    Verifichiamo la buona definizione di \(f_*\). Se \(\beta \sim \alpha\) in
+    \(X\), dobbiamo verificare che \(f \circ \beta \sim f \circ \alpha\) in
+    \(Y\). Data \(H : I \times I \to X\) l'omotopia tra \(\alpha\) e \(\beta\),
+    abbiamo che \(f \circ H : I \times I \to Y\) è omotopia tra \(f \circ
+    \alpha\) e \(f\circ \beta\).
+
+    Vediamo ora che \(f_*\) è omomorfismo di gruppi. Siano \([\alpha]\) e
+    \([\beta]\) in \(\pi{(X, x_{0})}\) e vogliamo
+    \[
+      f_*{([\alpha][\beta])} \overset{?}{=} f_*{([\alpha])} \cdot  f_*{([\beta])}
+    \]
+    ma effettivamnte
+    \[
+        f_*{([\alpha][\beta])} = [f \circ (\alpha * \beta)] \overset{(1)}{=} [f \circ \alpha *
+        f \circ \beta] = [f \circ \alpha] [f \circ \beta] = f_*{([\alpha])} \cdot 
+        f_*{([\beta])}
+    \]
+    dove \({(1)}\) viene semplicemente dal calcolo esplicito, considerando la
+    definizione di concatenazione.
+    \end{proof}
+    \begin{example}
+        Sia \(f : X \to Y\) costante. Allora \(f{(X)} = \{\overline{y}\} \) e
+        fissato \(x_{0} \in X\) abbiamo 
+        \[
+          f_* : \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, \overline{y})}
+        \]
+        ma preso \([\alpha] \in \pi_{1}{(X, x_{0})}\) allora \(f \circ \alpha :
+        I \to Y \) è costante e quindi \(f_*\) è l'omomorfismo banale.
+    \end{example}
+    
+    \begin{theorem}\label{thm:funt_p1}
+        Dati \(X,Y,Z\) spazi topologici. Siano \(f : X \to Y\) e \(g : Y \to Z\)
+        applicazioni continue, allora fissato \(x_{0} \in X\) abbiamo che
+        \[
+          \pi_{1}{(X, x_{0})} \overset{f_*}{\to} \pi_{1}{(Y, f{(x_{0})})}
+          \overset{g_*}{\to} \pi_{1}{(Z, g{(f{(x_{0})})})}
+        \]
+        ma vale che 
+        \[
+          g_* \circ f_* = (g \circ f)_*
+        \]
+    \end{theorem}
+    \begin{proof}
+        Sia \([\alpha] \in \pi_{1}{(X, x_{0})}\). Allora
+        \[{(g \circ f)}_*{([\alpha])} = [{(g \circ f)} \circ \alpha] = [g \circ
+        {(f \circ \alpha)}] = {(g_* \circ f_*)}{([\alpha])}\]
+    \end{proof}
+    
+    \begin{proposition}\label{prop:Id_p1}
+        Sia \(X\) uno spazio topologico e \(x_{0} \in X\). Allora
+        \((\mathrm{Id}_X)_*\) è l'omomorfismo identico di
+        \(\pi{(X, x_{0})}\) 
+    \end{proposition}
+    \begin{proof}
+        \begin{align*}
+            {(\mathrm{Id}_X)}_* : \pi_{1}{(X, x_{0})} &\to \pi_{1}{(X, x_{0})} \\
+            [\alpha] &\mapsto [\mathrm{Id}_X \circ \alpha] = [\alpha]
+        \end{align*}
+    \end{proof}
+    \begin{proposition}
+        Se due spazi topologici sono omeomorfi con \(\varphi : X \to Y \)
+        omeomorfismo allora preso \(x_{0} \in X\) 
+        \[
+          \varphi_* : \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, \varphi{(x_{0})})}
+      \]
+      è un isomorfismo di gruppi.
+    \end{proposition}
+    \begin{proof}
+        \(\exists \psi  : Y \to X\) tale che \(\psi \circ \varphi  =
+        \mathrm{Id}_X\) e \(\varphi \circ \psi = \mathrm{Id}_Y\). Ora
+        \[
+            \psi_* \circ \varphi_* \overset{\ref{thm:funt_p1}}{=} {(\psi \circ
+            \varphi )}_* = {(\mathrm{Id}_X)}_* \overset{\ref{prop:Id_p1}}{=}
+            \mathbb{1}_{\pi_{1}{(X, x_{0})}} 
+        \]
+        con \(\mathbb{1}\) l'isomorfismo identico.
+    \end{proof}
+    \begin{remark}
+        Per spazi cpa sappiamo che
+        \[
+          X \sim Y \implies \pi_{1}{(X, x_{0})} \cong \pi_{1}{(Y, y_{0})} \quad
+          \forall x_{0} \in X, y_{0} \in Y
+        \]
+    \end{remark}
+    \begin{theorem}\label{thm:omotopia_p1}
+        Siano \(X, Y\) spazi topologici e \(f, g : X \to Y\) applicazioni
+        continue. Siano \(f \approx g\). Sia \(x_{0} \in X\). Sia \(F : X \times
+        I \to Y\) l'omotopia tra \(f\)  e \(g\).
+        Notando che \(F{(x_{0}, \cdot )}\) è un cammino in \(Y\) tra \(F{(x_{0},
+        0)} = f{(x_{0})}\) e \(F{(x_{0}, 1)} = g{(x_{0})}\), abbiamo che il
+        seguente diagramma commuta:
+    \[\begin{tikzcd}
+        & \pi_{1}{(X, x_{0})} \\
+        \pi_{1}{(Y, f{(x_{0})})} && \pi_{1}{(Y, g{(x_{0})})}
+        \arrow["{f_*}", from=1-2, to=2-1]
+        \arrow["{g_*}", from=1-2, to=2-3]
+        \arrow["{\mu_\alpha}", from=2-1, to=2-3]
+    \end{tikzcd}\]
+    ossia \(g_* = \mu_{\alpha} \circ f_* \) 
+    \end{theorem}
+    \begin{proof}
+        Sia \([\gamma] \in \pi_{1}{(X, x_{0})}\). Vogliamo vedere
+        \[
+            g_*{([\gamma])} \overset{?}{=} {(\mu_{\alpha}  \circ
+            f_*)}{([\gamma])} = \mu_{\alpha} {[f \circ \gamma]} =
+            [{(\overline{\alpha} * {(f \circ \gamma)})} * \alpha]
+        \]
+        Si tratta quindi di verificare che \(f\circ \gamma \approx_{[0,1]}
+        \overline{\alpha} * {(f \circ \gamma)} * \alpha \) 
+        \[
+          H{(t, s)} = \begin{cases}
+              \alpha{(1 - 4t)} & t \in [0, \frac{1-s}{4}] \\
+              F'{(\frac{4t - 1 + s}{3s + 1}, s)} & t \in [\frac{1- s}{4},
+              \frac{1 + s}{2}]\\
+              \alpha{(2t -1)} & t \in [\frac{1 + s}{2}, 1]
+          \end{cases}
+        \]
+    \end{proof}
+    \begin{corollary}
+        Se \(\varphi : X \to Y\) è equivalenza omotopica allora \(\varphi_* :
+        \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, \varphi {(x_{0})})}\), fissato
+        \(x_{0} \in X\), è un isomorfismo.
+    \end{corollary}
+    \begin{proof}
+        Presa \(\psi\) un'inversa omotopica di \(\varphi \), abbiamo che 
+        \[
+            \varphi_* \circ \psi_* = {(\varphi \circ \psi )}_*
+            \overset{\ref{thm:omotopia_p1}}{=}
+            \mu_{\alpha} \circ {(\mathrm{Id}_X)}_* \overset{\ref{prop:Id_p1}}{=} \mu_{\alpha} \circ
+        \mathbb{1}_{\pi_{1}{(X, x_{0})}} \]% https://q.uiver.app/#q=WzAsNSxbMCwwLCJBIl0sWzEsMCwiQiJdLFsyLDAsIkMiXSxbMiwxLCJEIl0sWzEsMSwiRiJdLFswLDQsIlxcbXVfXFxiZXRhIl0sWzMsNCwiXFxtdV9cXGJldGEiLDJdLFsyLDEsIlxcbXVfXFxhbHBoYSIsMl0sWzAsMSwiXFxwc2lfKiJdLFsxLDQsIlxcdmFycGhpXyoiXSxbMiwzLCJcXHZhcnBoaV8qIl1d
+\[\begin{tikzcd}
+	\pi_{1}{(Y, \varphi {(x_{0})})} & \pi_{1}{(X, \psi {(\varphi {(x_{0})})})} &
+    \pi_{1}{(X, x_{0})} \\
+	& \pi {(Y, \varphi {(\psi {(\varphi {(x_{0})})})})} & \pi_{1}{(Y, \varphi
+    {(x_{0})})}
+	\arrow["{\psi_*}", from=1-1, to=1-2]
+	\arrow["{\mu_\beta}", from=1-1, to=2-2]
+	\arrow["{\varphi_*}", from=1-2, to=2-2]
+	\arrow["{\mu_\alpha}"', from=1-3, to=1-2]
+	\arrow["{\varphi_*}", from=1-3, to=2-3]
+	\arrow["{\mu_\beta}"', from=2-3, to=2-2]
+\end{tikzcd}\]
+    \end{proof}
+    
+    \subsection{Osservazioni Fondamentali}
+\begin{proposition}
+    Se ho \(r : X \to A\) retrazione, con \(A \subseteq X \) e \(r \circ i =
+    \mathrm{Id}_A\). Fissato \(x_{0} \in A\), abbiamo che
+    \[
+      r_* \circ i_* = {(r \circ i)}_* = (\mathrm{Id}_A)_* =
+      \mathbb{1}_{\pi_{1}{(A, x_{0})}}
+    \]
+    dunque \(i_*\) è iniettiva e \(r_*\) è suriettiva.
+\end{proposition}
+\begin{proposition}
+    Se \(A \subseteq X \) è un retratto debole di deformazione e \(r : X \to A\)
+    applicazione continua tale che \(i \circ r \approx \mathrm{Id}_X\) e \(r
+    \circ i \approx \mathrm{Id}_A\) allora
+    \[
+      {(i \circ r)}_* = u \icrc (\mathrm{Id}_X)_* = u 
+    \]
+    dove \(u\) è un isomorfismo da \(\pi_{1}{(X, x_{0})}\) a \(\pi_{1}{(X, (i
+    \circ r){(x_{0})})}\) 
+\end{proposition}
+\begin{proposition}
+    Se \(r : X \to A\) è una retrazione forte di deformazione, allora \(r_*
+    \circ i_* = \mathrm{Id}_{\pi_{1}{(A, x_{0})}} \) e \(i_* \circ r_* =
+    \mathrm{Id}_{\pi_{1}{(X, x_{0})}} \), dunque \(i_*\) e \(r_*\) sono una
+    l'inversa dell'altra.
+\end{proposition}
+\begin{example}
+    Il cilindro e il nastro di Möbius si retraggono di deformazione forte in
+    \(S^{1}\), e dunque hanno gruppo fondamentale isomorfo a quello di \(S^{1}\)
+    (sono connessi per archi dunque hanno \(\pi_{1}\) isomorfo in ogni punto)
+\end{example}
+\begin{theorem}
+    Siano \(X, Y\) spazi topologici. Fissato \(x_{0} \in X\) e \(y_{0} \in Y\)
+    vale che 
+    \[
+      \pi_{1}{(X \times Y, {(x_{0}, y_{0})})} \cong \pi_{1}{(X, x_{0})} \times
+      \pi_{1}{(Y, y_{0})}
+    \]
+\end{theorem}
+\begin{proof}
+    Intuitivamente, vogliamo proiettare ogni laccio su \(X\) e su \(Y\).
+
+    Più precisamente, sia \([\alpha] \in \pi_{1}{(X \times Y, {(x_{0},
+    y_{0})})}\). Allora \(p \circ \alpha\) è laccio in \(X\) con punto base
+    \(x_{0}\) e \(q \circ \alpha\) è laccio in \(Y\) con punto base \(y_{0}\).
+
+    Definiamo dunque \begin{align*}
+        \phi: \pi_{1}{(X \times  Y, {(x_{0}, y_{0})})} &\longrightarrow
+        \pi_{1}(X, x_{0}) \times  \pi1{(Y, y_{0})} \\
+        [\alpha] &\longmapsto {([p \circ \alpha], [q \circ \alpha])}
+    \end{align*}
+
+    Dobbiamo verificare la buona definizione di \(\phi\). Se \([\alpha] \sim
+    [\beta]\) in \(X \times Y\), allora esiste \(F : I \times  I \to X \times  Y
+    \) continua tale che \(F{(t, 0)} = \alpha{(t)} = {({(p \circ \alpha)}{(t)},
+    {(q \circ \alpha)}{(t)})}\) e \(F{(t, 1)} = \beta{(t)} =
+    {({(p \circ \beta)}{(t)}, {(q \circ \beta)}{(t)})}\). Allora per la
+    proprietà universale del prodotto, \(p \circ F\) è continua e \(q \circ F\)
+    è continua, e sono le omotopie richieste.
+
+    \(\phi\) è un omomorfismo. Infatti
+    \begin{align*}
+        \phi{([\alpha)][\beta]}) &= \phi{([\alpha * \beta])} = 
+        {([p \circ (\alpha * \beta)], [q \circ (\alpha * \beta)])} = \\
+        &= {([p \circ \alpha * p \circ \beta], [q \circ \alpha * q \circ
+        \beta])} = \\
+        &= {([p \circ \alpha][p \circ \beta], [q \circ \alpha][q \circ \beta])}
+        = \phi{([\alpha])} \cdot \phi{([\beta])}
+    \end{align*}
+
+    \(\phi\) è suriettivo. Infatti fissato \([\alpha_{1}] \in \pi_1{(X, x_{0})}\) e
+    \([\beta_{1}] \in \pi_{1}{(Y, y_{0})}\) abbiamo che, preso \(\alpha{(t)} =
+    {(\alpha_1{(t)}, \alpha_2{(t)})}\), evidentemente 
+    \[
+        \phi{([\alpha])} = {([p \circ \alpha], [q \circ \alpha])} =
+        {([\alpha_1], [\alpha_2])}
+    \]
+
+    Infine 
+    \begin{align*}
+    \mathrm{Ker}(\phi) &= \{[\alpha] \in \pi_{1}{(X \times Y, {(x_{0}, y_{0})})}
+    : \phi{([\alpha])} = {(\varepsilon_{x_{0}} , \varepsilon_{y_{0}} )}\} = \\
+   &= \{[\alpha] : p\circ \alpha \sim \varepsilon_{x_{0}} \text{ in \(X\) e } q
+   \circ \alpha \sim \varepsilon_{y_{0}} \text{ in \(Y\)}\} 
+    \end{align*}
+
+    Ora presa \(F : I \times  I \to X\) l'omotopia tra \(p \circ \alpha\) e
+    \(\varepsilon_{x_{0}} \) relativa a \(\{0, 1\} \) e \(G : I \times I \to Y\)
+    quella tra \(q \circ \alpha\) e \(\varepsilon_{y_{0}} \). Allora presa
+    \begin{align*}
+        H = {(F, G)}: I \times I &\longrightarrow X \times Y \\
+        {(t,s)} &\longmapsto H{(t,s)} = {(F{(t,s)}, G{(t, s)})}
+    \end{align*}
+    che è omotopia tra \(H{(\cdot , 0)} = {(p \circ \alpha, q \circ \alpha)}\) e
+    \(H{(\cdot , 1)} = {(\varepsilon_{x_{0}} , \varepsilon_{y_{0}} )} =
+    \varepsilon_{{(x_{0}, y_{0})}} \) 
+e dunque \(\mathrm{Ker}{(\phi)} = \{[\varepsilon_{x_{0},y_{0}}] \}\) e quindi
+\(\phi\) è iniettivo.
+\end{proof}
+
+\section{Gruppo fondamentale di \(S^{1}\)}
+
+Intuitivamente presa una circonferenza e un punto base (tipo se la vediamo nel
+piano complesso potremmo prendere 1). I lacci sono, eccetto quello costante,
+quelli fatti da un numero di giri intero sulla circonferenza stessa.
+Effettivamente l'idea è contare ``quante volte'' passo da 1, e dire che tale
+numero identifica la classe di equivalenza del laccio. Ne concluderemo dunque
+che \(\pi_{1}{(S^{1})} \cong \mathbb{Z}\).
+
+Consideriamo ora \(e : \mathbb{R} \to S^{1}\) la mappa esponenziale \(t \mapsto
+e^{2\pi i t}\) in \(\mathbb{C}\) oppure \(t \mapsto {(\cos{(2\pi t)}, \sin{(2
+\pi t)})}\) in \(\mathbb{R}^2\). Allora \(e\) è una identificazione aperta, e
+per verificarlo basta controllare una base di \(\mathbb{R}\). Effettivamente
+preso un aperto \({(a,b)}\), l'immagine è un arco aperto oppure tutto \(S^{1}\),
+che sono entrambi aperti. Inoltre \(e^{-1}{(1)} = \mathbb{Z}\) e preso
+\(e^{-1}{(e^{i\theta})} = \frac{\theta}{\pi} + \mathbb{Z}\) 
+\begin{remark}
+    Se prendo \({(a,b)} \subseteq \mathbb{R} \) con \(b-a < 1\) allora
+    \(e|_{{(a,b)}} \) è un omeomorfismo su \(e{(a,b)}\) che è un arco aperto di
+    \(S^{1}\).
+\end{remark}
+\begin{remark}
+    Al contrario, preso un sottoinsieme connesso e aperto di \(S^{1}\) che non
+    sia tutto \(S^{1}\) (un archetto aperto insomma) denotato \(A\), allora
+    \(e^{-1}{(A)}\) è un insieme composto da \(\mathbb{Z}\) intervalli aperti.
+
+\end{remark}
+
+\begin{lemma}[Aperti uniformemente rivestiti]\label{lem:unif_rivest}
+    Se \(A \subseteq S^{1} \) è aperto allora
+    \[
+      e^{-1}{(A)} = \coprod_{n \in \mathbb{Z}} U_{i}
+    \]
+    con \(U_{i} \subseteq \mathbb{R} \) aperti tale che \(e|_{U_{i}} : U_{i} \to
+    A\) è un omeomorfismo. 
+\end{lemma}
+\begin{corollary}
+    Se ho una funzione \(f: X \to S^{1}\) continua, con \(X\) spazio topologico.
+    Se \(f\) non è suriettiva allora è omotopa a una costante.
+\end{corollary}
+\begin{proof}
+    Non è suriettiva, significa che \(\exists p \in S^{1}\) tale che \(p \not\in
+    \mathrm{Im}{(f)}\). Posso vedere \(f\)  come \(f: X \to S^{1} \sminus \{p\}
+    \sim (0, 1)\) che è contraibile.
+\end{proof}
+
+
+
+
+
+
+\end{document}

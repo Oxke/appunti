@@ -177,7 +177,34 @@ Ma cos'è il segmento \(AB\)? È definito come
 
 Ne consegue che \(\vec{AB} \cap \vec{BA} = AB\) e \(\vec{AB} \cup \vec{BA} =
 \overline{AB}\) 
+\begin{enumerate}
+    \item[(Pasch) O4] Siano \(A, B, C \in \mathcal{P}\) tre punti non allineati
+        e sia \(r \in \mathcal{R}\). Allora se \(AB \cap r \neq \varnothing\)
+        necessariamente \(C \in r\) oppure esattamente una tra  \(AC \cap r \neq
+        \varnothing\) e \(BC \cap r \neq \varnothing\) è vera.
+\end{enumerate}
 
+
+
+\begin{definition}{Insieme convesso}
+    Un insieme \(S \subseteq \mathcal{P}\) è detto \textbf{convesso} se per ogni
+    coppia di punti \(A, B \in S\), si ha che se esiste \(T \in \mathcal{P}\)
+    tale che \(A - T - B\), allora \(T \in S\) 
+\end{definition}
+
+\begin{example}
+    Sia \(\mathcal{P} = \{{(x,y)} \in \mathbb{R}^2 : x < 0 \lor x \ge 1\} \). Le
+    rette \(\mathcal{R}\) sono le rette del piano cartesiano intersecate con
+    \(\mathcal{P}\). 
+
+    Allora valgono tutti gli assiomi (verificare) ma non quello di Pasch. 
+\end{example}
+
+\begin{theorem}
+    Sia \(Q \neq \varnothing\) un insieme convesso in una geometria di Pasch.
+    Sia \(r \in \mathcal{R}\). Allora se \(Q \cap r = \varnothing\) allora tutti
+    i punti di \(Q\) stanno dalla stessa parte rispetto a \(r\)
+\end{theorem}
 
 
 
