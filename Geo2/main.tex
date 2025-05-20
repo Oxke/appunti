@@ -1212,7 +1212,7 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
     \(S^{1}\), e dunque hanno gruppo fondamentale isomorfo a quello di \(S^{1}\)
     (sono connessi per archi dunque hanno \(\pi_{1}\) isomorfo in ogni punto)
 \end{example}
-\begin{theorem}
+\begin{theorem}[Gruppo fondamentale del prodotto]\label{thm:prod_p1}
     Siano \(X, Y\) spazi topologici. Fissato \(x_{0} \in X\) e \(y_{0} \in Y\)
     vale che 
     \[
@@ -1326,6 +1326,330 @@ che sono entrambi aperti. Inoltre \(e^{-1}{(1)} = \mathbb{Z}\) e preso
     \mathrm{Im}{(f)}\). Posso vedere \(f\)  come \(f: X \to S^{1} \sminus \{p\}
     \sim (0, 1)\) che è contraibile.
 \end{proof}
+Ora l'idea è usare questa elica per definire il ``grado'' di un laccio, ossia il
+numero di avvolgimenti.
+
+\begin{definition}{Sollevamento}
+    Dato \(f : I \to S^{1}\) continua, un'applicazione continua \(\tilde{f} : I
+    \to \mathbb{R}\) tale che \(e \circ \tilde{f}= f\) si chiama
+    \textbf{sollevamento} di \(f\)  rispetto a \(e\).
+
+    Inoltre se \(x_{0} = f{(0)}\) e fisso \(\tilde{x_{0}} \in \mathbb{R}\) tale
+    che \(e{(\tilde{x_{0}})} = x_{0}\). Allora se \(\tilde{f}{(0)} =
+    \tilde{x_{0}}\), \(\tilde{f}\) si chiama sollevamento con punto base
+    \(\tilde{x_{0}}\).
+\end{definition}
+
+\begin{remark}
+    Se \(\tilde{f}\) è un sollevamento di \(f\) allora \(\tilde{f}{(0)} \in
+    e^{-1}{(f{(0)})}\) 
+\end{remark}
+
+\begin{theorem}[Esistenza di sollevamenti di cammini]
+    Data \(f : I \to S^{1}\) un cammino, sia \(x_{0} = f{(0)}\). Allora per ogni
+    \(\tilde{x_{0}} \in e^{-1}{(\tilde{x_{0}})}\), esiste unico un sollevamento
+    di \(f\) rispetto a \(e\) con punto base \(\tilde{x_{0}}\).
+\end{theorem}
+\begin{proof}
+    Sia \(f: I \to S^{1}\). 
+
+    \(\forall t \in I\), \(f{(t)} \in  W_t \) aperto di \(S^{1}\) uniformemente
+    rivestito. Se consideriamo \(\{f^{-1}(W_t)\}_{t \in I} \) questo è un
+    ricoprimento aperto di \(I\), che è compatto e dunque ne possiamo estrarre
+    un sottoricoprimento finito. Al fine di evitare di dover lavorare con aperti
+    scomodi, notiamo che ogni \(f^{-1}{(W_t)} = \bigcup_{\alpha \in J_t}
+    B_{\alpha}\) con \(B_{\alpha} \) intervalli aperti in \(I\). A tal punto
+    prendiamo come ricoprimento aperto i \(B_{\alpha} \) e quindi otteniamo un
+    sottoricoprimento finito \(\{B_{\alpha_i}\}_{i=1}^n\) di \(I\) composto da
+    intervalli.
+
+    Abbiamo ora un ricoprimento di \(I\) del tipo 
+    \begin{align*}
+        I = [0, s_{0}) \cup (t_{1}, s_{1}) \cup (t_{2}, s_{2}) \cup  \dots \cup
+        (t_{n}, 1] \\
+        \text{ con } 0 < t_{1} < s_{0} < t_{2} < s_{1} < \dots < t_{n} < 1
+    \end{align*} 
+    Fisso, per ogni \(i \in 0\dots n\), \(l_{i} \in {(t_{i}, s_{i-1})}\). Allora
+    vale che
+    \[
+        [l_{i}, l_{i+1} ] \subseteq B_{i} \quad \forall i = 0, \dots, n-1
+    \]
+    dove abbiamo posto \(l_{0} = 0\) e \(l_{n+1} = 1\). Dunque \(f([l_{i},
+    l_{i+1} ]) \subseteq W_{t_{i}}  \) è uniformemente rivestito. Per comodità
+    segneremo ora \(W_{t_{i}} \) come \(W_{i} \).
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXHRpbGRle3hfMH0gXFxpbiBWX3QiXSxbMSwwLCJcXGJpZ2N1cF97aSBcXGluIFxcbWF0aGJie1p9fVZfaSJdLFsxLDEsIldfMCJdLFswLDEsIltsXzAsbF8xXSJdLFszLDEsIlxcYnVsbGV0Il0sWzIsMSwiZigwKT14XzAiXSxbMiwwLCJcXHRpbGRle3hfMH0iXSxbMCwxLCJcXHN1YnNldGVxIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiZSJdLFswLDIsImV8X3tWX3R9IiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifSwiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzMsMiwiZnxfe1tsXzAsbF8xXX0iLDJdLFszLDAsIlxcdGlsZGV7Zl8wfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDYsIlxcbmkiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw1LCJcXG5pIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}
+	{\tilde{x_0} \in V_t} & {\bigcup_{i \in \mathbb{Z}}V_i} & {\tilde{x_0}} \\
+	{[l_0,l_1]} & {W_0} & {f(0)=x_0} & \bullet
+	\arrow["\subseteq"{description}, draw=none, from=1-1, to=1-2]
+	\arrow["{e|_{V_t}}"{description}, hook, two heads, from=1-1, to=2-2]
+	\arrow["\ni"{description}, draw=none, from=1-2, to=1-3]
+	\arrow["e", from=1-2, to=2-2]
+	\arrow["{\tilde{f_0}}", dashed, from=2-1, to=1-1]
+	\arrow["{f|_{[l_0,l_1]}}"', from=2-1, to=2-2]
+	\arrow["\ni"{description}, draw=none, from=2-2, to=2-3]
+\end{tikzcd}\]
+    % TODO: diagramma e [l0, l1]
+
+    Ho ottenuto ora \(\tilde{f_{0}} : [l_{0},l_{1}] \to \mathbb{R}\)
+    sollevamento di \(f|_{[l_{0},l_{1}]} \) con \(\tilde{f_{0}}{(0)} =
+    \tilde{x_{0}} \). Adesso itero il procedimento finite volte e verifico che
+    si incollino bene. Infine prendendo
+    \[
+      \tilde{f}{(t)} = \tilde{f_{i}}{(t)} \text{ per } t \in [l_{i}, l_{i+1}]
+    \]
+    Inoltre \(\tilde{f}\) è unica perché nella costruzione non abbiamo
+    effettuato scelte sulla funzione (solo sul ricoprimento).
+\end{proof}
+
+Finalmente abbiamo tutto il necessario per studiare il gruppo fondamentale di
+\(S^{1}\). L'idea sarà definire una funzione
+\begin{align*}
+    d: \pi_{1}{(S^{1}, 1)} &\longrightarrow \mathbb{Z} \\
+    [\alpha] &\longmapsto d([\alpha]) = \tilde{\alpha_{0}}(1) 
+\end{align*}
+e mostrare che è un isomorfismo di gruppi.
+
+In primis compare un problema di buona definizione. Se \([\alpha] \sim [\beta]\)
+in \(S^{1}\) allora dobbiamo controllare che \(\tilde{\alpha_{0}}{(1)} =
+\tilde{\beta_{0}}{(1)}\).
+
+\begin{lemma}\label{lem:omotopia_sollev}
+    Siano \(f, g : I \to S^{1}\) cammini equivalenti. Sia \(H\) l'omotopia
+    tra i due.
+    Esistono due partizioni di \(I\) \(0 = a_{0} < a_{1} < \dots < a_{n} =
+    1\) e \(0 = b_{0} < b_{1} < \dots < b_{m} = 1\) tali che formando la
+    griglia come in figura %TODO: figura 
+    \(\forall i \in \{0, \dots, n-1\} \) e \(\forall j \in \{0, \dots, m-1\}
+    \) allora \(R_{ij}  = [a_{i}, a_{i+1} ] \times [b_{j}, b_{j+1}]\) è tale
+    che \(H{(R_{ij} )} \subseteq W_{ij} \) aperto uniformemente rivestito.
+\end{lemma}
+\begin{proof}
+    La dimostrazione è rognosa ma non difficile ed è lasciata come esercizio
+\end{proof}
+\begin{theorem}[Sollevamento delle omotopie]
+    Se \(f, g : I \to S^{1}\) cammini equivalenti, se fisso \(\tilde{x_{0}} \in
+    e^{-1}{(f{(0)} (= g{(0)}))}\) allora \(\tilde{f}_{\tilde{x_{0}}} \) e
+    \(\tilde{g}_{\tilde{x_{0}}} \) sono equivalenti in \(\mathbb{R}\) e in
+    particolare \(\tilde{f}_{\tilde{x_{0}}}{(1)} = \tilde{g}_{\tilde{x_{0}}}{(1)}\).
+\end{theorem}
+\begin{proof}
+    Presa \(H : I \times I \to S^{1}\) omotopia tra \(f\) e \(g\) relativa a
+    \(\{0,1\} \).
+
+    Consideriamo ora \(R_{ij}\) i rettangoli di cui al
+    lemma~\ref{lem:omotopia_sollev}. Esiste dunque un unico \(\overline{i}\)
+    tale che \(\tilde{x_{0}} \in V_{\overline{i}}^{00}  \). Prendiamo dunque
+    \(H|_{R_{00}} \to W_{00} \subseteq S^{1}\) e solleviamo a \(\tilde{H_{00}}
+    := {(e|_{V_{\overline{i}}^{00} } )}^{-1} \circ H|_{R_{00} } \). 
+
+    Ora prendiamo \(S := R_{00} \cap R_{01} = \{a_{1}\} \times [b_{0},b_{1}] \).
+    % TODO: finire
+
+    In questo modo in un numero finito di passi ottengo \(\tilde{H}: I \times I
+    \to \mathbb{R}\) continua e tale che \(e \circ \tilde{H} = H\). Inoltre
+    \begin{equation*}
+        (e \circ \tilde{H}){(t,0)} &= H{(t,0)} = f{(t)} \quad, \quad
+        \tilde{H}{(0,0)} = \tilde{x_{0}} \\
+    \end{equation*}
+    e dunque \(\tilde{H}{(\cdot ,0)} = \tilde{f}_{\tilde{x_{0}}}\) per unicità del
+    sollevamento. Similmente anche \(\tilde{H}{(\cdot ,1)} =
+    \tilde{g}_{\tilde{x_{0}}} \). \(\tilde{H}\) è un'omotopia tra
+    \(\tilde{f}_{\tilde{x_{0}}} \) e \(\tilde{g}_{\tilde{x_{0}}} \). 
+
+    Infine \(H\) è relativa a \(\{0,1\} \) e dunque \(\tilde{H}{(\{0\} \times
+    [0,1])}\) è connesso e \((e \circ \tilde{H}){(\{0\} \times [0,1])} = \{1\}
+    \). Ma allora \(0 \in \tilde{H}{(\{0\} \times [0,1])} \subseteq e^{-1}{(1)} =
+    \mathbb{Z} \) e dunque, essendo connesso è \(\{0\} \). Anche
+    \(\tilde{H}{(\{1\} \times [0,1])}\) è connesso in \(\mathbb{Z}\) ed è quindi
+    un punto solo. Segue la tesi.
+\end{proof}
+\begin{corollary}
+    \(d\) è un'applicazione ben definita
+\end{corollary}
+\begin{proof}
+    ovvio
+\end{proof}
+\begin{theorem}
+    \(d\) è un isomorfismo di gruppi.
+\end{theorem}
+\begin{proof}[Omomorfismo]
+    \(d\) è un omomorfismo di gruppi. Infatti presi \([\alpha], [\beta] \in
+    \pi_{1}{(S^{1}, 1)}\) vogliamo vedere che
+    \begin{equation}\label{eq:omomorfismo_d}
+        d{([\alpha][\beta])} = d{([\alpha]) + d([\beta])}
+    \end{equation}
+    Effettivamente
+    \[
+        d{([\alpha][\beta])} = d{([\alpha * \beta])} = \widetilde{\alpha *
+        \beta}_0{(1)}
+    \]
+    e notiamo che \(\widetilde{\alpha * \beta}_0 = \widetilde{\alpha_{0}} *
+    \widetilde{\beta_{\widetilde{\alpha_{0}}{(1)}}}\) (esercizio). Inoltre
+    \(\widetilde{\beta_{0}}{(t)} + \widetilde{\alpha_{0}}{(1)} =
+    \widetilde{\beta_{\widetilde{\alpha_{0}}({1})}}{(t)}\). Valutando i due in 1
+    abbiamo la tesi.
+\end{proof}
+\begin{proof}[Suriettività]
+    Sia \(n \in \mathbb{N}^{+}\) e consideriamo \(\rho_n : S^{1} \to S^{1}\),
+    \(\rho_n{(z)} = z^{n}\). Allora fissato \(w \in S^{1}\) abbiamo che \(w =
+    e^{i\eta}\) e 
+    \[
+      \rho_{n}^{-1}{(w)} = \{e^{i \frac{\eta}{n}}, e^{i \frac{\eta + 2\pi}{n}} ,
+      \dots, e^{i \frac{\eta + 2{(n-1)}\pi}{n}}\} 
+    \]
+    Vedere come viene l'omomorfismo è lasciato come esercizio. % TODO: esercizio
+    \[\begin{tikzcd}
+        I & S^{1} \\
+        {I/\{0,1\} \overset{\text{omeo}}{\approx} S^1}
+        \arrow["\overline{\rho_n}", from=1-1, to=1-2]
+        \arrow["\pi"', from=1-1, to=2-1]
+        \arrow["{\rho_n}"', from=2-1, to=1-2]
+    \end{tikzcd}\]
+    Come funziona \(d\) su \(\rho_n\)? \(\overline{\rho_n}{(t)} = e^{i_{2}\pi n
+    t}\) che è un laccio perché \(\overline{\rho_n}{(0)} =
+    \overline{\rho_n}{(1)}\). Allora \(d{([\overline{\rho_n}])} = n\).
+    Possiamo prendere \(n \in \mathbb{Z}\) e viene semplicemente il giro
+    inverso, e per \(n=0\) otteniamo \([\varepsilon_{0}]\) dunque otteniamo che
+    \(d\) è suriettivo. % TODO: aggiustare
+\end{proof}
+\begin{proof}[Iniettività]
+    \[
+        \mathrm{Ker}{(d)} = \{[\alpha] \in \pi_{1}{(S^{1}, 1)} : d{([\alpha])} = 0\} 
+    \] 
+    e dunque \(\widetilde{\alpha}_0{(1)} = 0\) ma anche
+    \(\widetilde{\alpha}_0{(0)} = 0\) quindi \(\widetilde{\alpha}_0\) è un
+    laccio in \(\mathbb{R}\). Ma \(\mathbb{R}\) è contraibile quindi
+    \(\widetilde{\alpha}_0 \sim \varepsilon_{0}\) e dunque esiste \(F : I \times
+    I \to \mathbb{R}\) omotopia relativa a \(\{0,1\} \) tra
+    \(\widetilde{\alpha}_0\) e \(\varepsilon_{0}\). Presa ora \(e \circ F : I
+    \times I \to S^{1}\) è un'omotopia relativa a \(\{0,1\} \) tra \(e \circ
+    \widetilde{\alpha}_0 = \alpha\) e \(e \circ \varepsilon_0^{\mathbb{R}} =
+    \varepsilon_1^{S^{1}}\) e quindi 
+    \[
+        \mathrm{Ker}{(d)} = \{[\varepsilon_{1}]\} 
+    \]
+    Dunque \(d\) è iniettivo.    
+\end{proof}
+\begin{remark}
+    Quali sono i lacci \(\alpha\) in \(S^{1}\) con punto base 1 tali che
+    \([\alpha]\) sia un generatore di \(\pi_{1}{(S^{1}, 1)}\)? Gli unici
+    generatori di \(\mathbb{Z}\) sono \(\{\pm 1\} \) dunque \(\alpha\) è un
+    laccio equivalente a \(e^{i2\pi t}\) oppure \(e^{-i2\pi t}\), ossia tutti i
+    lacci \(\alpha\) tali che \(\widetilde{\alpha}_0{(1)} \in \{\pm 1\} \). In
+    particolare \(\rho_{1} = \mathrm{Id}_{S^{1}}  \) e \(\rho_{-1} : e^{i\theta}
+    \mapsto e^{-i\theta}\). Allora \(\overline{\rho}_1{(t)} = e^{i 2\pi t}\) e
+    \(\overline{\rho}_{-1} {(t)} = e^{-i2\pi t}\). Sono i giri ovvi in senso
+    orario e antiorario.
+\end{remark}
+Ora vediamo importanti conseguenze di questo grande teorema.
+\begin{proposition}
+    \(S^{1} \subseteq D^2 \) non è un retratto
+\end{proposition}
+\begin{eser}
+    Dimostrare che \(S^{1}\subseteq D^2 \) non è un retratto di \(D^2\) 
+    \tcblower
+    In generale se \(A \subseteq X \) è un retratto, con retrazione \(r : X \to
+    A\) continua tale che \(r \circ i = \mathrm{Id}_A\). Se fisso \(x_{0} \in
+    A\), allora \(i_* \circ r_* = {(i \circ r)}_* = \mathrm{1}_{\pi_{1}{(A,
+    x_{0})}} \) e dunque \(i_*\) è iniettivo e \(r_*\) è suriettivo.
+
+    In particolare se \(S^{1}\) fosse retratto di \(D^2\) allora \(i_* :
+    \pi_{1}{(S^{1}, 1)} \to \pi_{1}{(D^2, 1)}\) sarebbe iniettivo, ma
+        \(pi_{1}{(S^{1}, 1)} = \mathbb{Z} \) mentre \(\pi1{(D^2, 1)} = \{1\}\)
+\end{eser}
+
+\begin{proposition}
+    \(C = S^{1} \times I\) e \(M\) striscia di Möbius hanno gruppo fondamentale
+    isomorfo a \(\mathbb{Z}\). 
+\end{proposition}
+\begin{proof}
+    Abbiamo già mostrato diverse volte che entrambi si retraggono per
+    deformazione forte su un sottoinsieme isomorfo a \(S^{1}\) 
+\end{proof}
+
+\begin{proposition}
+    Il toro \(T \sim  S^{1} \times S^{1}\) ha gruppo fondamentale 
+    \[
+      \pi_{1}{(S^{1 \times S^{1}}, {(1, 1)})} \cong \mathbb{Z} \times \mathbb{Z}
+    \]
+\end{proposition}
+\begin{proof}
+    Teorema~\ref{thm:prod_p1} e \(\pi_{1}{(S^{1}, 1)} \cong \mathbb{Z}\)
+\end{proof}
+
+In \(\mathbb{Z} \times \mathbb{Z}\) \({(0,1)}\) e \({(1,0)}\) sono generatori
+facili (non sono ovviamente gli unici), i cui lacci corrispondenti sono ad
+esempio \(\alpha{(t)} = {(e^{2\pi i t}, 1)}\) e \(\beta{(t)} = {(1, e^{2\pi i
+t})}\) ma invece di fare così, dato che è un po' complicato visualizzare
+\(\mathbb{C} \times \mathbb{C}\), visualizziamo \(T\) immerso in
+\(\mathbb{R}^3\). Allora due generatori sono i % TODO: FIGURA sono 
+lacci mostrati in figura, che corrispondono alle cuciture del toro. Quindi sul
+quadrato identificato \(T = I^2 / \sim \) abbiamo che \(\alpha\) e \(\beta\)
+possono essere visti come i segmenti \(\alpha = {(0\text{ o } 1,0)}\to {(0\text{ o }
+1,1)}\) e \(\beta = {(0, 0\text{ o }1)} \to {(1, 0 \text{ o }1)}\) che sono lacci
+per l'identificazione.
+\begin{eser}
+    Mostrare esplicitamente con il toro visto come quadrato identificato che
+    \[
+      \alpha * \beta \sim \beta * \alpha
+    \]
+\end{eser}
+\begin{eser}{Prossibilmente molto difficile}
+    Preso \(T \sminus \{P\} \), con \(P \in T\)  lo spazio che si retrae forte
+    di deformazione nella ``figura otto'' ossia \(S^{1} \wedge S^{1}\), mostrare
+    che i due ovvi generatori non commutano (bella merda)
+\end{eser}
+\begin{proposition}[Teorema del punto fisso di Brouwer]
+    Ogni funzione continua \(f : D^2 \to D^2\) ha almeno un punto fisso. Ossia
+    esiste \(x \in D^2\) tale che \(f{(x)} = x\).
+\end{proposition}
+\begin{proof}
+    Supponiamo per assurdo che \(\forall x \in D^2\), \(f{(x)}\neq x\). Allora
+    prendo per ogni \(x \in D^2\) la semiretta tra \(f{(x)}\) e \(x\) (tolto
+    \(f{(x)}\)) e la interseco con \(S^{1}\) il bordo di \(D^2\). Questo dà una
+    mappa \(r : D^2 \to S^{1}\) che è continua e \(r|_{S^{1}} =
+    \mathrm{Id}_{S^{1}} \) per costruzione. Ma allora \(r\) è una retrazione di
+    \(D^2\) in \(S^{1}\).
+\end{proof}
+
+\begin{remark}
+    Il toro \(n-\)dimensionale \(\mathbb{T}^n = S^{1} \times \dots \times
+    S^{1}\) \(n\) volte ha gruppo fondamentale \(\pi_{1}{(\mathbb{T}^n)} \cong
+    \mathbb{Z}^{n}\)
+\end{remark}
+
+\begin{eser}
+    Ogni omeomorfismo \(f:D^2 \to D^2\) necessariamente ha \(f{(S^{1})} =
+    S^{1}\) (e \(f_{S^{1}} \) è omeomorfismo).
+\end{eser}
+
+\begin{remark}
+    \(D^2 \sminus \{P\} \) è contraibile se \(P \in S^{1}\) ed è invece
+    omotopicamente equivalente a \(S^{1}\) se \(S^{1} \not\ni P \in D^2\) 
+\end{remark}
+
+\begin{definition}{Semplicemente connesso}
+    \(X\) spazio topologico si dice \textbf{semplicemente connesso} se è connesso per
+    archi e esiste \(x_{0} \in X\) tale per cui
+    \[
+        \pi_{1}{(X, x_{0})} = \{[\varepsilon_{x_{0}} ]\} 
+    \]
+\end{definition}
+\begin{remark}
+\begin{enumerate}[label = \arabic*.]
+    \item contraibile \(\implies \) semplicemente connesso
+    \item È necessario specificare cpa nella definizione, uno spazio discreto ha
+        ovunque \(\pi_{1}\) banale (es. \(\{0, 1\}\))
+\end{enumerate}
+
+\end{remark}
+
+
+
+
+
+
 
 
 
