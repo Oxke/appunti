@@ -1,7 +1,7 @@
 %! TEX program = lualatex
 \input{../preamble_appunti_report.tex}
-
 \usepackage{bbm}    % mettere nel preamble
+
 \newcommand{\Gs}{\mathcal{G}_S} % Definisco Gs per gruppo libero su S
 \newcommand{\id}{\mathrm{id}} % identity map
 
@@ -1999,6 +1999,183 @@ Siano $\mathbb{Z} \cong \Span{a \mid \emptyset}$ e $\mathbb{Z} \cong \Span{b \mi
 il gruppo libero su due generatori. Questo è un gruppo non abeliano.
 Invece, il prodotto diretto è $\mathbb{Z} \times \mathbb{Z} \cong \Span{a,b \mid aba^{-1}b^{-1}} \cong \mathbb{Z}^2$, che è abeliano.
 \end{example}
+
+%%%%%%%%%%%%%%%%%%%%
+%% 28 maggio 2025 %%
+%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[Proprietà universale del prodotto libero di gruppi]\label{thm:up_prod_lib}
+    Siano \(G_1, G_2, H\) dei gruppi. Per ogni 
+    \[
+        \phi_i : G_i \rightarrow H \text{ omomorfismo di gruppi }, \quad i = 1, 2
+    \]
+    esiste un unico omomorfismo di gruppi 
+    \[
+        \phi : G_1 * G_2 \rightarrow H
+    \]
+    che rende commutativo il seguente diagramma: 
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJHXzEgKiBHXzIiXSxbMCwwLCJHXzEiXSxbMCwyLCJHXzIiXSxbMSwxLCJIIl0sWzEsMCwial8xIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMiwwLCJqXzIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDMsIlxccGhpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFxwaGlfMSJdLFsyLDMsIlxccGhpXzIiLDJdXQ==
+\[\begin{tikzcd}
+	{G_1} \\
+	{G_1 * G_2} & H \\
+	{G_2}
+	\arrow["{j_1}", hook', from=1-1, to=2-1]
+	\arrow["{\phi_1}", from=1-1, to=2-2]
+	\arrow["\phi"{description}, dashed, from=2-1, to=2-2]
+	\arrow["{j_2}"', hook, from=3-1, to=2-1]
+	\arrow["{\phi_2}"', from=3-1, to=2-2]
+\end{tikzcd}\]
+dove \(j_i : G \rightarrow G_1 * G_2\) è l'inclusione naturale.
+\end{theorem}
+
+\begin{eser}
+    Dimostrare il teorema, che segue in maniera semplice scrivendo un elemento in \(G_1 * G_2\) come giustapposizione di parole in \(G_1\) e \(G_2\) e ricordando che le \(\phi_i\) sono omomorfismi di gruppi. 
+
+    Verificare inoltre che si tratta di una proprietà universale: se \(K\) è un gruppo per cui vale la proprietà universale del prodotto libero, allora \(K \cong G_1 * G_2\) in maniera canonica. 
+\end{eser}
+
+\subsection{Teorema di Seifert-Van Kampen: versione con relazioni}
+
+\begin{theorem}[Seifert-Van Kampen: relazioni]\label{thm:svk_rel}
+    Sia \(X\) uno spazio topologico, \(\mathcal{U, V} \subset X\) due aperti connessi per archi tali che l'intersezione sia non vuota e connessa per archi. 
+    Sia \(x_0\) nell'intersezione. 
+    Allora valgono le seguenti affermazioni, che sono tra loro equivalenti: 
+    \begin{enumerate}
+        \item \[\pi_1 (X, x_0) \cong (\pi_1(\mathcal U, x_0) * \pi_1(\mathcal V, x_0))/\mathcal N(R)\] dove \[R = \{i_\mathcal{U}^* [\alpha] i_\mathcal{V}^*[\alpha]^{-1} \, : \, [\alpha] \in \pi_1(\mathcal U \cap \mathcal V, x_0)\}\]con gli \(i^*\) le applicazioni indotte dall'inclusione tra l'intersezione e i due aperti;  
+        \item fissando le presentazioni \[\pi_1(\mathcal U, x_0) \cong \langle \, S_\mathcal U \, | \, R_\mathcal U \, \rangle, \quad \pi_1(\mathcal V, x_0) \cong \langle \, S_\mathcal V \, | \, R_\mathcal V \, \rangle \]si ha che \[\pi_1(X_0, x) = \Span{\, S_\mathcal U \sqcup S_\mathcal{V} \, | \, R_\mathcal{U} \sqcup R_\mathcal{V} \sqcup R \,}\]con \(R\) definito come prima. 
+    \end{enumerate}
+\end{theorem}
+
+Per analizzare meglio la situazione presentiamo il diagramma con le inclusioni (che è commutativo) e il relativo diagramma coi gruppi fondamentali (che, per funtorialità, è ancora commutativo): 
+% https://q.uiver.app/#q=WzAsMTEsWzAsMSwiXFxtYXRoY2FsIFUgXFxjYXAgXFxtYXRoY2FsIFYiXSxbMSwwLCJcXG1hdGhjYWwgVSJdLFsxLDIsIlxcbWF0aGNhbCBWIl0sWzIsMSwiWCJdLFszLDEsIlxcaW1wbGllcyJdLFs0LDEsIlxccGlfMSAoXFxtYXRoY2FsIFUgXFxjYXAgXFxtYXRoY2FsIFYsIHhfMCkiXSxbNSwwLCJcXHBpXzEgKFxcbWF0aGNhbCBVLCB4XzApIl0sWzUsMiwiXFxwaV8xIChcXG1hdGhjYWwgViwgeF8wKSJdLFs2LDEsIlxccGlfMSAoWCwgeF8wKSJdLFsxLDEsIj0iXSxbNSwxLCI9Il0sWzAsMSwiaV9cXG1hdGhjYWwgVSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiaV9cXG1hdGhjYWwgViIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzEsMywial9cXG1hdGhjYWwgVSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMywial9cXG1hdGhjYWwgViIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzUsNiwiaV9cXG1hdGhjYWwgVV4qIl0sWzUsNywiaV9cXG1hdGhjYWwgVl4qIiwyXSxbNiw4LCJqX1xcbWF0aGNhbCBVXioiXSxbNyw4LCJqX1xcbWF0aGNhbCBWXioiLDJdXQ==
+\[\begin{tikzcd}
+	& {\mathcal U} &&&& {\pi_1 (\mathcal U, x_0)} \\
+	{\mathcal U \cap \mathcal V} & {=} & X & \implies & {\pi_1 (\mathcal U \cap \mathcal V, x_0)} & {=} & {\pi_1 (X, x_0)} \\
+	& {\mathcal V} &&&& {\pi_1 (\mathcal V, x_0)}
+	\arrow["{j_\mathcal U}", hook, from=1-2, to=2-3]
+	\arrow["{j_\mathcal U^*}", from=1-6, to=2-7]
+	\arrow["{i_\mathcal U}", hook, from=2-1, to=1-2]
+	\arrow["{i_\mathcal V}"', hook', from=2-1, to=3-2]
+	\arrow["{i_\mathcal U^*}", from=2-5, to=1-6]
+	\arrow["{i_\mathcal V^*}"', from=2-5, to=3-6]
+	\arrow["{j_\mathcal V}"', hook', from=3-2, to=2-3]
+	\arrow["{j_\mathcal V^*}"', from=3-6, to=2-7]
+\end{tikzcd}\]
+
+Per mostrare l'equivalenza tra i due enunciati ci serviamo di un lemma. 
+
+\begin{lemma}
+    Dato un gruppo presentato per generatori e relazioni, \(G = \Span{\, S \, | \, R \, }\), \(R = R' \sqcup R''\), possiamo considerare \(G' = \Span{\, S \, | \, R' \, }\). Allora
+    \[
+        G \cong G'/\mathcal N (R'')
+    \]
+    attraverso un isomorfismo canonico.
+\end{lemma}
+
+\begin{proof}
+    Osserviamo che
+    \[
+        \forall a, b \in \Gs, \quad a \sim_{R'} b \implies a \sim_{R' \sqcup R''} b.
+    \]
+    Quindi c'è un omomorfismo naturale 
+    \[
+        \pi : G' \twoheadrightarrow G,
+    \]
+    dove ricordiamo che possiamo scrivere \(G' = \Gs/\mathcal N(R), G = \Gs/\mathcal (R' \sqcup R'')\). 
+    Vogliamo capire come sia fatto \(\ker \pi\). 
+    Dal momento che \(\pi(R'') = \{e_G\}\) possiamo dire che \(\mathcal N(R'') \subset \ker \pi\).  
+
+    Mostriamo l'altra inclusione. Abbiamo il seguente diagramma: 
+    % https://q.uiver.app/#q=WzAsNSxbMCwxLCJHJyJdLFsxLDEsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwyLCJHIl0sWzAsMCwiXFxtYXRoY2FsIEdfUyJdLFsyLDFdLFswLDIsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwxXSxbMywwXSxbMywxXV0=
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJHJyJdLFsxLDEsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwyLCJHIl0sWzAsMCwiXFxtYXRoY2FsIEdfUyJdLFsyLDFdLFswLDIsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwxXSxbMywwXSxbMywxLCJcXHBoaSJdXQ==
+\[\begin{tikzcd}
+	{\mathcal G_S} \\
+	{G'} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow[from=1-1, to=2-1]
+	\arrow["\phi", from=1-1, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["\pi"', two heads, from=2-1, to=3-1]
+\end{tikzcd}\]
+    dove definiamo \(\phi\) come composizione per avere la commutatività del diagramma. 
+    A questo punto usiamo la proprietà universale \ref{thm:up_presentation} per trovare l'unico omomorfismo di gruppi \(\overline \phi\) che fa commutare il seguente diagramma:
+    % https://q.uiver.app/#q=WzAsNCxbMiwwXSxbMCwwLCJcXG1hdGhjYWwgR19TIl0sWzEsMCwiRycvXFxtYXRoY2FsIE4oUicnKSJdLFswLDEsIkciXSxbMSwzXSxbMSwyLCJcXHBoaSJdLFszLDIsIlxcb3ZlcmxpbmUgXFxwaGkiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{\mathcal G_S} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{\overline \phi}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+    Il diagramma commuta, quindi per suriettività della mappa \(\Gs \to G'\) possiamo dire che anche il seguente diagramma commuta: 
+% https://q.uiver.app/#q=WzAsNCxbMiwwXSxbMCwwLCJHJyJdLFsxLDAsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwxLCJHIl0sWzEsMywiXFxwaSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDJdLFszLDIsIlxcb3ZlcmxpbmUgXFxwaGkiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{G'} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow[from=1-1, to=1-2]
+	\arrow["\pi"', two heads, from=1-1, to=2-1]
+	\arrow["{\overline \phi}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+Affinché il diagramma commuti si deve avere che \(\mathcal N (R'') \supset \ker \pi\). 
+
+Per il teorema di isomorfismo dei gruppi, 
+\[
+    \text{im} \pi \cong G'/\ker \pi \implies G \cong G' / \mathcal N(R''),
+\]
+che è quello che volevamo dimostrare. 
+\end{proof}
+
+\begin{proof}[Dimostrazione parziale del teorema di Seifert-Van Kampen]
+    Riprendendo il diagramma dopo l'enunciato del teorema, usando la proprietà universale del prodotto libero di gruppi \ref{thm:up_prod_lib} troviamo che 
+    \[
+        \exists ! \psi : \pi_1 (\mathcal U, x_0) * \pi_1(\mathcal V, x_0) \rightarrow \pi_1(X, x_0)
+    \]
+    che estende gli omomorfismi \(j_\mathcal{U}^*, j_\mathcal V^*\):
+    % https://q.uiver.app/#q=WzAsNCxbMiwxLCJcXHBpXzEoWCx4XzApIl0sWzAsMSwiXFxwaV8xKFxcbWF0aGNhbCBVLCB4XzApICogXFxwaV8xICggXFxtYXRoY2FsIFYsIHhfMCkiXSxbMCwwLCJcXHBpXzEoXFxtYXRoY2FsIFUsIHhfMCkiXSxbMCwyLCJcXHBpXzEoXFxtYXRoY2FsIFYsIHhfMCkiXSxbMiwwLCJqX1xcbWF0aGNhbCBVXioiXSxbMywwLCJqX1xcbWF0aGNhbCBWXioiLDJdLFszLDFdLFsyLDFdLFsxLDAsIlxccHNpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{\pi_1(\mathcal U, x_0)} \\
+	{\pi_1(\mathcal U, x_0) * \pi_1 ( \mathcal V, x_0)} && {\pi_1(X,x_0)} \\
+	{\pi_1(\mathcal V, x_0)}
+	\arrow[from=1-1, to=2-1]
+	\arrow["{j_\mathcal U^*}", from=1-1, to=2-3]
+	\arrow["\psi"{description}, dashed, from=2-1, to=2-3]
+	\arrow[from=3-1, to=2-1]
+	\arrow["{j_\mathcal V^*}"', from=3-1, to=2-3]
+\end{tikzcd}\]
+    Si ha che 
+    \[
+        \psi \left( \prod^n [\alpha_i] [\beta_i] \right) = \prod^n j_\mathcal U^* [\alpha_i]_\mathcal U j_\mathcal V^* [\beta_i]_\mathcal V = \prod^n [j_\mathcal U \circ \alpha_i]_X [j_\mathcal V \circ \beta_i]_X.
+    \]
+    Per la parte sui generatori % TODO: inserire il \ref 
+    sappiamo che \(\psi\) è suriettivo. 
+    Quindi, per il teorema di isomorfismo di gruppi, 
+    \[
+        \pi_1(X, x_0) \cong \frac{\pi_1(\mathcal U, x_0) * \pi_1 (\mathcal V, x_0)}{\ker \psi}.
+    \]
+    Si verifica direttamente che gli elementi di \(R\), che si esprimono come 
+    \[
+        i_\mathcal U^* [\gamma] i_\mathcal V^* [\gamma]^{-1}
+    \]
+    al variare di \([\gamma] \in \pi_1(\mathcal U \cap \mathcal V, x_0)\), hanno immagine banale attraverso \(\psi\). 
+    Segue che 
+    \[
+        \mathcal N (R) \subset \ker \psi.
+    \]
+    L'altra inclusione è molto più difficile da dimostrare, \emph{neanche il Manetti la dimostra}. 
+\end{proof}
+
+\begin{remark}
+    Osserviamo che le ipotesi del teorema sono necessarie. Ad esempio, la connessione per archi dell'intersezione è fondamentale: si pensi a un esempio che farebbe diventare il gruppo fondamentale di \(S^1\) banale se non dovesse essere necessaria. 
+\end{remark}
+
+\begin{corollary}
+    Sia \(X\) uno spazio topologico, \(\mathcal U \cap \mathcal V \neq \varnothing\) semplicemente connesso. Allora
+    \[
+        \pi_1 (X, x_0) \cong \pi_1 (\mathcal U, x_0) * \pi_1 (\mathcal V, x_0).
+    \]
+\end{corollary}
+
+
 
 
 
