@@ -1,5 +1,9 @@
 %! TEX program = lualatex
 \input{../preamble_appunti_report.tex}
+\usepackage{bbm}    % mettere nel preamble
+
+\newcommand{\Gs}{\mathcal{G}_S} % Definisco Gs per gruppo libero su S
+\newcommand{\id}{\mathrm{id}} % identity map
 
 \title{Appunti di Geometria 2}
 \author{Github Repository:
@@ -970,32 +974,121 @@ quindi nessun suo punto è retratto di deformazione.
     anche se è omeomorfo.
 \end{example}
 
-\begin{definition}
-    Sia \(X\) uno spazio topologico e \(x_{0} \in X\). Allora definiamo il
-    \textbf{gruppo fondamentale} di \(X\) in \(x_{0}\) come
+\section{Il gruppo fondamentale}
+Sia \(X\) uno spazio topologico. Definiamo il seguente insieme:
+\[
+    \Omega (X, x_0, x_1) := \left\{ \alpha: I \rightarrow X \text{ cammino tale che } \alpha(0) = x_0, \alpha(1) = x_1 \right\}.
+\] 
+Possiamo definire un'operazione di concatenazione tra cammini: 
+\[
+    * : \Omega(X, x_0, x_1) \times  \Omega(X, x_1, x_2) \rightarrow \Omega(X, x_0, x_2);
+\] 
+e possiamo definire l'opposto di un cammino: 
+\[
+    \overline{\cdot} : \Omega(X, x_0, x_1) \rightarrow \Omega(X, x_1, x_0). 
+\]
+Per esercizio si può mostrare che 
+\[
+    \begin{cases}
+        \alpha * \overline{\alpha} \sim \epsilon_{x_0} \\
+        \overline{\alpha} * \alpha \sim \epsilon_{x_1}
+    \end{cases}
+\] 
+e che 
+\[
+    \begin{cases}
+        \epsilon_{x_0} * {\alpha} \sim \alpha \\
+        {\alpha} * \epsilon_{x_1} \sim \alpha
+    \end{cases}
+\] 
+dove \(\epsilon_{x}\) è il cammino costante in \(x\). 
+Dimostriamo ora l'associatività della concatenazione a meno di omotopia. 
+\begin{proposition}\label{prop:associativita_concatenazione} 
+    Siano \(\alpha, \beta, \gamma\) cammini su cui è ben definita la concatenazione. 
+    Allora
     \[
-      \pi_1{(X, x_{0})} = \{\alpha : I \to X \text{ arco } x_{0} \to
-      x_{0}\} / \sim
-    \]
-    con \(\sim\) la relazione di equivalenza di cammini \(\alpha \sim \beta\) se
-    \(\alpha \approx_{[0,1]} \beta \) 
+        (\alpha * \beta) * \gamma \sim \alpha * (\beta * \gamma).
+    \] 
+\end{proposition}
+\begin{proof}
+    L'omotopia relativa a \(\{0, 1\}\) è data da 
+    \[
+       F(t, s) = \begin{cases}
+        \alpha \left( \frac{4t}{s+1} \right) & t \in \left[ 0, \frac{s+1}{4} \right] \\
+        \beta \left( 4t - s - 1 \right) & t \in \left[ \frac{s+1}{4}, \frac{s+s}{4}  \right] \\  
+        \gamma \left( \frac{4t}{2-s} + \frac{s+2}{2-s} \right) & t \in \left[ \frac{s+2}{4}, 1 \right].
+       \end{cases} 
+    \] 
+\end{proof}
+\begin{definition}{Gruppo fondamentale}
+    Sia \(\Omega(X, x_0) := \Omega(X, x_0, x_0)\) l'insieme dei lacci con punto base \(x_0\). 
+    Si consideri la relazione di equivalenza tra cammini \(\sim\) su \(\Omega(X, x_0)\) (l'omotopia è relativa a \(\{0, 1\}\), ossia fissa il punto base).
+    Definiamo l'insieme
+    \[
+       \pi_1(X, x_0) := \Omega(X, x_0) 
+    \] 
+    su cui definiamo un prodotto:    
+    \[
+        [\alpha] [\beta] := [\alpha * \beta].  
+    \] 
+    L'insieme \(\pi_1(X, x_0)\) dotato di questo prodotto è un gruppo, detto \emph{gruppo fondamentale} di \(X\) con punto base \(x_0\).
 \end{definition}
 \begin{proposition}
     La precedente è una buona definizione, ossia \(\pi_{1}{(X, x_{0})}\) è un
     gruppo.
 \end{proposition}
 \begin{proof}
-    La composizione di due cammini è un cammino ed è associativa, l'inverso di
-    un cammino è un cammino, la costante \(x_{0}\) è un cammino.
+    È sufficiente mostrare che l'operazione è ben definita. L'associatività è stata dimostrata nella \ref{prop:associativita_concatenazione}, l'elemento neutro è la classe \([\epsilon_{x_0}]\) mentre l'inverso è \([\alpha]^{-1} = [\overline{\alpha}]\).
+    Mostriamo la buona definizione. 
+    Siano \(\alpha \sim \alpha'\) e \(\beta \sim \beta'\) lacci in \(X\) con punto base \(x_0\). Allora 
+    \[
+        \begin{aligned}
+            \exists &F : I^2 \rightarrow X \text{ omotopia tra } &\alpha, \alpha' \text{ relativa a } &\{0, 1\}, \\ 
+            \exists &G : I^2 \rightarrow X \text{ omotopia tra } &\beta, \beta' \text{ relativa a } &\{0, 1\}.
+        \end{aligned}    
+    \]
+    Definiamo l'omotopia
+    \[
+       F \times G = \begin{cases}
+        F(2t, s) & t \in [0, 1/2], \\
+        F(2t-1, s) & t \in [1/2, 1].
+       \end{cases} 
+    \] 
+    Questa applicazione è continua (si incolla bene sul chiuso \(\{t = 1/2\}\)) ed è un'omotopia tra \(\alpha * \beta\) e \(\alpha' * \beta'\) che fissa il punto base. 
+
+     
 \end{proof}
 
 \begin{proposition}
-Se abbiamo uno spazio topologico \(X\)  con \(x_{0}\) e \(x_{1}\) connesse da un
-arco \(\gamma\) allora esiste un isomorfismo di gruppi
+Sia \(X\) uno spazio topologico e \(x_{0}, x_{1} \in X\) due punti connessi da un
+arco \(\gamma\). Allora esiste un isomorfismo di gruppi
 \[
   \mu_{\gamma} : \pi_{1}{(X, x_{0})} \to \pi_{1}{(X, x_{1})}
 \]
 \end{proposition}
+\begin{proof}
+    Per ogni scelta di \(\alpha \in \Omega(X, x_0)\) possiamo considerare il cammino 
+    \[
+       (\overline \gamma * \alpha) * \gamma \in \Omega(X, x_1). 
+    \] 
+    Definiamo l'applicazione 
+    \[
+       \mu_\gamma : \pi(X, x_0) \rightarrow \pi(X, x_1), \quad [\alpha] \mapsto [\overline \gamma * \alpha * \gamma]. 
+    \] 
+    L'applicazione \(\mu_\gamma\) è ben definita. 
+    Vogliamo mostrare che \(\mu_\gamma\) è un omomorfismo di gruppi. 
+    \[
+        \begin{aligned}
+        \mu_\gamma([\alpha][\beta]) &= \mu_\gamma([\alpha * \beta]) \\  
+        &= [\overline \gamma * \alpha * \beta * \gamma] \\
+        &= [\overline \gamma * \alpha* \gamma \overline * \gamma * \beta * \gamma]  \\  
+        &= [\overline \gamma * \alpha * \gamma][\overline \gamma * \beta * \gamma] \\
+        &= \mu_\gamma([\alpha]) \cdot \mu_\gamma([\beta]).
+        \end{aligned}
+    \]  
+    Quindi \(\mu_\gamma\) è un omomorfismo di gruppi. 
+    Per concludere è sufficiente mostrare che \(\mu_{\overline{\gamma}}\) è l'applicazione inversa di \(\mu_\gamma\).
+\end{proof}
 Specifichiamo che l'isomorfismo non è \emph{canonico}, nel senso che ve ne sono
 molti possibilmente e non ce n'è uno privilegiato. Tuttavia vale la seguente
 \begin{eser}
@@ -1012,7 +1105,7 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
 \end{remark}
 
 \subsection{funtorialità di \(\pi_{1}\)}
-    Sia \(f : x \to y\) continua tra spazi topologici. Fissiamo \(x_{0} \in x\)
+    Sia \(f : X \to Y\) un'applicazione continua tra spazi topologici. Fissiamo \(x_{0} \in x\).
     \begin{theorem}
         \(f\) induce un omomorfismo di gruppi
         \[
@@ -1068,8 +1161,8 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
     \end{example}
     
     \begin{theorem}\label{thm:funt_p1}
-        Dati \(X,Y,Z\) spazi topologici. Siano \(f : X \to Y\) e \(g : Y \to Z\)
-        applicazioni continue, allora fissato \(x_{0} \in X\) abbiamo che
+        Dati \(X,Y,Z\) spazi topologici, siano \(f : X \to Y\) e \(g : Y \to Z\)
+        applicazioni continue. Allora, fissato \(x_{0} \in X\) abbiamo che
         \[
           \pi_{1}{(X, x_{0})} \overset{f_*}{\to} \pi_{1}{(Y, f{(x_{0})})}
           \overset{g_*}{\to} \pi_{1}{(Z, g{(f{(x_{0})})})}
@@ -1097,12 +1190,11 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
         \end{align*}
     \end{proof}
     \begin{proposition}
-        Se due spazi topologici sono omeomorfi con \(\varphi : X \to Y \)
-        omeomorfismo allora preso \(x_{0} \in X\) 
+        Se due spazi topologici sono omeomorfi attraverso \(\varphi : X \to Y \) allora fissato \(x_{0} \in X\) 
         \[
-          \varphi_* : \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, \varphi{(x_{0})})}
-      \]
-      è un isomorfismo di gruppi.
+            \varphi_* : \pi_{1}{(X, x_{0})} \to \pi_{1}{(Y, \varphi{(x_{0})})}
+        \]
+        è un isomorfismo di gruppi.
     \end{proposition}
     \begin{proof}
         \(\exists \psi  : Y \to X\) tale che \(\psi \circ \varphi  =
@@ -1110,12 +1202,12 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
         \[
             \psi_* \circ \varphi_* \overset{\ref{thm:funt_p1}}{=} {(\psi \circ
             \varphi )}_* = {(\mathrm{Id}_X)}_* \overset{\ref{prop:Id_p1}}{=}
-            \mathbb{1}_{\pi_{1}{(X, x_{0})}} 
+            \mathbbm{1}_{\pi_{1}{(X, x_{0})}} 
         \]
-        con \(\mathbb{1}\) l'isomorfismo identico.
+        con \(\mathbbm{1}\) l'isomorfismo identico.
     \end{proof}
     \begin{remark}
-        Per spazi cpa sappiamo che
+        Per spazi connessi per archi sappiamo che
         \[
           X \sim Y \implies \pi_{1}{(X, x_{0})} \cong \pi_{1}{(Y, y_{0})} \quad
           \forall x_{0} \in X, y_{0} \in Y
@@ -1196,7 +1288,7 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
     applicazione continua tale che \(i \circ r \approx \mathrm{Id}_X\) e \(r
     \circ i \approx \mathrm{Id}_A\) allora
     \[
-      {(i \circ r)}_* = u \icrc (\mathrm{Id}_X)_* = u 
+      {(i \circ r)}_* = u \circ (\mathrm{Id}_X)_* = u 
     \]
     dove \(u\) è un isomorfismo da \(\pi_{1}{(X, x_{0})}\) a \(\pi_{1}{(X, (i
     \circ r){(x_{0})})}\) 
@@ -1212,7 +1304,7 @@ x \in x\) esiste unico \(\mu_x : \pi_{1}{(X, x_{0})} \cong \pi{(x, x)}\)
     \(S^{1}\), e dunque hanno gruppo fondamentale isomorfo a quello di \(S^{1}\)
     (sono connessi per archi dunque hanno \(\pi_{1}\) isomorfo in ogni punto)
 \end{example}
-\begin{theorem}[Gruppo fondamentale del prodotto]\label{thm:prod_p1}
+\begin{theorem}
     Siano \(X, Y\) spazi topologici. Fissato \(x_{0} \in X\) e \(y_{0} \in Y\)
     vale che 
     \[
@@ -1283,8 +1375,7 @@ e dunque \(\mathrm{Ker}{(\phi)} = \{[\varepsilon_{x_{0},y_{0}}] \}\) e quindi
 
 \section{Gruppo fondamentale di \(S^{1}\)}
 
-Intuitivamente presa una circonferenza e un punto base (tipo se la vediamo nel
-piano complesso potremmo prendere 1). I lacci sono, eccetto quello costante,
+Intuitivamente presa una circonferenza e un punto base (se vediamo la circonferenza nel piano complesso possiamo considerare il punto \(1+0i\)) i lacci sono, eccetto quello costante,
 quelli fatti da un numero di giri intero sulla circonferenza stessa.
 Effettivamente l'idea è contare ``quante volte'' passo da 1, e dire che tale
 numero identifica la classe di equivalenza del laccio. Ne concluderemo dunque
@@ -1326,30 +1417,40 @@ che sono entrambi aperti. Inoltre \(e^{-1}{(1)} = \mathbb{Z}\) e preso
     \mathrm{Im}{(f)}\). Posso vedere \(f\)  come \(f: X \to S^{1} \sminus \{p\}
     \sim (0, 1)\) che è contraibile.
 \end{proof}
-Ora l'idea è usare questa elica per definire il ``grado'' di un laccio, ossia il
-numero di avvolgimenti.
+
+%% 15 maggio 2025
+
+%%  uso \exp per la mappa esponenziale, eventualmente sostituisci
 
 \begin{definition}{Sollevamento}
-    Dato \(f : I \to S^{1}\) continua, un'applicazione continua \(\tilde{f} : I
-    \to \mathbb{R}\) tale che \(e \circ \tilde{f}= f\) si chiama
-    \textbf{sollevamento} di \(f\)  rispetto a \(e\).
-
-    Inoltre se \(x_{0} = f{(0)}\) e fisso \(\tilde{x_{0}} \in \mathbb{R}\) tale
-    che \(e{(\tilde{x_{0}})} = x_{0}\). Allora se \(\tilde{f}{(0)} =
-    \tilde{x_{0}}\), \(\tilde{f}\) si chiama sollevamento con punto base
-    \(\tilde{x_{0}}\).
+    Data un'applicazione continua \(f: I \rightarrow S^1\), un'applicazione continua 
+    \[
+        \tilde{f} : I \rightarrow \mathbb R \quad \text{ tale che } \exp \circ \tilde{f} = f
+    \] 
+    si dice \emph{sollevamento} di \(f\) rispetto a \(\exp\). 
 \end{definition}
-
 \begin{remark}
-    Se \(\tilde{f}\) è un sollevamento di \(f\) allora \(\tilde{f}{(0)} \in
-    e^{-1}{(f{(0)})}\) 
+    Se \(\tilde{f}\) è un sollevamento di \(f\), 
+    \[
+       \tilde{f} (0) \in \exp^{-1}(f(0)). 
+    \]  
+    Chiamiamo \(x_0 := f(0)\) e fissiamo \(\tilde{x_0} \in \mathbb R\) tale che 
+    \[
+       \exp(\tilde{x}_0) = x_0. 
+    \] 
+    Se \(\tilde{f}(0) = \tilde{x}_0\) allora \(\tilde{f}\) si dice \emph{sollevamento con punto di partenza} \(\tilde{x}_0\). 
 \end{remark}
 
-\begin{theorem}[Esistenza di sollevamenti di cammini]
-    Data \(f : I \to S^{1}\) un cammino, sia \(x_{0} = f{(0)}\). Allora per ogni
-    \(\tilde{x_{0}} \in e^{-1}{(\tilde{x_{0}})}\), esiste unico un sollevamento
-    di \(f\) rispetto a \(e\) con punto base \(\tilde{x_{0}}\).
+\begin{theorem}[Esistenza e unicità del sollevamento]
+    Dato un cammino \(f : I \to S^1\), sia \(x_0 := f(0)\). Allora, comunque scelto \(\tilde{x}_0 \in \exp^{-1}(x_0)\) esiste un unico sollevamento \(\tilde{f} : I \to \mathbb R\) di \(f\) tale che 
+    \[
+        \tilde{f}(0) = \tilde{x}_0, 
+    \]  
+    ossia \(\tilde{f}\) è un sollevamento con punto di partenza \(\tilde{x}_0\).
 \end{theorem}
+Intuitivamente significa che scelto un punto sull'elica sulla fibra di \(x_0 \in S^1\) attraverso la mappa esponenziale è possibile determinare univocamente il cammino che parte da quel punto e solleva \(f\). 
+
+
 \begin{proof}
     Sia \(f: I \to S^{1}\). 
 
@@ -1449,7 +1550,7 @@ in \(S^{1}\) allora dobbiamo controllare che \(\tilde{\alpha_{0}}{(1)} =
     In questo modo in un numero finito di passi ottengo \(\tilde{H}: I \times I
     \to \mathbb{R}\) continua e tale che \(e \circ \tilde{H} = H\). Inoltre
     \begin{equation*}
-        (e \circ \tilde{H}){(t,0)} &= H{(t,0)} = f{(t)} \quad, \quad
+        (e \circ \tilde{H}){(t,0)} = H{(t,0)} = f{(t)} \quad, \quad
         \tilde{H}{(0,0)} = \tilde{x_{0}} \\
     \end{equation*}
     e dunque \(\tilde{H}{(\cdot ,0)} = \tilde{f}_{\tilde{x_{0}}}\) per unicità del
@@ -1648,9 +1749,431 @@ per l'identificazione.
 
 
 
+%%%%%%%%%%%%%%%%%%%%
+%% 27 maggio 2025 %%
+%%%%%%%%%%%%%%%%%%%%
+
+\section{Gruppi liberi}
+
+%% TODO: inserire l'introduzione sui gruppi liberi
+\subsection{Proprietà universale del gruppo libero}
+
+%% TODO: inserire la proprietà universale del gruppo libero
+
+La proprietà universale del gruppo libero afferma che l'esistenza di una corrispondenza biunivoca tra le applicazioni \(S \rightarrow G\) e gli omomorfismi di gruppi \(\Gs \rightarrow G\).
+
+\begin{proposition}[Unicità del gruppo libero]
+    Siano $S \neq \varnothing$ un insieme, \(H\) un gruppo e \(i:S \hookrightarrow H\) un'applicazione soddisfacenti la proprietà universale del gruppo libero su $S$, ovvero, per un dato gruppo \(G\), 
+    \[
+        \forall f : S \rightarrow G, \quad \exists! h_H: H \rightarrow G \text{ omomorfismo di gruppi}: h_H \circ i = f.
+    \]
+    Allora $H$ è isomorfo a $\Gs$ tramite un isomorfismo canonico.
+\end{proposition}
+
+\begin{proof}
+Sia $j: S \to \Gs$ l'applicazione canonica (associa a ogni lettera dell'alfabeto \(S\) la parola di quella sola lettera).
+Usando la proprietà universale che vale sul gruppo libero e quella data in ipotesi, otteniamo due diagrammi commutativi:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJTIl0sWzEsMCwiSCJdLFswLDEsIlxcbWF0aGNhbHtHfV9TIl0sWzMsMCwiUyJdLFszLDEsIkgiXSxbNCwwLCJcXG1hdGhjYWx7R31fUyJdLFswLDEsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsImoiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFsyLDEsImgiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMyw0LCJpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMyw1LCJqIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCw1LCJoX0giLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	S & H && S & {\mathcal{G}_S} \\
+	{\mathcal{G}_S} &&& H
+	\arrow["i", hook, from=1-1, to=1-2]
+	\arrow["j", hook', from=1-1, to=2-1]
+	\arrow["j", hook, from=1-4, to=1-5]
+	\arrow["i", hook', from=1-4, to=2-4]
+	\arrow["h"', dashed, from=2-1, to=1-2]
+	\arrow["{h_H}"', dashed, from=2-4, to=1-5]
+\end{tikzcd}\]
+che possono essere incollati: 
+% https://q.uiver.app/#q=WzAsOCxbMCwxLCJTIl0sWzEsMSwiSCJdLFswLDIsIlxcbWF0aGNhbHtHfV9TIl0sWzAsMCwiXFxtYXRoY2Fse0d9X1MiXSxbMiwxLCJcXGltcGxpZXMiXSxbMywxLCJTIl0sWzQsMCwiXFxtYXRoY2Fse0d9X3MiXSxbNCwyLCJcXG1hdGhjYWx7R31fcyJdLFswLDEsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsImoiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6ImJvdHRvbSJ9fX1dLFsyLDEsImgiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwzLCJqIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCJoX0giLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNSw2LCJqIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNSw3LCJqIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbNyw2LCJoX0ggXFxjaXJjIGgiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{\mathcal{G}_S} &&&& {\mathcal{G}_s} \\
+	S & H & \implies & S \\
+	{\mathcal{G}_S} &&&& {\mathcal{G}_s}
+	\arrow["j"', hook, from=2-1, to=1-1]
+	\arrow["i", hook, from=2-1, to=2-2]
+	\arrow["j", hook', from=2-1, to=3-1]
+	\arrow["{h_H}"', dashed, from=2-2, to=1-1]
+	\arrow["j"', hook, from=2-4, to=1-5]
+	\arrow["j", hook', from=2-4, to=3-5]
+	\arrow["h"', dashed, from=3-1, to=2-2]
+	\arrow["{h_H \circ h}"', dashed, from=3-5, to=1-5]
+\end{tikzcd}\]
+Osserviamo che nell'ultimo diagramma (a destra), l'omomorfismo identico fa commutare il diagramma. Ma la proprietà universale del gruppo libero per l'applicazione \(j\) su \(\Gs\) afferma che questo omomorfismo è unico, e quindi concludiamo che \(h_H \circ h\) è proprio l'identità. 
+
+Simmetricamente possiamo mostrare che \(h \circ h_H\) è l'identità. 
+
+
+Per l'unicità osserviamo l'isomorfismo ottenuto è canonico. 
+\end{proof}
+
+
+\subsection{Presentazione di gruppi}
+Un gruppo può essere specificato mediante un insieme di generatori e un insieme di relazioni che essi soddisfano. 
+Prendiamo un esempio già noto e vediamo come si generalizza il concetto.
+\begin{example}[Gruppo diedrale]
+Si consideri il gruppo diedrale $D_n$
+\[ D_n = \Span{x, y \mid x^n, y^2, xyxy} \]
+I generatori sono $S=\{x,y\}$ e i relatori $R=\{x^n, y^2, xyxy\}$. Le relazioni corrispondenti sono $x^n=1, y^2=1, xy=yx^{-1}$ (quest'ultima è $xyxy=1$, usando $y^2=1 \implies y^{-1}=y$).
+\end{example}
+
+Sia $S \neq \varnothing$ l'alfabeto, sia \(P\) l'insieme delle parole con lettere in \(S\). 
+Sia \(R \subset P\) l'insieme delle \emph{relazioni}. 
+Definiamo due operazioni sulle parole: 
+\begin{enumerate}
+    \item aggiungere o togliere elementi della forma 
+    \[
+        x x^{-1}, \quad x^{-1} x
+    \]
+    in qualunque punto della parola; 
+    \item aggiungere o togliere \(w \in R\) o \(w^{-1} \in R\) (con l'inverso di una parola definito in maniera ovvia) in qualunque punto della parola.  
+\end{enumerate}
+Diciamo che \(w, w' \in P\) sono \emph{equivalenti rispetto a} \(R\), 
+\[
+    w \sim_R w',
+\]
+se e solo se possiamo ottenere \(w\) da \(w'\) con operazioni di tipo \((1), (2)\). 
+Si verifica che si tratta di una relazione di equivalenza. 
+Indichiamo 
+\[
+    \Span{\, S \, | \, R \, } := P/\sim_{R}.
+\]
+
+\begin{eser}
+Verificare che l'operazione di giustapposizione passa alle classi di equivalenza e definisce un'operazione che rende \(\Span{\, S \, | \, R \, }\) un gruppo.
+\end{eser}
+
+\begin{example}
+In \(D_n\) presentato come prima non c'è modo, in generale, di trovare dei rappresentati privilegiati per le classi di parole (come invece è possibile fare per i gruppi liberi). 
+Ad esempio \(xy\) e \(yx^{-1}\) sono uguali [\emph{fatelo per esercizio, ora non riesco a mostrarlo}], ma non c'è modo di preferire una rappresentazione all'altra. 
+Questo si lega al \href{https://en.wikipedia.org/wiki/Word_problem_for_groups}{problema della parola}. 
+\emph{Il problema della parola... sono stati scritti fiumi di parole a proposito}.
+\end{example}
+
+\begin{remark}[1]
+Sia  \(G\) un gruppo e \(S \subset G\) un insieme di generatori. Abbiamo che l'applicazione indotta \(h\) come nel seguente diagramma deve essere suriettiva per ipotesi che \(S\) generi \(G\). 
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiRyJdLFswLDEsIlxcbWF0aGNhbHtHfV9TIl0sWzAsMV0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMiwxLCJoIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn0sImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dXQ==
+\[\begin{tikzcd}
+	S & G \\
+	{\mathcal{G}_S}
+	\arrow[from=1-1, to=1-2]
+	\arrow["j", hook', from=1-1, to=2-1]
+	\arrow["h"', dashed, two heads, from=2-1, to=1-2]
+\end{tikzcd}\]
+Per il teorema di isomorfismo di gruppi, 
+\[
+    G \cong \mathcal{G}_S/\ker(h).
+\]
+Quindi il nostro problema sarà capire com'è fatto questo \(\ker h\). 
+\end{remark}
+
+\begin{remark}[2]\label{oss:ghom_h}
+    Sia, nell'osservazione precedente, \(G = \Span{\, S \, | \, R \, }\). Osserviamo che \(\ker h \supset R\). Infatti, sia 
+    \[
+        w = \prod x_i^{\nu_i} \in R \implies h(w) = \prod h(x_i)^{\nu_i} = \prod h(j(x_i))^{\nu_i} = [w] = 1,
+    \]  
+    avendo usato che \(j\) è l'iniezione canonica e che la classe di \(w\) nel gruppo \(\Span{ \, S \, | \, R \, }\) è l'elemento neutro. 
+\end{remark}
 
 
 
+
+\begin{theorem}[Proprietà universale di una presentazione]
+    \label{thm:up_presentation}
+
+    Sia \(\phi\) un omomorfismo di gruppi
+    \[
+        \phi : \Gs \rightarrow G: \quad \phi (R) = e_G.
+    \]
+    Allora esiste un unico 
+    \[
+        \overline \phi : \Span{\, S \, | \, R \, } \rightarrow G
+    \]
+    tale che il seguente diagramma commuta
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgR19TIl0sWzAsMSwiXFxsYW5nbGUgUyBcXCwgfCBcXCwgRyBcXHJhbmdsZSJdLFsxLDAsIkciXSxbMCwxLCJoIiwyXSxbMCwyLCJcXHBoaSJdLFsxLDIsIlxcb3ZlcmxpbmUgXFxwaGkiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{\mathcal G_S} & G \\
+	{\langle S \, | \, R \rangle}
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow["h"', from=1-1, to=2-1]
+	\arrow["{\overline \phi}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{theorem}
+\begin{proof}
+L'applicazione \(h\) si scrive come 
+\[
+    h : \Gs \rightarrow \langle \, S \, | \, R \rangle, \quad w \mapsto [w].
+\]
+Dall'ipotesi \(\phi(R) = e_G\) segue che la seguente è una buona definizione:
+\[
+    \overline \phi [w] = \phi (w),
+\]
+
+Verificare l'unicità come divertente esercizio. 
+\end{proof}
+
+\begin{eser}
+Verificare che se un gruppo $F$ (con un omomorfismo canonico $\pi_F: \Gs \to F$ tale che $\pi_F(R)=e_F$) soddisfa la proprietà universale del Teorema~\ref{thm:up_presentation}, allora $F \cong \Span{S \mid R}$ canonicamente.
+\end{eser}
+
+\begin{proposition}\label{prop:ker_h_is_NR}
+Sia $G = \Span{S \mid R}$ un gruppo presentato. Sia $j:S \to \Gs$ l'iniezione canonica e $h: \Gs \to G$ l'omomorfismo individuato in \ref{oss:ghom_h}. Allora $\ker h = \mathcal N (R)$ con
+\[
+    \mathcal N (R) = \bigcap \{H \triangleleft \Gs \, | \, R \subset H\}
+\]
+la chiusura normale dell'insieme \(R\) in \(\Gs\). 
+\end{proposition}
+\begin{proof}
+Siccome \(\ker h \triangleleft \Gs\) e \(R \subset \ker h\) si ha che 
+\[
+    \mathcal N (R) \subset \ker h.
+\]
+
+Per l'altra inclusione si usa la proprietà universale \ref{thm:up_presentation}.
+Consideriamo l'applicazione quoziente 
+\[
+    \nu : \Gs \rightarrow \Gs / \mathcal N(R).
+\]
+\(\nu\) è un omomorfismo di gruppi tale che \(\nu(R) = e_{\Gs / \mathcal N (R)}\), quindi possiamo usare la proprietà universale e trovare un unico \(\mu\) che fa commutare il diagramma seguente: 
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWwgR19TIl0sWzAsMSwiXFxsYW5nbGUgUyBcXCwgfCBcXCwgRyBcXHJhbmdsZSJdLFsxLDAsIlxcbWF0aGNhbCBHX1MiXSxbMCwxLCJoIiwyXSxbMCwyLCJcXG51Il0sWzEsMiwiXFxtdSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	{\mathcal G_S} & {\mathcal G_S/\mathcal N(R)} \\
+	{\langle S \, | \, R \rangle}
+	\arrow["\nu", from=1-1, to=1-2]
+	\arrow["h"', from=1-1, to=2-1]
+	\arrow["\mu"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+Per uno dei teoremi di omomorfismo sui gruppi, questo diagramma commuta se e solo se 
+\[
+    \ker h \subset \mathcal N(R).
+\]
+
+Concludiamo che \(\mathcal N(R) = \ker h\). 
+\end{proof}
+
+\begin{theorem}[Ogni gruppo è presentabile]
+    Ogni gruppo può essere rappresentato per generatori e relazioni.
+\end{theorem}
+\begin{proof}
+    Sia \(G\) un gruppo e \(S \subset G\) un insieme di generatori. 
+    Si consideri l'applicazione \(h: \Gs \rightarrow G\) indotta dall'inclusione di \(S\) in \(G\). 
+    \(\ker h \triangleleft G_S\). 
+    Sia \(R = \ker h\). 
+    Quindi 
+    \[
+        \Span{\, S \, | \, R \, } \cong G
+    \]
+    perché 
+    \[
+        \Span{\, S \, | \, R \, } \cong \Gs/\mathcal N(R) = \Gs/\ker h \cong G.
+    \]
+\end{proof}
+
+
+\paragraph{Gruppo abeliano libero.}
+Sia $S$ un insieme non vuoto. Sia $R_C = \{ xyx^{-1}y^{-1} \mid x,y \in S \}$ l'insieme dei commutatori tra gli elementi di $S$.
+Il gruppo $\Span{S \mid R_C}$ è il gruppo abeliano libero generato da $S$.
+Se $S$ è finito con $|S|=n$, allora $\Span{S \mid R_C} \cong \mathbb{Z}^n$.
+Questo gruppo è l'abelianizzazione del gruppo libero $\Gs$, denotato $Ab(\Gs)$.
+
+Anche il gruppo abeliano libero gode di una proprietà universale: per ogni \(G\) abeliano e per ogni \(\phi : \Gs \rightarrow G\) esiste un unico omomorfismo \(\overline \phi : Ab(\Gs) \rightarrow G\) che estende \(\phi\).  
+
+\paragraph{Prodotto libero di gruppi.}
+Siano $G_1$ e $G_2$ due gruppi con presentazioni $G_1 \cong \Span{S_1 \mid R_1}$ e $G_2 \cong \Span{S_2 \mid R_2}$. Assumiamo, senza perdita di generalità, che gli alfabeti $S_1$ e $S_2$ siano disgiunti.
+
+\begin{definition}{Prodotto Libero}
+Il \textbf{prodotto libero} di $G_1$ e $G_2$, denotato $G_1 * G_2$, è il gruppo definito dalla presentazione:
+\[ G_1 * G_2 := \Span{S_1 \cup S_2 \mid R_1 \cup R_2} \]
+(dove $R_1$ e $R_2$ sono interpretati come insiemi di parole nell'alfabeto $\mathcal{G}_{S_1 \cup S_2}$).
+\end{definition}
+
+\begin{eser}[Prodotto libero, prodotto diretto]
+Mostrare che il prodotto diretto $G_1 \times G_2$ ha la presentazione:
+\[ G_1 \times G_2 \cong \Span{S_1 \cup S_2 \mid R_1 \cup R_2 \cup \{ xyx^{-1}y^{-1} \mid x \in S_1, y \in S_2 \}} \]
+Le relazioni aggiuntive $\{[x,y]=1 \mid x \in S_1, y \in S_2\}$ (ove $[x,y]:=xyx^{-1}y^{-1}$) assicurano che gli elementi generati da $S_1$ commutino con quelli generati da $S_2$.
+\end{eser}
+
+\begin{example}
+Siano $\mathbb{Z} \cong \Span{a \mid \emptyset}$ e $\mathbb{Z} \cong \Span{b \mid \emptyset}$. Allora il loro prodotto libero è
+\[ \mathbb{Z} * \mathbb{Z} \cong \Span{a, b \mid \emptyset} \cong \mathcal{G}_{\{a,b\}}, \]
+il gruppo libero su due generatori. Questo è un gruppo non abeliano.
+Invece, il prodotto diretto è $\mathbb{Z} \times \mathbb{Z} \cong \Span{a,b \mid aba^{-1}b^{-1}} \cong \mathbb{Z}^2$, che è abeliano.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%
+%% 28 maggio 2025 %%
+%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[Proprietà universale del prodotto libero di gruppi]\label{thm:up_prod_lib}
+    Siano \(G_1, G_2, H\) dei gruppi. Per ogni 
+    \[
+        \phi_i : G_i \rightarrow H \text{ omomorfismo di gruppi }, \quad i = 1, 2
+    \]
+    esiste un unico omomorfismo di gruppi 
+    \[
+        \phi : G_1 * G_2 \rightarrow H
+    \]
+    che rende commutativo il seguente diagramma: 
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJHXzEgKiBHXzIiXSxbMCwwLCJHXzEiXSxbMCwyLCJHXzIiXSxbMSwxLCJIIl0sWzEsMCwial8xIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMiwwLCJqXzIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDMsIlxccGhpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywiXFxwaGlfMSJdLFsyLDMsIlxccGhpXzIiLDJdXQ==
+\[\begin{tikzcd}
+	{G_1} \\
+	{G_1 * G_2} & H \\
+	{G_2}
+	\arrow["{j_1}", hook', from=1-1, to=2-1]
+	\arrow["{\phi_1}", from=1-1, to=2-2]
+	\arrow["\phi"{description}, dashed, from=2-1, to=2-2]
+	\arrow["{j_2}"', hook, from=3-1, to=2-1]
+	\arrow["{\phi_2}"', from=3-1, to=2-2]
+\end{tikzcd}\]
+dove \(j_i : G \rightarrow G_1 * G_2\) è l'inclusione naturale.
+\end{theorem}
+
+\begin{eser}
+    Dimostrare il teorema, che segue in maniera semplice scrivendo un elemento in \(G_1 * G_2\) come giustapposizione di parole in \(G_1\) e \(G_2\) e ricordando che le \(\phi_i\) sono omomorfismi di gruppi. 
+
+    Verificare inoltre che si tratta di una proprietà universale: se \(K\) è un gruppo per cui vale la proprietà universale del prodotto libero, allora \(K \cong G_1 * G_2\) in maniera canonica. 
+\end{eser}
+
+\subsection{Teorema di Seifert-Van Kampen: versione con relazioni}
+
+\begin{theorem}[Seifert-Van Kampen: relazioni]\label{thm:svk_rel}
+    Sia \(X\) uno spazio topologico, \(\mathcal{U, V} \subset X\) due aperti connessi per archi tali che l'intersezione sia non vuota e connessa per archi. 
+    Sia \(x_0\) nell'intersezione. 
+    Allora valgono le seguenti affermazioni, che sono tra loro equivalenti: 
+    \begin{enumerate}
+        \item \[\pi_1 (X, x_0) \cong (\pi_1(\mathcal U, x_0) * \pi_1(\mathcal V, x_0))/\mathcal N(R)\] dove \[R = \{i_\mathcal{U}^* [\alpha] i_\mathcal{V}^*[\alpha]^{-1} \, : \, [\alpha] \in \pi_1(\mathcal U \cap \mathcal V, x_0)\}\]con gli \(i^*\) le applicazioni indotte dall'inclusione tra l'intersezione e i due aperti;  
+        \item fissando le presentazioni \[\pi_1(\mathcal U, x_0) \cong \langle \, S_\mathcal U \, | \, R_\mathcal U \, \rangle, \quad \pi_1(\mathcal V, x_0) \cong \langle \, S_\mathcal V \, | \, R_\mathcal V \, \rangle \]si ha che \[\pi_1(X_0, x) = \Span{\, S_\mathcal U \sqcup S_\mathcal{V} \, | \, R_\mathcal{U} \sqcup R_\mathcal{V} \sqcup R \,}\]con \(R\) definito come prima. 
+    \end{enumerate}
+\end{theorem}
+
+Per analizzare meglio la situazione presentiamo il diagramma con le inclusioni (che è commutativo) e il relativo diagramma coi gruppi fondamentali (che, per funtorialità, è ancora commutativo): 
+% https://q.uiver.app/#q=WzAsMTEsWzAsMSwiXFxtYXRoY2FsIFUgXFxjYXAgXFxtYXRoY2FsIFYiXSxbMSwwLCJcXG1hdGhjYWwgVSJdLFsxLDIsIlxcbWF0aGNhbCBWIl0sWzIsMSwiWCJdLFszLDEsIlxcaW1wbGllcyJdLFs0LDEsIlxccGlfMSAoXFxtYXRoY2FsIFUgXFxjYXAgXFxtYXRoY2FsIFYsIHhfMCkiXSxbNSwwLCJcXHBpXzEgKFxcbWF0aGNhbCBVLCB4XzApIl0sWzUsMiwiXFxwaV8xIChcXG1hdGhjYWwgViwgeF8wKSJdLFs2LDEsIlxccGlfMSAoWCwgeF8wKSJdLFsxLDEsIj0iXSxbNSwxLCI9Il0sWzAsMSwiaV9cXG1hdGhjYWwgVSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMiwiaV9cXG1hdGhjYWwgViIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzEsMywial9cXG1hdGhjYWwgVSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMywial9cXG1hdGhjYWwgViIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzUsNiwiaV9cXG1hdGhjYWwgVV4qIl0sWzUsNywiaV9cXG1hdGhjYWwgVl4qIiwyXSxbNiw4LCJqX1xcbWF0aGNhbCBVXioiXSxbNyw4LCJqX1xcbWF0aGNhbCBWXioiLDJdXQ==
+\[\begin{tikzcd}
+	& {\mathcal U} &&&& {\pi_1 (\mathcal U, x_0)} \\
+	{\mathcal U \cap \mathcal V} & {=} & X & \implies & {\pi_1 (\mathcal U \cap \mathcal V, x_0)} & {=} & {\pi_1 (X, x_0)} \\
+	& {\mathcal V} &&&& {\pi_1 (\mathcal V, x_0)}
+	\arrow["{j_\mathcal U}", hook, from=1-2, to=2-3]
+	\arrow["{j_\mathcal U^*}", from=1-6, to=2-7]
+	\arrow["{i_\mathcal U}", hook, from=2-1, to=1-2]
+	\arrow["{i_\mathcal V}"', hook', from=2-1, to=3-2]
+	\arrow["{i_\mathcal U^*}", from=2-5, to=1-6]
+	\arrow["{i_\mathcal V^*}"', from=2-5, to=3-6]
+	\arrow["{j_\mathcal V}"', hook', from=3-2, to=2-3]
+	\arrow["{j_\mathcal V^*}"', from=3-6, to=2-7]
+\end{tikzcd}\]
+
+Per mostrare l'equivalenza tra i due enunciati ci serviamo di un lemma. 
+
+\begin{lemma}
+    Dato un gruppo presentato per generatori e relazioni, \(G = \Span{\, S \, | \, R \, }\), \(R = R' \sqcup R''\), possiamo considerare \(G' = \Span{\, S \, | \, R' \, }\). Allora
+    \[
+        G \cong G'/\mathcal N (R'')
+    \]
+    attraverso un isomorfismo canonico.
+\end{lemma}
+
+\begin{proof}
+    Osserviamo che
+    \[
+        \forall a, b \in \Gs, \quad a \sim_{R'} b \implies a \sim_{R' \sqcup R''} b.
+    \]
+    Quindi c'è un omomorfismo naturale 
+    \[
+        \pi : G' \twoheadrightarrow G,
+    \]
+    dove ricordiamo che possiamo scrivere \(G' = \Gs/\mathcal N(R), G = \Gs/\mathcal (R' \sqcup R'')\). 
+    Vogliamo capire come sia fatto \(\ker \pi\). 
+    Dal momento che \(\pi(R'') = \{e_G\}\) possiamo dire che \(\mathcal N(R'') \subset \ker \pi\).  
+
+    Mostriamo l'altra inclusione. Abbiamo il seguente diagramma: 
+    % https://q.uiver.app/#q=WzAsNSxbMCwxLCJHJyJdLFsxLDEsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwyLCJHIl0sWzAsMCwiXFxtYXRoY2FsIEdfUyJdLFsyLDFdLFswLDIsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwxXSxbMywwXSxbMywxXV0=
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJHJyJdLFsxLDEsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwyLCJHIl0sWzAsMCwiXFxtYXRoY2FsIEdfUyJdLFsyLDFdLFswLDIsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwxXSxbMywwXSxbMywxLCJcXHBoaSJdXQ==
+\[\begin{tikzcd}
+	{\mathcal G_S} \\
+	{G'} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow[from=1-1, to=2-1]
+	\arrow["\phi", from=1-1, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow["\pi"', two heads, from=2-1, to=3-1]
+\end{tikzcd}\]
+    dove definiamo \(\phi\) come composizione per avere la commutatività del diagramma. 
+    A questo punto usiamo la proprietà universale \ref{thm:up_presentation} per trovare l'unico omomorfismo di gruppi \(\overline \phi\) che fa commutare il seguente diagramma:
+    % https://q.uiver.app/#q=WzAsNCxbMiwwXSxbMCwwLCJcXG1hdGhjYWwgR19TIl0sWzEsMCwiRycvXFxtYXRoY2FsIE4oUicnKSJdLFswLDEsIkciXSxbMSwzXSxbMSwyLCJcXHBoaSJdLFszLDIsIlxcb3ZlcmxpbmUgXFxwaGkiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{\mathcal G_S} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{\overline \phi}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+    Il diagramma commuta, quindi per suriettività della mappa \(\Gs \to G'\) possiamo dire che anche il seguente diagramma commuta: 
+% https://q.uiver.app/#q=WzAsNCxbMiwwXSxbMCwwLCJHJyJdLFsxLDAsIkcnL1xcbWF0aGNhbCBOKFInJykiXSxbMCwxLCJHIl0sWzEsMywiXFxwaSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDJdLFszLDIsIlxcb3ZlcmxpbmUgXFxwaGkiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{G'} & {G'/\mathcal N(R'')} & {} \\
+	G
+	\arrow[from=1-1, to=1-2]
+	\arrow["\pi"', two heads, from=1-1, to=2-1]
+	\arrow["{\overline \phi}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+Affinché il diagramma commuti si deve avere che \(\mathcal N (R'') \supset \ker \pi\). 
+
+Per il teorema di isomorfismo dei gruppi, 
+\[
+    \text{im} \pi \cong G'/\ker \pi \implies G \cong G' / \mathcal N(R''),
+\]
+che è quello che volevamo dimostrare. 
+\end{proof}
+
+\begin{proof}[Dimostrazione parziale del teorema di Seifert-Van Kampen]
+    Riprendendo il diagramma dopo l'enunciato del teorema, usando la proprietà universale del prodotto libero di gruppi \ref{thm:up_prod_lib} troviamo che 
+    \[
+        \exists ! \psi : \pi_1 (\mathcal U, x_0) * \pi_1(\mathcal V, x_0) \rightarrow \pi_1(X, x_0)
+    \]
+    che estende gli omomorfismi \(j_\mathcal{U}^*, j_\mathcal V^*\):
+    % https://q.uiver.app/#q=WzAsNCxbMiwxLCJcXHBpXzEoWCx4XzApIl0sWzAsMSwiXFxwaV8xKFxcbWF0aGNhbCBVLCB4XzApICogXFxwaV8xICggXFxtYXRoY2FsIFYsIHhfMCkiXSxbMCwwLCJcXHBpXzEoXFxtYXRoY2FsIFUsIHhfMCkiXSxbMCwyLCJcXHBpXzEoXFxtYXRoY2FsIFYsIHhfMCkiXSxbMiwwLCJqX1xcbWF0aGNhbCBVXioiXSxbMywwLCJqX1xcbWF0aGNhbCBWXioiLDJdLFszLDFdLFsyLDFdLFsxLDAsIlxccHNpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{\pi_1(\mathcal U, x_0)} \\
+	{\pi_1(\mathcal U, x_0) * \pi_1 ( \mathcal V, x_0)} && {\pi_1(X,x_0)} \\
+	{\pi_1(\mathcal V, x_0)}
+	\arrow[from=1-1, to=2-1]
+	\arrow["{j_\mathcal U^*}", from=1-1, to=2-3]
+	\arrow["\psi"{description}, dashed, from=2-1, to=2-3]
+	\arrow[from=3-1, to=2-1]
+	\arrow["{j_\mathcal V^*}"', from=3-1, to=2-3]
+\end{tikzcd}\]
+    Si ha che 
+    \[
+        \psi \left( \prod^n [\alpha_i] [\beta_i] \right) = \prod^n j_\mathcal U^* [\alpha_i]_\mathcal U j_\mathcal V^* [\beta_i]_\mathcal V = \prod^n [j_\mathcal U \circ \alpha_i]_X [j_\mathcal V \circ \beta_i]_X.
+    \]
+    Per la parte sui generatori % TODO: inserire il \ref 
+    sappiamo che \(\psi\) è suriettivo. 
+    Quindi, per il teorema di isomorfismo di gruppi, 
+    \[
+        \pi_1(X, x_0) \cong \frac{\pi_1(\mathcal U, x_0) * \pi_1 (\mathcal V, x_0)}{\ker \psi}.
+    \]
+    Si verifica direttamente che gli elementi di \(R\), che si esprimono come 
+    \[
+        i_\mathcal U^* [\gamma] i_\mathcal V^* [\gamma]^{-1}
+    \]
+    al variare di \([\gamma] \in \pi_1(\mathcal U \cap \mathcal V, x_0)\), hanno immagine banale attraverso \(\psi\). 
+    Segue che 
+    \[
+        \mathcal N (R) \subset \ker \psi.
+    \]
+    L'altra inclusione è molto più difficile da dimostrare, \emph{neanche il Manetti la dimostra}. 
+\end{proof}
+
+\begin{remark}
+    Osserviamo che le ipotesi del teorema sono necessarie. Ad esempio, la connessione per archi dell'intersezione è fondamentale: si pensi a un esempio che farebbe diventare il gruppo fondamentale di \(S^1\) banale se non dovesse essere necessaria. 
+\end{remark}
+
+\begin{corollary}
+    Sia \(X\) uno spazio topologico, \(\mathcal U \cap \mathcal V \neq \varnothing\) semplicemente connesso. Allora
+    \[
+        \pi_1 (X, x_0) \cong \pi_1 (\mathcal U, x_0) * \pi_1 (\mathcal V, x_0).
+    \]
+\end{corollary}
 
 
 
