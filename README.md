@@ -88,7 +88,7 @@ Se vuoi correggere un errore o aggiungere qualcosa:
 
 ### 3️⃣ Diventare collaboratore
 
-Se vuoi contribuire **frequentemente**, puoi contattarmi e potrei aggiungerti come **collaboratore**, così che tu possa direttamente fare modifiche senza necessità di fork
+Se vuoi contribuire **frequentemente**, puoi contattarmi e potrei aggiungerti come **collaboratore**, così che tu possa direttamente fare modifiche senza necessità di fork e pull requests
 
 ---
 
