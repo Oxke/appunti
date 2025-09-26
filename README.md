@@ -58,45 +58,36 @@ Se noti un errore o vuoi fare una domanda, puoi aprire un **issue**:
 Se vuoi correggere un errore o aggiungere qualcosa:
 
 1. **Forka** la repository cliccando il pulsante **fork** in alto a destra
-2. Clona il tuo fork sul tuo computer:
+1. Clona il tuo fork sul tuo computer:
 
    ```bash
    git clone https://github.com/TUOUSERNAME/appunti.git
    ```
 
-3. Crea un nuovo branch per le modifiche:
+1. Crea un nuovo branch per le modifiche:
 
    ```bash
    git checkout -b nome-modifica
    ```
 
-4. Modifica i file (`.tex`, figure, README, ecc.)
-5. Salva e fai il commit:
+1. Modifica i file (`.tex`, figure, README, ecc.)
+1. Ricompila i file `.pdf` se necessario
+
+1. Salva e fai il commit:
 
    ```bash
    git add .
    git commit -m "Descrizione delle modifiche"
    ```
 
-6. Fai il push sul tuo fork:
+1. Fai il push sul tuo fork:
 
    ```bash
    git push origin nome-modifica
    ```
 
-7. Vai sul tuo fork su GitHub e clicca **Compare & Pull Request**
+1. Vai sul tuo fork su GitHub e clicca **Compare & Pull Request**
 
 ### 3️⃣ Diventare collaboratore
 
 Se vuoi contribuire **frequentemente**, puoi contattarmi e potrei aggiungerti come **collaboratore**, così che tu possa direttamente fare modifiche senza necessità di fork e pull requests
-
----
-
-## 📝 Suggerimenti generali
-
-- I PDF sono aggiornati rispetto al `.tex`, quindi se vuoi leggere velocemente, apri il PDF.
-- Se vuoi contribuire, modifica sempre il `.tex` e poi rigenera il PDF (opzionale).
-- Le figure sono tutte in `figures/` e possono essere riutilizzate.
-- Ogni cartella contiene anche un file `.snippets`, non sono da considerare, non li
-  ho .gitignore-ati soltanto perché preferisco che siano condivisi tra il mio
-  laptop e il computer fisso
