@@ -1,0 +1,161 @@
+\section{Intro}
+\subsection{Spazi Normati}
+Sia \(X\) uno spazio vettoriale su campo \(\mathbb{K}\) (\(\mathbb{C}\) o \(\mathbb{R}\)). 
+\begin{definition}{norma}
+    Si definisce \textbf{norma} una funzione
+    \[
+      \|\cdot \|: X \to \mathbb{R}_{\ge 0} 
+    \]
+    tale che
+\begin{enumerate}[label = \roman*.]
+    \item \(\|x\|=0 \iff x=0\) 
+    \item \(\|\lambda x\| = |\lambda|\|x\|\), \(\forall \lambda \in \mathbb{K}\) e \(\forall x \in X\) 
+    \item \(\|x + y\| \le \|x\| + \|y\|\), \(\forall x, y \in X\) 
+\end{enumerate}
+\end{definition}
+
+\begin{definition}{Spazio Normato}
+    Uno \textbf{spazio normato} è una coppia \({(X, \|\cdot \|)}\) tale che \(X\) sia uno spazio vettoriale e \(\|\cdot \|\) una norma su \(X\).
+\end{definition}
+Per una notazione più leggera, quando non è ambiguo sottintenderemo la norma,
+scrivendo ``sia \(X\) uno spazio normato''.
+
+\begin{proposition}[Metrica indotta da \(\|\cdot \|\)]
+    La norma \(\|\cdot \|\) induce su \(X\) una metrica
+    \[
+      d{(x, y)} = \|x - y\|\quad\quad \forall x, y \in X
+    \]
+\end{proposition}
+
+\begin{note}[zioni]
+    Alcune notazioni utili: 
+\begin{itemize}[label = --]
+    \item \(B_r{(x_{0})} = \{x \in X : \|x - x_{0}\| \le r\} = x_{0} + r\,B_1{(0)} \)
+    \item \(\partial B_r{(x_{0})} = \{x \in X : \|x - x_{0}\| = r\} \) 
+\end{itemize}
+\end{note}
+
+\begin{definition}{Convergenza in norma - Convergenza forte}
+    Sia \(\{x_{n}\}_{n \in \mathbb{N}} \) una successione in \(X\) e sia \(x \in X\). Dico che \(x_{n}\) converge a \(x\) in norma o fortemente se 
+    \[
+      \forall \varepsilon > 0 \,\,\exists \overline{n}\, :\, \|x_{n} - x\| \le \varepsilon \quad \forall n \ge \overline{n}
+    \]
+\end{definition}
+
+\begin{definition}{Successione di Cauchy}
+    Una successione \(\{x_{n}\}_{n \in \mathbb{N}} \subseteq X \) è detta di
+    Cauchy se
+    \[
+      \forall \varepsilon >0 \,\, \exists \overline{n} \,:\, \|x_{n} - x_{m}\| \le \varepsilon \quad \forall n,m \ge \overline{n}
+    \]
+\end{definition}
+
+\begin{remark}{}
+    La norma \(\|\cdot \|\) è una funzione continua.
+\end{remark}
+\begin{proof}{}
+    Preso \(x,y \in X\),
+    \[
+      \|x\| = \|x - y + y\| \le \|x -y\| + \|y\|
+    \]
+    e similmente si può con variabili scambiate. Ne consegue che
+    \[
+      \left| \|x\| - \|y\| \right| \le \|x - y\|
+    \]
+    dunque la norma è Lipschitziana con costante 1
+\end{proof}
+
+\begin{definition}{Norma equivalente}
+    Sia \(X\) uno spazio normato e siano \(\|\cdot \|_{1} \) e \(\|\cdot \|_2\)
+    due norme su \(X\). Dico che \(\|\cdot \|_1\) è \textbf{topologicamente
+    equivalente} a \(\|\cdot \|_2\) se
+    \begin{align*}
+        \forall x \in X \,\, \forall r > 0 \,\, \exists r_{1}, r_{2} > &0 : \\
+        B_{r_{1}}{(x, \|\cdot \|_1)} \subseteq B_{r}{(x, \|\cdot \|_2)} &\text{ e } B_{r_{2}} {(x, \|\cdot \|_2)} \subseteq B_{r} {(x, \|\cdot \|_1)} 
+    \end{align*}
+\end{definition}
+
+\begin{proposition}{}
+    Sia \(X\) normato. Allora due norme \(\|\cdot \|_1\) e \(\|\cdot \|_2\) sono
+    equivalenti se e solo se \(\exists \alpha, \beta > 0\) tali che
+    \[
+      \alpha \|x\|_1 \le \|x\|_2 \le \beta \|x\|_1 \quad \forall x \in X
+    \]
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Fissato \(x_{0} = 0\), preso \(r\) tale che 
+        \[
+          B_{r_{2}} {(0, \|\cdot \|_2)} \subseteq B_r{(0, \|\cdot \|_1)} 
+        \]
+        preso ora \(0\neq x \in X\), sia \(y := \frac{r_{2}}{2 \|x\|_2}x\), così
+        che \(\|y\|_2 = \frac{r_{2}}{2} \), dunque \(y \in 
+        B_{r_{2}} {(0, \|\cdot \|_2)}\) e quindi per l'inclusione sopra
+        \[
+          \|y\|_1 = \frac{r_{2}}{2} \frac{\|x\|_1}{\|x\|_2} \le r 
+        \]
+        che è la prima delle disuguaglianze richieste. Similmente si può trovare
+        l'altra scambiando \(x\) e \(y\), le due norme, e \(r_{2}\) con \(r_{1}\) 
+    \item[\(\impliedby \)] Preso \(x_{0} \in X\) e \(r > 0\), sia \(r_{1} := r /
+        \beta\). Allora, per ogni \(x \in X\) 
+        \[
+          \|x - x_{0}\|_1 \le \frac{r}{\beta} \implies \|x-x_{0}\|_2 \le \beta
+          \|x - x_{0}\|_1 \le r
+        \]
+        che è la prima delle inclusioni richieste. Similmente si può trovare
+        l'altra prendendo \(r_{2} := r / \alpha\) e scambiando le norme.
+\end{itemize}
+\end{proof}
+
+\begin{remark}{}
+    Se \(\{x_{n}\} \) è di Cauchy rispetto alla norma \(\|\cdot \|_1\) e \(\|\cdot \|_2\) è una norma equivalente alla prima, allora \(\{x_{n}\} \) è di Cauchy rispetto a \(\|\cdot \|_2\) 
+\end{remark}
+
+\begin{definition}{Dimensione}
+    Sia \(X\) uno spazio vettoriale. Allora 
+    \[
+      \dim X = \begin{cases}{}
+          0 & X = \{0\} \\
+          n & n \in \mathbb{N} \text{ e \(X\) ha una base di \(n\) elementi} \\
+          +\infty & \forall n \in \mathbb{N}, \text{ esistono \(n\) vettori linearmente indipendenti}
+      \end{cases}
+    \]
+\end{definition}
+
+
+\begin{theorem}[Equivalenza delle norme]
+    Sia \(X\) uno spazio vettoriale di dimensione finita. Allora tutte le norme
+    sono topologicamente equivalenti.
+\end{theorem}
+\begin{proof}{}
+    Sia \(\{e_{1}, \dots, e_{n}\} \) una base di \(X\). Sia \(x \in X\). Allora
+    sia
+    \begin{equation*}
+      x = \sum_{i=1}^{n} x^{i}e_{i} \quad \text{ con } x^{i} \in \mathbb{K} \quad \forall i
+      \in \{1, \dots, n\}  
+    \end{equation*}
+    Definiamo la norma (facile controllo lasciato come esercizio)
+    \[
+      \|x\|_1 = \sum_{i=1}^{n} | a^{i}|  
+    \]
+    Sia ora \(\|\cdot \|\) un'altra norma su \(X\), dimostriamo che \(\|\cdot \|\) è equivalente a \(\|\cdot \|_1\).
+    \begin{equation*}
+        \|x\| = \left\| \sum_{i=1}^{n} x^{i}e_{i} \right\| \le \sum_{i=1}^{n} |x^{i}| \|e_{i}\| \le \underbrace{{\left( \max_{1 \le i \le N} \|e_{i}\|  \right)}}_{\beta} \|x\|_1
+    \end{equation*}
+    Rimane da dimostrare che \(\exists \alpha > 0 \) tale che \(\|x\|_1 \le \frac{1}{\alpha}\|x\|\). Assumiamo per assurdo che \(\forall n \in \mathbb{N}\) esista \(x_{n} \in X\) tale che \(\|x_{n}\|_1 > n \|x_{n}\|\). Prendiamo ora (ovviamente \(x_{n} \neq 0\) per la diseguaglianza stretta)
+    \[
+      y_{n} := \frac{x_{n}}{\|x_{n}\|_1} \text{ per ogni \(n \in \mathbb{N}\) }
+      \implies \|y_{n}\| < \frac{1}{n} \quad ; \quad \|y_n\|_1 = 1
+    \]
+    Dalla seconda otteniamo che \(\forall i \in \{1, \dots, n\} \) e \(\forall n \in \mathbb{N}\),  \(| y_{n}^{i} | \le 1\). Per Bolzano-Weierstrass esiste una sottosuccessione \(n_k\) tale che per ogni \(i \in \{1, \dots, n\} \), \(y_{n_k}^{i} \to y^{i} \).
+
+    Allora
+    \[
+      \|y_{n_k} -y\|_1 = \left\| \sum_{i=1}^{n} {\left( y_{n_k}^{i} - y^{i} \right)}  e_i \right\|_1 \le \beta \sum_{i=1}^{n} |y_{n_k}^{i} - y^{i}| \overset{k \to \infty}{\longrightarrow} 0
+    \]
+    e poiché
+    \[
+      1 = \|y_{n_k} \|_1 \le \|y_{n_k} - y\| + \|y\|_1 \overset{k \to \infty}{\implies } \|y\|_1 = 1
+    \]
+    che è in contraddizione con \(\|y_{n}\| \to 0\) 
+\end{proof}
