@@ -1,0 +1,117 @@
+\section{Richiami sui Moduli}
+\begin{theorem}[Secondo teorema di isomorfismo]
+    Sia \(M\) un modulo, con \(M', M'' \subseteq M \) sottomoduli. Allora 
+    \[
+      M' / (M' \cap  M'') \cong {(M' + M'')} / M''
+    \]
+\end{theorem}
+\begin{proof}{}
+    Si prenda \(f : M' \to (M' + M'') / M''\) composizione dell'inclusione di \(M'\) in \(M' + M''\) e della proiezione a quoziente, dunque è un omomorfismo.
+
+    Allora \(\mathrm{Ker} f = \{x \in M' : x + M'' = M''\} = M' \cap  M'' \) 
+    %TODO suriettività di f
+\end{proof}
+
+
+\begin{theorem}[Terzo teorema di isomorfismo]
+    Dati \(M'' \subseteq M' \subseteq M\)  sottomoduli e modulo, allora
+    \[
+      {({M}/{M'})} / {(M'/ M'')} \cong M / M'
+    \]
+\end{theorem}
+\begin{proof}{}
+    Sia \(f\) la composizione delle due proiezioni a quoziente, dunque è
+    suriettiva. Allora
+    \[
+      x \in \mathrm{Ker}f \iff \pi{(x)} \in \mathrm{Ker}\pi' = M'/M''
+    \]
+    dunque \(\mathrm{Ker}f  = M'\) da cui la tesi per il primo teorema di
+    isomorfismo.
+\end{proof}
+%
+\begin{definition}{Ideale massimale (sinistro / destro)}
+    Un ideale \(J\) (sinistro / destro)
+\end{definition}
+
+
+\begin{proposition}{} \( \) 
+\begin{enumerate}[label = \arabic*.]
+    \item Sia \(A\) un anello, allora un \(A\)-modulo \(M\) è ciclico se e solo se \(\exists I \subseteq A \) ideale sinistro tale che \(M \cong A / I\) 
+    \item \(M\) è semplice se e solo se \(\exists  I \subseteq A \) ideale
+        sinistro massimale tale che \(M \cong A/I\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    % TODO: tutto
+    \item 
+    \item Se \(M\) è semplice allora \(\forall 0 \neq x \in M\), \(M = Ax\),
+        dunque \(M\) è ciclico e per il punto 1. esiste \(I\) ideale sinistro
+        tale che \(M \neq A/I\). La proposizione si riduce a dire che \(A/I\) è
+        semplice se e solo se \(I\) è massimale. Sappiamo che i sottomoduli di
+        \(A/I\) sono tutti e soli della forma \(J /I\) con \(I \subseteq J \subseteq A  \) ideale sinistro.
+        Allora \(A / I \neq 0 \iff I \neq A\) e gli unici sottomoduli di \(A / I \) sono \(I / I\) e \(A / I\), ossia gli unici ideali sinistri \(J\) tali che \(I \subseteq J \subseteq A  \) sono \(I\) e \(A\).
+\end{enumerate}
+\end{proof}
+\begin{remark}{}
+    Con il lemma di Zorn si dimostra che \(A \neq 0 \implies \) esiste un ideale
+    sinistro massimale (e dunque esiste un sottomodulo semplice)
+\end{remark}
+
+\subsection{Prodotti}
+\begin{definition}{Prodotto}
+Supponiamo di avere \(M_{\lambda} \) \(A\)-moduli, per \(\lambda \in \Lambda\). Allora 
+\[
+  M := \prod_{\lambda \in \Lambda} M_{\lambda} \text{ è un \(A\)-modulo detto \textbf{prodotto} degli \(M_{\lambda}\)}
+\]
+con \({(x + y)}_\lambda := x_\lambda + y_\lambda\)  e \({(ax)}_\lambda =
+ax_\lambda\) per ogni \(\lambda \in \Lambda\) e \(x, y \in M\).
+
+\(\forall \mu \in \Lambda\) esiste \(p_\mu : M \to M_\mu\), \({(x_{\lambda})}_{\lambda \in \Lambda} \mapsto x_\mu  \) che è \(A\)-lineare e suriettivo.
+\end{definition}
+
+\begin{proposition}[Proprietà universale del prodotto]
+    Dati \(l_\mu : N \to M_\mu \) \(A\)-lineari, \(\forall \mu \in \Lambda\)
+    esiste unico \(f : N\to M\) \(A\)-lineare tale che \(f_\mu = l_\mu \circ f\) 
+\end{proposition}
+\[\begin{tikzcd}
+	N \\
+	{M_\mu} & M
+	\arrow["{l_\mu}"', from=1-1, to=2-1]
+	\arrow["{\exists ! f}", dashed, from=1-1, to=2-2]
+	\arrow["{f_\mu}", from=2-2, to=2-1]
+\end{tikzcd}\]
+\begin{proof}{}
+    %TODO proof
+\end{proof}
+
+\begin{definition}{Somma diretta}
+    La \textbf{somma diretta} (o coprodotto) degli \(M_{\lambda} \) è 
+    \[
+        M' = \{{(x_\lambda)}_{\lambda \in \Lambda} \in M : x_\lambda >0 \text{ per
+  finiti \(\lambda\)} \subseteq M \}
+    \]
+    è sottomodulo.
+\end{definition}
+
+\(\forall \mu \in \Lambda\) esiste
+\begin{align*}
+    i_\mu: M_\mu &\longrightarrow M' \\
+    x &\longmapsto i_\mu(x) = {(x_{\lambda} )}_{\lambda \in \Lambda}, \quad
+    x_\lambda := \begin{cases}{}
+        x & \lambda = \mu \\
+        0 & \lambda \neq \mu
+    \end{cases}
+\end{align*}
+che è \(A\)-lineare e iniettivo.
+
+\begin{proposition}[Proprietà universale somma diretta]
+\[\begin{tikzcd}
+	N \\
+	{M_\mu} & M'
+	\arrow["{l_\mu}", from=2-1, to=1-1]
+	\arrow["{i_\mu}"', from=2-1, to=2-2]
+	\arrow["{\exists! f}"', dashed, from=2-2, to=1-1]
+\end{tikzcd}\]
+\end{proposition}
+

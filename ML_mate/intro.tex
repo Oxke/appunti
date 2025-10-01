@@ -1,0 +1,118 @@
+\section{Neural Networks}
+\subsection{MLP}
+\begin{definition}{Multi Level Perceptron}
+    Una Multi-Level Perceptron (\textbf{MLP}) è una mappa \(\varphi : \mathbb{R}^{d} \to \mathbb{R}^{n_L}\) tale che \(\varphi {(x_{0})} = x_L\) e 
+    \begin{equation}
+      x_l = \rho_L(A_l x_{l-1} + b_l) \quad \forall l = 1,\dots,L
+    \end{equation}\label{eq:nn}
+    con \(\rho_l : \mathbb{R} \to \mathbb{R}\) componente per componente, funzione di attivazione.
+
+\end{definition}
+
+La precedente è una rete ``feedforward''.
+
+\begin{definition}{ResNet}
+    Prendendo \(\rho_l{(x)} = x_{l-1} + \rho(x)\) in~\eqref{eq:nn} viene una rete neurale ``resuduale'' di cui un'implementazione è la rete \emph{ResNet} e per l'ottimizzazione può funzionare meglio, nonostante per l'approssimazione non cambia molto.
+
+    Inoltre può essere vista come discretizzazione di 
+    \[
+      \dot{x}{(t)} = \rho (A{(t)}x{(t)} + b{(t)})
+    \]
+\end{definition}
+
+\begin{definition}{Recurrent NNs}
+Dati input \(y_{1}, y_{2}, \dots \in \mathbb{R}^{n_{in} } \), modifichiamo
+l'operazione~\eqref{eq:nn} in
+\[
+  x_l = \rho(A_x x_{l-1} + A_yy_l ) \quad l = 1,2,\dots
+\]
+con \(x_{0}\in \mathbb{R}^{N}\). Possono essere usate ad esempio per risolvere
+\[
+  \begin{cases}{}
+      \overline{x}{(t)} = F{(x{(t)}, y{(t)})} \\
+      x{(0)} = x_{0}
+  \end{cases}
+\]
+\end{definition}
+
+\chapter{Errors}
+Ci sono 3 errori che si possono verificare in ambito di questo tipo di
+matematica applicata:
+\begin{enumerate}[label = \arabic*.]
+    \item Approssimazione
+    \item Generalizzazione
+    \item Training
+\end{enumerate}
+Principlamente questo corso si occuperà principalmente di comprendere l'errore
+dovuto all'approssimazione, parlando meno degli altri due errori.
+
+Siano \(X,Y\) due insiemi, con \(\mu\) una misura su \(X\), \(\|\cdot \|_Y\) una
+norma su \(Y\) e \(G:X\to Y\) una funzione. Possiamo allora definire una \textbf{loss function}
+\[
+  \mathcal{L}{(\Phi)} = \int_X \|G{(x)}-\Phi{(x)}\|^2_Y \,d\mu{(x)}
+\]
+dove \(\Phi \in \mathcal{C}\) una classe di funzioni considerate per
+l'approssimazione
+
+Non potendo avere misuramenti di \(G\) per infiniti valori, si prende in
+realtà un sample \(\{x_{i}\}_{i=1} ^{N}\) di input e \(\{y_{i}=G{(x_{i})}\}_{i=1} ^{N}\) per cui la loss calcolabile è la \textbf{empirical loss}
+\[
+  \tilde{\mathcal{L}}{(\Phi)} = \sum_{i=1}^{n} w_{i} \|y_{i} - \Phi{(x_{i})}\|^2_Y 
+\]
+con i \(w_{i}\) pesi. Chiamiamo \(\Phi_{min}\) e \(\tilde{\Phi}_{min}\) le
+funzioni che sarebbero i minimi su \(\mathcal{C}\) delle due loss
+rispettivamente.
+
+In pratica, un'algoritmo di ottimizzazione è usato per minimizzare \(\tilde{\mathcal{L}}\) e \(\Phi_{comp} \) è l'approssimazione calcolata. Allora
+\[
+    \|G - \Phi_{comp} \| \le \underbrace{\|G-\Phi_{min} \|}_\text{approx error}  + \underbrace{\|\Phi_{min} - \tilde{\Phi}_{min}\|}_\text{generalization error}  + \underbrace{\|\tilde{\Phi}_{min} - \Phi_{comp}\|}_\text{training error} 
+\]
+
+In particolare cosa vogliamo arrivare a dimostrare noi è il \emph{universal
+approximation theorem}, ossia un teorema che dia le ipotesi per poter avere che
+l'errore tende a zero.
+
+\section{Setting}
+Sia \(K \subseteq \mathbb{R}^{d} \) un compatto.
+Sia \(C{(K)}\) l'insieme delle funzioni continue \(K \to \mathbb{R}\). Sia
+\(\rho\)  una funzione di attivazione continua.
+Sia \(\mathcal{M}\) la famiglia
+\[
+  \mathcal{M} = \{\mu \text{ misura relativa di Borel su }K\text{ con variazione
+  totale finita }\} 
+\]
+ossia il duale topologico di \(C{(K)}\) 
+\begin{theorem}[Template of a Universal Approximation Theorem]
+    Under some conditions on \(\rho\), 
+    \[
+      MLP(\rho, d, \sim )\text{ is dense in }C{(K)}
+    \]
+\end{theorem}
+
+By Riesz Theorem \(\forall L \in C{(K)}'\), \(\exists \mu \in \mathcal{M}\) such
+that
+\(
+  Lf = \int _K f \,d \mu
+\)
+
+\begin{definition}{Discriminant}
+    We say that \(f \in C{(K)}\) is \textbf{discriminant} if
+    \[
+      \int _K f{(a^{T}x + b)} \mu{(dx)} = 0 \quad \forall a \in \mathbb{R}^{d},
+      \forall b \in \mathbb{R}
+    \]
+\end{definition}
+
+We will prove that on condition that makes the theorem true is to have \(\rho\)
+be \emph{discriminant}. An easier constraint on \(\rho\), is have \(\rho\) not
+be polynomial.
+
+\begin{eser}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Argue that the thesis of universal approx theorem can't be true if \(\rho\) is a
+        polynomial
+    \item Conclude that a polynomial can't be discriminant
+    \item Show 2. with the definition
+\end{enumerate}
+\end{eser}
+
