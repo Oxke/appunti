@@ -125,7 +125,7 @@ scrivendo ``sia \(X\) uno spazio normato''.
 
 \begin{theorem}[Equivalenza delle norme]
     Sia \(X\) uno spazio vettoriale di dimensione finita. Allora tutte le norme
-    sono topologicamente equivalenti.
+    su \(X\) sono topologicamente equivalenti.
 \end{theorem}
 \begin{proof}{}
     Sia \(\{e_{1}, \dots, e_{n}\} \) una base di \(X\). Sia \(x \in X\). Allora
@@ -151,11 +151,279 @@ scrivendo ``sia \(X\) uno spazio normato''.
 
     Allora
     \[
-      \|y_{n_k} -y\|_1 = \left\| \sum_{i=1}^{n} {\left( y_{n_k}^{i} - y^{i} \right)}  e_i \right\|_1 \le \beta \sum_{i=1}^{n} |y_{n_k}^{i} - y^{i}| \overset{k \to \infty}{\longrightarrow} 0
+      \|y_{n_k} - y \| \le \beta\|y_{n_k} -y\|_1 = \beta\left\| \sum_{i=1}^{n} {\left( y_{n_k}^{i} - y^{i} \right)}  e_i \right\|_1 \le \beta^2 \sum_{i=1}^{n} |y_{n_k}^{i} - y^{i}| \overset{k \to \infty}{\longrightarrow} 0
     \]
     e poiché
     \[
-      1 = \|y_{n_k} \|_1 \le \|y_{n_k} - y\| + \|y\|_1 \overset{k \to \infty}{\implies } \|y\|_1 = 1
+      1 = \|y_{n_k} \| \le \|y_{n_k} - y\| + \|y\| \overset{k \to \infty}{\implies } \|y\| \ge  1
     \]
-    che è in contraddizione con \(\|y_{n}\| \to 0\) 
+    che è in contraddizione con \(\|y_{n}\| \to 0\)
 \end{proof}
+
+\begin{definition}{Spazio di Banach}
+    \(X\) spazio normato è detto \textbf{spazio di Banach} se le successioni di
+    Cauchy convergono in \(X\) (ossia \(X\) è completo)
+\end{definition}
+\begin{theorem}{}
+    Sia \(X\) uno spazio normato di dimensione finita. Allora \(X\) è di Banach.
+\end{theorem}
+\begin{proof}{}
+    Sia \(N = \dim X\). Dimostro che \(X\) è completo secondo la norma \(\|\cdot \|_1\).
+    
+    Sia \(\{x_{n}\} \) una successione di Cauchy. Vogliamo mostrare l'esistenza
+    di \(x \in X\) tale che \(\lim_{n \to \infty} \|x_{n}-x\|_1 = 0\).
+    Da definizione di successione di Cauchy, 
+    \[
+      \forall \varepsilon > 0 \,\, \exists \overline{n} \in \mathbb{N}: \forall
+      n,m \ge \overline{n},\,\, \|x_{n}-x_{m}\|_1 = \sum_{i=1}^{N} \left| x_{n}^{i}-x_{m}^{i}\right| \le \varepsilon
+    \]
+    per cui ogni successione delle componenti \(\{x^{i}_{n}\}_{n \in \mathbb{N}}  \) è di Cauchy in \(\mathbb{K}\). Poiché \(\mathbb{C}\) e \(\mathbb{R}\) sono completi, allora \(x_{n}^{i} \to x^{i} \in \mathbb{K}\) per ogni \(i \in \{1,\dots,N\} \). Concludiamo osservando che
+    \[
+      \|x_{n}-x\|_1 = \sum_{i=1}^{N} \left| x_{n}^{i} - x^{i}\right| \overset{n\to \infty}{\longrightarrow} 0
+    \]
+\end{proof}
+
+\begin{example}{}
+    Sia \(X = \mathbb{K}^{N}\) con \(\mathbb{K} = \mathbb{C}\) o
+    \(\mathbb{R}\). Su tale spazio possiamo avere le norme
+    \[
+      \|x\|_p = {\left( \sum_{i=1}^{N} |x^{i}|^{p}  \right)}^{\frac{1}{p}},
+      \quad p \in [1, \infty)
+    \]
+    \(X\) è chiaramente di Banach.
+\end{example}
+\begin{example}{}
+    Sia \(\Omega \subseteq \mathbb{R}^{d} \), allora \(X = C^{0}{(\Omega,\mathbb{K}^{N})}\) spazio delle funzioni continue \(\Omega\to \mathbb{R}^{N}\). Facile verificare che \(X\) formi uno spazio vettoriale.
+
+    Preso ora \(\Omega\) aperto e limitato. 
+    \[
+      C^{0}{(\overline{\Omega})} = \{f:\Omega\to \mathbb{R} \text{ unif.
+      continue}\} 
+    \]
+    poiché \(f\) è uniformemente continua se e solo se si può estendere con coninuità al bordo.
+    Si può prendere la norma
+    \[
+      \|f\|_{\infty} = \max_{x \in \overline{\Omega}} |f{(x)}| \quad \forall f
+      \in C^{0}{(\overline{\Omega})}
+    \]
+    che si può verificare essere effettivamente una norma. Inoltre con tale
+    norma \(C^{0}{(\overline{\Omega})}\) è uno spazio di Banach.
+
+    Le funzioni in \(C^{0}{(\overline{\Omega})}\) sono limitate e definite su un
+    compatto, dunque sono anche integrabili, e possiamo dunque definire le norme
+    \[
+        \|f\|_p = {\left( \int_{\Omega} |f{(x)}|^{p} \,d \right)}^{\frac{1}{p}}
+        \quad \forall f \in C^{0}{(\overline{\Omega})} \quad \forall p \in [1,
+        \infty)
+    \]
+    ma per nessun \(p\) la norma rende \(C^{0}{(\overline{\Omega})}\) completo.
+    Un esempio è
+    \[
+      f_{n}{(x)} = \begin{cases}{}
+          1 & x \in [0,\frac{1}{2} - \frac{1}{n}] \\
+          \text{lineare} & x \in [\frac{1}{2} - \frac{1}{n}, \frac{1}{2}+\frac{1}{n}] \\
+          0 & x \in [\frac{1}{2}+\frac{1}{n},1]
+      \end{cases}
+    \]
+    definita in \([0,1]\). Tale funzione converge in \(L_p\) con la stessa norma a una funzione non
+    continua.
+\end{example}
+
+\begin{example}{}
+    Legato all'esempio precedente, con la stessa norma gli spazi \\\(L^{p}{(\Omega,\mu)}\) sono spazi di Banach.
+
+    Presi ora gli spazi \(l^{p} := L^{p}{(\mathbb{N},\#)}\) gli spazi di
+    successioni \(\mathbb{N}\to \mathbb{K}\), abbiamo che anch'essi sono spazi
+     di Banach con norma
+     \begin{align*}
+         \|x\|_p &:= \|x\|_{L^{p}{(\mathbb{N}, \#)}} = {\left( \int_{\mathbb{N}} |x{(n)}|^{p} \,d\# \right)}^{\frac{1}{p}} = {\left( \sum_{n=1}^{\infty} |x{(n)}|^{p}  \right)}^{\frac{1}{p}} \\
+         \|x\|_{\infty} &= \sup_{n \in \mathbb{N}} |x{(n)}|
+     \end{align*}
+\end{example}
+\begin{note}[\emph{zione}]
+    Per le successioni in \(l^{p}\), indicheremo \(x \in l^{p}\)
+    intendendola come funzione \(x: \mathbb{N}\to \mathbb{K}\), per cui per
+    indicare la componente \(n\)-esima di \(x\) indicheremo \(x{(n)}\). In tal
+    modo possiamo indicare le successioni di elementi in \(l^{p}\) come
+    successioni \(\{x_{n}\}_{n \in \mathbb{N}}\), dove ogni \(x_{n}: \mathbb{N}\to \mathbb{K}\) è una funzione in \(l^{p}\) 
+\end{note}
+
+\subsection{Spazi di Hilbert}
+\begin{definition}{Prodotto scalare}
+
+    Sia \(X\) uno spazio vettoriale su \(\mathbb{C}\). Allora un prodotto
+    scalare è un'applicazione \(\Span{\cdot ,\cdot } : X\times X \to \mathbb{C}\) tale che
+\begin{enumerate}[label = \roman*.]
+    \item \(\Span{x,y} = \overline{\Span{y,x} } \quad \forall x,y \in X\) 
+    \item \(\Span{x,x} \ge 0\) e \(\Span{x,x} = 0 \iff x = 0\) 
+    \item \(\Span{\alpha x + \beta y, z} = \alpha \Span{x,z} + \beta \Span{y,z}, \quad \forall \alpha,\beta \in \mathbb{C}, \quad \forall x,y,z \in X \)
+\end{enumerate}
+\end{definition}
+\begin{remark}{}
+    Gli stessi assiomi valgono anche sul prodotto scalare su spazio reale.
+    Semplicemente si ha che se \(x \in \mathbb{R}\), allora \(\overline{x} = x\) quindi si possono droppare tutti i coniugati e viene tutto più leggero.
+\end{remark}
+\begin{note}[antilinearità nella seconda componente]
+    \[
+      \Span{x, \alpha y + \beta z} \overset{i.}{=} \overline{\Span{\alpha y + \beta z, x} } \overset{iii.}{=} \overline{\alpha} \overline{\Span{y,x} } + \overline{\beta}\overline{\Span{z,x} } \overset{i.}{=}
+      \overline{\alpha} \Span{x,y} + \overline{\beta}\Span{x,z} 
+    \]
+\end{note}
+
+\begin{lemmao}[Diseguaglianza di Cauchy-Schwarz]
+    Sia \(X\) uno spazio vettoriale munito del prodotto scalare \(\Span{\cdot ,\cdot } \). Allora
+    \[
+      |\Span{x,y} |^2 \le \Span{x,x} \Span{y,y} \quad \forall x,y \in X
+    \]
+    e inoltre la diseguaglianza è un'uguaglianza se e solo se \(x\) e \(y\) sono
+    linearmente dipendenti.
+\end{lemmao}
+\begin{proof}{}
+    Sia \(z := \Span{y,y} x - \Span{x,y} y\). Allora 
+    \begin{align*}
+        0 \le \Span{z,z} &= \Span{\Span{y,y} x - \Span{x,y} y, \Span{y,y} x - \Span{x,y} y} = \\
+                &= \Span{y,y} \Span{x, \Span{y,y} x - \Span{x,y} y} - \Span{x,y} \Span{y, \Span{y,y} x - \Span{x,y} y} = \\
+                &= \Span{y,y}^2\Span{x,x} - \Span{y,y} \Span{y,x} \Span{x,y} -
+                \cancel{\Span{x,y} \Span{y,y} \Span{y,x}} + \cancel{\Span{x,y} \Span{y,x} \Span{y,y}} = \\
+                &= \Span{y,y} {\left(\Span{y,y} \Span{x,x} -
+                    |\Span{x,y}|^2\right)}
+    \end{align*}
+    quindi ora o \(y=0\) che farebbe valere la tesi, oppure si può semplificare
+    \(\Span{y,y} \) e rimane esattamente la tesi.
+
+    Infine si verifica l'uguaglianza quando \(z=0\), ossia quando \(x\) e \(y\)
+    sono collineari.
+\end{proof}
+
+\begin{definition}{Spazio prehilbertiano}
+    Uno spazio vettoriale \(X\) con prodotto scalare viene detto spazio \textbf{prehilbertiano} (o spazio \emph{con prodotto interno})
+\end{definition}
+\begin{example}{}
+    \(\mathbb{K}^{N}\) con \(\Span{x,y} = \sum_{i=1}^{N} x^{i}\overline{y^{i}} \) è prehilbertiano.
+\end{example}
+\begin{example}{}
+    \(C^{0}{([0,1], \mathbb{C})}\) con \(\Span{f,g} = \int_{0}^{1} f{(x)}\overline{g}{(x)} \,d x \) 
+\end{example}
+
+\begin{definition}{Norma indotta dal prodotto scalare}
+    Su uno spazio prehilbertiano \(X, \Span{\cdot ,\cdot } \) definisco 
+    \[
+      \|x\|:= \sqrt{\Span{x,x} } \quad \forall x \in X
+    \]
+    Allora \(\|\cdot \|\) è una norma su \(X\) 
+\end{definition}
+\begin{proof}[buona definizione]
+    La radice è ben definita perché \(\Span{x,x}\) è un reale non negativo.
+    Inoltre si può mostrare che \(\|\cdot \|\) è una norma con gli assiomi di
+    prodotto scalare e la diseguaglianza di Schwarz per la diseguaglianza
+    triangolare.
+\end{proof}
+\begin{proposition}{}
+    Sia \(X\) uno spazio prehilbertiano, allora il prodotto scalare è una
+    funzione continua \(X\times X \to \mathbb{K}\).
+\end{proposition}
+\begin{proof}{}
+prese \(x_{n}\to x\) e \(y_{n}\to y\),
+    \begin{align*}
+        |\Span{x_{n},y_{n}} - \Span{x,y}| &= |\Span{x_{n},y_{n}} - \Span{x,y_{n}} +
+      \Span{x,y_{n}} - \Span{x,y} | \\
+            &= |\Span{x_{n}-x,y_{n}} + \Span{x,y_{n}-y} | \le |\Span{x_{n}-x,y_{n}} | + |\Span{x, y_{n}-y} | \le \\
+            &\le \|x_{n}-x\|\|y_{n}\| + \|x\|\|y_{n}-y\|
+            \overset{n\to \infty}{\longrightarrow }0
+    \end{align*}
+\end{proof}
+
+\begin{definition}{ortogonalità}
+    \(x,y \in X\) si dicono ortogonali se \(\Span{x,y} =0\) 
+\end{definition}
+
+\begin{proposition}[Identità di polarizzazione]
+    Se \(\mathbb{K}=\mathbb{C}\),
+    \[
+      \Span{x,y} = \frac{1}{4}{\left( \|x+y\|^2 - \|x-y\|^2 + i\|x+iy\|^2 - i\|x-iy\|^2 \right)} 
+    \]
+    Se invece \(\mathbb{K}=\mathbb{R}\),
+    \[
+      \Span{x,y} = \frac{1}{4}{\left( \|x+y\|^2 - \|x-y\|^2\right)} 
+    \]
+\end{proposition}
+\begin{proof}{}
+    Non sono difficili, basta scrivere per esteso \(\|x+y\|^2\) e \(\|x-y\|^2\)
+    (e \(\|x+iy\|^2\) e \(\|x-iy\|^2\) nel caso complesso) e poi fare i contazzi.
+\end{proof}
+
+\begin{proposition}{teorema di Pitagora}
+    Se \(\Span{x,y} =0\) allora \(\|x+y\|^2 = \|x\|^2 + \|y\|^2\) 
+\end{proposition}
+\begin{proof}{}
+    ovvio
+\end{proof}
+\begin{proposition}{Identità del parallelogramma}
+    Per ogni \(x,y \in X\), allora
+    \[
+      \|x-y\|^2 + \|x+y\|^2 = 2{\left( \|x\|^2 + \|y\|^2 \right)} 
+    \]
+\end{proposition}
+
+\begin{theorem}{Jordan - Von Neumann}
+    Sia \(X\) uno spazio normato, allora la norma è indotta da un prodotto
+    scalare se vale l'\emph{identità del parallelogramma}
+\end{theorem}
+\begin{proof}[Dimostrazione per \(\mathbb{K}=\mathbb{R}\) ]
+    Definiamo il prodotto scalare con l'identità di polarizzazione, dunque
+    \[
+      \Span{x,y} := \frac{1}{4}{\left( \|x+y\|^2 - \|x-y\|^2 \right)} 
+    \]
+    infatti se effettivamente \(\Span{\cdot ,\cdot } \) è un prodotto scalare
+    allora quest'uguaglianza varrebbe, dunque ha senso iniziare prendendola come
+    definizione. Verifichiamo ora che è un prodotto scalare.
+\begin{enumerate}[label = \roman*.]
+    \item Evidente per definizione
+    \item Evidente dalla definizione, perché viene letteralmente \(\Span{x,x} = \|x\|^2\) 
+    \item Proseguiamo con la dimostrazione, dividendo in \(\Span{x+y,z} = \Span{x,z} +\Span{y,z} \) e \(\Span{\lambda x,y} = \lambda\Span{x,y} \) 
+\end{enumerate}
+    \begin{align*}
+        \Span{x,z} + \Span{y,z} &\overset{(def)}{=} \frac{1}{4}{\left( \|x+z\|^2 - \|x-z\|^2 + \|y+z\|^2 - \|y-z\|^2 \right)} = \\
+        &= \frac{1}{4}{\left( \|x+z\|^2 + \|y+z\|^2 \right)} - \frac{1}{4}{\left( \|x-z\|^2 + \|y-z\|^2 \right)} = \\
+        &\overset{prll.}{=} \frac{1}{8}{\left(\cancel{ \|x-y\|^2} + \|x+y+2z\|^2 \right)} - \frac{1}{8}{\left( \cancel{\|x- y\|^2} + \|x + y - 2z\|^2 \right)} = \\
+        &= \frac{2}{4} {\left( \left\| \frac{x+y}{2}+z \right\|^2 - \left\| \frac{x+y}{2} - z
+\right\|^2\right)} = \\ &\overset{(def)}{=} 2\Span{\frac{x+y}{2}, z} 
+    \end{align*}
+
+    Da quest'ultima, scelto \(y=0\) e notando dalla definizione che \(\Span{0,z}=0\)  , abbiamo che
+    \[
+     \Span{x,z} = 2\Span{\frac{x}{2}, z} \implies \Span{x+y, z} = 2\Span{\frac{x+y}{2}, z} 
+    \]
+    che conclude la prima parte della dimostrazione della linearità.
+
+    Procediamo definendo
+    \[
+      \Lambda = \{\lambda \in \mathbb{R} : \Span{\lambda x, y} = \lambda\Span{x,y} , \,\, \forall x,y \in X\} 
+    \]
+    allora chiaramente \(\{0, 1, -1\} \subseteq \Lambda\). Notiamo che se \(\alpha, \beta \in \Lambda\) allora \(\alpha + \beta \in \Lambda\):
+    \[
+      \Span{{(\alpha + \beta)}x, y} = \Span{\alpha x + \beta x, y} = \Span{\alpha x, y}  + \Span{\beta x, y} = \alpha \Span{x,y} + \beta \Span{x,y} = {(\alpha + \beta)}\Span{x,y} 
+    \]
+    Dunque necessariamente \(\mathbb{Z} \subseteq \Lambda \). Prendiamo ora \(\alpha, \beta \in \mathbb{Z}\) con \(\beta \neq 0\), allora
+    \[
+      \alpha\Span{x,y} = \Span{\alpha x, y} = \Span{\alpha \frac{\beta}{\beta}x,
+      y } = \beta \Span{\frac{\alpha}{\beta}x, y} 
+    \]
+    da cui dividendo ambo i termini per \(\beta\) otteniamo che anche \(\mathbb{Q} \subseteq \Lambda \).
+    Concludiamo che, poiché \(\mathbb{Q}\) è denso in \(\mathbb{R}\) e \(\Span{\cdot ,\cdot } \) è continuo, allora \(\mathbb{R} \subseteq \Span{\Lambda} \).
+\end{proof}
+\begin{proof}[Dimostrazione per \(\mathbb{K}=\mathbb{C}\) ]
+    Similmente a prima, definiamo 
+    \[
+      \Span{x,y} := \frac{1}{4}{\left( \|x+y\|^2 - \|x-y\|^2  \right)}+ i \frac{1}{4}{\left(  \|x+iy\|^2 - \|x-iy\|^2 \right)} 
+    \]
+    Dunque \(Re\Span{x,y} = \frac{1}{4}{\left( \|x+y\|^2 - \|x-y\|^2 \right)} =: (x,y) \). Allora 
+    \[
+      \Span{x,y} = (x,y) + i (x, iy)
+    \]
+    allora per la parte reale del teorema \({(x,y)}\) verifica \({(x+y, z)} = {(x,z)}+{(y,z)}\) e \({(\lambda x, y)} = \lambda {(x,y)}\) per ogni \(\lambda \in \mathbb{R}\).
+\end{proof}
+
+
+
+
