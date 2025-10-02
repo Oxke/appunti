@@ -410,7 +410,7 @@ prese \(x_{n}\to x\) e \(y_{n}\to y\),
       y } = \beta \Span{\frac{\alpha}{\beta}x, y} 
     \]
     da cui dividendo ambo i termini per \(\beta\) otteniamo che anche \(\mathbb{Q} \subseteq \Lambda \).
-    Concludiamo che, poiché \(\mathbb{Q}\) è denso in \(\mathbb{R}\) e \(\Span{\cdot ,\cdot } \) è continuo, allora \(\mathbb{R} \subseteq \Span{\Lambda} \).
+    Concludiamo che, poiché \(\mathbb{Q}\) è denso in \(\mathbb{R}\) e \(\Span{\cdot ,\cdot } \) è continuo (per come è definito, chiaramente non possiamo usare la prop, essendo che non abbiamo ancora dimostrato che \(\Span{\cdot ,\cdot } \) è  un prodotto scalare), allora \(\mathbb{R} \subseteq \Lambda \subseteq \).
 \end{proof}
 \begin{proof}[Dimostrazione per \(\mathbb{K}=\mathbb{C}\) ]
     Similmente a prima, definiamo 
@@ -421,8 +421,136 @@ prese \(x_{n}\to x\) e \(y_{n}\to y\),
     \[
       \Span{x,y} = (x,y) + i (x, iy)
     \]
-    allora per la parte reale del teorema \({(x,y)}\) verifica \({(x+y, z)} = {(x,z)}+{(y,z)}\) e \({(\lambda x, y)} = \lambda {(x,y)}\) per ogni \(\lambda \in \mathbb{R}\).
+    allora per la parte reale del teorema \({(x,y)}\) verifica \({(x+y, z)} = {(x,z)}+{(y,z)}\) e \({(\lambda x, y)} = \lambda {(x,y)}\) per ogni \(\lambda \in \mathbb{R}\). Dunque
+    \[
+      \Span{x+y, z}  = {(x,z)} + {(y,z)} + i{(x,iz)} i{(y,iz)} = \Span{x,z} + \Span{y,z} 
+    \]
+    Rimane da verificare l'omogeneità per \(\lambda \in \mathbb{C}\) e che \(\Span{x,y} = \overline{\Span{y,x} }\). Iniziamo dalla seconda:
+    \[
+      \overline{\Span{y,x} } = \overline{{(y,x)} + i {(y, ix)}} = {(y,x)} - i {(y, ix)}
+    \]
+    inolre
+    \begin{align*}
+        {(y,ix)} &= \frac{1}{4}{\left( \|y + ix\|^2 - \|y -ix\|^2 \right)} = \frac{1}{4}{\left( \|i{(-iy + x)}\|^2 + \|i{(-iy - x)}\|^2 \right)} = \\
+                 &= \frac{1}{4}{\left( \|x - iy\|^2 + \|x + iy\|^2 \right)} =
+                 -{(x, iy)}
+    \end{align*}
+    e quindi la precedente è
+    \[
+      \overline{\Span{y,x} } = {(x,y)} + i{(x, iy)} = \Span{x,y} 
+    \]
+
+    Sia ora \(\alpha + i \beta = \lambda \in \mathbb{C}\), con \(\alpha , \beta \in \mathbb{R}\). Allora
+    \[
+    \Span{{(\alpha + i \beta)}x, y} = \Span{\alpha x + i \beta x, y} = \Span{ \alpha x , y } + i \Span{\beta x , y} = \alpha \Span{x,y} + \beta \Span{ix, y} 
+    \]
+    ma abbiamo che, riprendendo la definizione
+    \begin{align*}
+        \Span{ix, y} &= \frac{1}{4}{\left( \|ix + y\|^2 - \|ix-y\|^2 \right)} + i
+      \frac{1}{4}{\left( \|ix + iy\|^2 - \|ix -iy\|^2 \right)} \\
+                     &= -\frac{1}{4}{\left( \|x+iy\|^2 - \|x - iy\|^2 \right)} +
+        i {(x,y)} = i{(x,y)} - {(x, iy)} = \\ &= i\Span{x,y} 
+    \end{align*}
+
+    e quindi concludiamo
+    \[
+      \Span{{(\alpha + i \beta)}x, y} = \alpha\Span{x,y} + \beta\Span{ix,y} = \alpha\Span{x,y} +i \beta\Span{x,y} = \lambda\Span{x,y} 
+    \]
+    
+
 \end{proof}
+
+\begin{remark}{}
+    presa su \(C^{0}{([0,1])}\) la norma \(\|f\|_2^2 = \int_{0}^{1} |f|^2 \,dt \), allora \\\(\Span{f,g} = \int_{0}^{1} f{(t)}g{(t)} \,dt \) questo è uno spazio prehilbertiano.
+
+    Però con la norma \(\|f\|_{\infty}\) non è uno spazio prehilbertiano.
+    Infatti non vale l'identità del parallelogramma: prese \(f{(t)}=1-t\) e \(g{(t)}= t\) abbiamo
+\[
+  \|f-g\|^2_{\infty} + \|f+g\|^2_\infty = 1+1\neq  2{(1 + 1)} = 2{(\|f\|^2_\infty + \|g\|^2_\infty)}
+\]
+\end{remark}
+\begin{corollary}{}
+    Sia \(X\) uno spazio normato e sia \(M \subseteq X  \) un sottospazio di
+    dimensione finita. Allora \(M\) è chiuso.
+\end{corollary}
+\begin{proof}{}
+    \({(M, \|\cdot \|)}\) è esso stesso uno spazio normato di dimensione finita.
+    \(M\) è dunque completo quindi chiuso.
+\end{proof}
+
+\begin{example}{}
+    La precedente non vale se \(\dim X = +\infty\). Presi infatti \(M = C^{0}{(\Omega)}\) e \(X = L^2{(\Omega)}\), abbiamo che \(\overline{M}^{L^2} = L^2\) 
+\end{example}
+
+\subsection{Operatori lineari e continui}
+
+Siano \(X\) e \(Y\) spazi normati. Sia \(
+T: X\to Y\). Allora \(T\) è lineare se \[T{(\alpha x + \beta y)} = \alpha T{(x)} + \beta T{(y)}\] per ogni \(\alpha, \beta \in \mathbb{K}\) e \(x,y \in X\). Per ricordare la linearità, invece di scrivere \(T{(x)}\) scriveremo \(Tx\).
+
+\begin{note}{zione}
+    Nelle bolle, indicando a pedice lo spazio invece che il raggio, si sottintende il raggio
+    1 e si esplicita la norma da utilizzare:
+\[
+  B_X{(0)} := \{x \in  X : \|x\|_X < 1\} 
+\]
+\end{note}
+
+\begin{theorem}{}
+    Siano \(X, Y\) spazi normati. Sia \(T : X \to Y\). Allora le seguenti
+    proposizioni sono tutte equivalenti:
+\begin{enumerate}[label = (\roman*)]
+    \item \(T\) è continuo
+    \item \(T\) è continuo in 0
+    \item Ogni limitato di \(X\) ha immagine limitata in \(Y\) 
+\item \(\displaystyle \exists \alpha>0 : \overline{T{(B_X)}} \subseteq \alpha B_Y{(0)}\) 
+    \item \(\displaystyle \sup_{X \sminus \{0\} } \frac{\|Tx\|_y}{\|x\|_X} < +\infty\) 
+    \item \(\displaystyle \sup_{x \in B_X{(0)}} \|Tx\|_Y < +\infty\) 
+    \item \(\displaystyle\sup_{\|x\|_X=1} \|Tx\|_Y < +\infty\) 
+\end{enumerate}
+\end{theorem}
+\begin{remark}{}
+    Se \(X\) e \(Y\) hanno dimensione finita, \(T\) è sempre continuo.
+\end{remark}
+\begin{example}{}
+    Preso \begin{align*}
+        T: C^{0}{([0,1])}_{\|\cdot \|_1}  &\longrightarrow \mathbb{R} \\
+        f &\longmapsto T(f) = f{(0)}
+    \end{align*}
+    è chiaramente lineare. Tuttavia la controimmagine di \(\{0\} \) tramite \(T\) contiene
+    ad esempio la successione \(f_{n}{(x)} = \max(nx,1)\) che ha come limite in \(C^{0}_{\|\cdot\|_1} \) la funzione costante 1, per cui \(T^{-1}\{0\} \) non è chiuso.
+\end{example}
+\begin{definition}{Operatore limitato}
+    Un operatore che soddisfa la condizione \({(iii)}\) viene detto
+    \textbf{limitato}
+\end{definition}
+\begin{proof}{} \( \)
+\begin{itemize}[label = --]
+    \item[\((i) \implies (ii)\)] ovvio
+    \item[\((ii)\implies (i)\) ] ovvio, poiché \(T{(x-x_{0})} = T{(x)} - T{(x_{0})}\) 
+    \item[\((ii) \implies (iv)\)] Abbiamo che per ogni intorno \(U_Y\) di \(0_Y\) esiste un intorno \(U_X\) di \(0_X\) tale che \(T{(U_X)} \subseteq U_Y \). Allora scelto \(U_Y = \overline{B_Y{(0)}}\) abbiamo
+        \[
+          \exists \delta > 0 : T{(\delta\overline{B_X{(0)}})} = \delta T{(\overline{B_X{(0)}})}\subseteq B_Y{(0)} 
+        \]
+        per cui basta prendere \(\alpha = \frac{1}{\delta}\) 
+    \item[\((iv) \implies (ii)\)] Preso \(\varepsilon > 0\) bisogna trovare \(\delta>0\) tale che 
+        \[
+          T{(\delta \overline{B_x{(0)}})} \subseteq \varepsilon B_Y{(0)} 
+        \]
+        e similmente a prima per linearità basta prendere \(\delta = \varepsilon / \alpha\) 
+    \item[\((iv) \implies (iii)\)] Sia \(C \subseteq R \overline{B_X{(0)}} \) un
+        limitato. Allora
+        \[
+          T{(C)} \subseteq T{(R \overline{B_X{(0)}})} = RT{(\overline{B_x{(0)}})} \subseteq R \alpha \overline{B_Y{(0)}}  
+        \]
+    \item[\((iii) \implies (iv)\)] \(\overline{B_X}{(0)}\) è limitato in \(X\),
+        dunque \(T{(\overline{B_x{(0)}})}\) è limitato in \(Y\), e dunque è
+        contenuto in una palla \(\alpha B_Y{(0)}\) per un \(\alpha > 0\) 
+    \item[\((iv) \iff (vi)\)] \(\|x\|_X \le 1\) se e solo se \(x \in \overline{B_X{(0)}}\), il resto vien da sè
+    \item[\((v) \iff (vi) \iff (vii)\)] tutte ovvie, come anche è ovvio che il
+        valore finito nel caso sia lo stesso, e viene denotato \(\|T\| \) e in pratica tutte e tre dicono che \[\exists \|T\| > 0 : \|Tx\|_Y \le \|T\| \|x\|_X \] per ogni \(x \in X\) 
+\end{itemize}
+\end{proof}
+
 
 
 
