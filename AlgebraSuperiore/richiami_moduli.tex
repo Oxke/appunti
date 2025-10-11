@@ -1,4 +1,38 @@
 \section{Richiami sui Moduli}
+\begin{definition}{\(A\)-modulo}
+    Un \(A\)-modulo (di default sinistro) \(M\) è un gruppo abeliano \({(M, +)}\) con una
+    moltiplicazione per scalare definita da 
+    \begin{align*}
+        \cdot : A\times M &\longrightarrow M \\
+        {(a,x)}&\longmapsto ax \in M
+    \end{align*}
+    e tale che, \(\forall a,b \in A\) e \(\forall x,y \in M\):
+\begin{enumerate}[label = \arabic*)]
+    \item \(a{(x+y)} = ax + ay\) 
+    \item \({(a+b)}x = ax + bx\) 
+    \item \({(ab)}x = a{(bx)}\) 
+    \item \(1x = x\) 
+\end{enumerate}
+\end{definition}
+\begin{remark}{}
+    Se \(\mathbb{K}\) è un campo, allora un \(\mathbb{K}\)-modulo è uno spazio
+    vettoriale.
+\end{remark}
+\begin{remark}{}
+    Se \({(M, +)}\) è un gruppo abeliano, data \(f : A \times  M \to M\) posso
+    \\ definire \(\alpha : A \to M^{M}\) come \(\alpha{(a)} = (x \mapsto ax)\),
+    e quindi le proprietà precedenti si traducono in 
+\begin{enumerate}[label = \arabic*.]
+    \item \(\alpha{(a)}{(x+y)} = \alpha{(a)}{(x)} + \alpha{(a)}{(y)}\) e dunque
+        \(\alpha{(a)}\) è omomorfismo di gruppi, dunque \(\alpha{(A)} \subseteq \mathrm{End}{(M)}\) 
+    \item \(\alpha{(a+b)} = \alpha{(a)}+\alpha{(b)}\) dunque \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di gruppi
+    \item \(\alpha{(a)}\circ \alpha{(b)} = \alpha{(ab)}\) 
+    \item \(\alpha{(1)} = \mathrm{id}_M\) 
+\end{enumerate}
+Dalla 2,3,4 \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di anelli.
+\end{remark}
+
+
 \begin{theorem}[Secondo teorema di isomorfismo]
     Sia \(M\) un modulo, con \(M', M'' \subseteq M \) sottomoduli. Allora 
     \[
@@ -8,8 +42,11 @@
 \begin{proof}{}
     Si prenda \(f : M' \to (M' + M'') / M''\) composizione dell'inclusione di \(M'\) in \(M' + M''\) e della proiezione a quoziente, dunque è un omomorfismo.
 
-    Allora \(\mathrm{Ker} f = \{x \in M' : x + M'' = M''\} = M' \cap  M'' \) 
-    %TODO suriettività di f
+    Allora \(\mathrm{Ker} f = \{x \in M' : x + M'' = M''\} = M' \cap  M'' \).
+
+    Preso \(y \in {(M' + M'')}/M''\), \(y = x' + x'' + M''
+     = x' + M'' = f{(x')}\) dunque \(f\) è suriettiva. Dal primo
+     teorema di isomorfismo segue la tesi.
 \end{proof}
 
 
@@ -28,11 +65,6 @@
     dunque \(\mathrm{Ker}f  = M'\) da cui la tesi per il primo teorema di
     isomorfismo.
 \end{proof}
-%
-\begin{definition}{Ideale massimale (sinistro / destro)}
-    Un ideale \(J\) (sinistro / destro)
-\end{definition}
-
 
 \begin{proposition}{} \( \) 
 \begin{enumerate}[label = \arabic*.]
@@ -43,11 +75,13 @@
 \end{proposition}
 \begin{proof}{}
 \begin{enumerate}[label = \arabic*.]
-    % TODO: tutto
-    \item 
+    \item \({(\impliedby)}\) \(A / I\) è ciclico (generato da \(\overline{1}\)). Viceversa per \({(\implies )}\) so che \(M = Ax\) per un qualche \(x \in M\). Considerata \(
+        f : _AA \to M\) data da \(a \mapsto ax\), \(\mathrm{Ker}f\) è
+        sottomodulo di \(A\), ovvero ideale sinistro. Concludo per il primo
+        teorema di isomorfismo.
     \item Se \(M\) è semplice allora \(\forall 0 \neq x \in M\), \(M = Ax\),
         dunque \(M\) è ciclico e per il punto 1. esiste \(I\) ideale sinistro
-        tale che \(M \neq A/I\). La proposizione si riduce a dire che \(A/I\) è
+        tale che \(M \cong A/I\). La proposizione si riduce a dire che \(A/I\) è
         semplice se e solo se \(I\) è massimale. Sappiamo che i sottomoduli di
         \(A/I\) sono tutti e soli della forma \(J /I\) con \(I \subseteq J \subseteq A  \) ideale sinistro.
         Allora \(A / I \neq 0 \iff I \neq A\) e gli unici sottomoduli di \(A / I \) sono \(I / I\) e \(A / I\), ossia gli unici ideali sinistri \(J\) tali che \(I \subseteq J \subseteq A  \) sono \(I\) e \(A\).
@@ -70,25 +104,27 @@ ax_\lambda\) per ogni \(\lambda \in \Lambda\) e \(x, y \in M\).
 \(\forall \mu \in \Lambda\) esiste \(p_\mu : M \to M_\mu\), \({(x_{\lambda})}_{\lambda \in \Lambda} \mapsto x_\mu  \) che è \(A\)-lineare e suriettivo.
 \end{definition}
 
-\begin{proposition}[Proprietà universale del prodotto]
-    Dati \(l_\mu : N \to M_\mu \) \(A\)-lineari, \(\forall \mu \in \Lambda\)
-    esiste unico \(f : N\to M\) \(A\)-lineare tale che \(f_\mu = l_\mu \circ f\) 
+\begin{proposition}[Proprietà universale del prodotto] \( \) 
+    \\ Dati \(f_\mu : N \to M_\mu \) \(A\)-lineari \(\forall \mu \in \Lambda\),
+    allora esiste unico \(f : N\to M\) \(A\)-lineare tale che \(f_\mu = p_\mu \circ f\) 
 \end{proposition}
 \[\begin{tikzcd}
 	N \\
-	{M_\mu} & M
-	\arrow["{l_\mu}"', from=1-1, to=2-1]
+	{M_\mu} & \prod_{\lambda \in \Lambda} M_{\lambda} 
+	\arrow["{f_\mu}"', from=1-1, to=2-1]
 	\arrow["{\exists ! f}", dashed, from=1-1, to=2-2]
-	\arrow["{f_\mu}", from=2-2, to=2-1]
+	\arrow["{p_\mu}", from=2-2, to=2-1]
 \end{tikzcd}\]
-\begin{proof}{}
-    %TODO proof
-\end{proof}
+
+\begin{eser}{}
+    Dimostrare la proprietà universale del prodotto
+\end{eser}
+
 
 \begin{definition}{Somma diretta}
     La \textbf{somma diretta} (o coprodotto) degli \(M_{\lambda} \) è 
     \[
-        M' = \{{(x_\lambda)}_{\lambda \in \Lambda} \in M : x_\lambda >0 \text{ per
+        M' := \bigoplus_{\lambda \in \Lambda} M_\lambda = \{{(x_\lambda)}_{\lambda \in \Lambda} \in M : x_\lambda >0 \text{ per
   finiti \(\lambda\)} \subseteq M \}
     \]
     è sottomodulo.
@@ -108,10 +144,188 @@ che è \(A\)-lineare e iniettivo.
 \begin{proposition}[Proprietà universale somma diretta]
 \[\begin{tikzcd}
 	N \\
-	{M_\mu} & M'
-	\arrow["{l_\mu}", from=2-1, to=1-1]
+	{M_\mu} & \bigoplus_{\lambda \in \Lambda} M_\lambda
+	\arrow["{f_\mu}", from=2-1, to=1-1]
 	\arrow["{i_\mu}"', from=2-1, to=2-2]
 	\arrow["{\exists! f}"', dashed, from=2-2, to=1-1]
 \end{tikzcd}\]
 \end{proposition}
+\begin{remark}{}
+    Se \(\#\Lambda < +\infty\) allora 
+    \[
+      \bigoplus_{\lambda \in \Lambda} M_\lambda = \prod_{\lambda \in \Lambda} M_{\lambda} 
+    \]
+\end{remark}
+
+\begin{note}[zione]
+    Se \(M_\lambda = M\) per ogni \(\lambda \in \Lambda\), si denota
+    \[
+      \prod_{\lambda \in \Lambda} M =: M^{\Lambda} \quad \text{e} \quad
+      \bigoplus_{\lambda \in \Lambda} M =: M^{{(\Lambda)}}
+    \]
+\end{note}
+
+    Dati \(M_\lambda \subseteq M \) sottomoduli, con \(\lambda \in \Lambda
+    \), sia \[f : \oplus_{\lambda \in \Lambda} M_\lambda \to M\] l'omomorfismo indotto
+    dalle inclusioni \(M_\lambda \overset{i_{\lambda} }{\hookrightarrow }  M \), allora
+    \[
+      \mathrm{im}f =: \sum_{\lambda \in \Lambda} M_\lambda \subseteq M \text{ è sottomodulo } 
+    \]
+    Inoltre \(f\) è iniettiva se e solo se \(M_{\mu} \cap \sum_{\lambda \in \Lambda \sminus \{\mu\} } = 0  \) per ogni \(\mu \in \Lambda\) e in tal caso \(f\) induce un isomorfismo tra \(\bigoplus_{\lambda \in \Lambda} M_\lambda \) e \(\sum_{\lambda \in \Lambda} M_\lambda\) e si può scrivere \(\bigoplus_{\lambda \in \Lambda} M_\lambda\) per indicare il sottomodulo di \(M\) 
+
+
+\begin{definition}{Linearmente indipendente, base, modulo libero}
+    Sia \(U \subseteq M \) un insieme, con \(M\) \(A\)-modulo. Si dice che \(U\) è \(A\)-linearmente indipendente se dati \(x_{1},\dots,x_{n} \subseteq U \) distinti 
+    \[
+      a_{1}, \dots, a_{n} \in A \text{ t.c. } \sum_{i=1}^{n} a_{i} x_{i} = 0 \implies a_{1} = \dots = a_{n} = 0 
+    \]
+    \(U\) è detta \textbf{base} di \(M\) se è linearmente indipendente e genera
+    \(M\), ossia \(M = AU\). Si dice che \(M\) è \textbf{libero} se ammette una
+    base
+\end{definition}
+
+\begin{example}{}
+    Per ogni \(\Lambda\), \(A^{{(\Lambda)}}\) è libero con base \(\{e_\lambda : \lambda \in  \Lambda\} \) dove, per ogni \(\lambda \in \Lambda\),
+    \[
+        (e_\lambda)_i = \begin{cases}{}
+            1 & \lambda = i \\
+            0 & \lambda \neq i
+        \end{cases}
+    \]
+\end{example}
+
+\begin{proposition}{}
+    Siano \(L, M\) \(A\)-moduli, con \(L\) libero con base \(\{l_\lambda : \lambda \in \Lambda\} \) tale che \(l_\lambda \neq l_\mu\) se \(\lambda \neq \mu\), allora
+    \[
+      \forall \lambda \in  \Lambda \,\,\,\, \exists ! f :
+  L\to M \,\, A\text{-lineare t.c. }f{(l_\lambda)} = x_\lambda
+    \]
+\end{proposition}
+\begin{corollary}{}
+    Un \(A\)-modulo è libero se e solo se è isomorfo a \(A^{{(\Lambda)}}\) per
+    qualche \(\Lambda\) 
+\end{corollary}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] \(M\) libero con base \(\{x_\lambda : \lambda \in \Lambda\}\) con \(x_\lambda\neq x_\mu\) se \(\lambda \neq \mu\). Allora per la proposizione
+        \[
+          \exists ! f : A^{\Lambda} \to M \text{ \(A\)-lineare t.c. } f{(e_\lambda)} = x_\lambda 
+        \]
+        per ogni \(\lambda \in \Lambda\).
+        Allora \(\mathrm{im}f = \Span{x_{\lambda} : \lambda \in \Lambda}_A = M\) e \(f\) è iniettivo perché gli \(x_\lambda\) sono linearmente indipendenti.
+    \item[\(\impliedby \)] ovvio
+\end{itemize}
+\end{proof}
+
+\begin{corollary}{}
+    Ogni \(A\)-modulo è insomorfo a un quoziente di un modulo libero (\(A^{{(\Lambda)}}\) per un qualche \(\Lambda\) ).
+
+    Inoltre un \(A\)-modulo è finitamente generato se e solo se è isomorfo a un quoziente di \(A^{n}\), \(n \in \mathbb{N}\) 
+\end{corollary}
+\begin{proof}{}
+    Sia \(\{x_{\lambda} \}_{\lambda \in \Lambda}  \) un insieme di generatori di
+    un modulo \(M\). Per la proposizione \(\exists ! f: A^{{(\Lambda)}}\to M\)
+    \(A\)-lineare tale che f\(l_\lambda = x_\lambda\) per ogni \(\lambda \in
+    \Lambda\). Allora \(\mathrm{Im}f = M\) e dunque per il primo teorema di
+    isomorfismo \(M\neq A^{{(\Lambda)}} / \mathrm{ker}f\).
+
+    Per la seconda parte se \(M\) è finitamente generato posso scegliere \(\Lambda\) finito e viceversa \(M\neq A^{n} / N\) è finitamente generato perché \(A^{n}\) lo è e \(\pi : A^{n}\to A^{n} / N\) è un omomorfismo suriettivo.
+
+\end{proof}
+
+\begin{proposition}{}
+    \(A\) è con divisione se e solo se ogni suo \(A\)-modulo è libero
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] (complementi di algebra)
+    \item[\(\impliedby \)] Sia \(M\) un \(A\)-modulo semplice. Per ipotesi è
+        libero, allora \(M \cong A^{{(\Lambda)}}\) per un qualche \(\Lambda\).
+        Ma se \(\# \Lambda > 1\) allora \(A^{{(\Lambda)}}\) non è semplice (\(A \subseteq A^{{(\Lambda)}} \) è un sottomodulo non banale). Inoltre \(\Lambda\neq \varnothing\) (\(A^{{(\varnothing)}} = \{0\} \) non è semplice).
+
+        Ne consegue che \(M\cong A\) e dunque \(A\) è con divisione 
+\end{itemize}
+\end{proof}
+\begin{example}{}
+    Con \(A = \mathbb{Z}\), \(\mathbb{Z} / p \mathbb{Z}\) non è libero
+\end{example}
+
+Si può dimostrare che se \(A\) è con divisione, allora tutte le basi di un \(A\)-modulo (libero) \(M\) hanno la stessa cardinalità, che viene detta rango e indicata con \(\mathrm{rk}_A M\).
+
+In generale non tutte le basi di un \(A\)-modulo libero hanno la stessa
+cardinalità, esistono infatti anelli \(A\) non banali tali che \(\prescript{A}{A} \cong _AA
+%TODO pedice giusto
+^{n}\) per \emph{ogni} \(n \in \mathbb{N}\).
+
+\begin{example}{}
+    Sia \(A = \mathrm{End}_{\mathbb{K}} {(V)}\) con \(\mathbb{K}\) campo e \(\dim_{\mathbb{K}} {(V)} = +\infty\) 
+\end{example}
+
+
+Si dimostra che se \(A \to  B\) è omomorfismo di anelli e il rango dei \(B\)-modulli
+liberi è ben definito allora anche il rango degli \(A\)-moduli liberi è ben
+definito. Di conseguenza se \(A\neq 0 \) è commutativo allora il rango degli \(A\)-moduli liberi è ben definito (\(\exists I \subseteq A \) ideale massimale e \(\pi : A \to A/I\) omomorfismo con \(A / I\) campo)
+
+\subsection{restrizione degli scalari}
+Siano \(A, B\) anelli, con \(f : A \to B\) omomorfismo di anelli. Allora se \(M\) è un \(B\)-modulo allora \(M\) è anche un \(A\)-modulo con \(ax := f{(a)}x\). Si dice allora che \(
+_A M\) è ottenuto da \(_B M\) per \textbf{restrizione degli scalari} attraverso
+\(f\).
+
+Inoltre se \(M' \subseteq M \) è \(B\)-sottomodulo allora è anche un
+\(A\)-sottomodulo e se \(g : M \to N\) è \(B\)-lineare allora \(g\) è anche \(A\)-lineare.
+
+
+Prima della prossima definizione ricordiamo che il \textbf{centro} di un anello
+è sottoanello, con il centro l'insieme degli elementi che commutano con tutti
+gli altri elementi e indicato con \(Z{(A)}\),
+\[
+  Z{(A)} := \{z \in A : za = az \,\,\forall a \in A\} 
+\]
+\begin{definition}{}
+    Sia \(A\) commutativo. Allora una \(A\)-algebra è un omomorfismo di anelli
+    \(f:A\to B\) tale che \(\mathrm{im}f \subseteq Z{(B)}\) 
+\end{definition}
+Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
+\begin{example}{}
+    \(M_n{(A)}\) è una \(A\)-algebra con \(a \mapsto \begin{pmatrix}
+        
+        a & 0 \\
+        0 & a
+    \end{pmatrix}\) 
+\end{example}
+
+\begin{example}{}
+    Se \(A = \mathbb{Z}\) per ogni \(B\) anello l'unico omomorfismo di anelli \(\mathbb{Z}\to B\) è una \(\mathbb{Z}\)-algebra. Infatti l'omomorfismo unico \(\mathbb{Z} \to Z{(B)}\) deve essere lo stesso di \(\mathbb{Z} \to B\) 
+\end{example}
+
+\begin{definition}{Morfismo di \(A\)-algebre}
+    Siano \(f : A\to B\), \(g : A\to C\) \(A\)-algebre. Un (omo/iso/\dots)morfismo di
+    \(A\)-algebre da \(f\) a \(g\) è \(h : B\to C\) (omo/iso/\dots)morfismo di anelli tale
+    che \(h \circ f = g\) 
+\end{definition}
+\[\begin{tikzcd}
+	A \\
+    B & C
+    \arrow["{f}"', from=1-1, to=2-1]
+	\arrow["{g}", from=1-1, to=2-2]
+    \arrow["{h}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+\begin{example}{}
+    Ogni omomorfismo di anelli è omomorfismo di \(\mathbb{Z}\)-algebre. 
+\end{example}
+\begin{example}{}
+    Sia \(f : A\to B\) una \(A\)-algebra. Allora \(\forall I \subseteq B \) ideale \(B / I\) è \(A\)-algebra con \(\pi \circ f\) 
+\end{example}
+
+% TODO : algebre libere
+
+\begin{remark}[\textbf{motivazione della definizione}]
+    Se \(f : A\to B\) \(A\)-algebra, allora \(B\) è un anello e \(A\)-modulo
+    (per restrizione degli scalari) tale che 
+    \[
+      a{(b b')} = {(ab)}b' = b{(ab')}
+    \]
+\end{remark}
+
 

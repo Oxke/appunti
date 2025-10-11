@@ -52,7 +52,7 @@ commutativi.
     solo una implicazione non è ovvia. Se \(a', a'' \in A\) sono tali che \(a' a
     = a a'' = 1\) allora
     \begin{align*}
-        {(a' a)}a'' &= a' (a a'') 
+        {(a' a)}a'' &= a' (a a'') \\
         1 a'' = a'' &= a' = a' 1
     \end{align*}
     quindi \(a\) è invertibile e \(a^{-1} = a' = a''\) 
@@ -74,6 +74,10 @@ In generale, se \(1 \neq 0\), allora \(A^{*} \subseteq A \sminus \{0\}  \)
 \begin{definition}{Divisore di zero}
     \(a \in A\) è detto \textbf{divisore di zero} a sinistra (destra) se \(\exists  a' \in A \sminus \{0\} \) tale che \(a a' = 0\) (\(a' a = 0\))
 \end{definition}
+\begin{remark}{}
+    Divisore di zero a sinistra: \(aa' = 0\). Invertibile a sinistra: \(a' a = 1\) 
+\end{remark}
+
 
 \begin{definition}{Dominio}
     \(A\) viene detto \textbf{dominio} se \(A \neq 0\) e \(A\) non ha divisori
@@ -191,12 +195,20 @@ Inoltre \(\mathrm{im}\overline{f} = \mathrm{im}f\) e \(\mathrm{Ker}\overline{f} 
     \(f : A \to B\) è omomorfismo di anelli, allora \(\mathrm{im}f \cong A / \mathrm{Ker}f\)  
 \end{theorem}
 
+\begin{definition}{Ideale massimale (sinistro / destro)}
+    Un ideale \(J\) (sinistro/destro) di \(A\) è massimale se \(\forall I\) ideale
+    (sinistro/destro) tale che \(J \subseteq I \subseteq A  \), allora \(I = J\) o \( I = A\) 
+\end{definition}
+\begin{remark}{}
+    Esiste sempre un ideale (sinistro/destro) massimale (\emph{lemma di Zorn})
+\end{remark}
+
 \begin{definition}{}
     L'ideale generato da \(U \subseteq A \) è il più piccolo ideale di \(A\) che
     contiene \(U = \bigcap_{U \subseteq I \subseteq A \text{ideale}} I \) ed
     esplicitamente è 
     \[
-      A U A := \left\{\sum_{i=1}^{n} a_{i} u_{i} b_{i} : n \in N, a_{i}, b_{i} \in A, u_{i} \in U \right\} 
+      A\,UA := \left\{\sum_{i=1}^{n} a_{i} u_{i} b_{i} : n \in N, a_{i}, b_{i} \in A, u_{i} \in U \right\} 
     \]
 \end{definition}
 \begin{remark}{}
@@ -205,7 +217,7 @@ Inoltre \(\mathrm{im}\overline{f} = \mathrm{im}f\) e \(\mathrm{Ker}\overline{f} 
 \end{remark}
 \begin{definition}{PID}
     \(A\) è un dominio (d'integrità) a ideali principali (PID) se ogni ideale di
-    \(A\) è a ideali principali.
+    \(A\) è principale.
 \end{definition}
 \begin{example}{}
     Campi (non ci sono ideali propri)
