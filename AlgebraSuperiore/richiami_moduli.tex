@@ -328,4 +328,285 @@ Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
     \]
 \end{remark}
 
+% TODO UN BEL PO' di ROBA
+
+
+\begin{lemma}{}
+    Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) una successione
+    esatta di \(A\)-moduli. Siano \(f': A^{m} \to M'\) e \(f'' : A^{n}\to M''\)
+    omomorfismi. Allora esiste un diagramma commutativo con righe esatte
+\[\begin{tikzcd}
+	0 & A^{m} & A^{m+n} & A^{n} & 0 \\
+	0 & M' & M & M'' & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f'}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["f", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}", from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["i"', from=2-2, to=2-3]
+	\arrow["p"', from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+\end{lemma}\label{lem:com}
+
+\begin{proof}{}
+    % TODO manca
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) esatta di
+    \(A\)-moduli. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(M f.g. \implies M'' f.g.\) 
+    \item \(M', M'' f.g. \implies M f.g.\) 
+    \item \(M', M'' f.p. \implies M f.p.\) 
+    \item \(M f.g., M'' f.p. \implies M' f.g.\) 
+    \item \(M' f.g., M f.p. \implies M'' f.g.\) 
+\end{enumerate}
+\end{proposition}\label{prop:varie}
+\begin{proof}{} \( \) 
+\begin{enumerate}[label = \arabic*.]
+    \item già visto
+    \item In esercizio la dimostrazione diretta. In alternativa possiamo
+        applicare il lemma~\ref{lem:com}. Infatti esistono \(f': A^{m} \to M'\) e \(f'' : A^{n} \to M''\) omomorfismi suriettivi e per il lemma~\ref{lem:com} il diagramma
+\[\begin{tikzcd}
+	0 & A^{m} & A^{m+n} & A^{n} & 0 \\
+	0 & M' & M & M'' & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f'}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["f", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}", from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["i"', from=2-2, to=2-3]
+	\arrow["p"', from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+    commuta. Applicando ora il lemma del serpente otteniamo la successione
+    esatta 
+    \[
+      \mathrm{coKer}f' = 0 \to \mathrm{coKer}f \to  0= \mathrm{coKer} f'' \implies \mathrm{coKer} f = 0 \implies M f.g.
+    \]
+    \item Si può fare una dimostrazione simile a quella precedente e applicando
+        il lemma del serpente troviamo la successione esatta
+    \[
+    0 \to \mathrm{Ker} f' \to \mathrm{Ker} f \to \mathrm{Ker}f'' \to 0 = \mathrm{coKer} f'
+    \]
+    per il punto 1. \(M\) è finitamente generato e dunque \(M\) è finitamente
+    presentato.
+    \item \(M'' f.p. \implies \exists \) successione esatta \(A^{m} \overset{g}{\to } A^{n} \overset{h}{\to }M'' \to 0\). Esiste dunque il diagramma commutativo
+\[\begin{tikzcd}
+	 & A^{m} & A^{n} & M'' & 0 \\
+	0 & M' & M & M'' & 0
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{f'}", from=1-2, to=2-2]
+	\arrow["h", from=1-3, to=1-4]
+	\arrow["f", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\mathrm{id}}", from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["i"', from=2-2, to=2-3]
+	\arrow["p"', from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+    infatti voglio \(f\) tale che \(p \circ f = h\) e posso come prima (esercizio).
+    % TODO controllare che esista f' e che funzioni tutto
+    allora per il lemma del serpente trovo che
+    \[
+      0 \to \mathrm{coKer}f' \to \mathrm{coKer}f \to 0 = \mathrm{coKer_{
+              \mathrm{id}_{M''}
+      } }
+    \]
+    è una successione esatta, e dunque \(\mathrm{coKer}f' \cong \mathrm{coKer}f = M / \mathrm{Im} f\) per cui
+    \[
+    0 \to \mathrm{Im}f' \to M' \to \mathrm{coKer}f' \to 0
+    \]
+    è esatta. Concludiamo che \(\mathrm{Im} f' \cong A^{m} / \mathrm{Ker} f'\) e
+    dunque è \(f.g.\), da cui anche \(M'\) è finitamente generato per il punto
+    1.
+    \item \(M\) è finitamente generato, dunque \(M''\) è finitamente generato
+        per il punto 0. Come prima \(\exists\,\, A^{m} \to A^{n}, A^{n} \to M''\)
+        omomorfismi suriettivi e trovo il diagramma del lemma~\ref{lem:com} e
+        applicando il lemma del serpente ottengo la successione esatta
+        \[
+          \mathrm{Ker} f \to \mathrm{Ker}f'' \to 0 = \mathrm{coKer}f'
+        \]
+        Sia ora \(f: A^{m+n}\to M\) suriettiva, allora 
+        \[
+          0 \to \mathrm{Ker} f \to A^{m+n} \to M \to 0
+        \]
+        è esatta, \(A^{m+n}\) è finitamente generata, \(M\) è finitamente
+        presentato, dunque \(\mathrm{Ker}f\) è f.g., quindi per il punto 3. \(\mathrm{Ker}f''\) è f.g. e per il punto 0. \(M\) è f.p.
+\end{enumerate}
+\end{proof}
+
+\begin{eser}{}
+    Dimostrare il punto 1. della dimostrazione precedente direttamente.
+\end{eser}
+\begin{corollary}{}
+    Sia \(M = \bigoplus_{i=1}^{n} M_i \). Allora \(M\) è f.g. / f.p. se e solo
+    se \(M_{i} \) è f.g. / f.p. per ogni \(i\).
+\end{corollary}
+\begin{proof}{}
+    La successione \(0 \to \bigoplus_{i=1} ^{n-1}M_i \to M \to M_{n} \to 0\) è
+    esatta, dunque
+    \begin{itemize}
+        \item[\(\implies \)] unsando induzione su \(n\) e i punti 1. e 2. della
+            proposizione precedente
+        \item[\(\impliedby \)] \(M_n\) è f.g. per il punto 0., ed è f.p. per il
+            punto 4.
+    \end{itemize}
+\end{proof}
+\begin{remark}{}
+    per il punto 3., se \(M\) è f.p. allora ogni \(A^{n} \overset{p}{\to } M \to 0\) esatta si estende a 
+    \[
+      A^{m} \to A^{n} \overset{p}{\to } M \to 0
+    \]
+\end{remark}
+
+\begin{remark}{}
+    Sia \(A\) non noetheriano. Allora \(\exists M\) \(A\)-modulo f.g. non
+    noetheriamo, ad esempio \(M = A\), ossia \(\exists  M' \subseteq M \)
+    sottomodulo non f.g. e in tal caso anche quando \(M\) è finitamente
+    presentato, ad esempio nel caso \(M=A\), \(M/M'\) non è f.p. perché
+    contraddirrebbe il punto 3.
+\end{remark}
+
+Uno può chiedersi dato un modulo se i suoi sottomoduli finitamente generati
+siano anche moduli finitamente presentati. Quessto non è in generale vero ma
+motiva la seguente definizione
+
+\begin{definition}{Modulo coerente}
+    Uno modulo \(M\) è detto \textbf{coerente} se è finitamente generato e tutti
+    i suoi sottomoduli finitamente generati sono finitamente presentati.
+\end{definition}
+\begin{remark}{}
+    Chiaramente essendo \(M \subseteq M \) un sottomodulo, se è coerente è anche
+    f.p.
+\end{remark}
+\begin{definition}{Anello coerente}
+    Un anello \(A\) è \textbf{coerente} (a sinistra) se \(_AA\) è \(A\)-modulo
+    coerente (ossia tutti gli ideali sinistri f.g. di \(A\) sono f.p.)
+\end{definition}
+\begin{remark}{}
+    Se \(A\) è noetheriano e \(M\) è un \(A\)-modulo, allora
+    \[
+      M \text{ coerente } \iff M \text{ f.p. } \iff M \text{ f.g. } \iff M
+      \text{ noetheriano }
+    \]
+    in particolare \(A\) è coerente. 
+\end{remark}
+\begin{proof}{}
+    Sappiamo già che \(M\) noetheriano se e solo se \(M\) f.g. Resta da
+    dimostrare dunque che \(M\) noetheriano se e solo se \(M\) è coerente. So
+    che \(M' \subseteq M \) f.g. è noetheriano (perché \(M\) lo è). Allora esiste la successione esatta 
+    \[
+      0 \to \mathrm{Ker} p \to A^{n} \overset{p}{\to } M' \to 0
+    \]
+    Ora poiché \(A\) è noetheriano, anche \(A^{n}\) lo è, e dunque \(\mathrm{Ker} p \) è noetheriano, dunque \(\mathrm{Ker}p\) è f.g. e infine \(M'\) è f.p.
+\end{proof}
+\begin{remark}{}
+    Sia \(A\) coerente non noetheriano, allora \(_AA\) è coerente non
+    noetheriano
+\end{remark}
+\begin{example}{}
+    Sia \(A\) non noetheriano, \(I \subseteq A \) ideale sinistro non f.g.,
+    allora \(A/I\) è f.g. non f.p. e \(A / I\) può anche essere notheriano.
+
+    Un esempio è \(A = \mathbb{K}[X_n | n \in \mathbb{N}]\), \(I = {(X_n | n \in \mathbb{N})}\), \(A / I = \mathbb{K}\) 
+
+\end{example}
+
+\begin{remark}{}
+    Sia \(f : M \to N\) \(A\)-lineare, con \(M, N\) finitamente generati. Allora
+    \(\mathrm{Im} f \cong M / \mathrm{Ker} f\) e \(\mathrm{coKer} f \cong N / \mathrm{Im} f \)
+    sono finitamente generati (punto 0. della proposizione) ma non
+    necessariamente anche \(\mathrm{Ker} f\) se \(A\) è non noetheriano.
+    % TODO inserire esempio
+\end{remark}
+
+
+\begin{proposition}{}
+    Sia \(0 \to M' \overset{i}{\to } m \overset{p}{\to } M'' \to 0\) esatta di
+    \(A\)-moduli.
+\begin{enumerate}[label = \arabic*.]
+    \item \(M'\) f.g. e \(M\) coerente, allora \(M''\) è coerente
+    \item \(M', M''\) coerenti, allora \(M\) è coerente
+    \item \(M\) è coerente, \(M''\) è f.p., allora \(M'\) è coerente
+\end{enumerate}
+in particolare \(M', M, M''\) sono coerenti se due di essi lo sono.
+\end{proposition}
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item \(M''\) è f.g. per il punto 0. della proposizione~\ref{prop:varie}.
+        \(N'' \subseteq M'' \)  è f.g., allora c'è una successione esatta
+        \[
+          0 \to M' \to N := p^{-1}{(N'')} \to N'' \to 0
+        \]
+        Allora \(N\) è f.g. per 1. di~\ref{prop:varie} e dunque \(N\) è f.p.
+        perché \(M\) è coerente, da cui \(N''\) è f.p. per 4. di \ref{prop:varie}
+    \item \(M\) è f.g. per 1. di~\ref{prop:varie}, se \(N \subseteq M \)
+        sottomodulo finitamente generato, allora esiste la successione esatta
+        \[
+          0 \to N' := i^{-1}{(N)} \to N \to N'' := p{(N)} \to 0
+        \]
+        Allora \(N''\) è f.g. per 0. di~\ref{prop:varie} da cui \(N''\) è f.p.
+        per la coerenza di \(M\), dunque \(N'\) è f.g. per 3. di~\ref{prop:varie}. Segue dalla oerenza di \(M'\) che \(N'\) è f.p. e dunque \(N\) lo è per 2. di~\ref{prop:varie}
+    \item M' è f.g. per 3. di~\ref{prop:varie} dunque \(M'\) è coerente perché
+        \(M' \cong i{(M')} \subseteq M \) sottomodulo è f.g. e \(M\) è coerente.
+\end{enumerate}
+\end{proof}
+\begin{eser}{}
+    mostrare che
+    \[
+      \bigoplus_{i=1} ^{n} M_i \text{ coerente } \iff M_{i} \text{ coerente } \forall i
+    \]
+\end{eser}
+
+\begin{corollary}{}
+    Sia \(f: M \to N\) \(A\)-lineare, \(M, N\) coerenti, allora \\ \(\mathrm{Ker}f, \mathrm{Im}f, \mathrm{coKer}f\) sono coerenti.
+\end{corollary}
+\begin{proof}{}
+    \(\mathrm{Im}f \cong M / \mathrm{Ker} f\) è f.g. per 0. di~\ref{prop:varie}
+\end{proof}
+\begin{corollary}{}
+    Se \(A\) è coerente e \(M\) è un \(A\)-modulo f.p., allora \(M\) è coerente.
+\end{corollary}
+\begin{proof}{}
+    Basta osservare che per definizione esiste una successione esatta 
+    \[
+      A^{m} \overset{f}{\to } A^{n} \to M \to 0
+    \]
+    e in particolare dunque \(M \cong \mathrm{coKer}f\) e poiché \(A^{m}\) e \(A^{n}\) sono coerenti, lo è pure \(M\) 
+\end{proof}
+\begin{example}{}
+    Sia \(A\) commutativo tale che \(A[X_{1}, \dots, X_{n}]\) sia coerente \(\forall n \in \mathbb{N}\) (ad esempio \(A\) noetheriano, per il teorema della base di Hilbert)
+    Allora \(A[X_{\lambda} | \lambda \in \Lambda]\) è coerente \(\forall \Lambda\), anche se non è noetheriano per \(\# \Lambda = +\infty\) e \(A \neq 0\).
+    \begin{proof}[Idea della dimostrazione]
+        Sia \(I \subseteq B \) ideale f.g., ossia \(I = {(f_{1}, \dots, f_{n})}\). Allora \(\exists \Lambda_{0} \subseteq \Lambda \) finito tale che \(f_{1} \in B_{0} := A[X_\lambda | \lambda \in \Lambda_{0}]\) 
+    \end{proof}
+\end{example}
+\begin{example}[Anello non coerente]
+    Presi \(A\) e \(B\) come prima, ma supponiamo che \(A = \mathbb{K}\) campo.
+    Prendiamo dunque \(J := {(X_{\lambda} | \lambda \in \Lambda)}\), con \(\#
+    \Lambda = +\infty\). Allora preso
+    \[
+      C = B / J^2
+    \]
+    non è coerente. Preso infatti ad esempio 
+    \[
+      I = C \overline{X_{\lambda} } \text{  con }\lambda \in \Lambda
+    \]
+    è f.g. ma non f.p. perché c'è la successione esatta 
+    \[
+      0 \to J / J^2 \to C \to I \to 0
+    \]
+    e \(J / J^2\) è \(C\)-modulo annullato da \(J / J^2\) e come \(C / {(J / J^2)} \cong B / J \cong \mathbb{K}\)-modulo ha dimensione \(\infty\)  con base \(\{\overline{x_{\lambda} }| \lambda \in \Lambda \} \) 
+\end{example}
+
 

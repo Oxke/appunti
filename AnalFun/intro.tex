@@ -551,6 +551,40 @@ T: X\to Y\). Allora \(T\) è lineare se \[T{(\alpha x + \beta y)} = \alpha T{(x)
 \end{itemize}
 \end{proof}
 
+\section{Hahn - Banach}
+\begin{theorem}[Hahn - Banach (spazi normati)]
+    Sia \(X\) uno spazio normato, \(X_{0}\) un sottospazio. Sia \(g : X_{0} \to X\) lineare e continua, cioè \(g \in X_{0}'\). Allora \(\exists f: X \to \mathbb{K}\) lineare e continua, ossia \(f \in X'\) tale che
+\begin{enumerate}[label = \arabic*)]
+    \item \(f\) prolunga \(g\) 
+    \item \(\|f\|_{X'} = \|g\|_{X_{0}'}\)
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}{}
+    sia \(p{(x)} = \|g\|_{X_{0}'} \|x\| \). Allora \(p : X\to \mathbb{R}\) ed è
+    sublineare e omogenea, dunque è una seminorma. 
+    %TODO finire dimostrazione
+\end{proof}
+\begin{example}{}
+    Sia \(X = \mathbb{R}^2\), allora un generico operatore lineare \(\mathbb{R}^2\to \mathbb{R}\) è del tipo \(x \mapsto a \cdot x\), con \(a \in \mathbb{R}^2\).
+
+    Allora \(\|f\|_{\mathcal{L}{(\mathbb{R}^2, \mathbb{R})}}  = \sup_{x \in \mathbb{R}^2\sminus \{0\} } \frac{|fx|}{\|x\|_p}\) 
+    e abbiamo che \(|fx| \le \|a\|_q \|x\|_p\) con \(\frac{1}{q}+\frac{1}{p} = 1\). Dunque concludiamo che \(\|f\| \le \|a\|_q\). In realtà questa è un'uguaglianza. Basta infatti prendere 
+    \[
+      \overline{x} = {\left( |a_{1}|^{q-2}a_{1}, |a_{2}|^{q-2}a_{2} \right)} \implies \|x\|_p^{p} = |a_{1}|^{{(q-1)}p} + |a_{2}|^{{(q-1)}p} = |a_{1}|^{q} + |a_{2}|^{q} = \|a\|_q^{q}
+    \]
+dove si è usato che \(\frac{1}{p}+\frac{1}{q} = 1 \implies {(q-1)}p = q\). Ma
+inoltre abbiamo che
+\[
+  |f\overline{x}| = |a \cdot \overline{x}| = \|a\|_q^{q}
+\]
+concludiamo che
+\[
+  \|f\|_{\mathcal{L}{(\mathbb{R}^2, \mathbb{R})}} \ge \frac{|fx|}{\|\overline{x}\|_p} = \|a\|_q^{q - \frac{q}{p}} = \|a\|_q
+\]
+\end{example}
+
+Sia \(X_{0} = \{x \in \mathbb{R}^2 : x = {(0,x_{2})},\,\, x_{2} \in \mathbb{R}\} \) 
 
 
 

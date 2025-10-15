@@ -1,0 +1,152 @@
+\chapter{Categorie}
+
+\begin{definition}{Categoria}
+    Una \textbf{categoria} \(C\) è data da una classe di oggetti \(\mathrm{Ob}{(C)}\) e \(\forall X, Y \in \mathrm{Ob}{(C)}\) da un insieme di morfismi da \(X \) a \(Y\) indicato con
+    \(\mathrm{Hom}{(X,Y)} = \mathrm{Hom}_C {(X, Y)} = C{(X, Y)}\)  e da una
+   azione  composizione di morfismi, cioè \(\forall X, Y, Z \in \mathrm{Ob}{(C)}\)
+    (anche scritto \(X, Y, Z \in C\) ) un'operazione 
+    \begin{align*}
+        C{(X, Y)} \times  C{(Y, Z)} &\to  C{(X, Z)}
+        {(f, g)} &\mapsto g \circ f
+    \end{align*}
+
+    tale che 
+\begin{enumerate}[label = \arabic*.]
+    \item[0.] \(C{(X,Y)} \cap  C{(X', Y')} \neq \varnothing \implies X = X' \text{ e } Y = Y'\) 
+    \item[1.] \(\circ\) è associativa, cioè \(\forall X, Y, Z, W \in C\) e \(\forall f \in C{(X,Y)}\) e \(\forall g \in C{(Y, Z)}\) e \(\forall h \in C{(Z, W)}\)  allora 
+        \[
+          h \circ {(g \circ f)} = {(h \circ g)} \circ f
+        \]
+    \item[2.] \(\forall  X \in  C \) esiste \(1_X = \mathrm{id}_X \in C{(X, X)}\)
+        che è eleemento neutro di \(X\) cioè \(\forall Y \in C\) e \(\forall f
+        \in C{(X, Y)}\), 
+        \[
+          f \circ 1_X = f \quad, \quad 1_Y \circ f = f
+        \]
+\end{enumerate}
+\end{definition}
+\begin{example}{}
+    La categoria degli insiemi \(\mathbf{Set} \) che ha come oggetti tutti gli
+    insiemi e \(\forall X, Y \in \mathbf{Set} \) i morfismi \(\mathbf{Set}{(X, Y)} = \{f : X \to Y\}  \) le funzioni e \(\circ\) la composizione di funzioni
+\end{example}
+\begin{remark}{}
+    Se ho \(C\) tale che valgano solo 1. e 2. e non necessariamente 0. posso
+    ottenere la categoria \(C'\) che soddisfa anche 0. ponendo \(\mathrm{Ob}{(C')} := \mathrm{Ob}{(C)}\) e 
+    \[
+      C'{(X, Y)} := \{X\} \times C{(X,Y)} \times {(Y)}
+    \]
+\end{remark}
+\begin{example}{}
+    Le categorie concrete, in cui gli oggetti sono insiemi con qualche struttura
+    e i morfismi sono funzioni tra insiemi che preservano la struttura (con \(\circ\) sempre la composizione di funzioni). In particolare:
+\begin{itemize}
+    \item La categoria \(\mathbf{Grp}\) dei gruppi, dove gli oggetti sono i
+        gruppi e i morfismi gli omomorfismi di gruppi
+    \item La categoria \(\mathbf{Rng}\) degli anelli
+    \item Dato un anello \(A\), la categoria \(\mathbf{A-Mod}\) / \(\mathbf{Mod-A}\) degli \(A\)-moduli sinistri / destri
+    \item Dato un anello commutativo \(A\), la categoria \(\mathbf{A-Alg}\)
+        delle \(A\)-algebre
+    \item La categoria \(\mathbf{Top}\) degli spazi topologici (con funzioni
+        continue come morfismi)
+\end{itemize}
+\end{example}
+\begin{note}{}
+    Dato \(f \in C{(X, Y)}\) si può indicare con \(f : X \to Y\) ``come fosse
+    una funzione''
+\end{note}
+
+\begin{example}{}
+    Le categorie discrete, cioè tali che gli unici morfismi sono \(1_X\) per
+    ogni \(X \in C\).
+\end{example}
+
+\begin{example}{}
+    \(C\) tale che \(\forall X, Y \in C\), \(\# C {(X, Y)} = 1\), ottengo
+    una relazione \(\preccurlyeq \) su \(\mathrm{Ob}{(C)}\) in cui
+    \[
+      X \preccurlyeq Y \iff C{(X, Y)} \neq \varnothing
+    \]
+    e \(\preccurlyeq\)  è riflessivo (perché \(\exists  1_X \in C{(X, X)} \forall X \in C\)) e transitivo, perché \(\exists \circ\). Ne consegue che \(\preccurlyeq\) è un \emph{preordine}
+
+    Viceversa, data una relazione di preordine \(\preccurlyeq\) su un insieme (o
+    una classe) \(S\), ottengo una categoria \(C\) con \(\mathrm{Ob}{(C)} := S\) e \(\forall X, Y \in S\), 
+    \[
+      C{(X, Y)} := \begin{cases}{}
+          \{f_{X,Y} \} & \text{ se } X \preccurlyeq Y \\
+          \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con l'unica composizione possibile
+\end{example}
+
+\begin{example}[Categoria Vuota]
+    Prendendo \(\mathrm{Ob}{(C)} = \varnothing\)
+\end{example}
+\begin{remark}{}
+    \(\forall X \in C\) con \(C\) una categoria, \(\mathrm{End}_C{(X)} := C{(X, X)}\) è un monoide con \(\circ\), ne consegue il prossimo esempio
+\end{remark}
+\begin{example}[Monoide]
+    Una categoria con un solo oggetto è un monoide. Viceversa ogni monoide può
+    essere visto come categoria di un solo oggetto.
+\end{example}
+
+\begin{example}[Diagrammi]
+    Possiamo definire categorie date da diagrammi, in cui si rappresentano i
+    morfismi (non l'identità). Ad esempio:
+\[\begin{tikzcd}
+	\bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift right, from=1-3, to=1-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-7, to=1-6]
+\end{tikzcd}\]
+    sono tre categorie diverse, rispettivamente con 2, 2, e 3 oggetti
+\end{example}
+
+\begin{definition}{Categoria opposta}
+    La \textbf{categoria opposta} di \(C\) è denotata \(C^{op}\) ed è definita
+    da
+    \[
+        \mathrm{Ob}{(C^{op})} := \mathrm{Ob}{(C)} \quad C^{op}{(X, Y)} := C{(Y, X)}
+    \]
+    con composizione in \(\circ^{op}\) data da \(f \circ^{op} g := g \circ f\) 
+\end{definition}
+\begin{remark}{}
+    \[
+      {(C^{op})}^{op} = C
+    \]
+\end{remark}
+\begin{example}[Categoria Prodotto]
+    Siano \(C_{\lambda} \) per \(\lambda \in \Lambda\) delle categorie. Allora
+    la categoria prodotto
+    \[
+      C := \prod_{\lambda \in \Lambda} C_{\lambda} 
+    \]
+    è definita da 
+    \begin{align*}
+      \mathrm{Ob}{(C)} &:= \prod_{\lambda \in \Lambda} \mathrm{Ob}{(C_\lambda)} \\
+      C{({(X_{\lambda} )}_{\lambda \in \Lambda}, {(Y_{\lambda} )}_{\lambda \in \Lambda} )} &:= \prod_{\lambda \in \Lambda} C_{\lambda} {(X_{\lambda} , Y_\lambda)} \\
+      {(g_{\lambda} )}_{\lambda \in \Lambda} \circ {(f_{\lambda} )}_{\lambda \in \Lambda} &:= {(g_{\lambda} \circ f_{\lambda} )}_{\lambda \in \Lambda} 
+    \end{align*}
+\end{example}
+
+\begin{example}[Cateogoria Coprodotto]
+    La categoria coprodotto
+    \[
+      C := \coprod_{\lambda \in \Lambda} C_{\lambda} 
+    \]
+    è definita con \(\mathrm{Ob}{(C)} := \coprod_{\lambda \in \Lambda} \mathrm{Ob}{(C_{\lambda} )}\) l'unione disgiunta. 
+    \[
+      \forall X, Y \in C \quad C{(X, Y)} := \begin{cases}{}
+          C_{\lambda} {(X, Y)} & \text{ se } X, Y \in C_{\lambda} \text{ per
+          qualche } \lambda \in \Lambda \\
+              \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con \(\circ\) ovvia.
+\end{example}
+
+
+
+
