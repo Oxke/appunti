@@ -12,4 +12,65 @@
 
 \input{./intro.tex}
 
+\input{./hahn-banach.tex}
+
+\begin{eser}
+    Mostrare che
+    \begin{align*}
+        c_{0} &= \{x : \mathbb{N} \to \mathbb{R} : \lim_{n \to \infty} x{(n)} = 0\} \\ 
+        c &= \{x \in \ell^{\infty} : \lim_{n \to \infty} x{(n)} \text{ esiste }\} 
+    \end{align*}
+    sono sottospazi chiusi di \(\ell^{\infty}\).
+    \tcblower
+    Le dimostrazioni contose esplicite sono lasciate davvero come esercizio,
+    riporto dimostrazioni più sintetiche.
+
+    Utilizzando la \(f\) definita come il limite come poco più avanti (dopo il
+    teorema), abbiamo che \(c_{0}\) è chiuso in quanto \(c_{0} = f^{-1}{(\{0\} )}\)
+    controimmagine continua di chiuso.
+\end{eser}
+
+
+\begin{theorem}{}
+    Sia \(p \in [1, +\infty)\), sia \(f \in {(\ell^{p})}'\). Sia \(q \in \mathbb{R} \) tale che \(\frac{1}{p} + \frac{1}{q} = 1\). Allora
+    \[
+      \exists ! y \in \ell^{q} : \Span{f, x} = \sum_{n=1}^{\infty} x{(n)}y{(n)} 
+    \]
+    e inoltre \(\|f\|_{{(\ell^{p})}'} = \|y\|_{\ell^{q}}  \) 
+\end{theorem}
+Notare che il precedente teorema non vale per \(p = \infty\). Costruiamo infatti
+un funzionale lineare e continuo su \(\ell^{\infty}\) che non si rappresenta con
+\(y \in \ell^{1}\). Consideriamo infatti
+    \(g : c \to \mathbb{R}\) la funzione definita da \(\Span{g, x} = \lim_{n \to \infty} x{(n)}\). Allora \(g\) è lineare ed è continuo perché \(|\Span{g,x} | = | \lim_{n \to \infty} x{(n)} | \le \|x\|_{\infty} \) per cui \(g \in c'\) e in particolare \(\|g\|_{c'} = 1\) ad esempio prendendo la successione \(x \in c\) definita da \(x{(n)} = 1\).
+
+    Estendo ora \(g\) a tutto \(\ell^{\infty}\) con Hahn-Banach, ottenendo \(f :
+    \ell^{\infty} \to \mathbb{R}\) lineare continuo con \(\|f\|_{(\ell^{\infty})'} = 1 \).
+
+    Supponiamo ora per assurdo che esista \(y \in \ell^{1}\) tale che
+    \[
+      \Span{f, x} = \sum_{n=1}^{\infty} y{(n)}x{(n)} \quad \forall x \in \ell^{\infty} 
+    \]
+    e consideriamo ora gli \(x_k\) definiti come\footnote{concedetemi questa notazione da informatico} \(x_k = {(n == k)}\). Allora abbiamo \(\Span{f, x_k} = \lim_{n \to \infty} x_k{(n)} = 0\) ma per ogni \(k\) allora avremmo che \\ \(0 = \Span{f, x_k} = \sum_{n=1}^{\infty} y{(n)}x_k{(n)} = y{(k)} \) per cui \(y = 0\) che è impossibile perché sappiamo che \(f\) ha norma 1.
+
+
+
+\begin{eser}{}
+    Mostrare che
+    \[
+        c_{00} = \{x : \mathbb{N}\to \mathbb{R} \text{ definitivamente nulle}\} 
+    \]
+    è denso in \(\ell^{p}\), per ogni \(p \in [1, \infty)\) 
+\end{eser}
+
+\begin{eser}{}
+Mostrare che \(T : \ell^2 \to \ell^2\) dato da 
+\[
+  {(Tx)}{(n)} = \frac{x{(n)}}{n}
+\]
+è ben definito, lineare, continuo e \(T{(\ell^2)}\) non è chiuso in \(\ell^2\)
+ed è denso in \(\ell^2\) 
+    
+\end{eser}
+
+
 \end{document}

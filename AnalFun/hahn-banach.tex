@@ -1,0 +1,121 @@
+\begin{eser}{}
+    Sia \(Y \subseteq X \) un sottospazio di \(X\) spazio normato. Mostrare che
+    \(\overline{Y}\) è un sottospazio di \(X\).
+\end{eser}
+\begin{lemmao}{}
+    Sia \(X\) uno spazio normato e \(Y \subseteq X \) un sottospazio tale che
+    \(\overline{Y} \subset X \). Allora \(\exists f : X \to \mathbb{K}\) con \(f\) lineare continua, ossia \(f \in X'\) tale che:
+\begin{enumerate}[label = \arabic*.]
+    \item \(f \neq 0\) 
+    \item \(\Span{f, x} = 0\) per ogni \(x \in Y\) 
+\end{enumerate}
+\end{lemmao}
+\begin{remark}{}
+    Sia \(X\) uno spazio normato, \(Y \subseteq X \) un sottospazio si supponga
+    che se un funzionale \(f \in X'\) tale che \(\Span{f, x} = 0\) per ogni \(x \in Y\) allora necessariamente \(f = 0\). Segue che \(\overline{Y} = X\) 
+\end{remark}
+\begin{proof}{}
+    \(\exists x_{0} \in X - \overline{Y}\), allora \(X_{0} = Y \oplus \mathbb{K} x_{0}\). A questo punto prendiamo il funzionale \(g : X_{0} \to \mathbb{K}\) definito da \(g{(y + \alpha x_{0})} = \alpha\). Mostriamo ora che \(g \in X_{0}'\) e che è vero che \(g|_Y = 0\). La seconda è banalmente vera perché se \(y \in Y\) allora \(g{(y)} = g{(y + 0*x_{0})} = 0\). Mostriamo che \(g\) è lineare e continuo. 
+    Supponiamo \(x_{1} = y_{1} + \alpha_{1} x_{0}\) e \(x_{2} = y_{2} + \alpha_{2} x_{0}\). Allora
+    \begin{align*}
+        g{(\lambda x_{1} + \mu x_{2})} &= g{(\lambda y_{1} + \lambda \alpha_{1} x_{0} + \mu y_{2} + \mu \alpha_{2} x_{0})} = \\
+        &= g{({(\lambda y_{1} + \mu y_{2})} + {(\lambda \alpha_{1} + \mu \alpha_{2})} x_{0})} = \lambda \alpha_{1} + \mu \alpha_{2} = \\
+        &= \lambda g{(x_{1})} + \mu g{(x_{2})}
+    \end{align*}
+    Per la continuità, prendiamo \(\alpha \neq 0\) e abbiamo che
+    \[
+      \|x\| = \| y + \alpha x_{0}\| = \left\|{(-\alpha)}{\left(  \frac{y}{-\alpha} - x_{0} \right)} \right\| = | \alpha | \left\| \frac{y}{-\alpha} - x_{0}\right\|
+    \]
+    necessariamente \(\frac{y}{-\alpha} \in Y\) e dunque
+    possiamo proseguire la precedente equazione con 
+    \[
+      \|x\| = | \alpha | \left\| \frac{y}{-\alpha} - x_{0}\right\| \ge
+      |\alpha|\, d{(x_{0}, Y)} = |g{(x)}| \,d(x_{0}, Y)
+    \]
+    per cui concludiamo che \(g\) è continua con norma \(\|g\|\le 1 / {d{(x_{0},
+    Y)}}\). Questa disuguglianza è in realtà un'uguaglianza, infatti
+    poiché \(d{(x_{0}, {Y})} = \inf_{y \in {Y}} \|x_{0} - y\|\) abbiamo che
+    \[
+      \exists  y_{n} \in {Y} : \|y_{n} - x_{0}\| < \frac{n+1}{n} d{(x_{0}, {Y})}
+    \]
+    e ora abbiamo che
+    \[
+      \frac{n}{n+1} \frac{\|y_{n} - x_{0}\|}{d{(x_{0}, Y)}} < 1 = | g{(x_{0} -
+      y_{n})} | \le \|g\| \|x_{0} - y_{n}\|
+    \]
+    da cui per \(n \to \infty\) otteniamo \(\|g\|_{X_{0}'} \ge 1 / d{(x_{0}, Y)}\).
+
+    Ora estendo \(g\) a tutto \(X\) con Hahn-Banach ottenendo \(f \in X'\) tale
+    che \(f|_{X_{0}}  = g \) e dunque \(f|_Y = 0\). Inoltre l'estensione poiché
+    Hahn-Banach conserva la norma, abbiamo che
+    \[
+      \|f\|_{X'} = \frac{1}{d{(x_{0}, Y)}}
+    \]
+\end{proof}
+\begin{corollary}{}
+    Sia \(X\) uno spazio normato reale. Allora per ogni \(x_{0} \in X\) esiste una \(f \in X'\) tale che \(\Span{f, x_{0}} = \|x_{0}\|^2\) e \(\|f\|_{X'} = \|x_{0}\|\) 
+\end{corollary}
+\begin{proof}{}
+    Sia \(X_{0} = \mathbb{R}x_{0}\). Sia \(x = tx_{0} \in X_{0}\), allora
+    definiamo \(g{(x)} = g{(tx_{0})} = t\|x_{0}\|^2\). Verifichiamo che la norma
+    sia corretta: \(|g{(tx_{0})}| = |t| \|x_{0}\|^2\) dunque \(\|g\|_{X_{0}'} = \|x_{0}\| \).
+
+    Per Hahn-Banach possiamo estendere \(g\) a tutto \(X'\) ottenendo \(f : X \to \mathbb{R}\) tale che \(\Span{f, x} = \Span{g, x} \) per ogni \(x \in X_{0}\) e \(\|f\|_{X'}  = \|g\|_{X_{0}'} =\|x_{0}\| \). In particolare anche \(\Span{f, x_{0}}  = \Span{g, x_{0}}  = \|x_{0}\|^2\) 
+\end{proof}
+
+Il corollario precedente motiva la seguente definizione:
+\begin{definition}{Mappa di dualità}
+    Chiamiamo la \textbf{mappa di dualità} la seguente funzione
+    \begin{align*}
+        \mathcal{F}: X &\longrightarrow 2^{X'} \\
+        x &\longmapsto \mathcal{F}(x) = \{f \in X' : \Span{f, x} =
+        \|x\|^2 \,\, ; \,\, \|f\|_{X'} = \|x\|\} 
+    \end{align*}
+    che associa a ogni elemento di \(X\) l'insieme degli elementi ``a lui duali''.
+\end{definition}
+
+\begin{eser}{}
+    Consideriamo 
+    \[
+      \mathcal{F}'{(x)} = \{f \in X' : \Span{f, x} = \|x \|^2 \,\, ; \,\,
+      \|f\|_{X'} \le \|x\|\} '
+    \]
+    Mostrare che \(\mathcal{F}' = \mathcal{F}\) 
+    \tcblower
+    Fissato \(x \in X\), è evidente che \(\mathcal{F}{(x)} \subseteq \mathcal{F}'{(x)} \). Supponiamo ora che \(f \in \mathcal{F}'{(x)}\), ossia \(\|f\|_{X'} \le \|x\|\). Da \(|\Span{f, x}| = \|x\| \|x\| \) concludiamo che \(\|f\|_{X'} = \|x\|\) e dunque \(f \in \mathcal{F}{(x)}\) 
+\end{eser}
+
+\begin{eser}{}
+    Consideriamo
+    \[
+      \mathcal{I}{(x)} = \left\{f \in X' : \frac{1}{2}\|y\|^2 - \frac{1}{2}\|x\|^2 \ge \Span{f, y-x} \,\, \forall y \in X \right\} 
+    \]
+    Mostrare che \(\mathcal{I} = \mathcal{F}\) 
+    \tcblower
+    Fissiamo \(x \in X\) 
+    \begin{itemize}
+        \item[\(\subseteq \)] Sia \(f \in \mathcal{I}{(x)}\). Iniziamo mostrando
+            che \(\Span{f, x} = \|x\|^2\). Scegliamo \(y = \alpha x \) per \(\alpha \in \mathbb{R}\). Segue che
+            \[
+              \frac{1}{2}\alpha^2 \|x\|^2 - \frac{1}{2}\|x\|^2 \ge \Span{f, x}
+              {(\alpha - 1)}
+            \]
+            con questa uguaglianza, dividendo i casi per \(
+            \alpha > 0 \) e \(\alpha < 1\), prendiamo il limite di \(\alpha \to 1^{+}\) e \(\alpha \to 1^{-}\), ottenendo le due disuguaglianza \(\Span{f, x} \le \|x\|^2\) e \(\Span{f, x} \ge \|x\|^2\).
+
+            Rimane da controllare che \(\|f\|_{X'} \le \|x\|\). Scegliamo \(y \in X\) tale che \(\|y\| = \|x\|\). Otteniamo che
+            \[
+              \Span{f, y}  \le  \Span{f, x}  = \|x\|^2 \implies |\Span{f, y}| \le
+              \|y\|\|x\| \implies \|f\|_{X'} \le \|x\|
+            \]
+        \item[\(\supseteq \)] Sia \(f \in \mathcal{F}{(x)}\) e \(y \in X\). Allora 
+            \begin{align*}
+                \Span{f, y - x} &= \Span{f, y}  - \Span{f, x} \le \|f\|\|y\| - \|x\|^2 \le \frac{1}{2} \|f\|^2 + \frac{1}{2}\|y\| ^2 - \|x\|^2 \\ &\le  \frac{1}{2}\|y\|^2 - \frac{1}{2}\|x\|^2
+            \end{align*}
+            da cui \(f \in \mathcal{I}{(x)}\) 
+    \end{itemize}
+\end{eser}
+\begin{remark}{}
+    Il precedente esercizio suggerisce che \(f \in \mathcal{F}{(x)}\) svolge in
+    un certo senso il ruolo della derivata di \(\varphi {(x)} = \frac{1}{2}\|x\|^2\)  valutata in \(x\). Vedremo più avanti il significato di questa analogia.
+\end{remark}
