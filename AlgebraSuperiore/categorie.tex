@@ -26,27 +26,27 @@
 \end{enumerate}
 \end{definition}
 \begin{example}{}
-    La categoria degli insiemi \(\mathbf{Set} \) che ha come oggetti tutti gli
-    insiemi e \(\forall X, Y \in \mathbf{Set} \) i morfismi \(\mathbf{Set}{(X, Y)} = \{f : X \to Y\}  \) le funzioni e \(\circ\) la composizione di funzioni
+    La categoria degli insiemi \(\mathtt{Set} \) che ha come oggetti tutti gli
+    insiemi e \(\forall X, Y \in \mathtt{Set} \) i morfismi \(\mathtt{Set}{(X, Y)} = \{f : X \to Y\}  \) le funzioni e \(\circ\) la composizione di funzioni
 \end{example}
 \begin{remark}{}
     Se ho \(C\) tale che valgano solo 1. e 2. e non necessariamente 0. posso
     ottenere la categoria \(C'\) che soddisfa anche 0. ponendo \(\mathrm{Ob}{(C')} := \mathrm{Ob}{(C)}\) e 
     \[
-      C'{(X, Y)} := \{X\} \times C{(X,Y)} \times {(Y)}
+      C'{(X, Y)} := \{X\} \times C{(X,Y)} \times \{Y\} 
     \]
 \end{remark}
 \begin{example}{}
     Le categorie concrete, in cui gli oggetti sono insiemi con qualche struttura
     e i morfismi sono funzioni tra insiemi che preservano la struttura (con \(\circ\) sempre la composizione di funzioni). In particolare:
 \begin{itemize}
-    \item La categoria \(\mathbf{Grp}\) dei gruppi, dove gli oggetti sono i
+    \item La categoria \(\mathtt{Grp}\) dei gruppi, dove gli oggetti sono i
         gruppi e i morfismi gli omomorfismi di gruppi
-    \item La categoria \(\mathbf{Rng}\) degli anelli
-    \item Dato un anello \(A\), la categoria \(\mathbf{A-Mod}\) / \(\mathbf{Mod-A}\) degli \(A\)-moduli sinistri / destri
-    \item Dato un anello commutativo \(A\), la categoria \(\mathbf{A-Alg}\)
+    \item La categoria \(\mathtt{Rng}\) degli anelli
+    \item Dato un anello \(A\), la categoria \(\mathtt{A-Mod}\) / \(\mathtt{Mod-A}\) degli \(A\)-moduli sinistri / destri
+    \item Dato un anello commutativo \(A\), la categoria \(\mathtt{A-Alg}\)
         delle \(A\)-algebre
-    \item La categoria \(\mathbf{Top}\) degli spazi topologici (con funzioni
+    \item La categoria \(\mathtt{Top}\) degli spazi topologici (con funzioni
         continue come morfismi)
 \end{itemize}
 \end{example}
