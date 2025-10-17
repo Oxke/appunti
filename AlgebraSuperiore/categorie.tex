@@ -147,6 +147,285 @@
     con \(\circ\) ovvia.
 \end{example}
 
+\begin{definition}{Sottocategoria}
+    Sia \(C\) una categoria. Allora una sottocategoria \(C'\) di \(C\) è data
+    da una sottoclasse \(\mathrm{Ob}{(C')} \subseteq \mathrm{Ob}{(C)} \) e \(\forall X, Y \in C'\) da un sottoinsieme \(C'{(X, Y)} \subseteq C{(X, Y)} \) tale che \(\circ\) si restringe a \(C'\) e \(1_X \in C'{(X, X)}\) per ogni \(X \in C'\).
+
+    In particolare \(C'\) è una categoria.
+\end{definition}
+
+\begin{example}{}
+    Se \(C\) è un monoide (cateogoria di un oggetto), allora le sottocategorie
+    non vuote di \(C\) sono i sottomonoidi.
+\end{example}
+
+\begin{definition}{Sottocategoria Piena}
+    Una sottocategoria \(C'\) di \(C\) si dice \textbf{piena} se \(C'{(X, Y)} =
+    C{(X, Y)}\) per ogni \(X, Y \in C'\) 
+\end{definition}
+
+\begin{remark}{}
+    Una sottocategoria piena di \(C\) equivale a dare una sottoclasse di \(\mathrm{Ob}{(C)}\) 
+\end{remark}
+
+\begin{example}[Gruppi Abeliani]
+    \(\mathtt{Ab} \subseteq \mathtt{Grp} \) sottocategoria piena dei gruppi
+    abeliani. Similmente anche \(\mathtt{CRng} \subseteq \mathtt{Rng} \)
+    sottocategoria piena degli anelli commutativi.
+\end{example}
+
+Oltre alle sotto-strutture sono anche importanti i quozienti, e anche qui
+possiamo dare una definizione astratta
+
+\begin{definition}{Congruenza}
+    Una congruenza \(\sim \) su una categoria \(C\) è data da una relazione di
+    equivalenza \(\sim \) su \(C{(X, Y)}\) \(\forall X, Y \in C\) tale che
+    \[
+      \forall X, Y, Z \in C, \, \forall f, f' \in C{(X, Y)} \, \forall g,
+      g' \in C{(Y, Z)} \quad f \sim f', g \sim g' \implies g \circ f \sim g'
+      \circ f'
+    \]
+    equivalentemente \(g \sim g' \implies g \circ f \sim g' \circ f\) e \(h \circ g \sim h \circ g'\) 
+\end{definition}
+
+\begin{definition}{Quoziente}
+    Sia \(\sim \) una congruenza su \(C\), allora possiamo definire la categoria
+    quoziente \(C / \sim \) definita da
+    \[
+      \mathrm{Ob}{(C / \sim )} = \mathrm{Ob}{(C)} \quad {(C / \sim )}{(X, Y)} :=
+      C{(X, Y)} / \sim \quad \forall X, Y \in C
+    \]
+    e \(\circ\) è indotta da quella di \(C\), ossia
+    \[
+      \overline{g} \circ \overline{f} := \overline{g \circ f}
+    \]
+\end{definition}
+
+\begin{example}[Omotopia]
+    Sia \(C = \mathtt{Top}\) e \(\sim_h \) l'omotopia, ossia \(f, g : X \to Y\)
+    sono omotope se \(\exists  H : X \times [0, 1] \to Y\) continue tali che 
+    \[
+      f{(x)} = H{(x, 0)}, \quad g{(x)} = H{(x, 1)} \quad \forall x \in X
+    \]
+    e si ottiene \(\mathtt{Toph} := \mathtt{Top} / \sim_h \) 
+\end{example}
+
+\begin{example}[Gruppo quoziente]
+    Sia \(G\) un gruppo (visto come monoide, ossia categoria di un oggetto) e
+    sia \(H \vartriangleleft G\) e \(\sim \) su \(G\) data da \(a \sim b \iff aH
+    = bH\). Viceversa ogni \(\sim \) congruenza su \(G\) si può scrivere in tal
+    modo prendendo \(H = \{a \in G : a \sim 1\} \vartriangleleft G \) (esercizio).
+\end{example}
+
+\begin{definition}{morfismo invertibile}
+    Sia \(f : X\to Y\) un morfismo in una categoria \(C\). Allora esso è
+    invertibile a sinistra (destra) se \(\exists  f' : Y \to X\) tale che
+    \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)).
+\end{definition}
+\begin{remark}{}
+    \(f\) è invertibile a sinistra (destra) in \(C\), allora \(f\) è invertibile
+    a destra (sinistra) in \(C^{op}\) 
+\end{remark}
+
+\begin{definition}{Isomorfismo}
+    \(f : X \to Y\) è un \textbf{isomorfismo} se \(\exists f' : Y \to X\) tale che \(f'
+    \circ f = 1_X\) e \(f \circ f' = 1_Y\) 
+\end{definition}
+\begin{remark}{}
+    \(f\) è isomorfismo se e solo se \(f\) è invertibile a destra e a sinistra. 
+\end{remark}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio
+    \item[\(\impliedby \)] \(\exists f', f''\) tale che \(f' \circ f = 1_X\)  e
+        \(f \circ f'' = 1_Y\), allora
+        \[
+          f' \circ {( f \circ f'')} = f' = f'' = {(f' \circ f)} \circ f''
+        \]
+        e dunque \(f\) è invertibile.
+\end{itemize}
+    In particolare dunque la \(f'\) della definizione di isomorfismo è unica e
+    viene denotata \(f^{-1}\) 
+\end{proof}
+
+\begin{definition}{}
+    Siano \(X, Y \in C\). Allora \(X\) e \(Y\) sono isomorfe (\(X \cong Y\)) se
+    esiste un \(f: X \to Y\) isomorfismo.
+\end{definition}
+
+\begin{remark}{}
+    \(1_X\) è isomorfismo e \(1_X^{-1} = 1_X\). Se \(f\) isomorfismo
+    allora \(f^{-1}\) isomorfismo e \({(f^{-1})}^{-1} = f\). Se \(f, g\)
+    isomorfismi componibili, allora \(g \circ f\) è isomorfismo e \({(g \circ f)}^{-1} = f^{-1} \circ g^{-1}\) 
+
+    Ne segue che \(\cong\) è una relazione di equivalenza su \(\mathrm{Ob}{(C)}\) 
+\end{remark}
+
+\begin{definition}{}
+    Un morfismo \(f : X \to Y\) in \(C\) è detto \textbf{monomorfismo} se \(\forall Z \in C\) la funzione 
+    \begin{align*}
+        f_*: C{(Z, X)} &\longrightarrow C{(Z, Y)} \\
+        g &\longmapsto f_*(g) = f \circ g
+    \end{align*}
+    è iniettiva
+\end{definition}
+\begin{definition}{Epimorfismo}
+    \(f\) è un \textbf{epimorfismo} in \(C\) se è monomorfismo in \(C^{op}\),
+    ossia \(\forall Z \in C\) la funzione
+    \begin{align*}
+        f^*: C{(Y, Z)} &\longrightarrow C{(X, Z)} \\
+        g &\longmapsto f^*(g) = g \circ f
+    \end{align*}
+    è iniettiva.
+\end{definition}
+
+\begin{proposition}{}
+    \(f\) è invertibile a sinistra (destra), allora \(f\) è monomorfismo
+    (epimorfismo)
+\end{proposition}
+\begin{proof}{}
+    Basta dimostrare che se \(f\) è invertibile a sinistra, allora è mono.
+
+    Sappiamo che \(\exists f' : Y\to X\) tale che \(f' \circ f = 1_X\). Dobbiamo
+    dimostrare che \(f_*\) è iniettiva. Siano \(g, h \in C{(Z, X)}\) tali che \(f_*{(g)} = f_*{(h)}\). Allora \(f \circ g = f \circ g\), da cui \(f' \circ f \circ g = f' \circ f \circ h\) e dunque \(g = h\) 
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(C\) concreta. Allora
+    \[
+      f \text{ invertibile a sinistra (destra)} \implies f \text{ iniettiva
+      (suriettiva)} \implies f \text{ mono (epi)}
+    \]
+\end{proposition}
+\begin{proof}{}
+    Non possiamo usare il trick della categoria opposta, perché non è detto che
+    \(C^{op}\) sia ancora concreta.
+
+    Sia \(f'\) tale che \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)), allora
+    chiaramente \(f\) iniettiva (suriettiva) perché le composizioni \(1_X\) e \(1_Y\) sono biunivoche.
+
+    Se \(f\) è iniettiva, allora % TODO finire
+    se \(f\) è suriettiva, allora % TODO finire
+\end{proof}
+
+In generale non vale nessuna delle \(\impliedby\).
+\begin{example}{}
+    In \(\mathtt{Set}\) se \(f : X \to Y\) è suriettiva, allora \(f\) è invertibile a
+    sinistra. Infatti basta scegliere (AOC) \(f'{(y)} \in f^{-1}\{y\} \) per
+    ogni \(y \in Y\). Inoltre se \(X \neq \varnothing\) e \(f : X \to Y\) è
+    iniettiva, allora \(f\) è invertibile a sinistra.
+\end{example}
+
+\begin{eser}{}
+    In \(\mathtt{A-Mod}\), mostrare che \(f : M\to N\) iniettiva è invertibile a
+    sinistra se e solo se \(\mathrm{Im}{(f)} \subseteq N \) è addendo diretto.
+
+    Mostrare che \(f : M \to N\) suriettiva è invertibile a destra se e solo se
+    \(\mathrm{Ker}{(f)} \subseteq M \) è addendo diretto
+
+    Concludere che valgono sempre entrambe le implicazioni se e solo se \(A\) è
+    semisemplice.
+\end{eser}
+
+\begin{example}{}
+    In \(\mathtt{Set}\), se \(f\) è mono (epi), allora \(f\) è iniettiva
+    (suriettiva).
+
+    Infatti, poniamo per assurdo \(f : X \to Y\) non iniettiva, dunque siano \(x, y \in X\) tali che \(f{(x)} = f{(y)}\). Allora preso \(Z = \{z\} \) e \(g, h : Z\to X\) tali che \(g
+    {(z)} = x\) e \(h{(z)} = y\) abbiamo che \(f \circ g = f \circ h\) da cui \(g = h\) e dunque \(x = y\) 
+
+    Supponiamo \(f\) non suriettiva, mostrare \emph{per esercizio} \(\exists g, h : Y \to Z\) tali che
+    \(g \neq h\) ma \(g \circ f = h \circ f\) 
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{A-Mod}\) \(f : M \to N\) è mono (epi), allora \(f\) è iniettiva (suriettiva).
+
+    Infatti \(i : \mathrm{Ker}f \to M\) inclusione tale che \(f \circ i = 0\) e
+    anche \(0 : \mathrm{Ker}f \to M\) è tale che \(f \circ 0 = 0\). Concludiamo
+    che \(i = 0\) e dunque \(\mathrm{Ker}f = 0\).
+
+    Similmente \(\pi : N \to \mathrm{coKer}f\) è tale che \(\pi \circ f = 0\) e
+    se \(f\) è epi allora \(0 = \pi \) e dunque \(\mathrm{coKer} f= 0\) e dunque
+    \(f\) è suriettiva.
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Grp}\) \(f\) mono (epi), allora \(f\) iniettiva (suriettiva)
+
+    Per mono \(\implies \) iniettiva si può usare la stessa dei moduli, mentre
+    per l'altra è un po' più complicato, ma si dimostra che è vero lo stesso
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Rng}\) \(f : A\to B\) mono, allora \(f\) iniettiva. % TODO eser
+
+    Tuttavia \(f\) epi \textbf{non implica} f suriettiva. Ad esempio preso \(i :
+    \mathbb{Z} \hookrightarrow \mathbb{Q}\) è epi, infatti \(\forall A\) anello
+    esiste al più un omomorfismo \(\mathbb{Q} \to A\) (\(f : \mathbb{Q}\to A\)
+    sia omomorfismo, allora \(f|_{\mathbb{Z}} \) è l'unico omomorfismo e \(f{(\frac{a}{b})} = f{(a)}f{(b)}^{-1}\)). Chiaramente però non è suriettiva.
+\end{example}
+
+\begin{definition}{Funtore}
+    Un funtore \(F : C \to D\) tra 2 categorie è dato da una funzione
+    \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) e \(\forall X, X' \in C\) una
+    funzione \(F = F_{X, X'} : C{(X, X')} \to D{(F{(X)}, F{(X')})}\) tale che
+    \[
+      F{(g\circ f)} = F{(g)}\circ F{(f)} 
+    \]
+    (se \(f\) e \(g\) sono componibili in \(C\) ) e \(F{(1_X)} = 1_{F{(X)}} \)
+    per ogni \(X \in C\) 
+    
+\end{definition}
+\begin{proposition}{}
+    Sia \(F\) un funtore e \(f\) invertibile a sinistra (destra). Allora \(F{(f)}\) è invertibile a sinistra (destra)
+\end{proposition}
+\begin{proof}{}
+    \(\exists f'\) tale che \(f' \circ f = 1_X\), allora \(F{(f')} \circ F{(f)} = F{(f'\circ f)} = F{(1_X)} = 1_{F{(X)}} \).
+\end{proof}
+\begin{remark}{}
+    Segue che \(f\) iso, allora \(F{(f)}\) iso e \(F{(f)}^{-1} = F{(f^{-1})}\) 
+\end{remark}
+
+\begin{example}{}
+    Sia \(C' \subseteq C \) sottocategoria. Allora \(C' \to C\), \(x \mapsto x\) e \(f \mapsto f\) è un funtore
+\end{example}
+
+\begin{example}{}
+    Se \(\sim \) è una congruenza, allora \(C \to C /\sim\) è un funtore, con
+    \(x \mapsto x\) e \(f \mapsto \overline{f}\) 
+\end{example}
+
+\begin{example}[Funtore dimenticante]
+    \(C \to \mathtt{Set}\) con \(C\) categoria discreta e \(x \mapsto x\), \(f
+    \mapsto f\) è un funtore, che ``dimentica'' la struttura aggiunta.
+
+    Analogamente anche \(\mathtt{Rng} \to \mathtt{Ab}\), con \({(A, +, \cdot )} \to {(A, +)}\) è un funtore dimenticante.
+\end{example}
+
+\begin{example}{}
+    Sia \(A \to B\) un omomorfismo di anelli. Allora la restrizione degli
+    scalare è un funtore \(\mathtt{B-Mod} \to \mathtt{A-Mod}\) 
+\end{example}
+
+
+\begin{example}{}
+    Funtore tra 2 categorie discrete \(C\) e \(D\) è una funzione \(\mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) 
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 preordini \(C\) e \(D\) è una funzione \(\mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\)  che preserva la relazione di preordine.
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 monoidi è un omomorfismo di monoidi.
+
+    Più in generale dato un monoide e una categoria \(C\) , un funtore \(G \to C\) è dato da \(X \in C\) e da un omomorfismo di monoidi \(G \to \mathrm{End}_C{(X)}\) 
+
+    Se \(G\) è un gruppo un funtore \(G \to C\) è dato da \(X \in C\) e un
+    omomorfismo di gruppi \(G \to \mathrm{Aut}_C{(X)}\). Ad esempio se \(C = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
+\end{example}
+
 
 
 

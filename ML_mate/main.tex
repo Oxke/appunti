@@ -12,4 +12,77 @@
 
 \input{./intro.tex}
 
+Nel caso di funzioni di attivazioni \emph{regolari} \(\max_{x \in [-k, k]} |
+\Phi {(x)} - x | \le \frac{k}{\lambda}\), dove i pesi di \(\Phi\) sono contenuti
+(in valore assoluto) in \([\frac{1}{\lambda}, c\lambda]\) per qualche \(c > 0\).
+Ne consegue che 
+\[
+    \text{ errore } \le \exp {( - \underbrace{\max \left|\log {(\text{weight}
+    {(\Phi)})}\right|}_{\text{bit di informazione nei pesi}})}
+\]
+Ci importa approssimare la mappa \(z \mapsto z^2\), poiché questo implica poter
+approssimare la moltiplicazione \(x,y \mapsto xy\). Infatti
+\[
+  {\left( \frac{x+y}{2} \right)}^2 - {\left( \frac{x-y}{2} \right)}^2 = xy
+\]
+dall'approssimazione della moltiplicazione segue che è possibile approssimare i
+polinomi.
+
+Nel caso di una rete shallow monodimensionale, questa è uguale a 
+\[
+  \sum_{j=1}^{N} c_{j} \mathrm{ReLU}{(a_{j} x + b_{j})} + c_{0} 
+\]
+che è una funzione affine a tratti. Ne consegue che l'errore è proporzionale a
+\(\frac{1}{N}\), con \(N\) il numero di neuroni, infatti divide gli intervalli
+in intervallini di diametro \(h = \frac{1}{N}\).
+
+Vogliamo mostrare che con reti profonde l'errore diminuisce molto più
+velocemente.
+Definiamo ora 
+\[
+  F_{1}{(x)} = \begin{cases}{}
+      2x & x \in [0, \frac{1}{2}] \\
+      2(1-x) & x \in [\frac{1}{2}, 1]
+  \end{cases}
+\]
+che ha \(h = \frac{1}{2}\) e \(\mathtt{depth} = 2\) 
+Se ora compongo \(F_{1}\) con se stessa, otteniamo
+\[F_{2} = F_{1} \circ F_{1} = \begin{cases}{}
+    4x \% 1 & x \in  [0, \frac{1}{4}] \cup [\frac{1}{2, \frac{3}{4}}]
+    \\
+    4(1-x) \% 1 & x \in [\frac{1}{4}, \frac{1}{2}] \cup [\frac{3}{4}, 1]
+\end{cases}
+ \]
+ che ha \(h = \frac{1}{4}\) e \(\mathtt{depth} = 3\). Similmente osserviamo che
+ \[
+   h_N = \frac{1}{2}^{\mathtt{depth} {(F_N)} - 1}
+ \]
+ e la rete ha dimensione \(\mathtt{size}{(F_N)} = 6 + 3^2 {( N - 1)}\).
+
+ Ora però dobbiamo mostrare che è possibile approssimare \(x^2\), e non solo che
+ usando la composizione (rete profonda) è possibile superare la barriera inevitabile per le reti \emph{narrow}, ossia \(h \sim \frac{1}{N}\).
+
+\begin{proposition}{}
+     \[
+         \left| x^2 - x + \underbrace{\sum_{n=1}^{N} \frac{F_{n}{(x)}}{2^{2n}}}_{\text{ interpolante di \(x^2\) nei punti \(\{k 2^{-N}\}_{k=0}^{2^N} \) }}   \right| \le
+       2^{-2N -2}
+     \]
+\end{proposition}
+
+\begin{definition}{Concatenazione Sparsa}
+    Siano \(L_{1}, L_{2} \in \mathbb{N}\) due profondità, \(\Phi_{1}, \Phi_{2}\) due reti neurali a parametri \\ rispettivamente \(A_{k_{1}}^{{(1)}}, b_{k_{1}}^{{(1)}}\) e \(A_{k_{2}}^{{(2)}}, b_{k_{2}}^{{(2)}}\) per \(k_j \in 1\dots L_j\) e \(j \in 1, 2\).
+
+    Si supponga che \(\dim \mathtt{out} \Phi_2 = \dim \mathtt{in} \Phi_{1}\)
+    allora la \emph{concatenazione sparsa di \(\Phi_{1}\) e \(\Phi_{2}\)  } è
+    definita come
+    \[
+      \Phi_{1} \odot \Phi_{2} = \Phi_{1} \cdot \Phi^{\mathrm{Id, 2}} \cdot
+      \Phi_2
+    \]
+    e vale che \(\mathtt{depth}{(\Phi_{1} \odot \Phi_{2})} = L_{1} + L_{2}\) e
+    \(\mathtt{size}{(\Phi_{1} \odot \Phi_{2})} \le  2{(\mathtt{size}{(\Phi_{1})} + \mathtt{size}{(\Phi_{2})})}\) 
+\end{definition}
+
+
+
 \end{document}
