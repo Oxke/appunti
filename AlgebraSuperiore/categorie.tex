@@ -426,7 +426,7 @@ In generale non vale nessuna delle \(\impliedby\).
     omomorfismo di gruppi \(G \to \mathrm{Aut}_C{(X)}\). Ad esempio se \(C = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
 \end{example}
 
-\begin{example}[Funtore continuo]
+\begin{example}[Funtore costante]
     Date \(C, D\) categorie preso \(Y \subseteq D \) si può considerare il
     funtore costante di valore \(Y\), \(C \to D\), \(X \mapsto Y\) e \(f \mapsto 1_Y\) 
 \end{example}
@@ -459,22 +459,22 @@ In generale non vale nessuna delle \(\impliedby\).
     \]
 \end{example}
 
-\begin{remark}{}
+\begin{note}{}
     I funtori che abbiamo definito si dicono anche funtori covarianti
-\end{remark}
+\end{note}
 \begin{definition}{}
     Un funtore \textbf{controvariante} \(C \to D\) è un funtore (covariante) \(C^{op} \to D\).
-    Esplicitamente si ha che \(\forall X \in Css\) % TODO
 \end{definition}
 \begin{example}{}
-    \(\forall n \in \mathbb{N}\) i funori di coomologia (singolare) sono funtori
+    \(\forall n \in \mathbb{N}\) i funtori di coomologia (singolare) sono funtori
     controvarianti \(H^{n} : \mathtt{Top(h)}^{op} \to \mathtt{Ab}\) 
 \end{example}
 \begin{example}{}
     Sia \(C\) una categoria, \(X \in C\)
     \begin{align*}
         C{(X, \--)} : C &\to \mathtt{Set} \\
-        Y \mapsto C{(X, Y)} &\quad g \mapsto f \circ g
+        Y \mapsto C{(X, Y)} \quad {(f : Y \to Y')} &\mapsto {(f_{*} : C{(X, Y)} \to C{(X, Y')})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto f \circ g
     \end{align*}
     è un funtore perché \({(f' \circ f)}_* = f'_* \circ f_*\) 
 
