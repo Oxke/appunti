@@ -426,6 +426,301 @@ In generale non vale nessuna delle \(\impliedby\).
     omomorfismo di gruppi \(G \to \mathrm{Aut}_C{(X)}\). Ad esempio se \(C = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
 \end{example}
 
+\begin{example}[Funtore continuo]
+    Date \(C, D\) categorie preso \(Y \subseteq D \) si può considerare il
+    funtore costante di valore \(Y\), \(C \to D\), \(X \mapsto Y\) e \(f \mapsto 1_Y\) 
+\end{example}
+
+\begin{example}{}
+    Presa \(\mathtt{Top}_*\) la categoria degli spazi topologici puntati, il
+    gruppo fondamentale 
+    \[
+        \pi_{1} : \mathtt{Top}_* \to \mathtt{Grp}
+    \]
+    è un funtore
+\end{example}
+
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) ci sono funtori di omologia (singolare)
+    \[
+      H_{n} : \mathtt{Top} \to \mathtt{Ab}
+    \]
+\end{example}
+\begin{eser}{}
+    Sia \(\sim \) una congruenza su \(C\) e \(F : C \to D\) un funtore tale che
+    se \(f \sim f'\) in \(C\) allora \(F{(f)} = F{(f')}\).
+    Allora esiste unico un funtore \(\overline{F} : \frac{C}{\sim} \to D\) tale
+    che \(\overline{F}{(\overline{f})} = F{(f)}\) per ogni \(f\) morfismo di \(C\) 
+\end{eser}
+\begin{example}{}
+    Negli esempi precedenti se \(f\) e \(f'\) sono omotope, allora \(\pi_{1}{(f)} = \pi_{1}{(f')}\) e \(H_{n}{(f)} = H_{n}{(f')}\), dunque inducono funtori
+    \[
+      \pi_{1} : \mathtt{Toph}_* \to \mathtt{Grp} \quad H_{n} : \mathtt{Toph} \to \mathtt{Ab}
+    \]
+\end{example}
+
+\begin{remark}{}
+    I funtori che abbiamo definito si dicono anche funtori covarianti
+\end{remark}
+\begin{definition}{}
+    Un funtore \textbf{controvariante} \(C \to D\) è un funtore (covariante) \(C^{op} \to D\).
+    Esplicitamente si ha che \(\forall X \in Css\) % TODO
+\end{definition}
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) i funori di coomologia (singolare) sono funtori
+    controvarianti \(H^{n} : \mathtt{Top(h)}^{op} \to \mathtt{Ab}\) 
+\end{example}
+\begin{example}{}
+    Sia \(C\) una categoria, \(X \in C\)
+    \begin{align*}
+        C{(X, \--)} : C &\to \mathtt{Set} \\
+        Y \mapsto C{(X, Y)} &\quad g \mapsto f \circ g
+    \end{align*}
+    è un funtore perché \({(f' \circ f)}_* = f'_* \circ f_*\) 
+
+    Analogamente 
+    \begin{align*}
+        C{(\--, X)} : C^{op} &\to \mathtt{Set} \\
+        Y \mapsto C{(Y, X)} \quad {(f : Y \to Y')} &\mapsto {(f^{*} : C{(Y', X)} \to C{(Y, X)})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto g \circ f
+    \end{align*}
+\end{example}
+\begin{remark}{}
+    \(C'\) è anche un funtore 
+    \begin{align*}
+        C{(\--, =)} : C^{op} \times C &\to \mathtt{Set} \\
+        {(X, Y)} &\mapsto C{(X, Y)} \\
+        {(f : X \to X', g : Y \to Y')} &\mapsto \dots
+    \end{align*}
+\end{remark}
+\begin{example}{}
+    Per ogni gruppo \(G\), preso il sottogruppo dei commutatori \([G, G]\),
+    allora per ogni \(f : G \to H\) omomorfismo di gruppi, \(f{([G, G])} \subseteq [H, H] \) 
+    quindi si ottiene un funtore
+    \begin{align*}{}
+        \mathtt{Grp} &\to \mathtt{Grp} \\
+        G &\mapsto [G, G] \\
+        {(f : G \to H)} &\to {(f |_{[G, G]} : [G, G] \to [H, H] )}
+    \end{align*}
+    e anche 
+    \begin{align*}
+        \mathrm{Abel} : \mathtt{Grp} &\to \mathtt{Ab} \\
+        G &\mapsto \frac{G}{[G, G]} \text{ (abelianizzato di \(G\) ) }
+    \end{align*}
+\end{example}
+
+\begin{eser}{}
+    Indicando con \(Z{(X)}\) il centro di \(X\),
+
+   Mostrare che non esiste un funtore \(F : \mathtt{Rng} \to \mathtt{Rng}\) tale
+    che \(\forall A \in \mathtt{Rng}\) \(F{(A)} = Z{(A)}\).
+
+    Mostrare che non esiste un funtore \(F : \mathtt{Grp} \to \mathtt{Ab}\) tale
+    che \(\forall G \in \mathtt{Grp}\) \(F{(G)} = Z{(G)}\).
+\end{eser}
+
+    L'identità
+    \[
+      \mathrm{id}_C : C \to C \quad X \mapsto X \quad f \mapsto f
+    \]
+    è un funtore
+    Si possono comporre i funtori. Dati ad esempio 
+    \[
+      C \overset{F}{\to } D \overset{G}{\to } E
+    \]
+    funtori, possiamo definire \(G \circ F : C \to E\) come \(X \mapsto G{(F{(X)})}\)  e \(f \mapsto G{(F{(f)})}\) è un funtore.
+
+    La composizione è associativa  e \(F \circ \mathrm{id}_C = F = \mathrm{id}_C \circ F\) 
+
+In tal modo otteniamo una categoria \(\mathtt{Cat}\) delle categorie (piccole\footnote{si potrebbe anche fare di tutte le categorie, ma per motivi
+insiemistici/logici dovremmo introdurre gli universi di Grothendieck e fare le
+cose per bene. Al fine di evitare questo inutile sforzo, ci limitiamo a
+considerare le categorie piccole.})
+
+\begin{definition}{}
+    Un funtore \(F : C \to D\) è un isomorfismo se lo è in \(\mathtt{Cat}\),
+    cioè se \(\exists G : D \to C\)  funtore tale che \(G \circ F = \mathrm{id}_C = F \circ G\) 
+\end{definition}
+
+\begin{definition}{}
+    Un funtore \(F : C \to D\) è iniettivo (suriettivo) se \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) è iniettivo (suriettivo).
+
+    Nel caso in cui \(f\) sia sia iniettivo che suriettivo, è biunivoco.
+\end{definition}
+
+\begin{definition}{}
+    \(F\) è detto \textbf{fedele} (\textbf{pieno}) se \(\forall X, Y \in C\), \(F : C{(X, Y)} \to D{(F{(X)}, F{(Y)})}\) è iniettivo (suriettivo).
+
+    Nel caso in cui \(f\) sia sia fedele che pieno, si dice che è
+    \textbf{pienamente fedele}
+\end{definition}
+\begin{eser}{}
+    \(F\) funtore è isomorfismo se e solo se \(F\) è pienamente fedele e
+    biunivoco.
+\end{eser}
 
 
+\begin{example}{}
+    Se \(C' \subseteq C \) è una sottocategoria, allora il funtore di inclusione
+    \(i : C' \to C\) è iniettivo e fedele ed è pieno se e solo se \(C' \subseteq C\) è piena.
+
+    Ad esempio se \(\sim \) è una congruenza in \(C\) , allora il funtore
+    quoziente \(C \to C / \sim \) è biunivoco e pieno.
+\end{example}
+
+\begin{example}{}
+    Un omomorfismo di monoidi (categorie di un oggetto) è iniettivo (suriettivo)
+    se e solo se come funtore è fedele (pieno). In ogni caso è biunivoco.
+\end{example}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{\mathbb{Z}-Mod} \to \mathtt{Ab}\) e \(\mathtt{\mathbb{Z}-Alg} \to \mathtt{Rng}\) sono isomorfismi.
+\end{example}
+
+\begin{example}{}
+    Anche \(\mathtt{Mod-A}\cong \mathtt{A^{op}-Mod}\) ed esiste un isomorfismo
+    (anche se non sono categorie piccole).
+\end{example}
+
+\begin{definition}{}
+    Un funtore \(F: C \to D\) è \textbf{essenzialmente
+    \emph{iniettivo}/\emph{suriettivo}} se la funzione ridotta 
+    \[
+      \mathrm{Ob}{(C)}/\cong \to \mathrm{Ob}{(D)}/\cong
+    \]
+    è \emph{suriettivo}/\emph{iniettivo}
+\end{definition}
+
+\begin{remark}{}
+    Se \(F\) è suriettivo allora \(F\) è essenzialmente suriettivo. L'altra
+    implicazione non vale. Ad esempio
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    Nessuna delle implicazioni tra iniettiva e essenzialmente iniettiva è vera.
+    Basti considerare
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-1]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    per essenzialmente iniettiva \(\not\implies\) iniettiva
+    e
+\[\begin{tikzcd}
+	{(\bullet} & {\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift left, from=1-4, to=1-3]
+\end{tikzcd}\]
+    per iniettiva \(\not\implies \) essenzialmente iniettiva.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(F: C \to D\) un funtore pienamente fedele. Allora \(F\) è
+    essenzialmente iniettivo
+\end{proposition}
+\begin{proof}{}
+    Siano \(X, Y \in C\) tali che \(F{(X)} \cong F{(Y)}\) in \(D\). Devo
+    dimostrare che \(X \cong Y\) in \(C\).
+
+    Sappiamo che esiste \(g : F{(X)} \to F{(Y)}\) isomorfismo in \(D\). Poiché
+    \(F\) è pieno esiste \(f \in C{(X, Y)}\) tale che \(F{(f)} = g\).
+    Analogamente \(\exists f' \in C{(Y, X)}\) tale che \(F{(f')} = g^{-1}\).
+    \[
+      F{(f' \circ f)} = F{(f')} \circ F{(f)} = g^{-1} \circ g = 1_{F{(X)} = F{(1_X)}} 
+    \]
+    Se \(F\) è fedele, allora \(f' \circ f = 1_X\)  e analogamente \(f \circ f' = 1_Y\) da cui \(f\) è isomorfismo e duque \(X \cong Y\) 
+\end{proof}
+
+\begin{definition}{Trasformazione naturale}
+    Siano \(F, F' : C \to D\) funtori.
+
+    Una \textbf{trasformazione naturale} \(\alpha : F \to F'\) (si può anche
+    scrivere \(\alpha : F \implies F'\)) è il dato di un morfismo
+    \[
+      \alpha_X : F{(X)} \to F'{(X)} \text{ in \(D\) } \forall X \in C
+    \]
+    tale che \(\forall f : X \to Y\) morfismo di \(C\) il diagramma
+\[\begin{tikzcd}
+	{F(X)} & {F(Y)} \\
+	{F'(X)} & {F'(Y)}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\alpha_X}", from=1-1, to=2-1]
+	\arrow["{\alpha_Y}", from=1-2, to=2-2]
+	\arrow["{F'(f)}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    commuta in \(D\), cioè \(\alpha_Y \circ F{(f)} = F'{(f)} \circ \alpha_X\) 
+\end{definition}
+
+\begin{example}{}
+    Consideriamo i due funtori \(\mathrm{Abel} : \mathtt{Grp} \to \mathtt{Grp}\) e \(\mathrm{id} : \mathtt{Grp} \to \mathtt{Grp}\). 
+    C'è una trasformazione naturale \(\alpha : \mathrm{id} \to \mathrm{Abel}\)
+    definita per ogni \(G \in \mathtt{Grp}\) da 
+    \begin{align*}
+        \alpha_G: G &\longrightarrow \frac{G}{[G, G]} \\
+        a &\longmapsto \alpha_G(a) = a[G, G]
+    \end{align*}
+    è naturale perché \(\forall f : G \to H\) in \(\mathtt{Grp}\) il diagramma
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\alpha_G}", from=1-1, to=2-1]
+	\arrow["{\alpha_H}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}{}
+    Supponendo di avere \(F, F' : G \to \mathtt{Set}\) funtori (\(G\) gruppo
+    visto come categoria con un oggetto), cioè \(G\)-insiemi (azioni di \(G\) su
+    insiemi).
+    Allora una trasformazione naturale \(\alpha : F \to F'\) è un morfismo di \(G\)-insiemi cioè una
+    funzione \(\alpha : F{(G)} \to F'{(G)}\) tale che \(\alpha{(gx)} = g \alpha{(x)}\) per ogni \(g \in G\) e per ogni \(x \in F{(G)}\).
+\end{example}
+\begin{remark}{}
+    \(\forall F : C\to D\), \(\mathrm{id}_F : F \to F\) data da \({(\mathrm{id}_F)}_X = \mathrm{id}_{F{(X)}} \) per ogni \(X \in C\) è una trasformazione naturale.
+\end{remark}
+
+\begin{eser}{}
+    Dati \(F, F', F'' : C \to D\) funtori, \(\alpha : F \to F'\) e \(\beta : F'
+    \to F''\) trasformazioni naturali, allora la composizione \(\beta \circ \alpha : F \to F''\) è definita da
+    \[
+      \beta_X \circ \alpha_X =: {(\beta \circ \alpha)}_X : F{(X)} \to F''{(X)}
+    \]
+    Mostrare che \(\alpha \circ \beta\) è una trasformazione naturale
+\end{eser}
+
+La composizione dell'esercizio precedente è anche detta composizione verticale
+di trasformazioni naturali, per via di questo disegno esplicativo:
+\[\begin{tikzcd}
+	C & D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-20pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{F''}"', curve={height=20pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "F"{description}, from=1-1, to=1-2]
+	\arrow["\alpha", between={0.2}{0.8}, Rightarrow, from=0, to=2]
+	\arrow["\beta", between={0.2}{0.8}, Rightarrow, from=2, to=1]
+\end{tikzcd}\]
+
+Considerando funtori e trasformazioni naturali, si ottiene (assumiamo sempre \(C\) piccola) la categoria \(\mathtt{Fun}{(C, D)}\) (anche denotata \(D^{C}\) ) con oggetti i funtori \(C \to D\), morfismi le trasformazioni naturali e composizione la composizione verticale.
+
+\begin{definition}{}
+    Data una categoria \(C\), la categoria dei morfismi di \(C\) è
+    \[
+      \mathtt{Mor}{(C)} := \mathtt{Fun}{(\cdot \to \cdot , C)}
+    \]
+    che ha come oggetti esattamente \(\{f : \to X -Y : f \text{ morfismo di }C\} \) e trasformazioni naturali date da \({(X \overset{f}{\to } Y )} \to {(X' \overset{f'}{\to } Y' )}\) è data da \({(g : X \to  X' , h : Y \to  Y')}\) tale che 
+\[\begin{tikzcd}
+	{X} & {Y} \\
+    {X'} & {Y'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["f'", from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{definition}
 
