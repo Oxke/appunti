@@ -213,7 +213,8 @@ possiamo dare una definizione astratta
 \begin{example}[Gruppo quoziente]
     Sia \(G\) un gruppo (visto come monoide, ossia categoria di un oggetto) e
     sia \(H \vartriangleleft G\) e \(\sim \) su \(G\) data da \(a \sim b \iff aH
-    = bH\). Viceversa ogni \(\sim \) congruenza su \(G\) si può scrivere in tal
+    = bH\). Allora \(G/N\) è la categoria quoziente \(G / \sim \).
+    Viceversa ogni \(\sim \) congruenza su \(G\) si può scrivere in tal
     modo prendendo \(H = \{a \in G : a \sim 1\} \vartriangleleft G \) (esercizio).
 \end{example}
 
@@ -373,7 +374,7 @@ In generale non vale nessuna delle \(\impliedby\).
     \[
       F{(g\circ f)} = F{(g)}\circ F{(f)} 
     \]
-    (se \(f\) e \(g\) sono componibili in \(C\) ) e \(F{(1_X)} = 1_{F{(X)}} \)
+    (se \(f\) e \(g\) sono componibili in \(C\)) e \(F{(1_X)} = 1_{F{(X)}} \)
     per ogni \(X \in C\) 
     
 \end{definition}
@@ -388,20 +389,26 @@ In generale non vale nessuna delle \(\impliedby\).
 \end{remark}
 
 \begin{example}{}
-    Sia \(C' \subseteq C \) sottocategoria. Allora \(C' \to C\), \(x \mapsto x\) e \(f \mapsto f\) è un funtore
+    Sia \(C' \subseteq C \) sottocategoria. Allora \(C' \to C\), \(X \mapsto X\) e \(f \mapsto f\) è un funtore
 \end{example}
 
 \begin{example}{}
     Se \(\sim \) è una congruenza, allora \(C \to C /\sim\) è un funtore, con
-    \(x \mapsto x\) e \(f \mapsto \overline{f}\) 
+    \(X \mapsto X\) e \(f \mapsto \overline{f}\) 
 \end{example}
 
 \begin{example}[Funtore dimenticante]
-    \(C \to \mathtt{Set}\) con \(C\) categoria discreta e \(x \mapsto x\), \(f
+    \(C \to \mathtt{Set}\) con \(C\) categoria discreta e \(X \mapsto X\), \(f
     \mapsto f\) è un funtore, che ``dimentica'' la struttura aggiunta.
 
     Analogamente anche \(\mathtt{Rng} \to \mathtt{Ab}\), con \({(A, +, \cdot )} \to {(A, +)}\) è un funtore dimenticante.
 \end{example}
+\begin{remark}{}
+    Notare che il secondo funtore dimenticante non preserva gli epimorfismi.
+    Sarebbe infatti \(i : \mathbb{Z} \to \mathbb{Q}\) l'inclusione è
+    un'epimorfismo in \(\mathtt{Rng}\) ma non in \(\mathtt{Ab}\) 
+\end{remark}
+
 
 \begin{example}{}
     Sia \(A \to B\) un omomorfismo di anelli. Allora la restrizione degli
@@ -420,10 +427,12 @@ In generale non vale nessuna delle \(\impliedby\).
 \begin{example}{}
     Un funtore tra 2 monoidi è un omomorfismo di monoidi.
 
-    Più in generale dato un monoide e una categoria \(C\) , un funtore \(G \to C\) è dato da \(X \in C\) e da un omomorfismo di monoidi \(G \to \mathrm{End}_C{(X)}\) 
+    Più in generale dato \(G\)  un monoide e una categoria \(C\) , un funtore \(G \to C\) è dato da \(X \in C\) e da un omomorfismo di monoidi \(G \to \mathrm{End}_C{(X)}\) 
 
     Se \(G\) è un gruppo un funtore \(G \to C\) è dato da \(X \in C\) e un
     omomorfismo di gruppi \(G \to \mathrm{Aut}_C{(X)}\). Ad esempio se \(C = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
+    Similmente se \(C = \mathbb{K}\)-spazi vettoriali ho una rappresentazione di
+    \(G\).
 \end{example}
 
 \begin{example}[Funtore costante]
@@ -446,12 +455,12 @@ In generale non vale nessuna delle \(\impliedby\).
       H_{n} : \mathtt{Top} \to \mathtt{Ab}
     \]
 \end{example}
-\begin{eser}{}
+\begin{theorem}[Omomorfismo]
     Sia \(\sim \) una congruenza su \(C\) e \(F : C \to D\) un funtore tale che
     se \(f \sim f'\) in \(C\) allora \(F{(f)} = F{(f')}\).
-    Allora esiste unico un funtore \(\overline{F} : \frac{C}{\sim} \to D\) tale
+    Allora esiste un unico funtore \(\overline{F} : C /_\sim \to D\) tale
     che \(\overline{F}{(\overline{f})} = F{(f)}\) per ogni \(f\) morfismo di \(C\) 
-\end{eser}
+\end{theorem}
 \begin{example}{}
     Negli esempi precedenti se \(f\) e \(f'\) sono omotope, allora \(\pi_{1}{(f)} = \pi_{1}{(f')}\) e \(H_{n}{(f)} = H_{n}{(f')}\), dunque inducono funtori
     \[
@@ -462,7 +471,7 @@ In generale non vale nessuna delle \(\impliedby\).
 \begin{note}{}
     I funtori che abbiamo definito si dicono anche funtori covarianti
 \end{note}
-\begin{definition}{}
+\begin{definition}{funtore controvariante}
     Un funtore \textbf{controvariante} \(C \to D\) è un funtore (covariante) \(C^{op} \to D\).
 \end{definition}
 \begin{example}{}
@@ -480,17 +489,17 @@ In generale non vale nessuna delle \(\impliedby\).
 
     Analogamente 
     \begin{align*}
-        C{(\--, X)} : C^{op} &\to \mathtt{Set} \\
-        Y \mapsto C{(Y, X)} \quad {(f : Y \to Y')} &\mapsto {(f^{*} : C{(Y', X)} \to C{(Y, X)})} \\
+        C{(\--, Y)} : C^{op} &\to \mathtt{Set} \\
+        X \mapsto C{(X, Y)} \quad {(f : X \to X')} &\mapsto {(f^{*} : C{(X', Y)} \to C{(X, Y)})} \\
             & \quad \quad \quad \quad\quad\quad\quad  g \mapsto g \circ f
     \end{align*}
 \end{example}
 \begin{remark}{}
-    \(C'\) è anche un funtore 
+    C'è anche un funtore 
     \begin{align*}
         C{(\--, =)} : C^{op} \times C &\to \mathtt{Set} \\
         {(X, Y)} &\mapsto C{(X, Y)} \\
-        {(f : X \to X', g : Y \to Y')} &\mapsto \dots
+        {(f : X \to X', g : Y \to Y')} &\mapsto {(f^* : C{(X', Y)} \to  C{(X,Y)}, g_* : C{(X, Y)} \to C{(X, Y')})}
     \end{align*}
 \end{remark}
 \begin{example}{}
@@ -505,18 +514,44 @@ In generale non vale nessuna delle \(\impliedby\).
     e anche 
     \begin{align*}
         \mathrm{Abel} : \mathtt{Grp} &\to \mathtt{Ab} \\
-        G &\mapsto \frac{G}{[G, G]} \text{ (abelianizzato di \(G\) ) }
+        G &\mapsto \frac{G}{[G, G]} \text{ (abelianizzato di \(G\) ) } \\
+        {(f : G \to H)} &\mapsto {\left(\overline{f} : \frac{G}{[G,G]} \to \frac{H}{[H,H]}\right)}
     \end{align*}
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{p}", from=1-1, to=2-1]
+	\arrow["{q}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
 \end{example}
 
 \begin{eser}{}
     Indicando con \(Z{(X)}\) il centro di \(X\),
 
-   Mostrare che non esiste un funtore \(F : \mathtt{Rng} \to \mathtt{Rng}\) tale
+\begin{enumerate}[label = \alph*.]
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Rng} \to \mathtt{Rng}\) tale
     che \(\forall A \in \mathtt{Rng}\) \(F{(A)} = Z{(A)}\).
-
-    Mostrare che non esiste un funtore \(F : \mathtt{Grp} \to \mathtt{Ab}\) tale
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Grp} \to \mathtt{Ab}\) tale
     che \(\forall G \in \mathtt{Grp}\) \(F{(G)} = Z{(G)}\).
+\end{enumerate}
+    \tcblower
+    Supponiamo l'esistenza di \(F\).
+\begin{enumerate}[label = \alph*.]
+    \item Se prendo \(i : \mathbb{C} \hookrightarrow \mathbb{H}\),
+        allora \(F{(\mathbb{C})} = \mathbb{C} \) e \(F{(\mathbb{H})} = \mathbb{R}\). A tal punto però \(
+        F{(i)} : \mathbb{C} \to \mathbb{R}\) che non esiste perché altrimenti \[-1 = F{(i)}{(-1)} = F{(i)}{(i^2)} = F{(i)}{(i)}^2\]
+    \item Consideriamo
+        \[
+          \{(1), (12)\} \overset{i}{\hookrightarrow } S_{3} \overset{\varepsilon}{\to } \{\pm 1\} 
+        \]
+        Allora \(\varepsilon \circ i = \mathrm{Id}_{C_{2}} \). Allora avremmo
+        \[
+          0_{\mathrm{End}{(C_{2})}}  = F{(\varepsilon)} \circ F{(i)} = F{(\varepsilon \circ i)} = F{(\mathrm{id}_{C_{2}})} = \mathrm{id}_{C_{2}}
+        \]
+\end{enumerate}
+
 \end{eser}
 
     L'identità
@@ -542,16 +577,16 @@ considerare le categorie piccole.})
     cioè se \(\exists G : D \to C\)  funtore tale che \(G \circ F = \mathrm{id}_C = F \circ G\) 
 \end{definition}
 
-\begin{definition}{}
-    Un funtore \(F : C \to D\) è iniettivo (suriettivo) se \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) è iniettivo (suriettivo).
+\begin{definition}{iniettivo e suriettivo}
+    Un funtore \(F : C \to D\) è \emph{iniettivo}/\emph{suriettivo} se \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) è \emph{iniettivo}/\emph{suriettivo}.
 
-    Nel caso in cui \(f\) sia sia iniettivo che suriettivo, è biunivoco.
+    Nel caso in cui \(F\) sia sia iniettivo che suriettivo, è \textbf{biunivoco}.
 \end{definition}
 
-\begin{definition}{}
+\begin{definition}{Fedele e pieno}
     \(F\) è detto \textbf{fedele} (\textbf{pieno}) se \(\forall X, Y \in C\), \(F : C{(X, Y)} \to D{(F{(X)}, F{(Y)})}\) è iniettivo (suriettivo).
 
-    Nel caso in cui \(f\) sia sia fedele che pieno, si dice che è
+    Nel caso in cui \(F\) sia sia fedele che pieno, si dice che è
     \textbf{pienamente fedele}
 \end{definition}
 \begin{eser}{}
@@ -586,9 +621,9 @@ considerare le categorie piccole.})
     Un funtore \(F: C \to D\) è \textbf{essenzialmente
     \emph{iniettivo}/\emph{suriettivo}} se la funzione ridotta 
     \[
-      \mathrm{Ob}{(C)}/\cong \to \mathrm{Ob}{(D)}/\cong
+        \mathrm{Ob}{(C)}/_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}
     \]
-    è \emph{suriettivo}/\emph{iniettivo}
+    è \emph{iniettivo}/\emph{suriettivo}
 \end{definition}
 
 \begin{remark}{}
@@ -723,4 +758,142 @@ Considerando funtori e trasformazioni naturali, si ottiene (assumiamo sempre \(C
 	\arrow["f'", from=2-1, to=2-2]
 \end{tikzcd}\]
 \end{definition}
+
+\begin{definition}{}
+    Date \(F, G : C \to D\) funtori, \(\alpha : F \to G\) trasformazione
+    naturale, allora \(\alpha\) è \emph{isomorfismo} (\emph{naturale} o di funtori) se è isomorfismo in \(\mathtt{Fun}{(C, D)}\) cioè se 
+    \(\exists \beta : G \to F\) trasformazione naturale tale che \(\beta \circ
+    \alpha = \mathrm{id}_F\), \(\alpha \circ \beta = \mathrm{id}_G\).
+
+    In tal caso \(F\) e \(G\) si dicono \emph{isomorfi} (denotato \(F \cong
+    G\)).
+\end{definition}
+\begin{remark}{}
+    \(\cong\) di funtori è una relazione di equivalenza 
+\end{remark}
+\begin{example}{}
+
+Il primo gruppo di omologia si può vedere come l'abelianizzato del gruppo
+fondamentale. In linguaggio categorico abbiamo 
+\begin{align*}
+  \mathtt{Top_*} \overset{\pi_{1}}{\to } &\mathtt{Grp} \overset{\mathrm{Abel}}{\to } \mathtt{Ab} \\ 
+  &\text{ e } \\
+  \mathrm{Top_*} \to &\mathrm{Top} \overset{H_{1}}{\to } \mathtt{Ab} \\
+  {(X, x_{0})} \mapsto &\text{ comp. c.p.a. a \(x_{0}\)}
+\end{align*}
+sono funtori isomorfi
+\end{example}
+
+\begin{remark}{}
+    \(F \cong F'\) allora \(F\) e \(F'\) inducono la stessa funzione \(\mathrm{Ob}{(C)} /_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}\) quindi \(F\) è essenzialmente 
+   \emph{iniettiva} / \emph{suriettiva} se e solo se \(F'\) lo è.
+\end{remark}
+
+\begin{eser}{}
+    Mostrare che non necessariamente la precedente osservazione vale per le
+    proprietà di iniettività e suriettività.
+\end{eser}
+
+\begin{proposition}{}
+    Se \(F \cong F'\) allora \(F\) è \emph{fedele}/\emph{pieno} se e solo se \(F'\) è \emph{fedele}/\emph{pieno}.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to F'\) l'isomorfismo. Definiamo \\\(\overline{\alpha} = {(g \mapsto \alpha_Y \circ F{(F)} \circ \alpha_X^{-1})}\) 
+    Per ogni \(X, Y \in C\),
+\[\begin{tikzcd}
+	& {D(F(X),F(Y))} \\
+	{C(X,Y)} \\
+	& {D(F'(X),F'(Y))} \\
+	\arrow["{\overline{\alpha}}", from=1-2, to=3-2]
+	\arrow["F", from=2-1, to=1-2]
+	\arrow["{F'}", from=2-1, to=3-2]
+\end{tikzcd}\]
+% TODO: Finire
+\end{proof}
+
+\begin{proposition}{}
+\(\alpha, \beta\) trasformazioni naturali inducono una trasformazione naturale
+\(\beta * \alpha : G \circ F \to G' \circ F'\) 
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F'{(X)})}} \\
+    {G'{(F{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(\alpha_X)}", from=1-1, to=1-2]
+	\arrow["\beta_{F{(X)}}  ", from=1-1, to=2-1]
+	\arrow["\beta_{F'{(X)}} ", from=1-2, to=2-2]
+	\arrow["G'{(\alpha_X)}", from=2-1, to=2-2]
+\end{tikzcd}\]
+dunque \((\beta * \alpha)_X := \beta_{F'{(X)}} \circ G{(\alpha_X)} = G'{(\alpha_x)} \circ \beta_{F{(X)}} \).
+\end{proposition}
+\begin{proof}[Dimostrazione che è una trasformazione naturale]
+Vogliamo mostrare che \(b * a\) è naturale, cioè \(\forall f : X \to Y\) in \(C\) il diagramma
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F{(X)})}} \\
+    {G'{(F'{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(F{(f)})}", from=1-1, to=1-2]
+	\arrow["{(\beta * \alpha)}_X", from=1-1, to=2-1]
+	\arrow["{(\beta * \alpha)}_Y", from=1-2, to=2-2]
+	\arrow["G'{(F'{(f)})}", from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta. Ma questo è vero perché
+\begin{align*}
+    G'{(F'{(f)})} \circ {(\beta * \alpha)}_X &= G'{(F'{(f)})} \circ G'{(\alpha_x)}
+  \circ \beta_{F{(X)}} = G'{(F'{(f)} \circ \alpha_X)} \circ \beta_{F{(X)}} = \\
+    &\overset{\alpha \text{ nat.}}{=} G'{(\alpha_Y \circ F{(f)})} \circ
+    \beta_{F{(X)}} = G'{(\alpha_Y)} \circ G'{(F{(f)} \circ \beta_{F{(X)}})} = \\
+    &\overset{\beta \text{ nat.}}{=} G'{(\alpha_Y)} \circ \beta_{F{(Y)}}
+    \circ G{(F{(f)})} = {(\beta * \alpha)}_Y \circ G{(F{(f)})}
+\end{align*}
+\end{proof}
+
+Ovviamente è chiaro che si potrebbe definire allora la categoria delle
+trasformazioni naturali eccetera e andare avanti all'infinito. Per
+assiomatizzare queste cose in realtà bisognerebbe esplicitare che abbiamo
+definito le ``2-frecce'' e che quindi siamo in una \emph{2-categoria}
+
+\begin{note}[zione]
+    Se \(\beta = \mathrm{id}_G \) invece di \(\mathrm{id_G} * \alpha\) si scrive
+    \(G \circ \alpha\) (dunque con \({(G \circ \alpha)}_X = G{(\alpha_X)}\)). Se
+    \(\alpha = \mathrm{id}_F\) invece di \(\beta * \mathrm{id}_F\) si scrive \(\beta \circ F\) (con \({(\beta \circ F)}_X = \beta_{F{(X)}} \)). In generale 
+    \[
+      \beta * \alpha = {(\beta \circ F')} \circ {(G \circ \alpha)} = {(G' \circ
+      \alpha)} \circ {(\beta \circ F)}
+    \]
+\end{note}
+\begin{remark}{}
+    Se \(\alpha, \beta\) sono isomorfismi, allora \(\beta * \alpha\) è
+    isomorfismo. Questo significa che se 
+    \[
+      F \cong F', \quad G \cong G' \implies G \circ F \cong G' \circ F'
+    \]
+    cioè l'isomorfismo di funtori è una congruenza su \(
+    \mathtt{Cat}\) e quindi si ottiene la categoria \(\mathtt{Cat} /_{\cong}\)
+\end{remark}
+\begin{definition}{Equivalenza}
+    Un funtore \(F: C \to D\) è un'equivalenza se \(\exists G : D \to C\)
+    funtore tale che \(G \circ F \cong \mathrm{id}_G\) e \(F \circ G \cong \mathrm{id}_D\).
+
+    Un tale \(G\) si dice un \emph{quasi-inverso} di \(F\).
+\end{definition}
+\begin{remark}{}
+    \(F\) è un'equivalenza se e solo se \(\overline{F} \text{ in } \mathtt{Cat}/_{\cong} \) è un isomorfismo.
+\end{remark}
+
+Segue che se \(F \cong F'\), allora \(F\) è un'equivalenza se e solo se \(F'\) è
+un'equivalenza e un quasi-inverso di \(F\) è unico a meno di isomorfismo e
+l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{Cat}\) 
+
+\begin{theorem}[Finalmente un teorema]
+    Un funtore \(F : C \to D\) è un'\emph{equivalenza} se e solo se \(F\) è \emph{pienamente fedele} e \emph{essenzialmente suriettivo}
+\end{theorem}
+\begin{remark}{}
+    Non è necessario aggiungere l'ipotesi che \(F\) sia essenzialmente iniettivo
+    perché come mostrato prima pienamente fedele implica essenzialmente
+    iniettivo (ma non essenzialmente suriettivo).
+\end{remark}
+\begin{example}{}
+    Supponiamo che \(C' \subseteq C \) sia una sottocategoria piena. Allora il
+    funtore di inclusione \(C' \hookrightarrow C\) è pienamente fedele ed è
+    essenzialmente suriettivo (quindi è un'equivalenza) se e solo se \(\forall X \in C\) esiste \(X' \in C'\) tale che \(X \cong X'\).
+\end{example}
+
 
