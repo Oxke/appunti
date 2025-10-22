@@ -438,27 +438,264 @@ esiste \(\varepsilon > 0\) tale che
     finita. Ad esempio su \(\mathbb{R}\) posso avere \(A=\{x >0\} \) e \(B=\{ x \le 0\}\) che sono separati da \( \{0\} \) ma solo in senso largo.
 \end{remark}
 \begin{definition}{Funzionale di Minkowski}
-    Sia \(X\) uno spazio normato. \(C\) convesso che contiene lo 0. Sia
+    Sia \(X\) uno spazio normato. \(C\) aperto convesso che contiene lo 0. Sia
     \[
       p{(x)} = \inf \left\{ r > 0 : \frac{x}{r} \in C\right\}  \text{ il funzionale di
       Minkowski}
     \]
     viene anche detto \emph{gauge di \(C\)}.
 \end{definition}
-\begin{remark}{} Il funzionale di Minkowski \(p\) ha diverse proprietà
+\begin{proof}[Buona definizione]
+    \(p : X \to \mathbb{R}\) è ben definito. Poiché \(C\) è aperto e \(0 \in C\) , esiste \(\varepsilon > 0\) tale che \(B_\varepsilon {(0)} \subseteq C \), ossia \(\|x\| \le \varepsilon \implies x \in C\).
+    Fissato ora \(x \in X\), allora preso \(r = \frac{\varepsilon}{\|x\|}\)
+    abbiamo che \(\frac{\|x\|}{r} = \varepsilon \) e dunque \(\frac{x}{r} \in C\).
+
+    Dunque l'insieme di cui si fa l'inf è non vuoto.
+\end{proof}
+
+\begin{lemmao}[Proprietà del funzionale di Minkowski] Il funzionale di Minkowski \(p\) ha diverse proprietà
 \begin{enumerate}[label = \arabic*.]
-    \item \(p {(\lambda x )} \lambda p {(x)}\) per ogni \(x \in X\)  e per ogni
+    \item \(p {(\lambda x )} = \lambda p {(x)}\) per ogni \(x \in X\)  e per ogni
         \(\lambda > 0\) 
     \item \(p{(x + y)} \le p {(x)} + p {(y)}\) per ogni \(x, y \in X\) 
     \item \(\exists  m > 0 : 0 \le p {(x)} \le m \|x\|\) per ogni \(x \in X\) 
     \item \(C = \{ x \in X : p {( x)} <1\} \) 
 \end{enumerate}
+\end{lemmao}
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item ovvio
+    \item[3.] \[
+          \exists R > 0 : \overline{B}_R {(0)} \subseteq C \text{, cioè } \forall x \in X \sminus \{0\}, \quad R \frac{x}{\|x\|} \in C
+        \]
+        dunque \(p {(x)} \le \|x\|/R\) per ogni \(x \in X\) 
+    \item[4.] Sia \(x \in C\), trovo \(\varepsilon > 0\) tale che \({(1+\varepsilon)}x \in C\) poiché \(C\) è aperto. Allora \(p{(x)} \le \frac{1}{1+\varepsilon} < 1\).
+        Viceversa se \(p {(x)} < 1\), allora esiste \(\alpha \in (0,1)\) tale
+        che \(\frac{x}{\alpha} \in C\). Ma allora per la convessità di \(C\) e
+        poiché \(0 \in C\), anche \(\alpha \frac{x}{\alpha} + {(1-\alpha)}x \in C\) e dunque \(x \in C\) 
+    \item[2.] Prendo \(x,y \in X\) e \(\varepsilon > 0\). Allora
+        \[
+          \frac{x}{p{(x)} + \varepsilon}, \frac{y}{p{(y)} + \varepsilon} \in C
+        \]
+        (infatti \(p{(x)} + \varepsilon > p {(x)}\)). Ora poiché \(
+        C\) è convesso, \(\forall t \in (0, 1)\) 
+        \[
+          t \frac{x}{p{(x)} + \varepsilon} + {(1-t)} \frac{y}{p{(y)} +\varepsilon } \in C
+        \]
+        preso ora \(t = \frac{p{(x)} + \varepsilon}{p {(x)} + p {(y)} + 2\varepsilon}\), quindi \(
+        1-t = \frac{p {(y)} + \varepsilon}{p {(x)} + p {(y)} + 2\varepsilon}\)
+        abbiamo che
+        \[
+            \frac{x + y}{p {(x)} + p {(y)} + 2\varepsilon} \in C
+        \]
+        Ne consegue (da 4. o dalla definizione) che
+        \[
+          p {( x + y)} < p {(x)} + p {(y)} + 2\varepsilon \quad \forall \varepsilon > 0
+        \]
+        e per arbitrarietà di \(\varepsilon\) segue la sottolinearità
+        \(
+          p {(x+y)} \le p {(x)} + p {(y)}
+        \)
+        
+\end{enumerate}
+\end{proof}
+\begin{remark}{}
+    Abbiamo detto dunque che \(p\) è una seminorma. Cosa dovremmo aggiungere per
+    renderla una norma? Serve che sia omogenea anche per \(\lambda \le 0\),
+    dunque vogliamo \(p {( \lambda x)} = |\lambda| p {(x)}\) e inoltre vorremmo
+    che \(p {(x)} = 0 \iff x =0\).
+
+    Per la prima abbiamo che se \(\lambda < 0\) allora \(p {(\lambda x)} = p {( -\lambda {(-x)})} = |\lambda| p {(-x)}\). Vogliamo dunque che \(p {(-x)} = p {(x)}\). Abbiamo però che
+    \[
+      p {(-x )} = \inf \{r > 0 : -\frac{x}{r} \in C\} = \inf \{ r > 0 : -x \in rC\} 
+    \]
+    Una proprietà dunque che renderebbe l'uguaglianza vera (p ``pari'' diciamo)
+    sarebbe avere che se \(x \in C\), allora \(-x \in C\). Per poter avere
+    inoltre che \(p {(x)} = 0 \iff x = 0\) dobbiamo anche richiedere che \(C\)
+    sia limitato. In tali ipotesi in realtà \(p\) non è solo una norma ma è
+    equivalente a \(\|\cdot \|_X\) 
 \end{remark}
+
+
 \begin{lemma}[Separazione di un convesso non vuoto da un punto esterno]
     Sia \(C \subseteq X \) convesso aperto non vuoto e sia \(x_{0} \not\in C\).
     Allora \(\exists f \in X'\) tale che 
     \[
-      f{(x)} \le f{(x_{0})} \quad \forall x \in C
+      f{(x)} < f{(x_{0})} \quad \forall x \in C
     \]
 \end{lemma}
+\begin{proof}{}
+Sia \(X_{0} = \mathbb{R}x_{0}\). Allora \(X_{0}\) è sottospazio di \(X\). Sia
+\(g : X_{0} \to \mathbb{R}\) definita da \(g{(tx_{0})} = t\), per \(t \in
+\mathbb{R}\). Sia \(p\) il funzionale di Minkowski di \(C\), vogliamo dire che
+\(g{(tx_{0})} \le p {(tx_{0})}\) per ogni \(t > 0\). Poiché \(x_{0} \not\in C\),
+abbiamo che \(p {(x_{0})} \ge 1\). Effettivamente allora
+\[
+  g {(tx_{0})} = t \cdot  1 \le t p {(x_{0})} = p {(t x_{0})}
+\]
+Se invece \(t < 0\) banalmente \(g {(tx_{0})} \le  0 \le  p {(t x_{0})}\).
+
+Ora possiamo applicare Hahn-Banach dicendo che esiste \(f : X \to \mathbb{R}\)
+lineare tale che \(f = g\) su \(X_{0}\) e \(f{(x)} \le  p {(x)}\) per ogni \(x
+\in X\). Per le proprietà di Minkowski, abbiamo che \(f {(x)} \le  p {(x)} \le  m \|x\|\) per ogni \(x \in X\). Inoltre per linearità \(-f{(x)} = f{(-x)} \le m \|-x\| = m \|x\|\). Dalle due otteniamo che
+\[|f{(x)}| \le m \|x\| \quad \forall x \in X\] 
+e dunque \(f \in X'\).
+
+Ora se \(x \in C\), allora
+\[
+  f{(x)} \le p {(x)} < 1 = g{(x_{0})} = f{(x_{0})}
+\]
+\end{proof}
+\begin{theorem}[Hahn-Banach \--- prima forma geometrica]
+    Sia \(X\) uno spazio normato. Siano \(A, B\) sottoinsiemi non vuoti,
+    disgiunti e convessi. Allora se \(A\) è aperto esiste un iperpiano chiuso
+    che separa \(A\) e \(B\), cioè \(\exists f \in X'\) e \(\exists \alpha \in \mathbb{R}\) tale che 
+    \[
+      f{(x)} = \alpha \quad \forall x \in A \quad e \quad f{(x)}\ge \alpha \quad
+      \forall x \in B
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    Sia \(C = A - B = \{x \in X : x = a-b, \,\, a \in A, \,\, b \in B\} \).
+    Dobbiamo ora mostrare che \(C\) è convesso, aperto e non contiene lo 0. È
+    aperto in quanto
+    \[
+      C = \bigcup_{b \in B} {(A - b)} 
+    \]
+    unione di aperti. È convesso in quanto, se \(a_{i} - b_{i} = x_{i} \in C\)
+    per \(i = 1,2\), allora
+    \[
+      {(1-t)}{(a_{1} - b_{1})} + t {(a_{2} -b_{2})} = ({(1-t)}a_{1} + ta_{2}) - {({(1-t)}b_{1} + tb_{2})} \in C
+    \]
+    Infine chiaramente \(0 \not\in C\) poiché \(A\) e \(B\) sono disgiunti.
+
+    Allora \(\exists f \in X'\) tale che \(0 = f{(0)} > f{(z)}\) per ogni \(z
+    \in C\). Se \(z = x-y\), con \(x \in A\) e \(y \in B\) abbiamo dunque per
+    linearità che
+    \[
+      f{(x)} < f{(y)} \quad \forall x \in A, \quad \forall y \in B
+    \]
+    concludiamo l'esistenza di \(\alpha\) della tesi.
+\end{proof}
+
+\begin{theorem}[Hahn-Banach \--- seconda forma geometrica]
+    Sia \(X\) uno spazio normato, \(A \subseteq X \), \(B \subseteq X \). Siano
+    \(A, B\) convessi non vuoti e disgiunti. Allora, se \(A\) è chiuso e \(B\) è
+    compatto, esiste un iperpiano chiuso che separa \(A\) e \(B\) strettamente,
+    cioè
+    \[
+      \exists f \in X', \exists \alpha \in \mathbb{R}, \exists \varepsilon > 0 : f{(x)}
+      \le \alpha - \varepsilon \,\, \forall x \in A \text{ e } f{(x)} \ge \alpha
+      + \varepsilon \,\, \forall x \in B
+    \]
+\end{theorem}
+\begin{proof}{}
+    \(\forall \varepsilon > 0\), siano \(A_\varepsilon = A + B_\varepsilon {(0)}\) e
+    \(B_\varepsilon = B + B_\varepsilon {(0)}\). Dimostro ora che \(A_\varepsilon\) e \(B_\varepsilon\) sono convessi, disgiunti e aperti. Sono convessi in quanto somma di due convessi.
+    Sono aperti in quanto 
+    \[
+      A_\varepsilon = \bigcup_{a \in A} B_{\varepsilon}{(a)} \quad \text{ e }
+      \quad B_\varepsilon = \bigcup_{b \in B} B_\varepsilon {(b)}
+    \]
+    Dimostro ra che \(\exists \overline{\varepsilon} > 0 : \forall \varepsilon < \overline{\varepsilon}\), \(A_\varepsilon \cap B_\varepsilon = \varnothing\). Per assurdo supponiamo esista una successione \(\varepsilon_n \to 0\) decrescente 
+    e \(x_{n}, y_{n}, w_{n}, z_{n}\), con \(x_{n} \in A\), \(y_{n} \in B\), \(w_{n} \in B_{\varepsilon_n}{(0)}\) e \(z_{n} \in B_{\varepsilon_n} {(0)}\) tali che \(x_{n} + w_{n} = y_{n} + z_{n}\).
+    Allora 
+    \[
+      \|x_{n} - y_{n}\| = \|z_{n} - w_{n}\| \le 2 \varepsilon_n
+    \]
+    poiché \(y_{n} \in B\) compatto, esiste \(n_k\) sottosuccessione con \(y_{n_k} \to \overline{y} \in B\). Allora
+
+    \[
+      \|x_{n_k} - \overline{y}\| \le \|x_{n_k} - y_{n_k} \| + \|y_{n_k} - \overline{y}\| \overset{k \to \infty}{\longrightarrow} 0
+    \]
+    Da cui \(x_{n_k} \to \overline{y}\), ma \(x_{n_k} \in A\) chiuso, dunque \(\overline{y} \in A\). Risulterebbe che \(\overline{y} \in A \cap B\) che è assurdo.
+
+    Abbiamo dunque che \(\exists f \in X'\), ed \(\exists \alpha > 0\) tale che 
+    \begin{align*}
+      f{(z)} \le \alpha \quad \forall z \in A_\varepsilon \\
+      f{(z)} \ge \alpha \quad \forall z \in B_\varepsilon
+    \end{align*}
+    Ossia \(f{(x + \varepsilon w)} \le \alpha\), per ogni \(x \in A\) e \(w \in B_1{(0)}\) da cui
+    \(f{(x)} + \varepsilon f{(w)} \le \alpha\) e poiché vale per ogni \(w \in B_1{(0)}\) abbiamo 
+    \[
+     f{(x)} \le \alpha - \varepsilon \|f\|_{X'} \text{ e analogamente }
+      f{(x)} \ge \alpha + \varepsilon \|f\|_{X'} 
+    \]
+\end{proof}
+
+\section{Funzioni convesse}
+Sia \(X\) uno spazio vettoriale e sia \(\varphi : X \to \mathbb{R} + \{+ \infty\} \). Dico che \(\varphi \) è \emph{propria} se \(D{(\varphi )} = \{x \in X : \varphi {(x)} \neq +\infty\} \neq \varnothing\). Dico che \(\varphi \) è \emph{convessa} se, \(\forall x, y \in X\) e \(\forall t \in [0, 1]\), 
+\[
+  \varphi {(tx + {(1-t)}y)} \le t \varphi {(x)} + {(1-t)}\varphi {(y)}
+\]
+Sia \(C \subseteq X\) convesso non vuoto. Allora sia 
+\[
+  \varphi{(x)}= \begin{cases}{}
+      0 & x \in C \\
+      \infty & x \not\in  C
+  \end{cases}
+\]
+è una funzione convessa detta \emph{indicatrice} di \(C\) 
+\begin{definition}{Epigrafico}
+    Data \(\varphi\) una funzione, il suo \emph{epigrafico} è
+    \[
+      \mathrm{epi}\varphi = \{{(x, \lambda)} \in X \times  \mathbb{R} : \varphi {(x)} \le \lambda\} 
+    \]
+\end{definition}
+\begin{proposition}{}
+    Si ha che
+\begin{enumerate}[label = (\arabic*)]
+    \item \(\varphi : X \to \mathbb{R}\) è convessa se e solo se \(\mathrm{epi}\varphi \) è convesso
+    \item Se \(\varphi : X \to \mathbb{R} \cup \{+\infty\} \) è convessa, allora
+        \(\{x \in X : \varphi {(x)} \le \lambda\} \) è convesso \(\forall \lambda \in \mathbb{R}\) 
+    \item Se \(\varphi_{1}, \varphi_{2}\) sono convesse, allora
+        \(\varphi_{1}+\varphi_{2}\) è convessa
+    \item Se \(\{\varphi_{i}\}_{i \in I } \) sono convesse, allora \(\varphi{(x)} = \sup_{i \in I} \varphi_i {(x)}\) è convessa.
+\end{enumerate}
+\end{proposition}
+\begin{example}{}
+    Sia \(X\) uno spazio normato. Allora \(\varphi : X \to \mathbb{R}\) data da
+    \(\varphi{(x)} = \|x\|\) è convessa. Infatti
+\[
+  \|tx + {(1-t)}y\| \le t \|x\| + {(1-t)}\|y\| \quad \forall x, y \in X, \quad
+  \forall t \in (0, 1)
+\]
+\end{example}
+
+\section{semicontinuità}
+\begin{definition}{Funzione semicontinua inferiormente}
+    Sia \(X\) uno spazio normato.
+    \(\varphi : X \to \mathbb{R}\) è \emph{semicontinua inferiormente} se
+    \[
+      \varphi {(x)} \le \liminf_{y \to x} \varphi {(y)}
+    \]
+    viene anche abbreviato s.c.i.
+\end{definition}
+\begin{proposition}[Caratterizzazioni equivalenti]
+\begin{enumerate}[label = (\roman*)]
+    \item \(\varphi \) è s.c.i. se e solo se \(\mathrm{epi}\varphi \) è chiuso in \(X \times \mathbb{R}\) 
+    \item \(\varphi \) è s.c.i. se e solo se \(\{x \in X : \varphi {(x)} \le \lambda\} \) è chiuso per ogni \(\lambda \in \mathbb{R}\) s.c.i.
+    \item Se \(\varphi_{1}, \varphi_{2}\) sono s.c.i.
+        allora anche \(\varphi_{1} + \varphi_{2}\) lo è.
+
+    \item Se \(\{\varphi_i\}_{i \in I}\) sono s.c.i., allora \(\varphi{(x)} = \sup_{i \in I} \varphi_i{(x)}\) è s.c.i..
+    \item Sia \(X\) compatto, \(\varphi : X \to \mathbb{R}\) s.c.i., allora \(
+        \varphi \) ha minimo.
+\end{enumerate}
+\end{proposition}
+\begin{proof}[Dimostrazione di (v)]
+    S.c.i. se e solo se è continua secondo la topologia della semicontinuità
+    inferiore, con aperti della base della forma \((a, +\infty)\), con \(a \in \mathbb{R}
+    \)  come base. Allora se \(X\) è compatto, anche \(\varphi{(X)}\) è compatto. 
+\end{proof}
+\begin{theorem}{}
+    Sia \(X\) uno spazio normato, \(\varphi  : X \to \mathbb{R} \cup \{+\infty\} \) convessa, propria e s.c.i. Allora esiste \(f \in X'\) e \(\exists c \in \mathbb{R}\) tale che
+    \[
+      \varphi  {(x)} \ge \Span{f, x} + c \quad \forall x \in X
+    \]
+\end{theorem}
+
+
+
 
