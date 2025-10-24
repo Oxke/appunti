@@ -33,7 +33,7 @@ Dalla 2,3,4 \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di anelli.
 \end{remark}
 
 
-\begin{theorem}[Secondo teorema di isomorfismo]
+\begin{theorem}{Secondo teorema di isomorfismo}
     Sia \(M\) un modulo, con \(M', M'' \subseteq M \) sottomoduli. Allora 
     \[
       M' / (M' \cap  M'') \cong {(M' + M'')} / M''
@@ -50,7 +50,7 @@ Dalla 2,3,4 \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di anelli.
 \end{proof}
 
 
-\begin{theorem}[Terzo teorema di isomorfismo]
+\begin{theorem}{Terzo teorema di isomorfismo}
     Dati \(M'' \subseteq M' \subseteq M\)  sottomoduli e modulo, allora
     \[
       {({M}/{M'})} / {(M'/ M'')} \cong M / M'
@@ -331,7 +331,7 @@ Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
 % TODO UN BEL PO' di ROBA
 
 
-\begin{lemma}{}
+\begin{lemma}{}\label{lem:com}
     Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) una successione
     esatta di \(A\)-moduli. Siano \(f': A^{m} \to M'\) e \(f'' : A^{n}\to M''\)
     omomorfismi. Allora esiste un diagramma commutativo con righe esatte
@@ -350,13 +350,14 @@ Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
 	\arrow["p"', from=2-3, to=2-4]
 	\arrow[from=2-4, to=2-5]
 \end{tikzcd}\]
-\end{lemma}\label{lem:com}
+\end{lemma}
 
 \begin{proof}{}
     % TODO manca
 \end{proof}
 
 \begin{proposition}{}
+\label{prop:varie}
     Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) esatta di
     \(A\)-moduli. Allora
 \begin{enumerate}[label = \arabic*.]
@@ -366,7 +367,7 @@ Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
     \item \(M f.g., M'' f.p. \implies M' f.g.\) 
     \item \(M' f.g., M f.p. \implies M'' f.g.\) 
 \end{enumerate}
-\end{proposition}\label{prop:varie}
+\end{proposition}
 \begin{proof}{} \( \) 
 \begin{enumerate}[label = \arabic*.]
     \item già visto
@@ -608,5 +609,3 @@ in particolare \(M', M, M''\) sono coerenti se due di essi lo sono.
     \]
     e \(J / J^2\) è \(C\)-modulo annullato da \(J / J^2\) e come \(C / {(J / J^2)} \cong B / J \cong \mathbb{K}\)-modulo ha dimensione \(\infty\)  con base \(\{\overline{x_{\lambda} }| \lambda \in \Lambda \} \) 
 \end{example}
-
-

@@ -1,3 +1,141 @@
+%! TEX program = lualatex
+\documentclass[notitlepage]{report}
+\usepackage{layout}
+\usepackage[a4paper, centering, total={5in,9in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[many]{tcolorbox}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+\usepackage[colorlinks]{hyperref}
+\usepackage{titling}
+\usepackage{quiver}
+
+\newcommand*{\sminus}{\raisebox{1.3pt}{$\smallsetminus$}}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
+
+% newcommand for span with langle and rangle around
+\newcommand{\Span}[1]{{\left\langle#1\right\rangle}}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+}
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{section}.\arabic{theo}}
+% 
+\newcounter{excounter}[section]\setcounter{excounter}{0}
+\renewcommand{\theexcounter}{\arabic{chapter}.\arabic{section}.\arabic{excounter}}
+
+\numberwithin{equation}{section}
+
+\definecolor{thmblue}{RGB}{78, 68, 243}
+\newtcolorbox{theorem}[1][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=blue!1, colframe=blue!30,
+    title=Teorema~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
+    coltitle=thmblue!80, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=blue!5}
+}
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\newtcolorbox{lemmao}[1][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=applegreen!1, colframe=applegreen!30,
+    title=Lemma~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
+    coltitle=applegreen!115, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=applegreen!5}
+}
+
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{
+    colframe=violet!0,
+    coltitle=violet, % Title text color
+    fonttitle=\bfseries, % Title font
+    title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0pt, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=violet!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=violet!0,
+    borderline west={2pt}{-5pt}{violet!40},
+    #1
+}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[theo]{Lemma}
+\newtheorem{corollary}{Corollario}[theo]
+\newtheorem{proposition}[theo]{Proposizione}
+
+\theoremstyle{definition}
+\newtheorem{example}[excounter]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Nota}
+\newtheorem*{remark}{Osservazione}
+
+\newtcolorbox{notebox}{
+  colback=gray!10,
+  colframe=black,
+  arc=5pt,
+  boxrule=1pt,
+  left=15pt,
+  right=15pt,
+  top=15pt,
+  bottom=15pt,
+}
+
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}} % beautiful chi
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+
+\newtcolorbox[auto counter, number within=section]{eser}[1][]{
+    colframe=black!0,
+    coltitle=black!70, % Title text color
+    fonttitle=\bfseries\sffamily, % Title font
+    title={Esercizio~\thetcbcounter~#1}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0mm, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=black!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=black!0,
+    borderline west={1pt}{-5pt}{black!70}, 
+    segmentation style={dashed, draw=black!40, line width=1pt} % Dashed dividing line
+}
+\newcommand{\seminorm}[1]{\left\lvert\hspace{-1 pt}\left\lvert\hspace{-1 pt}\left\lvert#1\right\lvert\hspace{-1 pt}\right\lvert\hspace{-1 pt}\right\lvert}
+
+\title{Appunti di Algebra Superiore}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/AlgebraSuperiore}{\texttt{Oxke/appunti/AlgebraSuperiore}}}
+
+\date{Primo semestre, 2025 \-- 2026, prof. Alberto Canonaco}
+
+\begin{document}
 \chapter{Categorie}
 
 \begin{definition}{Categoria}
@@ -294,7 +432,8 @@ possiamo dare una definizione astratta
 \begin{proposition}{}
     Sia \(C\) concreta. Allora
     \[
-      f \text{ invertibile a \emph{sinistra}/\emph{destra}} \implies f \text{ \emph{iniettiva}/\emph{suriettiva}} \implies f \text{ \emph{mono}/\emph{epi}}
+      f \text{ invertibile a sinistra (destra)} \implies f \text{ iniettiva
+      (suriettiva)} \implies f \text{ mono (epi)}
     \]
 \end{proposition}
 \begin{proof}{}
@@ -304,18 +443,8 @@ possiamo dare una definizione astratta
     Sia \(f'\) tale che \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)), allora
     chiaramente \(f\) iniettiva (suriettiva) perché le composizioni \(1_X\) e \(1_Y\) sono biunivoche.
 
-    Se \(f\) è iniettiva, allora siano \(g_{1}, g_{2}: Z \to X\). Dunque \(\forall x \in X\) 
-    \[
-      f{(g_{1}{(x)})} = f{(g_{2}{(x)})} \overset{f \text{ inj.}}{\implies } g_{1}{(x)} = g_{2}{(x)}
-    \]
-    ossia \(f_*\) è iniettiva, ossia \(f\) è monomorfismo.
-
-    se \(f\) è suriettiva, allora siano \(
-    g_{1}, g_{2} : Y \to Z\). Sappiamo che \(\forall y \in Y\) esiste \(x_y \in X\) tale che \(f{(x_y)} = y\). Allora abbiamo che, assumendo che \(g_{1}\circ f = g_{2}\circ f\) 
-    \[
-        g_{1}{(y)} = g_{1}{(f{(x_y)})} = g_{2}{(f{(x_y)})} = g_{2}{(y)} \quad \forall y \in Y
-    \]
-    ossia \(f^{*}\) è iniettiva e dunque \(f\) è epimorfismo
+    Se \(f\) è iniettiva, allora % TODO finire
+    se \(f\) è suriettiva, allora % TODO finire
 \end{proof}
 
 In generale non vale nessuna delle \(\impliedby\).
@@ -464,7 +593,7 @@ In generale non vale nessuna delle \(\impliedby\).
       H_{n} : \mathtt{Top} \to \mathtt{Ab}
     \]
 \end{example}
-\begin{theorem}{Omomorfismo}
+\begin{theorem}[Omomorfismo]
     Sia \(\sim \) una congruenza su \(C\) e \(F : C \to D\) un funtore tale che
     se \(f \sim f'\) in \(C\) allora \(F{(f)} = F{(f')}\).
     Allora esiste un unico funtore \(\overline{F} : C /_\sim \to D\) tale
@@ -899,7 +1028,7 @@ l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{Cat}\)
     Sia \(F: C\to D\) un funtore, e si supponga che \(\forall X \in C\), \(\alpha_X : F{(X)} \to F'{(X)}\) sia un isomorfismo in \(D\). Allora \(F' : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) Si estende in modo unico a un funtore \(F' : C \to D\) tale che \(\alpha : F \to F'\) è isomorfismo.
 \end{lemma}
 
-\begin{theorem}{Finalmente un teorema}
+\begin{theorem}[Finalmente un teorema]
     Un funtore \(F : C \to D\) è un'\emph{equivalenza} se e solo se \(F\) è \emph{pienamente fedele} e \emph{essenzialmente suriettivo}
 \end{theorem}
 \begin{remark}{}
@@ -979,7 +1108,7 @@ l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{Cat}\)
     equivalenza.
 \end{eser}
 
-\section{Categorie preadditive}
+\section{Categorie preadditiva}
 \begin{definition}{Categoria preadditiva}
     Una categoria \emph{preadditiva} è una categoria \(\mathcal{A}\) con una
     struttura di gruppo abeliano (notazione: additivo) su \(\mathcal{A}{(X, Y)}\) per ogni \(X, Y \in \mathcal{A}\) ed è tale che la composizione di morfismi sia \(\mathbb{Z}\)-bilineare, ossia
@@ -1130,3 +1259,4 @@ Una categoria \(\mathcal{C}\) può non avere nessuna struttura di categoria
 
 
 
+\end{document}

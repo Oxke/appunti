@@ -499,7 +499,6 @@ esiste \(\varepsilon > 0\) tale che
         
 \end{enumerate}
 \end{proof}
-\begin{remark}{}
     Abbiamo detto dunque che \(p\) è una seminorma. Cosa dovremmo aggiungere per
     renderla una norma? Serve che sia omogenea anche per \(\lambda \le 0\),
     dunque vogliamo \(p {( \lambda x)} = |\lambda| p {(x)}\) e inoltre vorremmo
@@ -513,8 +512,65 @@ esiste \(\varepsilon > 0\) tale che
     sarebbe avere che se \(x \in C\), allora \(-x \in C\). Per poter avere
     inoltre che \(p {(x)} = 0 \iff x = 0\) dobbiamo anche richiedere che \(C\)
     sia limitato. In tali ipotesi in realtà \(p\) non è solo una norma ma è
-    equivalente a \(\|\cdot \|_X\) 
-\end{remark}
+    equivalente a \(\|\cdot \|_X\).
+
+\begin{proposition}{}
+    Se \(C\) aperto convesso non vuoto e limitato è tale che \(x \in C \iff -x \in C\), allora \(\exists m_{2} > 0\) tale che \(\|x\| \le m_{2} p {(x)}\) per ogni \(x \in X\)
+\end{proposition}
+\begin{proof}{}
+    Sappiamo che \(\exists R > 0 : C \subseteq B_{R} {(0)} \). Prendo ora \(x
+    \in X \sminus \{0\} \). Sia ora \(0 < \overline{r} = \|x\| / R\). Allora per
+    \(r < \overline{r}\), 
+    \[
+      r < \frac{\|x\|}{R} \implies \frac{\|x\|}{r} > R \implies \frac{x}{r}
+      \not\in 
+    \]
+    Sappiamo che \(p {(x)} \ge  \|x\| / R\) per ogni \(x \in X\). Infatti se per
+    assurdo \( p {( x)} < \|x\| /R\) allora esisterebbe \(\tilde{r}\) tale che
+    \(\frac{x}{\tilde{r}} \in C\) e \(\tilde{r} < \|x\| / R \implies \frac{x}{\tilde{r}} \not\in C\).
+
+    Abbiamo dunque che \(R =: m_{2}\) 
+\end{proof}
+
+In particolare, se \(C = B_{1}{(0)}\), allora \(p {(x)} = \|x\|\). Infatti
+ovviamente \(p {(x)} \ge \|x\|\) perché \(B_{1}{(0)} \supseteq C\).
+
+Sia ora \(X = \ell^2\). Sia \(C = \{x : \mathbb{N} \to \mathbb{R}: |x{(n)}| \le \frac{1}{n} \,\, \forall n \in \mathbb{N}\}\). Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(C \neq \varnothing\), \(C\) è chiuso in \(\ell^2\) e \(C\) è
+        convesso.
+
+        Infatti \(0 \in C\). Siano \(x_{1} \in C\) e \(x_{2} \in C\), allora
+        \[
+          | tx_{1}{(n)} + {(1-t)}x_{2}{(n)}| \le t | x_{1}{(n)}| + {(1-t)} | x_{2}{(n)} | \le  \frac{t}{n} + (1-t)/n = \frac{1}{n}
+        \]
+        dunque \(C\) è convesso.
+
+        Infine \(C\) è chiuso perché ogni \([-\frac{1}{n}, \frac{1}{n}] \subseteq \mathbb{R} \) è chiuso.
+    \item \(\mathring{C} = \varnothing\) 
+
+        Mi chiedo se \(\exists \varepsilon > 0\) tale che, se \(x \in \ell^2\) e
+        \(\|x\|_2 < \varepsilon \), allora \(x \in C\). Questo non è vero.
+        Infatti prendendo
+        \[
+          \overline{x}{(n)} = \begin{cases}{}
+              \varepsilon & n = \overline{n} \\
+              0 & \text{altrimenti}
+          \end{cases}
+        \]
+        abbiamo che \(\|\overline{x}\| = \varepsilon\) ma \(\overline{x} \not\in C\) 
+    \item \(C\) \textbf{non} è compatto in \(\ell^2\) 
+    \item \(\exists m > 0\) tale che \(\|x\|_2 \le m p {(x)}\)
+
+        Basta dimostrare che \(C\) è limitato. Ma questo è banalmente vero
+        perché per ogni \(x \in X\) 
+        \[
+          \|x\|_2^2 = \sum_{n=1}^{\infty} |x{(n)}|^2 \le \sum_{n=1}^{\infty} \left|\frac{1}{n}\right|^2 = \frac{\pi^2}{6}  
+        \]
+\end{enumerate}
+
+
+
 
 
 \begin{lemma}[Separazione di un convesso non vuoto da un punto esterno]
@@ -687,7 +743,7 @@ Sia \(C \subseteq X\) convesso non vuoto. Allora sia
 \begin{proof}[Dimostrazione di (v)]
     S.c.i. se e solo se è continua secondo la topologia della semicontinuità
     inferiore, con aperti della base della forma \((a, +\infty)\), con \(a \in \mathbb{R}
-    \)  come base. Allora se \(X\) è compatto, anche \(\varphi{(X)}\) è compatto. 
+    \)  come base. Allora se \(X\) è compatto, anche \(\varphi{(X)}\) è compatto. I compatti di \(\mathbb{R}_\text{s.c.i.}\) sono limitati inferiormente, poiché il ricoprimento con gli aperti della base ammmette sottoricoprimento finito.
 \end{proof}
 \begin{theorem}{}
     Sia \(X\) uno spazio normato, \(\varphi  : X \to \mathbb{R} \cup \{+\infty\} \) convessa, propria e s.c.i. Allora esiste \(f \in X'\) e \(\exists c \in \mathbb{R}\) tale che

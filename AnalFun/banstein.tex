@@ -1,0 +1,80 @@
+\section{Banach \-- Steinhaus}
+Sia \(X = c_{00}\). Consideriamolo dunque con la norma \(\|\cdot \|_{\infty}\).
+Ci chiediamo se \(X\) è Banach. Ovviamente no perché ad esempio la successione 
+\[
+  x_k{(n)} = \begin{cases}{}
+      \frac{1}{n} & n < k \\
+      0 & n \ge k
+  \end{cases}
+\]
+è convergente a \(\overline{x}{(n)} = \frac{1}{n}\) in \(\ell_{\infty} \), che
+però non è in \(c_{00}\). Poiché \(x_k\) è convergente in \(\ell_{\infty}\), in
+particolare è di Cauchy, e dunque \(c_{00} \) non è Banach.
+
+Definiamo ora il funzionale
+\begin{align*}
+    T_{n}: X &\longrightarrow \mathbb{R} \\
+    x &\longmapsto T_{n}(x) = n x{(n)}
+\end{align*}
+
+Ora fissato \(x \in c_{00}\), \(\lim_{n \to \infty} T_n x = 0\). Inoltre \(T_{n}\) è lineare ed è continuo poiché \(|T_n x | = | n x {(n)} | \le n \|x\|_{\infty} \). Dunque per \(
+n\) fissato, \(T_n\) è continuo.
+
+Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
+\infty\).
+
+\begin{theorem}[Banach \-- Steinhaus]
+    Sia \(X\) uno spazio di Banach, \( Y\) uno spazio normato. Sia \(\{T_{i}\}_{i \in I} \) 
+    una famiglia di operatori lineari e continui \(T_{i} : X \to Y\).
+
+    Allora se \(\forall x \in X\) esiste \(m {(x)}\) tale che \(\|T_{i}{(x)}\|_Y \le m {(x)}\) per ogni \(i \in I\) vale che 
+    \[
+      \forall x \in X \,\, \exists m {(x)} : \sup_{i \in I}\|T_{i} x \|_Y \le  m {(x)} \implies \sup_{i \in I} \|T_{i}\|_{\mathcal{L}{(X, Y)}} < +\infty
+    \]
+    in altre parole \emph{puntualmente limitato} implica \emph{uniformemente
+    limitato}
+\end{theorem}
+
+\begin{lemmao}[Baire]
+    Sia \(X\) uno spazio metrico completo. Data \(\{X_{n}\}_{n \in \mathbb{N}}\) una successione di sottoinsiemi chiusi magri, ossia con interno vuoto, si ha che \(
+    \bigcup_{n \in \mathbb{N}} X_{n}\) è magro.
+
+    Equivalentemente data \(\{X_{n}\} \) una successione di sottoinsiemi chiusi
+    tale che \(\bigcup_{n \in \mathbb{N}} X_{n} = X\), allora \(\exists n_{0}
+    \in \mathbb{N} : \mathring{X_{n_{0}}} \neq \varnothing\) 
+\end{lemmao}
+\begin{proof}[Dimostrazione di B.S.]
+    Costruiamo 
+    \[
+      X_{n} = \{x \in X : \|T_{i}x\| \le n \,\, \forall i \in I\}
+    \]
+    Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall n\), \(X_{n}\) è chiuso (controimmagine di chiuso tramite la
+        composizione delle funzioni continue \(T_{i}\) e \(\|\cdot \|\))
+    \item \(X = \bigcup_{n} X_{n}\)
+
+        Vogliamo mostrare che data \(x \in X\), \(\exists \overline{n} : x \in X_{\overline{n}}\). Sappiamo che \(\exists m {(x)} : \|T_{i}{(x)}\| \le m {(x)}\) per ogni \(i \in I\), e allora basta prendere \(\overline{n} \ge m {(x)}\).
+
+    Ora abbiamo le condizioni del lemma di Baire, e possiamo dunque dire che
+    esiste \(n_{0} : \mathring{X_{n_{0}} } \neq \varnothing\). Prendo dunque \(x_{0} \in \mathring{X_{n_0}}\).
+    Esiste dunque \(\delta > 0 : B_{\delta} {(x_{0})} \subseteq X_{n_0}\). In
+    particolare \(x_{0} + \frac{x}{\|x\|}\delta \in X_{n_{0}} \) per ogni \(x \neq 0\). Allora dalla definizione degli \(X_{n}\) segue che
+    \[
+      \left\|T_{i} {\left(x_{0} + \delta \frac{x}{\|x\|}\right)}\right\| \le n_{0}
+    \]
+    ora per linearità e proprietà della norma abbiamo che
+    \[
+      \delta \left\| T_{i} \frac{x}{\|x\|}\right\| \le \|T_{i} x_{0}\| + \left\|T {\left( x_{0} + \delta \frac{x}{\|x\|} \right)} \right\| \le n_{0} + n_{0} = 2n_{0}
+    \]
+
+    Finalmente concludiamo che
+    \[
+        \|T_{i}x\|\le {\left( \frac{2n_{0}}{\delta} \right)} \|x\| \implies \sup_{x \in X \sminus \{0\} } \frac{\|T_{i}x\|}{\|x\|} \le \frac{2n_{0}}{\delta}
+    \]
+\end{enumerate}
+
+\end{proof}
+
+
+

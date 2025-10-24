@@ -1,11 +1,10 @@
-\documentclass{article}
+\documentclass[notitlepage]{report}
 \usepackage{layout}
-\usepackage[a4paper, total={5in,9in}]{geometry}
+\usepackage[a4paper, centering, total={5in,9in}]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
 \usepackage{mathtools}
 \usepackage{amsthm}
-\usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cancel}
@@ -20,6 +19,7 @@
 \usepackage{transparent}
 \usepackage{enumitem}
 \usepackage[colorlinks]{hyperref}
+\usepackage{titling}
 \usepackage{quiver}
 
 \newcommand*{\sminus}{\raisebox{1.3pt}{$\smallsetminus$}}
@@ -34,76 +34,42 @@
     \import{./figures/}{#2.pdf_tex}
 }
 
-\pdfsuppresswarningpagegroup=1
-
 \newcounter{COUNTER}\setcounter{COUNTER}{0}
-\renewcommand{\thecounter}{\arabic{COUNTER}}
+\renewcommand{\theCOUNTER}{\arabic{COUNTER}}
 
 \newcounter{theo}[section]\setcounter{theo}{0}
-\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
-
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{section}.\arabic{theo}}
+% 
 \newcounter{excounter}[section]\setcounter{excounter}{0}
-\renewcommand{\theexcounter}{\arabic{section}.\arabic{excounter}}
+\renewcommand{\theexcounter}{\arabic{chapter}.\arabic{section}.\arabic{excounter}}
 
 \numberwithin{equation}{section}
 
-\newenvironment{theorem}[1][]{
-    \refstepcounter{COUNTER}
-     \ifstrempty{#1}
-    {\mdfsetup{
-        frametitle={
-            \tikz[baseline=(current bounding box.east),outer sep=0pt]
-            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
-            {\strut Teorema~\thecounter};}
-        }
-    }{\mdfsetup{
-        frametitle={
-            \tikz[baseline=(current bounding box.east),outer sep=0pt]
-            \node[anchor=east,rectangle,fill=blue!20,rounded corners=5pt]
-            {\strut Teorema~\thecounter~#1};}
-        }
-    }
-    \mdfsetup{
-        roundcorner=10pt,
-        innertopmargin=10pt,linecolor=blue!20,
-        linewidth=2pt,topline=true,
-        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
-        % nobreak=false
-    }
-\begin{mdframed}[]\relax}{
-\end{mdframed}}
+\definecolor{thmblue}{RGB}{78, 68, 243}
+\newtcolorbox{theorem}[2][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=blue!1, colframe=blue!30,
+    title=Teorema~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2},
+    coltitle=thmblue!80, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=blue!5}
+}
 
-% \newenvironment{definition}[1][]{
-%     \refstepcounter{theo}
-%      \ifstrempty{#1}
-%     {\mdfsetup{
-%         frametitle={
-%             \tikz[baseline=(current bounding box.east),outer sep=0pt]
-%             \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
-%             {\strut Definizione~\thetheo};}
-%         }
-%     }{\mdfsetup{
-%         frametitle={
-%             \tikz[baseline=(current bounding box.east),outer sep=0pt]
-%             \node[anchor=east,rectangle,fill=violet!20,rounded corners=5pt]
-%             {\strut Definizione~\thetheo:~#1};}
-%         }
-%     }
-%     \mdfsetup{
-%         roundcorner=10pt,
-%         innertopmargin=10pt,linecolor=violet!20,
-%         linewidth=2pt,topline=true,
-%         frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
-%         nobreak=true
-%     }
-% \begin{mdframed}[]\relax}{
-% \end{mdframed}}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\newtcolorbox{lemmao}[2][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=applegreen!1, colframe=applegreen!30,
+    title=Lemma~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2},
+    coltitle=applegreen!115, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=applegreen!5}
+}
 
-\newtcolorbox[auto counter, number within=section]{definition}[2][]{
+\newtcolorbox{definition}[2][]{
     colframe=violet!0,
     coltitle=violet, % Title text color
     fonttitle=\bfseries, % Title font
-    title={Definizione~\thecounter\ifstrempty{#2}{}{:~#2}}, % Title format
+    title={Definizione~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2}}, % Title format
     sharp corners, % Less rounded corners
     boxrule=0pt, % Line width of the box frame
     toptitle=1mm, % Distance from top to title
@@ -119,35 +85,9 @@
     #1
 }
 
-\newenvironment{lemmao}[1][]{
-    \refstepcounter{COUNTER}
-     \ifstrempty{#1}
-    {\mdfsetup{
-        frametitle={
-            \tikz[baseline=(current bounding box.east),outer sep=0pt]
-            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
-            {\strut Lemma~\thecounter};}
-        }
-    }{\mdfsetup{
-        frametitle={
-            \tikz[baseline=(current bounding box.east),outer sep=0pt]
-            \node[anchor=east,rectangle,fill=green!20,rounded corners=5pt]
-            {\strut Lemma~\thecounter~#1};}
-        }
-    }
-    \mdfsetup{
-        roundcorner=10pt,
-        innertopmargin=10pt,linecolor=green!20,
-        linewidth=2pt,topline=true,
-        frametitleaboveskip=\dimexpr-\ht\strutbox\relax,
-        % nobreak=true
-    }
-\begin{mdframed}[]\relax}{
-\end{mdframed}}
-
 \theoremstyle{plain}
 \newtheorem{lemma}[COUNTER]{Lemma}
-\newtheorem{corollary}{Corollario}[COUNTER]
+\newtheorem{corollary}[COUNTER]{Corollario}
 \newtheorem{proposition}[COUNTER]{Proposizione}
 
 \theoremstyle{definition}
@@ -171,11 +111,11 @@
 \DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}} % beautiful chi
 \newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
 
-\newtcolorbox[auto counter, number within=section]{eser}[1][]{
+\newtcolorbox{eser}[2][]{
     colframe=black!0,
     coltitle=black!70, % Title text color
     fonttitle=\bfseries\sffamily, % Title font
-    title={Esercizio~\thecounter~#1}, % Title format
+    title={Esercizio~\stepcounter{COUNTER}\theCOUNTER~#2}, % Title format
     sharp corners, % Less rounded corners
     boxrule=0mm, % Line width of the box frame
     toptitle=1mm, % Distance from top to title
