@@ -23,7 +23,75 @@ n\) fissato, \(T_n\) è continuo.
 Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
 \infty\).
 
-\begin{theorem}[Banach \-- Steinhaus]
+
+Per introdurre il teorema di Banach \-- Steinhaus, abbiamo bisogno del seguente lemma:
+
+\begin{lemmao}[Baire]
+    Sia \(X\) uno spazio metrico completo. Data \(\{X_{n}\}_{n \in \mathbb{N}}\) una successione di sottoinsiemi chiusi magri, ossia con interno vuoto, si ha che \(
+    \bigcup_{n \in \mathbb{N}} X_{n}\) è magro.
+
+    Equivalentemente data \(\{X_{n}\} \) una successione di sottoinsiemi chiusi
+    tale che \(\bigcup_{n \in \mathbb{N}} X_{n} = X\), allora \(\exists n_{0}
+    \in \mathbb{N} : \mathring{X_{n_{0}}} \neq \varnothing\) 
+\end{lemmao}
+\begin{proof}
+  Dimostriamo una versione equivalente: 
+  \[
+    \{A_n\} \subset X \text{ aperti densi} \implies \bigcap_{n} A_n \text{ denso}
+  \]
+  Fissiamo \(U \subset X\) aperto non vuoto. Sia \(x_0 \in U\), per le ipotesi su \(U\) possiamo trovare \(r_0 > 0\) tale che
+  \[
+    \overline {B_{r_0}(x_0)} \subset U.
+  \]
+  Per densità di \(A_1\) possiamo trovare un certo \(x_1\) tale che
+  \[
+    x_1 \in A_1 \cap B_{r_0}(x_0), 
+  \]
+  e un \(r_1 > 0\) tale che 
+  \[
+    \begin{cases}
+      \overline{B_{r_1}(x_1)} \subset B_{r_0}(x_0) \cap A_1, \\
+      0 < r_1 < \frac{r_0}{2}.
+    \end{cases}
+  \]
+  Procedendo induttivamente possiamo costruire due successioni, \(\{x_n\} \subset X\) e \(\{r_n\} \subset \mathbb R^+\), tali che per ogni \(n\) valga che
+  \[
+    \begin{dcases}
+      \overline{B_{r_n}(x_n)} \subset B_{r_{n-1}}(x_{n-1}) \cap A_n, \\
+      0 < r_n < \frac{r_{n-1}}{2}.
+    \end{dcases}
+  \]
+  Chiaramente la successione \(r_n\) converge a \(0\). Inoltre la successione \(\{x_n\}\) è di Cauchy, infatti per \(m > n\) vale che
+  \[
+  \begin{aligned}
+      d(x_n, x_m) &\le d(x_n, x_{n+1}) + d(x_{n+1}, x_{n+2}) + \ldots + d(x_{m-1}, x_m) \\
+      &< r_n + r_{n+1} + \ldots + r_{m-1} < r_n + \frac{r_n}{2} + \frac{r_n}{4} + \ldots = 2 r_n,
+  \end{aligned}
+  \]
+  che è infinitesima. Per completezza dello spazio \(X\) esiste \(\overline x \in X\) tale che \(x_n \to \overline x\). Vorremmo mostrare che 
+  \[
+    \overline x \in U \cap \bigcap_{n} A_n.
+  \]
+  Siccome, per ogni \(n, p \geq 0\) naturali vale che 
+  \[
+    x_{n + p} \in B_{r_n}(x_n) 
+  \]
+  si può affermare, passando al limite per \(p \to +\infty\), che
+  \[
+    \overline x \in \overline{B_{r_n}(x_n)} \quad \forall n \geq 0.
+  \]
+  Quindi, per la costruzione delle palle, si ha che
+  \[
+    \overline x \in A_n \quad \forall n \geq 0.
+  \]
+  Inoltre, per la costruzione iniziale, si ha che
+  \[
+    \overline x \in \overline{B_{r_0}(x_0)} \subset U.
+  \]  
+  Questo conclude la dimostrazione. 
+\end{proof}
+
+\begin{theorem}[Banach \-- Steinhaus]\label{thm:banach-steinhaus}
     Sia \(X\) uno spazio di Banach, \( Y\) uno spazio normato. Sia \(\{T_{i}\}_{i \in I} \) 
     una famiglia di operatori lineari e continui \(T_{i} : X \to Y\).
 
@@ -34,16 +102,7 @@ Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
     in altre parole \emph{puntualmente limitato} implica \emph{uniformemente
     limitato}
 \end{theorem}
-
-\begin{lemmao}[Baire]
-    Sia \(X\) uno spazio metrico completo. Data \(\{X_{n}\}_{n \in \mathbb{N}}\) una successione di sottoinsiemi chiusi magri, ossia con interno vuoto, si ha che \(
-    \bigcup_{n \in \mathbb{N}} X_{n}\) è magro.
-
-    Equivalentemente data \(\{X_{n}\} \) una successione di sottoinsiemi chiusi
-    tale che \(\bigcup_{n \in \mathbb{N}} X_{n} = X\), allora \(\exists n_{0}
-    \in \mathbb{N} : \mathring{X_{n_{0}}} \neq \varnothing\) 
-\end{lemmao}
-\begin{proof}[Dimostrazione di B.S.]
+\begin{proof}
     Costruiamo 
     \[
       X_{n} = \{x \in X : \|T_{i}x\| \le n \,\, \forall i \in I\}
@@ -57,7 +116,7 @@ Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
         Vogliamo mostrare che data \(x \in X\), \(\exists \overline{n} : x \in X_{\overline{n}}\). Sappiamo che \(\exists m {(x)} : \|T_{i}{(x)}\| \le m {(x)}\) per ogni \(i \in I\), e allora basta prendere \(\overline{n} \ge m {(x)}\).
 
     Ora abbiamo le condizioni del lemma di Baire, e possiamo dunque dire che
-    esiste \(n_{0} : \mathring{X_{n_{0}} } \neq \varnothing\). Prendo dunque \(x_{0} \in \mathring{X_{n_0}}\).
+    esiste \(n_{0} : \mathring{X}_{n_{0}} \neq \varnothing\). Prendo dunque \(x_{0} \in \mathring{X}_{n_0}\).
     Esiste dunque \(\delta > 0 : B_{\delta} {(x_{0})} \subseteq X_{n_0}\). In
     particolare \(x_{0} + \frac{x}{\|x\|}\delta \in X_{n_{0}} \) per ogni \(x \neq 0\). Allora dalla definizione degli \(X_{n}\) segue che
     \[
@@ -65,7 +124,7 @@ Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
     \]
     ora per linearità e proprietà della norma abbiamo che
     \[
-      \delta \left\| T_{i} \frac{x}{\|x\|}\right\| \le \|T_{i} x_{0}\| + \left\|T {\left( x_{0} + \delta \frac{x}{\|x\|} \right)} \right\| \le n_{0} + n_{0} = 2n_{0}
+      \delta \left\| T_{i} \frac{x}{\|x\|}\right\| \le \|T_{i} x_{0}\| + \left\|T_i {\left( x_{0} + \delta \frac{x}{\|x\|} \right)} \right\| \le n_{0} + n_{0} = 2n_{0}
     \]
 
     Finalmente concludiamo che
@@ -76,5 +135,63 @@ Inoltre \(\|T_{n}\|_{X'} = n \), dunque \(\lim_{n \to \infty} \|T_{n}\|_{X'} = +
 
 \end{proof}
 
+\begin{corollary}
+  Sia \(X\) uno spazio di Banach, e sia \(Y\) uno spazio normato. Si consideri una successione di operatori lineari e continui \(\{T_n\} \subset \mathcal L(X, Y)\). Si supponga che, per ogni \(x \in X\), esista \(y \in Y\) tale che 
+  \[
+    \lim_{n \to +\infty} \|T_n x - y\| = 0.
+  \]
+  Detta \(T : X \to Y\) l'applicazione che associa, ad ogni \(x \in X\), il rispettivo limite in \(Y\), si può dire che:
+  \begin{enumerate}
+    \item \(T \in \mathcal L(X, Y)\); 
+    \item \(\sup_{n \in \mathbb N} \|T_n\|_{\mathcal L(X, Y)} < +\infty\);
+    \item \(\|T\|_{\mathcal L(X, Y)} \le \liminf_{n \to +\infty} \|T_n\|_{\mathcal L(X, Y)}\). 
+  \end{enumerate}
+\end{corollary}
 
+\begin{proof}
+  La linearità di \(T\) segue direttamente dalla linearità degli operatori \(T_n\) e dalle proprietà del limite.
 
+  Mostriamo il secondo punto. Per applicare il Teorema \ref{thm:banach-steinhaus}, dobbiamo verificare che la famiglia di operatori \(\{T_n\}\) sia puntualmente limitata. Fissiamo un arbitrario \(x \in X\). Per ipotesi, la successione \(\{T_n x\}_{n \in \mathbb{N}}\) converge in \(Y\). Ogni successione convergente in uno spazio normato è limitata. Pertanto, esiste una costante \(m(x) > 0\) tale che
+  \[
+    \|T_n x \|_Y \leq m(x), \quad \forall n \in \mathbb N.
+  \]
+  Dato che questo vale per ogni \(x \in X\), le ipotesi del Teorema \ref{thm:banach-steinhaus} sono soddisfatte. Ne consegue che la successione delle norme degli operatori è uniformemente limitata, ossia
+  \[
+    M := \sup_{n \in \mathbb N} \|T_n\|_{\mathcal L(X, Y)} < +\infty.
+  \]
+
+  Mostriamo il primo punto. La linearità è già stata mostrata. Per la continuità, dobbiamo mostrare che \(T\) è un operatore limitato. Usando il risultato del punto precedente, sappiamo che \(\|T_n\|_{\mathcal L(X, Y)} \le M\) per ogni \(n\). Dunque, per ogni \(x \in X\), vale
+  \[
+    \|T_n x\|_Y \le \|T_n\|_{\mathcal L(X, Y)} \|x\|_X \le M \|x\|_X.
+  \]
+  Poiché \(T_n x \to T x\) e la norma è una funzione continua, si ha \(\|T_n x\|_Y \to \|T x\|_Y\). Passando al limite per \(n \to \infty\) nella disuguaglianza precedente, otteniamo:
+  \[
+    \|T x\|_Y = \lim_{n \to \infty} \|T_n x\|_Y \le M \|x\|_X.
+  \]
+  Questo dimostra che \(T\) è limitato (con \(\|T\| \le M\)), e quindi continuo.
+
+  Mostriamo il terzo punto. Partiamo dalla disuguaglianza \(\|T_n x\|_Y \le \|T_n\|_{\mathcal L(X, Y)} \|x\|_X\), valida per ogni \(n \in \mathbb{N}\) e ogni \(x \in X\). Prendendo il limite inferiore per \(n \to +\infty\) in entrambi i membri, otteniamo:
+  \[
+      \liminf_{n \to +\infty} \|T_n x\|_Y \le \liminf_{n \to +\infty} \left( \|T_n\|_{\mathcal L(X, Y)} \|x\|_X \right) = \left(\liminf_{n \to +\infty} \|T_n\|_{\mathcal L(X, Y)}\right) \|x\|_X.
+  \]
+  Dato che la successione \(\|T_n x\|_Y\) converge a \(\|T x\|_Y\), il suo limite inferiore coincide con il limite. Sostituendo nel membro di sinistra, si ha:
+  \[
+      \|T x\|_Y \le \left(\liminf_{n \to +\infty} \|T_n\|_{\mathcal L(X, Y)}\right) \|x\|_X.
+  \]
+  Poiché questa disuguaglianza vale per ogni \(x \in X\), per definizione di norma di un operatore si conclude che
+  \[
+      \|T\|_{\mathcal L(X, Y)} \le \liminf_{n \to +\infty} \|T_n\|_{\mathcal L(X, Y)}.
+  \]
+\end{proof}
+\begin{example}[Disugaglianza stretta nel punto 3]
+  Si consideri \(X = Y = \ell^2\). Si definiscano gli operatori
+  \[
+    T_n : \ell^2 \to \ell^2, \quad (T_n x)(k) = \begin{cases}
+      x(k), & k = n, \\
+      0, & k \neq n. \end{cases}
+  \]
+  Gli operatori sono lineari, e si osserva che sono anche limitati di norma unitaria. L'operatore limite, \(T\), manda ogni \(x \in \ell^2\) nell'elemento nullo di \(\ell^2\). Quindi vale la disugaglianza stretta
+  \[
+      \|T\|_{\mathcal L(\ell^2, \ell^2)} = 0 < \liminf_{n \to +\infty} \|T_n\|_{\mathcal L(\ell^2, \ell^2)} = 1.
+  \]
+\end{example}
