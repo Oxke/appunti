@@ -1128,5 +1128,299 @@ Una categoria \(\mathcal{C}\) può non avere nessuna struttura di categoria
     degli scalari \(B\mathtt{-Mod} \to A\mathtt{-Mod}\) è additivo.
 \end{example}
 
+\begin{example}{}
+    Se \(\mathcal{A}\) preadditiva, allora \(\forall X \in \mathcal{A}\) ci sono
+    funtori additivi
+    \[
+      \mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab} \quad , \quad \mathcal{A}{(\-- , X)} : \mathcal{A}^{op} \to \mathtt{Ab}
+    \]
+    e in generale se \(
+    \mathcal{A}\) è \(A\)-lineare, allora i due funtori hanno codominio \(A\mathtt{-Mod}\) 
+    e sono \(A\)-lineari
+\end{example}
+
+Notare che se \(\mathcal{A} \overset{F}{\to } \mathcal{B} \overset{G}{\to } \mathcal{C}\) 
+sono funtori additivi, allora \(G \circ F\) è additivo.
+Inoltre \(\mathrm{id}_\mathcal{A}\) è additivo. 
+Dunque si ottiene una categoria contenente le \textbf{categorie preadditive}
+(piccole) e morfismi i funtori additivi.
+
+    Sia \(\mathcal{C}\) una categoria (piccola) e \(\mathcal{A}\) una categoria
+    preadditiva. Allora \(\mathrm{Fun}{(\mathcal{C}, \mathcal{A})}\) è
+    preadditiva (in modo naturale) con la seguente struttura
+
+    \(\forall F, G \in \mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) e \(\forall \alpha, \beta : F \to G\) trasformazioni
+    naturali allora \(\alpha + \beta : F \to G\) trasformazione naturale
+    definita \(\forall X \in \mathcal{C}\) da
+    \[
+      {(\alpha + \beta)}_X := \alpha_X + \beta_X : F{(X)} \to G{(X)} \text{ in }
+      \mathcal{A}
+    \]
+    è naturale perché \(
+    \forall f : X \to C\), 
+\[\begin{tikzcd}
+	{F(X)} & {F(Y)} \\
+	{G{(X)}} & {G{(Y)}}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\alpha_X + \beta_X}", from=1-1, to=2-1]
+	\arrow["{\alpha_Y + \beta_Y}", from=1-2, to=2-2]
+	\arrow["{G{(f)}}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta
+
+Se anche \(\mathcal{C}\) è preadditiva sia 
+\[
+  \mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}
+\]
+la sottocategoria piena di \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) con 
+oggetti i funtori additivi. Allora tale categoria è preadditiva.
+
+\begin{example}{}
+    Se \(A\) è anello, allora gli \(A\)-moduli sono gli oggetti di \(\mathtt{AddFun}{(A, \mathtt{Ab})}\) (già visto)
+    e in effetti \(A\mathtt{-Mod} \cong \mathtt{AddFun}{(A, \mathtt{Ab})}\),
+    poiché dati \(M, N : A \to \mathtt{Ab}\) funtori (cioè \(A \to \mathrm{End}{(M)}\) e \(A \to \mathrm{End}{(N)}\) omomorfismi di anelli) la trasformazione naturale \(\alpha : M \to N\) è data da
+    \(\alpha : M \to N\) in \(\mathtt{Ab}\) tale che \(\forall a \in A\) 
+\[\begin{tikzcd}
+	{M} & {N} \\
+	{N} & {N}
+	\arrow["{a}", from=1-1, to=1-2]
+	\arrow["{\alpha}", from=1-1, to=2-1]
+	\arrow["{\alpha}", from=1-2, to=2-2]
+	\arrow["{a}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta, cioè \(a \alpha {(x)} = \alpha {(a x)}\) per ogni \(x \in M\), ossia \(
+\alpha \) è omomorfismo di \(A\)-moduli.
+\end{example}
+\begin{remark}{}
+    \(\forall \mathcal{A}\) preadditiva (piccola) si può definire la categoria
+    (preadditiva) \(\mathcal{A-}\mathtt{Mod} := \mathtt{AddFun}{(\mathcal{A}, \mathtt{Ab})}\).
+\end{remark}
+\begin{proposition}{}
+    Siano \(\mathcal{A}, \mathcal{B}\) preadditive, \(F, G : \mathcal{A} \to
+    \mathcal{B}\) funtori tali che \(F \cong G\) e \(F\) additivo. Allora \(G\)
+    è additivo
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to G\) isomorfismo. Allora \(\forall  f : X \to Y\) in \(\mathcal{A}\), 
+    \(G{(f)} = \alpha_Y \circ F{(f)} \circ \alpha_X^{-1}\).
+    Inoltre \(\forall f, f' : X \to Y\),
+    \begin{align*}G{(f + f')} &= \alpha_Y \circ F{(f +
+    f')} \circ \alpha_X^{-1} = \alpha_Y \circ {(F{(f)} + F{(f')})} \circ \alpha_X^{-1} = \\
+    &= \alpha_Y \circ F{(f)} \circ \alpha_X^{-1} + \alpha_Y \circ F{(f')} \circ
+    \alpha_X^{-1} = G{(f)} + G{(f')}
+\end{align*}
+\end{proof}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore pienamente fedele con \(\mathcal{B}\) preadditiva.
+    Allora esiste un'unica struttura preadditiva su \(\mathcal{A}\) tale che \(F\) 
+    sia additivo
+\end{remark}
+\begin{proof}{}
+    \(\forall X, Y \in \mathcal{A}\) voglio che \(F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}\) sia isomorfismo di gruppi, che è vero se e solo se \(\forall f, f' \in \mathcal{A}{(X,Y)}\) 
+    \[
+      f + f' = F^{-1}{(F{(f)} + F{(f')})} 
+    \]
+    (verifica lasciata in esercizio) % TODO esercizio
+\end{proof}
+
+\subsection{Prodotti, coprodotti, proprietà universali}
+
+\begin{definition}{Prodotto}
+Sia \(\mathcal{C}\) una categoria, siano \(
+X_\lambda \in \mathcal{C}\) con \(\lambda \in \Lambda\) insieme. Un prodotto
+degli \(
+X_\lambda\) è dato da \(X \in \mathcal{C}\) con morfismi morfismi \(p_\lambda
+\in C{(X, X_\lambda)}\) per ogni \(\lambda \in \Lambda\) tale che
+vale la seguente proprietà universale:
+\[
+  \forall Y \in \mathcal{C}, \,\, \forall \lambda \in \Lambda, \,\, \forall f_{\lambda} \in \mathcal{C}{(Y, X_\lambda)} \quad \exists ! f \in \mathcal{C}{(X, Y)} : f_\lambda = p_\lambda \circ f
+\]
+o equivalentemente il seguente diagramma commuta:
+\[\begin{tikzcd}
+	Y \\
+	{X_\mu} & X
+	\arrow["{f_\mu}"', from=1-1, to=2-1]
+	\arrow["{\exists ! f}", dashed, from=1-1, to=2-2]
+	\arrow["{p_\mu}", from=2-2, to=2-1]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{proposition}{}
+    Siano \({(X, \{p_\lambda\}_{\lambda \in \Lambda} )}\) e \({(X', \{p'_{\lambda} \}_{\lambda \in \Lambda} )}\).
+    due prodotti in \(C\) degli \(X_{\lambda} \). Allora \(\exists ! f \in \mathcal{C}{(X', X)}\) 
+    tale che \(p'_\lambda = p_\lambda \circ f\) per ogni \(\lambda\) e \(f\) è
+    isomorfismo. 
+
+    Viceversa se \({(X, \{p_\lambda\}_{\lambda \in \Lambda} )}\) è un prodotto
+    degli \(X_\lambda\) e \(f : X' \to X\) è isomorfismo, anche \({(X', \{p_\lambda \circ f\}_{\lambda \in \Lambda} )}\) è un prodotto degli \(X_\lambda\) 
+\end{proposition}
+\begin{remark}{}
+    Si dice che il prodotto è \emph{unico a meno di unico isomorfismo}
+\end{remark}
+\begin{proof}
+    \emph{(Prima parte)}
+    Esiste unico \(f\) per la proprietà universale, analogamente \(\exists ! f'
+    \in \mathcal{C}{(X, X')}\) tale che \(p_\lambda = p'_\lambda \circ f\), \(\forall \lambda \in \Lambda\). Dunque \(p_\lambda = p'_\lambda \circ f' = p_\lambda \circ f \circ f' = p_\lambda
+     \circ 1_X\). Ne consegue che \(1_X = f \circ f'\) per la proprietà
+     universale e analogamente \(1_Y = f'\circ f\).
+
+     \emph{(Seconda parte)} Dati \(Y \in \mathcal{C}\) e \(g_\lambda : Y \to
+     X'_\lambda\) devo dimostrare che \(\exists ! g : Y \to X\) tale che \(
+     g_\lambda = f_\lambda \circ f \circ g\) per ogni \(\lambda \in \Lambda\).
+     Ora per la proposizione universale di \(X\) \(\exists ! g : Y \to X\) tale
+     che \(g_\lambda = p_\lambda \circ g\). Voglio \(g = f \circ g'\) cioè \(g'
+     = f^{-1} \circ g\) 
+\end{proof}
+
+\begin{note}[zione]
+    L'oggetto prodotto \(X\) si indica con
+    \[
+      X =: \prod_{\lambda \in \Lambda} X_\lambda
+    \]
+\end{note}
+
+\begin{example}{}
+    In \(\mathtt{Set}\) il prodotto di insiemi \(X_\lambda\) per \(\lambda \in \Lambda\) 
+    è dato dall'usuale prodotto cartesiano con le proiezioni.
+
+    In categorie concrete come \(\mathtt{Grp}, \mathtt{Rng}, A\mathtt{-Mod}\) un
+    prodotto si ottiene dal prodotto in \(\mathtt{Set}\) mettendo la struttura
+    disgiuntiva componente per componente.
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{FinSet}\) (la sottocategoria piena di \(\mathtt{Set}\)) con
+    oggetti insiemi finiti, non esiste \(\prod_{\lambda \in \Lambda} X_\lambda\) se \(\# \Lambda = \infty\) e \(\# X_\lambda > 1\) per ogni \(\lambda \in \Lambda\) 
+
+    Infatti se per assurdo supponiamo il prodotto essere \(X\) per la proprietà
+    universale \(\forall Y \in \mathtt{FinSet}\), \( \infty > 
+    \# \mathtt{Set}{(Y, X)} = \prod_{\lambda \in \Lambda} \# \mathtt{Set}(Y,
+    X_\lambda) = \infty\) 
+\end{example}
+
+\begin{remark}{}
+    Se \(\# \Lambda = 1\) allora un prodotto di \(X_1\) è \(p_1 : X \to X_{1}\)
+    in \(\mathcal{C}\) tale che \(\forall Y \in \mathcal{C}\) e \(\forall f_{1} : Y \to X_{1}\) 
+    \(\exists ! f : Y \to X\) tale che \(f_{1} = p_{1} \circ f\) 
+
+    Questo è vero se \(p_{1}\) è isomorfismo (\(f = p_{1}^{-1} \circ f_{1}\)).
+    D'altra parte se \(p_{1}\) non è isomorfismo non fattorizza unicamente ogni
+    altro morfismo. Quindi un prodotto di \(
+    X \in \mathcal{C}\) è qualunque isomorfismo \(X' \to X\) (in particolare \(1_X\)).
+\end{remark}
+
+\begin{definition}{Oggetto terminale}
+    Un oggetto terminale di una categoria \(\mathcal{C}\) è un prodotto vuoto in
+    \(\mathcal{C}\), cioè \(X \in \mathcal{C}\) tale che \(\forall Y \in \mathcal{C}\) esiste un unico \(Y \to X\) morfismo di \(C\), cioè \(\#\mathcal{C}{(Y, X)} = 1\) 
+\end{definition}
+
+\begin{example}{}
+    In \(\mathtt{Set}\) \(X\) è terminale se e solo se \(\# X = 1\).
+    Analogamente in \(\mathtt{Grp}, \mathtt{Rng}, A\mathtt{-Mod}\) è ogni gruppo
+    anello o \(A\mathtt{-Mod}\) banale.
+\end{example}
+
+\begin{example}{}
+    Se \(G\) è un monoide non banale, allora \(G\) (come categoria con un solo
+    oggetto) non ha oggetto terminale.
+\end{example}
+
+\begin{proposition}{}
+    Una categoria \(\mathcal{C}\) ha tutti i prodotti finiti se e solo se ha
+    oggetto terminale e i prodotti di coppie di oggetti.
+\end{proposition}
+\begin{proof}{}
+    Dimostro solo per induzione l'implicazione non ovvia.
+
+    Il passo base è dato dalla presenza dell'oggetto terminale.
+    Per induzione supponiamo che esista
+    il prodotto di \(n-1\) oggetti \(X'=\prod_{i = 1}^{n-1} X_i\) con \(p'_i :
+    X' \to X_{i}\) per ogni \(i\). Sia ora un elemento \(X_n\) e per ipotesi
+    esiste \(X = X' \times X_{n}\) con \(p_{n} : X \to X_{n}, p' : X \to X'\).
+    Allora \(X\) è prodotto di tutti gli \(\{X_i\}_{i=1}^{n}\) con \(p_{i} :=
+    p'_i \circ p'\) per ogni \(i < n\). 
+\end{proof}
+
+\begin{definition}{Coprodotto}
+    Un coprodotto di \(X_\lambda\) \((\lambda \in \Lambda)\) in una categoria \(\mathcal{C}\) è un prodotto degli \(X_\lambda\) in \(\mathcal{C}^{op}\), cioè è dato da \(
+    X \in \mathcal{C}\) e da morfismi \(i_\lambda \in \mathcal{C}{(X_\lambda, X)}\) tali che vale la proprietà universale (duale di quella del prodotto)
+
+\[
+  \forall Y \in C, \,\, \forall \lambda \in \Lambda,\,\, \forall f_\lambda \in \mathcal{C}{(X_\lambda, Y)}, \quad \exists ! \,f \in \mathcal{C}{(X, Y)} : f_\lambda = f \circ i_\lambda
+\]
+e viene denotato 
+\[
+  X =: \coprod_{\lambda \in \Lambda} X_\lambda
+\]
+Diagrammaticamente, il diagramma
+\[\begin{tikzcd}
+	Y \\
+	{X_\lambda} & \coprod_{\lambda \in \Lambda} X_\lambda
+	\arrow["{f_\lambda}", from=2-1, to=1-1]
+	\arrow["{i_\lambda}"', from=2-1, to=2-2]
+	\arrow["{\exists! f}"', dashed, from=2-2, to=1-1]
+\end{tikzcd}\]
+commuta
+\end{definition}
+
+Nelle categorie preadditive si può parlare di \textbf{somma diretta} invece di
+coprodotto e usare \(\bigoplus\) invece di \(\coprod\).
+
+\begin{example}{}
+    In \(\mathtt{Set}\) il coprodotto è l'unione disgiunta. In \(A\mathtt{-Mod}\) è la somma diretta usuale. In \(\mathtt{Grp}\) i coprodotti sono i \textbf{prodotti liberi}.
+\end{example}
+
+\begin{definition}{Oggetto iniziale}
+    Un \emph{oggetto iniziale} di \(\mathcal{C}\) è un coprodotto vuoto in \(C\), ossia \(X \in \mathcal{C}\) tale che
+    \(\forall Y \in \mathcal{C}\), \(\# \mathcal{C}{(X, Y)} = 1\) 
+\end{definition}
+
+Può succedere che uno stesso oggetto sia terminale che iniziale. In tal caso per entrambe le definizioni esiste un solo morfismo da uno all'altro. Se tale morfismo è un isomorfismo
+allora l'oggetto è sia iniziale che terminale.
+
+\begin{definition}{Oggetto nullo}
+    Un oggetto sia iniziale che terminale si dice \emph{nullo}
+\end{definition}
+
+\begin{example}{}
+    In \(\mathtt{Set}\), \(\varnothing\) è iniziale (non nullo).
+    In \(\mathtt{Grp}/A\mathtt{-Mod}\) ogni \emph{gruppo}/\emph{modulo} banale è
+    nullo.
+    In \(\mathtt{Rng}\), \(\mathbb{Z}\) è iniziale (non nullo)
+\end{example}
+
+    Se \(X \in \mathcal{C}\) è nullo allora \(\forall Y, Z \in \mathcal{C}\)
+    esiste il morfismo \(0 \in \mathcal{C}{(Y, Z)}\) dato dalla composizione
+    \(Y \overset{\exists !}{\to } X \overset{\exists !}{\to } Z\). In tal caso
+    abbiamo che effettivamente \(f \circ 0 = 0\) e \(0 \circ g = 0\)  per ogni
+    \(f, g\) componibili con \(0\).
+\begin{example}{}
+    In \(\mathcal{A}\) preadditiva (in cui esiste un oggetto nullo) il morfismo
+    0 di cui sopra coincide con 0 dello struttura preadditiva.
+\end{example}
+
+\begin{definition}{Preservazione del prodotto}
+    Un funtore \(F : \mathcal{C} \to \mathcal{D}\) \emph{preserva un prodotto}
+    \({(X, \{p_\lambda\} _{\lambda \in \Lambda} )}\) di \(\{X_\lambda\}_{\lambda \in \Lambda} \subseteq \mathcal{C} \) se \({(F{(X)}, \{F{(p_\lambda)}\}_{\lambda \in \Lambda}  )}\) è un prodotto degli \(F{(X_{\lambda} )}\) in \(\mathcal{D}\).
+
+    Diremo inoltre che \(F\) \emph{preserva i prodotti (o prodotti finiti)} se preserva
+    tutti i prodotti (o prodotti finiti) che esistono in \(\mathcal{C}\) 
+\end{definition}
+\begin{remark}{}
+    Se \(F\) preserva un prodotto degli \(X_\lambda\), allora li preserva tutti.
+\end{remark}
+
+\begin{definition}{Preservazione del coprodotto}
+    \(F: \mathcal{C} \to \mathcal{D}\) preserva un coprodotto di \(\mathcal{C}\) se \(F^{op}\) preserva il
+    corrispondente prodotto di \(C^{op}\) 
+\end{definition}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{Grp}/\mathtt{Rng}/A\mathtt{-Mod} \to \mathtt{Set}\) preservano i prodotti ma non i coprodotti.
+\end{example}
+
+
+
 
 
