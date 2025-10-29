@@ -1420,7 +1420,113 @@ allora l'oggetto è sia iniziale che terminale.
     I funtori dimenticanti \(\mathtt{Grp}/\mathtt{Rng}/A\mathtt{-Mod} \to \mathtt{Set}\) preservano i prodotti ma non i coprodotti.
 \end{example}
 
+Ora vedremo in particolare cosa succede nelle categorie preadditive, in cui
+alcune valgono alcune simpatiche proprietà non ovvie.
 
+\begin{definition}{Biprodotto}
+    Sia \(\mathcal{A}\) una categoria preadditiva. Un \emph{biprodotto} di \(X_{1}, \dots, X_{n} \in \mathcal{A}\) 
+    è dato da \(X \in \mathcal{A}\) e morfismi (in \(\mathcal{A}\)) \(p_{j}: X\to X_j\) e \(i_{j}:
+    X_j \to X\), \(\forall j=1.. n\).
+    tali che
+    \begin{align*}
+        p_{j}\circ i_{j} = 1_{X_{j}} \quad ; \quad p_k \circ i_{j} &= 0 \quad \forall j,k=1 .. n \,\, \text{ con }j \neq k \\
+        \text{ e }\sum_{j=1}^{n} i_{j} \circ p_j &= 1_X 
+    \end{align*}
+\end{definition}
+\begin{remark}{}
+    \({(X, i_{1}, \dots, i_n, p_{1}, \dots, p_n )}\) è un biprodotto di \(X_{1}, \dots, X_{n}\) in \(\mathcal{A}\) 
+    se e solo se \({(X, p_{1}, \dots, p_n, i_1, \dots, i_n)}\) è un biprodotto
+    in \(\mathcal{A}^{op}\) 
+\end{remark}
+Se \(n = 0\) la condizione diventa \(1_X = 0\), dunque l'anello degli
+endomorfismi \(\mathrm{End}_{\mathcal{A}} {(X)}\) è banale.
 
+Se \(n = 1\) \(i_{1}\) e \(p_{1}\) sono isomorfismi e l'uno l'inverso
+dell'altro.
 
+\begin{remark}{}
+Basta verificare \(p_k \circ i_{j} = 0\) per \(j,k=1. .n-1\) e \(j\neq k\)
+(dunque per \(n=2\)) non è necessario verificare quella parte della definizione
+\end{remark}
+\begin{proof}{}
+    Sia \(k < n\). Allora
+    \begin{align*}
+        p_n \circ i_k &= p_n \circ 1_X \circ i_k = p_n \circ {\left( \sum_{j=1}^{n} i_j \circ p_j  \right)} \circ i_k = \sum_{j=1}^{n} p_n \circ i_j \circ p_j \circ i_k \\
+        &= p_n \circ i_n \circ p_n \circ i_k + \sum_{j=1}^{n-1} p_n \circ i_j
+        \circ p_j \circ i_k = 1_{X_{n}} \circ p_n \circ i_k = 0
+    \end{align*}
+    % TODO CORREGGERE
+\end{proof}
 
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria preadditiva e siano \(X_{1}, \dots, X_{n} \in \mathcal{A}\).
+    Allora \(X \in \mathcal{A}\) è biprodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se} \(X\) è un prodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se }\(X\) è
+    un coprodotto di \(X_{1}, \dots, X_{n}\).
+
+    Più precisamente \(X, p_{1}, \dots, p_{n}\) è un prodotto di \(X_{1}, \dots, X_{n}\) se e solo se esistono (unici) \(i_{1},\dots, \in \) tali che \({(X, \{i_j\}_{j=1. .n}, \{p_{j}\}_{j = 1. .n}  )}\) sono un biprodotto di \(X_{1}, \dots, X_{n}\).
+    Analogamente e dualmente per il coprodotto
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Per la proposizione universale del prodotto \(\exists ! i_j : X_j \to X\) per ogni \(j=1 . .n\) tali che
+        \[
+          p_k \circ i_j = \begin{cases}{}
+              1_{X_j} & \text{ se } j = k \\
+              0 & \text{ se } j\neq k
+          \end{cases}
+        \]
+        Resta da dimostrare che 
+        \[
+          \sum_{j=1}^{n} i_{j} \circ p_j = 1_X \iff p_k \circ  
+        \]
+        % TODO non mi torna
+    \item[\(\impliedby \)] Dati \(f_{j} : Y \to X_j \) devo dimostrare che \(\exists  ! \, f : Y \to X\) tale che \(f_j = p_j \circ f\) per ogni \(j = 1..n\). Allora posso definire
+        \[
+          f := \sum_{k=1}^{n} i_k \circ f_k : Y \to  X \text{ e allora } p_j
+          \circ f = \sum_{k=1}^{n} p_j \circ i_k \circ f_k = f_j 
+        \]
+        essa è unica poiché se \(f' : Y\to X\) è tale che \(\forall j\), \(f_j = p_j \circ f'\),
+        allora \[f' = 1_X \circ f' = \sum_{j=1}^{n} i_j \circ p_j \circ f' = \sum_{j=1}^{n} i_j \circ f_j = f\] 
+\end{itemize}
+\end{proo}
+\begin{remark}[\(n =0\) ]
+    In una categoria preadditiva un oggetto \\ è terminale \(\iff\)  è iniziale \(\iff\) è nullo \(\iff\) \(1_X = 0\) 
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo e sia \(X, \{i_{j}\}_{j = 1. .n}, \{p_{j}\} _{j = 1. .n}  \) un biprodotto di \(X_{1}, \dots, X_{n} \in \mathcal{A}\). Allora 
+    \({(F{(X)}, \{F{(i_{j})}\}_{j=1. .n}, \{F{(p_{j})}\} _{j=1. .n}  )}\) è un
+    biprodtto di \(F{(X_{1})}, \dots, F{(X_{n})}\) in \(\mathcal{B}\) 
+\end{remark}
+\begin{corollary}{}
+    Un funtore \(F: \mathcal{A} \to \mathcal{B}\) additivo preserva i prodotti e
+    i coprodotti finiti.
+\end{corollary}
+
+\begin{note}[zione matriciale nelle categorie preadditive]
+    Sia \(\mathcal{A}\) una categoria preadditiva. Siano \(X_{1}, \dots, X_{n}\) e \(Y_{1},\dots, Y_{n}\) in \(\mathcal{A}\) tali che \(\exists {(X, i_j^{X}, p_j^{X})}\) biprodotto di \(X_{1}, \dots, X_{n}\) 
+    e \(Y, i_j^{Y}, p_j^{Y}\) biprodotto di \(Y_{1}, \dots, Y_{n}\).
+    Dati \(f_{j,k}  : X_k\to Y_j \) morfismi di \(\mathcal{A}\) indico con la
+    matrice \(m \times  n\) \({(f_{j,k} )}\) il morfismo \(f: X\to Y\)
+    definito da
+    \[
+      f = \sum_{j=1}^{m} \sum_{k=1}^{n} i_j^{Y} \circ f_{j, k} \circ p_k^{X}
+    \]
+\end{note}
+
+\begin{definition}{Categoria additiva}
+    Una \emph{categoria additiva} è una categoria preadditiva in cui esistono
+    tutti i biprodotti.
+\end{definition}
+
+\begin{example}{}
+    \(A\mathtt{-Mod}\) è additiva per ogni anello \(A\).
+\end{example}
+\begin{example}{}
+    \(A\) anello come categoria preadditiva con un solo oggetto è additiva se e solo se
+    \(A=0\) 
+\end{example}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è additiva, allora anche \(\mathcal{A}^{op}\) lo è.
+\end{remark}
