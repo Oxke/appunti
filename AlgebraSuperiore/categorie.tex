@@ -1231,11 +1231,14 @@ commuta, cioè \(a \alpha {(x)} = \alpha {(a x)}\) per ogni \(x \in M\), ossia \
     sia additivo
 \end{remark}
 \begin{proof}{}
-    \(\forall X, Y \in \mathcal{A}\) voglio che \(F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}\) sia isomorfismo di gruppi, che è vero se e solo se \(\forall f, f' \in \mathcal{A}{(X,Y)}\) 
+    \(\forall X, Y \in \mathcal{A}\) voglio che \(F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}\) sia isomorfismo di gruppi (già è biettiva), che è vero se e solo se \(\forall f, f' \in \mathcal{A}{(X,Y)}\) 
     \[
       f + f' = F^{-1}{(F{(f)} + F{(f')})} 
     \]
-    (verifica lasciata in esercizio) % TODO esercizio
+    Infatti è ovvio che se \(+\) è così definita, allora \(F\) sia omomorfismo
+    di gruppi. Viceversa, se \(F\) è omomorfismo di gruppi, allora anche \(F^{-1}\) è omomorfismo di gruppi, 
+    e dunque \(F^{-1}{(F{(f)} + F{(f')})} = F^{-1}{(F{(f)})} + F^{-1}{(F{(f')})} = f + f'\).
+
 \end{proof}
 
 \subsection{Prodotti, coprodotti, proprietà universali}
@@ -1250,14 +1253,14 @@ vale la seguente proprietà universale:
 \[
   \forall Y \in \mathcal{\mathcal{C}}, \,\, \forall \lambda \in \Lambda, \,\, \forall f_{\lambda} \in \mathcal{\mathcal{C}}{(Y, X_\lambda)} \quad \exists ! f \in \mathcal{\mathcal{C}}{(X, Y)} : f_\lambda = p_\lambda \circ f
 \]
-o equivalentemente il seguente diagramma commuta:
+o equivalentemente i seguenti diagramma commutano :
 \[\begin{tikzcd}
 	Y \\
-	{X_\mu} & X
-	\arrow["{f_\mu}"', from=1-1, to=2-1]
+	{X_\lambda} & X
+	\arrow["{f_\lambda}"', from=1-1, to=2-1]
 	\arrow["{\exists ! f}", dashed, from=1-1, to=2-2]
-	\arrow["{p_\mu}", from=2-2, to=2-1]
-\end{tikzcd}\]
+	\arrow["{p_\lambda}", from=2-2, to=2-1]
+\end{tikzcd} \text{ al variare di \(\lambda \in \Lambda\) }\]
 \end{definition}
 
 \begin{proposition}{}
@@ -1479,23 +1482,34 @@ Basta verificare \(p_k \circ i_{j} = 0\) per \(j,k=1. .n-1\) e \(j\neq k\)
     Allora \(X \in \mathcal{A}\) è biprodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se} \(X\) è un prodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se }\(X\) è
     un coprodotto di \(X_{1}, \dots, X_{n}\).
 
-    Più precisamente \(X, p_{1}, \dots, p_{n}\) è un prodotto di \(X_{1}, \dots, X_{n}\) se e solo se esistono (unici) \(i_{1},\dots, \in \) tali che \({(X, \{i_j\}_{j=1. .n}, \{p_{j}\}_{j = 1. .n}  )}\) sono un biprodotto di \(X_{1}, \dots, X_{n}\).
-    Analogamente e dualmente per il coprodotto
+    Più precisamente \((X, p_{1}, \dots, p_{n})\) è un prodotto di \(X_{1}, \dots, X_{n}\) se e solo se esistono (unici) \(i_{1},\dots, i_n\) tali che \({(X, \{i_j\}_{j=1. .n}, \{p_{j}\}_{j = 1. .n}  )}\) è un biprodotto di \(X_{1}, \dots, X_{n}\).
+    Analogamente e dualmente per il coprodotto.
 \end{proposition}
 \begin{proof}\( \)
 \begin{itemize}
-    \item[\(\implies \)] Per la proposizione universale del prodotto \(\exists ! i_j : X_j \to X\) per ogni \(j=1 . .n\) tali che
+    \item[\(\implies \)] Per la proprietà universale del prodotto \(\exists ! i_j : X_j \to X\) per ogni \(j=1 . .n\) tali che
         \[
-          p_k \circ i_j = \begin{cases}{}
+          p_k \circ i_j = (f_{j} = ) \begin{cases}{}
               1_{X_j} & \text{ se } j = k \\
               0 & \text{ se } j\neq k
-          \end{cases}
-        \]
+          \end{cases}\quad
+\begin{tikzcd}
+	X_j  \\
+	{X_k} & X
+	\arrow["{\delta_{kj} 1_{X_{j}} }"', from=1-1, to=2-1]
+	\arrow["{\exists ! i_{j}}", dashed, from=1-1, to=2-2]
+	\arrow["{p_k}", from=2-2, to=2-1]
+\end{tikzcd}\]
         Resta da dimostrare che 
         \[
-          \sum_{j=1}^{n} i_{j} \circ p_j = 1_X \iff p_k \circ  
+          \sum_{j=1}^{n} i_{j} \circ p_j = 1_X \iff \forall k, \,\, p_k \circ
+          \sum_{j=1}^{n} i_{j} \circ p_{j} = p_k \text{ (proprietà universale)}
         \]
-        % TODO non mi torna
+        e effettivamente 
+        \[
+          p_k \circ \sum_{j=1}^{n} i_{j} \circ p_{j} = \sum_{j=1}^{n} p_k \circ
+          i_{j} \circ p_{j} = \underbrace{p_k \circ i_k}_{1_{X_k} }  \circ p_k = p_k
+        \]
     \item[\(\impliedby \)] Dati \(f_{j} : Y \to X_j \) devo dimostrare che \(\exists  ! \, f : Y \to X\) tale che \(f_j = p_j \circ f\) per ogni \(j = 1..n\). Allora posso definire
         \[
           f := \sum_{k=1}^{n} i_k \circ f_k : Y \to  X \text{ e allora } p_j
@@ -1505,7 +1519,7 @@ Basta verificare \(p_k \circ i_{j} = 0\) per \(j,k=1. .n-1\) e \(j\neq k\)
         allora \[f' = 1_X \circ f' = \sum_{j=1}^{n} i_j \circ p_j \circ f' = \sum_{j=1}^{n} i_j \circ f_j = f\] 
 \end{itemize}
 \end{proof}
-\begin{remark}[\(n =0\) ]
+\begin{remark}[\(n =0\)]
     In una categoria preadditiva un oggetto \\ è terminale \(\iff\)  è iniziale \(\iff\) è nullo \(\iff\) \(1_X = 0\) 
 \end{remark}
 
@@ -1707,7 +1721,13 @@ introduciamo i seguenti nuovi concetti
 
     Un \emph{limite} di \(I\) è dato da \(X \in \mathcal{C}\) con una
     trasformazione naturale \(\alpha : K_X \to I\) dove \(K_X : \mathcal{L} \to \mathcal{C}\) è il funtore 
-    costante di valore \(X\).
+    costante di valore \(X\), ossia
+\(\begin{tikzcd}
+	\mathcal{L} & \mathcal{C}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "K_X", curve={height=-10pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "I"', curve={height=10pt}, from=1-1, to=1-2]
+	\arrow["\alpha", between={0.1}{0.9}, Rightarrow, from=0, to=1]
+\end{tikzcd}\).
 
     In altri termini, \(\forall L \in \mathcal{L}\), \(\alpha_L ; X \to I{(L)}\) è tale che \(\forall l : L \to L'\) in \(\mathcal{L}\), il seguente diagramma commuta:
 \[\begin{tikzcd}
@@ -1723,24 +1743,45 @@ introduciamo i seguenti nuovi concetti
       \forall Y \in \mathcal{C}, \,\, \forall \beta : K_Y \to I \text{
       trasformazione naturale, } \, \exists  ! \, f \in \mathcal{C}{(Y, X)} \text{ t.c. } \beta = \alpha \circ K_f
     \]
-    dove \(K_f : K_X \to K_Y\) è la trasformazione naturale definita da \({(K_f)}_L := f \) per ogni \(L \in \mathcal{L}\). In altre parole \(\beta_L = \alpha_l \circ f\) per ogni \(L \in \mathcal{L}\) 
-
+    dove \(K_f : K_Y \to K_X\) è la trasformazione naturale definita da \({(K_f)}_L := f \) per ogni \(L \in \mathcal{L}\). In altre parole \(\beta_L = \alpha_L \circ f\) per ogni \(L \in \mathcal{L}\), ossia il seguente diagramma commuta:
+\[\begin{tikzcd}
+	X \\
+	{I(L)} & {I(L')} \\
+	Y
+	\arrow["{\alpha_L}"', from=1-1, to=2-1]
+	\arrow["{\alpha_{L'}}", from=1-1, to=2-2]
+	\arrow["{I(l)}"', from=2-1, to=2-2]
+    \arrow["{\exists ! f}"', curve={height=-35pt}, dashed, from=3-1, to=1-1]
+	\arrow["{\beta_L}", from=3-1, to=2-1]
+	\arrow["{\beta_{L'}}"', from=3-1, to=2-2]
+\end{tikzcd}\]
 \end{definition}
 
 \begin{example}[Prodotto]
     Se \(\mathcal{L} = \Lambda\) insieme (categoria discreta), allora \(I\) è
-    dato dagli \(I{(\lambda)} \in \mathcal{C}\) (\(\lambda \in \Lambda\)), e un
+    dato dagli \(I{(\lambda)} =: X_\lambda \in \mathcal{C}\) (\(\lambda \in \Lambda\)), e un
     limite di \(I\) è un prodotto degli \(I{(\lambda)}\) (\(\lambda \in \Lambda\)) perché un limite 
-    è dato da \(X \in \mathcal{C}\) con morfismi \(\alpha_\lambda : X \to I{(\lambda)}\) (qualunque) tali che \(\forall Y \in \mathcal{C}\) e \(\forall \beta_\lambda : Y \to I{(\lambda)}\),
+    è dato da \(X \in \mathcal{C}\) con morfismi \(\alpha_\lambda : X \to X_\lambda\) (qualunque, perché \(l\) può essere solo \(1_\lambda\)) tali che \(\forall Y \in \mathcal{C}\) e \(\forall \beta_\lambda : Y \to X_\lambda\),
     \[
       \exists ! \, f \in \mathcal{C}{(Y, X)} : \beta_\lambda  = \alpha_\lambda
       \circ f \quad \forall \lambda \in \Lambda
-    \]
+      \quad 
+\begin{tikzcd}
+	X \\
+	{X_\lambda} & {X_\lambda} \\
+	Y
+	\arrow["{\alpha_\lambda}"', from=1-1, to=2-1]
+    \arrow["{\alpha_\lambda}", from=1-1, to=2-2]
+	\arrow["{1_\lambda}"', from=2-1, to=2-2]
+    \arrow["{\exists ! f}"', curve={height=-35pt}, dashed, from=3-1, to=1-1]
+	\arrow["{\beta_\lambda}", from=3-1, to=2-1]
+    \arrow["{\beta_\lambda}"', from=3-1, to=2-2]
+\end{tikzcd}\]
 \end{example}
 
 \begin{example}{}
     Sia \(\mathcal{L} = {(\bullet \rightrightarrows \bullet )}\). Allora \(I\) è
-    dato da \(Y \underset{g}{\overset{f}{\rightrightarrows}} Z\) in \(\mathcal{C}\). Un limite di \(I\) è dato da \(X \in \mathcal{C}\) 
+    dato da \( I{(\mathcal{L})} = Y \underset{g}{\overset{f}{\rightrightarrows}} Z\) in \(\mathcal{C}\). Un limite di \(I\) è dato da \(X \in \mathcal{C}\) 
     con morfismi \(\alpha_{1} : X\to Y\) e \(\alpha_{2}: X \to Z\) tali che
     \(\alpha_{2} = f \circ \alpha_{1} = g \circ \alpha_{1}\) o equivalentemente
     \(h: X \to Y\) tale che \(f \circ h = g \circ h\).
@@ -1755,18 +1796,28 @@ introduciamo i seguenti nuovi concetti
 	\arrow["h", from=1-1, to=1-2]
 	\arrow["g"', shift right, from=1-2, to=1-3]
 	\arrow["f", shift left, from=1-2, to=1-3]
-	\arrow["{\exists ! \,k}", from=2-1, to=1-1]
+	\arrow["{\exists ! \,k}", dashed, from=2-1, to=1-1]
 	\arrow["{h'}"', from=2-1, to=1-2]
 \end{tikzcd}\]
     tale \(h\) si dice \emph{equalizzatore} di \(f\) e \(g\).
 
-    In \(\mathtt{Set}\) si può prendere \(X := \{y \in Y : f{(y)} = g{(y)}\} \hookrightarrow Y\).
-    Analogamente in \(\mathtt{Grp}\), \(\mathtt{Rng}\) e \(A\mathtt{-Mod}\).
+    In \(\mathtt{Set}\) si può prendere \(X := \{y \in Y : f{(y)} = g{(y)}\} \overset{i}{\hookrightarrow } Y\).
+    Analogamente in \(\mathtt{Grp}\), \(\mathtt{Rng}\) e \(A\mathtt{-Mod}\) e
+    sarà sottogruppo, sottoanello e sottomodulo come diagramma abbiamo
+\(\begin{tikzcd}
+	X & Y & Z \\
+	X'
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-2, to=1-3]
+	\arrow["f", shift left, from=1-2, to=1-3]
+	\arrow["{\exists ! \,k}", dashed, from=2-1, to=1-1]
+	\arrow["{h'}"', from=2-1, to=1-2]
+\end{tikzcd}\)
 \end{example}
 
 \begin{example}{}
     Sia \(\mathcal{L} = {(: \rightrightarrows \bullet)}\). Allora \(I\) è dato
-    da\(\begin{tikzcd}
+    da\(\begin{tikzcd}[baseline=-4.5ex]
 	& {Y_2} \\
 	{Y_1} & Z
 	\arrow["{g_2}"', from=1-2, to=2-2]
@@ -1801,7 +1852,24 @@ introduciamo i seguenti nuovi concetti
 
 \begin{definition}{Colimite}
     Un \emph{colimite} di \(I : \mathcal{L} \to \mathcal{C}\) è un limite di \(I^{op} : \mathcal{L}^{op} \to \mathcal{C}^{op}\), cioè è dato da \(X \in \mathcal{C}\) 
-    con una trasformazione naturale \(\alpha : I \to K_X\) tale che \(\forall Y \in \mathcal{C}\), \(\forall \beta: I \to K_Y\) trasformazione naturale, \(\exists ! f \in \mathcal{C}{(X, Y)}\) tale che \(\beta = K_f \circ \alpha\) (cioè \(\beta_L = f \circ \alpha_L\) per ogni \(L \in \mathcal{L}\) )
+    con una trasformazione naturale \(\alpha : I \to K_X\) tale che \(\forall Y
+    \in \mathcal{C}\), \(\forall \beta: I \to K_Y\) trasformazione naturale,
+    \(\exists ! f \in \mathcal{C}{(X, Y)}\) tale che \(\beta = K_f \circ
+    \alpha\) (cioè \(\beta_L = f \circ \alpha_L\) per ogni \(L \in \mathcal{L}\)
+    ).
+
+    Equivalentemente, \(L, L' \in \mathcal{L}, Y \in \mathcal{C}, \beta_L : I(L) \to Y\) e \(b_{L'} : I(L') \to  Y\), esiste unico \(f : X \to Y\) tale che il seguente diagramma commuta:
+\[\begin{tikzcd}
+	X \\
+	{I(L)} & {I(L')} \\
+	Y
+	\arrow["{\exists!f}", curve={height=35pt}, dashed, from=1-1, to=3-1]
+	\arrow["{\alpha_L}", from=2-1, to=1-1]
+	\arrow["{I(l)}"', from=2-1, to=2-2]
+	\arrow["{\beta_L}"', from=2-1, to=3-1]
+	\arrow["{\alpha_{L'}}"', from=2-2, to=1-1]
+	\arrow["{\beta_{L'}}", from=2-2, to=3-1]
+\end{tikzcd}\]
 \end{definition}
 \begin{example}{}
     Se \(\mathcal{L} = {(\bullet \rightrightarrows \bullet)}\), allora un
