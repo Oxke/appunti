@@ -502,6 +502,7 @@ In generale non vale nessuna delle \(\impliedby\).
         X \mapsto \mathcal{C}{(X, Y)} \quad {(f : X \to X')} &\mapsto {(f^{*} : \mathcal{C}{(X', Y)} \to \mathcal{C}{(X, Y)})} \\
             & \quad \quad \quad \quad\quad\quad\quad  g \mapsto g \circ f
     \end{align*}
+    è un funtore controvariante perché \({(f' \circ f )}^{*} = f^{*} \circ f'^{*}\) 
 \end{example}
 \begin{remark}{}
     C'è anche un funtore 
@@ -1815,15 +1816,15 @@ introduciamo i seguenti nuovi concetti
 \end{tikzcd}\)
 \end{example}
 
-\begin{example}{}
-    Sia \(\mathcal{L} = {(: \rightrightarrows \bullet)}\). Allora \(I\) è dato
+\begin{example}[Prodotto fibrato o \emph{pullback}]
+    Sia \(\mathcal{L} = {(\bullet \to  \bullet \leftarrow \bullet)}\). Allora \(I\) è dato
     da\(\begin{tikzcd}[baseline=-4.5ex]
 	& {Y_2} \\
 	{Y_1} & Z
 	\arrow["{g_2}"', from=1-2, to=2-2]
 	\arrow["{g_1}", from=2-1, to=2-2]
 \end{tikzcd}\) in \(\mathcal{C}\). Un limite di \(I\) è \(X \in \mathcal{C}\)
-    con morfismi \(f_{1}: X \to Y_{1}\) e \(f_{2}: X \to Y_{2}\) (\(h: X \to Z\)) tale che
+    con morfismi \(f_{1}: X \to Y_{1}\) e \(f_{2}: X \to Y_{2}\) (e \(h: X \to Z\)) tale che
     \[
       {(h = )} g_{1} \circ f_{1} = g_{2} \circ f_{2}
     \]
@@ -1846,9 +1847,20 @@ introduciamo i seguenti nuovi concetti
     In tal caso \({(X, f_{1}, f_{2})}\) si dice \emph{prodotto fibrato} di \(g_{1}, g_{2}\) (o \emph{pullback})
 \end{example}
 
-\begin{example}{}
+\begin{example}[Prodotto fibrato su \(\mathtt{Set}\)]
     \(\mathtt{Set}\) (o altre categorie concrete) si può prendere \(X := \{y_{1}, y_{2} \in Y_{1} \times  Y_{2} : g_{1}{(y_{1})} = g_{2}{(y_{2})}\}\) 
 \end{example}
+
+\begin{example}{}
+    Se prendiamo \(\mathcal{L} = \varnothing\) e \(I\) il funtore vuoto, allora
+    la definizione di limite diventa (notare l'assenza di \(\alpha\) e \(\beta\) che sono funzioni vuote)
+    \[
+      X \in \mathcal{C} : \forall Y \in \mathcal{C} \exists ! f \in
+      \mathcal{C}{(Y, X)}
+    \]
+    ossia \(X\) è oggetto terminale
+\end{example}
+
 
 \begin{definition}{Colimite}
     Un \emph{colimite} di \(I : \mathcal{L} \to \mathcal{C}\) è un limite di \(I^{op} : \mathcal{L}^{op} \to \mathcal{C}^{op}\), cioè è dato da \(X \in \mathcal{C}\) 
@@ -1873,7 +1885,7 @@ introduciamo i seguenti nuovi concetti
 \end{definition}
 \begin{example}{}
     Se \(\mathcal{L} = {(\bullet \rightrightarrows \bullet)}\), allora un
-    colimite di di \(I\) (dato da \(Y \underset{g}{\overset{f}{\rightrightarrows}} Z\)) è dato da \(h : Z \to X\) tale che \(h \circ f = h \circ g\) tale che \(\forall h' : Z \to X'\) tale che \(h' \circ f = h' \circ g\), \(\exists  !\, k : X \to X'\) tale che \(h'= k \circ h\). Equivalentemente il diagramma
+    colimite di \(I\) (dato da \(Y \underset{g}{\overset{f}{\rightrightarrows}} Z\)) è dato da \(h : Z \to X\) tale che \(h \circ f = h \circ g\) tale che \(\forall h' : Z \to X'\) tale che \(h' \circ f = h' \circ g\), \(\exists  !\, k : X \to X'\) tale che \(h'= k \circ h\). Equivalentemente il diagramma
 \begin{tikzcd}
 	Y & Z & X \\
 	&& {X'}
@@ -1887,6 +1899,30 @@ commuta e \(h\) si dice \emph{coequalizzatore} di \(f\) e \(g\).
 \end{example}
 \begin{eser}{Coprodotto fibrato o \emph{pushout}}
     Definire il coprodotto fibrato, che è il duale del prodotto fibrato.
+    \tcblower
+    Sia \(\mathcal{L} = {(\bullet \leftarrow \bullet \to \bullet)}\) (duale di
+    quella del prodotto fibrato). Allora una colimite di \(I\) (la cui immagine in \(\mathcal{C}\)  è \(\begin{tikzcd}[baseline=-4.5ex]
+	& {Y_2} \\
+	{Y_1} & Z
+	\arrow["{g_2}"', from=2-2, to=1-2]
+	\arrow["{g_1}", from=2-2, to=2-1])
+\end{tikzcd}\) è dato da \(X \in \mathcal{C}\), \(f_{1} : Y_{1}\to X, f_{2} : Y_{2}\to X(, h : Z \to X)\) morfismi tali che \(f_{1} \circ
+g_{1} = f_{2} \circ g_{2} (= h)\). Inoltre la proprietà universale dice che \(\forall X' \in \mathcal{C}\), \(f_{1}' \in \mathcal{C}{(Y_{1}, X)}\) e \(f_{2}' \in \mathcal{C}{(Y_{2}, X)}\) tali che \(f_{1}' \circ g_{1} = f_{2}' \circ g_{2}\), allora \(\exists ! \, f : X \to Y\) tale che \(f \circ f_i = f_i'\) per \(i \in \{1, 2\}\).
+
+Equivalentemente, il seguente diagramma commuta:
+    \[\begin{tikzcd}
+	{X'} \\
+	& X & {Y_2} \\
+	& {Y_1} & Z
+	\arrow["{\exists!\, f}"{description}, dashed, from=2-2, to=1-1]
+	\arrow["{f'_2}"', curve={height=12pt}, from=2-3, to=1-1]
+	\arrow["{f'_1}", curve={height=-12pt}, from=3-2, to=1-1]
+	\arrow["{f_2}"', from=2-3, to=2-2]
+	\arrow["{f_1}", from=3-2, to=2-2]
+	\arrow["{g_2}"', from=3-3, to=2-3]
+	\arrow["{g_1}", from=3-3, to=3-2]
+    \end{tikzcd}\]
+    In tal caso \({(X, f_{1}, f_{2})}\) si dice \emph{prodotto cofibrato} di \(g_{1}, g_{2}\) (o \emph{pushout})
 \end{eser}
 
 \begin{example}{}
@@ -1899,6 +1935,180 @@ commuta e \(h\) si dice \emph{coequalizzatore} di \(f\) e \(g\).
     In alcuni casi invece di \emph{limiti}/\emph{colimiti} si può parlare di \emph{limiti inversi}/\emph{limiti diretti}.
 \end{note}
 
+\begin{example}{}
+    Similmente a prima, prendendo \(\mathcal{L} = \varnothing\) e \(I\) il
+    funtore vuoto, la definizione diventa
+    \[
+      X \in \mathcal{C} : \forall Y \in \mathcal{C}\quad \exists ! f \in \mathcal{C}{(X, Y)}
+    \]
+    ossia \(X\) è un oggetto iniziale.
+\end{example}
+
+\begin{proposition}[Unicità del limite]\label{prop:unic_limite}
+    Se \({(X, \alpha)}\) limite esiste, allora è unico a meno di isomorfismo. In
+    altre parole dati \({(X, \alpha)}\) e \({(Y, \beta)}\) limiti di \(I\),
+    allora \(\exists ! \, f \in C{(X', X)}\) tale che \(\beta = \alpha \circ
+    K_f\) e \(f \) è isomorfismo.
+
+    Viceversa, se \({(X, \alpha)}\) è un limite di \(I\) e \(f : Y \to X\) è
+    isomorfismo, allora anche \({(X', \alpha \circ K_f)}\) è un limite di \(I\) 
+\end{proposition}
+\begin{eser}
+    Dimostrare la proposizione~\ref{prop:unic_limite}
+\end{eser}
+
+\begin{note}[zione]
+    Un limite di \(I\) si indica con \(\lim I \) o \(\displaystyle\lim_{\longleftarrow} I \)
+    e analogamente un colimite di \(I\) si indica con \(\mathrm{colim} \, I\) o
+    \(\displaystyle\lim_{\longrightarrow} I\).
+
+    Un (co)equalizzatore d \(f, g ; Y \to Z\) si indica con \(\mathrm{(co)eq} {(f, g)}\)
+
+
+    Un prodotto fibrato di \(Y_{1} \overset{g_{1}}{\to } Z
+    \overset{g_{2}}{\leftarrow} Y_{2}\) si indica con \(Y_{1} \times_Z Y_{2}\).
+    Similmente per i coprodotti fibrati si usa \(Y_{1} \coprod_Z Y_{2}\) 
+\end{note}
+
+\begin{proposition}{}
+    Sia \(\gamma : I \to I'\) una trasformazione naturale tra funtori \(\mathcal{L} \to \mathcal{C}\) 
+    e sia \({(\lim I )}\) un limite di \(I\). Allora
+\begin{enumerate}[label = \arabic*.]
+    \item Se \({(\lim I ' , \alpha')}\) è un limite di \(I'\) allora \(\exists ! \lim \gamma \in \mathcal{C}{(\lim I, \lim I')}\) tale che \(\alpha' \circ K_{\lim \gamma } = \gamma \circ \alpha \),
+        inoltre se \(\gamma\) è isomorfismo, allora anche \(\lim \gamma\) è
+        isomorfismo.
+\[\begin{tikzcd}
+	{K_{ \lim I}} & {K_{ \lim I'} } \\
+	{I} & {I'}
+	\arrow["{K_{ \lim \gamma} }", from=1-1, to=1-2]
+	\arrow["{\alpha}", from=1-1, to=2-1]
+	\arrow["{\alpha'}", from=1-2, to=2-2]
+	\arrow["{\gamma}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\item Se \(\gamma\) è isomorfismo, allora \({( \lim I, \gamma \circ \alpha)}\) è
+    un limite di \(I'\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Segue direttamente dal fatto che \({( \lim I', \alpha')}\) è un limite
+        di \(I'\) e \(\gamma \circ \alpha\) è una trasformazione naturale
+    \item Sia \(Y \in \mathcal{C}\) e \(\beta : K_Y \to I'\) trasformazione naturale. Allora \(\gamma^{-1} \circ \beta : K_Y \to I\) è trasformazione naturale e dunque \(\exists !\, f \in C{(Y,  \lim I)} \) tale che \(\gamma^{-1} \circ \beta = \alpha \circ K_f\), da cui \(\beta = \gamma \circ \alpha \circ K_f\) 
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}{Condizione sufficiente per l'esistenza dei limiti}\label{th:suff_coeq_prod}
+    Sia \(\mathcal{L}\) una categoria piccola. Allora esistono tutti i (co)limiti dei funtori \(\mathcal{L} \to \mathcal{C}\) se in \(\mathcal{C}\) esistono tutti i (co)equalizzatori e tutti i (co)prodotti indicizzati dagli oggetti e dai morfismi di \(\mathcal{L}\).
+
+    Più precisamente un (co)limite di \(I : \mathcal{L} \to \mathcal{C}\) è dato
+    da \({(X, \alpha)}\) con
+    \begin{align*}
+    X &= \mathrm{eq}{\left( \prod_{L \in \mathcal{L}} I{(L)} \underset{h}{\overset{g}{\rightrightarrows}} \prod_{{(l : L \to L')} \in \mathrm{Mor}{(\mathcal{L})}} I{(L')}) \right)} \\
+    \text{dove } p_{{(l : L \to L')}} \circ g &:= p_{L'}, \quad p_{{(l : L \to L')}} \circ h := I{(l)} \circ p_L
+\end{align*}
+
+Indicando con \(i : X \to \prod_{L \in \mathcal{L}} I{(L)}\) il morfismo
+naturale, 
+\[
+  \forall L \in \mathcal{L} \quad \alpha_L := p_L \circ i : X \to I{(L)}
+\]
+\end{theorem}
+
+\begin{proof}[idea di dimostrazione]
+    \(\alpha\) è naturale perché \(g \circ i = h \circ i\). Più in generale,
+    dato \(j : Y \to \prod_{L \in \mathcal{L}} I{(L)}\) in \(\mathcal{C}\), sia
+    \(\beta_L := p_L \circ j : Y \to I{(L)}\). Allora \(\beta : K_Y \to I\) è
+    una trasformazione naturale se e solo se \(g \circ j = h \circ j\).
+    Osservando questo, una qualunque trasformazione naturale \(\beta : K_Y \to I\) è ottenuta da \(j : Y \to \prod_{L \in \mathcal{L}} I {(L)}\) con \(g \circ j = h \circ j\) ponendo \(\beta_L = p_L \circ j\).
+
+    Per definizione di equalizzatore, \(\exists ! \, f \in \mathcal{C}{(Y, X)}\) tale che \(j = i \circ f\) che è equivalente a \(\beta_L = \alpha_L \circ f\) e \(\beta = \alpha \circ K_f\).
+
+    \(\beta\) è naturale se e solo se \(\forall l : L \to L'\) morfismo di
+    \(\mathcal{L}\), \(I{(l)} \circ \beta_L = \beta_{L'}\) cioè \(I{(l)} \circ p_L \circ j = p_{L'}  \circ j \iff 
+    p_l \circ h \circ j = p_l \circ g \circ j \overset{\text{ propr. univ.
+    prodotto}}{\iff} h \circ j = g \circ j \)
+\end{proof}
+
+\begin{definition}{}
+    Sia \(\mathcal{C}\) una categoria.
+
+    \(\mathcal{C}\) \emph{ha i (co)limiti di forma \(\mathcal{L}\)} se esistono i
+    (co)limiti di tutti i funtori \(\mathcal{L} \to \mathcal{C}\).
+
+    \(\mathcal{C}\) è \emph{(co)completa} se ha i \emph{(co)limiti} di forma \(\mathcal{L}\) per ogni categoria piccola \(\mathcal{L}\).
+
+    \(\mathcal{C}\) è \emph{finitamente (co)completa} se ho i (co)limiti di
+    forma \(\mathcal{L}\) per ogni categoria finita \(\mathcal{L}\) (ossia se \(\mathrm{Mor} \mathcal{L}\) è finito)
+\end{definition}
+
+\begin{corollary}{}
+    \(\mathcal{C}\) categoria è (finitamente) (co)completa se e solo se ha (co)equalizzatori e
+    (co)prodotti (finiti).
+\end{corollary}
+
+\begin{example}{}
+    \(\mathtt{Set}\) è completa e cocompleta (anche \(\mathtt{Grp}\), \(\mathtt{Rng}\) e \(A\mathtt{-Mod}\))
+\end{example}
+
+\begin{definition}{}
+    Sia \(F : \mathcal{C} \to \mathcal{D}\) funtore. \(F\) preserva un
+    (co)limite \({(X, \alpha)}\) di \(I : \mathcal{L} \to \mathcal{C}\) se \({(F{(X)}, F \circ \alpha\footnote{Composizione orizzontale: \(\alpha: K_X \to I \implies F \circ \alpha : F \circ K_X = K_{F{(X)}} \to F \circ I \)})}\) è un (co)limite di \(F \circ I : \mathcal{L} \to \mathcal{D}\)
+\end{definition}
+\begin{remark}{}
+    Se \(F\) preserva un limite di \(I\), allora \(F\) preserva tutti i
+    limiti di \(I\).
+\end{remark}
+
+\(F\) preserva i (co)limiti (finiti) se preserva i (co)limiti di forma \(\mathcal{L}\) per ogni \(\mathcal{L}\) categoria piccola (finita)
+
+\begin{corollary}{}
+    Sia \(\mathcal{C}\) una categoria (finitamente) (co)completa.
+    Allora \(F\) preserva i (co)limiti (finiti) se e solo se \(F\) preserva i
+    (co)prodotti (finiti) e i (co)equalizzatori.
+\end{corollary}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{Grp} , \mathtt{Rng} , A\mathtt{-Mod} \to \mathtt{Set}\) preservano i limiti ma non i colimiti.
+\end{example}
+
+\begin{example}{}
+    \(\forall X \in \mathcal{C}\) i funtori \(\mathcal{C}{(X, -)} : \mathcal{C} \to \mathtt{Set}\) e \(\mathcal{C}{(-, X)} : C^{op} \to \mathtt{Set}\) preservano i limiti, ma in generale non i colimiti.
+
+    Analogamente se \(\mathcal{A}\) è una categoria preadditiva, allora \(\forall X \in \mathcal{A}\) i funtori \\ \(\mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab}\) e \(\mathcal{A}{(-, X)}
+    : \mathcal{A}^{op} \to \mathtt{Ab}\) preservano i limiti, ma in generale
+    non i colimiti.
+
+\begin{proof}[controesempio colimiti]
+    Se \(\mathcal{C} = \mathtt{Set}\) e \(\# X \ge 2\), allora \(\mathcal{C}{(X, -)}\) non preserva i coprodotti. % TODO: eser
+\end{proof}
+
+\begin{proof}[\(\mathcal{C}{(X, -)}\) preserva i limiti]
+    Infatti sia \(I : \mathcal{L} \to \mathcal{C}\) funtore con limite \({(Y, \alpha)}\). Allora abbiamo che \(\forall L \in \mathcal{L}\) \(\alpha_L \in \mathcal{C}{(Y, I{(L)})}\) tale che \(\forall l : L \to L'\) morfismo di \(\mathcal{L}\), \(I{(l)} \circ \alpha_L = \alpha_L'\). Ma allora
+    \[
+      {(\alpha_L)}_{L \in \mathcal{L}} \in \mathrm{eq}{\left( \prod_{L \in \mathcal{L}} C{(Y, I{(L)})} \underset{h}{\overset{g}{\rightrightarrows}} \prod_{{(l : L \to L')} \in \mathrm{Mor}{(\mathcal{L})}} C{(Y, I{(L')})}) \right)}
+    \]
+    % TODO : aggiustare e finire
+\end{proof}
+\end{example}
+
+\begin{remark}{}
+    Sia \(F, F' : \mathcal{C} \to \mathcal{D}\) con \(F \cong F'\). Se \(F\)
+    preserva un limite \({(X, \alpha)}\) di \(I : \mathcal{L} \to
+    \mathcal{C}\), allora anche \(F'\) lo preserva. 
+
+    Infatti \({(F{(X)}, F \circ \alpha)}\) è un limite di \(F \circ I\) e \(\gamma : F \to F'\) è
+    isomorfismo, dunque \(\gamma \circ I : F \circ I \to  F' \circ I\) è
+    isomorfismo, dunque \({(F{(X)}, {(\gamma \circ I)} \circ {(F \circ \alpha)})}\) è un limite di \(F' \circ I\).
+    Segue dunque che \({(F'{(X)}, {(\gamma \circ I)} \circ {(F \circ \alpha)} \circ K_{\gamma_X^{-1}} = F' \circ \alpha)}\) dove l'ultima uguaglianza è perché \(\alpha\) è naturale.
+\end{remark}
+
+\begin{remark}{}
+    Vedremo che ogni equivalenza di categorie preserva sia i limiti che i
+    colimiti.
+
+    Sgue che se \(\mathcal{C}\) e \(\mathcal{D}\) sono equivalenti e \(\mathcal{C}\) ha i limiti di forma \(\mathcal{L}\), lo stesso vale per \(\mathcal{D}\). Infatti sia \(I : \mathcal{L} \to \mathcal{D}\) funtore e sia \(F : \mathcal{C} \to \mathcal{D}\) equivalenza con quasi-inverso \(G\). 
+    Allora \(G \circ I : \mathcal{L} \to \mathcal{C}\) ha limite \({(X, \alpha)}\) e dunque anche \(F \circ G \circ I \cong I\) ha limite 
+\end{remark}
 
 
 
