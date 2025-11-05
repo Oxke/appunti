@@ -2110,5 +2110,126 @@ naturale,
     Allora \(G \circ I : \mathcal{L} \to \mathcal{C}\) ha limite \({(X, \alpha)}\) e dunque anche \(F \circ G \circ I \cong I\) ha limite 
 \end{remark}
 
+Siano \(\mathcal{C}\) e \(\mathcal{D}\) categorie (con \(\mathcal{C}\) piccola)
+e sia \(X \in \mathcal{C}\). Allora c'è un funtore di valutazione in \(X\) 
+\begin{align*}
+    \mathrm{ev}_X: \mathtt{Fun}{(\mathcal{C}, \mathcal{D})} &\longrightarrow
+    \mathcal{D} \\
+    F &\longmapsto \mathrm{ev}_X(F) = F{(X)} \\
+    {(\alpha : F \to G)} &\longmapsto {(\alpha_X : F{(X)} \to G{(X)})} \\
+\end{align*}
+E \(\forall f : X \to Y\), \(\mathrm{ev}\) induce una trasformazione naturale
+\(\mathrm{ev}_f : \mathrm{ev}_X \to \mathrm{ev}_Y\) definita da 
+\({(\mathrm{ev_f})}_X : \mathrm{ev}_X{(F)} = F{(X)} \overset{F{(f)}}{\to } \mathrm{ev}_Y{(F)} = F{(Y)}\) 
+
+\begin{proposition}{}
+    Se in \(\mathcal{D}\) esistono i limiti di forma \(\mathcal{L}\), allora
+    esistono anche in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\) e si
+    calcolano ``puntualmente'', cioè, dato \(I: \mathcal{L} \to \mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\)
+    si ha che 
+    \[
+      {( \lim I)}{(X)} =  \lim {(\mathrm{ev}_X \circ I)} % NOTE: canonaco qui
+                                            % aveva usato := invece di =
+    \]
+    e \(\forall f : X \to Y\) morfismo di \(\mathcal{C}\) 
+    \[
+      {( \lim I)}{(f)} =  \lim {(\mathrm{ev}_f \circ I)}
+    \]
+    con trasformazioni naturali \(\alpha{(X)} : K_{ \lim {(\mathrm{ev}_X \circ I)}} \to \mathrm{ev}_X \circ I\) e \(\forall L \in \mathcal{L}\) \(\alpha{(X)}_L :  \lim {(\mathrm{ev}_X \circ I)} \to {(\mathrm{ev}_X \circ I)}{(L)} = I{(L)}{(X)}\).
+
+    La trasformazione naturale \(\alpha: K_{ \lim I} \to I\) è definita \(\forall L \in \mathcal{L}\) da 
+    \[
+      a_L :  \lim I \to I{(L)} \text{ morfismo in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\) }
+    \]
+    cioè una trasformazione naturale definita \(\forall X \in \mathcal{C}\) da
+    \[
+        \underbrace{{(\alpha_L)}_X}_{\alpha{(X)}_L} :  \underbrace{{( \lim I)}{(X)}}_{ \lim {(\mathrm{ev}_X \circ I)}} \to I{(L)}{(X)}
+    \]
+\end{proposition}
+
+\subsection{Limiti in categorie preadditivive}
+
+\begin{definition}{(co)Nucleo}
+    Sia \(\mathcal{A}\) una categoria preadditiva. Un (co)nucleo di \(f: X \to Y\) morfismo di \(\mathcal{A}\) è un (co)equalizzatore di \(X \underset{0}{\overset{f}{\rightrightarrows}} Y\)
+\end{definition}
+\begin{remark}{}
+    Il (co)equalizzzatore di \(X \underset{g}{\overset{f}{\rightrightarrows}} Y \) è (co)nucleo di \(f-g\) 
+\end{remark}
+Un nucleo di \(f : X \to Y\) è dunque \( i : K \to X\) tale che \(f \circ i = 0\) 
+e \(\forall i', K' \to X\) tale che \(f \circ i' = 0\), allora 
+\(\exists ! \, g : K' \to K\) tale che \(i' = i \circ g\). Equivalentemente il
+seguente diagramma commuta:
+
+\[\begin{tikzcd}
+	K & {i'} & Y \\
+	& {K'}
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\exists! \,g}", dashed, from=2-2, to=1-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=1-3]
+\end{tikzcd}\]
+
+Un conucleo di \(f\) è \(p : Y \to C\) tale che \(p \circ f = 0\) e \(\forall p' : Y\to C'\) tale che
+\(p' \circ f = 0\) allora \(\exists ! \,h : C \to C' \) tale che \(p ' = h \circ p\).
+Equivalentemente il seguente diagramma commuta:
+
+\[\begin{tikzcd}
+	X & Y & C \\
+	& {K'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["p", from=1-2, to=1-3]
+	\arrow["{p'}"', from=1-2, to=2-2]
+	\arrow["{\exists!\,h}", dashed, from=1-3, to=2-2]
+\end{tikzcd}\]
+
+\begin{example}{}
+    In \(A\mathtt{-Mod}\) un nucleo di \(f: M \to N\) è dato dall'inclusione \(\mathrm{Ker}f \hookrightarrow M\).
+
+    Un conucleo di \(f\) è dato invece dalla proiezione a quoziente 
+    \[
+      \pi : N \to \mathrm{coKer}f := \frac{N}{\mathrm{Im}f}
+    \]
+    effettivamente 
+\[\begin{tikzcd}
+	M & N & \frac{N}{\mathrm{Im}f} \\
+	& {P}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=1-3]
+	\arrow["{g}"', from=1-2, to=2-2]
+	\arrow["{\exists!\,g'}", dashed, from=1-3, to=2-2]
+\end{tikzcd}\]
+    rappresenta il teorema di omomorfismo per moduli.
+\end{example}
+\begin{remark}{}
+    In quanto limiti, nuclei e conuclei sono unici a meno di unico isomorfismo
+\end{remark}
+
+\begin{definition}{Categoria preabeliana}
+    Una categoria \emph{preabeliana} e una categoria additiva in cui esistono
+    nuclei e conuclei.
+\end{definition}
+\begin{remark}{}
+    Una categoria è preabeliana se e solo se è preabeliana e finitamente
+    completa e cocompleta.
+\end{remark}
+\begin{remark}{}
+    Se \(\mathcal{A}\) è preabeliana, allora \(\mathcal{A}^{op}\) è preabeliana.
+    \(\mathcal{A}' \subseteq \mathcal{A}\) sottocategoria piena è preabeliana se
+    è chiusa per prodotti e coprodotti finiti, per nuclei e per conuclei (cioè
+    \(f: X \to Y\) in \(\mathcal{A}'\) \(\implies \) \(\exists i: K \to X\)
+    nucleo di \(f\) in \(\mathcal{A}\) con \(K \in \mathcal{A}'\)).
+
+    Ad esempio, se \(\mathcal{A} = A\mathtt{-Mod}\) e \(\mathcal{A}'\) con
+    oggetti i moduli noeheriani/artiniani/coerenti, allora \(\mathcal{A}'\) è
+    preabeliana.
+\end{remark}
+
+
 
 
