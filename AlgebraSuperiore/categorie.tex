@@ -355,8 +355,8 @@ In generale non vale nessuna delle \(\impliedby\).
     anche \(0 : \mathrm{Ker}f \to M\) è tale che \(f \circ 0 = 0\). Concludiamo
     che \(i = 0\) e dunque \(\mathrm{Ker}f = 0\).
 
-    Similmente \(\pi : N \to \mathrm{coKer}f\) è tale che \(\pi \circ f = 0\) e
-    se \(f\) è epi allora \(0 = \pi \) e dunque \(\mathrm{coKer} f= 0\) e dunque
+    Similmente \(\pi : N \to \mathrm{coker}f\) è tale che \(\pi \circ f = 0\) e
+    se \(f\) è epi allora \(0 = \pi \) e dunque \(\mathrm{coker} f= 0\) e dunque
     \(f\) è suriettiva.
 \end{example}
 
@@ -2191,7 +2191,7 @@ Equivalentemente il seguente diagramma commuta:
 
     Un conucleo di \(f\) è dato invece dalla proiezione a quoziente 
     \[
-      \pi : N \to \mathrm{coKer}f := \frac{N}{\mathrm{Im}f}
+      \pi : N \to \mathrm{coker}f := \frac{N}{\mathrm{Im}f}
     \]
     effettivamente 
 \[\begin{tikzcd}
@@ -2230,6 +2230,275 @@ Equivalentemente il seguente diagramma commuta:
     preabeliana.
 \end{remark}
 
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) una sottocategoria piena di \(A\mathtt{-Mod}\) con
+    oggetti i moduli \emph{finitamente generati}/\emph{finitamente presentati}
+    (è sempre additiva).
+
+    Allora \(\mathcal{A}\) è preabeliana se e solo se \(A\) è
+    \emph{noetheriano}/\emph{coerente}.
+
+    Infatti \(M\) \(A\)-modulo è \emph{f.g.}/\emph{f.p.} se e solo se \(M\) è \emph{noeth.}/\emph{coerente}.
+    Viceversa \(\mathcal{A}\) è in ogni caso chiusa per conuclei in \(A\mathtt{-Mod}\), ma in generale non per nuclei. Sia \(A\) non \emph{noeth.}/\emph{coerente}. Allora in entrambi i casi \(\exists f : M \to N\) in \(\mathcal{A}\) tale che \(\mathrm{Ker}f\) non è f.g.
+    Infatti nel primo caso si può prendere \(f = \pi : A \to A/\mathfrak{I}\) con \(\mathfrak{I}\)
+    ideale sinistro non f.g., mentre nel secondo caso \(\exists  \mathfrak{I} \subseteq A \) ideale sinistro f.f.g. non f.p. se prendo \(f : A^{n} \to A\) con \(\mathrm{im}f = \mathfrak{I}\).
+
+    Per assurdo sia ora \(g : K \to M\) un nucleo di \(f\) in \(\mathcal{A}\)
+    (dunque \(f \circ g = 0\)). In ogni caso \(K\) è f.g. e dunque \(\mathrm{im}g\) è f.g. 
+    \(\implies  x \in \mathrm{Ker}f \sminus \mathrm{im}g\).
+
+    Sia \(h : A \to M\), \(a \mapsto ax\) in \(\mathcal{A}\) tale che \(f \circ h = 0\), ma \(\not
+    \exists  h' : A \to K\) tale che \(h = g \circ h'\), e il che contraddice la
+    proprietà universale.
+\end{example}
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità, \(\mathcal{A} \subseteq A\mathtt{-Mod} \)
+    sottocategoria piena con oggetti i moduli senza torsione, ossia tali che
+    \[
+      T{(M)} := \{x \in M : \mathrm{Ann}{(x)} \neq 0\} = 0 \quad (T{(M)} \subseteq M \text{ sottomodulo})
+    \]
+    Allora \(\mathcal{A}\) è chiusa per nuclei (\(M \in \mathcal{A}, M' \subseteq M \) sottomodulo, allora \(M' \in \mathcal{A}\)),
+    ma non è chiusa per conuclei se \(A\) non è un campo (esiste infatti \(0 \neq I \neq A\)) ideale
+    \(I, A \in \mathcal{A}\) ma \(\mathrm{coker}(I \hookrightarrow A) = A/I
+    \not\in A\).
+
+    \(\mathcal{A}\) è comunque preabeliana, infatti \(\forall f : M \to N\) in
+    \(\mathcal{A}\), un conucleo di \(f\) in \(\mathcal{A}\) è 
+    \[
+      N \overset{\pi}{\to } \mathrm{coker}f \overset{\pi'}{\to } C := \frac{\mathrm{coker}f}{T{(\mathrm{coker}f)}}
+    \]
+    Allora \(\pi' \circ \pi \circ f = 0\) evidentemente. Inoltre vale la
+    proprietà universale, infatti
+\[\begin{tikzcd}
+	M & N & {\mathrm{coker}f} & C \\
+	& {P\in\mathcal{A}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=1-3]
+	\arrow["g"', from=1-2, to=2-2]
+	\arrow["{\pi'}", from=1-3, to=1-4]
+	\arrow["{\exists!\,g'}"', dashed, from=1-3, to=2-2]
+	\arrow["{\exists!\,g''}", curve={height=-12pt}, dotted, from=1-4, to=2-2]
+\end{tikzcd}\]
+    dove la freccia tratteggiata è dovuta alla proprietà universale del conucleo
+    in \(A\mathtt{-Mod}\) mentre quella puntinata (ossia quella voluta in \(\mathcal{A}\)) è dovuta al fatto, più generale, che dato \(g' : L \to P\) in \(A\mathtt{-Mod}\) con \(P \in \mathcal{A}\) e \(\pi' : L \to L/T{(L)}\) 
+    \[
+      \exists ! \,g'' : \frac{L}{T{(L)}} \to P \text{ t.c. } g' = g'' \circ \pi'
+    \]
+    poiché \(g'{(T{(L)})} \subseteq T{(P)} = 0\) e dunque si può applicare il
+    teorema di omomorfismo.
+\end{example}
+
+\begin{note}{zione}
+    In una categoria preabeliana, \(\forall f : X \to Y\), indico con 
+    \begin{align*}
+      &\mathrm{ker}f : \mathrm{Ker} f \to X \text{ un nucleo di \(f\)} \\
+      &\mathrm{coker}f : Y \to \mathrm{Coker}f \text{ un conucleo di \(f\)}
+    \end{align*}
+\end{note}
+
+\begin{proposition}{}
+    Sia \(C\) una categoria piccola, \(\mathcal{A}\) una categoria preabeliana,
+    allora \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è preabeliana. Se \(\mathcal{C}\) è preadditiva, allora \(\mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}\) (che è additiva) è chiusa per conuclei e nuclei in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) e quindi è preabeliana.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to G\) un morfismo in \(\mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}\). Devo dimostrare che \(\mathrm{Ker}\alpha\), \(\mathrm{Coker}\alpha\) (in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\)) sono additivi. Effettivamente
+    \[
+      \forall X \in \mathcal{C} \quad \mathrm{Ker}(\alpha) {(X)} = \mathrm{Ker}{(\alpha_X)}
+    \]
+    e \(\forall f : X \to Y\) morfismo di \(C'\), \(\mathrm{Ker}{(\alpha)}{(f)}\) è l'unico morfismo 
+    \(f'\) tale che il seguente diagramma commuta:
+\[\begin{tikzcd}
+	{\mathrm{Ker}(\alpha_X)} & {F(X)} & {G(X)} \\
+	{\mathrm{Ker}(\alpha_X)} & {F(Y)} & {G(Y)}
+	\arrow["{\mathrm{ker}(\alpha_X)}", from=1-1, to=1-2]
+	\arrow["{f'}", dashed, from=1-1, to=2-1]
+	\arrow["{\alpha_X}", from=1-2, to=1-3]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+	\arrow["{G(f)}", from=1-3, to=2-3]
+	\arrow["{\mathrm{ker}(\alpha_Y)}"', from=2-1, to=2-2]
+	\arrow["{\alpha_Y}"', from=2-2, to=2-3]
+\end{tikzcd}\]
+    Analogamente dato \(g: X \to Y\), allora \(\mathrm{Ker}{(\alpha)}{(g)} = g'\) tale che l'analogo diagramma commuta. Dunque abbiamo
+    \[
+      F{(f + g)} = F{(f)} + F{(g)} \,\,,\,\, G{(f + g)} = G{(f)} + G{(g)} \implies
+      f' + g' = {(f + g)}'
+    \]
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(\mathcal{C}\) una categoria. Allora ogni
+    \emph{equalizzatore}/\emph{coequalizzatore} in \(\mathcal{C}\) è un
+    \emph{mono}/\emph{epi}morfismo in \(\mathcal{C}\).
+\end{proposition}
+\begin{proof}{}
+    Sia \(f : X \to Y\) un equalizzatore di \(Y \underset{h}{\overset{g}{\rightrightarrows}} Z\). Dati \(l, l' : W \to X\) tali che \(f \circ l = f \circ l'\). Devo dimostrare che \(l = l'\). 
+    Effettivamente
+    \[
+      g \circ {(f \circ l)} = h \circ {(f \circ l)} \implies \exists ! \, \overline{l} : W \to X \text{ t.c. } f \circ l = l \circ \overline{l} \implies l = \overline{l} = l'
+    \]
+\[\begin{tikzcd}
+	X & Y & Z \\
+	W
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-2, to=1-3]
+	\arrow["h", shift left, from=1-2, to=1-3]
+	\arrow["{\exists!\,\overline{l}}", dashed, from=2-1, to=1-1]
+	\arrow["{f\circ l}"', from=2-1, to=1-2]
+\end{tikzcd}\]
+    in particolare in una categoria preadditiva i \textbf{nuclei} sono \textbf{mono} e i \textbf{conuclei} sono \textbf{epi}.
+\end{proof}
+\begin{remark}{}
+    In \(\mathcal{A}\) categoria preadditiva, \(f : X \to Y\) è mono \(\iff\)
+    dato \(g : X' \to X\) t.c. \(f \circ g = 0\), allora \(g = 0\). Analogamente
+    per gli epimorfismi.
+\end{remark}
+
+\begin{definition}{Categoria abeliana}
+    Una categoria \emph{abeliana} è una categoria preabeliana in cui ogni
+    monomorfismo è un nucleo e ogni epimorfismo è un conucleo
+\end{definition}
+\begin{example}{}
+    \(A\mathtt{-Modl}\) è abeliana \(\forall A\) anello.
+
+    Infatti se \(f : M \to N\) in \(A\mathtt{-Mod}\) è \emph{mono}/\emph{epi} se
+    e solo se \(f\) è \emph{iniettivo}/\emph{suriettivo}.
+
+    Se \(f\) è iniettivo, allora \(\mathrm{im}f \cong M\) e l'inclusione \(\mathrm{im}f \overset{i}{\hookrightarrow } N\) è un nucleo di \(\mathrm{coker}f : N \to \mathrm{Coker}f\). 
+    Dunque anche \(f\) è un nucleo di \(\mathrm{coker}f\) poiché \(f = i \circ f'\) con \(f' : M \to \mathrm{im}f\) isomorfismo.
+
+    Se \(f\) è suriettivo, per il primo teorema di isomorfismo \(N \cong M / \mathrm{Ker}f\) e sia 
+    \(\overline{f}\) l'isomorfismo. Allora
+\[\begin{tikzcd}
+	{\mathrm{Ker}f} & M & N \\
+	&& {\mathrm{Coker}(j)}
+	\arrow["{j:=\mathrm{ker}f}", from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}j}"', from=1-2, to=2-3]
+	\arrow["{\exists!\,\overline{f}}"', dashed, from=2-3, to=1-3]
+\end{tikzcd}\]
+    commuta e dunque \(f\) è un conucleo di \(j\).
+\end{example}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è abeliana, anche \(\mathcal{A}^{op}\) è abeliana.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria preadditiva con oggetto nullo \(0\).
+    Allora un morfismo \(f : X \to Y\) di \(\mathcal{A}\) è
+    \emph{mono}/\emph{epi}morfismo \(\iff\) \emph{\(\mathrm{Ker}f =
+    0\)}/\emph{\(\mathrm{Coker}f = 0\)}
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Devo dimostrare che \(0 \overset{0}{\hookrightarrow }X \) è un nucleo di \(f\).
+        Se \(f \circ 0 = 0\), dato \(g : Z \to X\) tale che \(f \circ g = 0\),
+        allora \(g = 0\) (perché \(f\) è mono) e dunque fattorizza in modo unico
+        attraverso \(0\).
+    \item[\(\impliedby \)] Se \(\mathrm{Ker}f = 0\) dato \(g : Z \to X\) tale
+        che \(f \circ g = 0\), allora per definizione di nucleo, \(g\) fattorizza in modo unico attraverso \(0 \to X\), dunque \(g = 0\) 
+\end{itemize}
+\end{proof}
+
+\begin{definition}{Immagine e coimmagine}
+    Un'\emph{immagine} di \(f : X \to Y\) in una categoria preabeliana è un
+    nucleo di un conucleo di \(f\). Una \emph{coimmagine} di \(f\) è un conucleo
+    di un nucleo di \(f\). Diagrammaticamente abbiamo
+\[\begin{tikzcd}
+	\mathrm{Ker}f & X & Y & \mathrm{Coker}f \\
+	& \mathrm{Coim}f & \mathrm{Im}f
+	\arrow["{\mathrm{ker}f}", from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}", from=1-3, to=1-4]
+\arrow["{\mathrm{coker}{(\mathrm{ker}f)} = \mathrm{coim}f}", from=2-2, to=1-2]
+\arrow["{\mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)}}"', from=2-3, to=1-3]
+\end{tikzcd}\]
+\end{definition}
+\begin{note}{zione}
+    Se \(f\) è nucleo di \(g\) si scrive \(f = \mathrm{ker}g\) 
+\end{note}
+\begin{proposition}{}
+    Sia \(f\) un (co)nucleo in una categoria preabeliana. Allora \[f = (co)im(f)\]
+\end{proposition}
+
+\begin{proof}{}
+    Sia \(f :X \implies Y\) un nucleo di \(g : Y \to Z\). Voglio dimostrare che
+    il seguente diagramma commuta:
+    
+\[\begin{tikzcd}
+	X & Y & Z \\
+	& {Y'} & {\mathrm{Coker}f}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}"{description}, from=1-2, to=2-3]
+	\arrow["{\exists!\,h'}", dashed, from=2-2, to=1-1]
+	\arrow["h", from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=2-3]
+	\arrow["{\exists!\,g'}"', dashed, from=2-3, to=1-3]
+\end{tikzcd}\]
+    Ossia \(f\) è nucleo di \(\mathrm{coker}f\). È sempre vero che \(\mathrm{coker}f \circ f = 0\). Dato \(h : Y' \to Y\) tale che \(\mathrm{coker}f \circ h = 0\), devo dire che \(\exists !\, h' : Y'\to X\) tale che \(h = f \circ h'\).
+
+    % TODO : finire
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(f\) \emph{mono}/\emph{epi} in una categoria abeliana. Allora \(f = \text{(co)}\mathrm{im}{(f)}\).
+\end{corollary}
+
+
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria abeliana. Sia \(\mathcal{A}' \subseteq
+    \mathcal{A}\) una sottocategoria piena chiusa per (co)prodotti finiti,
+    nuclei e conuclei. Allora \(\mathcal{A}'\) è abeliana.
+\end{proposition}
+\begin{proof}{}
+    \(\mathcal{A}'\) è già preabeliana.
+
+    \(f : X \to Y\) mono di \(\mathcal{A}'\) \(\iff\) \(\mathrm{Ker}f = 0\) in
+    \(\mathcal{A}'\) e quindi in \(\mathcal{A}\), ossia \(f\) è mono in \(\mathcal{A}\), ma allora \(f = \mathrm{im}f \) in \(\mathcal{A}\) e quindi in \(\mathcal{A}'\) 
+\end{proof}
+
+\begin{example}{}
+    In particolare le sottocategoria di \(A\mathtt{-Mod}\) con oggetti i moduli
+    \emph{noeth.}/\emph{artin.}/\emph{coerenti} sono abeliane
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{C}\) piccola, \(\mathcal{A}\) categoria abeliana. Allora \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è abeliana.
+    \begin{proof}{}
+        Sappiamo già che \(\mathtt{Fun}{(\mathcal{C},\mathcal{A})}\) è
+        preabeliana.
+
+        ora \(\alpha : F \to G\) è mono in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) \(\iff\) \(\mathrm{Ker}\alpha = 0 \iff \mathrm{Ker}{(\alpha_X)} = 0\) per ogni \(X \in \mathcal{C}\), cioè \(\alpha_X\) mono in \(\mathcal{A}\) abeliana e dunque \(\alpha_X = \mathrm{im}{(\alpha_X)} \implies \alpha = \mathrm{im}\alpha\).
+    \end{proof}
+
+    Se \(\mathcal{C}\) è preadditiva, allora \(\mathtt{AddFun}{(\mathcal{C},\mathcal{A})}\) è chiusa per 
+    nuclei e conuclei in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) e dunque
+    \(\mathtt{AddFun}{(\mathcal{C},\mathcal{A})}\) è abeliana.
+    In particolare \(\mathcal{A}\mathtt{-Mod} = \mathtt{AddFun}{(\mathcal{A}, \mathtt{Ab})}\) è abeliana \(\forall \mathcal{A}\) preadditiva piccola.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(f: X \to Y\) monomorfismo e epimorfismo in una categoria abeliana.
+    Allora \(f \) è isomorfismo.
+\end{proposition}
+\begin{proof}{}
+    \(f\) è mono, dunque \(f = \mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)}\).
+    Poiché \(f\) è epi, \(\mathrm{Coker}f = 0\), dunque un'immagine di \(f\) è
+    \(1_Y\), e quindi \(f\) è isomorfismo.
+\end{proof}
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) sottocategoria piena di \(A\mathtt{-Mod}\) (\(A\)
+    dominio d'integrità non campo) dei moduli senza torsione. Allora \(\mathcal{A}\) non è abeliana.
+
+    \begin{proof}{}
+        Sia \(0 \neq I \neq A\) ideale. Allora l'inclusione \(i : I \to A\) è
+        mono (\(\mathrm{Ker}i = 0\) ), epi (\(\mathrm{Coker}i = {(A/I)}/{(T{(A /I)})} = 0\) ) ma non è isomorfismo.
+    \end{proof}
+\end{example}
 
 
 
