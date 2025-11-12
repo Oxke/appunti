@@ -1,0 +1,25 @@
+global !p
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and x != '0'
+def matrix():
+	return env('matrix') or env('pmatrix') or env('bmatrix') or env('Bmatrix') or env('vmatrix') or env('Vmatrix')
+def not_math():
+	return not math()
+endglobal
+
+priority 200
+context "math()"
+snippet >-> "mono" iA
+\rightarrowtail $0
+endsnippet
+
+priority 200
+context "math()"
+snippet \gg> "epi" iA
+\twoheadrightarrow $0
+endsnippet

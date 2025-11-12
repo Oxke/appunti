@@ -1789,9 +1789,9 @@ introduciamo i seguenti nuovi concetti
 
     La proprietà universale diventa:
     \[
-      \forall X' \in \mathcal{C}, \, \forall h' : X' \to Y\,\, \exists ! \,k :
-      X' \to X : h' = h \circ k \quad \text{ossia }
-\begin{tikzcd}
+      \forall X' \in \mathcal{C}, \, \forall h' : X' \to Y : f \circ h' = g \circ\,\, \exists ! \,k :
+  X' \to X : h' = h \circ k\]
+\[\text{ossia il diagramma }\begin{tikzcd}
 	X & Y & Z \\
 	X'
 	\arrow["h", from=1-1, to=1-2]
@@ -1799,7 +1799,7 @@ introduciamo i seguenti nuovi concetti
 	\arrow["f", shift left, from=1-2, to=1-3]
 	\arrow["{\exists ! \,k}", dashed, from=2-1, to=1-1]
 	\arrow["{h'}"', from=2-1, to=1-2]
-\end{tikzcd}\]
+\end{tikzcd} \text{ commuta}\]
     tale \(h\) si dice \emph{equalizzatore} di \(f\) e \(g\).
 
     In \(\mathtt{Set}\) si può prendere \(X := \{y \in Y : f{(y)} = g{(y)}\} \overset{i}{\hookrightarrow } Y\).
@@ -2336,7 +2336,7 @@ Equivalentemente il seguente diagramma commuta:
     Sia \(f : X \to Y\) un equalizzatore di \(Y \underset{h}{\overset{g}{\rightrightarrows}} Z\). Dati \(l, l' : W \to X\) tali che \(f \circ l = f \circ l'\). Devo dimostrare che \(l = l'\). 
     Effettivamente
     \[
-      g \circ {(f \circ l)} = h \circ {(f \circ l)} \implies \exists ! \, \overline{l} : W \to X \text{ t.c. } f \circ l = l \circ \overline{l} \implies l = \overline{l} = l'
+      g \circ {(f \circ l)} = h \circ {(f \circ l)} \implies \exists ! \, \overline{l} : W \to X \text{ t.c. } f \circ l = f \circ \overline{l} \implies l = \overline{l} = l'
     \]
 \[\begin{tikzcd}
 	X & Y & Z \\
@@ -2412,11 +2412,11 @@ Equivalentemente il seguente diagramma commuta:
 	\arrow["{\mathrm{ker}f}", from=1-1, to=1-2]
 	\arrow["f", from=1-2, to=1-3]
 	\arrow["{\mathrm{coker}f}", from=1-3, to=1-4]
-\arrow["{\mathrm{coker}{(\mathrm{ker}f)} = \mathrm{coim}f}", from=2-2, to=1-2]
+\arrow["{\mathrm{coker}{(\mathrm{ker}f)} = \mathrm{coim}f}"', from=1-2, to=2-2]
 \arrow["{\mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)}}"', from=2-3, to=1-3]
 \end{tikzcd}\]
 \end{definition}
-\begin{note}{zione}
+\begin{note}[zione]
     Se \(f\) è nucleo di \(g\) si scrive \(f = \mathrm{ker}g\) 
 \end{note}
 \begin{proposition}{}
@@ -2500,5 +2500,279 @@ Equivalentemente il seguente diagramma commuta:
     \end{proof}
 \end{example}
 
+\begin{proposition}{}
+    Se \(\mathcal{A}\) e \(\mathcal{B}\) sono due categorie equivalenti, allora
+    \(\mathcal{A}\) è abeliana se e solo se \(\mathcal{B}\) è abeliana.
+\end{proposition}
+\begin{proof}{}
+    So già che \(\mathcal{B}\) è preabeliana. Per dualità basta dimostrare che
+    se \(f : X \to Y\) è monomorfismo di \(\mathcal{B}\), allora è nucleo.
+
+    Sia \(F : \mathcal{B} \to \mathcal{A}\) un'equivalenza (quindi preserva i
+    (co)nuclei). Allora se \(f\) è mono \(\mathrm{Ker}f = 0\), dunque \(\mathrm{Ker}{(F{(f)})} = F{(0)} = 0\) è dunque \(F{(f)}\) è mono.
+
+    Inoltre \(F{(f)} = \mathrm{im}{(F{(f)})} = \mathrm{Ker}{(\mathrm{coker}{(F{(f)})})}\). Ma \(\mathrm{im}{(F{(f)})} = F{(\mathrm{im}{(f)})}\). A meno di isomorfismo, \(F{(f)} = F{(\mathrm{im}{(f)})}\) e dunque \(f = \mathrm{im}{(f)}\) poiché \(F\) è pienamente fedele.
+\end{proof}
+
+\begin{note}[zione]
+    I mono si possono indicare con \(\rightarrowtail\) e gli epi con \(\) 
+\end{note}
+
+\begin{theorem}{}
+    Sia \(\mathcal{A}\) una categoria preabeliana. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall f : X \to Y\) di \(\mathcal{A}\), \(\exists !\, s{(f)} : \mathrm{Coim}f \to \mathrm{Im}f\) tale che \(f = \mathrm{im}(f) \circ s{(f)} \circ \mathrm{coim}{(f)}\) 
+    \item \(\mathcal{A}\) è abeliana se e solo se \(s{(f)}\) è isomorfismo per
+        ogni morfismo \(f\) di \(\mathcal{A}\) 
+\end{enumerate}
+\end{theorem}
+\begin{proof}{}
+    \[\begin{tikzcd}
+	\mathrm{Ker}f & X & Y & \mathrm{Coker}f \\
+	& \mathrm{Coim}f & {\mathrm{Im}f}
+	\arrow["\mathrm{ker}f", tail, from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coim}f}"', two heads, from=1-2, to=2-2]
+	\arrow["\mathrm{coker}f", two heads, from=1-3, to=1-4]
+	\arrow["{f'}", dashed, from=2-2, to=1-3]
+	\arrow["{s(f)}"', dashed, from=2-2, to=2-3]
+	\arrow["{\mathrm{im}f}"', tail, from=2-3, to=1-3]
+    \end{tikzcd}\]
+
+\begin{enumerate}[label = \arabic*.]
+    \item \(f \circ \mathrm{ker}f = 0\) e \(\mathrm{coim}f = \mathrm{coker}{(\mathrm{ker}f)}\). Dunque 
+        esiste unico \(f' : \mathrm{Coim}f \to Y\) tale che \(f = f' \circ \mathrm{coim}f\).
+
+        \[
+          0 = \mathrm{coker}f \circ f = \mathrm{coker}f \circ f' \circ
+            \mathrm{coim}f \implies \mathrm{coker}f \circ f' = 0
+        \]
+        poiché \(\mathrm{coim}\) è epi.
+
+        Inoltre 
+        \[
+        \mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)} \implies \exists ! \, s{(f)} : \mathrm{Coim}f \to \mathrm{Im}f : f' = \mathrm{im}f \circ s{(f)}
+        \]
+        dove \(s{(f)}\) è unico perché \(\mathrm{im}f\) è mono e \(\mathrm{coim}f\) è epi.
+    \item 
+    \begin{itemize}
+        \item[\(\implies \)] Per dualità basta dimostrare che \(f\) mono \(\implies \) \(f\) nucleo
+            \[
+              \mathrm{coim}f = \mathrm{coker}{(\mathrm{ker}f)} =
+              \mathrm{coker}{(0 \to X)} \implies \mathrm{coim}{(f)} \text{ iso}
+              \implies f = \mathrm{im}f \circ iso
+            \]
+            cioè \(f\,``="\, \mathrm{im}f\) è un nucleo
+        \item[\(\implidby \)] \(s{(f)}\) è isomorfismo se e solo se \(
+            s{(f)}\) è mono e epi. Per dualità basta dimostrare che \(s{(f)}\) è mono, che è vero se \(f'\) è mono. Dunque dimostreremo che \(f'\) è mono.
+
+            Sia \(g : Z \to \mathrm{Coim}f\) tale che \(f' \circ g = 0\), devo
+            dimostrare che \(g=0\).
+
+            \[
+\begin{tikzcd}
+	{\mathrm{Ker}f} & X & Y & {\mathrm{Coker}f} \\
+	W & {\mathrm{Coim}f} & {\mathrm{Im}f} \\
+	& Z & {\mathrm{Coker}h} & {\mathrm{Coker}g}
+	\arrow["{\mathrm{ker}f}", tail, from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{{\mathrm{coim}f}}"', two heads, from=1-2, to=2-2]
+	\arrow["{\mathrm{coker}f}", two heads, from=1-3, to=1-4]
+	\arrow["{h'}", dashed, from=2-1, to=1-1]
+	\arrow["h", from=2-1, to=2-2]
+	\arrow["{{f'}}", dashed, from=2-2, to=1-3]
+	\arrow["{{s(f)}}", dashed, from=2-2, to=2-3]
+	\arrow["{\mathrm{coker}g}"{description}, shift left, from=2-2, to=3-4]
+	\arrow["{{\mathrm{im}f}}", tail, from=2-3, to=1-3]
+	\arrow["g", from=3-2, to=2-2]
+	\arrow["q"{description}, dashed, from=3-3, to=2-2]
+	\arrow["{=}"{description}, draw=none, from=3-3, to=3-4]
+	\arrow["{f''}"', curve={height=6pt}, dashed, from=3-4, to=1-3]
+\end{tikzcd}\]
+    ma \(f' \circ g = 0 \), quindi \(\exists !\, f'' : \mathrm{Coker}g \to Y\)
+    tale che \(f'= f'' \circ \mathrm{coker}g\).
+
+    Inoltre \(\mathrm{coker}g \circ \mathrm{coim}f : X \to \mathrm{Coker}g\)
+    epi e \(\mathcal{A}\) è abeliana, dunque
+    \[
+      \exists h : W \to X : \mathrm{coker}g \circ \mathrm{coim}f = \mathrm{coker}h
+    \]
+    \(f \circ h = f' \circ \mathrm{coim}f \circ h = f'' \circ \mathrm{coker}g \circ \mathrm{coim}f \circ h = f'' \circ \mathrm{coker}h \circ h = 0\) dunque \(\exists !\, h' : W \to \mathrm{Ker}f\) tale che \(h = \mathrm{Ker}f \circ h'\). 
+    \end{itemize}
+    %TODO finire
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(f: X \to Y\) morfismo in una categoria abeliana. Allora \(f\) si
+    fattorizza come \(X \overset{e}{\to } I \overset{m}{\to } Y\) con \(e\) epi
+    e \(m\) mono. Inoltre tale fattorizzazione è essenzialmente unica, cioè se
+    \(X \overset{e'}{\twoheadrightarrow } I' \overset{}{\rightarrowtail} Y\) è un'altra
+    fattorizzazione simile, allora \(\exists ! \, t : I \to I'\) (iso)morfismo
+    tale che \(e' = t \circ e\) e \(m = m' \circ t\) 
+\end{corollary}
+\begin{proof}[dimostrazione unicità]
+\[\begin{tikzcd}
+	X & I & Y \\
+	Z & {I'}
+	\arrow["e", two heads, from=1-1, to=1-2]
+	\arrow["{e'}", two heads, from=1-1, to=2-2]
+	\arrow["m", tail, from=1-2, to=1-3]
+	\arrow["g", from=2-1, to=1-1]
+	\arrow["t"', dashed, from=2-2, to=1-2]
+	\arrow["{m'}"', tail, from=2-2, to=1-3]
+\end{tikzcd}\]
+    Poiché \(e\) è epi, allora \(e = \mathrm{coker}g \) con \(g : Z \to X\).
+    Allora \(e \circ g = 0 \implies m \circ e \circ g = m' \circ e' \circ g = 0 \implies e' \circ g = 0\) perché \(m'\) è mono. Poiché \(e = \mathrm{coker}g\), 
+    \[
+      \exists ! \, t : I \to I' : e' = t \circ e
+    \]
+    Allora \(m' \circ t \circ e = m' \circ e' = m \circ e\). Inoltre \(e\) è
+    epi, dunque \(m' \circ t = m\).
+
+    Verificare come esercizio che \(t\) è iso.
+\end{proof}
+
+\begin{definition}{Sottoggetto}
+    Un \emph{sottoggetto} di \(X\) è una classe di equivalenza di monomorfismi
+    \(Y \overset{i}{\rightarrowtail } X\), dove \({(Y \overset{i}{\rightarrowtail } X)} \sim {(Y' \overset{i'}{\rightarrowtail } X)}\) se \(\exists t : Y \to Y'\) isomorfismo tale che \(i = i' \circ t\), ossia \(\begin{tikzcd}
+	Y & X \\
+	{Y'}
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["t"', from=1-1, to=2-1]
+	\arrow["{i'}"', from=2-1, to=1-2]
+\end{tikzcd}\) 
+\end{definition}
+\begin{remark}{}
+    Sia \(\mathcal{C}_X\) la sottocategoria di \(\mathrm{Mor}{(\mathcal{C})}\) con oggetti i mono
+    con codominio \(X\). Sia ora
+    \[
+      \mathcal{C}'_X{({(Y \overset{i}{\to }X)}, {(Y' \overset{i}{\to }X)})} := \{t \in \mathcal{C}{(Y, Y')} : i' \circ t = i\} 
+    \]
+    Inoltre \(t\) è tale che \(i' \circ t = i\) è mono, dunque \(t\) è mono.
+    Allora \(i'\) è mono, quindi \(t\) è unico, quindi \(\mathcal{C}'_X\) è un
+    preordine.
+
+    Una relazione di preordine induce una relazione d'ordine sulle classi di
+    isomorfismo degli oggetti. Quindi ottengo una relazione d'ordine sui
+    sottoggetti di \(X\) (che indico con \(\subseteq \)), cioè se \(Y, Y'\)
+    sottoggetti di \(X\), si scrive \(Y \subseteq Y' \) se \(\exists t \) tale
+    che. % TODO non ho capito.
+    Dualmente si ottiene la nozione di quoziente di \(
+    X\) considerando gli epi \(X \twoheadrightarrow  Y\).
+\end{remark}
+\begin{example}{}
+    Sia \(f : X \to 
+    Y\) un monomorfismo in una categoria abeliana. Allora \(f = \mathrm{im}{(f)}\) come sottoggetti di \(X\).
+\end{example}
+\begin{definition}{Complesso}
+    \(X \overset{f}{\to } Y \overset{g}{\to } Z\) in una categoria preadditiva è
+    un \emph{complesso} se \(g \circ f = 0\) 
+\end{definition}
+\begin{remark}{}
+    In \(\mathcal{A}\) abeliana,
+    \[\begin{tikzcd}
+	X & Y & Z \\
+	{\mathrm{Im}f} && {\mathrm{Ker}g}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\mathrm{coim}f}"', two heads, from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{im}f}"'{pos=0.7}, from=2-1, to=1-2]
+	\arrow["t"', dashed, from=2-1, to=2-3]
+	\arrow["{\mathrm{ker}g}"'{pos=0.3}, tail, from=2-3, to=1-2]
+\end{tikzcd}\]
+    \[
+      g \circ f = 0 \iff \exists (!)\, t : \mathrm{Im} f \to \mathrm{Ker}g \text{ t.c. } \mathrm{im}f = \mathrm{ker}g \circ t
+    \]
+
+    Infatti \(\impliedby\) è vero perché
+    \[
+        g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f = \underbrace{g \circ \mathrm{ker}g}_0 \circ t \circ \underbrace{\mathrm{coim}f}_0
+    \]
+    e viceversa
+    \[
+      0 = g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f \,, \mathrm{coim}f \text{ epi} \implies g \circ \mathrm{im}f = 0
+    \]
+    da cui \(\exists ! \, t : \mathrm{Im}f \to \mathrm{Ker}g\) tale che
+    \(\mathrm{im}f = \mathrm{ker}g \circ t\).
+\end{remark}
+
+\begin{definition}{}
+    \(X \overset{f}{\to } Y \overset{g}{\to } Z\) complesso in una categoria
+    abeliana è \emph{esatta} se \(t : \mathrm{Im}f \to \mathrm{Ker}g \) tale che
+    \(\mathrm{im}f = \mathrm{ker}g \circ t\) è isomorfismo (ossia \(\mathrm{Im}f = \mathrm{Ker}g\) come sottoggetti di \(Y\))
+\end{definition}
+
+\begin{remark}{}
+\[\begin{tikzcd}
+	X & Y & Z \\
+	{\mathrm{Coker}f} && {\mathrm{Im}g}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}"'{pos=0.9}, from=1-2, to=2-1]
+	\arrow["{\mathrm{coim}g}"'{pos=0.3}, from=1-2, to=2-3]
+	\arrow["t"', dashed, from=2-1, to=2-3]
+	\arrow["{\mathrm{im}g}"', tail, from=2-3, to=1-3]
+\end{tikzcd}\]
+   \[
+     g \circ f \mathrm{iso} \iff \exists (!) t : \mathrm{coim}g \circ t = \mathrm{coker}f
+   \] 
+   e la successione è esatta se e solo se \(
+   t\) è isomorfismo.
+\end{remark}
+
+\begin{proposition}{}
+\begin{enumerate}[label = \arabic*.]
+    \item \(0 \to X \overset{f}{\to } Y\) è esatta \(\iff\) \(\mathrm{Ker}f = 0\) \(\iff f \) mono.
+    \item \(X \overset{f}{->} Y \to 0\) è esatta \(\iff \mathrm{Coker}f = 0 \iff f\) epi
+    \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z\) è esatta (in \(X\) e \(Y\)) \(\iff f = \mathrm{ker}g\)
+    \item[3'] \(X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta \(\iff g = \mathrm{coker}f\)
+    \item \(\forall f : X \to Y\) la successione \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \overset{f}{\to} Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta. In particolare se \(f\) è mono, allora \(0 \to X \overset{f}{\to } Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta e \(f\) epi, dunque \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \to Y \to 0\) è esatta
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+    A quanto pare l'unica non ovvia è la 3.     
+    \begin{itemize}
+        \item[\(\implies \)] Se la successione è esatta in \(X\) allora \(f\) è
+            mono, dunque \(f = \mathrm{im}f\). Se la successione è esatta in \(Y\) allora \(\mathrm{im}f = \mathrm{ker}g \implies f = \mathrm{ker}g\) 
+        \item[\(\impliedby \)] Se \(f = \mathrm{ker}g \implies f\) mono, dunque successione
+    esatta in \(X\). Ma quindi \((\mathrm{ker}f) = f = \mathrm{im}f\) e dunque esatta in \(Y\) 
+    \end{itemize} 
+\end{proof}
+
+\begin{definition}{Successione esatta corta}
+    Le successioni esatte della forma \( 0 \to X \to Y \to Z \to 0\) si dicono
+    esatte corte.
+\end{definition}
+\begin{proposition}{}
+    Una successione esatta corta \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) in una
+    categoria abeliana si spezza se vale una delle seguenti condizioni
+    equivalenti:
+\begin{enumerate}[label = \arabic*.]
+    \item \(f\) è invertibile a sinistra 
+    \item \(g\) è invertibile a destra
+    \item \(\exists r : Y \to X\) e \(s : Z \to Y\) tale che \({(Y, f, s, r, g)}\) è un biprodotto di \(X \) e \(Z\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}[Buona definizione]
+    Per dualità basta dimostrare che \(1. \iff 3.\). Inoltre \(
+    3. \implies 1.\) è ovvia, dunque dimostriamo solo \(1. \implies 3.\).
+
+    Sia \(h:= 1_Y - f \circ r : Y \to Y\). Allora \(h \circ f = f - f \circ
+    \underbrace{r \circ f}_{1_X} = 0\). Allora
+    \[g = \mathrm{coker}f \implies \exists !\, s : Z \to Y : h = s \circ g
+    \implies 1_Y = s \circ g + f \circ r \]
+    Dunque resta da dimostrare che \(g \circ s = 1_Z\). Infatti \(g \circ s \circ g = g \circ h = g - g \circ f \circ r = g = 1_Z \circ g\) e \(g\) è epimorfismo, dunque \(g \circ s = 1_Z\).
+\end{proof}
+
+\begin{definition}{Categoria semisemplice}
+    Una categoria abeliana \(\mathcal{A}\) è detta \emph{semisemplice} se tutte le
+    successioni esatte corte di \(\mathcal{A}\) si spezzano 
+\end{definition}
+
+\begin{example}{}
+    \(A\mathtt{-Mod}\) è semisemplice se e solo se \(A\) è semisemplice.
+\end{example}
 
 
