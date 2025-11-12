@@ -2327,7 +2327,7 @@ Equivalentemente il seguente diagramma commuta:
     \]
 \end{proof}
 
-\begin{proposition}{}
+\begin{proposition}{}\label{prop:equal_mono}
     Sia \(\mathcal{C}\) una categoria. Allora ogni
     \emph{equalizzatore}/\emph{coequalizzatore} in \(\mathcal{C}\) è un
     \emph{mono}/\emph{epi}morfismo in \(\mathcal{C}\).
@@ -2359,6 +2359,10 @@ Equivalentemente il seguente diagramma commuta:
     Una categoria \emph{abeliana} è una categoria preabeliana in cui ogni
     monomorfismo è un nucleo e ogni epimorfismo è un conucleo
 \end{definition}
+\begin{remark}{}
+    Per la proposizione~\ref{prop:equal_mono} il viceversa vale sempre.
+\end{remark}
+
 \begin{example}{}
     \(A\mathtt{-Modl}\) è abeliana \(\forall A\) anello.
 
@@ -2563,31 +2567,30 @@ Equivalentemente il seguente diagramma commuta:
               \implies f = \mathrm{im}f \circ iso
             \]
             cioè \(f\,``="\, \mathrm{im}f\) è un nucleo
-        \item[\(\implidby \)] \(s{(f)}\) è isomorfismo se e solo se \(
+        \item[\(\impliedby \)] \(s{(f)}\) è isomorfismo se e solo se \(
             s{(f)}\) è mono e epi. Per dualità basta dimostrare che \(s{(f)}\) è mono, che è vero se \(f'\) è mono. Dunque dimostreremo che \(f'\) è mono.
 
             Sia \(g : Z \to \mathrm{Coim}f\) tale che \(f' \circ g = 0\), devo
             dimostrare che \(g=0\).
 
-            \[
-\begin{tikzcd}
+            \[\begin{tikzcd}
 	{\mathrm{Ker}f} & X & Y & {\mathrm{Coker}f} \\
 	W & {\mathrm{Coim}f} & {\mathrm{Im}f} \\
-	& Z & {\mathrm{Coker}h} & {\mathrm{Coker}g}
-	\arrow["{\mathrm{ker}f}", tail, from=1-1, to=1-2]
+	Z & {\mathrm{Coker}h} & {\mathrm{Coker}g}
+	\arrow["{{\mathrm{ker}f}}", tail, from=1-1, to=1-2]
 	\arrow["f", from=1-2, to=1-3]
-	\arrow["{{\mathrm{coim}f}}"', two heads, from=1-2, to=2-2]
-	\arrow["{\mathrm{coker}f}", two heads, from=1-3, to=1-4]
-	\arrow["{h'}", dashed, from=2-1, to=1-1]
-	\arrow["h", from=2-1, to=2-2]
-	\arrow["{{f'}}", dashed, from=2-2, to=1-3]
-	\arrow["{{s(f)}}", dashed, from=2-2, to=2-3]
-	\arrow["{\mathrm{coker}g}"{description}, shift left, from=2-2, to=3-4]
-	\arrow["{{\mathrm{im}f}}", tail, from=2-3, to=1-3]
-	\arrow["g", from=3-2, to=2-2]
-	\arrow["q"{description}, dashed, from=3-3, to=2-2]
-	\arrow["{=}"{description}, draw=none, from=3-3, to=3-4]
-	\arrow["{f''}"', curve={height=6pt}, dashed, from=3-4, to=1-3]
+	\arrow["{{{\mathrm{coim}f}}}"{description}, two heads, from=1-2, to=2-2]
+	\arrow["{{\mathrm{coker}f}}", two heads, from=1-3, to=1-4]
+	\arrow["{{h'}}", dashed, from=2-1, to=1-1]
+	\arrow["h", from=2-1, to=1-2]
+	\arrow["{{{f'}}}", dashed, from=2-2, to=1-3]
+	\arrow["{{{s(f)}}}", dashed, from=2-2, to=2-3]
+	\arrow["{\mathrm{coker}g}"{description}, from=2-2, to=3-3]
+	\arrow["{{{\mathrm{im}f}}}", tail, from=2-3, to=1-3]
+	\arrow["g", from=3-1, to=2-2]
+	\arrow["q", dashed, from=3-2, to=2-2]
+	\arrow["{=}"{description}, draw=none, from=3-2, to=3-3]
+	\arrow["{f''}"', curve={height=18pt}, dashed, from=3-3, to=1-3]
 \end{tikzcd}\]
     ma \(f' \circ g = 0 \), quindi \(\exists !\, f'' : \mathrm{Coker}g \to Y\)
     tale che \(f'= f'' \circ \mathrm{coker}g\).
@@ -2644,13 +2647,14 @@ Equivalentemente il seguente diagramma commuta:
 \end{tikzcd}\) 
 \end{definition}
 \begin{remark}{}
-    Sia \(\mathcal{C}_X\) la sottocategoria di \(\mathrm{Mor}{(\mathcal{C})}\) con oggetti i mono
+    Sia \(\mathcal{C}'_X\) la sottocategoria di \(\mathrm{Mor}{(\mathcal{C})}\) con oggetti i mono
     con codominio \(X\). Sia ora
     \[
-      \mathcal{C}'_X{({(Y \overset{i}{\to }X)}, {(Y' \overset{i}{\to }X)})} := \{t \in \mathcal{C}{(Y, Y')} : i' \circ t = i\} 
-    \]
+      \mathcal{C}'_X{({(Y \overset{i}{\rightarrowtail  }X)}, {(Y' \overset{i'}{\rightarrowtail  }X)})} := \{t \in \mathcal{C}{(Y, Y')} : i' \circ t = i\} 
+    \] % NOTE: perché C'_X e non C_X ??
+
     Inoltre \(t\) è tale che \(i' \circ t = i\) è mono, dunque \(t\) è mono.
-    Allora \(i'\) è mono, quindi \(t\) è unico, quindi \(\mathcal{C}'_X\) è un
+    Inoltre \(t\), se esiste, è unico, quindi \(\mathcal{C}'_X\) è un
     preordine.
 
     Una relazione di preordine induce una relazione d'ordine sulle classi di
@@ -2663,13 +2667,13 @@ Equivalentemente il seguente diagramma commuta:
 \end{remark}
 \begin{example}{}
     Sia \(f : X \to 
-    Y\) un monomorfismo in una categoria abeliana. Allora \(f = \mathrm{im}{(f)}\) come sottoggetti di \(X\).
+    Y\) un monomorfismo in una categoria abeliana. Allora \(f = \mathrm{im}{(f)}\) come sottoggetti di \(Y\). % NOTE: corretto io 'sottoggetti di X' in 'sottoggetti di Y'
 \end{example}
 \begin{definition}{Complesso}
     \(X \overset{f}{\to } Y \overset{g}{\to } Z\) in una categoria preadditiva è
     un \emph{complesso} se \(g \circ f = 0\) 
 \end{definition}
-\begin{remark}{}
+\begin{proposition}{}
     In \(\mathcal{A}\) abeliana,
     \[\begin{tikzcd}
 	X & Y & Z \\
@@ -2684,29 +2688,37 @@ Equivalentemente il seguente diagramma commuta:
     \[
       g \circ f = 0 \iff \exists (!)\, t : \mathrm{Im} f \to \mathrm{Ker}g \text{ t.c. } \mathrm{im}f = \mathrm{ker}g \circ t
     \]
+\end{proposition}
 
-    Infatti \(\impliedby\) è vero perché
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\impliedby \)]
     \[
-        g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f = \underbrace{g \circ \mathrm{ker}g}_0 \circ t \circ \underbrace{\mathrm{coim}f}_0
+        g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f = \underbrace{g \circ \mathrm{ker}g}_0 \circ t \circ \mathrm{coim}f = 0
     \]
-    e viceversa
-    \[
+    \item[\(\implies \)] \[
       0 = g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f \,, \mathrm{coim}f \text{ epi} \implies g \circ \mathrm{im}f = 0
     \]
     da cui \(\exists ! \, t : \mathrm{Im}f \to \mathrm{Ker}g\) tale che
-    \(\mathrm{im}f = \mathrm{ker}g \circ t\).
+    \(\mathrm{im}f = \mathrm{ker}g \circ t\) per la proprietà universale del
+    nucleo.
+\end{itemize}
+\end{proof}
+\begin{remark}{}
+    In un complesso, esiste sempre tale \(t\), ma non necessariamente è un
+    isomorfismo
 \end{remark}
 
-\begin{definition}{}
+\begin{definition}{Successione esatta}
     \(X \overset{f}{\to } Y \overset{g}{\to } Z\) complesso in una categoria
-    abeliana è \emph{esatta} se \(t : \mathrm{Im}f \to \mathrm{Ker}g \) tale che
+    abeliana è detta successione \emph{esatta} se \(t : \mathrm{Im}f \to \mathrm{Ker}g \) tale che
     \(\mathrm{im}f = \mathrm{ker}g \circ t\) è isomorfismo (ossia \(\mathrm{Im}f = \mathrm{Ker}g\) come sottoggetti di \(Y\))
 \end{definition}
 
 \begin{remark}{}
 \[\begin{tikzcd}
 	X & Y & Z \\
-	{\mathrm{Coker}f} && {\mathrm{Im}g}
+	{\mathrm{Coker}f} && {\mathrm{Coim}g}
 	\arrow["f", from=1-1, to=1-2]
 	\arrow["g", from=1-2, to=1-3]
 	\arrow["{\mathrm{coker}f}"'{pos=0.9}, from=1-2, to=2-1]
@@ -2715,28 +2727,28 @@ Equivalentemente il seguente diagramma commuta:
 	\arrow["{\mathrm{im}g}"', tail, from=2-3, to=1-3]
 \end{tikzcd}\]
    \[
-     g \circ f \mathrm{iso} \iff \exists (!) t : \mathrm{coim}g \circ t = \mathrm{coker}f
-   \] 
+     g \circ f = 0 \iff \exists (!) t : \mathrm{coim}g \circ t = \mathrm{coker}f
+   \] % NOTE: 'g o f iso' cambiato in 'g o f = 0'
    e la successione è esatta se e solo se \(
    t\) è isomorfismo.
 \end{remark}
 
-\begin{proposition}{}
-\begin{enumerate}[label = \arabic*.]
+\begin{proposition}{} \(\) 
+\begin{enumerate}[label = \arabic*.] 
     \item \(0 \to X \overset{f}{\to } Y\) è esatta \(\iff\) \(\mathrm{Ker}f = 0\) \(\iff f \) mono.
-    \item \(X \overset{f}{->} Y \to 0\) è esatta \(\iff \mathrm{Coker}f = 0 \iff f\) epi
+    \item[\(1^{op}\).] \(X \overset{f}{\to} Y \to 0\) è esatta \(\iff \mathrm{Coker}f = 0 \iff f\) epi
     \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z\) è esatta (in \(X\) e \(Y\)) \(\iff f = \mathrm{ker}g\)
-    \item[3'] \(X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta \(\iff g = \mathrm{coker}f\)
+    \item[\(2^{op}\).] \(X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta \(\iff g = \mathrm{coker}f\)
     \item \(\forall f : X \to Y\) la successione \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \overset{f}{\to} Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta. In particolare se \(f\) è mono, allora \(0 \to X \overset{f}{\to } Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta e \(f\) epi, dunque \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \to Y \to 0\) è esatta
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}{}
-    A quanto pare l'unica non ovvia è la 3.     
+    A quanto pare l'unica non ovvia è la 2.
     \begin{itemize}
         \item[\(\implies \)] Se la successione è esatta in \(X\) allora \(f\) è
             mono, dunque \(f = \mathrm{im}f\). Se la successione è esatta in \(Y\) allora \(\mathrm{im}f = \mathrm{ker}g \implies f = \mathrm{ker}g\) 
-        \item[\(\impliedby \)] Se \(f = \mathrm{ker}g \implies f\) mono, dunque successione
+        \item[\(\impliedby \)] Se \(f = \mathrm{ker}g\), allora \(f\) è mono, dunque successione
     esatta in \(X\). Ma quindi \((\mathrm{ker}f) = f = \mathrm{im}f\) e dunque esatta in \(Y\) 
     \end{itemize} 
 \end{proof}
