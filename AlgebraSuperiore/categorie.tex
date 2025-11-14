@@ -2787,4 +2787,269 @@ Equivalentemente il seguente diagramma commuta:
     \(A\mathtt{-Mod}\) è semisemplice se e solo se \(A\) è semisemplice.
 \end{example}
 
+\begin{definition}{Funtore esatto}
+    Un funtore \(F : \mathcal{A} \to \mathcal{B}\) tra categorie abeliane si
+    dice \emph{esatto} a \emph{sinistra}/\emph{destra} se \(F\) è additivo e
+    preserva le successioni esatte rispettivamente della forma \(0 \to X \to Y \to Z\) o della forma 
+    \(X \to Y \to Z \to 0\).
+\end{definition}
 
+\begin{remark}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} \(\iff\) \(F\) è additivo
+    e preserva i \emph{nuclei}/\emph{conuclei} \(\iff\) \(F\) preserva i
+    \emph{limiti}/\emph{colimiti} finiti.
+\end{remark}
+
+Usando l'osservazione si potrebbe definire anche \(F : \mathcal{C} \to \mathcal{D}\)
+esatto a \emph{sinistra}/\emph{destra} se \(\mathcal{C}\) è finitamente
+\emph{completa}/\emph{cocompleta} e \(F\) preserva i
+\emph{limiti}/\emph{colimiti}
+
+\begin{definition}{}
+    \(F : \mathcal{A} \to \mathcal{B}\) tra categorie abeliane è detto
+    \emph{esatto} se lo è sia a sinistra che a destra.
+\end{definition}
+
+\begin{remark}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} se \(F\) preserva i
+    \emph{mono}/\emph{epi}morfismi. Infatti se \(f : X \to Y\) è mono, allora
+    esiste una successione esatta \(0 \to X \overset{f}{\to } Y \to Z\) 
+\end{remark}
+
+\begin{proposition}{}\label{prop:fun_exact_iff}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    abeliane. Allora sono equivalenti le seguenti affermazioni:
+\begin{enumerate}[label = \roman*)]
+    \item \(F\) è esatto a \emph{sinistra}/\emph{destra}
+    \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta in
+        \(\mathcal{A} \implies \) 
+        \[\(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \quad / \quad F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \to 0\]
+        è esatta in \(\mathcal{B}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+    \(i) \implies ii)\) è ovvia. Si supponga ora che valga \(ii)\). Allora sia
+    \(0 \to X \overset{f}{\to} Y \overset{g}{\to } Z\) esatta in \(\mathcal{A}\). si decomponga \(g = i \circ g'\) con \(i\) mono e \(g\) epi, dunque \(Y \overset{g'}{\twoheadrightarrow } Z'
+    \overset{i}{\rightarrowtail } Z\). Allora \(\mathrm{ker}g' = \mathrm{ker}g\) perché \(i\) è mono e \(\mathrm{ker}g = f\), dunque \( 0 \to X \overset{f}{\to } Y \overset{g'}{\to } Z' \to 0\) è esatta. Segue che per ipotesi \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g')}}{\to} F{(Z')}\) è esatta.
+
+    Poiché ora \(i\) è mono, allora \(F{(i)}\) è mono e dunque \(F{(f)} = \mathrm{ker}{(F{(g')})} = \mathrm{ker}{(F{(i)} \circ F{(g')})} = \mathrm{ker}{(F{(g)})}\).
+
+    Ne consegue che \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta.
+\end{proof}
+
+
+\begin{proposition}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categoria
+    abeliane. Allora le seguenti sono equivalenti:
+\begin{enumerate}[label = \roman*)]
+    \item \(F\) preserva le successioni esatte (della forma \(X \to Y \to Z\)).
+    \item \(F\) è esatto.
+    \item \(F\) è esatto a sinistra e preserva gli epimorfismi.
+    \item[iii')] \(F\) è esatto a destra e preserva i monomorfismi.
+    \item \(F\) preserva le successioni esatte corte.
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+    Molte implicazioni sono ovvie, in particolare è evidente che \(i) \implies ii) \implies iii) \implies iv)\) e \(ii) => iii') \implies iv)\). Inoltre \(iv) \implies ii)\) per la proposizione~\ref{prop:fun_exact_iff}.
+    Resta da dimostarre che \(ii) \implies i)\).
+
+    Sia \(X \overset{f}{\to } Y \overset{g}{\to } Z\) esatta in \(\mathcal{A}\).
+
+    Allora \(f = f' \circ p\) con \(p\) epi e \(f'\) mono. Inoltre \(\mathrm{im}f = \mathrm{ker}g\) mma \(\mathrm{im}f = \mathrm{ker}{(\mathrm{coker}{(f)})}\) e poiché \(p\) è epi, allora \(\mathrm{coker}f = \mathrm{coker}f' \implies \mathrm{im}f = \mathrm{im}f'\).
+    Poiché \(f'\) è mono, allora \(\mathrm{im}f' = f'\) e dunque \(\mathrm{ker}g = f'\). Dunque \(0 \to X' \overset{f'}{\to } Y \overset{g}{\to } Z\) è esatta e \(F\) è esatto (a sinistra). Segue che \(0 \to F{(X')} \overset{F{(f')}}{\to } F{(X)} \to F{(Y)} \overset{F{(g)}}{\to } F{(Z)}\) è esatta. Ma \(
+    F{(f)} = F{(f')} \circ F{(p)}\) e \(F{(p)}\) è epi, essendo \(F\) esatto a
+    destra, dunque \(\mathrm{coker}{(F{(f)})} = \mathrm{coker}{(F{(f')})} \implies \mathrm{im}{(F{(f)})} \implies \mathrm{im}{(F{(f')})} = \mathrm{ker}{(F{(g)})} \implies \) 
+    \[
+      F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to } F{(Z)}
+    \]
+    è esatta.
+\end{proof}
+
+\begin{definition}{}
+    \(F: \mathcal{A} \to \mathcal{B}\) funtore tra categorie abeliane è esatto
+    al centro se \(F\) è additivo e per ogni successione esatta \(0 \to X\overset{f}{\to} Y \overset{g}{\to} Z \to 0\) in \(\mathcal{A}\), allora \(F{(X)} \overset{F{(f)}}{\to} F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta in \(\mathcal{B}\).
+\end{definition}
+\begin{corollary}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} \(\iff\) \(F\) è esatto al
+    centro e preserva i \emph{mono}/\emph{epi}morfismi.
+\end{corollary}
+
+\begin{remark}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    abeliane. Allora \(F\) preserva le successioni esatte corte che si spezzano.
+    Dunque se \(\mathcal{A}\) è semisemplice allora \(F\) è esatto.
+\end{remark}
+
+\begin{example}{}
+    Sia \(A \to B\) un omomorfismi di anelli. Allora il funtore di restrizione
+    degli scalari \(B\mathtt{-Mod} \to A\mathtt{-Mod}\) è esatto. 
+\end{example}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) è abeliana e \(\mathcal{A}' \subseteq \mathcal{A} \)
+    sottocategoria piena è chiusa per (co)prodotti finiti, nuclei e conuclei
+    (dunque \(\mathcal{A}'\) è additiva), allora il funtore di inclusione \(\mathcal{A}' \to \mathcal{A}\) è esatto.
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{C}\) una categoria (piccola) e \(\mathcal{A}\) una categoria
+    abeliana (quindi \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è abeliana).
+
+    Allora \(\forall X \in \mathcal{C}\) il funtore di valutazione in \(X\)
+    \begin{align*}
+        \mathrm{ev}_X: \mathtt{Fun}{(\mathcal{C}, \mathcal{A})} &\longrightarrow \mathcal{A} \\
+        F &\longmapsto \mathrm{ev}_X(F) = F{(X)}\\
+        \alpha &\longmapsto \mathrm{ev}_X(\alpha) = \alpha_X
+    \end{align*}
+    è esatto
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) una categoria abeliana e \(X \in \mathcal{A}\). Allora i
+    funtori \(\mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab}\) e \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to \mathtt{Ab}\) sono esatti a sinistra (e più in generale preservano i limiti).
+
+    \begin{proof}[Dim. \(\mathcal{A}{(X, -)}\) esatto a sinistra (assumendo
+        additivo)]
+        \(0 \to Y' \overset{f}{\to}  Y \overset{g}{\to}  Y'' {(\to 0)}\) è
+        esatta in \(\mathcal{A}\). Allora \(0 \to \mathcal{A}{(X, Y')} \overset{f_*}{\to} \mathcal{A}{(X, Y)} \overset{g_*}{\to} \mathcal{A}{(X, Y'')}\) è esatta in \(\mathtt{Ab}\).
+
+        Infatti \(g \circ f = 0 \implies g_* \circ f_* = {(g \circ f)}_* = 0_* =
+        0\) e dato \(h \in \mathcal{A}{(X, Y)}\) tale che \(g_*{(h)} = 0\), devo
+        dimostrare che \(\exists ! h' \in \mathcal{A}{(X, Y')}\) tale che \(h =
+        f_*{(h')}\). Questo è vero perché \(0 = g_*{(h)} = g \circ h\). E dunque 
+\begin{tikzcd}
+	{Y'} & Y & {Y''} \\
+	& X
+	\arrow["{f=\mathrm{ker}g}", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{h'}", dashed, from=2-2, to=1-1]
+	\arrow["h", from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=1-3]
+\end{tikzcd}
+    e per la proprietà universale del \(\mathrm{ker}\) tale \(h'\) esiste unico.
+    \end{proof}
+
+    In generale \(\mathcal{A}{(X, -)}\) e \(\mathcal{A}{(-, X)}\) non sono
+    esatti a destra (ma lo sono se \(\mathcal{A}\) è semisemplice). In particolare, se \( 0 \to Y' \overset{f}{\to}  Y \overset{g}{\to}  Y'' \to 0\) non si spezza, allora \(\mathcal{A}{(Y'', _)}\) non è esatto a destra, perché \(g\) epi in \(\mathcal{A}\) ma \(g_*\) non è epi (suriettivo) in \(\mathtt{Ab}\). Infatti \(g_* : \mathcal{A}{(Y'', Y)} \to \mathcal{A}{(Y'', Y'')})\) è tale che \(\mathrm{id}_{Y''} \not\in \mathrm{im}{(g_*)}\). Analogamente \(\mathcal{A}{(-, Y')}\) non è esatto a destra.
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità non campo. Consideriamo \(F : A\mathtt{-Mod} \to A\mathtt{-Mod}\) dato da \(F{(M)} ={M}/{T{(M)}}\) e \(
+    F{(f : M\to N)} = \overline{f} : M / T{(M)} \to N / T{(N)}\) omomorfismo
+    indotto. Allora \(F\) è additivo (esercizio) e preserva mono e epi ma \textbf{non è esatto al centro} (e dunque neanche a sinistra o destra).
+
+    Infatti se \(f\) è suriettivo, allora anche \(\overline{f}\) è suriettivo e se \(f\) è iniettivo, allora \(\overline{f}\) è iniettivo poiché \(\overline{x} \in \mathrm{ker}\overline{f} \implies f{(x)} \in T{(N)} \implies \exists 0 \neq a \in A : 0 = a f{(x)} = f{(ax)} \implies ax = 0 \) per iniettività di \(f\). Segue che quindi \(x \in T{(M)} \implies \overline{x} = \overline{0}\).
+
+    Tuttavia nono è esatto al centro, infatti se \(
+    0 \neq I \subsetneq A\) è ideale, allora \(
+    0 \to I \overset{i}{\to} A \overset{\pi}{\to} A / I \to 0\) è esatta in \(A\mathtt{-Mod}\), ma \(T{(I)} = T{(A)} = 0 \) e \(T{(A / I)} = A / I\), dunque \(F{(I)} = I\), \(F{(A)}=A\) e \(F{(A / I)} = 0\), per cui si ottiene \(I \overset{i}{\to} A \overset{F{(\pi)}}{\to} 0\) che \textbf{non} è esatta.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) esatto e fedele tra categorie
+    abeliane. Sia \(X \overset{f}{\to} Y \overset{g}{\to} Z\) una successione
+    (qualunque) in \(\mathcal{A}\) tale che \(F{(X)} \overset{F{(f)}}{\to} F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta in \(\mathcal{B}\), allora \(X \overset{f}{\to} Y \overset{g}{\to}  Z\) è esatta in \(\mathcal{A}\)
+\end{proposition}
+
+\begin{note}[zione]
+    Sia \(X' \subseteq X\) sottoggetto di \(X\). Allora indico con \(X / X'\) un
+    conucleo di \(X' \rightarrowtail X\) 
+\end{note}
+
+\begin{proof}{}
+    \(F{(g \circ f)} = F{(g)} \circ F{(f)} = 0 \overset{\text{additivo}}{=}F{(0)}\), quindi \(
+    g \circ f = 0\) poiché \(F\) è fedele, e dunque \(
+    X \overset{f}{\to} Y \overset{g}{\to} Z\) è un complesso e quindi \(\mathrm{Im}f \subseteq \mathrm{Ker}g \) come sottoggetti.
+    Devo dimostrare quindi che \(C := \mathrm{Ker}g / \mathrm{Im}f = 0\). Poiché
+    \(F\) preserva i nuclei, \(F{(C)} = F{(\mathrm{Ker}g)} / F{(\mathrm{Im}f)} = \mathrm{Ker}{(F{(g)})} / \mathrm{Im}{(F{(f)})} = 0\) perché la successione in \(\mathcal{B}\) è esatta. Segue dunque che \(F{(1_C)} = 0 = F{(0 : C \to C)}\) e \(F\) è fedele, dunque \(1_C = 0\), ossia \(C=0\) è l'oggetto nullo.
+\end{proof}
+
+\begin{theorem}{Freyd - Mitchell}
+    Sia \(\mathcal{A}\) una categoria abeliana (piccola). Allora esiste un
+    anello \(A\) e un funtore esatto pienamente fedele \(\mathcal{A} \to A\mathtt{-Mod}\) 
+\end{theorem}
+\begin{corollary}{}\label{cor:caccia_diag_amod}
+    Le dimostrazioni di caccia al diagramma in \(\mathcal{A}\) abeliana si
+    possono fare in \(A\mathtt{-Mod}\)
+\end{corollary}
+In realtà il teorema precedente si può utilizzare anche se \(\mathcal{A}\) non è
+piccola, perché tanto il diagramma solitamente prende pochi oggetti
+
+\begin{lemmao}{del Serpente}
+    Il seguente diagramma con righe esatte
+\[\begin{tikzcd}
+	{(0} & {)X'} & X & {X''} & 0 \\
+	0 & {Y'} & Y & {Y''(} & {0)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["i", from=1-2, to=1-3]
+	\arrow["{f'}"', from=1-2, to=2-2]
+	\arrow["p", from=1-3, to=1-4]
+	\arrow["f"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["j", from=2-2, to=2-3]
+	\arrow["q", from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+    induce una successione esatta
+    \[
+        (0\to ) \mathrm{Ker}f' \to \mathrm{Ker}f \to \mathrm{Ker}f'' \overset{d}{\to} \mathrm{Coker}f' \to \mathrm{Coker}f \to \mathrm{Coker}f'' (\to 0)
+    \]
+\end{lemmao}
+\begin{proof}{}
+    Corollario~\ref{cor:caccia_diag_amod}. Se invece volessimo dimostrarlo
+    esplicitamente usando solo elementi categorici, si può dimostrare
+    utilizzando prodotti fibrati difficili perché non si può usare la proprietà
+    universale dei ker e coker banalmente (notare che \(d\) è dal lato sbagliato
+    per poterlo fare)
+\end{proof}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è una categoria (pre)abeliana, allora ci sono i funtori
+    \(\mathrm{Ker}, \mathrm{Coker} : \mathrm{Mor}{(\mathcal{A})} \to \mathcal{A}\) definita nel
+    modo ovvio per \(\mathrm{Ker}{(f)}\) e per ogni morfismo \\\(\begin{tikzcd}
+	{X'} & X \\
+	{Y'} & Y
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["{f'}", from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{j}", from=2-1, to=2-2]
+\end{tikzcd} : f \to f'\) in \(\mathrm{Mor}{(\mathcal{A})}\), allora \(\mathrm{Ker}{({(i, j)})} := i'\) tale che \(\mathrm{Ker}f \circ i' = i \circ \mathrm{Ker}f'\) o equivalentemente (includendo anche la definizione di \(\mathrm{Coker}\)) il seguente diagramma commuta:
+\[ \begin{tikzcd}
+	{\mathrm{Ker}(f')} & {\mathrm{Ker}(f)} \\
+	{X'} & X \\
+	{Y'} & Y \\
+	{\mathrm{Coker}f'} & {\mathrm{Coker}f}
+	\arrow["{i'}", from=1-1, to=1-2]
+	\arrow["{\mathrm{ker}f'}"', from=1-1, to=2-1]
+	\arrow["{\mathrm{ker}f}", from=1-2, to=2-2]
+	\arrow["i", from=2-1, to=2-2]
+	\arrow["{f'}", from=2-1, to=3-1]
+	\arrow["f", from=2-2, to=3-2]
+	\arrow["j", from=3-1, to=3-2]
+	\arrow["{\mathrm{coker}f'}"', from=3-1, to=4-1]
+	\arrow["{\mathrm{coker}f}", from=3-2, to=4-2]
+	\arrow["{j'}", from=4-1, to=4-2]
+\end{tikzcd} \]
+    e per il lemma del serpente \(\mathrm{Ker}\) è esatto a sinistra e \(\mathrm{Coker}\) è esatto a destra.
+    Non sono però esatti, perché se prendo \(X' = Y'' = 0\), \(p = f\), \(j =
+    1_X\) e \(X \neq 0\), allora ottengo la successione
+    \[ \begin{tikzcd}
+	0 & 0 & 0 & X & X & 0 & 0 \\
+	&&& {\mathrm{Ker}f''} & {\mathrm{Coker}f'}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\cong", from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-4, to=1-4]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-5, to=1-5]
+\end{tikzcd} \]
+\end{remark}
+
+
+
+
+ 
