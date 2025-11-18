@@ -1,0 +1,283 @@
+\chapter{Moduli (reprise)}
+\begin{definition}{Bimodulo}
+    Siano \(A, B\) anelli. Allora un \({(A,B)}\)\emph{-bimodulo} è un gruppo abeliano
+    \({(M, +)}\) con struttura di \(A\)-modulo sinistro e di \(B\)-modulo destro
+    tale che \( {(ax)}b = a{(xb)}\) per ogni \(a \in A \), \(b \in B\) e \(x \in
+    M\).
+
+    Se \(A=B\) allora si dice \(A\)-bimodulo invece che \({(A,A)}\)-bimodulo.
+\end{definition}
+\begin{remark}{}
+    Un \({(A,B)}\)-bimodulo è anche un \({(B^{op}, A^{op})}\)-bimodulo. In
+    particolare
+    \[
+      A\text{-bimodulo} = A^{op}\text{-bimodulo}
+    \]
+\end{remark}
+\begin{example}{}
+    \(A\) come anello è un \(A\)-bimodulo
+\end{example}
+\begin{example}{}
+    Se \(A\) è commutativo, allora se \(M\) è \(A\)-modulo è un \(A\)-bimodulo,
+    con la proprietà aggiuntiva che \(ax = xa\) (più in generale se vale questa
+    proprietà si dice che il bimodulo è \emph{simmetrico})
+\end{example}
+\begin{example}{}
+    Se \(B\) è una \(A\)-algebra e \(M\) un \(B\)-modulo
+    \emph{sinistro}/\emph{destro}, allora \(M\) è un
+    \({(B,A)}/{(A,B)}\)-bimodulo.
+
+    Di conseguenza, \(\forall A\) anello e \(\forall M\) \(A\)-modulo
+    \emph{sinistro}/\emph{destro}, \(M\) è un
+    \({(A,\mathbb{Z})}/{(\mathbb{Z},A)}\)-bimodulo.
+\end{example}
+
+\begin{definition}{Omomorfismo di bimoduli}
+    Un omomorfismo di \({(A,B)}\)-bimoduli è \(f : M \to N\) omomorfismo sia di
+    \(A\)-moduli sinistri che di \(B\)-moduli destri.
+\end{definition}
+
+Si ottiene che la categoria \(A\mathtt{-Mod-}B\) degli \({(A,B)}\)-bimoduli è
+una categoria abeliana.
+
+
+\begin{proposition}{}
+    Sia \(M \in A\mathtt{-Mod-}B\) e \(N \in A\mathtt{-Mod-}C\). Allora
+    \(\mathrm{Hom}_A{(M,N)}\) è un \({(B, C)}\)-bimodulo con 
+    \[
+      {(bf)}{(x)} := f{(xb)} \quad ; \quad {(fc)}{(x)} := f{(cx)} \quad \forall
+      b \in B, \,\, c \in C,\,\, x \in M,\,\, f \in \mathrm{Hom}_A{(M, N)}
+    \]
+\end{proposition}
+\begin{proof}{}
+    \(bf\) è \(A\)-lineare, infatti \({(bf)}{(ax)} = a {(bf)}{(x)}\) per ogni
+    \(a \in A\) perché \({(bf)}{(ax)} = f{({(ax)}b)} = f{(a{(xb)})} = af{(xb)} = a
+    {(bf)}{(x)}\).
+    Analogamente \(fc\) è \(A\)-lineare (lasciato per esercizio). %TODO eser
+
+    Devo dimostrare in particolare che \({(bb')}{(f)} = b{(b'f)}\) e \(f{(c c')}
+    = {(fc)}c'\). Sono entrambe vere perché, \(\forall x \in M\) 
+    \[
+    {({(b b')}{(f)})}{(x)} = f{(x{(b b')})} = f{({(xb)}b')} = {(b'f)}{(xb)} =
+    {(b{(b'f)})}{(x)}
+    \]
+    e analogamente l'altra (lasciata per esercizio). % TODO eser
+
+    Resta da dimostrare che \({(bf)}c = b{(fc)}\). Infatti
+    \[
+      {(b{(fc)})}{(x)} = {(fc)}{(xb)} = f{(xb)}{(c)} = {(bf)}{(x)}c =
+      {({(bf)}c)}{(x)}
+    \]
+\end{proof}
+\begin{corollary}{}
+    Sia \(M \in A\mathtt{-Mod-}B\). Allora si ottengono funtori (additivi) 
+    \begin{align*}
+      \mathrm{Hom}_A {(M, -)}&: A\mathtt{-Mod} \to B\mathtt{-Mod} \\
+      \mathrm{Hom}_A {(-, M)}&: {(A\mathtt{-Mod})}^{op} \to \mathtt{Mod-}B
+    \end{align*}
+\end{corollary}
+\begin{proof}{}
+    resta da dimostrare che \(\forall g : N \to N'\) in \(A\mathtt{-Mod}\),
+    allora \(g_* : \mathrm{Hom}_A{(M, N)} \to \mathrm{Hom}_A{(M,N')}\) definita
+    da \(f \mapsto g \circ f\) e \(g^{*} : \mathrm{Hom}_A{(N', M)} \to
+    \mathrm{Hom}_A{(N, M)}\) definita da \(f' \mapsto f' \circ g\)  sono
+    \(B\)-lineari.
+
+    Dunque vogliamo mostrare che \(g_*{(bf)} = g \circ bf = b{(g \circ f)} =
+    bg_*{(f)}\). Effettivamente \(\forall x \in M\) 
+    \[
+    {(g \circ {(bf)})}{(x)} = g{({(bf)}{(x)})} = g{(f{(xb)})} = {(g \circ
+    f)}{(xb)} = {(b{(g \circ f)})}{(x)}
+    \]
+    e analogamente \(g^{*}\) è \(B\)-lineare (lasciato per esercizio). % TODO eser
+\end{proof}
+
+\begin{example}{}
+    Il funtore \(\mathrm{Hom}_A{(A, -)} : A\mathtt{-Mod} \to A\mathtt{-Mod}\) è
+    isomorfo a \(\mathrm{id}_{A\mathtt{-Mod}} \) con isomorfismo naturale
+    \(\alpha : \mathrm{Hom}_A{(A, -)} \to \mathrm{id}_{A\mathtt{-Mod}} \)
+    definito \(\forall M \in A\mathtt{-Mod}\) da
+    \begin{align*}
+        \alpha_M: \mathrm{Hom}_A{(A, M)} &\longrightarrow M \\
+        f &\longmapsto \alpha_M(f) = f{(1)}
+    \end{align*}
+    so già che \(\alpha_M\) è biunivoca. Resta da dimostrare che è
+    \(A\)-lineare. Questo è vero perché, \(\forall a \in A\) 
+    \[
+      \alpha_M {(af)} = {(af)}{(1)} = f{(1a)} = f{(a1)} = af{(1)} = a\alpha_M {(f)}
+    \]
+    e inoltre se \(g : M \to N\) è \(A\)-lineare, allora il diagramma
+    \[\begin{tikzcd}
+	\mathrm{Hom}_A{(A, M)} & M \\
+	\mathrm{Hom}_A{(A, N)} & N
+	\arrow["{\alpha_M}", from=1-1, to=1-2]
+	\arrow["{g_*}", from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["{\alpha_N}", from=2-1, to=2-2]
+\end{tikzcd} \]
+    commuta.
+    Questo è vero perché \(\forall f \in \mathrm{Hom}_A{(A, M)}\),
+    \(g{(\alpha_M{(f)})} = g {(f{(1)})}\) e \(\alpha_N{(g_*{(f)})} = a_N{(g
+    \circ f)} = {(g \circ f)}{(1)}\) 
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) commutativo, \(B\) una \(A\)-algebra, \(M, N\) \(B\)-moduli.
+    Allora Poiché \(M, N \in B\mathtt{-Mod-}A\), \(\mathrm{Hom}_B{(M, N)}\) è
+    \(A\)-bimodulo simmetrico (ossia tale che \(\forall a \in A\) e \(\forall f
+    \in \mathrm{Hom}_B{(M, N)}\), \({(af)}{(x)} = f{(ax)} = af{(x)}\).
+
+    In particolare se \(M, N\) sono \(A\)-moduli, allora \(\mathrm{Hom}_A{(M,
+    N)}\) è un \(A\)-modulo in questo modo.
+\end{example}
+
+
+\begin{definition}{Prodotto tensoriale}
+    Un \emph{prodotto tensoriale} di \(M \in \mathrm{Mod-}A\) e \(N \in
+    A\mathtt{-Mod}\) è un gruppo abeliano \(T\) con una funzione \(t: M \times N
+    \to T\) che sia \(A\)-bilanciata, cioè \(t\) è \(\mathbb{Z}\)-bilineare e
+    \[
+      t{(xa, y)} = t{(x, ay)} \quad \forall a \in A,\,\, \forall x \in M,\,\,
+      \forall y \in N
+    \]
+    universale per tale proprietà, ossia \(t\) è
+    tale che \(\forall G\) gruppo abeliano e \(\forall f: M \times N \to G\)
+    \(A\)-bilanciata \(\exists ! f' : T \to G\) \(\mathbb{Z}\)-lineare tale che
+    \(f = f' \circ t\) 
+\end{definition}
+
+\begin{proposition}{}
+    Siano \({(T, t)}\) e \({(T', t')}\) due prodotti tensoriali di \(M\) e
+    \(N\). Allora \(\exists ! i : T \to T'\) \(\mathbb{Z}\)-lineare tale che
+    \(t' = i \circ t\) e \(i\) è isomorfismo.
+
+    Inoltre si può prendere \(T := \mathbb{Z}^{{(M \times N)}} / H\). Con
+    leggero abuso di notazione in \(\mathbb{Z}^{{(M \times  N)}}\) indico con
+    \({(x, y)}\) l'elemento della base indicizzato da \({(x, y)} \in M \times
+    N\). Con tale notazione, e \(x, x' \in M\), \(y, y' \in N\) e \(a \in A\) 
+    \[
+        H = \Span{\underbrace{{(x + x', y)} - {(x,y)} -
+        {(x',y)}}_{\text{additività nel primo argomento}}, \underbrace{{(x, y +
+y')} - {(x,y)} - {(x, y')}}_{\text{add. nel secondo arg.}}, \underbrace{{(xa,y)}
+- {(x, ay)}}_{\text{bilanciataggine}}} 
+    \]
+    e 
+    \[
+      t{(x,y)} = {(x,y)} + H
+    \]
+\end{proposition}
+\begin{proof}[Dimostrazione unicità]
+    Per la proprietà universale di \(T, t\), \(\exists ! i \) tale che \(t' = i
+    \circ t\). Analogamente per \(i' : T' \to T\) e come al solito \(i \circ i'
+    = \mathrm{id}_{T'} \) e \(i' \circ i = \mathrm{id}_T\) 
+\end{proof}
+\begin{proof}{Dimostrazione esistenza}
+    \(t\) è \(A\)-bilanciata per definizione di \(T\). Data \(f: M \times N \to
+    G\) \(A\)-bilineare \(\exists ! \tilde{f} : \mathbb{Z}^{{(M \times N)}} \to
+    G\) \(\mathbb{Z}\)-lineare tale che \(\tilde{f}{(x, y)} = f{(x, y)}\) per
+    ogni \(x \in M\) e \(y \in N\).
+
+    Allora \(f\) è \(A\)-bilanciata implica che \(\tilde{f}|_H = 0\) e per il
+    teorema di omomorfismo per gruppi \(\exists ! f' : T \to G\)
+    \(\mathbb{Z}\)-lineare tale che \(\tilde{f} = f' \circ \pi\) (con \(\pi : Z
+    ^{{(M \times N)}} \to T\) la proiezione).
+
+    Abbiamo che \(t = \pi \circ j\), con \(j : M \times N \to \mathbb{Z}^{{(M \times
+    N)}}\) definita da \({(x, y)} \mapsto {(x,y)}\).
+
+    Finalmente si conclude che
+    \[
+      f = \tilde{f} \circ j = f' \circ \pi \circ j = f' \circ t
+    \]
+    e \(f'\) è unica (esercizio). % TODO eser
+\end{proof}
+
+\begin{note}[zione]
+    Si indica \(T\) con \(M \otimes_A N\) e \(t{(x,y)}\) con \(x \otimes y\).
+\end{note}
+\begin{remark}{}
+    \(M \otimes_A N = \Span{x \otimes y : x \in M, y \in N} = \Span{x \otimes y
+    : x \in U, y \in V} \) con \(M = \Span{U} \) e \(N = \Span{V} \). Uno
+    potrebbe pensare che basti prendere \(U\) e \(V\) generatori come
+    \emph{modulo} di \(M\) e \(N\) ma questo in generale non basta e \(U, V\)
+    devono essere generatori di \(M\) e \(N\) come gruppo.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(M \in \mathtt{Mod-}A\) e \(N \in A\mathtt{-Mod}\). Allora la funzione
+    \begin{align*}
+        M \otimes_A N &\to N \otimes_{A^{op}} M \\
+        x \otimes y & \mapsto y \otimes x
+    \end{align*}
+    è ben definita ed è isomorfismo di gruppi
+\end{proposition}
+\begin{proof}{}
+    Bisogna controllare che \begin{align*}
+        f: M \times N &\longrightarrow N \otimes_{A^{op}} M \\
+        {(x,y)} &\longmapsto f({(x,y)}) = y \otimes x
+    \end{align*}
+    sia \(A\)-bilanciata. Lo è perché
+    \[
+      f{(xa, y)} = y \otimes {(xa)} = {(ay)} \otimes x = f{(x, ay)}
+    \]
+    E dunque \(\exists ! f' : M \otimes_A N \to N \otimes_{A^{op}} M\)
+    \(\mathbb{Z}\)-lineare tale che \(f{(x \otimes y)} = y \otimes x\) 
+
+    Immagino che sia per la solita ragione che \(f'\) è \(\mathbb{Z}\)-lineare. % TODO eser
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(f : M \to M'\) in \(\mathtt{Mod-}A\) e \(g: N \to N'\) in
+    \(A\mathtt{-Mod}\). Allora \(f \otimes g : M \otimes_A N \to M' \otimes_A
+    N'\) data da \(x \otimes y \mapsto f{(x)} \otimes g{(y)}\) è (ben definita)
+    e isomorfismo.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\varphi : M \times N \to M' \otimes_A N'\), \({(x,y)} \mapsto
+    f{(x)} \otimes g{(y)}\)  è \(A\)-bilanciata
+    (esercizio). % TODO eser 
+
+    Allora \(\exists ! \varphi ' : M \otimes_A N \to M' \otimes_A N'\)
+    \(\mathbb{Z}\)-lineare tale che \(\varphi'{(x \otimes y)} = f{(x)} \otimes
+    g{(y)}\) 
+\end{proof}
+\begin{corollary}{} Esistono i funtori (additivi) \\
+\begin{minipage}{0.48\textwidth}
+    \begin{align*}
+        M\otimes_A -: A\text{-Mod} &\longrightarrow \text{Ab} \\
+        N &\longmapsto  M \otimes_A N \\
+        (g : N \to N') &\longmapsto \mathrm{id}_M \otimes g
+    \end{align*}
+\end{minipage}
+e
+\hfill
+\begin{minipage}{0.48\textwidth}
+    \begin{align*}
+        - \otimes_A N: \text{Mod-}A &\longrightarrow \text{Ab} \\
+        M &\longmapsto M \otimes_A N \\
+        (f : M \to M') &\longmapsto f \otimes \mathrm{id}_N
+    \end{align*}
+\end{minipage}
+\end{corollary}
+
+\begin{proposition}{}
+    Sia \(M \in B\mathtt{-Mod-}A\), \(N \in A\mathtt{-Mod-}C\). Allora \(M
+    \otimes_A N \in B\mathtt{-Mod-}C\) con \(b{(x \otimes y)} := {(bx)} \otimes
+    y\) e \({(x \otimes y)}c := x \otimes {(yc)}\) 
+\end{proposition}
+\begin{proof}{}
+    Fissato \(b \in B\) devo vedere che la moltiplicazione a sinistra per \(b\)
+    è ben definita. Infatti \(\varphi_b : M \to M\) data da \(x \mapsto bx\) è
+    \(A\)-lineare e \(\varphi_{b*} : M \otimes_A N \to M \otimes_A N\) definita
+    da \(x \otimes y \mapsto {(bx)} \otimes y\) è \(\mathbb{Z}\)-lineare.
+
+    Va visto che \(\forall z \in M \otimes_A N\) e \(\forall b, b' \in B\)
+    allora \({(b b')}z = b{(b' z)}\). Poiché basta verificarlo su un generatore
+    allora basta verificarlo quando \(z = x \otimes y\) e lì è chiaro.
+
+    Analogamente per \(z {(c c')} = {(z c)}c'\) e \({(bz)}c = b{(zc)}\).
+\end{proof}
+
+
+
+

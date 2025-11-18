@@ -2823,7 +2823,7 @@ esatto a \emph{sinistra}/\emph{destra} se \(\mathcal{C}\) è finitamente
     \item \(F\) è esatto a \emph{sinistra}/\emph{destra}
     \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta in
         \(\mathcal{A} \implies \) 
-        \[\(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \quad / \quad F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \to 0\]
+        \[0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \quad / \quad F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \to 0\]
         è esatta in \(\mathcal{B}\).
 \end{enumerate}
 \end{proposition}
@@ -2833,7 +2833,7 @@ esatto a \emph{sinistra}/\emph{destra} se \(\mathcal{C}\) è finitamente
     \(0 \to X \overset{f}{\to} Y \overset{g}{\to } Z\) esatta in \(\mathcal{A}\). si decomponga \(g = i \circ g'\) con \(i\) mono e \(g\) epi, dunque \(Y \overset{g'}{\twoheadrightarrow } Z'
     \overset{i}{\rightarrowtail } Z\). Allora \(\mathrm{ker}g' = \mathrm{ker}g\) perché \(i\) è mono e \(\mathrm{ker}g = f\), dunque \( 0 \to X \overset{f}{\to } Y \overset{g'}{\to } Z' \to 0\) è esatta. Segue che per ipotesi \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g')}}{\to} F{(Z')}\) è esatta.
 
-    Poiché ora \(i\) è mono, allora \(F{(i)}\) è mono e dunque \(F{(f)} = \mathrm{ker}{(F{(g')})} = \mathrm{ker}{(F{(i)} \circ F{(g')})} = \mathrm{ker}{(F{(g)})}\).
+    Poiché ora \(i\) è mono, allora \(F{(i)}\) è mono e dunque \[F{(f)} = \mathrm{ker}{(F{(g')})} = \mathrm{ker}{(F{(i)} \circ F{(g')})} = \mathrm{ker}{(F{(g)})}\]
 
     Ne consegue che \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta.
 \end{proof}
@@ -3036,20 +3036,19 @@ piccola, perché tanto il diagramma solitamente prende pochi oggetti
     e per il lemma del serpente \(\mathrm{Ker}\) è esatto a sinistra e \(\mathrm{Coker}\) è esatto a destra.
     Non sono però esatti, perché se prendo \(X' = Y'' = 0\), \(p = f\), \(j =
     1_X\) e \(X \neq 0\), allora ottengo la successione
-    \[ \begin{tikzcd}
+
+\[ \begin{tikzcd}
 	0 & 0 & 0 & X & X & 0 & 0 \\
 	&&& {\mathrm{Ker}f''} & {\mathrm{Coker}f'}
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-6, to=1-7]
 	\arrow["\cong", from=1-4, to=1-5]
 	\arrow[from=1-5, to=1-6]
 	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-4, to=1-4]
 	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-5, to=1-5]
 \end{tikzcd} \]
+
 \end{remark}
 
-
-
-
- 
