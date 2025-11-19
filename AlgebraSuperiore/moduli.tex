@@ -355,17 +355,31 @@ e
         \arrow["{f^*}"', from=2-2, to=2-1]
         \arrow["{G(g)_*}", from=2-2, to=2-3]
     \end{tikzcd}\]
-    ossia \(\forall h \in \mathcal{D}{(F{(X)}, Y)}\), \(\varphi {(g \circ h)} =
-    G{(g)} \circ \varphi {(h)}\) e \(\varphi {(h \circ F{(f)})} = \varphi {(h)}
-    \circ f\) 
+    ossia \(\forall h \in \mathcal{D}{(F{(X)}, Y)}\), \[\varphi_{X, Y'}  {(g \circ h)} =
+    G{(g)} \circ \varphi_{X, Y}  {(h)} \text{ e } \varphi _{X',Y} {(h \circ F{(f)})}
+    = \varphi _{X, Y} {(h)}
+    \circ f\] 
 \end{definition}
 
 \begin{remark}{}
     Una \(\varphi \) come sopra definisce una trasformazione naturale
-    (isomorfismo) \(\mathcal{D}{(F{(-)}, =)} \to \mathcal{C}{(-, G{(=)})}\) tra
+    (isomorfismo) \(\mathcal{D}{(F{(-)}, =)} \Rightarrow \mathcal{C}{(-, G{(=)})}\) tra
     funtori \(\mathcal{C}^{op} \times \mathcal{D} \to \mathtt{Set}\) (o
     viceversa dato un tale isomorfismo naturale si ottiene un'aggiunzione tra
-    \(F\) e \(G\))
+    \(F\) e \(G\)). Questo equivale a dire che, per ogni \( X' \overset{f}{\to }
+    X\) e \(Y \overset{g}{\to } Y'\),  il seguente diagramma commuta
+    \[\begin{tikzcd}
+	\mathcal{D}{(F{(X)}, Y)} & \mathcal{C}{(X, G{(Y)})} \\
+	\mathcal{D}{(F{(X')}, Y')} & \mathcal{C}{(X', G{(Y')})}
+	\arrow["{\varphi_{X,Y}}", from=1-1, to=1-2]
+	\arrow["{g_* \circ F(f)^*}"', from=1-1, to=2-1]
+	\arrow["{G(g)_*\circ f^*}", from=1-2, to=2-2]
+	\arrow["{\varphi_{X', Y'}}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    ossia che \(\forall h \in \mathcal{D}{(F{(X)}, Y)}\), si ha che
+    \(\varphi_{X', Y'} \circ g_* \circ F{(f)}^{*} {(h)} = G{(g)}_* \circ f^{*}
+    \circ \varphi_{X, Y} {(h)}\), ossia \(\varphi_{X',Y'} {(g \circ h \circ
+    F{(f)})} = G{(g)} \circ \varphi_{X, Y} {(h)} \circ f\) 
 \end{remark}
 
 \begin{remark}{}

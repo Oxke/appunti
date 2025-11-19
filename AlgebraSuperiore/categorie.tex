@@ -509,7 +509,8 @@ In generale non vale nessuna delle \(\impliedby\).
     \begin{align*}
         \mathcal{C}{(\--, =)} : \mathcal{C}^{op} \times \mathcal{C} &\to \mathtt{Set} \\
         {(X, Y)} &\mapsto \mathcal{C}{(X, Y)} \\
-        {(f : X \to X', g : Y \to Y')} &\mapsto {(f^* : \mathcal{C}{(X', Y)} \to  \mathcal{C}{(X,Y)}, g_* : \mathcal{C}{(X, Y)} \to \mathcal{C}{(X, Y')})}
+        {(f : X \to X', g : Y \to Y')} &\mapsto g_* \circ f^* :
+        \mathcal{C}{(X', Y)} \to  \mathcal{C}{(X,Y')}
     \end{align*}
 \end{remark}
 \begin{example}{}
