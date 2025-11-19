@@ -278,6 +278,163 @@ e
     Analogamente per \(z {(c c')} = {(z c)}c'\) e \({(bz)}c = b{(zc)}\).
 \end{proof}
 
+\begin{corollary}{}
+    Sia \(M \in B\mathtt{-Mod-}A\). Allora esistono i funtori (additivi)
+    \[
+      M \otimes_A - : A\mathtt{-Mod} \to B\mathtt{-Mod} \quad e \quad -
+      \otimes_B M : \mathtt{Mod-}B \to \mathtt{Mod}-A
+    \]
+\end{corollary}
+\begin{proof}{}
+    Per \(M \otimes_A -\) resta da dimostrare che \(\forall g : N \to N'\) in
+    \(A\mathtt{-Mod}\), \(g_* : M \otimes_A N \to M \otimes_A N'\) è
+    \(B\)-lineare, cioè \(g_*{(bz)} = bg_*{(z)}\) per ogni \(z \in M \otimes_A
+    N\). Posso supporre \(z= x \otimes y\) da cui
+    \[
+        g_* {(bz)} = g_* {(b {(x \otimes y)})} =
+        \underbrace{g_*}_{\mathrm{id_M} \otimes g} {({(bx)} \otimes y)} = {(bx)}
+      \otimes g{(y)} = b{(x \otimes g{(y)})} = b g_* {(z)}
+    \]
+    Per \(- \otimes_B M\) il discorso è simile nelle categorie op.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(A\) commutativo, \(M, N \in A\mathtt{-Mod}\). Allora \(M \otimes_A N
+    \in A\mathtt{-Mod}\) 
+\end{corollary}
+
+\begin{remark}{}
+    Se \(A\) è commutativo, allora 
+    \begin{align*}
+        t : M \times N &\to M \otimes_A N \\
+        {(x, y)} & \mapsto x \otimes y
+    \end{align*}
+    è \(A\)-bilineare (oltre che \(A\)-bilanciata ovviamente) perché
+    \(t {(ax, y)} = {(ax)} \otimes y = a{(x \otimes y)} = x \otimes {(ay)} =
+    t{(x, ay)}\).
+
+    Inoltre, data \(f: M \times N \to P\) \(A\)-bilineare (con \(P \in
+    A\mathtt{-Mod}\), allora \(f\) è \(A\)-bilanciata e quindi \(\exists! f' :
+    M \otimes_A N \to P\) \(\mathbb{Z}\)-lineare tale che \(f = f' \circ t\)  e
+    \(f'\) è \(A\)-lineare perché \(f'{(a{(x \otimes y)})} = f'{({(ax)} \otimes
+    y)} = f'{(t{(ax, y)})} = f{(ax, y)} = a f{(x, y)} = \dots = af'{(x \otimes
+    y)}\).
+
+    Una conseguenza è che su \(A\) commutativo si può definire \(M \otimes_A N\)
+    attaverso la proposizione universale per le funzioni \(A\)-bilineari \(M
+    \times N \to P\).
+\end{remark}
+
+\begin{remark}{}
+    Sia \(M \in B\mathtt{-Mod-}A\) e \(N \in A\mathtt{-Mod-}C\). Allora \(M
+    \otimes_A N = B {(U \otimes V)}C \) se \(M = B U \) e \(N = VC\) 
+\end{remark}
+
+\begin{definition}{Funtore aggiunto}
+    Sia \(F : \mathcal{C} \to \mathcal{D}\) e \(G : \mathcal{D} \to
+    \mathcal{D}\) funtori. Si dice che \(F\) è \emph{aggiunto sinistro} di
+    \(G\) (o che \(G\) è \emph{aggiunto destro} di \(F\)) e si indica \(F \dashv
+    G\) se \(\forall X \in \mathcal{C}\) e \(\forall Y \in \mathcal{D}\)
+    \[
+      \exists \varphi = \varphi_{X,Y} : \mathcal{D}{(F{(X)}, Y)} \to
+      \mathcal{C}{(X, G{(Y)})}
+    \]
+    biunivoca e naturale in \(X\) e \(Y\), cioè \(\forall f : X' \to X\) in
+    \(\mathcal{C}\) e \(\forall g : Y \to Y'\) in \(\mathcal{D}\) il seguente
+    diagramma commuta
+    \[\begin{tikzcd}
+        \mathcal{D}{(F{(X')}, Y)} & \mathcal{D}{(F{(X)}, Y)} &
+        \mathcal{D}{(F{(X)}, Y')} \\
+        \mathcal{C}{(X', G{(Y)})} & \mathcal{C}{(X, G{(Y)})} & \mathcal{C}{(X,
+        G{(Y')})}
+        \arrow["{\varphi_{X', Y}}"', from=1-1, to=2-1]
+        \arrow["{F(f)^*}"', from=1-2, to=1-1]
+        \arrow["{g_*}", from=1-2, to=1-3]
+        \arrow["{\varphi_{X,Y}}"', from=1-2, to=2-2]
+        \arrow["{\varphi_{X, Y'}}", from=1-3, to=2-3]
+        \arrow["{f^*}"', from=2-2, to=2-1]
+        \arrow["{G(g)_*}", from=2-2, to=2-3]
+    \end{tikzcd}\]
+    ossia \(\forall h \in \mathcal{D}{(F{(X)}, Y)}\), \(\varphi {(g \circ h)} =
+    G{(g)} \circ \varphi {(h)}\) e \(\varphi {(h \circ F{(f)})} = \varphi {(h)}
+    \circ f\) 
+\end{definition}
+
+\begin{remark}{}
+    Una \(\varphi \) come sopra definisce una trasformazione naturale
+    (isomorfismo) \(\mathcal{D}{(F{(-)}, =)} \to \mathcal{C}{(-, G{(=)})}\) tra
+    funtori \(\mathcal{C}^{op} \times \mathcal{D} \to \mathtt{Set}\) (o
+    viceversa dato un tale isomorfismo naturale si ottiene un'aggiunzione tra
+    \(F\) e \(G\))
+\end{remark}
+
+\begin{remark}{}
+    \(F \dashv G \iff G^{op} \dashv F^{op}\) 
+\end{remark}
+
+\begin{example}{}
+    Se \(F : \mathcal{C} \to \mathcal{D}\) è un'equivalenza e \(G : \mathcal{D}
+    \to \mathcal{C}\) è un quasi-inverso di \(F\), allora \(F \dashv G \) e \(G
+    \dashv F\) 
+    \begin{proof}{}
+        Vogliamo mostrare che \(\forall X \in \mathcal{C}\) e \(Y \in
+        \mathcal{D}\), \[\mathcal{D}{(F{(X)}, Y)}
+            \underset{\sim}{\overset{G}{\to}} \mathcal{C}{(G{(F{(X)})},
+    G{(Y)})}\underset{\sim}{\overset{\alpha_X^{*}}{\to}} \mathcal{C}{(X, G{(Y)})}
+\] 
+    se \(\alpha: \mathrm{id}_\mathcal{C} \to G \circ F\) isomorfismo (\(\implies
+    \alpha_X :X \to G \circ F{(X)}\) isomorfismo in \(\mathcal{C}\))
+    \end{proof}
+\end{example}
+
+\begin{example}{}
+    \[
+        (\mathrm{Abel} : \mathtt{Grp} \to \mathtt{Ab}) \dashv {(\mathtt{Ab}
+        \overset{\text{inclusione}}{\to } \mathtt{Grp})}
+    \]
+    con \(\mathrm{Abel}{(G)} = G / [G, G]\). Allora questo è vero perché
+    \(\forall G \in \mathtt{Grp}\) e \(\forall H \in \mathrm{Ab}\) 
+    \[
+        \mathtt{Ab}{\left( \frac{G}{[G,G]}, H \right)} \longleftrightarrow
+        \mathtt{Grp}{(G, H)}
+    \]
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità e \(\mathcal{A} \subseteq A\mathtt{-Mod} \)
+    la sottocategoria piena dei moduli senza torsione. Allora
+    \begin{align*}
+        \left( A\mathtt{-Mod} \to \mathcal{A} \right) &\dashv \left(
+        \mathcal{A} \overset{\text{inclusione}}{\to} A\mathtt{-Mod} \right) \\
+            M \mapsto \frac{M}{T{(M)}} &
+    \end{align*}
+    perché \(\forall M, N \in A\mathtt{-Mod}\) con \(T{(N)} = 0\) allora
+    \[
+      \mathrm{Hom}_A{(M / T{(M)} , N)} \cong \mathrm{Hom}_A {(M, N)}
+    \]
+\end{example}
+
+\begin{proposition}{}
+    Se \(F \overset{\varphi }{\dashv } G\) e \(F, F' : \mathcal{C} \to
+    \mathcal{D}\), allora \(F' \dashv G \iff F' \cong F\) 
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Cerco \(\alpha_X \in \mathcal{D}{(F{(X)}, F'{(X)})}\) e
+        possiamo prendere
+        \[
+          \alpha_X = \varphi_{X,F'{(X)}} ^{-1} {\left( \varphi '_{X, F'{(X)}}
+          {(1_{F'{(X)}} )} \right)} 
+        \]
+    \item[\(\impliedby \)] Sia \(\alpha : F \to F'\) l'isomorfismo. Allora
+        voglio definire \(\varphi'_{X, Y}  : \mathcal{D}{(F'{(X)} \to Y)} \to
+        \mathcal{C}{(X, G{(Y)})}\) per ogni \(X \in \mathcal{C}\) e \(Y \in
+        \mathcal{D}\) e possiamo definirlo come \(\varphi'_{X, Y} = \varphi_{X,
+        Y} \circ \alpha_X^{*}\)
+\end{itemize}
+\end{proof}
+
+
 
 
 
