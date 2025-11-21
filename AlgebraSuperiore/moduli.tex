@@ -448,6 +448,266 @@ e
 \end{itemize}
 \end{proof}
 
+\begin{example}{}
+    Dati \(F : \mathtt{Set} \to A\mathtt{-Mod}\) e \(G : A\mathtt{-Mod} \to
+    \mathtt{Set}\) dati da \(F: \Lambda \mapsto A^{{(\Lambda)}}\) e \(G : M
+    \mapsto M\) il funtore dimenticante, allora \(F \dashv G\) poiché
+    \(\mathrm{Hom}_A {(A^{{(\Lambda)}}, M)} \leftrightarrow
+    \mathtt{Set}{(\Lambda, M)}\) 
+\end{example}
+
+\begin{remark}{}
+    Dato \({(F : \mathcal{C} \to \mathcal{D})} \dashv {(G : \mathcal{D} \to
+    \mathcal{C})}\) dato da \(\varphi_{X, Y} : \mathcal{D}{(F{(X)}, Y)}
+    \overset{\sim }{\to }\mathcal{C}{(X, G{(Y)})}\), ottengo una trasformazione
+    naturale
+    \[
+      \eta : \mathrm{id}_\mathcal{C} \to G \circ F \text{ (unità dell'aggiunto)
+      e } \varepsilon : F \circ G \to \mathrm{id}_\mathcal{D} \text{ (counità
+      dell'aggiunto)}
+    \]
+    definite da, \(\forall X \in \mathcal{C}\), \(\eta_X := \varphi _{X, F{(X)}}
+    {(1_{F{(X)}} )} \in \mathcal{C}{(X, G{(F{(X)})})} \cong \mathcal{D}{(F{(X)},
+    F{(X)})}\ni 1_{F{(X)}} \) e la \(\varepsilon\) \(\forall Y \in \mathcal{D}\) data da 
+    \(\varepsilon_Y := \varphi ^{-1}_{G{(Y)}, Y} {(1_{G{(Y)}} )}\).
+
+    A questo punto, per ogni \(h \in \mathcal{D}{(F{(X)}, Y)}\), 
+    \[
+      \varphi {(h)} = \varphi {(h \circ 1_{F{(X)}} )} \overset{\varphi  \text{
+      nat.}}{=} G{(h)} \circ \varphi{(1_{F{(X)}} )} = G{(h)} \circ \eta_X
+    \]
+    Quindi \(\forall k \in C{(X, G{(Y)})}\), esiste unico \(h \in
+    \mathcal{D}{(F{(X)} , Y)}\) tale che \(k = \varphi {(h)} = G{(h)} \circ
+    \eta_{X} \)  
+\end{remark}
+
+\begin{proposition}{}
+    Se \(\mathcal{C}\) e \(\mathcal{D}\) sono preadditive e \(G\) è additiva,
+    allora \(F\) è additivo e \(\varphi _{X, Y} \) è \(\mathbb{Z}\)-lineare per
+    ogni \(X \in \mathcal{C}\) e \(Y \in \mathcal{D}\). In altre parole
+    \(\varphi \) dà trasformazioni naturali \(\mathcal{D}{(F{(-)}, =)} \to
+    \mathcal{C}{(-, G{(=)})}\) come funtori \(\mathcal{C}^{op} \times
+    \mathcal{D} \to \mathtt{Ab}\) 
+\end{proposition}
+
+\begin{proof}{}
+    \(\forall h, h' \in \mathcal{D}{(F{(X)}, Y)}\), si ha che \(\varphi_{X, Y}  {(h +
+    h')} = G{(h + h')} \circ \eta_X = G{(h )} \circ \eta_X + G{(h')} \circ
+    \eta_X = \varphi {(h)} + \varphi {(h')}\). Inoltre \(\forall f' : X \to X'\)
+    in \(\mathcal{C}\), 
+    \begin{align*}
+      &G{(F{(f+f')})} \circ \eta_X \overset{\eta \text{ nat}}{=} \eta_{X'} \circ
+        {(f + f')} = \eta_{X'} \circ f + \eta_{X'} \circ f' = \\
+      &= G{(F{(f)})} \circ \eta_X + G{(F{(f')})} \circ \eta_{X} = G{(F{(f)} +
+    F{(f')})} \circ \eta_X \\ &\implies F{(f + f')} = F{(f)} + F{(f')}
+    \end{align*}
+\end{proof} % TODO: check correctness
+
+\begin{theorem}
+    Siano \(\mathcal{C}\) e \(\mathcal{D}\) categorie qualunque e siano \(F, G\)
+    funtori tali che
+    \[
+      {(F : \mathcal{C} \to \mathcal{D})} \dashv {(G : \mathcal{D} \to
+      \mathcal{C})}
+    \]
+    Allora \(F\) preserva i colimiti e \(G\) preserva i limiti.
+\end{theorem}
+
+\begin{proof}[idea della dimostrazione]
+    Sia \(I : \mathcal{L} \to \mathcal{D}\) un funtore (con \(\mathcal{L}\)
+    piccola) con \( \lim I = {(Z \in \mathcal{D}, \alpha: K_Z \to I)}\). Allora
+    per definizione di limite si ha che, \(\forall Y \in \mathcal{D}\),
+    \begin{align*}
+        \delta_{Y, Z} : \mathcal{D}{(Y, Z)} &\longrightarrow
+        \mathtt{Fun}{(\mathcal{L}, \mathcal{D})}{(K_Y, I)} \\
+        g &\longmapsto \delta_{Y, Z} (g) = \alpha \circ K_g
+    \end{align*}
+    è biunivoca. Vogliamo dimostrare che \( \lim {(G \circ I)} = {(G{(Z)}, G
+    \circ \alpha : K_{G{(Z)}} \to G \circ I)}\), ossia che \(\forall X \in
+    \mathcal{C}\), 
+    \begin{align*}
+        \gamma_{X, Z} : \mathcal{C}{(X, G{(Z)})} &\longrightarrow
+        \mathtt{Fun}{(\mathcal{L}, \mathcal{C})}{(K_X, G \circ I)} \\
+        f &\longmapsto \gamma_{X, Z} (f) = g \circ \alpha \circ K_f
+    \end{align*}
+    è biunivoca. A tale scopo notiamo che abbiamo il seguente diagramma
+    commutativo:
+    \[\begin{tikzcd}
+	\mathcal{C}{(X, G{(Z)})} & \mathtt{Fun}{(\mathcal{L}, \mathcal{C})}{(K_X, G
+    \circ I)} \\
+	\mathcal{D}{(F{(X)}, Z)} & \mathtt{Fun}{(\mathcal{L},
+    \mathcal{D})}{(K_{F{(X)}} , I)}
+	\arrow["{\gamma_{X, Z}}", from=1-1, to=1-2]
+	\arrow["{\varphi_{X,Z}}"', tail reversed, from=1-1, to=2-1]
+	\arrow["{\delta_{F(X),Z}}"', tail reversed, from=2-1, to=2-2]
+	\arrow["{\tilde{\varphi}}"', from=2-2, to=1-2]
+\end{tikzcd} \]
+    dove \(\tilde{\varphi}\) è definita nel seguente modo per ogni \(\beta \in
+    \mathtt{Fun}{(\mathcal{L}, \mathcal{D})}{(K_{F{(X)}} , I)}\), ossia per ogni
+    trasformazione naturale \(\beta : K_{F{(X)}} \to I \) 
+    \[
+      \forall L \in \mathcal{L} \quad \tilde{\varphi}{(\beta)}_L := \varphi_{X,
+      I{(L)}} {(\beta_L)} : X \to G{(I{(L)})}
+    \]
+    si verifica che \(\tilde{\varphi}\) è ben definita ed è biunivoca,
+    il diagramma commuta e dunque \(\gamma_{X, Z}\) è biunivoca.
+\end{proof}
+
+\begin{corollary}{}
+    Ogni equivalenza di categorie preserva limiti e colimiti.
+\end{corollary}
+
+\begin{corollary}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore tra categorie additive.
+    Allora:
+\begin{enumerate}[label = \arabic*.]
+    \item Se \(F\) è aggiunto \emph{sinistro}/\emph{destro}, \(F\) è additivo
+        (preserva infatti i \emph{coprodotti}/\emph{prodotti} finiti)
+    \item Se \(\mathcal{A}, \mathcal{B}\) sono abeliane e \(F\) è aggiunto
+        \emph{sinistro}/\emph{destro}, allora \(F\) è esatto a
+        \emph{destra}/\emph{sinistra}
+\end{enumerate}
+\end{corollary}
+
+\begin{eser}
+    Sia \(\mathcal{A}\) una categoria abeliana. Dimostrare che \(\mathrm{Ker}\)
+    è esatto a sinistra e \(\mathrm{Coker}\) è esatto a destra.
+
+    \emph{Suggerimento}: (per \(\mathrm{Ker}\)) considerare il funtore \(\mathcal{A} \to
+    \mathtt{Mor}{(\mathcal{A})}\) dato da \(X \mapsto {(X \mapsto 0)}\) 
+\end{eser}
+
+\begin{theorem}
+    Sia \(M \in B\mathtt{-Mod-}A\). Allora 
+    \[
+      {(M \otimes_A - : A\mathtt{-Mod} \to B\mathtt{-Mod})} \dashv
+      {(\mathrm{Hom}_B{(M, -)} : B\mathtt{-Mod} \to A\mathtt{-Mod})}
+    \]
+\end{theorem}
+\begin{proof}{}
+    Vogliamo dimostrare che, \(\forall N \in A\mathtt{-Mod}\) e \(\forall P \in
+    B\mathtt{-Mod}\), \\\(\mathrm{Hom}_B{(M \otimes_A N, P)} \cong
+    \mathrm{Hom}_A{(N, \mathrm{Hom}_B{(M, P)})}\). Questo è vero perché 
+    \[ \begin{tikzcd}
+	{\mathrm{Hom}_B{(M \otimes_A N, P)}} & {\mathrm{Bal}_A^{B}{(M \times N, P)}} & {\mathrm{Hom}_A {(N, \mathrm{Hom}_B{(M, P)})}} \\
+	{\mathrm{Hom}{(M \otimes_A N, P)}} & {\mathrm{Bal}_A{(M \times N, P)}} & {\mathrm{Hom}_A{(N, \mathrm{Hom}{(M, P)})}}
+	\arrow["\sim", from=1-1, to=1-2]
+	\arrow["\subseteq"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow["\sim", from=1-2, to=1-3]
+	\arrow["\subseteq"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["\subseteq"{marking, allow upside down}, draw=none, from=1-3, to=2-3]
+	\arrow["{{t^*}}", from=2-1, to=2-2]
+	\arrow["\sim"', draw=none, from=2-1, to=2-2]
+	\arrow["{f \mapsto \tilde{f}}"', tail reversed, from=2-2, to=2-3]
+	\arrow["{\tilde{g} \mapsfrom \,g}"', shift left=8, draw=none, from=2-3, to=2-2]
+\end{tikzcd}\]
+Dove:
+\begin{itemize}
+    \item \(t^*\) è biunivoca perché sappiamo che \(t : M \times N \to M \otimes_A
+N\) è \(A\)-bilanciata universale.
+    \item le due funzioni tra \(\mathrm{Bal}_A\) e \(\mathrm{Hom}_A\) sono
+        definite da \(\tilde{g}{(x, y)} = g{(y)}{(x)}\) e \(\tilde{f}{(y)}{(x)}
+        = f{(x, y)}\). Sono chiaramente una l'inversa dell'altra, e l'unica
+        verifica non ovvia da fare è che \(\tilde{f}{(ay)} = a\tilde{f}{(y)}\)
+        per ogni \(a \in A\) e \(\forall y \in N\), effettivamente abbiamo che,
+        \(\forall x \in M\),
+        \[
+          \tilde{f}{(ay)}{(x)} = f{(x)}{(ay)} = f{(xa, y)} =
+          \tilde{f}{(y)}{(xa)} = a\tilde{f}{(y)}{(x)}
+        \]
+        e analogamente se \(g\) è \(A\)-lineare, allora \(\tilde{g}\) è
+        \(A\)-bilanciata.
+    \item \(\mathrm{Bal}_A^{B}{(M \times N, P)} = \{f \in \mathrm{Bal}_A{(M
+        \times N, P)} | f \text{ è \(B\)-lineare nel primo argomento}\}\) 
+\end{itemize}
+    Le biezioni rimangono nei sottoinsiemi, perché conservano la \(B\)-linearità
+    % TODO: detto malissimo e non sono sicuro di aver capito
+\end{proof}
+
+\begin{corollary}{}
+    \(M \otimes_A -\) è esatto a destra e preserva i coprodotti (e anche
+    \(\mathrm{Hom}_B{(M, -)}\) è esatto a sinistra e preserva i prodotti)
+\end{corollary}
+\begin{corollary}{}
+    Se \(A\) è commutativo e \(M \in A\mathtt{-Mod}\), allora 
+    \[
+        (M \otimes_A - : A\mathtt{-Mod} \to A\mathtt{-Mod}) \dashv
+        {(\mathrm{Hom}_A{(M, -)} : A\mathtt{-Mod} \to A\mathtt{-Mod})}
+    \]
+\end{corollary}
+
+\begin{remark}{}
+    A \(\in A\mathtt{-Mod-}A\), dunque 
+    \[
+      {(A \otimes_A - : A\mathtt{-Mod} \to A\mathtt{-Mod})} \dashv
+      {(\mathrm{Hom}_A{(A,-)}: A\mathtt{-Mod} \to A\mathtt{-Mod})} \cong
+      \mathrm{id}_{A\mathtt{-Mod}} 
+    \]
+    da cui \(A \otimes_A - \cong \mathrm{id}_{A\mathtt{-Mod}}\) e potevamo
+    vederlo più direttamente in quanto \(\forall M \in A\mathtt{-Mod}\) \(A
+    \otimes_A M \to M\) dato da \(a \otimes x \mapsto ax\) è ben definito ed è
+    un isomorfismo con inverso \(M \to A \otimes_A M\) dato da \(x \mapsto 1
+    \otimes x\).
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(M \in \mathtt{Mod-}A\), \(N \in A\mathtt{-Mod-}B\) e \(P \in
+    B\mathtt{-Mod}\). Allora 
+    \[
+      {(M \otimes_A N)}\otimes_B P \cong M \otimes_A {(N \otimes_B P)}
+    \]
+    con isomorfismo tale che \({(x \otimes y)} \otimes z \mapsto x \otimes {(y
+    \otimes z)}\) 
+\end{proposition}
+
+\begin{proof}{}
+    Fissato \(z \in P\), sia 
+    \begin{align*}
+        f_z: M \times N &\longrightarrow M \otimes_A {(N \otimes_B P)} \\
+        {(x,y)} &\longmapsto f_z({(x,y)}) = x \otimes {(y \otimes z)}
+    \end{align*}
+    allora \(f_z\) è \(A\)-bilanciata e dunque per la proprietà universale del prodotto
+    tensoriale \(\exists ! f_z' : M \otimes_A N \to M \otimes_A {(N \otimes_B
+    P)}\) \(\mathbb{Z}\)-lineare tale che \(x \otimes y \mapsto x \otimes {(y
+    \otimes z)}\). Sia ora 
+    \begin{align*}
+        f: {(M \otimes_A N)} \times P &\longrightarrow M \otimes_A {(N \otimes_B
+        P)} \\
+        {(w,z)} &\longmapsto f({(w,z)}) = f'_z{(w)}
+    \end{align*}
+    Allora \(f\) è \(B\)-bilanciata. Infatti se \(w = x \otimes y\) (basta
+    verificare in questo caso) 
+    \begin{align*}
+        f{(wb, z)}&= f'_z{(wb)} = f'_z {({(x \otimes y)}b)} = f'_z {(x \otimes yb)}
+        = x \otimes {({(yb)} \otimes z)} = \\ &= x \otimes {(y \otimes bz)} = f'_{bz}
+      {(x \otimes y)} = f'_{bz} {(w)} = \\ &= f{(w, bz)}
+    \end{align*}
+    Ora di nuovo per la proprietà universale del prodotto tensoriale possiamo
+    dire che
+    \(
+      \exists ! \, f': {(M \otimes_A N)} \otimes_B P \to M \otimes_A {(N
+      \otimes_B P)} \) \(\mathbb{Z}\)-bilineare t.c. \(f'{({(x \otimes y)}
+      \otimes z)} = x \otimes {(y \otimes z)}
+    \)
+\end{proof}
+\begin{corollary}{}
+    Se \(A\) è commutativo e \(M, N, P \in A\mathtt{-Mod}\), allora \({(M
+    \otimes_A N)} \otimes_A P \cong M \otimes_A {(N \otimes_A P)}\) 
+\end{corollary}
+
+\begin{remark}{}
+    Se \(M \in B\mathtt{-Mod-}A\), allora in generale \(M \otimes_A - :
+    A\mathtt{-Mod} \to B\mathtt{-Mod}\) non preserva i monomorfismi.
+
+    Ad \textbf{esempio} sia \(A\) un dominio d'integrità non campo e sia \(0
+    \neq a \in A \sminus A^{*}\). Allora \(f_a: A \to A\) dato da \(b \mapsto
+    ab\) è monomorfismo in \(A\mathtt{-Mod}\), ma preso \(M = A/(a)\) abbiamo
+    che \(\varphi _{a*} : M \otimes_A A\to M \otimes_A A\) dato da \(x \otimes b
+    \mapsto x \otimes {(ab)}\) non è iniettivo % TODO check
+    
+\end{remark}
+
+
 
 
 
