@@ -704,8 +704,28 @@ N\) è \(A\)-bilanciata universale.
     ab\) è monomorfismo in \(A\mathtt{-Mod}\), ma preso \(M = A/(a)\) abbiamo
     che \(\varphi _{a*} : M \otimes_A A\to M \otimes_A A\) dato da \(x \otimes b
     \mapsto x \otimes {(ab)}\) non è iniettivo % TODO check
-    
 \end{remark}
+
+\subsection{Funtori indotti da omomorfismi di anelli}
+
+A questo punto, dato un omomorfismo di anelli \(f : A \to B\), esso induce i
+funtori
+\begin{itemize}[label = --]
+    \item \(f^{*}: B\mathtt{-Mod} \to A\mathtt{-Mod}\) (restrizione degli
+        scalari)
+    \item \(f_! := B \otimes_A - : A\mathtt{-Mod} \to B\mathtt{-Mod}\)
+        (estensione degli scalari, considerando \(B \in B\mathtt{-Mod-}A\))
+    \item \(f_* := \mathrm{Hom}_A {(B, -)} : A\mathtt{-Mod} \to B\mathtt{-Mod}\)
+        (coestensione degli scalari, considerando \(B \in A\mathtt{-Mod-}B\))
+\end{itemize}
+
+\begin{proposition}{}
+    Sia \(f: A \to B\) come sopra, ossia \(f \in \mathtt{Rng}{(A,
+    B)}\), allora
+    \[
+      f_! \dashv f^{*} \dashv f_*
+    \]
+\end{proposition}
 
 
 
