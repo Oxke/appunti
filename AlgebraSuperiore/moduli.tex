@@ -628,7 +628,7 @@ N\) è \(A\)-bilanciata universale.
     \(M \otimes_A -\) è esatto a destra e preserva i coprodotti (e anche
     \(\mathrm{Hom}_B{(M, -)}\) è esatto a sinistra e preserva i prodotti)
 \end{corollary}
-\begin{corollary}{}
+\begin{corollary}{}\label{cor:mod_tens}
     Se \(A\) è commutativo e \(M \in A\mathtt{-Mod}\), allora 
     \[
         (M \otimes_A - : A\mathtt{-Mod} \to A\mathtt{-Mod}) \dashv
@@ -706,7 +706,7 @@ N\) è \(A\)-bilanciata universale.
     \mapsto x \otimes {(ab)}\) non è iniettivo % TODO check
 \end{remark}
 
-\subsection{Funtori indotti da omomorfismi di anelli}
+\section{Funtori indotti da omomorfismi di anelli}
 
 A questo punto, dato un omomorfismo di anelli \(f : A \to B\), esso induce i
 funtori
@@ -719,6 +719,9 @@ funtori
         (coestensione degli scalari, considerando \(B \in A\mathtt{-Mod-}B\))
 \end{itemize}
 
+Come notazione si può usare \(f_*\) invece di \(f^{*}\), \(f^{*}\) invece di
+\(f_!\) e \(f^{!}\) invece di \(f_*\) 
+
 \begin{proposition}{}
     Sia \(f: A \to B\) come sopra, ossia \(f \in \mathtt{Rng}{(A,
     B)}\), allora
@@ -727,6 +730,287 @@ funtori
     \]
 \end{proposition}
 
+\begin{proof}{}
+    \(\forall N \in A\mathtt{-Mod}\) e \(\forall B \in B\mathtt{-Mod}\) devo
+    dimostrare che
+\begin{enumerate}[label = \arabic*.]
+    \item \(\mathrm{Hom}_B{(f_!{(N)}, P)} \cong \mathrm{Hom}_A {(N, f^{*}{(P)})}\) 
+    \item \(\mathrm{Hom}_A {(f^{*}{(P)}, N)} \cong \mathrm{Hom}_B{(P, f_*{(N)})}\) 
+\end{enumerate}
+
+\begin{proof}[1.]
+    \(\mathrm{Hom}_B{(f_!{(N)}, P)} = \mathrm{Hom}_B{(B\otimes_A N, P)} \cong
+    \mathrm{Hom}_A {(N, \mathrm{Hom}_B{(B, P)})} \) per il
+    corollario~\ref{cor:mod_tens} ma ora \(\mathrm{Hom_B{(B, P)}} \cong P\) come
+    \(A\)-modulo, dunque abbiamo che il precedente 
+    \[
+      \mathrm{Hom}_B{(f_!{(N)}, P)} \cong \mathrm{Hom}_A {(N, P)} =
+      \mathrm{Hom}_A {(N, f^{*}{(P)})}
+    \]
+    dove nell'ultimo passaggio si è usato che effettivamente
+    \(\mathrm{Hom}_A{(N, P)}\) è la restrizione degli scalari.
+\end{proof}
+
+\begin{proof}[2.]
+    \begin{align*}
+        \mathrm{Hom}_A {(f^{*}{(P)}, N)} &\overset{\text{\(P\) \(A\)-modulo}}{=}
+        \mathrm{Hom}_A {(P, N)} \cong \mathrm{Hom}_A {(B \otimes_B P, N)} \cong \\ &\cong
+      \mathrm{Hom}_B{(P, \mathrm{Hom}_A{(B, N)})} = \mathrm{Hom}_B{(P, f_*{(N)})}
+    \end{align*}
+\end{proof}
+\end{proof}
+
+\begin{corollary}{}
+    \(f_!\) è esatto a destra e \(f_*\) è esatto a sinistra
+\end{corollary}
+
+\begin{remark}{}
+    \(f_! {(A)} \cong B\) 
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(M \in A\mathtt{-Mod}\) \emph{f.g.}/\emph{f.p.}. Allora \(f_!{(M)} \in
+    B\mathtt{-Mod}\) è \emph{f.g.}/\emph{f.p.}.
+\end{proposition}
+\begin{proof}{}
+    Se la successione \((A^{m} \to )A^{n} \to M \to 0\) è esatta, allora anche 
+    \[
+        {(\underbrace{f_!{(A^{m})}}_{B^{m}} \to )}
+        \underbrace{f_!{(A^{n})}}_{B^{n}} \to f_!{(M)} \to 0
+    \]
+    è esatta, e dunque \(f_!{(M)}\) è \emph{f.g.}/\emph{f.p.}.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(I \subseteq A \) un ideale e \(\pi : A \to {A}/{I}\) il quoziente.
+    Allora \(\forall M \in A\mathtt{-Mod}\), \(\pi_! {(M)} \cong {M}/{IM}\) (in
+    \(A / I\mathtt{-Mod}\), dunque equivalentemente in \(A\mathtt{-Mod}\))
+\end{corollary}
+\begin{proof}{}
+    La successione \(0 \to I \overset{j}{\to} A \overset{\pi}{\to} A / I \to 0\) è
+    esatta in \(A\mathtt{-Mod-}A\). So che \(\pi_! {(M)} = {(A / I)} \otimes_A
+    M\). A questo punto possiamo usare che \(- \otimes_A M : A\mathtt{-Mod-}A
+    \to A\mathtt{-Mod}\) è esatto a destra, dunque. 
+
+\[\begin{tikzcd}
+	I \otimes_A M & A \otimes_A M & A / I \otimes_A M & \bullet & 0 \\
+	&& M
+	\arrow[from=1-1, to=1-2]
+	\arrow["{a\otimes x \mapsto ax}"{description}, from=1-1, to=2-3]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}\]
+
+% TODO: aggiustare
+Ma allora \(A / I \otimes_A M \cong \mathrm{Coker}{\left({{I \otimes_A M \to M}\above
+{a\otimes x \mapsto ax}}\right)} =
+    M / IM\) 
+\end{proof}
+
+\begin{definition}{Proiettività e iniettività}
+    Sia \(\mathcal{A}\) una categoria abeliana e \(X \in \mathcal{A}\). Allora
+    \(X\) si dice \emph{proiettivo} se \(\mathcal{A}{(X, -)} : \mathcal{A} \to
+    \mathtt{Ab}\) è esatto (ossia equivalentemente se \(\mathcal{A}{(X, -)}\)
+    preserva gli epi, cioè \(\forall f : Y \twoheadrightarrow Z\) epimorfismi di
+    \(\mathcal{A}\), allora \(f_* : \mathcal{A}{(X, Z)} \to \mathcal{A}{(X,
+    Z)}\) è suriettivo, ossia per ogni \(g : X \to Z\) esiste \(s : X \to Y\)
+    tale che \(f \circ s = g\))
+
+    \(X\) si dice \emph{iniettivo} (in \(\mathcal{A}\)) se è proiettivo in
+    \(\mathcal{A}^{op}\), cioè se \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to
+    \mathtt{Ab}\) è esatto. (Equivalentemente \(\mathcal{A}{(-, X)}\) preserva
+    gli epimorfismi, ossia \(\forall f : Y \rightarrowtail Z\) monomorfismo di
+    \(\mathcal{A}\), \(f^{*} : \mathcal{A}{(Z, X)} \to \mathcal{A}{(Y, X)}\) è
+    suriettivo).
+\end{definition}
+
+\begin{remark}{}
+    Se \(0 \to X \overset{f}{\to} Y \overset{g}{\to} Z \to 0\) è esatta, \(Z\) è
+    proiettivo oppure \(X\) è iniettivo, allora la successione si spezza. Ad
+    esempio se \(Z\) è proiettivo, allora \(g : Y \twoheadrightarrow Z \) e
+    esiste \(\mathrm{id}_Z : Z \to Z\), allora \(\exists s : Z \to Y\) tale che
+    \(g \circ s = 1_Z\).
+
+    Quindi otteniamo che \(\mathcal{A}\) è semisemplice se e solo se tutti gli
+    oggetti di \(\mathcal{A}\) sono proiettivi se e solo se tutti gli oggetti di
+    \(\mathcal{A}\) sono iniettivi.
+\end{remark}
+
+\begin{definition}{Moduli piatti}
+    \(M \in \mathtt{Mod}-A\) è \emph{piatto} (su \(\mathcal{A}\)) se 
+    \(M \otimes_A - : A\mathtt{-Mod} \to \mathtt{Ab}\) è esatto.
+    Equivalentemente \(M \otimes_A -\) preserva i monomorfismi, cioè se \(f : N
+    \rightarrowtail P\) iniettivo in \(A\mathtt{-Mod}\), allora \(f_* :
+    M\otimes_A N \to M \otimes_A P\) è iniettivo in \(\mathtt{Ab}\).
+\end{definition}
+
+\begin{proposition}{} \(\) 
+\begin{enumerate}[label = \arabic*.]
+    \item Sia \(\mathcal{A}\) una categoria abeliana e \(X_\lambda \in
+        \mathcal{A}\) per ogni \(\lambda \in \Lambda\). Supponiamo inoltre che
+        esista \(X = \coprod_{\lambda \in \Lambda} X_\lambda\) (resp. \(X = \prod_{\lambda
+        \in \Lambda} X_\lambda\)). Allora \(X\) è proiettivo (resp. iniettivo) se
+        e solo se tutti gli \(X_\lambda\) sono proiettivi (resp. iniettivi).
+    \item Sia \(A\) un anello, \(M_\lambda \in \mathtt{Mod}-A \) per ogni
+        \(\lambda \in \Lambda\). Allora 
+        \[
+          \bigoplus_{\lambda \in \Lambda} M_\lambda \text{ è piatto } \iff
+          M_\lambda \text{ è piatto } \forall  \lambda \in \Lambda
+        \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}{} \( \) 
+\begin{enumerate}[label = \arabic*.]
+    \item Basta dimostrare il caso \(X = \coprod_{\lambda \in \Lambda}
+        X_\lambda\). In tale caso sia \(f : Y \twoheadrightarrow Z\) un
+        epimorfismo in \(\mathcal{A}\). Allora \(X\) è proiettivo se e solo se
+        \(f_* : \mathcal{A}{(X, Y)} \to \mathcal{A}{(X, Z)}\) è suriettivo. Ma
+        \[
+          \mathcal{A}{(X, Y)} = \mathcal{A}{\left( \prod_{\lambda \in \Lambda}
+          X_\lambda, Y \right)} \overset{\text{ prop. univ. \(\coprod\)}}{\cong}
+          \prod_{\lambda \in \Lambda} \mathcal{A}{(X_\lambda, Y)}
+        \]
+        quindi ora poiché il seguente diagramma commuta, 
+
+\[\begin{tikzcd}
+	\mathcal{A}{(X, Y)} & \mathcal{A}{(X, Z)} \\
+	\prod_{\lambda \in \Lambda} \mathcal{A}{(X_\lambda, Y)} & \prod_{\lambda \in \Lambda} \mathcal{A}{(X_\lambda, Z)}
+	\arrow["{f_*}", from=1-1, to=1-2]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["{\prod_{\lambda \in \Lambda}f_*}", from=2-1, to=2-2]
+	\arrow["{(g_\lambda)_{\lambda \in \Lambda} \mapsto (f \circ g_\lambda)_{\lambda \in \Lambda}}"', shift right=2, draw=none, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+        La mappa \(f_*\) è suriettiva se e solo se \(\prod_{\lambda \in \Lambda}
+        f_*\) è suriettiva. Ma quest'ultima lo è se tutte le sue componenti lo
+        sono, ossia se ogni \(X_\lambda\) è proiettivo.
+    \item \(M\) è piatto se e solo se \(\forall f : N \to P\) iniettivo in
+        \(A\mathtt{-Mod}\), \(f_* : M \otimes_A N \to M \otimes_A P\) è
+        iniettivo in \(\mathtt{Ab}\). Poiché \(- \otimes_A N\) preserva i
+        coprodotti, \(M \otimes_A N \cong \bigoplus_{\lambda \in \Lambda} M_\lambda
+        \otimes N\). Allora
+\[\begin{tikzcd}
+	M \otimes_A N & M \otimes_A P \\
+	\bigoplus_{\lambda \in \Lambda} M_{\lambda} \otimes_A N & \bigoplus_{\lambda \in \Lambda} M_\lambda \otimes_A P
+	\arrow["{f_*}", from=1-1, to=1-2]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["{\bigoplus_{\lambda \in \Lambda}f_*}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+    ma ora \(f_*\) è iniettivo \(\iff\) se \(\bigoplus_{\lambda \in \Lambda}
+    f_*\) è iniettivo \(\iff\) ogni componente di \(\bigoplus_{\lambda \in
+    \Lambda} f_* \) è iniettiva \(\iff\) ogni \(M_\lambda\) è piatto.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}{} \(\) 
+\begin{enumerate}[label = \arabic*.]
+    \item Un \(A\)-modulo è proiettivo se e solo se è addendo diretto di un
+        modulo libero.
+    \item Ogni modulo proiettivo è piatto.
+\end{enumerate}
+\end{corollary}
+\begin{proof}{}
+    \(A \in A\mathtt{-Mod}\) è proiettivo e piatto perché \(\mathrm{Hom}_A {(A,
+    -)} : A\mathtt{-Mod} \to \mathtt{Ab}\) è isomorfo al funtore dimenticante, e
+    dunque è esatto. Analogamente \(- \otimes_A A : \mathtt{Mod-}A \to
+    \mathtt{Ab}\) è isomorfo al funtore dimenticante e dunque è esatto.
+
+    Sia \(\mathcal{P}\) una collezione di oggetti (chiusa per isomorfismi) di
+    \(A\mathtt{-Mod}\) tale che \(A \in \mathcal{P}\) e tali che se \(M_\lambda
+    \in A\mathtt{-Mod}\) (con \(\lambda \in \Lambda\)), si ha che 
+    \[
+      \bigoplus_{\lambda \in \Lambda} M_\lambda \in \mathcal{P} \iff M_\lambda
+      \in \mathcal{P} \quad \forall \lambda \in \Lambda
+    \]
+    Allora ogni \(M\) addendo diretto di un modulo libero è tale che \(M \in
+    \mathcal{P}\). Infatti in tal caso \(\exists N \in A\mathtt{-Mod}\) tale che
+    \(M \oplus N\) è libero, dunque \(M \oplus N \cong A^{{(\Lambda)}}\) per
+    qualche \(\Lambda\), e dunque \(A \in \mathcal{P} \implies A^{{(\Lambda)}}
+    \in \mathcal{P} \implies M \oplus N \in \mathcal{P} \implies  M \in
+    \mathcal{P}\), quindi sia i proiettivi che i piatti contengono gli addendi
+    diretti dei moduli liberi.
+
+    Per concludere basta dimostrare che se \(M \in A\mathtt{-Mod}\) è
+    proiettivo, allora è addendo diretto di un modulo libero. Questo è vero
+    perché \(\exists L \in A\mathtt{-Mod}\) libero, e \(N \subseteq L \)
+    sottomodulo tale che \(M \cong L/M\), cioè esiste una successione esatta
+    \[
+      0 \to N \to L \to M \to 0
+    \]
+    ma poiché \(M\) è proiettivo la successione si spezza, e dunque \(L \cong M
+    \oplus N\) 
+\end{proof}
+
+\begin{example}{}
+    Sia \(A = \mathbb{Z} / 6 \mathbb{Z}\) (semisemplice), allora
+    \(\Span{\overline{2}} \) è un \(A\)-modulo proiettivo non libero.
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità che non sia un campo, sia \(0 \neq a \in A
+    \sminus A^{*}\). Allora \(A / (a)\) come \(A\)-modulo non è piatto, infatti
+    \(A \to A ; b \mapsto ab\) è omomorfismo iniettivo in \(A\mathtt{-Mod}\)
+    tale che 
+    \[ \begin{tikzcd}
+	A \otimes_A A / (a) & A \otimes-A A / (a) \\
+	A / (a) & A / (a)
+	\arrow["{\varphi_{a*}}", from=1-1, to=1-2]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["0", from=2-1, to=2-2]
+\end{tikzcd} \]
+    dove chiaramente \(0 : x \mapsto ax\) in \(A / (a)\) non è iniettivo.
+\end{example}
+
+\begin{proposition}{}
+    \(M \in A\mathtt{-Mod}\) è iniettivo se solo se per ogni \(I \subseteq A \)
+    ideale sinistro e \(\forall g : I \to M\) \(A\)-lineare, \(\exists x \in M\)
+    tale che \(g{(a)} = ax\) per ogni \(a \in I\).
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Poiché \(M\) è iniettivo, \(\begin{tikzcd}
+	I & A \\
+	M
+	\arrow[tail, from=1-1, to=1-2]
+	\arrow["g"', from=1-1, to=2-1]
+	\arrow["{g'}", dashed, from=1-2, to=2-1]
+\end{tikzcd}\) commuta, ossia esiste \(g': A \to M\) \\\(A\)-lineare tale che
+\(g'|_I = g\). Allora \(x := g'{(1)}\) e abbiamo che \(ax = g'{(a)} =g{(a)}\)
+per ogni \(a \in I\).
+    \item[\(\impliedby \)] Dato \(N_{0} \subseteq N \) sottomodulo e \(f_{0} :
+        N_{0} \to M\) \(A\)-lineare, basta dimostrare che \(\exists f : N \to
+        M\) \(A\)-lineare tale che \(f|_{N_{0}}  = f_{0}\).
+
+        Sia ora \begin{align*}U := \{{(N', f')} | N_{0} \subseteq N' \subseteq N \text{
+        sottomodulo e } f' : N' \to M \\\text{ è \(A\)-lineare ed è t.c. }
+f'|_{N_{0}} =f_{0}\}\end{align*}
+        Dove \(U\) è ordinato da \({(N', f')} \le {(N'', f'')} \iff N' \subseteq
+        N''\) e \(f''|_{N'} = f'\).
+        Inoltre \({(N_{0}, f_{0})} \in U\) che dunque non è vuoto. Inoltre ogni
+        catena \({(N_\lambda, f_\lambda)}\) in \(U\) (per \(\lambda \in
+        \Lambda\)) ha un maggiorante \(N' = \bigcup_{\lambda \in \Lambda}
+        N_{\lambda}, f'\) tale che \(f'|_{N_{\lambda} } = f_{\lambda} \). % TODO eser forse
+        
+        Allora ci sono le ipotesi del lemma di Zorn, per cui esiste un elemento
+        massimale \({(N_{1}, f_{1})}\in U\). Ora dobbiamo solo dimostrare che
+        \(N_{1} = N\). Supponiamo per assurdo che \(N_{1} \subsetneq N\). Allora
+        \(\exists y \in N \sminus N_{1}\). Sia ora \(I = \{a \in A : ay \in
+        N_{1}\} \subseteq A \) ideale sinistro. \(g : I \to M\) data da \(a
+        \mapsto f_{1}{(ay)}\) è \(A\)-lineare e per ipotesi \(\exists x \in M\)
+        tale che \(f_{1}{(ay)} = g{(a)} = ax\) per ogni \(a \in I\). Allora
+        possiamo definire \(N_{2} := N_{1} + Ay\) e \(f_{2} : N_{2} \to M\) data
+        da \(y_{1} + ay \mapsto f_{1}{(y_{1})} + ax\) che è ben definita
+        (lasciato per esercizio), \(A\)-lineare, e \({(N_{1}, f_{1})} \lneqq
+        {(N_{2}, f_{2})}\), che è assurdo.
+        
+\end{itemize}
+\end{proof}
 
 
 
