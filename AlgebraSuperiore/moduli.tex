@@ -1012,7 +1012,155 @@ f'|_{N_{0}} =f_{0}\}\end{align*}
 \end{itemize}
 \end{proof}
 
+\subsection{Moduli divisibili e senza torsione}
 
+\begin{definition}{Modulo divisibile}
+    Sia \(A\) un dominio d'integrità, \(M \in A\mathtt{-Mod}\). Allora \(M\) è
+    \emph{divisibile} se \(\forall x \in M\) e \(\forall 0 \neq a \in A\),
+    allora \(\exists y \in M\) tale che \(x = ay\) 
+\end{definition}
 
+\begin{remark}{}
+    Un modulo \(M\) è divisibile se e solo se \(\forall 0 \neq a \in A\) la
+    funzione \(M \to M\) definita da \(x \mapsto ax\) è suriettiva. Analogamente
+    \(M\) è senza torsione se e solo se tale funzione è iniettiva.
+\end{remark}
 
+\begin{remark}{}
+    Se \(M\) è divisibile e \(M' \subseteq M \) sottomodulo, allora \(M / M'\) è
+    ancora divisibile.
+\end{remark}
+
+\begin{example}{}
+    Il campo dei quozienti \(Q{(A)}\) è divisibile in \(A\mathtt{-Mod}\). Di
+    conseguenza anche \(Q{(A)} / A\) è divisibile.
+\end{example}
+
+\begin{proposition}{}/\label{prop:M-inj-div}
+    Sia \(A\) un dominio d'integrità e \(M \in A\mathtt{-Mod}\). Allora se \(M\) è
+    iniettivo, allora \(M\) è divisibile. Inoltre se \(A\) è PID vale anche
+    l'altra implicazione.
+\end{proposition}
+\begin{proof}{}
+    \(M\) è iniettivo se e solo se \(\forall I \subseteq A \) ideale e \(\forall
+    g : I \to M\) \(A\)-lineare, allora \(\exists x \in M\) tale che \(g {(a)} =
+    ax\) per ogni \(a \in I\).
+
+    \(M\) è d'altra parte divisibile se e solo se \(\forall 0 \neq I \subseteq A
+    \) ideale \textbf{principale} e \(\forall g : I \to M\) \(A\)-lineare,
+    allora \(\exists x \in M\) tale che \(g{(a)} = ax\) per ogni \(a \in I\).
+    Questa definizione equivalente vale perché in tal modo \(I = {(b)}\), con
+    \(0 \neq b \in A\), allora \(I \cong A\) in \(A\mathtt{-Mod}\), quindi \(g :
+    I \to M\) \(A\)-lineare è determinata da \(g{(b)} = y \in M\). Allora
+    chiedere l'esistenza dell'\(x\) di cui sopra equivale a dire che \(\exists x
+    \in M\) tale che \(g{(ab)} = abx\) per ogni \(ab \in I\), ossia \(y = bx\).
+
+    La proposizione segue ovviamente dalla similarità delle due
+    caratterizzazioni.
+\end{proof}
+
+\begin{definition}{Avere abbastanza iniettivi o proiettivi}
+    Una categoria abeliana \(\mathcal{A}\) \emph{ha abbastanza iniettivi} se
+    \(\forall X \in \mathcal{A}\) \(\exists X \rightarrowtail Y\) mono con \(Y\)
+    iniettivo.
+
+    Dualmente \(\mathcal{A}\) \emph{ha abbastanza proiettivi} se
+    \(\mathcal{A}^{op}\) ha abbastanza iniettivi, cioè se \(\forall X \in
+    \mathcal{A}\) \(\exists Y \twoheadrightarrow X\) epi (di \(\mathcal{A}\))
+    con \(Y\) proiettivo (in \(\mathcal{A}\)).
+\end{definition}
+
+\begin{example}{}
+    \(A\mathtt{-Mod}\) ha abbastanza proiettivi perché ogni modulo è quoziente
+    di un modulo libero, e i moduli liberi sono proiettivi.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(f : A \to B\) un omomorfismo di anelli. Se \(A\mathtt{-Mod}\) ha
+    abbastanza iniettivi, allora \(B\mathtt{-Mod}\) ha abbastanza iniettivi.
+\end{proposition}
+
+\begin{proof}{}
+    Sia \(N \in B\mathtt{-Mod}\). Per ipotesi \(\exists i : f^{*}{(N)}
+    \twoheadrightarrow M\) mono in \(A\mathtt{-Mod}\) con \(M\) iniettivo.
+    Sappiamo che \(f^{*} \dashv f_* = \mathrm{Hom}_A{(B, -)}\). Allora \(f_*\) è
+    esatto a sinistra e dunque \(f_*{(i)}\) è mono. Sia \(\eta :
+    \mathrm{id}_{B\mathtt{-Mod}} \to f_* \circ f^{*}\) unità dell'aggiunzione.
+    Allora \(\eta_N : N \to f_* {(f^{*}{(N)})} = \mathrm{Hom}_A{(B, N)}\). Viene
+    lasciato in esercizio mostrare che effettivamente tale mappa è \(y \mapsto
+    {(b \mapsto by)}\). 
+
+    Se \(y \in \mathrm{Ker}{(\eta_N)}\) allora \(\eta_N{(y)}{(1)} = 0\), quindi
+    \(\eta_N\) è iniettiva, allora
+    \[
+      N \overset{\eta_N}{\rightarrowtail } f_*{(f^{*}{(N)})}
+      \overset{f_*{(i)}}{\rightarrowtail } f_*{(M)}
+    \]
+    dunque basta dimostrare che \(f_*{(M)}\) è iniettivo, cioè \\
+    \(\mathrm{Hom}_B{(-, f_*{(M)})} \cong \mathrm{Hom}_A{(f^{*}{(-)}, M)}\) è esatto. Questo è vero poiché sono esatti
+    sia \(f^{*}\) che \(\mathrm{Hom}_A{(-, M)}\).
+\end{proof}
+
+\begin{proposition}{}
+    \(\mathtt{Ab} \cong \mathbb{Z}\mathtt{-Mod}\) ha abbastanza iniettivi.
+\end{proposition}
+\begin{corollary}{}
+    Per ogni anello \(A\), \(A\mathtt{-Mod}\) ha abbastanza iniettivi.
+\end{corollary}
+\begin{proof}{}
+    Per la proposizione~\ref{prop:M-inj-div}, \(G\) è iniettivo se e solo se è
+    divisibile (perché \(\mathbb{Z}\) è PID). So che \(\mathbb{Q}/\mathbb{Z} \in
+    \mathtt{Ab}\) è divisibile (e allora anche \(\mathbb{Q}/\mathbb{Z} ^{\Lambda}
+    \) lo è per ogni \(\Lambda\)) allora per ogni \(0 \neq a \in G\), voglio
+    trovare \(f_a : G
+    \to \mathbb{Q}/\mathbb{Z}\) è omomorfismo tale che \(f_a{(a)} \neq 0\). A
+    Questo punto si può definire 
+    \begin{align*}
+        f: G &\longrightarrow {(\mathbb{Q}/\mathbb{Z})}^{G \sminus \{0\} } \\
+        b &\longmapsto f(b) = {(a \mapsto f_a{(b)})}
+    \end{align*}
+    omomorfismo iniettivo. Per trovare tale \(f_a\) considero \(\Span{a}
+    \hookrightarrow G\). Esiste \(g_a : \Span{a} \to \mathbb{Q}/\mathbb{Z}\)
+    omomorfismo tale che \(g{(a)}{(a)} \neq 0\). Allora poiché
+    \(\mathbb{Q}/\mathbb{Z}\) è iniettivo esiste \(f_a : G \to
+    \mathbb{Q}/\mathbb{Z}\) tale che \(f_a|_{\Span{a} } = g_a\) 
+\end{proof}
+
+\begin{remark}{}
+    \(\mathrm{Hom}{(-, \mathbb{Q}/\mathbb{Z})} : \mathtt{Ab}^{op} \to
+    \mathtt{Ab}\) è esatto (poiché \(\mathbb{Q}/\mathbb{Z}\) è iniettivo) e
+    fedele.
+    
+    Infatti, dato \(f : G \to G'\) in \(\mathtt{Ab}\) tale che \(\widehat{f} = f^{*}
+    : \widehat{G}' := \mathrm{Hom}{(G', \mathbb{Q}/\mathbb{Z})} \to \mathrm{Hom}{(G,
+    \mathbb{Q}/\mathbb{Z})} = G\), allora se \(\widehat{f} = 0\), segue che \(f =
+    0\). Infatti, \(\forall h \in \widehat{G}'\), \(f^{*}{(h)} = h \circ f = 0\).
+    Allora se \(\exists a \in G : f{(a)} = a' \neq 0\) allora posso prendere una
+    \(h \in \widehat{G}'\) (la \(f_{a'}\) della dimostrazione sopra) tale che
+    \(h{(a')} = h{(f{(a)})} \neq 0\). Allora necessariamente \(f = 0\).
+\end{remark}
+
+\begin{proposition}{}
+    Le seguenti condizioni sono equivalenti
+\begin{enumerate}[label = \roman*)]
+    \item \(M \in \mathtt{Mod}-A\) è piatto
+    \item \(\widehat{M} \in A\mathtt{-Mod}\) è iniettivo
+    \item \(\forall I \subseteq A \) ideale sinistro, \(M \otimes_A I \to M\)
+        dato da \(x \otimes a \mapsto xa\) è iniettivo.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+    \(M\) è piatto se e solo se \(\forall f : N \rightarrowtail  P\) mono in
+    \(A\mathtt{-Mod}\), \(f_* : M\otimes_A N \to M\otimes_A P\) è
+    iniettivo in \(\mathtt{Ab}\). Questo è equivalente a dire che 
+    \(\widehat{f}_* : \widehat{M \otimes_A P} \to \widehat{M \otimes_A N}\) è
+    suriettivo, dove \(\widehat{M \otimes_A P} = \mathrm{Hom}{(M \otimes_A P,
+    \mathbb{Q}/\mathbb{Z})} \cong \mathrm{Hom}_A{(P, \widehat{M})}\) e \(\widehat{M
+\otimes_A N} \cong \mathrm{Hom}_A{(N, \widehat{M})}\). Ma questo è equivalente a
+dire che \(\hat{m}\) è iniettivo in \(A\mathtt{-Mod}\).
+
+    Per \(iii)\)  basta considerare \(f : I \to A\) inclusione, con \(I\) ideale
+    sinistro.
+\end{proof}
 
