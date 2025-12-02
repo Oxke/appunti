@@ -1,0 +1,285 @@
+\chapter{Algebra Omologica}
+
+Sia \(\mathcal{A}\) una categoria preadditiva, e \(C{(\mathcal{A})}\) la
+categoria dei complessi. Siano \(X^{\cdot }\) e \(Y^{\cdot } \in
+C{(\mathcal{A})}\). Allora dati \(\kappa^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
+per ogni \(i \in \mathbb{Z}\) 
+\begin{equation}{}\label{eq:omotopia-complessi}
+    sono arrivato in ritardo
+\end{equation}
+
+
+\begin{definition}{Omotopia}
+    Sia \(f^\bullet \in C{(\mathcal{A})}{(X^{\cdot }, Y^{\cdot})}\) è
+    \emph{omotopo a 0} se \(\exists k^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
+    tale che vale~\eqref{eq:omotopia-complessi}.
+
+    \(f^{\bullet}\) e \(g^\bullet \in C{(\mathcal{A})}{(X^\bullet, Y^\bullet)}\)
+    sono \emph{omotopi} (denotato con \(f^\bullet \sim g^\bullet\)) se
+    \(f^\bullet - g^\bullet \) è omotopo a 0.
+\end{definition}
+
+\begin{remark}{} 
+    \(\mathtt{Htp}{(X^\bullet, Y^\bullet)} := \{f^\bullet \in C{(\mathcal{A})}
+    {(X^\bullet, Y^\bullet)} | f^\bullet \sim 0\} \) % TODO: cos'è
+\end{remark}
+
+Come conseguenza si ottiene una categoria preadditiva \(K{(\mathcal{A})} :=
+C{(\mathcal{A})} / \mathtt{Htp}\) (categoria \emph{omotopa} di \(\mathcal{A}\))
+con funtore additivo \(Q = Q_{\mathcal{A}} : C{(\mathcal{A})} \to
+K{(\mathcal{A})}\) tale che \(X^\bullet \mapsto X^\bullet\) e \(f^\bullet
+\mapsto [f^\bullet]\) 
+
+\begin{remark}{}
+    Si dimostra che se \(\mathcal{A}\) è abeliana, allora 
+    \[
+      \mathcal{A} \text{ è semisemplice } \iff K{(\mathcal{A})}\text{ è abeliana
+      } \iff K{(\mathcal{A})}\text{ è preabeliana }
+    \]
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    preadditive. Allora \(F\) induce funtori \(C{(F)} : C{(\mathcal{A})} \to C
+    {(\mathcal{B})}\) e \(K{(F)} : K{(\mathcal{A})} \to K{(\mathcal{B})}\) tali
+    che, per ogni \(X \in C{(\mathcal{A})}\), \(C{(F)} {(X^\bullet)} =
+    K{(F)}{(X^\bullet)} = \) 
+    \[
+       = {\left( \dots \to F{(X^{i-1})} \overset{F{(d^{i-1})}}{\to} F{(X^{i})}
+       \overset{F{(d^{i})}}{\to} F{(X^{i+1})} \right)} 
+    \]
+    e per funtorialità \(F{(d^{i})} \circ F{(d^{i-1})} = F{(d^{i} \circ
+    F^{i-1})} = F{(0)} = 0\) perché è additivo.
+
+    E esplicitamente \(\forall f^\bullet : X^\bullet \to Y^\bullet\),
+    \(C{(F)}{(f^\bullet)}^{i} := F{(f^{i})}\) e \(K{(F)} {([f^\bullet])} :=
+    [C{(F)}{(f^\bullet)}]\) (mostrare per esercizio che è sempre ben
+    definito). Di solito si scrive direttamente \(F\) invece di \(C{(F)}\) o
+    \(K{(F)}\) 
+\end{remark}
+
+\begin{lemma}{}
+    Sia \(\mathcal{A}\) una categoria abeliana. Sia \(f^\bullet \in
+    \mathtt{Htp}{(X^\bullet, Y^\bullet)}\). Allora \(H^{i}{(f^\bullet)} = 0\)
+    per ogni \(i \in Z\) 
+\end{lemma}
+\begin{proof}{}
+    \(f^{i} = d_{Y^\bullet} ^{i-1} \circ k^{i} + k^{i+1} \circ
+    d_{X^\bullet}^{i}\). Osservando il diagramma a righe esatte
+\[ \begin{tikzcd}
+	0 & \mathrm{Im}{(d_{X^\bullet} ^{i-1})} & \mathrm{Ker}{(d_{X^\bullet} ^{i})}
+      & H^{i}{(X^\bullet)} & 0 \\
+	0 & \mathrm{Im}{(d_{Y^\bullet} ^{i-1})} & \mathrm{Ker}{(d_{Y^\bullet} ^{i})}
+      & H^{i}{(Y^\bullet)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["I^{i}{(f^\bullet)}"', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["K^{i}{(f^\bullet)}", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{H^i(f^\bullet)}", dashed, from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd} \]
+
+Ma allora \(H^{i}{(f^\bullet)} = 0 \iff K^{i}{(f^\bullet)}\) fattorizza
+attraverso \(I^{i}{(Y^\bullet)} \to K^{i}{(Y^\bullet)}\) se e solo se
+\(\mathrm{Im}{(K^{i}{(f^\bullet)})} \subseteq \mathrm{Im}{(d_{Y^\bullet}
+^{i-1})} \). Allora \(K^{i}{(f^\bullet)}\) è indotto da \(f^{i}\), quindi da
+\(d_{Y^\bullet} ^{i-1} \circ K^{i}\) (perché \(d_{X^\bullet} ^{i}\) è 0 su
+\(K^{i}{(f^\bullet)}\)).
+\end{proof} 
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) abeliana. Allora \(\forall i \in \mathbb{Z}\) il funtore
+    \(H^{i} : C{(\mathcal{A})} \to \mathcal{A}\) induce un funtore additivo
+    \(H^{i} : K{(\mathcal{A})} \to \mathcal{A}\) 
+\end{corollary}
+
+\begin{definition}{Risoluzione}
+    Sia \(\mathcal{A}\) una categoria abeliana. Una \emph{risoluzione} a
+    \emph{sinistra}/\emph{destra} di un oggetto \(X \in \mathcal{A}\) è una
+    successione esatta 
+    \[
+     \dots \to X^{-2} \to X^{-1} \to X^{0} \to X \to 0 / 0 \to X \to X^{0} \to
+     X_{1} \to X_{2} \to \dots
+    \] 
+    (di solito si scrive \(\dots\to X_2 \to X_{1} \to X_{0} \to X \to
+    0\) nel caso di risoluzione sinistra).
+
+    Inoltre una tale soluzione ha \emph{lunghezza} \(n\) se (ad esempio nel caso
+    di risoluzione destra)
+    \[
+      X^{n} \neq 0 \text{ e } {(X^{i} = 0)} \quad \forall i > n
+    \]
+    Se tale \(n\) non esiste si dice che la lunghezza è \(\infty\) 
+\end{definition}
+
+Esistono diversi tipo di risoluzione a seconda del tipo di problemi che si sta
+affrontando. Per i nostri scopi vedremo di studiare gli oggetti iniettivi e
+suriettivi.
+
+\begin{definition}{}
+    Una risoluzione \emph{proiettiva}/\emph{iniettiva} di \(X \in \mathcal{A}\)
+    è una risoluzione \emph{sinistra}/\emph{destra} \emph{con} \(X_{i}\)
+    \emph{proiettivo} / \emph{con }\(X^{i}\) \emph{iniettivo} per ogni \(i \in
+    \mathbb{N}\).
+\end{definition}
+
+\begin{proposition}{}
+    Ogni \(X \in \mathcal{A}\) ha una risoluzione
+    \emph{proiettiva}/\emph{iniettiva} se e solo se \(\mathcal{A}\) ha
+    abbastanza \emph{proiettivi}/\emph{iniettivi}.
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio.
+    \item[\(\impliedby \)] \(\exists d^{0} : X^{0} \to X\) epimorfismo, con
+        \(X^{0}\) proiettivo. Allora \(\exists \tilde{d}^{1} : X^{1} \to
+        \mathrm{Ker}{(d^{0})}\) epi con \(X^{1}\) proiettivo. Allora \(d^{1} :=
+        \mathrm{Ker}{(d^{0})} \circ \tilde{d}^{1} : X^{1} \to X^{0}\) e si può
+        proseguire per induzione.
+\end{itemize}
+\end{proof}
+
+\begin{proposition}{}\label{prop:non-so-niente}
+    Sia \(\mathcal{A}\) una categoria abeliana e sia \(f : X \to Y\) un morfismo
+    di \(\mathcal{A}\). E siano
+    \[ \begin{tikzcd}
+	0 & X & X^{0} & X^{1} & \dots \text{ risoluzione di \(X\) }\\
+    0 & Y & I^{0} & I^{1} & \dots \text{ complesso con ogni \(I^{i}\) iniettivo}
+	\arrow[from=1-1, to=1-2]
+	\arrow["s", from=1-2, to=1-3]
+	\arrow["f"', from=1-2, to=2-2]
+	\arrow["d^{0}", from=1-3, to=1-4]
+	\arrow["f^{0}", dashed, from=1-3, to=2-3]
+	\arrow["d^{1}", from=1-4, to=1-5]
+	\arrow["f^{1}", dashed, from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["t",from=2-2, to=2-3]
+	\arrow["\ell^{0}", from=2-3, to=2-4]
+	\arrow["\ell^{1}", from=2-4, to=2-5]
+\end{tikzcd} \]
+    Si denoti inoltre \(X^\bullet := {\left( 0 \to X^{0} \overset{d^{0}}{\to}
+    X^{1} \to \dots \right)} \) e \(I^\bullet := {\left( 0 \to I^{0}
+\overset{\ell^{0}}{\to} I^{1} \to \dots \right)} \).
+    Allora
+\begin{enumerate}[label = \arabic*)]
+    \item \(\exists \, f : X^\bullet \to I^\bullet\) in \(C{(\mathcal{A})}\) che
+        estende \(f\), cioè \(f^0 \circ s = t \circ f\) 
+    \item \([f^\bullet]\) è unico in \(K{(\mathcal{A})}\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+    Siano \(\tilde{X}^\bullet\) e \(\tilde{I}^\bullet\) i complessi delle righe
+    del diagramma. In particolare \(\tilde{X}^{-1} = X\), \(\tilde{X}^{i} =
+    X^{i}\) per ogni \(i \in \mathbb{N}\) e \(\tilde{X}^{i} = 0\) per ogni \(i <
+    -1\). Similmente per \(\tilde{I}^{\bullet}\). Inoltre si denoti anche \(s =
+    d^{-1}\) e \(t = \ell^{-1}\).
+
+\begin{enumerate}[label = \arabic*)]
+    \item Cerco \(\tilde{f}^\bullet : \tilde{X}^\bullet \to \tilde{I}^\bullet\)
+        in \(C{(\mathcal{A})}\) tale che \(\tilde{f}^{-1} = f\). Dato \(n \in
+        \mathbb{N}\) e supponendo di avere già definito \(\tilde{f}^{i} \) per
+    ogni \(i < n\) tale che \(\tilde{f}^{i} \circ d^{i-1} = \ell^{i-1} \circ
+    \tilde{f}^{i-1}\) per ogni \(i < n\).
+
+    Cerco ora \(f^{n} = \tilde{f}^{n} : X^{n} \to I^{n}\) tale che \(f^{n} \circ
+    d^{n-1} = \ell^{n-1} \circ \tilde{f}^{n-1}\).
+    \[ \begin{tikzcd}
+	\tilde{X}^{n-2} & \tilde{X}^{n-1} & \tilde{X}^{n} = X^{n} \\
+	& \tilde{I}^{n-1} & I^{n}
+	\arrow["{d^{n-2}}", from=1-1, to=1-2]
+	\arrow["{d^{n-1}}", from=1-2, to=1-3]
+	\arrow["{\tilde{f}^{n-1}}"', from=1-2, to=2-2]
+	\arrow[from=1-2, to=2-3]
+	\arrow["{f^n}", dashed, from=1-3, to=2-3]
+	\arrow["{\ell^{n-1}}"', from=2-2, to=2-3]
+\end{tikzcd} \]
+    è esatto, dunque \(I^{n}\) è iniettivo. Allora
+    \[
+      \mathcal{A}{(X^{n}, I^{n})} \overset{d^{n-1 *}}{\to}
+      \mathcal{A}{(\tilde{X}^{n-1}, I^{n})} \overset{d^{n-2*}}{\to}
+      \mathcal{A}{(\tilde{X}^{n-2}, I^{n})}
+    \] è esatta, e quindi esiste \(f^{n} \in \mathcal{A}{(X^{n}, I^{n})}\) tale
+    che 
+    \begin{align*}
+      &d^{n-1*}{(f^{n})} = f^{n} \circ d^{n-1} = \ell_{n-1}  \circ
+      \tilde{f}^{n-1} \iff \\ \iff &0 = d^{n-2*}{\left( \ell^{n-1} \circ \tilde{f}^{n-1}
+      \right)} = \ell^{n-1} \circ \tilde{f}^{n-1} \circ d^{n-2} =
+      \underbrace{\ell^{n-1} \circ \ell^{n-2}}_{0} \circ \tilde{f}^{n-2}
+    \end{align*}
+
+    \item Dati \(f^\bullet, g^\bullet : X^\bullet \to I\) che estendono \(f\) ,
+        devo dimostrare che \(f^\bullet \sim g^\bullet\). Basta allora
+        dimostarre che dato \(h^\bullet : X^\bullet \to I^\bullet\) che estede
+        \(0 : X \to Y\), allora \(h^\bullet \sim 0\).
+        A tale scopo, sia \(\tilde{h}^\bullet : \tilde{X}^\bullet \to
+        \tilde{I}^\bullet\) dato da \(\tilde{h}^{i} := h^{i}\), \(\forall i \in
+        \mathbb{N}\) e \(\tilde{h}^{i} := 0\), \(\forall i < 0\). Allora
+        \(\tilde{h}^\bullet\) è un morfismo in \(C{(\mathcal{A})}\). Voglio
+        dunque dimostrare che \(\exists k^{i} : \tilde{X}^{i} \to
+        \tilde{I}^{i-1}\) tale che 
+        \begin{equation}\label{eq:helpext1}
+          \tilde{h}^{i} = \ell^{i-1} \circ k^{i} + k^{i+1} \circ d^{i} \quad
+          \forall i \in \mathbb{Z}\text{ , con \(k^{0} = 0\)}
+        \end{equation}
+        (infatti da questo seguirebbe che \(\tilde{h}^\bullet \sim 0 \) e
+        \(h^\bullet \sim 0\)).
+
+        Dato \(n \in \mathbb{N}\) e assumendo di avere già definito i \(k^{i}\)
+        per ogni \(i \le n\) tale che~\eqref{eq:helpext1} valga per ogni \(i <
+        n\). Cerco allora \(k^{n+1} : X^{n+1} \to I^{n}\) tale che
+        valga~\eqref{eq:helpext1} per \(i = n\). Allora il seguente diagramma
+        con prima riga esatta commuta:
+    \[ \begin{tikzcd}
+	\tilde{X}^{n-1} & {X}^{n} & {X}^{n+1} \\
+	& I^{n}
+	\arrow["{d^{n-1}}", from=1-1, to=1-2]
+	\arrow["{d^{n}}", from=1-2, to=1-3]
+	\arrow["{h^{n} - \ell^{n-1} \circ k^{n}}"', from=1-2, to=2-2]
+	\arrow["{k^{n+1}}", dashed, from=1-3, to=2-2]
+\end{tikzcd} \]
+    e come prima dunque \(\exists \, k^{n+1}\) tale che
+    valga~\eqref{eq:helpext1} per \(i = n\) se e solo se 
+    \begin{align*}
+        0 &= \ell^{n-1} \circ k^{n} \circ d^{n-1} = \ell^{n-1} \circ {\left(
+        \tilde{h}^{n-1} - \ell^{n-2} \circ k^{n-1} \right)} = \\ &= \tilde{h}^{n} \circ
+      d^{n-1} - \ell^{n-1} \circ \tilde{h}^{n-1} = 0
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}{}
+    Una risoluzione iniettiva di \(X \in \mathcal{A}\) categoria abeliana (se
+    esiste) è unica a meno di isomorfismo in \(K{(\mathcal{A})}\).
+\end{corollary}
+\begin{proof}{}
+    Siano \(0 \to X \to I^\bullet\) e \(0 \to X \to J^\bullet\) risoluzioni
+    iniettive di \(X\). Allora applico la proposizione~\ref{prop:non-so-niente}
+    con \(f = 1_X\), dunque \(\exists \, f^\bullet : I^\bullet \to J^\bullet\)
+    che estende \(1_X\). Analogamente \(\exists \, g^\bullet : J^\bullet \to
+    I^\bullet\) che estende \(1_X\). Segue che anche \(g^\bullet \circ f^\bullet
+    : I^\bullet \to I^\bullet\) estende \(1_X\), ma anche \(1_{i^\bullet} \)
+    estende \(1_X\), da cui \(g^\bullet \circ f^\bullet \sim 1_{I^\bullet} \) e
+    analogamente \(f^\bullet \circ g^\bullet \sim 1_{J^\bullet} \) da cui
+    \([f^\bullet]\) è isomorfismo.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi. Allora
+    c'è un funtore ``risoluzione iniettiva'' \(I_\mathcal{A} : \mathcal{A} \to
+    K(\mathcal{A})\) tale che \(I_{\mathcal{A}} {(X)} := I^\bullet\) e \(0 \to X
+    \to I^\bullet\) è una risoluzione iniettiva (AoC per poterla scegliere per
+    ogni \(X \in \mathcal{A}\)).
+
+    Inoltre \(\forall f : X \to Y\) in \(\mathcal{A}\), \(I_{\mathcal{A}} {(f)}
+    := [f^\bullet]\) con \(f^\bullet\) che estende \(f\). Si ottiene dunque un
+    funtore (esercizio) la cui classe di isomorfismo non dipende dalle scelte.
+\end{corollary}
+
+
+
+
