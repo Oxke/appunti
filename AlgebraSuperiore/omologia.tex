@@ -281,5 +281,300 @@ suriettivi.
 \end{corollary}
 
 
+\begin{theorem}{}\label{thm:funtori-derivati}
+Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+abeliane. Se \(\mathcal{A}\) ha abbastanza iniettivi allora 
+\[
+  R^{i}F :  \mathcal{A}\overset{I_\mathcal{A}}{\to} K{(\mathcal{A})} \overset{F}{\to} 
+  K{(\mathcal{B})} \overset{H^{i}}{\to} \mathcal{B} \quad \forall i \in \mathbb{N}
+\]
+
+e ogni successione esatta \(\Sigma : 0 \to X \overset{f}{\to} Y \overset{g}{\to}
+Z \to 0\) in \(\mathcal{A}\) induce una successione esatta in \(\mathcal{B}\) 
+\[
+  0 \to R^{0}F{(X)} \overset{R^{0}F{(f)}}{\to} R^{0}F{(Y)}
+  \overset{R^{0}F{(g)}}{\to} R^{0}F{(Z)} \overset{w^{0}}{\to} R^{1}F{(X)}
+  \overset{R^{1}F{(f)}}{\to} \dots
+\]
+
+\end{theorem}
+
+% TODO recuperare una lezione da 1h
+
+\begin{corollary}{}
+\begin{enumerate}[label = \arabic*.]
+    \item \(R^{i}F\) è esatto al cntro \(\forall i \in \mathbb{N}\) e \(R^{0}F\)
+        è esatto a sinistra
+    \item \(R^{0}F \cong F \iff F\) è esatto a sinistra 
+    \item \(F\) è eatto se e solo se \(R^{0}F \cong F\) e \(R^{i}F \cong 0\),
+        ossia \(R^{0}F \cong F\) e \(R^{1}F \cong 0\) 
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Chiaro
+    \item Un'implicazione (\(\Rightarrow\)) è una diretta conseguenza di 1. Per
+        \(\impliedby \) invece, sia \(X \in \mathcal{A}\) e sia \(0 \to X \to
+        I^{0} \overset{d^{0}}{\to} I^{1} \to  \dots\) una risoluzione iniettiva
+        di \(X\). Allora
+        \begin{align*}
+            R^{0}F{(X)} &= H^{0}{(F{(I^{\bullet})})} = H^{0}{(0 \to F{(I^{0})}
+            \overset{F{(d^{0})}}{\to} F{(I^{1})} \to \dots)} \cong \\ &\cong
+          \mathrm{Ker}{(F{(d^{0})})} \overset{\text{\(F\) esatto a sx}}{\cong}
+          F{(\mathrm{Ker}{(d^{0})})} \cong F{(X)}
+        \end{align*}
+    \item Se \(R^{0}F \cong F\) e \(R^{i}F \cong 0\) per ogni \(i > 0\), allora
+        \(R^{0}F \cong F\) e \(R^{1} F \cong 0\). Adesso, per il punto 2 \(F\) è
+        esatto a sinsitra e anche a destra (poiché \(R^{1}F \cong 0\)). Resta da
+        dimostrare che se \(F\) è esatto, allora \(R^{i}F \cong 0\) per ogni \(i
+        > 0\). Ma effettivamente abbiamo che
+        \[
+          R^{i}F{(X)} = H^{i}{(F{(I^\bullet)})} = 0 \quad \forall i > 0
+        \]
+        poiché \(F\) è esatto e \(0 \to X \to I^{0} \to I^{1} \to \dots\) è
+        esatta, per cui anche la successione \(0 \to F{(X)} \to F{(I^{0})} \to F{(I^{1})} \to
+        \dots\) è esatta.
+\end{enumerate}
+\end{proof}
+\begin{remark}{}
+    I funtori derivati destri sono interessanti solo per funtori esatti a
+    sinistra (ma non a destra)
+\end{remark}
+
+
+\begin{definition}{Funtore derivato sinistro}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo, con
+    \(\mathcal{A}\) con abbastanza proiettivi. Allora i funtori derivati
+    sinistri di \(F\) sono 
+    \(
+        L_{i}F := {(R^{i}F^{op})}^{op}
+    \).
+
+    In altre parole, \(\forall X \in \mathcal{A}\), presa \(p_\bullet \to X \to
+    0\) una risoluzione proiettiva di \(X\) (con \(p_\bullet = \dots \to p_{1}
+    \to p_{0} \to 0\) e 
+    \[
+      L_{i}F{(X)} := H_{i}{(F{(p_\bullet)})} = H_{i}{(\dots \to F{(p_{1})} \to
+      F{(p_{0})} \to 0)}
+    \]
+\end{definition}
+
+Il teorema~\ref{thm:funtori-derivati} diventa: ogni \(\Sigma : 0 \to X
+\overset{f}{\to} Y \overset{g}{\to} Z \to 0\) in \(\mathcal{A}\) induce una
+successione esatta in \(\mathcal{B}\), data da
+\[
+  \dots \to l_{1}F{(Z)} \overset{w_{0}}{\to} L_{0}F{(X)}
+  \overset{L_{0}F{(f)}}{\to} L_{0}F{(Y)} \overset{L_{0}F{(g)}}{\to} L_{0}F{(Z)}
+  \to 0
+\]
+e il corollario diventa che \(L \circ F\) è esatto a destra, e \(L \circ F \cong
+F\) se e solo se \(F\) è esatto a destra.
+
+\begin{remark}{}
+    Se abbiamo \(F : \mathcal{A}^{op} \to \mathcal{B}\) additivo, con
+    \(\mathcal{A}\) con abbastanza proiettivi, allora gli \(R^{i}F\) si
+    calcolano con le risoluzione proiettive in \(\mathcal{A}\), ossia \(\forall
+    X \in \mathcal{A}\), \(R^{i}F{(X)} = H^{i}{(F{(p_\bullet)})}\) con
+    \(p_\bullet \to X \to 0\) risoluzione proiettiva.
+
+    Presa dunque \(0 \to X \to Y \to Z \to 0\) esatta in \(\mathcal{A}\), questa
+    induce \(0 \to R^{0}F{(Z)} \to R^{0}F{(Y)} \to R^{0}F{(X)} \to R^{1}F{(Z)}
+    \to \dots\) esatta in \(\mathcal{B}\).
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) additivo, con \(\mathcal{A}\) con
+    abbastanza iniettivi. Se ho un diagramma commutativo a righe esatte in
+    \(\mathcal{A}\) del tipo
+\[ \begin{tikzcd}
+	{\Sigma:} & 0 & X & Y & Z & 0 \\
+	{\Sigma^\prime:} & 0 & {X^\prime} & {Y^\prime} & {Z^\prime} & 0
+	\arrow[from=1-2, to=1-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+
+allora il seguente diagramma commuta:
+\[ \begin{tikzcd}
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
+    \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
+         R^{i+1}F{(X^{\prime})}& \dots
+	\arrow[from=1-1, to=1-2]
+	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
+	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+
+Inoltre Se \(F, F^{\prime} : \mathcal{A} \to \mathcal{B}\) sono funtori
+additivi, con \(\mathcal{A}\) con abbastanza iniettivi e \(\alpha : F \to
+F^{\prime}\) una trasformazione naturale, allora \(\alpha\)  induce
+\(C{(\alpha)} : C{(F)} \to C{(F')}\) (\(C{(\mathcal{A})} \to C{(\mathcal{B})}\))
+data da \(C{(\alpha)}_X : C{(F)}{(X^\bullet)} \to C{(F)}{(Y^\bullet)}\) definita
+nel modo ovvio. Si scrive per brevità \(\alpha\) al posto di \(C{(\alpha)}\).
+Analogamente \(\alpha\) al posto di \(K{(\alpha)}\) definita nello stesso modo.
+Allora \(\alpha\) induce \(H^{i} \circ \alpha \circ I_{\mathcal{A}} \), \(H^{i}
+\circ F \circ I_\mathcal{A} = R^{i}F \to R^{i}F^{\prime}\) trasformazione
+naturale, per ogni \(i \in \mathbb{N}\). In altre parole, il seguente diagramma
+commuta:
+\[ \begin{tikzcd}
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
+    \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
+         R^{i+1}F{(X^{\prime})}& \dots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{(R^{i}\alpha)}_X"', from=1-2, to=2-2]
+	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
+	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+\end{remark}
+\begin{example}{}
+   Sia \(\mathcal{A}\) una categoria abeliana, \(X \in \mathcal{A}\). Allora i
+   funtori \(\mathcal{A}{(X, -)} : \mathcal{A} \to \mathtt{Ab}\),
+   \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to \mathtt{Ab}\) sono esatti a
+   sinistra. Se \(\mathcal{A}\) ha abbastanza iniettivi si indica con 
+   \[
+     \mathtt{Ext}_{\mathcal{A}}^{i}{(X, -)} := R^{i}{(\mathcal{A})}{(X, -)}
+   \]
+   e per ogni successione esatta in \(\mathcal{A}\), \(0 \to Y^{\prime}
+   \overset{f}{\to} Y \overset{g}{\to} Y'' \to 0\) ottengo una successione
+   esatta in \(\mathtt{Ab}\), 
+   \[
+     \dots \to \mathrm{Ext}_{\mathcal{A}} ^{i}{(X, Y')} \overset{f_*}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i}{(X, Y)} \overset{g_*}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i}{(X, Y'')} \overset{w^{i}}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i+1}{(X, Y')}
+   \]
+   con \(\mathrm{Ext}_\mathcal{A}^{i}{(X, -)} \cong \mathcal{A}{(X, -)} =
+   \mathrm{Hom}_\mathcal{A}{(X, -)}\).
+
+   Se \(\mathcal{A}\) ha abbastanza proiettivi indichiamo con
+\(\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(-, X)} = R^{i}{(\mathcal{A})}{(-,
+   X)}\). Esplicitamente se \(0 \to Y' \overset{f}{\to} Y \overset{g}{\to} Y''
+   \to 0\) è una successione esatta in \(\mathcal{A}\), allora essa induce la
+   successione esatta
+   \[
+    \dots \to \overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y'', X)} \overset{g^{*}}{\to}
+\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y, X)} \overset{f^{*}}{\to}
+\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y'', X)}
+\overset{\overline{w}^{i}}{\to}
+ \overline{\mathrm{Ext}}_\mathcal{A}^{i+1}{(Y'', X)} \to \dots
+   \]
+   Se \(\mathcal{A} =A\mathtt{-Mod}\) scrivo \(\mathrm{Ext}_A^{i}\) e
+\(\overline{\mathrm{Ext}}_A^{i}\) invece del più pedante
+   \(\mathrm{Ext}_{A\mathtt{-Mod}} ^{i}\) e
+\(\overline{\mathrm{Ext}}_{A\mathtt{-Mod}} ^{i}\).
+
+Inoltre, \(\forall M \in \mathtt{Mod-}A\), \(M \otimes_A - : A\mathtt{-Mod} \to
+\mathtt{Ab}\) è esatto a destra. Allora si indica \(\mathrm{Tor}_i^{A}{(M, -)}
+:= L_{i}{(M \otimes_A -)}\) e per ogni \(0 \to N' \overset{f}{\to} N
+\overset{g}{\to} N'' \to 0\) esatta in \(A\mathtt{-Mod}\), essa induce
+\[
+  \dots \to \mathrm{Tor}_i^{A}{(M, N')} \overset{f_*}{\to}
+  \mathrm{Tor}_i^{A}{(M, N)} \overset{g_*}{\to} \mathrm{Tor}_i^{A} \to
+  \mathrm{Tor}_{i+1} ^{A}{(M, N')} \to \dots
+\]
+e il funtore \(\mathrm{Tor}_0{(M, -)} \cong M \otimes_A -\).
+
+Dualmente, se \(N \in A\mathtt{-Mod}\), allora \(- \otimes_A N : \mathtt{Mod-}A
+\to \mathtt{Ab}\) è esatto a destra, dunque \(\overline{\mathrm{Tor}}_i^{A}{(-,
+N)} := L_{i}{(- \otimes_A N)}\).
+
+\end{example}
+
+Sia ora \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi, \(f : X
+\to X'\) un morfismo di \(\mathcal{A}\). Allora \(\forall Y \in \mathcal{A}\),
+\(f^{*} : \mathcal{A}{(X', Y)} \to \mathcal{A}{(X, Y)}\) definisce una
+trasformazione naturale \(f^{*} : \mathcal{A}{(X', -)} \to \mathcal{A}{(X, -)}\)
+che induce una trasformazione naturale \(R^{i}f^{*} =: f^{*} :
+\mathrm{Ext}_\mathcal{A}^{i}{(X', -)} \to \mathrm{Ext}^{i}_\mathcal{A}{(X, -)}\)
+per ogni \(i \in \mathbb{N}\). Si ottiene dunque un funtore
+\(\mathrm{Ext}_\mathcal{A}^{i}{(-, =)} : \mathcal{A}^{op} \times \mathcal{A} \to
+\mathtt{Ab}\) tale che \(\mathrm{Ext}_\mathcal{A}^{0}{(-, =)} \cong
+\mathcal{A}{(-, =)}\). 
+
+Analogamente, se \(\mathcal{A}\) ha abbastanza proiettivi, ottengo, per ogni \(i
+\in \mathbb{N}\), un funtore \(
+  \overline{\mathrm{Ext}}_\mathcal{A}^{i} : \mathcal{A}^{op} \times \mathcal{A}
+  \to \mathtt{Ab} \text{ tale che } \overline{\mathrm{Ext}}_\mathcal{A}^{0}{(-,
+  =)} \cong \mathcal{A}{(-, =)}
+\). 
+
+Analogamente (sorry se qui noi si continua a fare analogie), per ogni anello
+\(A\) si ottengono funtori \(\mathrm{Tor}_i^{A}{(-, =)}\),
+\(\overline{\mathrm{Tor}}_i^{A}{(-, =)} : \mathtt{Mod-}A \times A\mathtt{-Mod}
+\to \mathtt{Ab}\) tali che \(\mathrm{Tor}_0^{A}{(-, =)} \cong
+\overline{\mathrm{Tor}}_0^{A}{(-, =)} \cong - \otimes_A =\).
+
+\begin{proposition}{}
+    Siano \(F, F', F'' : \mathcal{A} \to \mathcal{B}\) funtori additivi,
+    \(\mathcal{A}\) con abbastanza iniettivi, \(F' \overset{\alpha}{\to} F
+    \overset{\beta}{\to} F''\) trasformazioni naturali tali che \(\forall I \in
+    \mathcal{A}\) iniettivo, la successione \(0 \to F'{(I)}
+    \overset{\alpha_I}{\to} F{(I)} \overset{\beta_I}{\to} F''{(I)} \to 0\) è
+    esatta in \(\mathcal{B}\)\dots
+    
+    Allora, per ogni \(X \in \mathcal{A}\), la seguente successione è esatta in
+    \(\mathcal{B}\):
+    \[
+      \dots \to R^{i}F'{(X)} \overset{{(R^{i}\alpha)}_X}{\to} R^{i}F{(X)}
+      \overset{{(R^{i}\beta)}_X}{\to} R{(i)}F''{(X)} \to R^{i+1}F''{(X)} \to \dots
+    \]
+\end{proposition}
+
+\begin{proof}{}
+    \(0 \to X \to I^\bullet\) è una risoluzione iniettiva di \(X\). Allora
+    \(R^{i}F^{(', '')}{(X)} := H^{i}{(F^{{(', '')}}{(I^\bullet)})}\). Allora la
+    successione 
+    \[
+      0 \to F'{(I^\bullet)} \overset{\alpha_{I^\bullet} }{\to} F{(I^\bullet)}
+      \overset{\beta_{I^\bullet} }{\to} F''{(I^\bullet)} \to 0
+    \]
+    è esatta in \(C{(\mathcal{B})}\) perché per ipotesi \(0 \to F'{(I^{n})}
+    \overset{\alpha_{I^{n}} }{\to} F{(I^{n})} \overset{\beta_{I^{n}} }{\to}
+    F''{(I^{n})}\) lo è in \(\mathcal{B}\) e appplico la successione esatta di
+    coomologia.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) con abbastanza iniettivi. Una successione \(0 \to X''
+    \overset{f}{\to} X \overset{g}{\to} X' \to 0\) esatta in \(\mathcal{A}\)
+    induce, per ogni \(Y \in \mathcal{A}\), la successione esatta in
+    \(\mathtt{Ab}\) 
+    \[
+      \dots \to \mathrm{Ext}_{\mathcal{A}^{i}{(X', Y)}} \overset{g^{*}}{\to} 
+      \mathrm{Ext}_{\mathcal{A}}^{i}{(X, Y)} \overset{f^{*}}{\to}  \mathrm{Ext}_{\mathcal{A}}
+      ^{i}{(X'', Y)} \to \mathrm{Ext}_\mathcal{A}^{i+1}{(X', Y)} \to \dots
+    \]
+    e analogamente, partendo dalla successione esatta corta \(0 \to Y' \to Y \to
+    Y'' \to 0\) esatta in \(\mathcal{A}\), allora \(\forall X \in \mathcal{A}\)
+    la seguente successione è esatta in \(\mathtt{Ab}\):
+\end{corollary}
 
 
