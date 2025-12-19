@@ -1350,6 +1350,379 @@ aperto di \(U\), } \sigma_{i} \in \mathcal{F}^{s}{(U_{i})}\,\,\forall i \in I \}
   \end{align*}
 \end{proof}
 
+\begin{definition}{Sotto(pre)fascio}
+    Sia \(\mathcal{F}\) un (pre)fascio. \(\mathcal{F}' \subseteq \mathcal{F} \)
+    è un \emph{sottoprefascio} se \(\forall U \in \mathrm{Open}{(X)}\),
+    \(\mathcal{F}'{(U)} \subseteq \mathcal{F}{(U)} \) e \(\forall \sigma \in
+    \mathcal{F}'{(U)}\), \(\forall V \subseteq U \) aperto, \(\sigma|_{V} \in
+    \mathcal{F}^{\prime}{(V)}\)
+\end{definition}
+    
+    Se \(\mathcal{F}\) è separato, allora \(\mathcal{F}^{\prime}\) è separato.
+
+    Se \(\mathcal{F}\) è un fascio, allora \(\mathcal{F}'^{a}\) si descrive come
+    \(\mathcal{F}'^{a}{(U)} := \{\sigma \in \mathcal{F}{(U)}: \exists
+    \{U_{i}\}_{i \in I}\\ \text{ ric. aperto di \(U\) t.c. }\sigma|_{U_{i}} \in
+\mathcal{F}'{(U_{i})}, \, \forall i \in I\}\) 
+
+In particolare se \(\varphi : \mathcal{F} \to \mathcal{G}\) è un morfismo di
+\(0_X\mathtt{-Mod}\), allora \(\mathrm{coim}\varphi =
+\mathrm{coker}{(ker{(\varphi )})} = \mathrm{coker}{(ker_\mathcal{P}{(\varphi
+)})} = \eta \circ \mathrm{coker}_\mathcal{P}{(\mathrm{ker}_\mathcal{P}{(\varphi
+)})} = \eta \circ \mathrm{coim}_\mathcal{P}{(\varphi )}\), da cui
+\(\mathrm{Im}{(\varphi )} = \mathrm{Im}_\mathcal{P}{(\varphi )}^{a}\). Allora
+
+Allora \(\mathrm{Im}_\mathcal{P}{(\varphi )} \subseteq \mathcal{G} \) è un
+sottoprefascio (separato).
+\[
+  \implies \mathrm{Im}{(\varphi )}{(U)} = \{\sigma \in \mathcal{G }{(U)} :
+  \exists \{U_{i}\} _{i \in I} \text{ ric. aperto di \(U\) t.c. }\sigma|_{U_{i}}
+\in \mathrm{Im}{(\varphi_{U_{i}}} \, \forall i \in I\} 
+\]
+
+Sia \({(X, 0_X)}\) uno spazio anellato. Per ogni \(U \in \mathrm{Open}{(X)}\)
+c'è un funtore \(\Gamma{(U, -)} : 0_X\mathtt{-Mod} \to 0_X{(U)}\mathtt{-Mod}\).
+Tale funtore è esatto a sinistra perché è composizione dell'inclusione
+\(0_X\mathtt{-Mod} \hookrightarrow 0_X\mathtt{-PMod}\) (che è esatto a sinistra
+perché aggiunto destro di \({(-)}^{a}\)) con \(\Gamma{(U, -)}:
+0_X\mathtt{-PMod} \to 0_X{(U)}\mathtt{-Mod}\), definito da \(\mathcal{F} \mapsto
+\mathcal{F}{(U)}\) che è esatto.
+
+\begin{remark}{}
+    In generale \(\Gamma{(X, -)}\) non è esatto (a destra), cioè non preserva
+    gli epimorfismi. In altre parole esiste \(\varphi  : \mathcal{F} \to
+    \mathcal{G}\) in \(0_X\mathtt{-Mod}\) localmente suriettivo ma tale che
+    \(\varphi _X : \mathcal{F}{(X)} \to \mathcal{G}{(X)}\) non è suriettivo.
+    Il prossimo esempio mostra che questo è vero
+\end{remark}
+
+\begin{example}{}
+    Suppongo che \(\exists A\) anello tale che \(0_X{(U)} \subseteq A^{U} \) per
+    ogni \(U \in \mathrm{Open}{(X)}\). Allora \(\forall Y \subseteq X \) sia
+    \(\mathcal{I}_Y \subseteq 0_X \) sottofascio (di \(0_X\)-moduli, detto di
+    ``ideali''), definito per ogni \(U \in \mathrm{Open}{(X)}\) da
+    \(\mathcal{I}_Y{(U)} := \{\sigma \in 0_X{(U)} : \sigma|_Y = 0\}\). Ottengo
+    allora un epimorfismo in \(0_X\mathtt{-Mod}\) \(\pi: 0_X \to 0_X /
+    \mathcal{I}_Y\). Cerco un esempio in cui \(\pi_X : 0_X {(X)} \to {(0_X /
+    \mathcal{I}_Y)}{(X)}\) non suriettivo. Preso ora \(0_X = A_X \) (fascio
+    localmente costante) con \(A \neq 0\), \(X\) connesso e \(Y = \{x_{1},
+    x_{2}\} \) con \(x_{1} \neq x_{2}\) punti chiusi.
+
+Allora \(U_{1} = X \sminus \{x_{2}\} \) e \(U_{2} = X \sminus \{x_{1}\}\)
+    sono aperti e \(\{U_{1}, U_{2}\} \) è un ricoprimento aperto di \(X\). Sia
+    ora \(a_{1}, a_{2} \in A\) con \(a_{1} \neq a_{2}\). Sia \(\sigma_{i} \in
+    0_X{(U_{i})}\) definito da \(\sigma_i{(x)} := a_{i}\) per ogni \(x \in
+    U_{i}\). Allora \(\sigma_{2}|_{U_{1,2}}, \sigma_{1}|_{U_{1,2}} \in
+    \mathcal{I}_Y{(U_{1,2})} = A_X{(U_{1,2} )}\).
+
+    \begin{align*}
+      &\implies \overline{\sigma}_i := \pi{(\sigma_i)}\in {(0_X /
+      \mathcal{I}_Y)}{(U_{i})} \text{ t.c. } \overline{\sigma}_1 |_{U_{1,2} } =
+        \overline{\sigma}_2|_{U_{1,2}} \\&\implies \exists!\, \tau \in {(0_X /
+      \mathcal{I}_Y)}{(X)} \text{ t.c. } \tau|_{U_{i}} = \overline{\sigma}_i
+    \end{align*}
+
+    Se ora per assurdo \(\exists \sigma \in 0_X{(X)}\) tale che \(\pi{(\sigma)}
+    = \tau\), allora \(\sigma{(x)} = a \in A\) per ogni \(x \in X\). Ma
+    \[
+      \pi{(\sigma|_{U_{i}} )} = \pi{(\sigma)}|_{U_{i}} = \tau|_{U_{i}} =
+      \overline{\sigma}_i = \pi{(\sigma_i)} \implies \sigma|_{U_{i}} - \sigma_i
+      \in \mathcal{I}_Y{(U_{i})}
+    \]
+    dunque \(a = \sigma{(x_{i})} = \sigma_i{(x_{i})} = a_{i}\) che è assurdo.
+\end{example}
+
+\begin{note}[zione]
+    Per ogni \(\mathcal{F}, \mathcal{G} \in 0_X\mathtt{-Mod}\) scrivo
+    \(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}\) o \(\mathrm{Hom}_{0_X}
+    {(\mathcal{F}, \mathcal{G})}\) invece di \(0_X\mathtt{-Mod}{(\mathcal{F},
+    \mathcal{G})}\).
+
+    \(\mathrm{Hom}_X{(0_X, \mathcal{F})}\) è in modo naturale un
+    \(0_X{(X)}\)-modulo.
+\end{note}
+
+\begin{remark}{}
+    Il funtore \(\mathrm{Hom}_X{(0_X, -)} : 0_X\mathtt{-Mod} \to
+    0_X{(X)}\mathtt{-Mod}\) è isomorfo a \(\Gamma{(X, -)}\).
+    Infatti per ogni \(\mathcal{F} \in 0_X\mathtt{-Mod}\),
+    \(\mathrm{Hom}_X{(0_X, \mathcal{F})} \to \mathcal{F}{(X)}\) definito da
+    \(\varphi  \mapsto \varphi _X{(1)}\) ha inversa \(\mathcal{F}{(X)} \to
+    \mathrm{Hom}_X{(0_X, \mathcal{F})}\) dato da \(\sigma \mapsto
+    \widehat{\sigma}\), con \(\widehat{\sigma}_U{(\alpha)} := \alpha \sigma|_U
+    \in \mathcal{F}{(U)}\) (\(\alpha \in 0_X{(U)}\)).
+
+    Quindi in generale \(\mathrm{Hom}_X{(0_X,-)}\) non è esatto, cioè \(0_X\)
+    non è oggetto proiettivo di \(0_X\mathtt{-Mod}\).
+    È possibile dimostrare che non ci sono abbastanza proiettivi in
+    \(0_X\mathtt{-Mod}\). D'altra parte ci sono sempre abbastanza iniettivi
+    (vedremo).
+\end{remark}
+
+\begin{definition}{Coomologia di fasci}
+    Per ogni \(n \in \mathbb{N}\), \(H^{n}{(X, -)} := R^{n}\Gamma{(X, -)} :
+    0_X\mathtt{-Mod} \to 0_X{(X)}\mathtt{-Mod}\).
+
+    Quindi per ogni successione esatta \(0 \to \mathcal{F}' \to \mathcal{F} \to
+    \mathcal{F}'' \to 0\) in \(0_X\mathtt{-Mod}\) ottengo una successione esatta
+    \[
+      0 \to H^{0}{(X, \mathcal{F}')} \to H^{0}{(X, \mathcal{F})} \to H^{0}{(X,
+      \mathcal{F}'')} \to H^{1}{(X, \mathcal{F}')} \to \dots
+    \]
+\end{definition}
+
+\begin{proposition}{}
+    Sia \({(X, O_X)}\) uno spazio anellato. Allora in \(O_X\mathtt{-Mod}\) ci
+    sono prodotti e coprodotti (i.e. è completa e cocompleta).
+\end{proposition}
+\begin{proof}{}
+    È chiaro per \(O_X\mathtt{-PMod}\), infatti
+    \[
+      {(\prod_{\lambda \in \Lambda} \mathcal{F}_\lambda)} {(U)} = \prod_{\lambda
+      \in \Lambda} \mathcal{F}_\lambda{(U)} \in O_X{(U)}\mathtt{-Mod} 
+    \]
+    e analogamente per \(\coprod_{\lambda \in \Lambda} \mathcal{F}_\lambda\) 
+
+    Se \(\mathcal{F}_\lambda\) sono fasci, allora \(prod_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda\) è un fascio (esercizio). %TODO eser
+    Per il coprodotto, risulta che \(\coprod_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda = {\left( \coprod^{\mathcal{P}}_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda \right)} ^{a}\), poiché \({(-)}^{a}\) preserva i
+    colimiti e \(\mathcal{F}_\lambda^{a}\cong \mathcal{F}_\lambda\) se
+    \(\mathcal{F}_\lambda\) è un fascio.
+\end{proof}
+
+\begin{definition}{Spiga}
+    Sia \(\mathcal{F}:\mathrm{Open}{(X)}^{op} \to \mathcal{C} \in \mathtt{PSh}{(X, \mathcal{C})}\). Allora la
+    \emph{spiga} di \(\mathcal{F}\) in \(x \in X\) è 
+    \[
+      \mathcal{F}_x := \mathrm{colim} \,\mathcal{F}|_{\mathrm{Open}_x{(X)}^{op}} \in
+      \mathcal{C}
+    \]
+    dove \(\mathrm{Open}_x{(X)} := \{U \in \mathrm{Open}{(X)} : x \in U\} \).
+    Allora \(\mathrm{Open}_x{(X)}^{op}\) è un \emph{insieme filtrante}, cioè
+    della forma \({(I, \le )}\) insieme (pre)ordinato tale che \(\forall i, j
+    \in I\), \(\exists k \in I\) tale che \(i , j \le k\) (infatti dati \(U, V
+    \in \mathrm{Open}_x{(X)}\) esiste \(W \in \mathrm{Open}_x{(X)}\) tale che
+    \(W \subseteq U, V \)).
+\end{definition}
+
+Sia \(F : {(I, \le )}\to \mathcal{C}\) un funtore con \({(I, \le )}\) filtrante
+e \(\mathcal{C}\) una categoria concreta. Allora
+\[
+  \mathrm{colim}\, F \overset{\text{insieme}}{=} {\left( \coprod_{i \in I} F{(i)}
+  \right)} /_\sim 
+\]
+con \(a \sim b \iff \exists k \in I\) tale che \(i, j \le k\) e \(F{(i\to
+k)}{(a)} = F{(j \to k)}{(b)} \in F{(k)}\) con morfismi naturali \(F{(i)} \to
+\mathrm{colim}\, F\).
+
+Dunque esplicitamente possiamo avere
+\[
+  \mathcal{F}_x = {\left( \coprod_{U \in \mathrm{Open}{(X)}} \mathcal{F}{(U)}
+  \right)}/_\sim 
+\]
+con \(\sigma \in \mathcal{F}{(U)} \sim \tau \in \mathcal{F}{(V)}\iff \exists \,W
+\in \mathrm{Open}_x{(U \cap V)}\) tale
+che \(\sigma|_W = \tau|_W\) e gli elementi di \(\mathcal{F}_x\) vengono detti
+\emph{germi} di sezioni di \(\mathcal{F}\) in \(x\).
+
+\begin{note}[zione]
+    Data \(\sigma \in \mathcal{F}{(U)}\), con \(U \in \mathrm{Open}_x {(X)}\),
+    allora indico con \(\sigma_x = [\sigma] \in  \mathcal{F}_x\).
+\end{note}
+
+Se \(\mathcal{F} \in O_X\mathtt{PMod}\), allora \(\mathcal{F}_x\) è
+\(O_{X,x}\)-modulo.
+
+\(\varphi : \mathcal{F} \to \mathcal{G}\) morfismo di prefasci induce morfismi
+in \(\mathcal{C}\) di \(O_X,x\)-moduli \(\varphi_x : \mathcal{F}_x \to
+\mathcal{G}_x\) per ogni \(x \in X\) tale che \(\forall U \in
+\mathrm{Open}_x{(X)}\) e \(\forall \sigma \in \mathcal{F}{(U)}\),
+\(\mathcal{F}_x{(\sigma_x)} = \varphi _U{(\sigma)}_x\) 
+
+\begin{lemma}{}\label{lem:inj}
+    Sia \(\varphi : \mathcal{F} \to \mathcal{G}\) morfismo di prefasci. Allora
+    \(\varphi \) è localmente \emph{iniettivo}/\emph{suriettivo} se e solo se
+    \(\varphi_x : \mathcal{F}_x \to \mathcal{G}_x\) è
+    \emph{iniettivo}/\emph{suriettivo} per ogni \(x \in X\).
+
+    In particolare \(\eta_\mathcal{F} : \mathcal{F} \to \mathcal{F}^{a}\) induce
+    un isomorfismmo sulle spighe.
+\end{lemma}
+
+\begin{remark}{}
+    Una successione in \(O_X\mathtt{-Mod}\) è esatta se e solo se lo è sulle
+    spighe.
+\end{remark}
+
+\begin{proof}[Dimostrazione lemma (\emph{iniettivo})] \( \) 
+    \begin{itemize}
+        \item[\(\implies \)] Sia \(\sigma_x, \tau_x \in \mathcal{F}_x\), con
+            \(\sigma \in \mathcal{F}{(U)}\), \(\tau \in \mathcal{F}{(V)}\) e
+            \(U, V \in \mathrm{Open}_x{(X)}\) tali che \(\varphi_x{(\sigma_x)} =
+            \varphi _x{(\tau_x)}\). Allora devo dimostrare \(\sigma_x =
+            \tau_x\).
+
+            Sappiamo già che \(\varphi {(\sigma)}_x = \varphi {(\tau)}_x\).
+            Allora esiste \(W \in \mathrm{Open}_x{(U \cap V)}\) tale che
+            \(\varphi {(\sigma)}|_W = \varphi {(\tau)}|_W\) ma allora \(\varphi
+            {(\sigma |_W)} = \varphi {(\tau|_W)}\). Poiché \(\varphi \) è
+            localmente iniettivo, allora esiste un \(W' \in
+            \mathrm{Open}_x{(W)}\) tale che \({(\sigma|_W)}|_{W^{\prime}} =
+        {(\tau|_W)}|_{W^{\prime}} \) da cui \(\sigma |_{W'} = \tau|_{W^{\prime}}
+        \), per cui \(\sigma_x = \tau_x\) 
+        \item[\(\impliedby \)] Sia \(U \in \mathrm{Open}{(X)}\) e siano
+            \(\sigma, \tau \in \mathcal{F}{(U)}\) tali che \(\varphi {(\sigma)} =
+            \varphi {(\tau)}\). Per ogni \(x \in U\), abbiamo che \(\varphi
+            {(\sigma)}_x = \varphi {(\tau)}_x\)  da cui \(\varphi _x{(\sigma_x)}
+            = \varphi _x{(\tau_x)}\) per cui \(\sigma_x = \tau_x\) poiché
+            \(\varphi _x\) è iniettiva. Allora \(\exists \, U_x \in
+            \mathrm{Open}_x{(U)}\) tale che \(\sigma|_{U_x}  = \tau_{U_x}\).
+
+            Adesso però \(\{U_x\}_{x \in U}  \) è un ricoprimento aperto di
+            \(U\) tale che \(\sigma|_{U_x} = \tau|_{U_x} \) per ogni \(x \in
+            U\), e quindi \(\varphi \) è localmente iniettiva.
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}{}
+    Sia \({(X, O_X)}\) uno spazio anellato. Allora \(O_X\mathtt{-Mod}\) ha
+    abbastanza iniettivi.
+\end{proposition}
+\begin{proof}{}
+    Per ogni \(x \in X\), 
+    \begin{align*}
+        O_X\mathtt{-Mod} &\longrightarrow O_{X,x}\mathtt{-Mod} \\
+         \mathcal{F}&\longmapsto \mathcal{F}_x
+    \end{align*}
+    è aggiunto sinistro di 
+    \begin{align*}
+        O_{X,x} \mathtt{-Mod}  &\longrightarrow O_X\mathtt{-Mod} \\
+        M &\longmapsto \widehat{M}
+    \end{align*}
+    con \(\widehat{M}{(U)} = M {(x \in U)}\) con restrizione \(1_M\) quando
+    possibile.
+
+    Questo sono aggiunti perché \(\forall \mathcal{F} \in O_X\mathtt{-Mod}\) e
+    \(\forall M \in O_{X,x}\mathtt{-Mod}\), 
+    \[
+      \mathrm{Hom}_{O_{X,x} } {(\mathcal{F}_x, M)} \cong
+      \mathrm{Hom}_X{(\mathcal{F}, \widehat{M})} \ni \varphi 
+    \]
+    dato da morfismi di \(O_X{(U)}\)-moduli \(\varphi {(U)} \to \widehat{M}{(U)}
+    = M\) per ogni \(U \in \mathrm{Open}_x{(X)}\) tale che \(\forall U \subseteq
+    V \in \mathrm{Open}_x{(X)}\). Per la proprietà universale del colimite,
+    \(\varphi _U{(\sigma|_V)} = \varphi_V{(\sigma)}\) per ogni \(\sigma \in
+    \mathcal{F}{(V)}\).
+
+    L'unità \(\eta\) di questa aggiunzione è tale che \(\forall \mathcal{F} \in
+    O_X\mathtt{-Mod}\) e \(\forall x \in X\)
+    \[
+      \eta_\mathcal{F}{(x)} = \eta_x : \mathcal{F} \to \widehat{\mathcal{F}_x} 
+    \]
+    induce un isomorfismo sulla spiega in \(x\), \(\mathcal{F}_x \to {\left(
+    \widehat{\mathcal{F}_x} \right)}_x\) e ottengo un morfismo in
+    \(O_X\mathtt{-Mod}\) \(\mathcal{F} \to \prod_{x \in X}
+    \widehat{\mathcal{F}_x}\) indotto dalle \(\eta{(x)}\) per ogni \(x \in X\)
+    che è iniettiva su ogni spiga, quindi è (localmente) iniettiva per il
+    lemma~\ref{lem:inj}.
+
+    Se dimostro che esiste un monomorfismo \(\varphi {(x)} : \mathcal{F}_x \to
+    \mathcal{I}_x\) con \(\mathcal{I}_x\) iniettivo, ottengo
+    \[
+      \prod_{x \in X} \varphi {(x)} : \prod_{x \in X} \widehat{\mathcal{F}_x}
+      \to \prod_{x \in X} \mathcal{I}_x
+    \]
+    iniettivo con \(\prod_{x \in X} \mathcal{I}_x\) iniettivo.
+
+Più in generale trovo monomorfismo \(\widehat{\mathcal{M}} \to \mathcal{I}\)
+    con \(\mathcal{I}\) iniettivo per ogni \(M \in O_{X, x}\mathtt{-Mod}\).
+
+    Esiste \(f : M \to I\) mono in \(O_{X, x} \mathtt{-Mod}\) con \(I\)
+    iniettivo. Allora \(\widehat{f} : \widehat{M} \to \widehat{I}\) in
+    \(O_x\mathtt{-Mod}\). Poiché \(\widehat{{(-)}}\) è aggiunto destro, allora
+    preserva i mono e dunque \(\widehat{f}\) è mono.
+
+    Resta da dimostrare che \(\widehat{I}\) è iniettivo in \(O_X\mathtt{-Mod}\)
+    cioè \(\mathrm{Hom}_X{(-, \widehat{I})} \cong\mathrm{Hom}_{O_{X,x} {(-_x,
+    I)}} \) manda mono di \(O_X\mathtt{-Mod}\) in epi (di \(\mathtt{Ab}\)).
+    Questo è vero perché \(-_x\) preserva i mono per il lemma~\ref{lem:inj} e
+    \(\mathrm{Hom}_{O_{X,x} } {(-, I)}\) è esatto perché \(I\) è iniettivo.
+    
+\end{proof}
+
+\begin{example}{}
+    Si può dimostrare che \(\forall A\) anello, \(H^{n}{(X, -)} :
+    A_x\mathtt{-Mod} \to A\mathtt{-Mod}\) conincidono con la coomoologia
+    singolare se \(X\) è localmente contraibile.
+\end{example}
+
+Volendo definire \(\mathrm{Hom}\) in modo che sia un (pre)fascio, possiamo
+farlo. Siano \(\mathcal{F}, \mathcal{G} \in O_X\mathtt{-PMod}\). Allora
+\(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})} \in \mathbb{Z}_X\mathtt{-Mod}\)
+(anche \(O_X\mathtt{-Mod}\) se \(O_X\) è commutativo) definito \(\forall U \in
+\mathrm{Open}{(X)}\) da 
+\[
+  \mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}{(U)} :=
+  \mathrm{Hom}_U{(\mathcal{F}|_U, \mathcal{G}|_U)} \in \mathtt{Ab}
+\]
+dove \(\mathcal{F}|_U\) è prefascio su \(U\) definito per ogni \(V \in
+\mathcal{Open}{(U)}\) da \(\mathcal{F}|_U{(V)} = \mathcal{F}{(V)}\). 
+Se \(\mathcal{F}, \mathcal{G}\) sono fasci, allora
+\(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}\) è un fascio, e si ottiene
+dunque un funtore \(\mathcal{Hom}_X{(-, =)} : O_X\mathtt{-Mod}^{op} \times
+O_X\mathtt{-Mod} \to \mathbb{Z}_X\mathtt{-Mod}\) esatto a sinistra in ciascun
+argomento e si possono considerare i funtori derivati \(\mathtt{Ext}_X^{i}{(-,
+=)}\).
+
+Inoltre dati \(\mathcal{F} \in \mathtt{PMod-}O_X\) e \(\mathcal{G} \in
+O_X\mathtt{-PMod}\), si definisce anche 
+\[
+{(\mathcal{F} \otimes_X^{\mathcal{P}} \mathcal{G})} {(U)} = \mathcal{F}{(U)}
+  \otimes_{O_X{(U)}} \mathcal{G}{(U)}
+\]
+per cui \(\mathcal{F} \otimes_X^{\mathcal{P}} \mathcal{G} \in
+\mathbb{Z}_X\mathtt{-PMod}\). Se \(\mathcal{F}, \mathcal{G}\) sono fasci, allora
+si può prendere \(\mathcal{F} \otimes_X \mathcal{G} := {\left( \mathcal{F}
+\otimes_X^{\mathcal{P}} \mathcal{G}\right)}^{a}\) e si ottiene un funtore 
+\[
+  - \otimes_X = : \mathtt{Mod-}O_X \times O_X\mathtt{-Mod} \to
+  \mathbb{Z}_X\mathtt{-Mod}
+\]
+esatto a destra in ciascun argomento, che si può derivare usando gli
+\(O_X\)-moduli piatti ottenendo \(\mathrm{Tor}_i^{X}{(-, =)}\).
+
+\begin{remark}{}
+    Sia \(f : X \to Y\) continua. Allora essa induce 
+    \begin{align*}
+        f_*: \mathtt{(P)Sh}{(X, \mathcal{C})} &\longrightarrow
+        \mathtt{(P)Sh}{(Y, \mathcal{C})} \\
+        \mathcal{F} &\longmapsto f_*(\mathcal{F}){(V)} := \mathcal{F}{(f^{-1}{(V)})}
+    \end{align*}
+
+    e varianti per i fasci di moduli. Ci sono anche funtori \(\mathtt{(P)Sh}{(Y,
+    \mathcal{C})} \to \mathtt{(P)Sh}{(X, \mathcal{C})}\).
+\end{remark}
+
+\begin{definition}{}
+    \(\mathcal{F} \in O_X\mathtt{-Mod}\) è (localmente) di
+    \emph{tipo}/\emph{presentazione}
+    finita se \(\forall x \in X\) esiste \(U \in \mathrm{Open}_x{(X)}\) e una
+    successione esatta della forma 
+    \[
+      O_U^{n} \to \mathcal{F}|_U \to 0 \quad / \quad O_U^{m} \to O_U^{n} \to
+      \mathcal{F}|_U \to 0
+    \]
+    \(\mathcal{F}\) è \emph{coerente} se è di tipo finito e per ogni \(U \in
+    \mathrm{Open}{(X)}\) e per ogni \(\mathcal{F}^{\prime} \subseteq \mathcal{F}
+    |_U\) sottofascio di tipo finito è di presentazione finita.
+
+    Si ottiene sempre una categoria abeliana \(\mathrm{Coh}{(X)} \subseteq
+    O_X\mathtt{-Mod}\). Essere coerente è equivalente a essere di presentazione
+    finita se e solo se \(O_X\) è coerente (vero ad esempio per varietà
+    complesse)
+\end{definition}
 
 
 
