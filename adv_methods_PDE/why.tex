@@ -1,0 +1,66 @@
+\chapter{Introduzione}
+
+\section{Acustica}
+
+In acustica ci interessa sia studiare cosa succede che effettivamente produrre
+suoni e vedere che succede\footnote{Questa frase a lezione era un dissing ad
+astronomia}. In generale l'acustica si occupa di generazione, propagazione e
+ricezione di onde sonore o acustiche. È una \textbf{perturbazione}
+\textbf{meccanica} che si \textbf{propaga} in un \textbf{fluido}. Perturbazione
+perché riguarda piccoli spostamenti, non è uno shock. Meccanica perché riguarda
+i movimenti delle particelle. Si propaga significa che è coinvolto qualcosa che
+cambia a seconda dell'istante di tempo in punti spaziali diversi. Infine in un
+fluido perché guardiamo onde in un gas o liquido.
+
+Per derivare la funzione d'onda, immaginiamo di avere una funzione \(\psi
+{(\mathbf{x} , t)}\) che è una densità che dipende sia dal tempo che dallo
+spazio. Ci interessa come viene modificata questa densità nel tempo, quindi
+guardiamo l'equazione
+\begin{equation}\label{eq:acu_onda_integrale}
+  \frac{\partial}{\partial t}\int _D \psi {(\mathbf{x} , t)} \,d\mathbf{x} =
+  \int _D q{(\mathbf{x} , t)} \,d\mathbf{x} - \oint _{\partial D} \mathbf{J}
+  \cdot \mathbf{n} \,dS
+\end{equation}
+dove \(q\) è il termine di \emph{sorgente}, che dice quanta di questa densità
+viene generata nell'istante \(t\) al punto \(\mathbf{x} \), \(\mathbf{n} \) è il
+vettore normale alla superficie \(S\) e \(\mathbf{J} \) è il flusso. Vogliamo
+inoltre che il flusso \(\mathbf{J} = \psi \mathbf{v} \). Usando dunque ora
+il teorema della divergenza otteniamo che
+\begin{equation}\label{eq:acu_div}
+  \int _D {\left( \frac{\partial }{\partial t}\psi - q + \mathrm{div} {(\psi \mathbf{v}
+  )}\right)}  \,d\mathbf{x} = 0 \implies \frac{\partial }{\partial t}\psi +
+  \mathrm{div} {(\psi \mathbf{v})} = q
+\end{equation}
+
+In questo caso sappiamo che \(\psi = \rho\) la densità di massa, e poiché
+sappiamo che non è possibile creare massa, allora \(q = 0\). otteniamo dunque
+l'equazione
+\begin{equation}\label{eq:acu_cont_massa}
+  \frac{\partial \rho}{\partial t} + \mathrm{div}{(\rho \mathbf{v} )} = 0
+\end{equation}
+
+Un'altra ``densità'' che ci interessa è la \emph{quantità di moto}. Possiamo
+infatti prendere dunque \(\psi = {(\rho \mathbf{v} )}_j\), per \(j=1,2,3\). Se fosse infatti che
+\(\mathbf{v} \) è costante, avremmo che \(\int \rho \mathbf{v}  = \mathbf{v}
+\int _D \rho = \mathbf{v} m\). Per considerare l'inerzia ora includiamo la legge
+di Newton \(\mathbf{F} = {(m\mathbf{v} )}'\), allora abbiamo che \(q = F_j\).
+Riscrivendo dunque l'equazione~\eqref{eq:acu_div}, abbiamo
+\[
+  \frac{\partial }{\partial t}{(\rho v_j)} + \mathrm{div}{(\rho v_s \mathbf{v}
+  )} = F_j = {(\nabla p)}_j
+\]
+con \(p\) la pressione. Otteniamo ora, con la derivata del prodotto
+\[
+  v_j {\left( \frac{\partial \rho}{\partial t} +  \mathrm{div}{(\rho \mathbf{v}
+  )}\right)} + \rho \frac{\partial v_j}{\partial t} + \rho \mathbf{v} \cdot
+  \nabla v_j = {(\nabla p)}_j
+\]
+ma da~\eqref{eq:acu_cont_massa} abbiamo che il termine tra parentesi è nullo, da
+cui (riscrivendo il tutto anche in forma vettoriale e dividendo per \(\rho\) )
+\begin{equation}\label{eq:eulero}
+  \frac{\partial \mathbf{v} }{\partial t} + {(\mathbf{v} \cdot \nabla )}
+  \mathbf{v} = \frac{1}{\rho} \nabla p
+\end{equation}
+dove \({\left( {(\mathbf{v} \cdot \nabla )}\mathbf{v}  \right)}_j =
+\sum_{k=1}^{3} v_{n} \frac{\partial v_j}{\partial x_k}  \) 
+

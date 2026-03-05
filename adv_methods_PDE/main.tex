@@ -1,0 +1,46 @@
+%! TEX program = lualatex
+\input{./preamble_report.tex}
+
+\title{Appunti di Metodi Numerici Avanzati per le PDE}
+\author{GitHub Repository:
+\href{https://github.com/Oxke/appunti/tree/main/AlgebraSuperiore}{\texttt{Oxke/appunti/NOPS}}}
+
+\date{Secondo semestre, 2025 \-- 2026, prof. Duma}
+
+\begin{document}
+\maketitle
+
+Su kiro ci sono registrazioni di anni precedenti. 
+
+L'argomento principale del
+corso sarà lo studio dell'equazione di HelmHoltz
+\[
+  \nabla \mathbf{u}  + k^2 \mathbf{u}  = 0 \quad k > 0
+\]
+Vedremo in particolare alcuni punti:
+\begin{enumerate}[label = \arabic*.]
+    \item Perché è un'equazione interessante e da dove viene (onde: EM,
+        acustica)
+    \item Soluzioni particolari (in particolare il caso in 2 dimensioni) per
+        costruire esempi e intuizioni
+    \item Strumenti matematici che servono per ciò che succede dopo
+    \item Problemi al bordo (in particolare domini illimitati)
+    \item Equazioni integrali al bordo, dunque il Metodo di elementi al bordo
+    \item Studio di analisi e varianti
+    \item Forma con indice di rifrazione \(n\),
+        \(\nabla \mathbf{u} + k^2 n \mathbf{u} = 0\)
+\end{enumerate}
+
+In particolare nello studio ci saranno tre aspetti da osservare, quello
+modellistico, quello analitico e quello numerico.
+
+L'esame consiste di un progetto in due parti, dove la prima riguarda
+l'implementazione del metodo BEM, mentre la seconda parte l'implementazione
+della risoluzione di un problema base per un certo tipo di onda, problema che
+metterà assieme molte parti prese dal corso.
+
+\tableofcontents
+
+\input{./why.tex}
+
+\end{document}

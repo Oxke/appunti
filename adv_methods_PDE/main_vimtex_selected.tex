@@ -1,0 +1,1262 @@
+%! TEX program = lualatex
+\documentclass[notitlepage]{report}
+\usepackage{layout}
+\usepackage[a4paper, centering, total={5in,9in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[many]{tcolorbox}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+\usepackage[colorlinks]{hyperref}
+\usepackage{titling}
+\usepackage{quiver}
+
+\newcommand*{\sminus}{\raisebox{1.3pt}{$\smallsetminus$}}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
+
+% newcommand for span with langle and rangle around
+\newcommand{\Span}[1]{{\left\langle#1\right\rangle}}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+}
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{section}.\arabic{theo}}
+% 
+\newcounter{excounter}[section]\setcounter{excounter}{0}
+\renewcommand{\theexcounter}{\arabic{chapter}.\arabic{section}.\arabic{excounter}}
+
+\numberwithin{equation}{section}
+
+\definecolor{thmblue}{RGB}{78, 68, 243}
+\newtcolorbox{theorem}[1][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=blue!1, colframe=blue!30,
+    title=Teorema~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
+    coltitle=thmblue!80, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=blue!5}
+}
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\newtcolorbox{lemmao}[1][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=applegreen!1, colframe=applegreen!30,
+    title=Lemma~\stepcounter{theo}\thetheo\ifstrempty{#1}{}{:~#1},
+    coltitle=applegreen!115, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=applegreen!5}
+}
+
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{
+    colframe=violet!0,
+    coltitle=violet, % Title text color
+    fonttitle=\bfseries, % Title font
+    title={Definizione~\thetcbcounter\ifstrempty{#2}{}{:~#2}}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0pt, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=violet!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=violet!0,
+    borderline west={2pt}{-5pt}{violet!40},
+    #1
+}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[theo]{Lemma}
+\newtheorem{corollary}{Corollario}[theo]
+\newtheorem{proposition}[theo]{Proposizione}
+
+\theoremstyle{definition}
+\newtheorem{example}[excounter]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Nota}
+\newtheorem*{remark}{Osservazione}
+
+\newtcolorbox{notebox}{
+  colback=gray!10,
+  colframe=black,
+  arc=5pt,
+  boxrule=1pt,
+  left=15pt,
+  right=15pt,
+  top=15pt,
+  bottom=15pt,
+}
+
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}} % beautiful chi
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+
+\newtcolorbox[auto counter, number within=section]{eser}[1][]{
+    colframe=black!0,
+    coltitle=black!70, % Title text color
+    fonttitle=\bfseries\sffamily, % Title font
+    title={Esercizio~\thetcbcounter~#1}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0mm, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=black!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=black!0,
+    borderline west={1pt}{-5pt}{black!70}, 
+    segmentation style={dashed, draw=black!40, line width=1pt} % Dashed dividing line
+}
+\newcommand{\seminorm}[1]{\left\lvert\hspace{-1 pt}\left\lvert\hspace{-1 pt}\left\lvert#1\right\lvert\hspace{-1 pt}\right\lvert\hspace{-1 pt}\right\lvert}
+
+\title{Appunti di Algebra Superiore}
+\author{Github Repository:
+\href{https://github.com/Oxke/appunti/tree/main/AlgebraSuperiore}{\texttt{Oxke/appunti/AlgebraSuperiore}}}
+
+\date{Primo semestre, 2025 \-- 2026, prof. Alberto Canonaco}
+
+\begin{document}
+\chapter{Categorie}
+
+\begin{definition}{Categoria}
+    Una \textbf{categoria} \(C\) è data da una classe di oggetti \(\mathrm{Ob}{(C)}\) e \(\forall X, Y \in \mathrm{Ob}{(C)}\) da un insieme di morfismi da \(X \) a \(Y\) indicato con
+    \(\mathrm{Hom}{(X,Y)} = \mathrm{Hom}_C {(X, Y)} = C{(X, Y)}\)  e da una
+   azione  composizione di morfismi, cioè \(\forall X, Y, Z \in \mathrm{Ob}{(C)}\)
+    (anche scritto \(X, Y, Z \in C\) ) un'operazione 
+    \begin{align*}
+        C{(X, Y)} \times  C{(Y, Z)} &\to  C{(X, Z)}
+        {(f, g)} &\mapsto g \circ f
+    \end{align*}
+
+    tale che 
+\begin{enumerate}[label = \arabic*.]
+    \item[0.] \(C{(X,Y)} \cap  C{(X', Y')} \neq \varnothing \implies X = X' \text{ e } Y = Y'\) 
+    \item[1.] \(\circ\) è associativa, cioè \(\forall X, Y, Z, W \in C\) e \(\forall f \in C{(X,Y)}\) e \(\forall g \in C{(Y, Z)}\) e \(\forall h \in C{(Z, W)}\)  allora 
+        \[
+          h \circ {(g \circ f)} = {(h \circ g)} \circ f
+        \]
+    \item[2.] \(\forall  X \in  C \) esiste \(1_X = \mathrm{id}_X \in C{(X, X)}\)
+        che è eleemento neutro di \(X\) cioè \(\forall Y \in C\) e \(\forall f
+        \in C{(X, Y)}\), 
+        \[
+          f \circ 1_X = f \quad, \quad 1_Y \circ f = f
+        \]
+\end{enumerate}
+\end{definition}
+\begin{example}{}
+    La categoria degli insiemi \(\mathtt{Set} \) che ha come oggetti tutti gli
+    insiemi e \(\forall X, Y \in \mathtt{Set} \) i morfismi \(\mathtt{Set}{(X, Y)} = \{f : X \to Y\}  \) le funzioni e \(\circ\) la composizione di funzioni
+\end{example}
+\begin{remark}{}
+    Se ho \(C\) tale che valgano solo 1. e 2. e non necessariamente 0. posso
+    ottenere la categoria \(C'\) che soddisfa anche 0. ponendo \(\mathrm{Ob}{(C')} := \mathrm{Ob}{(C)}\) e 
+    \[
+      C'{(X, Y)} := \{X\} \times C{(X,Y)} \times \{Y\} 
+    \]
+\end{remark}
+\begin{example}{}
+    Le categorie concrete, in cui gli oggetti sono insiemi con qualche struttura
+    e i morfismi sono funzioni tra insiemi che preservano la struttura (con \(\circ\) sempre la composizione di funzioni). In particolare:
+\begin{itemize}
+    \item La categoria \(\mathtt{Grp}\) dei gruppi, dove gli oggetti sono i
+        gruppi e i morfismi gli omomorfismi di gruppi
+    \item La categoria \(\mathtt{Rng}\) degli anelli
+    \item Dato un anello \(A\), la categoria \(\mathtt{A-Mod}\) / \(\mathtt{Mod-A}\) degli \(A\)-moduli sinistri / destri
+    \item Dato un anello commutativo \(A\), la categoria \(\mathtt{A-Alg}\)
+        delle \(A\)-algebre
+    \item La categoria \(\mathtt{Top}\) degli spazi topologici (con funzioni
+        continue come morfismi)
+\end{itemize}
+\end{example}
+\begin{note}{}
+    Dato \(f \in C{(X, Y)}\) si può indicare con \(f : X \to Y\) ``come fosse
+    una funzione''
+\end{note}
+
+\begin{example}{}
+    Le categorie discrete, cioè tali che gli unici morfismi sono \(1_X\) per
+    ogni \(X \in C\).
+\end{example}
+
+\begin{example}{}
+    \(C\) tale che \(\forall X, Y \in C\), \(\# C {(X, Y)} = 1\), ottengo
+    una relazione \(\preccurlyeq \) su \(\mathrm{Ob}{(C)}\) in cui
+    \[
+      X \preccurlyeq Y \iff C{(X, Y)} \neq \varnothing
+    \]
+    e \(\preccurlyeq\)  è riflessivo (perché \(\exists  1_X \in C{(X, X)} \forall X \in C\)) e transitivo, perché \(\exists \circ\). Ne consegue che \(\preccurlyeq\) è un \emph{preordine}
+
+    Viceversa, data una relazione di preordine \(\preccurlyeq\) su un insieme (o
+    una classe) \(S\), ottengo una categoria \(C\) con \(\mathrm{Ob}{(C)} := S\) e \(\forall X, Y \in S\), 
+    \[
+      C{(X, Y)} := \begin{cases}{}
+          \{f_{X,Y} \} & \text{ se } X \preccurlyeq Y \\
+          \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con l'unica composizione possibile
+\end{example}
+
+\begin{example}[Categoria Vuota]
+    Prendendo \(\mathrm{Ob}{(C)} = \varnothing\)
+\end{example}
+\begin{remark}{}
+    \(\forall X \in C\) con \(C\) una categoria, \(\mathrm{End}_C{(X)} := C{(X, X)}\) è un monoide con \(\circ\), ne consegue il prossimo esempio
+\end{remark}
+\begin{example}[Monoide]
+    Una categoria con un solo oggetto è un monoide. Viceversa ogni monoide può
+    essere visto come categoria di un solo oggetto.
+\end{example}
+
+\begin{example}[Diagrammi]
+    Possiamo definire categorie date da diagrammi, in cui si rappresentano i
+    morfismi (non l'identità). Ad esempio:
+\[\begin{tikzcd}
+	\bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift right, from=1-3, to=1-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-7, to=1-6]
+\end{tikzcd}\]
+    sono tre categorie diverse, rispettivamente con 2, 2, e 3 oggetti
+\end{example}
+
+\begin{definition}{Categoria opposta}
+    La \textbf{categoria opposta} di \(C\) è denotata \(C^{op}\) ed è definita
+    da
+    \[
+        \mathrm{Ob}{(C^{op})} := \mathrm{Ob}{(C)} \quad C^{op}{(X, Y)} := C{(Y, X)}
+    \]
+    con composizione in \(\circ^{op}\) data da \(f \circ^{op} g := g \circ f\) 
+\end{definition}
+\begin{remark}{}
+    \[
+      {(C^{op})}^{op} = C
+    \]
+\end{remark}
+\begin{example}[Categoria Prodotto]
+    Siano \(C_{\lambda} \) per \(\lambda \in \Lambda\) delle categorie. Allora
+    la categoria prodotto
+    \[
+      C := \prod_{\lambda \in \Lambda} C_{\lambda} 
+    \]
+    è definita da 
+    \begin{align*}
+      \mathrm{Ob}{(C)} &:= \prod_{\lambda \in \Lambda} \mathrm{Ob}{(C_\lambda)} \\
+      C{({(X_{\lambda} )}_{\lambda \in \Lambda}, {(Y_{\lambda} )}_{\lambda \in \Lambda} )} &:= \prod_{\lambda \in \Lambda} C_{\lambda} {(X_{\lambda} , Y_\lambda)} \\
+      {(g_{\lambda} )}_{\lambda \in \Lambda} \circ {(f_{\lambda} )}_{\lambda \in \Lambda} &:= {(g_{\lambda} \circ f_{\lambda} )}_{\lambda \in \Lambda} 
+    \end{align*}
+\end{example}
+
+\begin{example}[Cateogoria Coprodotto]
+    La categoria coprodotto
+    \[
+      C := \coprod_{\lambda \in \Lambda} C_{\lambda} 
+    \]
+    è definita con \(\mathrm{Ob}{(C)} := \coprod_{\lambda \in \Lambda} \mathrm{Ob}{(C_{\lambda} )}\) l'unione disgiunta. 
+    \[
+      \forall X, Y \in C \quad C{(X, Y)} := \begin{cases}{}
+          C_{\lambda} {(X, Y)} & \text{ se } X, Y \in C_{\lambda} \text{ per
+          qualche } \lambda \in \Lambda \\
+              \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con \(\circ\) ovvia.
+\end{example}
+
+\begin{definition}{Sottocategoria}
+    Sia \(C\) una categoria. Allora una sottocategoria \(C'\) di \(C\) è data
+    da una sottoclasse \(\mathrm{Ob}{(C')} \subseteq \mathrm{Ob}{(C)} \) e \(\forall X, Y \in C'\) da un sottoinsieme \(C'{(X, Y)} \subseteq C{(X, Y)} \) tale che \(\circ\) si restringe a \(C'\) e \(1_X \in C'{(X, X)}\) per ogni \(X \in C'\).
+
+    In particolare \(C'\) è una categoria.
+\end{definition}
+
+\begin{example}{}
+    Se \(C\) è un monoide (cateogoria di un oggetto), allora le sottocategorie
+    non vuote di \(C\) sono i sottomonoidi.
+\end{example}
+
+\begin{definition}{Sottocategoria Piena}
+    Una sottocategoria \(C'\) di \(C\) si dice \textbf{piena} se \(C'{(X, Y)} =
+    C{(X, Y)}\) per ogni \(X, Y \in C'\) 
+\end{definition}
+
+\begin{remark}{}
+    Una sottocategoria piena di \(C\) equivale a dare una sottoclasse di \(\mathrm{Ob}{(C)}\) 
+\end{remark}
+
+\begin{example}[Gruppi Abeliani]
+    \(\mathtt{Ab} \subseteq \mathtt{Grp} \) sottocategoria piena dei gruppi
+    abeliani. Similmente anche \(\mathtt{CRng} \subseteq \mathtt{Rng} \)
+    sottocategoria piena degli anelli commutativi.
+\end{example}
+
+Oltre alle sotto-strutture sono anche importanti i quozienti, e anche qui
+possiamo dare una definizione astratta
+
+\begin{definition}{Congruenza}
+    Una congruenza \(\sim \) su una categoria \(C\) è data da una relazione di
+    equivalenza \(\sim \) su \(C{(X, Y)}\) \(\forall X, Y \in C\) tale che
+    \[
+      \forall X, Y, Z \in C, \, \forall f, f' \in C{(X, Y)} \, \forall g,
+      g' \in C{(Y, Z)} \quad f \sim f', g \sim g' \implies g \circ f \sim g'
+      \circ f'
+    \]
+    equivalentemente \(g \sim g' \implies g \circ f \sim g' \circ f\) e \(h \circ g \sim h \circ g'\) 
+\end{definition}
+
+\begin{definition}{Quoziente}
+    Sia \(\sim \) una congruenza su \(C\), allora possiamo definire la categoria
+    quoziente \(C / \sim \) definita da
+    \[
+      \mathrm{Ob}{(C / \sim )} = \mathrm{Ob}{(C)} \quad {(C / \sim )}{(X, Y)} :=
+      C{(X, Y)} / \sim \quad \forall X, Y \in C
+    \]
+    e \(\circ\) è indotta da quella di \(C\), ossia
+    \[
+      \overline{g} \circ \overline{f} := \overline{g \circ f}
+    \]
+\end{definition}
+
+\begin{example}[Omotopia]
+    Sia \(C = \mathtt{Top}\) e \(\sim_h \) l'omotopia, ossia \(f, g : X \to Y\)
+    sono omotope se \(\exists  H : X \times [0, 1] \to Y\) continue tali che 
+    \[
+      f{(x)} = H{(x, 0)}, \quad g{(x)} = H{(x, 1)} \quad \forall x \in X
+    \]
+    e si ottiene \(\mathtt{Toph} := \mathtt{Top} / \sim_h \) 
+\end{example}
+
+\begin{example}[Gruppo quoziente]
+    Sia \(G\) un gruppo (visto come monoide, ossia categoria di un oggetto) e
+    sia \(H \vartriangleleft G\) e \(\sim \) su \(G\) data da \(a \sim b \iff aH
+    = bH\). Allora \(G/N\) è la categoria quoziente \(G / \sim \).
+    Viceversa ogni \(\sim \) congruenza su \(G\) si può scrivere in tal
+    modo prendendo \(H = \{a \in G : a \sim 1\} \vartriangleleft G \) (esercizio).
+\end{example}
+
+\begin{definition}{morfismo invertibile}
+    Sia \(f : X\to Y\) un morfismo in una categoria \(C\). Allora esso è
+    invertibile a sinistra (destra) se \(\exists  f' : Y \to X\) tale che
+    \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)).
+\end{definition}
+\begin{remark}{}
+    \(f\) è invertibile a sinistra (destra) in \(C\), allora \(f\) è invertibile
+    a destra (sinistra) in \(C^{op}\) 
+\end{remark}
+
+\begin{definition}{Isomorfismo}
+    \(f : X \to Y\) è un \textbf{isomorfismo} se \(\exists f' : Y \to X\) tale che \(f'
+    \circ f = 1_X\) e \(f \circ f' = 1_Y\) 
+\end{definition}
+\begin{remark}{}
+    \(f\) è isomorfismo se e solo se \(f\) è invertibile a destra e a sinistra. 
+\end{remark}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio
+    \item[\(\impliedby \)] \(\exists f', f''\) tale che \(f' \circ f = 1_X\)  e
+        \(f \circ f'' = 1_Y\), allora
+        \[
+          f' \circ {( f \circ f'')} = f' = f'' = {(f' \circ f)} \circ f''
+        \]
+        e dunque \(f\) è invertibile.
+\end{itemize}
+    In particolare dunque la \(f'\) della definizione di isomorfismo è unica e
+    viene denotata \(f^{-1}\) 
+\end{proof}
+
+\begin{definition}{}
+    Siano \(X, Y \in C\). Allora \(X\) e \(Y\) sono isomorfe (\(X \cong Y\)) se
+    esiste un \(f: X \to Y\) isomorfismo.
+\end{definition}
+
+\begin{remark}{}
+    \(1_X\) è isomorfismo e \(1_X^{-1} = 1_X\). Se \(f\) isomorfismo
+    allora \(f^{-1}\) isomorfismo e \({(f^{-1})}^{-1} = f\). Se \(f, g\)
+    isomorfismi componibili, allora \(g \circ f\) è isomorfismo e \({(g \circ f)}^{-1} = f^{-1} \circ g^{-1}\) 
+
+    Ne segue che \(\cong\) è una relazione di equivalenza su \(\mathrm{Ob}{(C)}\) 
+\end{remark}
+
+\begin{definition}{}
+    Un morfismo \(f : X \to Y\) in \(C\) è detto \textbf{monomorfismo} se \(\forall Z \in C\) la funzione 
+    \begin{align*}
+        f_*: C{(Z, X)} &\longrightarrow C{(Z, Y)} \\
+        g &\longmapsto f_*(g) = f \circ g
+    \end{align*}
+    è iniettiva
+\end{definition}
+\begin{definition}{Epimorfismo}
+    \(f\) è un \textbf{epimorfismo} in \(C\) se è monomorfismo in \(C^{op}\),
+    ossia \(\forall Z \in C\) la funzione
+    \begin{align*}
+        f^*: C{(Y, Z)} &\longrightarrow C{(X, Z)} \\
+        g &\longmapsto f^*(g) = g \circ f
+    \end{align*}
+    è iniettiva.
+\end{definition}
+
+\begin{proposition}{}
+    \(f\) è invertibile a sinistra (destra), allora \(f\) è monomorfismo
+    (epimorfismo)
+\end{proposition}
+\begin{proof}{}
+    Basta dimostrare che se \(f\) è invertibile a sinistra, allora è mono.
+
+    Sappiamo che \(\exists f' : Y\to X\) tale che \(f' \circ f = 1_X\). Dobbiamo
+    dimostrare che \(f_*\) è iniettiva. Siano \(g, h \in C{(Z, X)}\) tali che \(f_*{(g)} = f_*{(h)}\). Allora \(f \circ g = f \circ g\), da cui \(f' \circ f \circ g = f' \circ f \circ h\) e dunque \(g = h\) 
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(C\) concreta. Allora
+    \[
+      f \text{ invertibile a sinistra (destra)} \implies f \text{ iniettiva
+      (suriettiva)} \implies f \text{ mono (epi)}
+    \]
+\end{proposition}
+\begin{proof}{}
+    Non possiamo usare il trick della categoria opposta, perché non è detto che
+    \(C^{op}\) sia ancora concreta.
+
+    Sia \(f'\) tale che \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)), allora
+    chiaramente \(f\) iniettiva (suriettiva) perché le composizioni \(1_X\) e \(1_Y\) sono biunivoche.
+
+    Se \(f\) è iniettiva, allora % TODO finire
+    se \(f\) è suriettiva, allora % TODO finire
+\end{proof}
+
+In generale non vale nessuna delle \(\impliedby\).
+\begin{example}{}
+    In \(\mathtt{Set}\) se \(f : X \to Y\) è suriettiva, allora \(f\) è invertibile a
+    sinistra. Infatti basta scegliere (AOC) \(f'{(y)} \in f^{-1}\{y\} \) per
+    ogni \(y \in Y\). Inoltre se \(X \neq \varnothing\) e \(f : X \to Y\) è
+    iniettiva, allora \(f\) è invertibile a sinistra.
+\end{example}
+
+\begin{eser}{}
+    In \(\mathtt{A-Mod}\), mostrare che \(f : M\to N\) iniettiva è invertibile a
+    sinistra se e solo se \(\mathrm{Im}{(f)} \subseteq N \) è addendo diretto.
+
+    Mostrare che \(f : M \to N\) suriettiva è invertibile a destra se e solo se
+    \(\mathrm{Ker}{(f)} \subseteq M \) è addendo diretto
+
+    Concludere che valgono sempre entrambe le implicazioni se e solo se \(A\) è
+    semisemplice.
+\end{eser}
+
+\begin{example}{}
+    In \(\mathtt{Set}\), se \(f\) è mono (epi), allora \(f\) è iniettiva
+    (suriettiva).
+
+    Infatti, poniamo per assurdo \(f : X \to Y\) non iniettiva, dunque siano \(x, y \in X\) tali che \(f{(x)} = f{(y)}\). Allora preso \(Z = \{z\} \) e \(g, h : Z\to X\) tali che \(g
+    {(z)} = x\) e \(h{(z)} = y\) abbiamo che \(f \circ g = f \circ h\) da cui \(g = h\) e dunque \(x = y\) 
+
+    Supponiamo \(f\) non suriettiva, mostrare \emph{per esercizio} \(\exists g, h : Y \to Z\) tali che
+    \(g \neq h\) ma \(g \circ f = h \circ f\) 
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{A-Mod}\) \(f : M \to N\) è mono (epi), allora \(f\) è iniettiva (suriettiva).
+
+    Infatti \(i : \mathrm{Ker}f \to M\) inclusione tale che \(f \circ i = 0\) e
+    anche \(0 : \mathrm{Ker}f \to M\) è tale che \(f \circ 0 = 0\). Concludiamo
+    che \(i = 0\) e dunque \(\mathrm{Ker}f = 0\).
+
+    Similmente \(\pi : N \to \mathrm{coKer}f\) è tale che \(\pi \circ f = 0\) e
+    se \(f\) è epi allora \(0 = \pi \) e dunque \(\mathrm{coKer} f= 0\) e dunque
+    \(f\) è suriettiva.
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Grp}\) \(f\) mono (epi), allora \(f\) iniettiva (suriettiva)
+
+    Per mono \(\implies \) iniettiva si può usare la stessa dei moduli, mentre
+    per l'altra è un po' più complicato, ma si dimostra che è vero lo stesso
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Rng}\) \(f : A\to B\) mono, allora \(f\) iniettiva. % TODO eser
+
+    Tuttavia \(f\) epi \textbf{non implica} f suriettiva. Ad esempio preso \(i :
+    \mathbb{Z} \hookrightarrow \mathbb{Q}\) è epi, infatti \(\forall A\) anello
+    esiste al più un omomorfismo \(\mathbb{Q} \to A\) (\(f : \mathbb{Q}\to A\)
+    sia omomorfismo, allora \(f|_{\mathbb{Z}} \) è l'unico omomorfismo e \(f{(\frac{a}{b})} = f{(a)}f{(b)}^{-1}\)). Chiaramente però non è suriettiva.
+\end{example}
+
+\begin{definition}{Funtore}
+    Un funtore \(F : C \to D\) tra 2 categorie è dato da una funzione
+    \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) e \(\forall X, X' \in C\) una
+    funzione \(F = F_{X, X'} : C{(X, X')} \to D{(F{(X)}, F{(X')})}\) tale che
+    \[
+      F{(g\circ f)} = F{(g)}\circ F{(f)} 
+    \]
+    (se \(f\) e \(g\) sono componibili in \(C\)) e \(F{(1_X)} = 1_{F{(X)}} \)
+    per ogni \(X \in C\) 
+    
+\end{definition}
+\begin{proposition}{}
+    Sia \(F\) un funtore e \(f\) invertibile a sinistra (destra). Allora \(F{(f)}\) è invertibile a sinistra (destra)
+\end{proposition}
+\begin{proof}{}
+    \(\exists f'\) tale che \(f' \circ f = 1_X\), allora \(F{(f')} \circ F{(f)} = F{(f'\circ f)} = F{(1_X)} = 1_{F{(X)}} \).
+\end{proof}
+\begin{remark}{}
+    Segue che \(f\) iso, allora \(F{(f)}\) iso e \(F{(f)}^{-1} = F{(f^{-1})}\) 
+\end{remark}
+
+\begin{example}{}
+    Sia \(C' \subseteq C \) sottocategoria. Allora \(C' \to C\), \(X \mapsto X\) e \(f \mapsto f\) è un funtore
+\end{example}
+
+\begin{example}{}
+    Se \(\sim \) è una congruenza, allora \(C \to C /\sim\) è un funtore, con
+    \(X \mapsto X\) e \(f \mapsto \overline{f}\) 
+\end{example}
+
+\begin{example}[Funtore dimenticante]
+    \(C \to \mathtt{Set}\) con \(C\) categoria discreta e \(X \mapsto X\), \(f
+    \mapsto f\) è un funtore, che ``dimentica'' la struttura aggiunta.
+
+    Analogamente anche \(\mathtt{Rng} \to \mathtt{Ab}\), con \({(A, +, \cdot )} \to {(A, +)}\) è un funtore dimenticante.
+\end{example}
+\begin{remark}{}
+    Notare che il secondo funtore dimenticante non preserva gli epimorfismi.
+    Sarebbe infatti \(i : \mathbb{Z} \to \mathbb{Q}\) l'inclusione è
+    un'epimorfismo in \(\mathtt{Rng}\) ma non in \(\mathtt{Ab}\) 
+\end{remark}
+
+
+\begin{example}{}
+    Sia \(A \to B\) un omomorfismo di anelli. Allora la restrizione degli
+    scalare è un funtore \(\mathtt{B-Mod} \to \mathtt{A-Mod}\) 
+\end{example}
+
+
+\begin{example}{}
+    Funtore tra 2 categorie discrete \(C\) e \(D\) è una funzione \(\mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) 
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 preordini \(C\) e \(D\) è una funzione \(\mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\)  che preserva la relazione di preordine.
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 monoidi è un omomorfismo di monoidi.
+
+    Più in generale dato \(G\)  un monoide e una categoria \(C\) , un funtore \(G \to C\) è dato da \(X \in C\) e da un omomorfismo di monoidi \(G \to \mathrm{End}_C{(X)}\) 
+
+    Se \(G\) è un gruppo un funtore \(G \to C\) è dato da \(X \in C\) e un
+    omomorfismo di gruppi \(G \to \mathrm{Aut}_C{(X)}\). Ad esempio se \(C = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
+    Similmente se \(C = \mathbb{K}\)-spazi vettoriali ho una rappresentazione di
+    \(G\).
+\end{example}
+
+\begin{example}[Funtore costante]
+    Date \(C, D\) categorie preso \(Y \subseteq D \) si può considerare il
+    funtore costante di valore \(Y\), \(C \to D\), \(X \mapsto Y\) e \(f \mapsto 1_Y\) 
+\end{example}
+
+\begin{example}{}
+    Presa \(\mathtt{Top}_*\) la categoria degli spazi topologici puntati, il
+    gruppo fondamentale 
+    \[
+        \pi_{1} : \mathtt{Top}_* \to \mathtt{Grp}
+    \]
+    è un funtore
+\end{example}
+
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) ci sono funtori di omologia (singolare)
+    \[
+      H_{n} : \mathtt{Top} \to \mathtt{Ab}
+    \]
+\end{example}
+\begin{theorem}[Omomorfismo]
+    Sia \(\sim \) una congruenza su \(C\) e \(F : C \to D\) un funtore tale che
+    se \(f \sim f'\) in \(C\) allora \(F{(f)} = F{(f')}\).
+    Allora esiste un unico funtore \(\overline{F} : C /_\sim \to D\) tale
+    che \(\overline{F}{(\overline{f})} = F{(f)}\) per ogni \(f\) morfismo di \(C\) 
+\end{theorem}
+\begin{example}{}
+    Negli esempi precedenti se \(f\) e \(f'\) sono omotope, allora \(\pi_{1}{(f)} = \pi_{1}{(f')}\) e \(H_{n}{(f)} = H_{n}{(f')}\), dunque inducono funtori
+    \[
+      \pi_{1} : \mathtt{Toph}_* \to \mathtt{Grp} \quad H_{n} : \mathtt{Toph} \to \mathtt{Ab}
+    \]
+\end{example}
+
+\begin{note}{}
+    I funtori che abbiamo definito si dicono anche funtori covarianti
+\end{note}
+\begin{definition}{funtore controvariante}
+    Un funtore \textbf{controvariante} \(C \to D\) è un funtore (covariante) \(C^{op} \to D\).
+\end{definition}
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) i funtori di coomologia (singolare) sono funtori
+    controvarianti \(H^{n} : \mathtt{Top(h)}^{op} \to \mathtt{Ab}\) 
+\end{example}
+\begin{example}{}
+    Sia \(C\) una categoria, \(X \in C\)
+    \begin{align*}
+        C{(X, \--)} : C &\to \mathtt{Set} \\
+        Y \mapsto C{(X, Y)} \quad {(f : Y \to Y')} &\mapsto {(f_{*} : C{(X, Y)} \to C{(X, Y')})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto f \circ g
+    \end{align*}
+    è un funtore perché \({(f' \circ f)}_* = f'_* \circ f_*\) 
+
+    Analogamente 
+    \begin{align*}
+        C{(\--, Y)} : C^{op} &\to \mathtt{Set} \\
+        X \mapsto C{(X, Y)} \quad {(f : X \to X')} &\mapsto {(f^{*} : C{(X', Y)} \to C{(X, Y)})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto g \circ f
+    \end{align*}
+\end{example}
+\begin{remark}{}
+    C'è anche un funtore 
+    \begin{align*}
+        C{(\--, =)} : C^{op} \times C &\to \mathtt{Set} \\
+        {(X, Y)} &\mapsto C{(X, Y)} \\
+        {(f : X \to X', g : Y \to Y')} &\mapsto {(f^* : C{(X', Y)} \to  C{(X,Y)}, g_* : C{(X, Y)} \to C{(X, Y')})}
+    \end{align*}
+\end{remark}
+\begin{example}{}
+    Per ogni gruppo \(G\), preso il sottogruppo dei commutatori \([G, G]\),
+    allora per ogni \(f : G \to H\) omomorfismo di gruppi, \(f{([G, G])} \subseteq [H, H] \) 
+    quindi si ottiene un funtore
+    \begin{align*}{}
+        \mathtt{Grp} &\to \mathtt{Grp} \\
+        G &\mapsto [G, G] \\
+        {(f : G \to H)} &\to {(f |_{[G, G]} : [G, G] \to [H, H] )}
+    \end{align*}
+    e anche 
+    \begin{align*}
+        \mathrm{Abel} : \mathtt{Grp} &\to \mathtt{Ab} \\
+        G &\mapsto \frac{G}{[G, G]} \text{ (abelianizzato di \(G\) ) } \\
+        {(f : G \to H)} &\mapsto {\left(\overline{f} : \frac{G}{[G,G]} \to \frac{H}{[H,H]}\right)}
+    \end{align*}
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{p}", from=1-1, to=2-1]
+	\arrow["{q}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{eser}{}
+    Indicando con \(Z{(X)}\) il centro di \(X\),
+
+\begin{enumerate}[label = \alph*.]
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Rng} \to \mathtt{Rng}\) tale
+    che \(\forall A \in \mathtt{Rng}\) \(F{(A)} = Z{(A)}\).
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Grp} \to \mathtt{Ab}\) tale
+    che \(\forall G \in \mathtt{Grp}\) \(F{(G)} = Z{(G)}\).
+\end{enumerate}
+    \tcblower
+    Supponiamo l'esistenza di \(F\).
+\begin{enumerate}[label = \alph*.]
+    \item Se prendo \(i : \mathbb{C} \hookrightarrow \mathbb{H}\),
+        allora \(F{(\mathbb{C})} = \mathbb{C} \) e \(F{(\mathbb{H})} = \mathbb{R}\). A tal punto però \(
+        F{(i)} : \mathbb{C} \to \mathbb{R}\) che non esiste perché altrimenti \[-1 = F{(i)}{(-1)} = F{(i)}{(i^2)} = F{(i)}{(i)}^2\]
+    \item Consideriamo
+        \[
+          \{(1), (12)\} \overset{i}{\hookrightarrow } S_{3} \overset{\varepsilon}{\to } \{\pm 1\} 
+        \]
+        Allora \(\varepsilon \circ i = \mathrm{Id}_{C_{2}} \). Allora avremmo
+        \[
+          0_{\mathrm{End}{(C_{2})}}  = F{(\varepsilon)} \circ F{(i)} = F{(\varepsilon \circ i)} = F{(\mathrm{id}_{C_{2}})} = \mathrm{id}_{C_{2}}
+        \]
+\end{enumerate}
+
+\end{eser}
+
+    L'identità
+    \[
+      \mathrm{id}_C : C \to C \quad X \mapsto X \quad f \mapsto f
+    \]
+    è un funtore
+    Si possono comporre i funtori. Dati ad esempio 
+    \[
+      C \overset{F}{\to } D \overset{G}{\to } E
+    \]
+    funtori, possiamo definire \(G \circ F : C \to E\) come \(X \mapsto G{(F{(X)})}\)  e \(f \mapsto G{(F{(f)})}\) è un funtore.
+
+    La composizione è associativa  e \(F \circ \mathrm{id}_C = F = \mathrm{id}_C \circ F\) 
+
+In tal modo otteniamo una categoria \(\mathtt{Cat}\) delle categorie (piccole\footnote{si potrebbe anche fare di tutte le categorie, ma per motivi
+insiemistici/logici dovremmo introdurre gli universi di Grothendieck e fare le
+cose per bene. Al fine di evitare questo inutile sforzo, ci limitiamo a
+considerare le categorie piccole.})
+
+\begin{definition}{}
+    Un funtore \(F : C \to D\) è un isomorfismo se lo è in \(\mathtt{Cat}\),
+    cioè se \(\exists G : D \to C\)  funtore tale che \(G \circ F = \mathrm{id}_C = F \circ G\) 
+\end{definition}
+
+\begin{definition}{iniettivo e suriettivo}
+    Un funtore \(F : C \to D\) è \emph{iniettivo}/\emph{suriettivo} se \(F : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) è \emph{iniettivo}/\emph{suriettivo}.
+
+    Nel caso in cui \(F\) sia sia iniettivo che suriettivo, è \textbf{biunivoco}.
+\end{definition}
+
+\begin{definition}{Fedele e pieno}
+    \(F\) è detto \textbf{fedele} (\textbf{pieno}) se \(\forall X, Y \in C\), \(F : C{(X, Y)} \to D{(F{(X)}, F{(Y)})}\) è iniettivo (suriettivo).
+
+    Nel caso in cui \(F\) sia sia fedele che pieno, si dice che è
+    \textbf{pienamente fedele}
+\end{definition}
+\begin{eser}{}
+    \(F\) funtore è isomorfismo se e solo se \(F\) è pienamente fedele e
+    biunivoco.
+\end{eser}
+
+
+\begin{example}{}
+    Se \(C' \subseteq C \) è una sottocategoria, allora il funtore di inclusione
+    \(i : C' \to C\) è iniettivo e fedele ed è pieno se e solo se \(C' \subseteq C\) è piena.
+
+    Ad esempio se \(\sim \) è una congruenza in \(C\) , allora il funtore
+    quoziente \(C \to C / \sim \) è biunivoco e pieno.
+\end{example}
+
+\begin{example}{}
+    Un omomorfismo di monoidi (categorie di un oggetto) è iniettivo (suriettivo)
+    se e solo se come funtore è fedele (pieno). In ogni caso è biunivoco.
+\end{example}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{\mathbb{Z}-Mod} \to \mathtt{Ab}\) e \(\mathtt{\mathbb{Z}-Alg} \to \mathtt{Rng}\) sono isomorfismi.
+\end{example}
+
+\begin{example}{}
+    Anche \(\mathtt{Mod-A}\cong \mathtt{A^{op}-Mod}\) ed esiste un isomorfismo
+    (anche se non sono categorie piccole).
+\end{example}
+
+\begin{definition}{}
+    Un funtore \(F: C \to D\) è \textbf{essenzialmente
+    \emph{iniettivo}/\emph{suriettivo}} se la funzione ridotta 
+    \[
+        \mathrm{Ob}{(C)}/_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}
+    \]
+    è \emph{iniettivo}/\emph{suriettivo}
+\end{definition}
+
+\begin{remark}{}
+    Se \(F\) è suriettivo allora \(F\) è essenzialmente suriettivo. L'altra
+    implicazione non vale. Ad esempio
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    Nessuna delle implicazioni tra iniettiva e essenzialmente iniettiva è vera.
+    Basti considerare
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-1]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    per essenzialmente iniettiva \(\not\implies\) iniettiva
+    e
+\[\begin{tikzcd}
+	{(\bullet} & {\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift left, from=1-4, to=1-3]
+\end{tikzcd}\]
+    per iniettiva \(\not\implies \) essenzialmente iniettiva.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(F: C \to D\) un funtore pienamente fedele. Allora \(F\) è
+    essenzialmente iniettivo
+\end{proposition}
+\begin{proof}{}
+    Siano \(X, Y \in C\) tali che \(F{(X)} \cong F{(Y)}\) in \(D\). Devo
+    dimostrare che \(X \cong Y\) in \(C\).
+
+    Sappiamo che esiste \(g : F{(X)} \to F{(Y)}\) isomorfismo in \(D\). Poiché
+    \(F\) è pieno esiste \(f \in C{(X, Y)}\) tale che \(F{(f)} = g\).
+    Analogamente \(\exists f' \in C{(Y, X)}\) tale che \(F{(f')} = g^{-1}\).
+    \[
+      F{(f' \circ f)} = F{(f')} \circ F{(f)} = g^{-1} \circ g = 1_{F{(X)} = F{(1_X)}} 
+    \]
+    Se \(F\) è fedele, allora \(f' \circ f = 1_X\)  e analogamente \(f \circ f' = 1_Y\) da cui \(f\) è isomorfismo e duque \(X \cong Y\) 
+\end{proof}
+
+\begin{definition}{Trasformazione naturale}
+    Siano \(F, F' : C \to D\) funtori.
+
+    Una \textbf{trasformazione naturale} \(\alpha : F \to F'\) (si può anche
+    scrivere \(\alpha : F \implies F'\)) è il dato di un morfismo
+    \[
+      \alpha_X : F{(X)} \to F'{(X)} \text{ in \(D\) } \forall X \in C
+    \]
+    tale che \(\forall f : X \to Y\) morfismo di \(C\) il diagramma
+\[\begin{tikzcd}
+	{F(X)} & {F(Y)} \\
+	{F'(X)} & {F'(Y)}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\alpha_X}", from=1-1, to=2-1]
+	\arrow["{\alpha_Y}", from=1-2, to=2-2]
+	\arrow["{F'(f)}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    commuta in \(D\), cioè \(\alpha_Y \circ F{(f)} = F'{(f)} \circ \alpha_X\) 
+\end{definition}
+
+\begin{example}{}
+    Consideriamo i due funtori \(\mathrm{Abel} : \mathtt{Grp} \to \mathtt{Grp}\) e \(\mathrm{id} : \mathtt{Grp} \to \mathtt{Grp}\). 
+    C'è una trasformazione naturale \(\alpha : \mathrm{id} \to \mathrm{Abel}\)
+    definita per ogni \(G \in \mathtt{Grp}\) da 
+    \begin{align*}
+        \alpha_G: G &\longrightarrow \frac{G}{[G, G]} \\
+        a &\longmapsto \alpha_G(a) = a[G, G]
+    \end{align*}
+    è naturale perché \(\forall f : G \to H\) in \(\mathtt{Grp}\) il diagramma
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\alpha_G}", from=1-1, to=2-1]
+	\arrow["{\alpha_H}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}{}
+    Supponendo di avere \(F, F' : G \to \mathtt{Set}\) funtori (\(G\) gruppo
+    visto come categoria con un oggetto), cioè \(G\)-insiemi (azioni di \(G\) su
+    insiemi).
+    Allora una trasformazione naturale \(\alpha : F \to F'\) è un morfismo di \(G\)-insiemi cioè una
+    funzione \(\alpha : F{(G)} \to F'{(G)}\) tale che \(\alpha{(gx)} = g \alpha{(x)}\) per ogni \(g \in G\) e per ogni \(x \in F{(G)}\).
+\end{example}
+\begin{remark}{}
+    \(\forall F : C\to D\), \(\mathrm{id}_F : F \to F\) data da \({(\mathrm{id}_F)}_X = \mathrm{id}_{F{(X)}} \) per ogni \(X \in C\) è una trasformazione naturale.
+\end{remark}
+
+\begin{eser}{}
+    Dati \(F, F', F'' : C \to D\) funtori, \(\alpha : F \to F'\) e \(\beta : F'
+    \to F''\) trasformazioni naturali, allora la composizione \(\beta \circ \alpha : F \to F''\) è definita da
+    \[
+      \beta_X \circ \alpha_X =: {(\beta \circ \alpha)}_X : F{(X)} \to F''{(X)}
+    \]
+    Mostrare che \(\alpha \circ \beta\) è una trasformazione naturale
+\end{eser}
+
+La composizione dell'esercizio precedente è anche detta composizione verticale
+di trasformazioni naturali, per via di questo disegno esplicativo:
+\[\begin{tikzcd}
+	C & D
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-20pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{F''}"', curve={height=20pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "F"{description}, from=1-1, to=1-2]
+	\arrow["\alpha", between={0.2}{0.8}, Rightarrow, from=0, to=2]
+	\arrow["\beta", between={0.2}{0.8}, Rightarrow, from=2, to=1]
+\end{tikzcd}\]
+
+Considerando funtori e trasformazioni naturali, si ottiene (assumiamo sempre \(C\) piccola) la categoria \(\mathtt{Fun}{(C, D)}\) (anche denotata \(D^{C}\) ) con oggetti i funtori \(C \to D\), morfismi le trasformazioni naturali e composizione la composizione verticale.
+
+\begin{definition}{}
+    Data una categoria \(C\), la categoria dei morfismi di \(C\) è
+    \[
+      \mathtt{Mor}{(C)} := \mathtt{Fun}{(\cdot \to \cdot , C)}
+    \]
+    che ha come oggetti esattamente \(\{f : \to X -Y : f \text{ morfismo di }C\} \) e trasformazioni naturali date da \({(X \overset{f}{\to } Y )} \to {(X' \overset{f'}{\to } Y' )}\) è data da \({(g : X \to  X' , h : Y \to  Y')}\) tale che 
+\[\begin{tikzcd}
+	{X} & {Y} \\
+    {X'} & {Y'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["f'", from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition}{}
+    Date \(F, G : C \to D\) funtori, \(\alpha : F \to G\) trasformazione
+    naturale, allora \(\alpha\) è \emph{isomorfismo} (\emph{naturale} o di funtori) se è isomorfismo in \(\mathtt{Fun}{(C, D)}\) cioè se 
+    \(\exists \beta : G \to F\) trasformazione naturale tale che \(\beta \circ
+    \alpha = \mathrm{id}_F\), \(\alpha \circ \beta = \mathrm{id}_G\).
+
+    In tal caso \(F\) e \(G\) si dicono \emph{isomorfi} (denotato \(F \cong
+    G\)).
+\end{definition}
+\begin{remark}{}
+    \(\cong\) di funtori è una relazione di equivalenza 
+\end{remark}
+\begin{example}{}
+
+Il primo gruppo di omologia si può vedere come l'abelianizzato del gruppo
+fondamentale. In linguaggio categorico abbiamo 
+\begin{align*}
+  \mathtt{Top_*} \overset{\pi_{1}}{\to } &\mathtt{Grp} \overset{\mathrm{Abel}}{\to } \mathtt{Ab} \\ 
+  &\text{ e } \\
+  \mathrm{Top_*} \to &\mathrm{Top} \overset{H_{1}}{\to } \mathtt{Ab} \\
+  {(X, x_{0})} \mapsto &\text{ comp. c.p.a. a \(x_{0}\)}
+\end{align*}
+sono funtori isomorfi
+\end{example}
+
+\begin{remark}{}
+    \(F \cong F'\) allora \(F\) e \(F'\) inducono la stessa funzione \(\mathrm{Ob}{(C)} /_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}\) quindi \(F\) è essenzialmente 
+   \emph{iniettiva} / \emph{suriettiva} se e solo se \(F'\) lo è.
+\end{remark}
+
+\begin{eser}{}
+    Mostrare che non necessariamente la precedente osservazione vale per le
+    proprietà di iniettività e suriettività.
+\end{eser}
+
+\begin{proposition}{}
+    Se \(F \cong F'\) allora \(F\) è \emph{fedele}/\emph{pieno} se e solo se \(F'\) è \emph{fedele}/\emph{pieno}.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to F'\) l'isomorfismo. Definiamo \\\(\overline{\alpha} = {(g \mapsto \alpha_Y \circ F{(F)} \circ \alpha_X^{-1})}\) 
+    Per ogni \(X, Y \in C\),
+\[\begin{tikzcd}
+	& {D(F(X),F(Y))} \\
+	{C(X,Y)} \\
+	& {D(F'(X),F'(Y))} \\
+	\arrow["{\overline{\alpha}}", from=1-2, to=3-2]
+	\arrow["F", from=2-1, to=1-2]
+	\arrow["{F'}", from=2-1, to=3-2]
+\end{tikzcd}\]
+% TODO: Finire
+\end{proof}
+
+\begin{proposition}{}
+\(\alpha, \beta\) trasformazioni naturali inducono una trasformazione naturale
+\(\beta * \alpha : G \circ F \to G' \circ F'\) 
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F'{(X)})}} \\
+    {G'{(F{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(\alpha_X)}", from=1-1, to=1-2]
+	\arrow["\beta_{F{(X)}}  ", from=1-1, to=2-1]
+	\arrow["\beta_{F'{(X)}} ", from=1-2, to=2-2]
+	\arrow["G'{(\alpha_X)}", from=2-1, to=2-2]
+\end{tikzcd}\]
+dunque \((\beta * \alpha)_X := \beta_{F'{(X)}} \circ G{(\alpha_X)} = G'{(\alpha_x)} \circ \beta_{F{(X)}} \).
+\end{proposition}
+\begin{proof}[Dimostrazione che è una trasformazione naturale]
+Vogliamo mostrare che \(b * a\) è naturale, cioè \(\forall f : X \to Y\) in \(C\) il diagramma
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F{(X)})}} \\
+    {G'{(F'{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(F{(f)})}", from=1-1, to=1-2]
+	\arrow["{(\beta * \alpha)}_X", from=1-1, to=2-1]
+	\arrow["{(\beta * \alpha)}_Y", from=1-2, to=2-2]
+	\arrow["G'{(F'{(f)})}", from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta. Ma questo è vero perché
+\begin{align*}
+    G'{(F'{(f)})} \circ {(\beta * \alpha)}_X &= G'{(F'{(f)})} \circ G'{(\alpha_x)}
+  \circ \beta_{F{(X)}} = G'{(F'{(f)} \circ \alpha_X)} \circ \beta_{F{(X)}} = \\
+    &\overset{\alpha \text{ nat.}}{=} G'{(\alpha_Y \circ F{(f)})} \circ
+    \beta_{F{(X)}} = G'{(\alpha_Y)} \circ G'{(F{(f)} \circ \beta_{F{(X)}})} = \\
+    &\overset{\beta \text{ nat.}}{=} G'{(\alpha_Y)} \circ \beta_{F{(Y)}}
+    \circ G{(F{(f)})} = {(\beta * \alpha)}_Y \circ G{(F{(f)})}
+\end{align*}
+\end{proof}
+
+Ovviamente è chiaro che si potrebbe definire allora la categoria delle
+trasformazioni naturali eccetera e andare avanti all'infinito. Per
+assiomatizzare queste cose in realtà bisognerebbe esplicitare che abbiamo
+definito le ``2-frecce'' e che quindi siamo in una \emph{2-categoria}
+
+\begin{note}[zione]
+    Se \(\beta = \mathrm{id}_G \) invece di \(\mathrm{id_G} * \alpha\) si scrive
+    \(G \circ \alpha\) (dunque con \({(G \circ \alpha)}_X = G{(\alpha_X)}\)). Se
+    \(\alpha = \mathrm{id}_F\) invece di \(\beta * \mathrm{id}_F\) si scrive \(\beta \circ F\) (con \({(\beta \circ F)}_X = \beta_{F{(X)}} \)). In generale 
+    \[
+      \beta * \alpha = {(\beta \circ F')} \circ {(G \circ \alpha)} = {(G' \circ
+      \alpha)} \circ {(\beta \circ F)}
+    \]
+\end{note}
+\begin{remark}{}
+    Se \(\alpha, \beta\) sono isomorfismi, allora \(\beta * \alpha\) è
+    isomorfismo. Questo significa che se 
+    \[
+      F \cong F', \quad G \cong G' \implies G \circ F \cong G' \circ F'
+    \]
+    cioè l'isomorfismo di funtori è una congruenza su \(
+    \mathtt{Cat}\) e quindi si ottiene la categoria \(\mathtt{Cat} /_{\cong}\)
+\end{remark}
+\begin{definition}{Equivalenza}
+    Un funtore \(F: C \to D\) è un'equivalenza se \(\exists G : D \to C\)
+    funtore tale che \(G \circ F \cong \mathrm{id}_G\) e \(F \circ G \cong \mathrm{id}_D\).
+
+    Un tale \(G\) si dice un \emph{quasi-inverso} di \(F\).
+\end{definition}
+\begin{remark}{}
+    \(F\) è un'equivalenza se e solo se \(\overline{F} \text{ in } \mathtt{Cat}/_{\cong} \) è un isomorfismo.
+\end{remark}
+
+Segue che se \(F \cong F'\), allora \(F\) è un'equivalenza se e solo se \(F'\) è
+un'equivalenza e un quasi-inverso di \(F\) è unico a meno di isomorfismo e
+l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{Cat}\) 
+
+\begin{definition}{Scheletro}
+    Una sottocategoria piena \(C' \subseteq C \) è detta \emph{scheletro} se \(\forall X \in C\), \(\exists ! X' \in C'\) tale che \(X \cong X'\) 
+\end{definition}
+
+\begin{lemma}{}\label{lem:ext-scheletro}
+    Sia \(F: C\to D\) un funtore, e si supponga che \(\forall X \in C\), \(\alpha_X : F{(X)} \to F'{(X)}\) sia un isomorfismo in \(D\). Allora \(F' : \mathrm{Ob}{(C)} \to \mathrm{Ob}{(D)}\) Si estende in modo unico a un funtore \(F' : C \to D\) tale che \(\alpha : F \to F'\) è isomorfismo.
+\end{lemma}
+
+\begin{theorem}[Finalmente un teorema]
+    Un funtore \(F : C \to D\) è un'\emph{equivalenza} se e solo se \(F\) è \emph{pienamente fedele} e \emph{essenzialmente suriettivo}
+\end{theorem}
+\begin{remark}{}
+    Non è necessario aggiungere l'ipotesi che \(F\) sia essenzialmente iniettivo
+    perché come mostrato prima pienamente fedele implica essenzialmente
+    iniettivo (ma non essenzialmente suriettivo).
+\end{remark}
+\begin{example}{}
+    Supponiamo che \(C' \subseteq C \) sia una sottocategoria piena. Allora il
+    funtore di inclusione \(C' \hookrightarrow C\) è pienamente fedele ed è
+    essenzialmente suriettivo (quindi è un'equivalenza) se e solo se \(\forall X \in C\) esiste \(X' \in C'\) tale che \(X \cong X'\).
+\end{example}
+
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(G : D \to C\) un quasi-inverso di \(F\). Allora
+        \(F \circ G \cong \mathrm{id}_G\) che è essenzialmente suriettivo, e
+        dunque \(F\) è essenzialmente suriettivo. D'altra parte lo stesso \(F
+        \circ G\) è fedele, e dunque \(G\) è fedele.
+        
+        Ora, per ogni \(X, Y \in C\),
+        \[
+          C{(X, Y)} \overset{F_{X,Y} }{\to } D{(F{(X)}, F{(Y)})} \overset{G_{F{(X)}, F{(Y)}}  \text{ inj}}{\to} C{(G{(F{(X)})}, G{(F{(Y)})})}
+        \]
+        poiché la composizione è biunivoca e \(G\) è fedele, allora entrambi
+        devono essere biunivoci, ossia in particolare \(F\) è pienamente fedele.
+    \item[\(\impliedby \)] Consideriamo prima il caso di un'inclusione \(C' \subseteq C \) sottocategoria piena tale che \(\forall X \in C\) esista \(X' \in C\) tale che \(X \cong X'\). 
+        Sia \(I : C' \to C\) il funtore di inclusione (pienamente fedele e
+        essenzialmente suriettivo).
+
+        Allora \(\forall X \in C\) scelto (AoC) un
+        isomorfismo \(\alpha_X : X \to \tilde{P}{(X)} \in C'\) e se \(X \in 
+        C'\) in particolare prendiamo \(\alpha_X = 1_X\). Applico ora il
+        lemma~\ref{lem:ext-scheletro} con \(F = \mathrm{id}_C\) e dunque \(\exists !\) estensione di \(\tilde{P}\) a un funtore \(\tilde{P} : C \to C\) tale che \(\alpha : \mathrm{id}_C \to \tilde{P}\) è isomorfismo. Allora \(\exists ! P : C \to C'\) funtore tale che \(\tilde{P} = I \circ P\) e \(P\) è un quasi-inverso di \(I\) poiché \(I \circ P = \tilde{P} \cong \mathrm{id}_C\) e \(P \circ I = \mathrm{id}_{C'}\).
+
+        In generale, dato \(F : C \to D\) pienamente fedele. Siano allora \(
+        I : C' \to C\) e \(J : D' \to D\) due scheletri. Per il caso qui fatto
+        \(I, J\) sono equivalenze e siano \(P : C\to C'\) quasi-inverso di \(I\) e \(Q : D \to D'\) quasi-inverso di \(J\).
+\[\begin{tikzcd}
+	C & D \\
+	{C'} & {D'}
+	\arrow["F"{description}, from=1-1, to=1-2]
+	\arrow["P"', shift right, from=1-1, to=2-1]
+	\arrow["Q", shift left, from=1-2, to=2-2]
+	\arrow["I"', shift right, from=2-1, to=1-1]
+	\arrow["{F'}"{description}, from=2-1, to=2-2]
+	\arrow["J", shift left, from=2-2, to=1-2]
+\end{tikzcd}\]
+    Sia \(F' := Q \circ F \circ I : C' \to D'\) come nel diagramma. Allora \(
+    I, F, Q\) sono pienamente fedeli e essenzialmente suriettivi (\(I\) per
+    definizione, \(F\) per ipotesi e \(Q\) perché è un'equivalenza e vale il
+    punto \({(\implies )}\)) dunque \(
+    F'\) è pienamente fedele e essenzialmente suriettivo.
+
+    \(F'\) è essenzialmente biunivoco, \(C'\) e \(D'\) sono scheletri, dunque \(F'\) è biunivoco, quindi isomorfismo e quindi equivalenza.
+    \[
+        F = \mathrm{id}_D \circ F \circ \mathrm{id}_c \cong J \circ Q \circ F
+        \circ I \circ P = J \circ F' \circ P
+    \]
+    equivalenza perché lo sono \(J, F'\) e \(P\) 
+\end{itemize}
+\end{proof}
+
+\begin{example}{}
+    Sia \(\sim \) una relazione d'equivalenza su un insieme \(X\) che vedo come
+    categoria \(C\) con \(\mathrm{Ob}{(C)} = X\)  e \(C{(x,y)} \neq \varnothing \iff x \sim y\).
+
+    Il funtore \(C \to X/_\sim\) (categoria discreta) definito da \(x \mapsto
+    \overline{x}\) è un'equivalenza poiché pienamente fedele e essenzialmente
+    suriettiva.
+\end{example}
+
+\begin{eser}{}
+    Mostrare che ogni categoria equivalente a una categoria discreta è una relazione di
+    equivalenza, ossia una categoria dove \(\forall X, Y \in C, \,\,
+    C{(X,Y)} \neq O \iff x \sim y \) per una qualche \(\sim \) relazione di
+    equivalenza.
+\end{eser}
+
+\section{Categorie preadditiva}
+\begin{definition}{Categoria preadditiva}
+    Una categoria \emph{preadditiva} è una categoria \(\mathcal{A}\) con una
+    struttura di gruppo abeliano (notazione: additivo) su \(\mathcal{A}{(X, Y)}\) per ogni \(X, Y \in \mathcal{A}\) ed è tale che la composizione di morfismi sia \(\mathbb{Z}\)-bilineare, ossia
+    \[
+      g \circ {(f + f')} = g \circ f + g \circ f' \quad \text{ e } \quad {(g +
+      g')} \circ f = g \circ f + g' \circ f 
+    \]
+    per ogni \(
+    X, Y, Z \in \mathcal{A}\), \(f, f' \in \mathcal{A}{(X, Y)}\) e \(g, g' \in \mathcal{A}{(Y, Z)}\).
+\end{definition}
+\begin{remark}{}
+    Si dice anche che \(\mathcal{A}\) è una \(\mathtt{Ab}\)-Categoria. Si può
+    studiare quando si può generare una categoria simile partendo da altre
+    categorie invece di \(\mathtt{Ab}\) ma non è argomento di questo corso.
+
+    Si può anche dire che \(\mathcal{A}\) è \(\mathbb{Z}\)-lineare. Più in
+    generale \(\forall\)\footnote{normalmente in mezzo alla frase così avrei scritto esplicitamente ``per ogni'' ma trovavo divertente la quantità di \(\mathcal{A}\) e di \(A\) nella frase quindi ho valutato simpatico aggiungere anche un \(\forall\)} anello commutativo \(A\) una categoria \(A\)-lineare è
+    una categoria \(\mathcal{A}\) con una struttura di \(A\)-modulo su \(\mathcal{A}{(X,Y)}\) tale che la composizione sia \(A\)-bilineare.
+\end{remark}
+\begin{proposition}{}
+    Se \(A\) è non commutativo, allora \(\forall a, b \in A\) e \(\forall f :
+    X\to Y\) morfismo di \(\mathcal{A}\),
+    \[
+      {(ab)}f = {(ba)}f
+    \]
+\end{proposition}
+\begin{proof}{}
+    \[
+      {(ab)}f = a{(bf)} = a{({(bf)}\circ 1_X)} = {(bf)} \circ {(a1_x)} = f \circ
+      {(b{(a 1_X)})} = f \circ {(ba)}1_X = {(ba)}f
+    \]
+\end{proof}
+
+\begin{example}{}
+    Sia \(A\) un anello, allora \(A\mathtt{-Mod}\) è preadditiva. Infatti per
+    ogni \(M, N \in {(A\mathtt{-Mod})}\), \(A\mathtt{-Mod}{(M, N)} = \mathrm{Hom}_A{(M, N)}\) è un gruppo abeliano e \(\circ\) è \(\mathbb{Z}\)-bilineare. Se \(A\) è commutativo, allora \(A\mathtt{-Mod}\) è anche \(A\)-lineare.
+    Più in generale se \(B\) è una \(A\)-algebra allora \(B\mathtt{-Mod}\) è \(A\)-lineare.
+\end{example}
+
+\begin{remark}{}
+    Sia \(X \in \mathcal{A}\) categoria \(A\)-lineare (quindi \(A\)
+    commutativo). Allora \(\mathrm{End}_\mathcal{A}{(X)}\) è una \(A\)-algebra.
+    Infatti \({(\mathrm{End}_{\mathcal{A}} {(X)}, \circ)}\) è un monoide e \(\mathrm{End}_\mathcal{A}\) è \(A\)-modulo e \(\circ\) è \(A\)-lineare.
+
+    Quindi le categorie \(A\)-lineari con un solo oggetto sono \(A\)-algebre. In
+    particolare \textbf{\emph{le categorie preadditive con un solo oggetto sono anelli}}.
+\end{remark}
+
+\begin{remark}{}
+Sia \(\mathcal{A}\) preadditiva, allora \(\mathcal{A}^{op}\) è preadditiva con
+la stessa struttura di gruppo abeliano su \(\mathcal{A}^{op}{(X, Y)} = \mathcal{A}{(Y, X)}\) per ogni \(X, Y \in \mathcal{A}\).
+\end{remark}
+
+\begin{remark}{}
+Se \(\mathcal{A}\) è preadditiva, allora \(\mathcal{A}' \subseteq \mathcal{A}\) sottocategoria tale che \(\mathcal{A}'{(X, Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X, Y \in \mathcal{A}'\), allora \(\mathcal{A}'\) è preadditiva. In particolare la condizione è sempre verificata per le categorie piene.
+\end{remark}
+
+    Sia \(\mathcal{A}\) preadditiva, \(\sim \) una congruenza tale che \(\forall X, Y \in \mathcal{A}\), \(\forall f, f', g \in \mathcal{A}{(X, Y)}\) allora \(f \sim f' \implies f + g \sim f' + g\). In tale ipotesi \(\mathcal{A}/_\sim \) è preadditiva con \(\overline{f} + \overline{g} = \overline{f+g}\).
+
+    Data una tale congruenza, sia \(\forall X, Y \in \mathcal{A}\) 
+    \[
+      \mathfrak{I}{(X,Y)} = \{f \in \mathcal{A}{(X, Y)} : f \sim 0\} 
+    \]
+    e indichiamo con \(\mathfrak{I} \subseteq \mathcal{A}\) la collezione di
+    tutti gli \(\mathfrak{I}{(X, Y)}\). Allora vale la proprietà di ideale, gioè
+    dati \(f, g\) morfismi di \(\mathcal{A}\) componibili, 
+    \[
+      f \circ \mathfrak{I} \text{ o } g \in \mathfrak{I} \implies g \circ f \in \mathfrak{I}
+    \]
+    Se per esempio \(f \in \mathfrak{I}\) ossia \(f \sim 0\), allora \(g \circ f
+    \sim g \circ 0 = 0 \) e dunque \(g \circ f \in \mathfrak{I}\).
+
+    Arriviamo dunque alla seguente definizione
+
+\begin{definition}{}
+    Definiamo un ideale \(\mathfrak{I}\) in una categoria preadditiva \(\mathcal{A}\) come \(\mathfrak{I}{(X,Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X, Y \in \mathcal{A}\) tale che
+    \[
+      f \in \mathfrak{I} \text{ o } g \in \mathfrak{I} \implies g \circ f \in
+      \mathfrak{I}
+    \]
+\end{definition}
+Viceversa, dato \(\mathfrak{I} \subseteq \mathcal{A} \) ideale, si ottiene una
+congruenza \(\sim \) su \(\mathcal{A}\) definito da 
+\[
+  f \sim f' \iff f' - f \in \mathfrak{I}{(X, Y)} \quad \forall X, Y \in \mathcal{A} \quad \forall f, f' \in  \mathcal{A}{(X, Y)}
+\]
+ed è tale che \(f \sim f' \implies f + g \sim f'+ g\).
+
+In tali ipotesi si può anche denotare \(\mathcal{A} / \mathfrak{I}\) invece di
+\(\mathcal{A}/_\sim\).
+
+Una categoria \(\mathcal{C}\) può non avere nessuna struttura di categoria
+    preadditiva (ad esempio se \(\exists X, Y \in \mathcal{C}\)) tale che \(\mathcal{C}{(X, Y)} = \varnothing\) o averne più di una.
+
+\begin{example}{G}
+    Possiamo pensare ad anelli \(A\) e \(B\) tali che \({(A, \cdot )} \cong {(B, \cdot )}\) e \({(A, +)} \not\cong {(B, +)}\).
+
+    Ad esempio possiamo prendere \(A = \mathbb{Z} / 4 \mathbb{Z}\) e \(B = \mathbb{Z} /_{2 \mathbb{Z}} [X] / {(X^2)}\). Allora evidentemente 
+    \[
+      {(A, +)} \cong C_4 \not\cong C_{2} \times C_{2} \cong B
+    \]
+    ma gli elementi diversi da \(0\) e \(1\) di \(A\) sono \(\overline{2}\) e \(\overline{3}\) e sono tali che \(\overline{2}^2 = \overline{0}\), \(\overline{3}^2 = \overline{1}\) e \(\overline{2} \cdot \overline{3} = \overline{2}\). Similmente in \(B\) abbiamo che
+    \(
+      \overline{X}^2 = \overline{0}
+    \), \(\overline{1+X}^2 = \overline{1}\) e \(\overline{X} \cdot \overline{1+X} = \overline{X}\)
+\end{example}
+
+\begin{definition}{}
+    Un funtore \(F : \mathcal{A} \to \mathcal{B}\) tra categorie preadditive è
+    additivo se 
+    \[
+      F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}
+    \]
+    è omomorfismo di gruppi \(\forall X, Y \in \mathcal{A}\).
+
+    Più in generale \(F: \mathcal{A} \to \mathcal{B}\) tra categorie
+    \(A\)-lineari è detto \(A\)-lineare se \(F_{X, Y} \) è \(A\)-lineare \(\forall X, Y \in \mathcal{A}\).
+\end{definition}
+
+\begin{example}{}
+    Sia \(\mathcal{A}' \subseteq \mathcal{A} \) sottocategoria tale che \(\mathcal{A}'{(X, Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X,Y \in \mathcal{A}'\). Allora l'inclusione \(\mathcal{A}' \to \mathcal{A}\) è addditivo.
+\end{example}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) è preadditiva e \(\mathfrak{I} \subseteq \mathcal{A} \)
+    ideale, allora il funtore \(f : \mathcal{A} \to \mathcal{A}/\mathfrak{I}\) 
+    definito da \(X \mapsto X\) e \(f \mapsto \overline{f}\) è additivo.
+\end{example}
+
+\begin{eser}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) additivo tale che ``\(\mathfrak{I} = \ker F\)'' cioè \(F{(f)} = 0 \), \(\forall f \in \mathfrak{I}\), allora mostrare che esiste un unico \(\overline{F} : \mathcal{A}/\mathfrak{I} \to \mathcal{B}\) funtore additivo tale che \(F = \overline{F} \circ P\) 
+\end{eser}
+
+\begin{example}{}
+    Siano \(A, B\) anelli (categorie preadditive con un solo oggetto), allora un
+    funtore additivo \(A\to B\) è un omomorfismo di anelli.
+
+    Più in generale per ogni anello \(A\) e per ogni \(\mathcal{A}\) categoria
+    preadditiva un funtore additivo \( A \to \mathcal{A}\) è dato da un oggetto
+    \(X \in \mathcal{A}\) e un omomorfismo di anelli \(A \to \mathrm{End}_\mathcal{A}{(X)}\).
+    Quindi un \(A\)-modulo è un funtore additivo \(A \to \mathtt{Ab}\) 
+\end{example}
+
+\begin{example}{}
+    Sia \(A\to B\) un omomorfismo di anelli. Allora il funtore di restrizione
+    degli scalari \(B\mathtt{-Mod} \to A\mathtt{-Mod}\) è additivo.
+\end{example}
+
+
+
+\end{document}
