@@ -47,20 +47,229 @@ di Newton \(\mathbf{F} = {(m\mathbf{v} )}'\), allora abbiamo che \(q = F_j\).
 Riscrivendo dunque l'equazione~\eqref{eq:acu_div}, abbiamo
 \[
   \frac{\partial }{\partial t}{(\rho v_j)} + \mathrm{div}{(\rho v_s \mathbf{v}
-  )} = F_j = {(\nabla p)}_j
+  )} = F_j = {(-\nabla p)}_j
 \]
 con \(p\) la pressione. Otteniamo ora, con la derivata del prodotto
 \[
   v_j {\left( \frac{\partial \rho}{\partial t} +  \mathrm{div}{(\rho \mathbf{v}
   )}\right)} + \rho \frac{\partial v_j}{\partial t} + \rho \mathbf{v} \cdot
-  \nabla v_j = {(\nabla p)}_j
+  \nabla v_j = {(-\nabla p)}_j
 \]
 ma da~\eqref{eq:acu_cont_massa} abbiamo che il termine tra parentesi è nullo, da
 cui (riscrivendo il tutto anche in forma vettoriale e dividendo per \(\rho\) )
 \begin{equation}\label{eq:eulero}
   \frac{\partial \mathbf{v} }{\partial t} + {(\mathbf{v} \cdot \nabla )}
-  \mathbf{v} = \frac{1}{\rho} \nabla p
+  \mathbf{v} + \frac{1}{\rho} \nabla p = 0
 \end{equation}
 dove \({\left( {(\mathbf{v} \cdot \nabla )}\mathbf{v}  \right)}_j =
-\sum_{k=1}^{3} v_{n} \frac{\partial v_j}{\partial x_k}  \) 
+\sum_{k=1}^{3} v_{n} \frac{\partial v_j}{\partial x_k}  \). La~\eqref{eq:eulero}
+è detta \textbf{equazione di Eulero}.
+
+In acustica, ora abbiamo \(\rho\), \(\mathbf{v} \) e \(p\) e vorremmo scriverle
+come perturbazione. Vorremmo dunque avere tre equazioni
+\begin{align*}
+    \rho {(\mathbf{x} , t)} &= \rho_{0} + \rho_\approx {(\mathbf{x} , t)}\\ 
+    \mathbf{v} {(\mathbf{x} , t)} &= \cancel{\mathbf{v}_0} + v_\approx {(\mathbf{x} , t)} \\
+    p{(\mathbf{x} , t)} &= p_{0} + p_\approx {(\mathbf{x} , t)}
+\end{align*}
+dove assumiamo che \(\mathbf{v}_0 = \mathbf{0} \) assumendo che inizialmente il
+fluido sia fermo. Inoltre queste equazioni assumono che la pressioen e la
+densità siano uniformi nel fluido che consideriamo. Chiaramente questo non
+varrebbe ad esempio se l'evento che vogliamo modellizzare è abbastanza grande da
+avere che la differenza di pressione è percepibile (ad esempio un aereo a 10k
+metri sentito dal suolo o robe del genere) ma in tali casi dovremmo ampliare
+queste equazioni con più dettagli. Le equazioni~\eqref{eq:acu_cont_massa} e
+\eqref{eq:eulero} diventono dunque
+\[
+  \frac{\partial p_\approx}{\partial t} + \mathrm{div}{(\rho_{0}
+  \mathbf{v}_\approx + \cancel{\rho_\approx \mathbf{v}_\approx})} \quad e \quad 
+  \frac{\partial \mathbf{v}_\approx}{\partial t} + \cancel{{(\mathbf{v}_\approx \cdot
+  \nabla )} \mathbf{v}_\approx} + \frac{1}{\rho_{0} + \rho_{\approx} } \nabla
+  p_{\approx} = \mathbf{0} 
+\]
+Dove abbiamo cancellato i termini che sono piccoli in quanto prodotto di due
+perturbazioni. Inoltre notiamo che
+\[
+  \frac{1}{\rho_{0} + \rho_\approx} = \frac{1}{\rho_{0} {\left( 1 +
+  \frac{\rho_\approx}{\rho_{0}} \right)} } \approx \frac{1}{\rho_{0}} {\left( 1
+- \frac{\rho_\approx}{\rho_{0}}\right)} 
+\]
+dove l'ultima approssimazione è di nuovo perché ``razionalizzando'' al
+denominatore togliamo il prodotto di perturbazioni in quanto piccolo. Otteniamo
+dunque finalmente le due equazioni
+\begin{equation}\label{eq:eulero_lineare}
+  \frac{\partial \rho_\approx}{\partial t} + \rho_{0} \mathrm{div}{(\mathbf{v}
+  _\approx)} = 0 \quad e \quad \frac{\partial \mathbf{v}_\approx}{\partial t} +
+  \frac{1}{\rho_{0}} \nabla p_\approx = 0
+\end{equation}
+ossia una approssimazione lineare delle equazioni di continuità e di Eulero.
+
+Attualmente però abbiamo solo due equazioni per tre variabili. Dunque ora
+utilizziamo l'assunzione fisicamente motivata che la pressione è determinata
+dalla densità in qualche modo, ossia \(p = f{(\rho)}\), con \(f\) una qualche
+funzione bella. Abbiamo dunque che \(p_{0} + p_\approx = f{(\rho_{0} +
+\rho_\approx)} \approx f{(\rho_{0})} + \rho_\approx f'{(\rho_{0})}\) e in
+particolare \(p_\approx \approx \rho_\approx f'{(\rho_{0})}\), dove ci
+aspettiamo che \(f'{(\rho_{0})} > 0\) e in particolare lo chiamiamo \(c^2 =
+f'{(\rho_{0})}\). Cambiando il \(\approx\) in \(=\) e aggiuggendo quest'ultima
+equazione alle~\eqref{eq:eulero_lineare} otteniamo (anche derivando rispetto al
+tempo un'altra volta)
+\begin{equation}\label{eq:acu_onda}
+    \frac{1}{c^2} \frac{\partial ^2 p_\approx}{\partial t ^2} + \rho_{0}
+    \mathrm{div} {\left(\frac{\partial \mathbf{v} _\approx}{\partial t}\right)} = 0
+    \implies \frac{1}{c^2} \frac{\partial^2 p_\approx}{\partial t ^2 } - \nabla
+    ^2 p_\approx = 0
+\end{equation}
+dove l'ultima è un'equazione d'onda, con \(p_\approx\) come potenziale.
+
+Notiamo che se \(F : \mathbb{R} \to \mathbb{R}\) e \(\mathbf{d}  \in
+\mathbb{R}^{n}\), con \(\|\mathbf{d} \| = 1\) e \(U{(\mathbf{x} , t)} =
+F{(\mathbf{x}  \cdot  \mathbf{d}  - ct)}\), allora
+\begin{align*}
+  \frac{\partial ^2 U}{\partial t^2} = {(-c)}^2 F''{(\mathbf{x}  \cdot
+  \mathbf{d}  - ct)} \;; \quad \nabla U = F'{(\mathbf{x} \cdot \mathbf{d} - ct)}
+  \mathbf{d} a\;;\\\nabla ^2 U = \mathrm{div}{(\nabla U)} = \nabla
+  F'{(\mathbf{x} \cdot \mathbf{d} - ct)} \cdot \mathbf{d} = F''{(\mathbf{x}
+  \cdot \mathbf{d}  - ct)} \cancel{\mathbf{d}  \cdot \mathbf{d} }
+\end{align*}
+Dunque \(F\) soddisfa l'equazione delle onde. In particolare queste sono le
+cosiddette \emph{onde piane}.
+
+Un'altra classe di onde che soddisferebbe l'equazione sarebbe costituita da
+quelle della forma \(U{(\mathbf{x} ,
+t)} = \frac{F{(\|\mathbf{x} \| - ct)}}{\|\mathbf{x} \|}\), le \emph{onde
+sferiche}.
+
+Una variante dell'equazione d'onda è quella smorzata, con equazione
+\begin{equation}\label{eq:onda_smorzata}
+  \frac{1}{c^2} \frac{\partial ^2 U}{\partial t^2} U + \frac{\gamma}{c^2}
+  \frac{\partial U}{\partial t} - \nabla ^2 U = 0 \quad \text{ con }\gamma>0
+\end{equation}
+che aggiunge all'equazione d'onda normale un termine che la fa decadere
+esponenzialmente.
+
+Al fine di risolvere le equazioni differenziali dobbiamo definire delle
+\emph{condizioni al bordo}. Vi sono diverse condizioni che possiamo studiare:
+\begin{itemize}[label = --]
+    \item \textbf{Sound-Hard}: l'ostacolo contro cui va a sbattere l'onda è
+        ``duro'', dunque \(\mathbf{v}_\approx \cdot \mathbf{n} = 0\) 
+    \item \textbf{Sound-Soft}: l'ostacolo è morbido, ``attutisce'', dunque a
+        quanto pare \(p_\approx = 0\). Queste condizioni riflettono le onde come
+        i sonar?
+    \item \textbf{Impedenza}: una condizione a metà tra le due, dunque quando
+        l'onda va a colpire un ostacolo e questo impedisce all'onda di
+        proseguire e le proprietà del mezzo determinano di quanto l'onda riesce
+        a penetrare, con una relazione tra le due, in particolare una formula
+        come
+        \[
+          \mathbf{v} \cdot \mathbf{n} = \frac{\theta}{c\rho_{0}}p_\approx
+        \]
+        dove \(\theta > 0\) è un parametro adimensionale che descrive le proprietà
+        acustiche dell'ostacolo e si chiama \emph{coefficiente di impedenza (di
+        superficie)}.\footnote{In una sala concerti di teatro si progettano
+            sedie che abbiano un coefficiente di impedenza simile a quello di
+            esseri umani vestiti, per fare sì che non ci sia molta differenza
+            nel suono tra una sala piena e una vuota}
+\end{itemize}
+La discussione diventa più fine quando si studiano mezzi differenti, come la
+trasmissione acustica tra due fluidi diversi, come aria e acqua (aeroacustica),
+oppure tra un solido e un fluido (vibroacustica).
+
+\section{Onde armoniche in tempo}
+Vogliamo ora considerare delle onde \(U{(\mathbf{x} , t)}\) (dunque soluzioni
+dell'equazione delle onde) sinusoidali in tempo. Avremo dunque un valore
+\(\omega > 0\) che indichi la frequenza temporale. Un esempio è
+\begin{equation*}
+  U{(\mathbf{x} , t)} = A{(\mathbf{x} )} \sin{(\omega t)} + B{(\mathbf{x} )}
+  \cos{(\omega t)}
+\end{equation*}
+scritto così però non è comodissimo, dunque vogliamo prendere 
+\begin{equation}\label{eq:onda_armotempo}
+    U{(\mathbf{x} , t)} = \Re {\left( u{(\mathbf{x} )} e^{-i\omega t} \right)} =
+  \Re {(u{(\mathbf{x} )})} \cos{(\omega t)} + \Im {(u{(\mathbf{x} )})} \sin
+  {(\omega t)}
+\end{equation}
+che (la prima ovviamente) è più comoda nei calcoli essendo più semplice. Se
+questa \(U\) è soluzione dell'equazione delle onde otteniamo
+\[
+  {\left( \frac{1}{c^2} \frac{\partial ^2}{\partial t ^2} - \nabla ^2 \right)}
+  U{(\mathbf{x} , t)} = \Re \left\{ {\left( \frac{1}{c^2}{(-\omega)}^2 {(\mathbf{x} )}
+  - \nabla ^2 u{(\mathbf{x} )}\right)} e^{-i\omega t} \right\} = 0
+\]
+Allora dovendo valore per ogni valore di \(t\), abbiamo che, introducendo \(k =
+\frac{\omega}{c}\) il numero d'onda (\emph{wavenumber}), allora otteniamo
+l'equazione
+\begin{equation}\label{eq:helmholtz}
+  -k^2 u - \nabla ^2 u = 0 \implies \nabla ^2 u + k^2 u = 0
+\end{equation}
+Sappiamo che \(u\) è a valori complessi, dunque \(u{(\mathbf{x} )} =
+A{(\mathbf{x} )} e ^{i \omega \varphi {(\mathbf{x} )}}\), con \(A \ge 0\).
+Riportandola ora nell'equazione~\eqref{eq:onda_armotempo} otteniamo
+\[
+  U{(\mathbf{x} , t)} = A{(\mathbf{x} )} \Re {\left( e^{i\omega \varphi
+  {(\mathbf{x} )}} \, e^{-i \omega t} \right)} = A{(\mathbf{x} )} \cos{(\omega
+{( t - \varphi {(\times )})})}
+\]
+\(k\) è una sorta di ``frequenza spaziale'', è in unità di misura
+\([\text{lunghezza}^{-1}]\) e possiamo definire la \emph{lunghezza d'onda}
+\(\lambda = \frac{2\pi}{k}\).
+
+Se ora prendiamo \(U = p_\approx\), in sound-soft abbiamo \(u = 0\)
+(dirichlet). In sound-hard invece abbiamo \(\mathbf{v}_\approx \cdot \mathbf{n}
+= 0\) allora dalla~\eqref{eq:eulero_lineare} otteniamo
+\begin{equation}\label{eq:neumann}
+  \frac{\partial u}{\partial n} = \mathbf{n} \nabla u = 0
+\end{equation}
+Ossia l'equazione di \textbf{Neumann}. In impedenza invece abbiamo 
+\[
+  \mathbf{v}  \cdot  \mathbf{n} = \frac{\theta}{c \rho_{0}} p_\approx \implies
+  -\frac{1}{\cancel{\rho_{0}}}\nabla p_\approx \cdot \mathbf{n} = \frac{\theta}{c
+  \cancel{\rho_{0}}} \frac{\partial p_\approx}{\partial t} \implies  - \frac{\partial
+p_\approx}{\partial n} = \frac{\theta}{c} {(-i\omega)}p_\approx 
+\]
+Da cui infine
+\begin{equation}\label{eq:helmholz_impedenza}
+  \frac{\partial u}{\partial n} - i\theta k u = 0
+\end{equation}
+
+Riprendendo l'equazione in damping abbiamo
+\[
+  \frac{1}{c^2} U'' + \frac{\gamma}{c^2} U' - \nabla ^2 U = 0
+\]
+Prendendo \(U\) come in~\eqref{eq:onda_armotempo} abbiamo
+\[
+  -\frac{\omega^2}{c^2} u - \frac{i\omega\gamma}{c^2}u - \nabla ^2 u = 0
+  \implies \nabla ^2 u + {\left( \frac{i \omega\gamma + \omega^2}{c^2} \right)}
+  u = 0
+\]
+in questo caso prendendo il coefficiente di \(u\) come \(k^2\) (dunque
+complesso) possiamo modellizzare il problema con un'equazione di Helmholtz.
+Vedremo che in alcuni casi introdurre \(k^2\) complesso (nel modo giusto)
+porterà in alcuni casi a dimostrare che alcuni problemi sono ben posti.
+
+Vedendo il sistema tra particelle, abbiamo che \(\mathbf{U} {(\mathbf{x} , t)}\) può
+indicare lo spostamento \(\mathbf{x}  \mapsto \mathbf{x} + \mathbf{U}
+{(\mathbf{x} , t)} \), dunque \(\frac{\partial \mathbf{U} }{\partial t} =
+\mathbf{v} _\approx\), da cui si può ottenere che 
+\[
+  \mathbf{U} = \frac{\nabla p_\approx}{\omega^2\rho_{0}}
+\]
+
+\begin{remark}{}
+    Se abbiamo una \(U{(\mathbf{x} , t)}\) allora per la trasformata di Fourier
+    sappiamo che
+    \[
+      U{(\mathbf{x} , t)} = \frac{1}{\sqrt{2\pi}} \int _{\mathbb{R}}
+      \widehat{U}{(\mathbf{x} , \omega)} e^{i\omega t} \,d\omega
+    \]
+    per cui ogni segnale si può scrivere come somma di funzioni ad una sola
+    frequenza, dove \(\widehat{U}\) si trova in modo simile con
+
+    \[
+      \widehat{U}{(\mathbf{x} , t)} = \frac{1}{\sqrt{2\pi}} \int_{\mathbb{R}}
+      U{(\mathbf{x} , t)}e^{-i\omega t} \,dt
+    \]
+    Per cui ogni problema di onde è risolvibili come somma di un numero infinito
+    di problemi di Helmholtz. Ovviamente nella pratica non se ne fanno infiniti.
+\end{remark}
 
