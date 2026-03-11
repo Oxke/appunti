@@ -1,0 +1,3055 @@
+\chapter{Categorie}
+
+\begin{definition}{Categoria}
+    Una \textbf{categoria} \(\mathcal{C}\) è data da una classe di oggetti \(\mathrm{Ob}{(\mathcal{C})}\) e \(\forall X, Y \in \mathrm{Ob}{(\mathcal{C})}\) da un insieme di morfismi da \(X \) a \(Y\) indicato con
+    \(\mathrm{Hom}{(X,Y)} = \mathrm{Hom}_\mathcal{C} {(X, Y)} = \mathcal{C}{(X, Y)}\)  e da una
+   azione  composizione di morfismi, cioè \(\forall X, Y, Z \in \mathrm{Ob}{(\mathcal{C})}\)
+    (anche scritto \(X, Y, Z \in \mathcal{C}\) ) un'operazione 
+    \begin{align*}
+        \mathcal{C}{(X, Y)} \times  \mathcal{C}{(Y, Z)} &\to  \mathcal{C}{(X, Z)}
+        {(f, g)} &\mapsto g \circ f
+    \end{align*}
+
+    tale che 
+\begin{enumerate}[label = \arabic*.]
+    \item[0.] \(\mathcal{C}{(X,Y)} \cap  \mathcal{C}{(X', Y')} \neq \varnothing \implies X = X' \text{ e } Y = Y'\) 
+    \item[1.] \(\circ\) è associativa, cioè \(\forall X, Y, Z, W \in \mathcal{C}\) e \(\forall f \in \mathcal{C}{(X,Y)}\) e \(\forall g \in \mathcal{C}{(Y, Z)}\) e \(\forall h \in \mathcal{C}{(Z, W)}\)  allora 
+        \[
+          h \circ {(g \circ f)} = {(h \circ g)} \circ f
+        \]
+    \item[2.] \(\forall  X \in  \mathcal{C} \) esiste \(1_X = \mathrm{id}_X \in \mathcal{C}{(X, X)}\)
+        che è eleemento neutro di \(X\) cioè \(\forall Y \in \mathcal{C}\) e \(\forall f
+        \in \mathcal{C}{(X, Y)}\), 
+        \[
+          f \circ 1_X = f \quad, \quad 1_Y \circ f = f
+        \]
+\end{enumerate}
+\end{definition}
+\begin{example}{}
+    La categoria degli insiemi \(\mathtt{Set} \) che ha come oggetti tutti gli
+    insiemi e \(\forall X, Y \in \mathtt{Set} \) i morfismi \(\mathtt{Set}{(X, Y)} = \{f : X \to Y\}  \) le funzioni e \(\circ\) la composizione di funzioni
+\end{example}
+\begin{remark}{}
+    Se ho \(\mathcal{C}\) tale che valgano solo 1. e 2. e non necessariamente 0. posso
+    ottenere la categoria \(\mathcal{C}'\) che soddisfa anche 0. ponendo \(\mathrm{Ob}{(\mathcal{C}')} := \mathrm{Ob}{(\mathcal{C})}\) e 
+    \[
+      \mathcal{C}'{(X, Y)} := \{X\} \times \mathcal{C}{(X,Y)} \times \{Y\} 
+    \]
+\end{remark}
+\begin{example}{}
+    Le categorie concrete, in cui gli oggetti sono insiemi con qualche struttura
+    e i morfismi sono funzioni tra insiemi che preservano la struttura (con \(\circ\) sempre la composizione di funzioni). In particolare:
+\begin{itemize}
+    \item La categoria \(\mathtt{Grp}\) dei gruppi, dove gli oggetti sono i
+        gruppi e i morfismi gli omomorfismi di gruppi
+    \item La categoria \(\mathtt{Rng}\) degli anelli
+    \item Dato un anello \(A\), la categoria \(\mathtt{A-Mod}\) / \(\mathtt{Mod-A}\) degli \(A\)-moduli sinistri / destri
+    \item Dato un anello commutativo \(A\), la categoria \(\mathtt{A-Alg}\)
+        delle \(A\)-algebre
+    \item La categoria \(\mathtt{Top}\) degli spazi topologici (con funzioni
+        continue come morfismi)
+\end{itemize}
+\end{example}
+\begin{note}{}
+    Dato \(f \in \mathcal{C}{(X, Y)}\) si può indicare con \(f : X \to Y\) ``come fosse
+    una funzione''
+\end{note}
+
+\begin{example}{}
+    Le categorie discrete, cioè tali che gli unici morfismi sono \(1_X\) per
+    ogni \(X \in \mathcal{C}\).
+\end{example}
+
+\begin{example}{}
+    \(\mathcal{C}\) tale che \(\forall X, Y \in \mathcal{C}\), \(\# \mathcal{C} {(X, Y)} \le 1\), ottengo
+    una relazione \(\preccurlyeq \) su \(\mathrm{Ob}{(\mathcal{C})}\) in cui
+    \[
+      X \preccurlyeq Y \iff \mathcal{C}{(X, Y)} \neq \varnothing
+    \]
+    e \(\preccurlyeq\)  è riflessivo (perché \(\exists  1_X \in \mathcal{C}{(X, X)} \forall X \in \mathcal{C}\)) e transitivo, perché \(\exists \circ\). Ne consegue che \(\preccurlyeq\) è un \emph{preordine}
+
+    Viceversa, data una relazione di preordine \(\preccurlyeq\) su un insieme (o
+    una classe) \(S\), ottengo una categoria \(\mathcal{C}\) con \(\mathrm{Ob}{(\mathcal{C})} := S\) e \(\forall X, Y \in S\), 
+    \[
+      \mathcal{C}{(X, Y)} := \begin{cases}{}
+          \{f_{X,Y} \} & \text{ se } X \preccurlyeq Y \\
+          \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con l'unica composizione possibile
+\end{example}
+
+\begin{example}[Categoria Vuota]
+    Prendendo \(\mathrm{Ob}{(\mathcal{C})} = \varnothing\)
+\end{example}
+\begin{remark}{}
+    \(\forall X \in \mathcal{C}\) con \(\mathcal{C}\) una categoria, \(\mathrm{End}_\mathcal{C}{(X)} := \mathcal{C}{(X, X)}\) è un monoide con \(\circ\), ne consegue il prossimo esempio
+\end{remark}
+\begin{example}[Monoide]
+    Una categoria con un solo oggetto è un monoide. Viceversa ogni monoide può
+    essere visto come categoria di un solo oggetto.
+\end{example}
+
+\begin{example}[Diagrammi]
+    Possiamo definire categorie date da diagrammi, in cui si rappresentano i
+    morfismi (non l'identità). Ad esempio:
+\[\begin{tikzcd}
+	\bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift right, from=1-3, to=1-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-7, to=1-6]
+\end{tikzcd}\]
+    sono tre categorie diverse, rispettivamente con 2, 2, e 3 oggetti
+\end{example}
+
+\begin{definition}{Categoria opposta}
+    La \textbf{categoria opposta} di \(\mathcal{C}\) è denotata \(\mathcal{C}^{op}\) ed è definita
+    da
+    \[
+        \mathrm{Ob}{(\mathcal{C}^{op})} := \mathrm{Ob}{(\mathcal{C})} \quad \mathcal{C}^{op}{(X, Y)} := \mathcal{C}{(Y, X)}
+    \]
+    con composizione in \(\circ^{op}\) data da \(f \circ^{op} g := g \circ f\) 
+\end{definition}
+\begin{remark}{}
+    \[
+      {(\mathcal{C}^{op})}^{op} = \mathcal{C}
+    \]
+\end{remark}
+\begin{example}[Categoria Prodotto]
+    Siano \(\mathcal{C}_{\lambda} \) per \(\lambda \in \Lambda\) delle categorie. Allora
+    la categoria prodotto
+    \[
+      \mathcal{C} := \prod_{\lambda \in \Lambda} \mathcal{C}_{\lambda} 
+    \]
+    è definita da 
+    \begin{align*}
+      \mathrm{Ob}{(\mathcal{C})} &:= \prod_{\lambda \in \Lambda} \mathrm{Ob}{(\mathcal{C}_\lambda)} \\
+      \mathcal{C}{({(X_{\lambda} )}_{\lambda \in \Lambda}, {(Y_{\lambda} )}_{\lambda \in \Lambda} )} &:= \prod_{\lambda \in \Lambda} \mathcal{C}_{\lambda} {(X_{\lambda} , Y_\lambda)} \\
+      {(g_{\lambda} )}_{\lambda \in \Lambda} \circ {(f_{\lambda} )}_{\lambda \in \Lambda} &:= {(g_{\lambda} \circ f_{\lambda} )}_{\lambda \in \Lambda} 
+    \end{align*}
+\end{example}
+
+\begin{example}[Cateogoria Coprodotto]
+    La categoria coprodotto
+    \[
+      \mathcal{C} := \coprod_{\lambda \in \Lambda} \mathcal{C}_{\lambda} 
+    \]
+    è definita con \(\mathrm{Ob}{(\mathcal{C})} := \coprod_{\lambda \in \Lambda} \mathrm{Ob}{(\mathcal{C}_{\lambda} )}\) l'unione disgiunta. 
+    \[
+      \forall X, Y \in \mathcal{C} \quad \mathcal{C}{(X, Y)} := \begin{cases}{}
+          \mathcal{C}_{\lambda} {(X, Y)} & \text{ se } X, Y \in \mathcal{C}_{\lambda} \text{ per
+          qualche } \lambda \in \Lambda \\
+              \varnothing & \text{ altrimenti}
+      \end{cases}
+    \]
+    con \(\circ\) ovvia.
+\end{example}
+
+\begin{definition}{Sottocategoria}
+    Sia \(\mathcal{C}\) una categoria. Allora una sottocategoria \(\mathcal{C}'\) di \(\mathcal{C}\) è data
+    da una sottoclasse \(\mathrm{Ob}{(\mathcal{C}')} \subseteq \mathrm{Ob}{(\mathcal{C})} \) e \(\forall X, Y \in \mathcal{C}'\) da un sottoinsieme \(\mathcal{C}'{(X, Y)} \subseteq \mathcal{C}{(X, Y)} \) tale che \(\circ\) si restringe a \(\mathcal{C}'\) e \(1_X \in \mathcal{C}'{(X, X)}\) per ogni \(X \in \mathcal{C}'\).
+
+    In particolare \(\mathcal{C}'\) è una categoria.
+\end{definition}
+
+\begin{example}{}
+    Se \(\mathcal{C}\) è un monoide (cateogoria di un oggetto), allora le sottocategorie
+    non vuote di \(\mathcal{C}\) sono i sottomonoidi.
+\end{example}
+
+\begin{definition}{Sottocategoria Piena}
+    Una sottocategoria \(\mathcal{C}'\) di \(\mathcal{C}\) si dice \textbf{piena} se \(\mathcal{C}'{(X, Y)} =
+    \mathcal{C}{(X, Y)}\) per ogni \(X, Y \in \mathcal{C}'\) 
+\end{definition}
+
+\begin{remark}{}
+    Una sottocategoria piena di \(\mathcal{C}\) equivale a dare una sottoclasse di \(\mathrm{Ob}{(\mathcal{C})}\) 
+\end{remark}
+
+\begin{example}[Gruppi Abeliani]
+    \(\mathtt{Ab} \subseteq \mathtt{Grp} \) sottocategoria piena dei gruppi
+    abeliani. Similmente anche \(\mathtt{\mathcal{C}Rng} \subseteq \mathtt{Rng} \)
+    sottocategoria piena degli anelli commutativi.
+\end{example}
+
+Oltre alle sotto-strutture sono anche importanti i quozienti, e anche qui
+possiamo dare una definizione astratta
+
+\begin{definition}{Congruenza}
+    Una congruenza \(\sim \) su una categoria \(\mathcal{\mathcal{C}}\) è data da una relazione di
+    equivalenza \(\sim \) su \(\mathcal{\mathcal{C}}{(X, Y)}\) \(\forall X, Y \in \mathcal{\mathcal{C}}\) tale che
+    \[
+      \forall X, Y, Z \in \mathcal{\mathcal{C}}, \, \forall f, f' \in \mathcal{\mathcal{C}}{(X, Y)} \, \forall g,
+      g' \in \mathcal{\mathcal{C}}{(Y, Z)} \quad f \sim f', g \sim g' \implies g \circ f \sim g'
+      \circ f'
+    \]
+    equivalentemente \(g \sim g' \implies g \circ f \sim g' \circ f\) e \(h \circ g \sim h \circ g'\) 
+\end{definition}
+
+\begin{definition}{Quoziente}
+    Sia \(\sim \) una congruenza su \(\mathcal{\mathcal{C}}\), allora possiamo definire la categoria
+    quoziente \(\mathcal{\mathcal{C}} /_\sim \) definita da
+    \[
+      \mathrm{Ob}{(\mathcal{\mathcal{C}} /_\sim )} = \mathrm{Ob}{(\mathcal{\mathcal{C}})} \quad {(\mathcal{\mathcal{C}} /_\sim )}{(X, Y)} :=
+      \mathcal{\mathcal{C}}{(X, Y)} /_\sim \quad \forall X, Y \in \mathcal{\mathcal{C}}
+    \]
+    e \(\circ\) è indotta da quella di \(\mathcal{\mathcal{C}}\), ossia
+    \[
+      \overline{g} \circ \overline{f} := \overline{g \circ f}
+    \]
+\end{definition}
+
+\begin{example}[Omotopia]
+    Sia \(\mathcal{\mathcal{C}} = \mathtt{Top}\) e \(\sim_h \) l'omotopia, ossia \(f, g : X \to Y\)
+    sono omotope se \(\exists  H : X \times [0, 1] \to Y\) continue tali che 
+    \[
+      f{(x)} = H{(x, 0)}, \quad g{(x)} = H{(x, 1)} \quad \forall x \in X
+    \]
+    e si ottiene \(\mathtt{Toph} := \mathtt{Top} / \sim_h \) 
+\end{example}
+
+\begin{example}[Gruppo quoziente]
+    Sia \(G\) un gruppo (visto come monoide, ossia categoria di un oggetto) e
+    sia \(H \vartriangleleft G\) e \(\sim \) su \(G\) data da \(a \sim b \iff aH
+    = bH\). Allora \(G/N\) è la categoria quoziente \(G / \sim \).
+    Viceversa ogni \(\sim \) congruenza su \(G\) si può scrivere in tal
+    modo prendendo \(H = \{a \in G : a \sim 1\} \vartriangleleft G \) (esercizio).
+\end{example}
+
+\begin{definition}{morfismo invertibile}
+    Sia \(f : X\to Y\) un morfismo in una categoria \(\mathcal{C}\). Allora esso è
+    invertibile a sinistra (destra) se \(\exists  f' : Y \to X\) tale che
+    \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)).
+\end{definition}
+\begin{remark}{}
+    \(f\) è invertibile a sinistra (destra) in \(\mathcal{C}\), allora \(f\) è invertibile
+    a destra (sinistra) in \(\mathcal{C}^{op}\) 
+\end{remark}
+
+\begin{definition}{Isomorfismo}
+    \(f : X \to Y\) è un \textbf{isomorfismo} se \(\exists f' : Y \to X\) tale che \(f'
+    \circ f = 1_X\) e \(f \circ f' = 1_Y\) 
+\end{definition}
+\begin{remark}{}
+    \(f\) è isomorfismo se e solo se \(f\) è invertibile a destra e a sinistra. 
+\end{remark}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio
+    \item[\(\impliedby \)] \(\exists f', f''\) tale che \(f' \circ f = 1_X\)  e
+        \(f \circ f'' = 1_Y\), allora
+        \[
+          f' \circ {( f \circ f'')} = f' = f'' = {(f' \circ f)} \circ f''
+        \]
+        e dunque \(f\) è invertibile.
+\end{itemize}
+    In particolare dunque la \(f'\) della definizione di isomorfismo è unica e
+    viene denotata \(f^{-1}\) 
+\end{proof}
+
+\begin{definition}{}
+    Siano \(X, Y \in \mathcal{C}\). Allora \(X\) e \(Y\) sono isomorfe (\(X \cong Y\)) se
+    esiste un \(f: X \to Y\) isomorfismo.
+\end{definition}
+
+\begin{remark}{}
+    \(1_X\) è isomorfismo e \(1_X^{-1} = 1_X\). Se \(f\) isomorfismo
+    allora \(f^{-1}\) isomorfismo e \({(f^{-1})}^{-1} = f\). Se \(f, g\)
+    isomorfismi componibili, allora \(g \circ f\) è isomorfismo e \({(g \circ f)}^{-1} = f^{-1} \circ g^{-1}\) 
+
+    Ne segue che \(\cong\) è una relazione di equivalenza su \(\mathrm{Ob}{(\mathcal{C})}\) 
+\end{remark}
+
+\begin{definition}{}
+    Un morfismo \(f : X \to Y\) in \(\mathcal{C}\) è detto \textbf{monomorfismo} se \(\forall Z \in \mathcal{C}\) la funzione 
+    \begin{align*}
+        f_*: \mathcal{C}{(Z, X)} &\longrightarrow \mathcal{C}{(Z, Y)} \\
+        g &\longmapsto f_*(g) = f \circ g
+    \end{align*}
+    è iniettiva
+\end{definition}
+\begin{definition}{Epimorfismo}
+    \(f\) è un \textbf{epimorfismo} in \(\mathcal{C}\) se è monomorfismo in \(\mathcal{C}^{op}\),
+    ossia \(\forall Z \in \mathcal{C}\) la funzione
+    \begin{align*}
+        f^*: \mathcal{C}{(Y, Z)} &\longrightarrow \mathcal{C}{(X, Z)} \\
+        g &\longmapsto f^*(g) = g \circ f
+    \end{align*}
+    è iniettiva.
+\end{definition}
+
+\begin{proposition}{}
+    \(f\) è invertibile a sinistra (destra), allora \(f\) è monomorfismo
+    (epimorfismo)
+\end{proposition}
+\begin{proof}{}
+    Basta dimostrare che se \(f\) è invertibile a sinistra, allora è mono.
+
+    Sappiamo che \(\exists f' : Y\to X\) tale che \(f' \circ f = 1_X\). Dobbiamo
+    dimostrare che \(f_*\) è iniettiva. Siano \(g, h \in \mathcal{C}{(Z, X)}\) tali che \(f_*{(g)} = f_*{(h)}\). Allora \(f \circ g = f \circ g\), da cui \(f' \circ f \circ g = f' \circ f \circ h\) e dunque \(g = h\) 
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(\mathcal{C}\) concreta. Allora
+    \[
+      f \text{ invertibile a \emph{sinistra}/\emph{destra}} \implies f \text{ \emph{iniettiva}/\emph{suriettiva}} \implies f \text{ \emph{mono}/\emph{epi}}
+    \]
+\end{proposition}
+\begin{proof}{}
+    Non possiamo usare il trick della categoria opposta, perché non è detto che
+    \(\mathcal{C}^{op}\) sia ancora concreta.
+
+    Sia \(f'\) tale che \(f' \circ f = 1_X\) (\(f \circ f' = 1_Y\)), allora
+    chiaramente \(f\) iniettiva (suriettiva) perché le composizioni \(1_X\) e \(1_Y\) sono biunivoche.
+
+    Se \(f\) è iniettiva, allora siano \(g_{1}, g_{2}: Z \to X\). Dunque \(\forall x \in X\) 
+    \[
+      f{(g_{1}{(x)})} = f{(g_{2}{(x)})} \overset{f \text{ inj.}}{\implies } g_{1}{(x)} = g_{2}{(x)}
+    \]
+    ossia \(f_*\) è iniettiva, ossia \(f\) è monomorfismo.
+
+    se \(f\) è suriettiva, allora siano \(
+    g_{1}, g_{2} : Y \to Z\). Sappiamo che \(\forall y \in Y\) esiste \(x_y \in X\) tale che \(f{(x_y)} = y\). Allora abbiamo che, assumendo che \(g_{1}\circ f = g_{2}\circ f\) 
+    \[
+        g_{1}{(y)} = g_{1}{(f{(x_y)})} = g_{2}{(f{(x_y)})} = g_{2}{(y)} \quad \forall y \in Y
+    \]
+    ossia \(f^{*}\) è iniettiva e dunque \(f\) è epimorfismo
+\end{proof}
+
+In generale non vale nessuna delle \(\impliedby\).
+\begin{example}{}
+    In \(\mathtt{Set}\) se \(f : X \to Y\) è suriettiva, allora \(f\) è invertibile a
+    sinistra. Infatti basta scegliere (AOC) \(f'{(y)} \in f^{-1}\{y\} \) per
+    ogni \(y \in Y\). Inoltre se \(X \neq \varnothing\) e \(f : X \to Y\) è
+    iniettiva, allora \(f\) è invertibile a sinistra.
+\end{example}
+
+\begin{eser}{}
+    In \(\mathtt{A-Mod}\), mostrare che \(f : M\to N\) iniettiva è invertibile a
+    sinistra se e solo se \(\mathrm{Im}{(f)} \subseteq N \) è addendo diretto.
+
+    Mostrare che \(f : M \to N\) suriettiva è invertibile a destra se e solo se
+    \(\mathrm{Ker}{(f)} \subseteq M \) è addendo diretto
+
+    Concludere che valgono sempre entrambe le implicazioni se e solo se \(A\) è
+    semisemplice.
+\end{eser}
+
+\begin{example}{}
+    In \(\mathtt{Set}\), se \(f\) è mono (epi), allora \(f\) è iniettiva
+    (suriettiva).
+
+    Infatti, poniamo per assurdo \(f : X \to Y\) non iniettiva, dunque siano \(x, y \in X\) tali che \(f{(x)} = f{(y)}\). Allora preso \(Z = \{z\} \) e \(g, h : Z\to X\) tali che \(g
+    {(z)} = x\) e \(h{(z)} = y\) abbiamo che \(f \circ g = f \circ h\) da cui \(g = h\) e dunque \(x = y\) 
+
+    Supponiamo \(f\) non suriettiva, mostrare \emph{per esercizio} \(\exists g, h : Y \to Z\) tali che
+    \(g \neq h\) ma \(g \circ f = h \circ f\) 
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{A-Mod}\) \(f : M \to N\) è mono (epi), allora \(f\) è iniettiva (suriettiva).
+
+    Infatti \(i : \mathrm{Ker}f \to M\) inclusione tale che \(f \circ i = 0\) e
+    anche \(0 : \mathrm{Ker}f \to M\) è tale che \(f \circ 0 = 0\). Concludiamo
+    che \(i = 0\) e dunque \(\mathrm{Ker}f = 0\).
+
+    Similmente \(\pi : N \to \mathrm{coker}f\) è tale che \(\pi \circ f = 0\) e
+    se \(f\) è epi allora \(0 = \pi \) e dunque \(\mathrm{coker} f= 0\) e dunque
+    \(f\) è suriettiva.
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Grp}\) \(f\) mono (epi), allora \(f\) iniettiva (suriettiva)
+
+    Per mono \(\implies \) iniettiva si può usare la stessa dei moduli, mentre
+    per l'altra è un po' più complicato, ma si dimostra che è vero lo stesso
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{Rng}\) \(f : A\to B\) mono, allora \(f\) iniettiva. % TODO eser
+
+    Tuttavia \(f\) epi \textbf{non implica} f suriettiva. Ad esempio preso \(i :
+    \mathbb{Z} \hookrightarrow \mathbb{Q}\) è epi, infatti \(\forall A\) anello
+    esiste al più un omomorfismo \(\mathbb{Q} \to A\) (\(f : \mathbb{Q}\to A\)
+    sia omomorfismo, allora \(f|_{\mathbb{Z}} \) è l'unico omomorfismo e \(f{(\frac{a}{b})} = f{(a)}f{(b)}^{-1}\)). Chiaramente però non è suriettiva.
+\end{example}
+
+\begin{definition}{Funtore}
+    Un funtore \(F : \mathcal{C} \to D\) tra 2 categorie è dato da una funzione
+    \(F : \mathrm{Ob}{(\mathcal{C})} \to \mathrm{Ob}{(D)}\) e \(\forall X, X' \in \mathcal{C}\) una
+    funzione \(F = F_{X, X'} : \mathcal{C}{(X, X')} \to D{(F{(X)}, F{(X')})}\) tale che
+    \[
+      F{(g\circ f)} = F{(g)}\circ F{(f)} 
+    \]
+    (se \(f\) e \(g\) sono componibili in \(\mathcal{C}\)) e \(F{(1_X)} = 1_{F{(X)}} \)
+    per ogni \(X \in \mathcal{C}\) 
+    
+\end{definition}
+\begin{proposition}{}
+    Sia \(F\) un funtore e \(f\) invertibile a sinistra (destra). Allora \(F{(f)}\) è invertibile a sinistra (destra)
+\end{proposition}
+\begin{proof}{}
+    \(\exists f'\) tale che \(f' \circ f = 1_X\), allora \(F{(f')} \circ F{(f)} = F{(f'\circ f)} = F{(1_X)} = 1_{F{(X)}} \).
+\end{proof}
+\begin{remark}{}
+    Segue che \(f\) iso, allora \(F{(f)}\) iso e \(F{(f)}^{-1} = F{(f^{-1})}\) 
+\end{remark}
+
+\begin{example}{}
+    Sia \(\mathcal{C}' \subseteq \mathcal{C} \) sottocategoria. Allora \(\mathcal{C}' \to \mathcal{C}\), \(X \mapsto X\) e \(f \mapsto f\) è un funtore
+\end{example}
+
+\begin{example}{}
+    Se \(\sim \) è una congruenza, allora \(\mathcal{C} \to \mathcal{C} /\sim\) è un funtore, con
+    \(X \mapsto X\) e \(f \mapsto \overline{f}\) 
+\end{example}
+
+\begin{example}[Funtore dimenticante]
+    \(\mathcal{C} \to \mathtt{Set}\) con \(\mathcal{C}\) categoria discreta e \(X \mapsto X\), \(f
+    \mapsto f\) è un funtore, che ``dimentica'' la struttura aggiunta.
+
+    Analogamente anche \(\mathtt{Rng} \to \mathtt{Ab}\), con \({(A, +, \cdot )} \to {(A, +)}\) è un funtore dimenticante.
+\end{example}
+\begin{remark}{}
+    Notare che il secondo funtore dimenticante non preserva gli epimorfismi.
+    Sarebbe infatti \(i : \mathbb{Z} \to \mathbb{Q}\) l'inclusione è
+    un'epimorfismo in \(\mathtt{Rng}\) ma non in \(\mathtt{Ab}\) 
+\end{remark}
+
+
+\begin{example}{}
+    Sia \(A \to B\) un omomorfismo di anelli. Allora la restrizione degli
+    scalare è un funtore \(\mathtt{B-Mod} \to \mathtt{A-Mod}\) 
+\end{example}
+
+
+\begin{example}{}
+    Funtore tra 2 categorie discrete \(\mathcal{C}\) e \(D\) è una funzione \(\mathrm{Ob}{(\mathcal{C})} \to \mathrm{Ob}{(D)}\) 
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 preordini \(\mathcal{C}\) e \(D\) è una funzione \(\mathrm{Ob}{(\mathcal{C})} \to \mathrm{Ob}{(D)}\)  che preserva la relazione di preordine.
+\end{example}
+
+\begin{example}{}
+    Un funtore tra 2 monoidi è un omomorfismo di monoidi.
+
+    Più in generale dato \(G\)  un monoide e una categoria \(\mathcal{C}\) , un funtore \(G \to \mathcal{C}\) è dato da \(X \in \mathcal{C}\) e da un omomorfismo di monoidi \(G \to \mathrm{End}_\mathcal{C}{(X)}\) 
+
+    Se \(G\) è un gruppo un funtore \(G \to \mathcal{C}\) è dato da \(X \in \mathcal{C}\) e un
+    omomorfismo di gruppi \(G \to \mathrm{Aut}_\mathcal{C}{(X)}\). Ad esempio se \(\mathcal{C} = \mathtt{Set}\) il funtore dà un'azione di un gruppo su un insieme.
+    Similmente se \(\mathcal{C} = \mathbb{K}\)-spazi vettoriali ho una rappresentazione di
+    \(G\).
+\end{example}
+
+\begin{example}[Funtore costante]
+    Date \(\mathcal{C}, D\) categorie preso \(Y \subseteq D \) si può considerare il
+    funtore costante di valore \(Y\), \(\mathcal{C} \to D\), \(X \mapsto Y\) e \(f \mapsto 1_Y\) 
+\end{example}
+
+\begin{example}{}
+    Presa \(\mathtt{Top}_*\) la categoria degli spazi topologici puntati, il
+    gruppo fondamentale 
+    \[
+        \pi_{1} : \mathtt{Top}_* \to \mathtt{Grp}
+    \]
+    è un funtore
+\end{example}
+
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) ci sono funtori di omologia (singolare)
+    \[
+      H_{n} : \mathtt{Top} \to \mathtt{Ab}
+    \]
+\end{example}
+\begin{theorem}{Omomorfismo}
+    Sia \(\sim \) una congruenza su \(\mathcal{C}\) e \(F : \mathcal{C} \to D\) un funtore tale che
+    se \(f \sim f'\) in \(\mathcal{C}\) allora \(F{(f)} = F{(f')}\).
+    Allora esiste un unico funtore \(\overline{F} : \mathcal{C} /_\sim \to D\) tale
+    che \(\overline{F}{(\overline{f})} = F{(f)}\) per ogni \(f\) morfismo di \(\mathcal{C}\) 
+\end{theorem}
+\begin{example}{}
+    Negli esempi precedenti se \(f\) e \(f'\) sono omotope, allora \(\pi_{1}{(f)} = \pi_{1}{(f')}\) e \(H_{n}{(f)} = H_{n}{(f')}\), dunque inducono funtori
+    \[
+      \pi_{1} : \mathtt{Toph}_* \to \mathtt{Grp} \quad H_{n} : \mathtt{Toph} \to \mathtt{Ab}
+    \]
+\end{example}
+
+\begin{note}{}
+    I funtori che abbiamo definito si dicono anche funtori covarianti
+\end{note}
+\begin{definition}{funtore controvariante}
+    Un funtore \textbf{controvariante} \(\mathcal{C} \to D\) è un funtore (covariante) \(\mathcal{C}^{op} \to D\).
+\end{definition}
+\begin{example}{}
+    \(\forall n \in \mathbb{N}\) i funtori di coomologia (singolare) sono funtori
+    controvarianti \(H^{n} : \mathtt{Top(h)}^{op} \to \mathtt{Ab}\) 
+\end{example}
+\begin{example}{}
+    Sia \(\mathcal{C}\) una categoria, \(X \in \mathcal{C}\)
+    \begin{align*}
+        \mathcal{C}{(X, \--)} : \mathcal{C} &\to \mathtt{Set} \\
+        Y \mapsto \mathcal{C}{(X, Y)} \quad {(f : Y \to Y')} &\mapsto {(f_{*} : \mathcal{C}{(X, Y)} \to \mathcal{C}{(X, Y')})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto f \circ g
+    \end{align*}
+    è un funtore perché \({(f' \circ f)}_* = f'_* \circ f_*\) 
+
+    Analogamente 
+    \begin{align*}
+        \mathcal{C}{(\--, Y)} : \mathcal{C}^{op} &\to \mathtt{Set} \\
+        X \mapsto \mathcal{C}{(X, Y)} \quad {(f : X \to X')} &\mapsto {(f^{*} : \mathcal{C}{(X', Y)} \to \mathcal{C}{(X, Y)})} \\
+            & \quad \quad \quad \quad\quad\quad\quad  g \mapsto g \circ f
+    \end{align*}
+    è un funtore controvariante perché \({(f' \circ f )}^{*} = f^{*} \circ f'^{*}\) 
+\end{example}
+\begin{remark}{}
+    C'è anche un funtore 
+    \begin{align*}
+        \mathcal{C}{(\--, =)} : \mathcal{C}^{op} \times \mathcal{C} &\to \mathtt{Set} \\
+        {(X, Y)} &\mapsto \mathcal{C}{(X, Y)} \\
+        {(f : X \to X', g : Y \to Y')} &\mapsto g_* \circ f^* :
+        \mathcal{C}{(X', Y)} \to  \mathcal{C}{(X,Y')}
+    \end{align*}
+\end{remark}
+\begin{example}{}
+    Per ogni gruppo \(G\), preso il sottogruppo dei commutatori \([G, G]\),
+    allora per ogni \(f : G \to H\) omomorfismo di gruppi, \(f{([G, G])} \subseteq [H, H] \) 
+    quindi si ottiene un funtore
+    \begin{align*}{}
+        \mathtt{Grp} &\to \mathtt{Grp} \\
+        G &\mapsto [G, G] \\
+        {(f : G \to H)} &\to {(f |_{[G, G]} : [G, G] \to [H, H] )}
+    \end{align*}
+    e anche 
+    \begin{align*}
+        \mathrm{Abel} : \mathtt{Grp} &\to \mathtt{Ab} \\
+        G &\mapsto \frac{G}{[G, G]} \text{ (abelianizzato di \(G\) ) } \\
+        {(f : G \to H)} &\mapsto {\left(\overline{f} : \frac{G}{[G,G]} \to \frac{H}{[H,H]}\right)}
+    \end{align*}
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{p}", from=1-1, to=2-1]
+	\arrow["{q}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{eser}{}
+    Indicando con \(Z{(X)}\) il centro di \(X\),
+
+\begin{enumerate}[label = \alph*.]
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Rng} \to \mathtt{Rng}\) tale
+    che \(\forall A \in \mathtt{Rng}\) \(F{(A)} = Z{(A)}\).
+    \item Mostrare che non esiste un funtore \(F : \mathtt{Grp} \to \mathtt{Ab}\) tale
+    che \(\forall G \in \mathtt{Grp}\) \(F{(G)} = Z{(G)}\).
+\end{enumerate}
+    \tcblower
+    Supponiamo l'esistenza di \(F\).
+\begin{enumerate}[label = \alph*.]
+    \item Se prendo \(i : \mathbb{\mathcal{C}} \hookrightarrow \mathbb{H}\),
+        allora \(F{(\mathbb{\mathcal{C}})} = \mathbb{\mathcal{C}} \) e \(F{(\mathbb{H})} = \mathbb{R}\). A tal punto però \(
+        F{(i)} : \mathbb{\mathcal{C}} \to \mathbb{R}\) che non esiste perché altrimenti \[-1 = F{(i)}{(-1)} = F{(i)}{(i^2)} = F{(i)}{(i)}^2\]
+    \item Consideriamo
+        \[
+          \{(1), (12)\} \overset{i}{\hookrightarrow } S_{3} \overset{\varepsilon}{\to } \{\pm 1\} 
+        \]
+        Allora \(\varepsilon \circ i = \mathrm{Id}_{\mathcal{C}_{2}} \). Allora avremmo
+        \[
+          0_{\mathrm{End}{(\mathcal{C}_{2})}}  = F{(\varepsilon)} \circ F{(i)} = F{(\varepsilon \circ i)} = F{(\mathrm{id}_{\mathcal{C}_{2}})} = \mathrm{id}_{\mathcal{C}_{2}}
+        \]
+\end{enumerate}
+
+\end{eser}
+
+    L'identità
+    \[
+      \mathrm{id}_\mathcal{C} : \mathcal{C} \to \mathcal{C} \quad X \mapsto X \quad f \mapsto f
+    \]
+    è un funtore
+    Si possono comporre i funtori. Dati ad esempio 
+    \[
+      \mathcal{C} \overset{F}{\to } D \overset{G}{\to } E
+    \]
+    funtori, possiamo definire \(G \circ F : \mathcal{C} \to E\) come \(X \mapsto G{(F{(X)})}\)  e \(f \mapsto G{(F{(f)})}\) è un funtore.
+
+    La composizione è associativa  e \(F \circ \mathrm{id}_\mathcal{C} = F = \mathrm{id}_\mathcal{C} \circ F\) 
+
+In tal modo otteniamo una categoria \(\mathtt{\mathcal{C}at}\) delle categorie (piccole\footnote{si potrebbe anche fare di tutte le categorie, ma per motivi
+insiemistici/logici dovremmo introdurre gli universi di Grothendieck e fare le
+cose per bene. Al fine di evitare questo inutile sforzo, ci limitiamo a
+considerare le categorie piccole.})
+
+\begin{definition}{}
+    Un funtore \(F : \mathcal{C} \to D\) è un isomorfismo se lo è in \(\mathtt{\mathcal{C}at}\),
+    cioè se \(\exists G : D \to \mathcal{C}\)  funtore tale che \(G \circ F = \mathrm{id}_\mathcal{C} = F \circ G\) 
+\end{definition}
+
+\begin{definition}{iniettivo e suriettivo}
+    Un funtore \(F : \mathcal{C} \to D\) è \emph{iniettivo}/\emph{suriettivo} se \(F : \mathrm{Ob}{(\mathcal{C})} \to \mathrm{Ob}{(D)}\) è \emph{iniettivo}/\emph{suriettivo}.
+
+    Nel caso in cui \(F\) sia sia iniettivo che suriettivo, è \textbf{biunivoco}.
+\end{definition}
+
+\begin{definition}{Fedele e pieno}
+    \(F\) è detto \textbf{fedele} (\textbf{pieno}) se \(\forall X, Y \in \mathcal{C}\), \(F : \mathcal{C}{(X, Y)} \to D{(F{(X)}, F{(Y)})}\) è iniettivo (suriettivo).
+
+    Nel caso in cui \(F\) sia sia fedele che pieno, si dice che è
+    \textbf{pienamente fedele}
+\end{definition}
+\begin{eser}{}
+    \(F\) funtore è isomorfismo se e solo se \(F\) è pienamente fedele e
+    biunivoco.
+\end{eser}
+
+
+\begin{example}{}
+    Se \(\mathcal{C}' \subseteq \mathcal{C} \) è una sottocategoria, allora il funtore di inclusione
+    \(i : \mathcal{C}' \to \mathcal{C}\) è iniettivo e fedele ed è pieno se e solo se \(\mathcal{C}' \subseteq \mathcal{C}\) è piena.
+
+    Ad esempio se \(\sim \) è una congruenza in \(\mathcal{C}\) , allora il funtore
+    quoziente \(\mathcal{C} \to \mathcal{C} / \sim \) è biunivoco e pieno.
+\end{example}
+
+\begin{example}{}
+    Un omomorfismo di monoidi (categorie di un oggetto) è iniettivo (suriettivo)
+    se e solo se come funtore è fedele (pieno). In ogni caso è biunivoco.
+\end{example}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{\mathbb{Z}-Mod} \to \mathtt{Ab}\) e \(\mathtt{\mathbb{Z}-Alg} \to \mathtt{Rng}\) sono isomorfismi.
+\end{example}
+
+\begin{example}{}
+    Anche \(\mathtt{Mod-A}\cong \mathtt{A^{op}-Mod}\) ed esiste un isomorfismo
+    (anche se non sono categorie piccole).
+\end{example}
+
+\begin{definition}{}
+    Un funtore \(F: \mathcal{C} \to D\) è \textbf{essenzialmente
+    \emph{iniettivo}/\emph{suriettivo}} se la funzione ridotta 
+    \[
+        \mathrm{Ob}{(\mathcal{C})}/_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}
+    \]
+    è \emph{iniettivo}/\emph{suriettivo}
+\end{definition}
+
+\begin{remark}{}
+    Se \(F\) è suriettivo allora \(F\) è essenzialmente suriettivo. L'altra
+    implicazione non vale. Ad esempio
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    Nessuna delle implicazioni tra iniettiva e essenzialmente iniettiva è vera.
+    Basti considerare
+\[\begin{tikzcd}
+	{(\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-1]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-2]
+\end{tikzcd}\]
+    per essenzialmente iniettiva \(\nRightarrow\) iniettiva
+    e
+\[\begin{tikzcd}
+	{(\bullet} & {\bullet)} & {(\bullet} & {\bullet)}
+	\arrow[from=1-2, to=1-3]
+	\arrow[shift left, from=1-3, to=1-4]
+	\arrow[shift left, from=1-4, to=1-3]
+\end{tikzcd}\]
+    per iniettiva \(\nRightarrow\) essenzialmente iniettiva.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(F: \mathcal{C} \to D\) un funtore pienamente fedele. Allora \(F\) è
+    essenzialmente iniettivo
+\end{proposition}
+\begin{proof}{}
+    Siano \(X, Y \in \mathcal{C}\) tali che \(F{(X)} \cong F{(Y)}\) in \(D\). Devo
+    dimostrare che \(X \cong Y\) in \(\mathcal{C}\).
+
+    Sappiamo che esiste \(g : F{(X)} \to F{(Y)}\) isomorfismo in \(D\). Poiché
+    \(F\) è pieno esiste \(f \in \mathcal{C}{(X, Y)}\) tale che \(F{(f)} = g\).
+    Analogamente \(\exists f' \in \mathcal{C}{(Y, X)}\) tale che \(F{(f')} = g^{-1}\).
+    \[
+    F{(f' \circ f)} = F{(f')} \circ F{(f)} = g^{-1} \circ g = 1_{F{(X)}} = F{(1_X)}
+    \]
+    Se \(F\) è fedele, allora \(f' \circ f = 1_X\)  e analogamente \(f \circ f' = 1_Y\) da cui \(f\) è isomorfismo e duque \(X \cong Y\) 
+\end{proof}
+
+\begin{definition}{Trasformazione naturale}
+    Siano \(F, F' : \mathcal{C} \to D\) funtori.
+
+    Una \textbf{trasformazione naturale} \(\alpha : F \to F'\) (si può anche
+    scrivere \(\alpha : F \implies F'\)) è il dato di un morfismo
+    \[
+      \alpha_X : F{(X)} \to F'{(X)} \text{ in \(D\) } \forall X \in \mathcal{C}
+    \]
+    tale che \(\forall f : X \to Y\) morfismo di \(\mathcal{C}\) il diagramma
+\[\begin{tikzcd}
+	{F(X)} & {F(Y)} \\
+	{F'(X)} & {F'(Y)}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\alpha_X}", from=1-1, to=2-1]
+	\arrow["{\alpha_Y}", from=1-2, to=2-2]
+	\arrow["{F'(f)}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    commuta in \(D\), cioè \(\alpha_Y \circ F{(f)} = F'{(f)} \circ \alpha_X\) 
+\end{definition}
+
+\begin{example}{}
+    Consideriamo i due funtori \(\mathrm{Abel} : \mathtt{Grp} \to \mathtt{Grp}\) e \(\mathrm{id} : \mathtt{Grp} \to \mathtt{Grp}\). 
+    C'è una trasformazione naturale \(\alpha : \mathrm{id} \to \mathrm{Abel}\)
+    definita per ogni \(G \in \mathtt{Grp}\) da 
+    \begin{align*}
+        \alpha_G: G &\longrightarrow \frac{G}{[G, G]} \\
+        a &\longmapsto \alpha_G(a) = a[G, G]
+    \end{align*}
+    è naturale perché \(\forall f : G \to H\) in \(\mathtt{Grp}\) il diagramma
+\[\begin{tikzcd}
+	{G} & {H} \\
+    {\frac{G}{[G,G]}} & {\frac{H}{[H,H]}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\alpha_G}", from=1-1, to=2-1]
+	\arrow["{\alpha_H}", from=1-2, to=2-2]
+	\arrow["\overline{f}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}{}
+    Supponendo di avere \(F, F' : G \to \mathtt{Set}\) funtori (\(G\) gruppo
+    visto come categoria con un oggetto), cioè \(G\)-insiemi (azioni di \(G\) su
+    insiemi).
+    Allora una trasformazione naturale \(\alpha : F \to F'\) è un morfismo di \(G\)-insiemi cioè una
+    funzione \(\alpha : F{(G)} \to F'{(G)}\) tale che \(\alpha{(gx)} = g \alpha{(x)}\) per ogni \(g \in G\) e per ogni \(x \in F{(G)}\).
+\end{example}
+\begin{remark}{}
+    \(\forall F : \mathcal{C}\to D\), \(\mathrm{id}_F : F \to F\) data da \({(\mathrm{id}_F)}_X = \mathrm{id}_{F{(X)}} \) per ogni \(X \in \mathcal{C}\) è una trasformazione naturale.
+\end{remark}
+
+\begin{eser}{}
+    Dati \(F, F', F'' : \mathcal{C} \to D\) funtori, \(\alpha : F \to F'\) e \(\beta : F'
+    \to F''\) trasformazioni naturali, allora la composizione \(\beta \circ \alpha : F \to F''\) è definita da
+    \[
+      \beta_X \circ \alpha_X =: {(\beta \circ \alpha)}_X : F{(X)} \to F''{(X)}
+    \]
+    Mostrare che \(\alpha \circ \beta\) è una trasformazione naturale
+\end{eser}
+
+La composizione dell'esercizio precedente è anche detta \emph{composizione
+verticale}
+di trasformazioni naturali, per via di questo disegno esplicativo:
+\[\begin{tikzcd}
+	\mathcal{C} & \mathcal{D}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-20pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{F''}"', curve={height=20pt}, from=1-1, to=1-2]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "F"{description}, from=1-1, to=1-2]
+	\arrow["\alpha", between={0.2}{0.8}, Rightarrow, from=0, to=2]
+	\arrow["\beta", between={0.2}{0.8}, Rightarrow, from=2, to=1]
+\end{tikzcd}\]
+
+Considerando funtori e trasformazioni naturali, si ottiene (assumiamo sempre \(\mathcal{C}\) piccola) la categoria \(\mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\) (anche denotata \(\mathcal{D}^{\mathcal{C}}\) ) con oggetti i funtori \(\mathcal{C} \to \mathcal{D}\), morfismi le trasformazioni naturali e composizione la composizione verticale.
+
+\begin{definition}{}
+    Data una categoria \(\mathcal{C}\), la categoria dei morfismi di \(\mathcal{C}\) è
+    \[
+      \mathtt{Mor}{(\mathcal{C})} := \mathtt{Fun}{(\cdot \to \cdot , \mathcal{C})}
+    \]
+    che ha come oggetti esattamente \(\{f : X \to Y \text{ morfismo di }\mathcal{C}\} \) e trasformazioni naturali date da \({(X \overset{f}{\to } Y )} \to  {(X' \overset{f'}{\to } Y' )}\) è data da \({(g : X \to  X' , h : Y \to  Y')}\) tale che 
+\[\begin{tikzcd}
+	{X} & {Y} \\
+    {X'} & {Y'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["f'", from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition}{}
+    Date \(F, G : \mathcal{C} \to D\) funtori, \(\alpha : F \to G\) trasformazione
+    naturale, allora \(\alpha\) è \emph{isomorfismo} (\emph{naturale} o di funtori) se è isomorfismo in \(\mathtt{Fun}{(\mathcal{C}, D)}\) cioè se 
+    \(\exists \beta : G \to F\) trasformazione naturale tale che \(\beta \circ
+    \alpha = \mathrm{id}_F\), \(\alpha \circ \beta = \mathrm{id}_G\).
+
+    In tal caso \(F\) e \(G\) si dicono \emph{isomorfi} (denotato \(F \cong
+    G\)).
+\end{definition}
+\begin{remark}{}
+    \(\cong\) di funtori è una relazione di equivalenza 
+\end{remark}
+\begin{example}{}
+
+Il primo gruppo di omologia si può vedere come l'abelianizzato del gruppo
+fondamentale. In linguaggio categorico abbiamo 
+\begin{align*}
+  \mathtt{Top_*} \overset{\pi_{1}}{\to } &\mathtt{Grp} \overset{\mathrm{Abel}}{\to } \mathtt{Ab} \\ 
+  &\text{ e } \\
+  \mathrm{Top_*} \to &\mathrm{Top} \overset{H_{1}}{\to } \mathtt{Ab} \\
+  {(X, x_{0})} \mapsto &\text{ comp. c.p.a. che contiene \(x_{0}\)}
+\end{align*}
+sono funtori isomorfi
+\end{example}
+
+\begin{remark}{}
+    \(F \cong F'\) allora \(F\) e \(F'\) inducono la stessa funzione \(\mathrm{Ob}{(\mathcal{C})} /_{\cong} \to \mathrm{Ob}{(D)}/_{\cong}\) quindi \(F\) è essenzialmente 
+   \emph{iniettiva} / \emph{suriettiva} se e solo se \(F'\) lo è.
+\end{remark}
+
+\begin{eser}{}
+    Mostrare che non necessariamente la precedente osservazione vale per le
+    proprietà di iniettività e suriettività.
+\end{eser}
+
+\begin{proposition}{}
+    Se \(F \cong F'\) allora \(F\) è \emph{fedele}/\emph{pieno} se e solo se \(F'\) è \emph{fedele}/\emph{pieno}.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to F'\) l'isomorfismo. Sia allora \(\overline{\alpha} :
+    \mathcal{D}{(F{(X)}, F{(Y)})} \to \mathcal{D}{(F'{(X)}, F'{(Y)})}\) definita
+    da \(\overline{\alpha}{(g)} := \alpha_Y \circ g \circ \alpha_X^{-1}\).
+    Per ogni \(X, Y \in \mathcal{C}\), il diagramma
+\[\begin{tikzcd}
+	& {\mathcal{D}(F(X),F(Y))} \\
+	{\mathcal{C}(X,Y)} \\
+	& {\mathcal{D}(F'(X),F'(Y))} \\
+	\arrow["{\overline{\alpha}}", from=1-2, to=3-2]
+	\arrow["F", from=2-1, to=1-2]
+	\arrow["{F'}", from=2-1, to=3-2]
+\end{tikzcd}\]
+commuta. Infatti preso \(f \in \mathcal{C}{(X, Y)}\), per la trasformazione
+naturale \(\alpha_Y \circ F{(f)} = F'{(f)} \circ \alpha_X\) si ha che 
+\[
+  {(\overline{\alpha} \circ F)}{(f)} = \alpha_Y \circ F{(f)} \circ \alpha_X^{-1}
+  = F'{(f)}
+\]
+Inoltre \(\overline{\alpha}\) è una biezione, infatti ha inversa \(\overline{\alpha}^{-1}{(h)} = \alpha_Y^{-1} \circ h \circ \alpha_X\): \[\overline{\alpha} {( \overline{\alpha}^{-1} \circ \overline{\alpha})}{(g)} = \overline{\alpha}^{-1}
+{(\alpha_Y \circ g \circ \alpha_X^{-1})} = \alpha_Y^{-1} \circ \alpha_Y \circ g
+\circ \alpha_X^{-1} \circ \alpha_X = g
+\]
+e similmente l'altra composizione. Allora chiaramente se \(F\) è \emph{fedele}/\emph{pieno}, allora \(F'  = \overline{\alpha} \circ F \) è \emph{iniettivo}/\emph{suriettivo}.
+
+\end{proof}
+
+\begin{proposition}{}
+\(\alpha, \beta\) trasformazioni naturali inducono una trasformazione naturale
+\(\beta * \alpha : G \circ F \to G' \circ F'\) 
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F'{(X)})}} \\
+    {G'{(F{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(\alpha_X)}", from=1-1, to=1-2]
+	\arrow["\beta_{F{(X)}}  ", from=1-1, to=2-1]
+	\arrow["\beta_{F'{(X)}} ", from=1-2, to=2-2]
+	\arrow["G'{(\alpha_X)}", from=2-1, to=2-2]
+\end{tikzcd}\]
+dunque \((\beta * \alpha)_X := \beta_{F'{(X)}} \circ G{(\alpha_X)} = G'{(\alpha_x)} \circ \beta_{F{(X)}} \).
+\end{proposition}
+\begin{proof}[Dimostrazione che è una trasformazione naturale]
+Vogliamo mostrare che \(b * a\) è naturale, cioè \(\forall f : X \to Y\) in \(\mathcal{C}\) il diagramma
+\[\begin{tikzcd}
+	{G{(F{(X)})}} & {G{(F{(X)})}} \\
+    {G'{(F'{(X)})}} & {G'{(F'{(X)})}}
+	\arrow["G{(F{(f)})}", from=1-1, to=1-2]
+	\arrow["{(\beta * \alpha)}_X", from=1-1, to=2-1]
+	\arrow["{(\beta * \alpha)}_Y", from=1-2, to=2-2]
+	\arrow["G'{(F'{(f)})}", from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta. Ma questo è vero perché
+\begin{align*}
+    G'{(F'{(f)})} \circ {(\beta * \alpha)}_X &= G'{(F'{(f)})} \circ G'{(\alpha_x)}
+  \circ \beta_{F{(X)}} = G'{(F'{(f)} \circ \alpha_X)} \circ \beta_{F{(X)}} = \\
+    &\overset{\alpha \text{ nat.}}{=} G'{(\alpha_Y \circ F{(f)})} \circ
+    \beta_{F{(X)}} = G'{(\alpha_Y)} \circ G'{(F{(f)} \circ \beta_{F{(X)}})} = \\
+    &\overset{\beta \text{ nat.}}{=} G'{(\alpha_Y)} \circ \beta_{F{(Y)}}
+    \circ G{(F{(f)})} = {(\beta * \alpha)}_Y \circ G{(F{(f)})}
+\end{align*}
+\end{proof}
+
+Ovviamente è chiaro che si potrebbe definire allora la categoria delle
+trasformazioni naturali eccetera e andare avanti all'infinito. Per
+assiomatizzare queste cose in realtà bisognerebbe esplicitare che abbiamo
+definito le ``2-frecce'' e che quindi siamo in una \emph{2-categoria}
+
+\begin{note}[zione]
+    Se \(\beta = \mathrm{id}_G \) invece di \(\mathrm{id_G} * \alpha\) si scrive
+    \(G \circ \alpha\) (dunque con \({(G \circ \alpha)}_X = G{(\alpha_X)}\)). Se
+    \(\alpha = \mathrm{id}_F\) invece di \(\beta * \mathrm{id}_F\) si scrive \(\beta \circ F\) (con \({(\beta \circ F)}_X = \beta_{F{(X)}} \)). In generale 
+    \[
+      \beta * \alpha = {(\beta \circ F')} \circ {(G \circ \alpha)} = {(G' \circ
+      \alpha)} \circ {(\beta \circ F)}
+    \]
+\end{note}
+\begin{remark}{}
+    Se \(\alpha, \beta\) sono isomorfismi, allora \(\beta * \alpha\) è
+    isomorfismo. Questo significa che se 
+    \[
+      F \cong F', \quad G \cong G' \implies G \circ F \cong G' \circ F'
+    \]
+    cioè l'isomorfismo di funtori è una congruenza su \(
+    \mathtt{\mathcal{C}at}\) e quindi si ottiene la categoria \(\mathtt{\mathcal{C}at} /_{\cong}\)
+\end{remark}
+\begin{definition}{Equivalenza}
+    Un funtore \(F: \mathcal{C} \to D\) è un'equivalenza se \(\exists G : D \to \mathcal{C}\)
+    funtore tale che \(G \circ F \cong \mathrm{id}_G\) e \(F \circ G \cong \mathrm{id}_D\).
+
+    Un tale \(G\) si dice un \emph{quasi-inverso} di \(F\).
+\end{definition}
+\begin{remark}{}
+    \(F\) è un'equivalenza se e solo se \(\overline{F} \text{ in } \mathtt{\mathcal{C}at}/_{\cong} \) è un isomorfismo.
+\end{remark}
+
+Segue che se \(F \cong F'\), allora \(F\) è un'equivalenza se e solo se \(F'\) è
+un'equivalenza e un quasi-inverso di \(F\) è unico a meno di isomorfismo e
+l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{\mathcal{C}at}\) 
+
+\begin{definition}{Scheletro}
+    Una sottocategoria piena \(\mathcal{C}' \subseteq \mathcal{C} \) è detta \emph{scheletro} se \(\forall X \in \mathcal{C}\), \(\exists ! X' \in \mathcal{C}'\) tale che \(X \cong X'\) 
+\end{definition}
+
+\begin{lemma}{}\label{lem:ext-scheletro}
+    Sia \(F: \mathcal{C}\to D\) un funtore, e si supponga che \(\forall X \in \mathcal{C}\), \(\alpha_X : F{(X)} \to F'{(X)}\) sia un isomorfismo in \(D\). Allora \(F' : \mathrm{Ob}{(\mathcal{C})} \to \mathrm{Ob}{(D)}\) Si estende in modo unico a un funtore \(F' : \mathcal{C} \to D\) tale che \(\alpha : F \to F'\) è isomorfismo.
+\end{lemma}
+
+\begin{theorem}{Finalmente un teorema}
+    Un funtore \(F : \mathcal{C} \to D\) è un'\emph{equivalenza} se e solo se \(F\) è \emph{pienamente fedele} e \emph{essenzialmente suriettivo}
+\end{theorem}
+\begin{remark}{}
+    Non è necessario aggiungere l'ipotesi che \(F\) sia essenzialmente iniettivo
+    perché come mostrato prima pienamente fedele implica essenzialmente
+    iniettivo (ma non essenzialmente suriettivo).
+\end{remark}
+\begin{example}{}
+    Supponiamo che \(\mathcal{C}' \subseteq \mathcal{C} \) sia una sottocategoria piena. Allora il
+    funtore di inclusione \(\mathcal{C}' \hookrightarrow \mathcal{C}\) è pienamente fedele ed è
+    essenzialmente suriettivo (quindi è un'equivalenza) se e solo se \(\forall X \in \mathcal{C}\) esiste \(X' \in \mathcal{C}'\) tale che \(X \cong X'\).
+\end{example}
+
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Sia \(G : D \to \mathcal{C}\) un quasi-inverso di \(F\). Allora
+        \(F \circ G \cong \mathrm{id}_G\) che è essenzialmente suriettivo, e
+        dunque \(F\) è essenzialmente suriettivo. D'altra parte lo stesso \(F
+        \circ G\) è fedele, e dunque \(G\) è fedele.
+        
+        Ora, per ogni \(X, Y \in \mathcal{C}\),
+        \[
+          \mathcal{C}{(X, Y)} \overset{F_{X,Y} }{\to } D{(F{(X)}, F{(Y)})} \overset{G_{F{(X)}, F{(Y)}}  \text{ inj}}{\to} \mathcal{C}{(G{(F{(X)})}, G{(F{(Y)})})}
+        \]
+        poiché la composizione è biunivoca e \(G\) è fedele, allora entrambi
+        devono essere biunivoci, ossia in particolare \(F\) è pienamente fedele.
+    \item[\(\impliedby \)] Consideriamo prima il caso di un'inclusione \(\mathcal{C}' \subseteq \mathcal{C} \) sottocategoria piena tale che \(\forall X \in \mathcal{C}\) esista \(X' \in \mathcal{C}\) tale che \(X \cong X'\). 
+        Sia \(I : \mathcal{C}' \to \mathcal{C}\) il funtore di inclusione (pienamente fedele e
+        essenzialmente suriettivo).
+
+        Allora \(\forall X \in \mathcal{C}\) scelto (AoC) un
+        isomorfismo \(\alpha_X : X \to \tilde{P}{(X)} \in \mathcal{C}'\) e se \(X \in 
+        \mathcal{C}'\) in particolare prendiamo \(\alpha_X = 1_X\). Applico ora il
+        lemma~\ref{lem:ext-scheletro} con \(F = \mathrm{id}_\mathcal{C}\) e dunque \(\exists !\) estensione di \(\tilde{P}\) a un funtore \(\tilde{P} : \mathcal{C} \to \mathcal{C}\) tale che \(\alpha : \mathrm{id}_\mathcal{C} \to \tilde{P}\) è isomorfismo. Allora \(\exists ! P : \mathcal{C} \to \mathcal{C}'\) funtore tale che \(\tilde{P} = I \circ P\) e \(P\) è un quasi-inverso di \(I\) poiché \(I \circ P = \tilde{P} \cong \mathrm{id}_\mathcal{C}\) e \(P \circ I = \mathrm{id}_{\mathcal{C}'}\).
+
+        In generale, dato \(F : \mathcal{C} \to D\) pienamente fedele. Siano allora \(
+        I : \mathcal{C}' \to \mathcal{C}\) e \(J : D' \to D\) due scheletri. Per il caso qui fatto
+        \(I, J\) sono equivalenze e siano \(P : \mathcal{C}\to \mathcal{C}'\) quasi-inverso di \(I\) e \(Q : D \to D'\) quasi-inverso di \(J\).
+\[\begin{tikzcd}
+	\mathcal{C} & D \\
+	{\mathcal{C}'} & {D'}
+	\arrow["F"{description}, from=1-1, to=1-2]
+	\arrow["P"', shift right, from=1-1, to=2-1]
+	\arrow["Q", shift left, from=1-2, to=2-2]
+	\arrow["I"', shift right, from=2-1, to=1-1]
+	\arrow["{F'}"{description}, from=2-1, to=2-2]
+	\arrow["J", shift left, from=2-2, to=1-2]
+\end{tikzcd}\]
+    Sia \(F' := Q \circ F \circ I : \mathcal{C}' \to D'\) come nel diagramma. Allora \(
+    I, F, Q\) sono pienamente fedeli e essenzialmente suriettivi (\(I\) per
+    definizione, \(F\) per ipotesi e \(Q\) perché è un'equivalenza e vale il
+    punto \({(\implies )}\)) dunque \(
+    F'\) è pienamente fedele e essenzialmente suriettivo.
+
+    \(F'\) è essenzialmente biunivoco, \(\mathcal{C}'\) e \(D'\) sono scheletri, dunque \(F'\) è biunivoco, quindi isomorfismo e quindi equivalenza.
+    \[
+        F = \mathrm{id}_D \circ F \circ \mathrm{id}_c \cong J \circ Q \circ F
+        \circ I \circ P = J \circ F' \circ P
+    \]
+    equivalenza perché lo sono \(J, F'\) e \(P\) 
+\end{itemize}
+\end{proof}
+
+\begin{example}{}
+    Sia \(\sim \) una relazione d'equivalenza su un insieme \(X\) che vedo come
+    categoria \(\mathcal{C}\) con \(\mathrm{Ob}{(\mathcal{C})} = X\)  e \(\mathcal{C}{(x,y)} \neq \varnothing \iff x \sim y\).
+
+    Il funtore \(\mathcal{C} \to X/_\sim\) (categoria discreta) definito da \(x \mapsto
+    \overline{x}\) è un'equivalenza poiché pienamente fedele e essenzialmente
+    suriettiva.
+\end{example}
+
+\begin{eser}{}
+    Mostrare che ogni categoria equivalente a una categoria discreta è una relazione di
+    equivalenza, ossia una categoria dove \(\forall X, Y \in \mathcal{C}, \,\,
+    \mathcal{C}{(X,Y)} \neq O \iff x \sim y \) per una qualche \(\sim \) relazione di
+    equivalenza.
+\end{eser}
+
+\section{Categorie preadditive}
+\begin{definition}{Categoria preadditiva}
+    Una categoria \emph{preadditiva} è una categoria \(\mathcal{A}\) con una
+    struttura di gruppo abeliano (notazione: additivo) su \(\mathcal{A}{(X, Y)}\) per ogni \(X, Y \in \mathcal{A}\) ed è tale che la composizione di morfismi sia \(\mathbb{Z}\)-bilineare, ossia
+    \[
+      g \circ {(f + f')} = g \circ f + g \circ f' \quad \text{ e } \quad {(g +
+      g')} \circ f = g \circ f + g' \circ f 
+    \]
+    per ogni \(
+    X, Y, Z \in \mathcal{A}\), \(f, f' \in \mathcal{A}{(X, Y)}\) e \(g, g' \in \mathcal{A}{(Y, Z)}\).
+\end{definition}
+\begin{remark}{}
+    Si dice anche che \(\mathcal{A}\) è una \(\mathtt{Ab}\)-Categoria. Si può
+    studiare quando si può generare una categoria simile partendo da altre
+    categorie invece di \(\mathtt{Ab}\) ma non è argomento di questo corso.
+
+    Si può anche dire che \(\mathcal{A}\) è \(\mathbb{Z}\)-lineare. Più in
+    generale \(\forall\)\footnote{normalmente in mezzo alla frase così avrei scritto esplicitamente ``per ogni'' ma trovavo divertente la quantità di \(\mathcal{A}\) e di \(A\) nella frase quindi ho valutato simpatico aggiungere anche un \(\forall\)} anello commutativo \(A\) una categoria \(A\)-lineare è
+    una categoria \(\mathcal{A}\) con una struttura di \(A\)-modulo su \(\mathcal{A}{(X,Y)}\) tale che la composizione sia \(A\)-bilineare.
+\end{remark}
+\begin{proposition}{}
+    Se \(A\) è non commutativo, allora \(\forall a, b \in A\) e \(\forall f :
+    X\to Y\) morfismo di \(\mathcal{A}\),
+    \[
+      {(ab)}f = {(ba)}f
+    \]
+\end{proposition}
+\begin{proof}{}
+    \[
+      {(ab)}f = a{(bf)} = a{({(bf)}\circ 1_X)} = {(bf)} \circ {(a1_x)} = f \circ
+      {(b{(a 1_X)})} = f \circ {(ba)}1_X = {(ba)}f
+    \]
+\end{proof}
+
+\begin{example}{}
+    Sia \(A\) un anello, allora \(A\mathtt{-Mod}\) è preadditiva. Infatti per
+    ogni \(M, N \in {(A\mathtt{-Mod})}\), \(A\mathtt{-Mod}{(M, N)} = \mathrm{Hom}_A{(M, N)}\) è un gruppo abeliano e \(\circ\) è \(\mathbb{Z}\)-bilineare. Se \(A\) è commutativo, allora \(A\mathtt{-Mod}\) è anche \(A\)-lineare.
+    Più in generale se \(B\) è una \(A\)-algebra allora \(B\mathtt{-Mod}\) è \(A\)-lineare.
+\end{example}
+
+\begin{remark}{}
+    Sia \(X \in \mathcal{A}\) categoria \(A\)-lineare (quindi \(A\)
+    commutativo). Allora \(\mathrm{End}_\mathcal{A}{(X)}\) è una \(A\)-algebra.
+    Infatti \({(\mathrm{End}_{\mathcal{A}} {(X)}, \circ)}\) è un monoide e \(\mathrm{End}_\mathcal{A}\) è \(A\)-modulo e \(\circ\) è \(A\)-lineare.
+
+    Quindi le categorie \(A\)-lineari con un solo oggetto sono \(A\)-algebre. In
+    particolare le categorie preadditive con un solo oggetto sono anelli.
+\end{remark}
+
+\begin{remark}{}
+Sia \(\mathcal{A}\) preadditiva, allora \(\mathcal{A}^{op}\) è preadditiva con
+la stessa struttura di gruppo abeliano su \(\mathcal{A}^{op}{(X, Y)} = \mathcal{A}{(Y, X)}\) per ogni \(X, Y \in \mathcal{A}\).
+\end{remark}
+
+\begin{remark}{}
+Se \(\mathcal{A}\) è preadditiva, allora \(\mathcal{A}' \subseteq \mathcal{A}\) sottocategoria tale che \(\mathcal{A}'{(X, Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X, Y \in \mathcal{A}'\), allora \(\mathcal{A}'\) è preadditiva. In particolare la condizione è sempre verificata per le categorie piene.
+\end{remark}
+
+    Sia \(\mathcal{A}\) preadditiva, \(\sim \) una congruenza tale che \(\forall X, Y \in \mathcal{A}\), \(\forall f, f', g \in \mathcal{A}{(X, Y)}\) allora \(f \sim f' \implies f + g \sim f' + g\). In tale ipotesi \(\mathcal{A}/_\sim \) è preadditiva con \(\overline{f} + \overline{g} = \overline{f+g}\).
+
+    Data una tale congruenza, sia \(\forall X, Y \in \mathcal{A}\) 
+    \[
+      \mathfrak{I}{(X,Y)} = \{f \in \mathcal{A}{(X, Y)} : f \sim 0\} 
+    \]
+    e indichiamo con \(\mathfrak{I} \subseteq \mathcal{A}\) la collezione di
+    tutti gli \(\mathfrak{I}{(X, Y)}\). Allora vale la proprietà di ideale, cioè
+    dati \(f, g\) morfismi di \(\mathcal{A}\) componibili, 
+    \[
+      f \in  \mathfrak{I} \text{ o } g \in \mathfrak{I} \implies g \circ f \in \mathfrak{I}
+    \]
+    Se per esempio \(f \in \mathfrak{I}\) ossia \(f \sim 0\), allora \(g \circ f
+    \sim g \circ 0 = 0 \) e dunque \(g \circ f \in \mathfrak{I}\).
+
+    Arriviamo dunque alla seguente definizione
+
+\begin{definition}{}
+    Definiamo un ideale \(\mathfrak{I}\) in una categoria preadditiva \(\mathcal{A}\) come \(\mathfrak{I}{(X,Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X, Y \in \mathcal{A}\) tale che
+    \[
+      f \in \mathfrak{I} \text{ o } g \in \mathfrak{I} \implies g \circ f \in
+      \mathfrak{I}
+    \]
+\end{definition}
+Viceversa, dato \(\mathfrak{I} \subseteq \mathcal{A} \) ideale, si ottiene una
+congruenza \(\sim \) su \(\mathcal{A}\) definito da 
+\[
+  f \sim f' \iff f' - f \in \mathfrak{I}{(X, Y)} \quad \forall X, Y \in \mathcal{A} \quad \forall f, f' \in  \mathcal{A}{(X, Y)}
+\]
+ed è tale che \(f \sim f' \implies f + g \sim f'+ g\).
+
+In tali ipotesi si può anche denotare \(\mathcal{A} / \mathfrak{I}\) invece di
+\(\mathcal{A}/_\sim\).
+
+Una categoria \(\mathcal{\mathcal{C}}\) può non avere nessuna struttura di categoria
+    preadditiva (ad esempio se \(\exists X, Y \in \mathcal{\mathcal{C}}\)) tale che \(\mathcal{\mathcal{C}}{(X, Y)} = \varnothing\) o averne più di una.
+
+\begin{example}{G}
+    Possiamo pensare ad anelli \(A\) e \(B\) tali che \({(A, \cdot )} \cong {(B, \cdot )}\) e \({(A, +)} \not\cong {(B, +)}\).
+
+    Ad esempio possiamo prendere \(A = \mathbb{Z} / 4 \mathbb{Z}\) e \(B = \mathbb{Z} /_{2 \mathbb{Z}} [X] / {(X^2)}\). Allora evidentemente 
+    \[
+      {(A, +)} \cong \mathcal{C}_4 \not\cong \mathcal{C}_{2} \times \mathcal{C}_{2} \cong B
+    \]
+    ma gli elementi diversi da \(0\) e \(1\) di \(A\) sono \(\overline{2}\) e \(\overline{3}\) e sono tali che \(\overline{2}^2 = \overline{0}\), \(\overline{3}^2 = \overline{1}\) e \(\overline{2} \cdot \overline{3} = \overline{2}\). Similmente in \(B\) abbiamo che
+    \(
+      \overline{X}^2 = \overline{0}
+    \), \(\overline{1+X}^2 = \overline{1}\) e \(\overline{X} \cdot \overline{1+X} = \overline{X}\)
+\end{example}
+
+\begin{definition}{}
+    Un funtore \(F : \mathcal{A} \to \mathcal{B}\) tra categorie preadditive è
+    additivo se 
+    \[
+      F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}
+    \]
+    è omomorfismo di gruppi \(\forall X, Y \in \mathcal{A}\).
+
+    Più in generale \(F: \mathcal{A} \to \mathcal{B}\) tra categorie
+    \(A\)-lineari è detto \(A\)-lineare se \(F_{X, Y} \) è \(A\)-lineare \(\forall X, Y \in \mathcal{A}\).
+\end{definition}
+
+\begin{example}{}
+    Sia \(\mathcal{A}' \subseteq \mathcal{A} \) sottocategoria tale che \(\mathcal{A}'{(X, Y)} < \mathcal{A}{(X,Y)}\) per ogni \(X,Y \in \mathcal{A}'\). Allora l'inclusione \(\mathcal{A}' \to \mathcal{A}\) è addditivo.
+\end{example}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) è preadditiva e \(\mathfrak{I} \subseteq \mathcal{A} \)
+    ideale, allora il funtore \(f : \mathcal{A} \to \mathcal{A}/\mathfrak{I}\) 
+    definito da \(X \mapsto X\) e \(f \mapsto \overline{f}\) è additivo.
+\end{example}
+
+\begin{eser}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) additivo tale che ``\(\mathfrak{I} = \ker F\)'' cioè \(F{(f)} = 0 \), \(\forall f \in \mathfrak{I}\), allora mostrare che esiste un unico \(\overline{F} : \mathcal{A}/\mathfrak{I} \to \mathcal{B}\) funtore additivo tale che \(F = \overline{F} \circ P\) 
+\end{eser}
+
+\begin{example}{}
+    Siano \(A, B\) anelli (categorie preadditive con un solo oggetto), allora un
+    funtore additivo \(A\to B\) è un omomorfismo di anelli.
+
+    Più in generale per ogni anello \(A\) e per ogni \(\mathcal{A}\) categoria
+    preadditiva un funtore additivo \( A \to \mathcal{A}\) è dato da un oggetto
+    \(X \in \mathcal{A}\) e un omomorfismo di anelli \(A \to \mathrm{End}_\mathcal{A}{(X)}\).
+    Quindi un \(A\)-modulo è un funtore additivo \(A \to \mathtt{Ab}\) 
+\end{example}
+
+\begin{example}{}
+    Sia \(A\to B\) un omomorfismo di anelli. Allora il funtore di restrizione
+    degli scalari \(B\mathtt{-Mod} \to A\mathtt{-Mod}\) è additivo.
+\end{example}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) preadditiva, allora \(\forall X \in \mathcal{A}\) ci sono
+    funtori additivi
+    \[
+      \mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab} \quad , \quad \mathcal{A}{(\-- , X)} : \mathcal{A}^{op} \to \mathtt{Ab}
+    \]
+    e in generale se \(
+    \mathcal{A}\) è \(A\)-lineare, allora i due funtori hanno codominio \(A\mathtt{-Mod}\) 
+    e sono \(A\)-lineari
+\end{example}
+
+Notare che se \(\mathcal{A} \overset{F}{\to } \mathcal{B} \overset{G}{\to } \mathcal{\mathcal{C}}\) 
+sono funtori additivi, allora \(G \circ F\) è additivo.
+Inoltre \(\mathrm{id}_\mathcal{A}\) è additivo. 
+Dunque si ottiene una categoria contenente le \textbf{categorie preadditive}
+(piccole) e morfismi i funtori additivi.
+
+    Sia \(\mathcal{\mathcal{C}}\) una categoria (piccola) e \(\mathcal{A}\) una categoria
+    preadditiva. Allora \(\mathrm{Fun}{(\mathcal{\mathcal{C}}, \mathcal{A})}\) è
+    preadditiva (in modo naturale) con la seguente struttura
+
+    \(\forall F, G \in \mathtt{Fun}{(\mathcal{\mathcal{C}}, \mathcal{A})}\) e \(\forall \alpha, \beta : F \to G\) trasformazioni
+    naturali allora \(\alpha + \beta : F \to G\) trasformazione naturale
+    definita \(\forall X \in \mathcal{\mathcal{C}}\) da
+    \[
+      {(\alpha + \beta)}_X := \alpha_X + \beta_X : F{(X)} \to G{(X)} \text{ in }
+      \mathcal{A}
+    \]
+    è naturale perché \(
+    \forall f : X \to \mathcal{C}\), 
+\[\begin{tikzcd}
+	{F(X)} & {F(Y)} \\
+	{G{(X)}} & {G{(Y)}}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\alpha_X + \beta_X}", from=1-1, to=2-1]
+	\arrow["{\alpha_Y + \beta_Y}", from=1-2, to=2-2]
+	\arrow["{G{(f)}}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta
+
+Se anche \(\mathcal{\mathcal{C}}\) è preadditiva sia 
+\[
+  \mathtt{AddFun}{(\mathcal{\mathcal{C}}, \mathcal{A})}
+\]
+la sottocategoria piena di \(\mathtt{Fun}{(\mathcal{\mathcal{C}}, \mathcal{A})}\) con 
+oggetti i funtori additivi. Allora tale categoria è preadditiva.
+
+\begin{example}{}
+    Se \(A\) è anello, allora gli \(A\)-moduli sono gli oggetti di \(\mathtt{AddFun}{(A, \mathtt{Ab})}\) (già visto)
+    e in effetti \(A\mathtt{-Mod} \cong \mathtt{AddFun}{(A, \mathtt{Ab})}\),
+    poiché dati \(M, N : A \to \mathtt{Ab}\) funtori (cioè \(A \to \mathrm{End}{(M)}\) e \(A \to \mathrm{End}{(N)}\) omomorfismi di anelli) la trasformazione naturale \(\alpha : M \to N\) è data da
+    \(\alpha : M \to N\) in \(\mathtt{Ab}\) tale che \(\forall a \in A\) 
+\[\begin{tikzcd}
+	{M} & {N} \\
+	{N} & {N}
+	\arrow["{a}", from=1-1, to=1-2]
+	\arrow["{\alpha}", from=1-1, to=2-1]
+	\arrow["{\alpha}", from=1-2, to=2-2]
+	\arrow["{a}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+commuta, cioè \(a \alpha {(x)} = \alpha {(a x)}\) per ogni \(x \in M\), ossia \(
+\alpha \) è omomorfismo di \(A\)-moduli.
+\end{example}
+\begin{remark}{}
+    \(\forall \mathcal{A}\) preadditiva (piccola) si può definire la categoria
+    (preadditiva) \(\mathcal{A-}\mathtt{Mod} := \mathtt{AddFun}{(\mathcal{A}, \mathtt{Ab})}\).
+\end{remark}
+\begin{proposition}{}
+    Siano \(\mathcal{A}, \mathcal{B}\) preadditive, \(F, G : \mathcal{A} \to
+    \mathcal{B}\) funtori tali che \(F \cong G\) e \(F\) additivo. Allora \(G\)
+    è additivo
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to G\) isomorfismo. Allora \(\forall  f : X \to Y\) in \(\mathcal{A}\), 
+    \(G{(f)} = \alpha_Y \circ F{(f)} \circ \alpha_X^{-1}\).
+    Inoltre \(\forall f, f' : X \to Y\),
+    \begin{align*}G{(f + f')} &= \alpha_Y \circ F{(f +
+    f')} \circ \alpha_X^{-1} = \alpha_Y \circ {(F{(f)} + F{(f')})} \circ \alpha_X^{-1} = \\
+    &= \alpha_Y \circ F{(f)} \circ \alpha_X^{-1} + \alpha_Y \circ F{(f')} \circ
+    \alpha_X^{-1} = G{(f)} + G{(f')}
+\end{align*}
+\end{proof}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore pienamente fedele con \(\mathcal{B}\) preadditiva.
+    Allora esiste un'unica struttura preadditiva su \(\mathcal{A}\) tale che \(F\) 
+    sia additivo
+\end{remark}
+\begin{proof}{}
+    \(\forall X, Y \in \mathcal{A}\) voglio che \(F_{X,Y}  : \mathcal{A}{(X, Y)} \to \mathcal{B}{(F{(X)}, F{(Y)})}\) sia isomorfismo di gruppi (già è biettiva), che è vero se e solo se \(\forall f, f' \in \mathcal{A}{(X,Y)}\) 
+    \[
+      f + f' = F^{-1}{(F{(f)} + F{(f')})} 
+    \]
+    Infatti è ovvio che se \(+\) è così definita, allora \(F\) sia omomorfismo
+    di gruppi. Viceversa, se \(F\) è omomorfismo di gruppi, allora anche \(F^{-1}\) è omomorfismo di gruppi, 
+    e dunque \(F^{-1}{(F{(f)} + F{(f')})} = F^{-1}{(F{(f)})} + F^{-1}{(F{(f')})} = f + f'\).
+
+\end{proof}
+
+\subsection{Prodotti, coprodotti, proprietà universali}
+
+\begin{definition}{Prodotto}
+Sia \(\mathcal{\mathcal{C}}\) una categoria, siano \(
+X_\lambda \in \mathcal{\mathcal{C}}\) con \(\lambda \in \Lambda\) insieme. Un prodotto
+degli \(
+X_\lambda\) è dato da \(X \in \mathcal{\mathcal{C}}\) con morfismi morfismi \(p_\lambda
+\in \mathcal{C}{(X, X_\lambda)}\) per ogni \(\lambda \in \Lambda\) tale che
+vale la seguente proprietà universale:
+\[
+  \forall Y \in \mathcal{\mathcal{C}}, \,\, \forall \lambda \in \Lambda, \,\, \forall f_{\lambda} \in \mathcal{\mathcal{C}}{(Y, X_\lambda)} \quad \exists ! f \in \mathcal{\mathcal{C}}{(X, Y)} : f_\lambda = p_\lambda \circ f
+\]
+o equivalentemente i seguenti diagramma commutano :
+\[\begin{tikzcd}
+	Y \\
+	{X_\lambda} & X
+	\arrow["{f_\lambda}"', from=1-1, to=2-1]
+	\arrow["{\exists ! f}", dashed, from=1-1, to=2-2]
+	\arrow["{p_\lambda}", from=2-2, to=2-1]
+\end{tikzcd} \text{ al variare di \(\lambda \in \Lambda\) }\]
+\end{definition}
+
+\begin{proposition}{}
+    Siano \({(X, \{p_\lambda\}_{\lambda \in \Lambda} )}\) e \({(X', \{p'_{\lambda} \}_{\lambda \in \Lambda} )}\).
+    due prodotti in \(\mathcal{C}\) degli \(X_{\lambda} \). Allora \(\exists ! f \in \mathcal{\mathcal{C}}{(X', X)}\) 
+    tale che \(p'_\lambda = p_\lambda \circ f\) per ogni \(\lambda\) e \(f\) è
+    isomorfismo. 
+
+    Viceversa se \({(X, \{p_\lambda\}_{\lambda \in \Lambda} )}\) è un prodotto
+    degli \(X_\lambda\) e \(f : X' \to X\) è isomorfismo, anche \({(X', \{p_\lambda \circ f\}_{\lambda \in \Lambda} )}\) è un prodotto degli \(X_\lambda\) 
+\end{proposition}
+\begin{remark}{}
+    Si dice che il prodotto è \emph{unico a meno di unico isomorfismo}
+\end{remark}
+\begin{proof}
+    \emph{(Prima parte)}
+    Esiste unico \(f\) per la proprietà universale, analogamente \(\exists ! f'
+    \in \mathcal{\mathcal{C}}{(X, X')}\) tale che \(p_\lambda = p'_\lambda \circ f\), \(\forall \lambda \in \Lambda\). Dunque \(p_\lambda = p'_\lambda \circ f' = p_\lambda \circ f \circ f' = p_\lambda
+     \circ 1_X\). Ne consegue che \(1_X = f \circ f'\) per la proprietà
+     universale e analogamente \(1_Y = f'\circ f\).
+
+     \emph{(Seconda parte)} Dati \(Y \in \mathcal{\mathcal{C}}\) e \(g_\lambda : Y \to
+     X'_\lambda\) devo dimostrare che \(\exists ! g : Y \to X\) tale che \(
+     g_\lambda = f_\lambda \circ f \circ g\) per ogni \(\lambda \in \Lambda\).
+     Ora per la proposizione universale di \(X\) \(\exists ! g : Y \to X\) tale
+     che \(g_\lambda = p_\lambda \circ g\). Voglio \(g = f \circ g'\) cioè \(g'
+     = f^{-1} \circ g\) 
+\end{proof}
+
+\begin{note}[zione]
+    L'oggetto prodotto \(X\) si indica con
+    \[
+      X =: \prod_{\lambda \in \Lambda} X_\lambda
+    \]
+\end{note}
+
+\begin{example}{}
+    In \(\mathtt{Set}\) il prodotto di insiemi \(X_\lambda\) per \(\lambda \in \Lambda\) 
+    è dato dall'usuale prodotto cartesiano con le proiezioni.
+
+    In categorie concrete come \(\mathtt{Grp}, \mathtt{Rng}, A\mathtt{-Mod}\) un
+    prodotto si ottiene dal prodotto in \(\mathtt{Set}\) mettendo la struttura
+    disgiuntiva componente per componente.
+\end{example}
+
+\begin{example}{}
+    In \(\mathtt{FinSet}\) (la sottocategoria piena di \(\mathtt{Set}\)) con
+    oggetti insiemi finiti, non esiste \(\prod_{\lambda \in \Lambda} X_\lambda\) se \(\# \Lambda = \infty\) e \(\# X_\lambda > 1\) per ogni \(\lambda \in \Lambda\) 
+
+    Infatti se per assurdo supponiamo il prodotto essere \(X\) per la proprietà
+    universale \(\forall Y \in \mathtt{FinSet}\), \( \infty > 
+    \# \mathtt{Set}{(Y, X)} = \prod_{\lambda \in \Lambda} \# \mathtt{Set}(Y,
+    X_\lambda) = \infty\) 
+\end{example}
+
+\begin{remark}{}
+    Se \(\# \Lambda = 1\) allora un prodotto di \(X_1\) è \(p_1 : X \to X_{1}\)
+    in \(\mathcal{\mathcal{C}}\) tale che \(\forall Y \in \mathcal{\mathcal{C}}\) e \(\forall f_{1} : Y \to X_{1}\) 
+    \(\exists ! f : Y \to X\) tale che \(f_{1} = p_{1} \circ f\) 
+
+    Questo è vero se \(p_{1}\) è isomorfismo (\(f = p_{1}^{-1} \circ f_{1}\)).
+    D'altra parte se \(p_{1}\) non è isomorfismo non fattorizza unicamente ogni
+    altro morfismo. Quindi un prodotto di \(
+    X \in \mathcal{\mathcal{C}}\) è qualunque isomorfismo \(X' \to X\) (in particolare \(1_X\)).
+\end{remark}
+
+\begin{definition}{Oggetto terminale}
+    Un oggetto terminale di una categoria \(\mathcal{\mathcal{C}}\) è un prodotto vuoto in
+    \(\mathcal{\mathcal{C}}\), cioè \(X \in \mathcal{\mathcal{C}}\) tale che \(\forall Y \in \mathcal{\mathcal{C}}\) esiste un unico \(Y \to X\) morfismo di \(\mathcal{C}\), cioè \(\#\mathcal{\mathcal{C}}{(Y, X)} = 1\) 
+\end{definition}
+
+\begin{example}{}
+    In \(\mathtt{Set}\) \(X\) è terminale se e solo se \(\# X = 1\).
+    Analogamente in \(\mathtt{Grp}, \mathtt{Rng}, A\mathtt{-Mod}\) è ogni gruppo
+    anello o \(A\mathtt{-Mod}\) banale.
+\end{example}
+
+\begin{example}{}
+    Se \(G\) è un monoide non banale, allora \(G\) (come categoria con un solo
+    oggetto) non ha oggetto terminale.
+\end{example}
+
+\begin{proposition}{}
+    Una categoria \(\mathcal{\mathcal{C}}\) ha tutti i prodotti finiti se e solo se ha
+    oggetto terminale e i prodotti di coppie di oggetti.
+\end{proposition}
+\begin{proof}{}
+    Dimostro solo per induzione l'implicazione non ovvia.
+
+    Il passo base è dato dalla presenza dell'oggetto terminale.
+    Per induzione supponiamo che esista
+    il prodotto di \(n-1\) oggetti \(X'=\prod_{i = 1}^{n-1} X_i\) con \(p'_i :
+    X' \to X_{i}\) per ogni \(i\). Sia ora un elemento \(X_n\) e per ipotesi
+    esiste \(X = X' \times X_{n}\) con \(p_{n} : X \to X_{n}, p' : X \to X'\).
+    Allora \(X\) è prodotto di tutti gli \(\{X_i\}_{i=1}^{n}\) con \(p_{i} :=
+    p'_i \circ p'\) per ogni \(i < n\). 
+\end{proof}
+
+\begin{definition}{Coprodotto}
+    Un coprodotto di \(X_\lambda\) \((\lambda \in \Lambda)\) in una categoria \(\mathcal{\mathcal{C}}\) è un prodotto degli \(X_\lambda\) in \(\mathcal{\mathcal{C}}^{op}\), cioè è dato da \(
+    X \in \mathcal{\mathcal{C}}\) e da morfismi \(i_\lambda \in \mathcal{\mathcal{C}}{(X_\lambda, X)}\) tali che vale la proprietà universale (duale di quella del prodotto)
+
+\[
+  \forall Y \in \mathcal{C}, \,\, \forall \lambda \in \Lambda,\,\, \forall f_\lambda \in \mathcal{\mathcal{C}}{(X_\lambda, Y)}, \quad \exists ! \,f \in \mathcal{\mathcal{C}}{(X, Y)} : f_\lambda = f \circ i_\lambda
+\]
+e viene denotato 
+\[
+  X =: \coprod_{\lambda \in \Lambda} X_\lambda
+\]
+Diagrammaticamente, il diagramma
+\[\begin{tikzcd}
+	Y \\
+	{X_\lambda} & \coprod_{\lambda \in \Lambda} X_\lambda
+	\arrow["{f_\lambda}", from=2-1, to=1-1]
+	\arrow["{i_\lambda}"', from=2-1, to=2-2]
+	\arrow["{\exists! f}"', dashed, from=2-2, to=1-1]
+\end{tikzcd}\]
+commuta
+\end{definition}
+
+Nelle categorie preadditive si può parlare di \textbf{somma diretta} invece di
+coprodotto e usare \(\bigoplus\) invece di \(\coprod\).
+
+\begin{example}{}
+    In \(\mathtt{Set}\) il coprodotto è l'unione disgiunta. In \(A\mathtt{-Mod}\) è la somma diretta usuale. In \(\mathtt{Grp}\) i coprodotti sono i \textbf{prodotti liberi}.
+\end{example}
+
+\begin{definition}{Oggetto iniziale}
+    Un \emph{oggetto iniziale} di \(\mathcal{\mathcal{C}}\) è un coprodotto vuoto in \(\mathcal{C}\), ossia \(X \in \mathcal{\mathcal{C}}\) tale che
+    \(\forall Y \in \mathcal{\mathcal{C}}\), \(\# \mathcal{\mathcal{C}}{(X, Y)} = 1\) 
+\end{definition}
+
+Può succedere che uno stesso oggetto sia terminale che iniziale. In tal caso per entrambe le definizioni esiste un solo morfismo da uno all'altro. Se tale morfismo è un isomorfismo
+allora l'oggetto è sia iniziale che terminale.
+
+\begin{definition}{Oggetto nullo}
+    Un oggetto sia iniziale che terminale si dice \emph{nullo}
+\end{definition}
+
+\begin{example}{}
+    In \(\mathtt{Set}\), \(\varnothing\) è iniziale (non nullo).
+    In \(\mathtt{Grp}/A\mathtt{-Mod}\) ogni \emph{gruppo}/\emph{modulo} banale è
+    nullo.
+    In \(\mathtt{Rng}\), \(\mathbb{Z}\) è iniziale (non nullo)
+\end{example}
+
+    Se \(X \in \mathcal{\mathcal{C}}\) è nullo allora \(\forall Y, Z \in \mathcal{\mathcal{C}}\)
+    esiste il morfismo \(0 \in \mathcal{\mathcal{C}}{(Y, Z)}\) dato dalla composizione
+    \(Y \overset{\exists !}{\to } X \overset{\exists !}{\to } Z\). In tal caso
+    abbiamo che effettivamente \(f \circ 0 = 0\) e \(0 \circ g = 0\)  per ogni
+    \(f, g\) componibili con \(0\).
+\begin{example}{}
+    In \(\mathcal{A}\) preadditiva (in cui esiste un oggetto nullo) il morfismo
+    0 di cui sopra coincide con 0 dello struttura preadditiva.
+\end{example}
+
+\begin{definition}{Preservazione del prodotto}
+    Un funtore \(F : \mathcal{\mathcal{C}} \to \mathcal{D}\) \emph{preserva un prodotto}
+    \({(X, \{p_\lambda\} _{\lambda \in \Lambda} )}\) di \(\{X_\lambda\}_{\lambda \in \Lambda} \subseteq \mathcal{\mathcal{C}} \) se \({(F{(X)}, \{F{(p_\lambda)}\}_{\lambda \in \Lambda}  )}\) è un prodotto degli \(F{(X_{\lambda} )}\) in \(\mathcal{D}\).
+
+    Diremo inoltre che \(F\) \emph{preserva i prodotti (o prodotti finiti)} se preserva
+    tutti i prodotti (o prodotti finiti) che esistono in \(\mathcal{\mathcal{C}}\) 
+\end{definition}
+\begin{remark}{}
+    Se \(F\) preserva un prodotto degli \(X_\lambda\), allora li preserva tutti.
+\end{remark}
+
+\begin{definition}{Preservazione del coprodotto}
+    \(F: \mathcal{\mathcal{C}} \to \mathcal{D}\) preserva un coprodotto di \(\mathcal{\mathcal{C}}\) se \(F^{op}\) preserva il
+    corrispondente prodotto di \(\mathcal{C}^{op}\) 
+\end{definition}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{Grp}/\mathtt{Rng}/A\mathtt{-Mod} \to \mathtt{Set}\) preservano i prodotti ma non i coprodotti.
+\end{example}
+
+Ora vedremo in particolare cosa succede nelle categorie preadditive, in cui
+alcune valgono alcune simpatiche proprietà non ovvie.
+
+\begin{definition}{Biprodotto}
+    Sia \(\mathcal{A}\) una categoria preadditiva. Un \emph{biprodotto} di \(X_{1}, \dots, X_{n} \in \mathcal{A}\) 
+    è dato da \(X \in \mathcal{A}\) e morfismi (in \(\mathcal{A}\)) \(p_{j}: X\to X_j\) e \(i_{j}:
+    X_j \to X\), \(\forall j=1.. n\).
+    tali che
+    \begin{align*}
+        p_{j}\circ i_{j} = 1_{X_{j}} \quad ; \quad p_k \circ i_{j} &= 0 \quad \forall j,k=1 .. n \,\, \text{ con }j \neq k \\
+        \text{ e }\sum_{j=1}^{n} i_{j} \circ p_j &= 1_X 
+    \end{align*}
+\end{definition}
+\begin{remark}{}
+    \({(X, i_{1}, \dots, i_n, p_{1}, \dots, p_n )}\) è un biprodotto di \(X_{1}, \dots, X_{n}\) in \(\mathcal{A}\) 
+    se e solo se \({(X, p_{1}, \dots, p_n, i_1, \dots, i_n)}\) è un biprodotto
+    in \(\mathcal{A}^{op}\) 
+\end{remark}
+Se \(n = 0\) la condizione diventa \(1_X = 0\), dunque l'anello degli
+endomorfismi \(\mathrm{End}_{\mathcal{A}} {(X)}\) è banale.
+
+Se \(n = 1\) \(i_{1}\) e \(p_{1}\) sono isomorfismi e l'uno l'inverso
+dell'altro.
+
+\begin{remark}{}
+Basta verificare \(p_k \circ i_{j} = 0\) per \(j,k=1. .n-1\) e \(j\neq k\)
+(dunque per \(n=2\)) non è necessario verificare quella parte della definizione
+\end{remark}
+\begin{proof}{}
+    Sia \(k < n\). Allora supponendo che \(p_k \circ i_j = 0\) se \(k \neq j < n\),
+    \begin{align*}
+        p_n \circ i_k &= p_n \circ 1_X \circ i_k = p_n \circ {\left( \sum_{j=1}^{n} i_j \circ p_j  \right)} \circ i_k = \sum_{j=1}^{n} p_n \circ i_j \circ p_j \circ i_k = \\
+        &= p_n \circ i_n \circ p_n \circ i_k + \sum_{j=1}^{n-1} p_n \circ i_j
+        \circ p_j \circ i_k = \\
+        &= 1_{X_{n}} \circ p_n \circ i_k + p_{n} \circ
+        i_k \circ 1_{X_k} = p_{n} \circ i_k + p_{n} \circ i_k
+    \end{align*}
+    \(\implies p_{n} \circ i_k = 0\) 
+\end{proof}
+
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria preadditiva e siano \(X_{1}, \dots, X_{n} \in \mathcal{A}\).
+    Allora \(X \in \mathcal{A}\) è biprodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se} \(X\) è un prodotto di \(X_{1}, \dots, X_{n}\) \emph{se e solo se }\(X\) è
+    un coprodotto di \(X_{1}, \dots, X_{n}\).
+
+    Più precisamente \((X, p_{1}, \dots, p_{n})\) è un prodotto di \(X_{1}, \dots, X_{n}\) se e solo se esistono (unici) \(i_{1},\dots, i_n\) tali che \({(X, \{i_j\}_{j=1. .n}, \{p_{j}\}_{j = 1. .n}  )}\) è un biprodotto di \(X_{1}, \dots, X_{n}\).
+    Analogamente e dualmente per il coprodotto.
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Per la proprietà universale del prodotto \(\exists ! i_j : X_j \to X\) per ogni \(j=1 . .n\) tali che
+        \[
+          p_k \circ i_j = (f_{j} = ) \begin{cases}{}
+              1_{X_j} & \text{ se } j = k \\
+              0 & \text{ se } j\neq k
+          \end{cases}\quad
+\begin{tikzcd}
+	X_j  \\
+	{X_k} & X
+	\arrow["{\delta_{kj} 1_{X_{j}} }"', from=1-1, to=2-1]
+	\arrow["{\exists ! i_{j}}", dashed, from=1-1, to=2-2]
+	\arrow["{p_k}", from=2-2, to=2-1]
+\end{tikzcd}\]
+        Resta da dimostrare che 
+        \[
+          \sum_{j=1}^{n} i_{j} \circ p_j = 1_X \iff \forall k, \,\, p_k \circ
+          \sum_{j=1}^{n} i_{j} \circ p_{j} = p_k \text{ (proprietà universale)}
+        \]
+        e effettivamente 
+        \[
+          p_k \circ \sum_{j=1}^{n} i_{j} \circ p_{j} = \sum_{j=1}^{n} p_k \circ
+          i_{j} \circ p_{j} = \underbrace{p_k \circ i_k}_{1_{X_k} }  \circ p_k = p_k
+        \]
+    \item[\(\impliedby \)] Dati \(f_{j} : Y \to X_j \) devo dimostrare che \(\exists  ! \, f : Y \to X\) tale che \(f_j = p_j \circ f\) per ogni \(j = 1..n\). Allora posso definire
+        \[
+          f := \sum_{k=1}^{n} i_k \circ f_k : Y \to  X \text{ e allora } p_j
+          \circ f = \sum_{k=1}^{n} p_j \circ i_k \circ f_k = f_j 
+        \]
+        essa è unica poiché se \(f' : Y\to X\) è tale che \(\forall j\), \(f_j = p_j \circ f'\),
+        allora \[f' = 1_X \circ f' = \sum_{j=1}^{n} i_j \circ p_j \circ f' = \sum_{j=1}^{n} i_j \circ f_j = f\] 
+\end{itemize}
+\end{proof}
+\begin{remark}[\(n =0\)]
+    In una categoria preadditiva un oggetto \\ è terminale \(\iff\)  è iniziale \(\iff\) è nullo \(\iff\) \(1_X = 0\) 
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo e sia \(X, \{i_{j}\}_{j = 1. .n}, \{p_{j}\} _{j = 1. .n}  \) un biprodotto di \(X_{1}, \dots, X_{n} \in \mathcal{A}\). Allora 
+    \({(F{(X)}, \{F{(i_{j})}\}_{j=1. .n}, \{F{(p_{j})}\} _{j=1. .n}  )}\) è un
+    biprodtto di \(F{(X_{1})}, \dots, F{(X_{n})}\) in \(\mathcal{B}\) 
+\end{remark}
+\begin{corollary}{}
+    Un funtore \(F: \mathcal{A} \to \mathcal{B}\) additivo preserva i prodotti e
+    i coprodotti finiti.
+\end{corollary}
+
+\begin{note}[zione matriciale nelle categorie preadditive]
+    Sia \(\mathcal{A}\) una categoria preadditiva. Siano \(X_{1}, \dots, X_{n}\) e \(Y_{1},\dots, Y_{n}\) in \(\mathcal{A}\) tali che \(\exists {(X, i_j^{X}, p_j^{X})}\) biprodotto di \(X_{1}, \dots, X_{n}\) 
+    e \(Y, i_j^{Y}, p_j^{Y}\) biprodotto di \(Y_{1}, \dots, Y_{n}\).
+    Dati \(f_{j,k}  : X_k\to Y_j \) morfismi di \(\mathcal{A}\) indico con la
+    matrice \(m \times  n\) \({(f_{j,k} )}\) il morfismo \(f: X\to Y\)
+    definito da
+    \[
+      f = \sum_{j=1}^{m} \sum_{k=1}^{n} i_j^{Y} \circ f_{j, k} \circ p_k^{X}
+    \]
+\end{note}
+
+\begin{definition}{Categoria additiva}
+    Una \emph{categoria additiva} è una categoria preadditiva in cui esistono
+    tutti i biprodotti.
+\end{definition}
+
+\begin{example}{}
+    \(A\mathtt{-Mod}\) è additiva per ogni anello \(A\).
+\end{example}
+\begin{example}{}
+    \(A\) anello come categoria preadditiva con un solo oggetto è additiva se e solo se
+    \(A=0\) 
+\end{example}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è additiva, allora anche \(\mathcal{A}^{op}\) lo è.
+\end{remark}
+
+\begin{example}{}
+    Le sottocategorie piene di \(A\mathtt{-Mod}\) con oggetti i moduli
+    \emph{f.g.} / \emph{f.p.} / \emph{coerenti} / \emph{noetheriani} /
+    \emph{artiniani} / \emph{liberi} sono additive. Non vale per esempio per
+    ciclici.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) un funtore additivo essenzialmente
+    suriettivo. Allora se \(\mathcal{A}\) è additiva, anche \(\mathcal{B}\) è
+    additiva. In particolare \(\mathcal{A}/\mathfrak{I}\) è additivo per ogni \(\mathfrak{I} \subseteq \mathcal{A} \) 
+    ideale.
+\end{proposition}
+
+\begin{proof}{}
+    \(\forall Y_{1}, \dots, Y_{n}\), se \(F\) è ess. suriettivo, allora \(\exists X_{j} \in \mathcal{A}\) 
+    tale che \(F{(X_{j})} \cong Y_j\). A meno di cambiare \(F\) con \(F' \cong F\) 
+    posso supporre \(F {(X_{j})} = Y_{j}\).
+
+    Allora se \(\exists X\) biprodotto di \(X_{1}, \dots, X_{n}\) in \(\mathcal{A}\), \(F{(X)}\) è 
+    biprodotto di \(Y_{1}, \dots, Y_{n}\) 
+\end{proof}
+
+\begin{remark}{}
+    Sia \(\mathcal{C}\) una categoria (piccola) e \(\mathcal{A}\) additiva.
+    Allora \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è additiva.
+\end{remark}
+\begin{proof}{}
+    Dati \(F_{1}, \dots, F_{n} \in \mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\)
+    devo dimostrare che esiste il loro biprodotto.
+    Per ogni \(X \in \mathcal{C}\) esiste \(F{(X)}\) biprodotto di
+    \(F_{1}{(X)}, \dots, F_{n}{(X)}\) in \(\mathcal{A}\).
+
+    \(\forall f : X \to Y\) morfismo di \(C\) definisco \(F{(f)}\) come il
+    morfismo definito con la notazione matriciale da
+    \[
+      F{(X)} = \bigoplus_{i = 1}^{n}F_{i}{(X)} \overset{
+        \begin{pmatrix}
+            F_{1}{(f)} &  & 0 \\
+             & \dots & \\
+             0 &  & F_n{(X)}
+        \end{pmatrix}
+      }{\longrightarrow} F{(Y)} = \bigoplus_{i=1} ^{n} F_{i}{(Y)}
+    \]
+    Allora \(F: \mathcal{C} \to \mathcal{A}\) è un funtore e ci sono
+    trasformazioni naturali \(i_j : F_{j} \to F\) e \(p_{j} : F \to F_{j}\) le
+    cui componenti sono
+    \[
+      {(i_{j})}_X := i^{X}_j : F_{j}{(X)} \to F{(X)} \quad ; \quad {(p_j)}_X :=
+      p_{j}^{X} : F{(X)} \to F_{j}{(X)}
+    \]
+    Poiché \(\mathcal{C}\) è preadditiva, \(\mathtt{AddFun}{(\mathcal{C},\mathcal{A})}\) è additiva.
+    Poiché \(F_{1}, \dots, F_{n} \in \mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}\), allora \(F = \bigoplus_{i=1} ^{n}\) è additivo, infatti
+    \begin{align*}
+        F{(f + g)} &= \begin{pmatrix}
+          F_{1}{(f+g)} &  & 0 \\
+           & \dots &  \\
+           0 &  & F_n{(f + g)}
+           \end{pmatrix} = \\ &=\begin{pmatrix}
+          F_{1}{(f)}+F_{1}{(g)} &  & 0 \\
+           & \dots &  \\
+      0 &  & F_n{(f)} + F_n{(g)}
+      \end{pmatrix} = F{(f)} + F{(g)}
+    \end{align*}
+\end{proof}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) è preadditiva (piccola), allora \(\mathcal{A}\mathtt{-Mod} := \mathtt{AddFun}{(\mathcal{A}, \mathtt{Ab})}\) è additiva.
+\end{example}
+
+\begin{proposition}{}\label{prop:F_add}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore con \(\mathcal{A}\)
+    additiva, \(\mathcal{B}\) preadditiva, \(F\) che preserva i prodotti (o
+    coprodotti) finiti. Allora \(F\) è additivo
+\end{proposition}
+\begin{proof}[Dimostrazione (idea)]
+    Sia \(0 \in \mathcal{A}\) oggetto nullo, allora \(F{(0)}\) è termianle,
+    dunque \(F{(0)}\) è nullo (perché \(B\) è preadditiva), ossia \(F{(0)} = 0\).
+
+    Allora segue che \(F\) preserva i biprodotti. Infatti se \((X, \{i_j\}_{j = 1. .n}, \{p_{j}\}_{j= 1. .n})\)
+    è un biprodotto di \(X_{1}, \dots, X_{n}\) in \(\mathcal{A}\), allora \({(X, p_{1}, \dots, p_{n})}\) è un prodotto di \(X_{1}, \dots, X_{n}\) in \(\mathcal{A}\)
+    e dunque \(F{(X)}, \{F{(p_{j})}\}_{j = 1. .n} \) è un prodotto di 
+    \(F{(X_{1})}, \dots, F{(X_{n})}\) in \(\mathcal{B}\). Allora \(\exists !
+    i'_j : F{(X_{j})} \to F{(X)}\) tali che \({(F{(X)}, \{i_{j}'\}_{j = 1. .n}, \{F{(p_{j})}\}_{j = 1. .n})}\)
+    è un biprodotto di \(F{(X_{1})}, \dots, F{(X_{n})}\). Ma allora deve essere
+    \(i_{j}' = F{(i_{j})}\) poiché 
+    \begin{align*}
+        F{(p_k \circ i_j)} &= F{(p_k)} \circ F{(i_{j})} = F{(p_k)} \circ i'_j = \begin{cases}{}
+          1 & \text{ se } j = k \\
+          0 & \text{ se } j\neq k
+      \end{cases} \\
+            F{(0 : Y \to Z)} &= 0 : F{(Y)} \to F{(Z)}
+    \end{align*}
+    E allora se \(f, g : X \to Y\) in \(\mathcal{A}\), allora \(f + g\) è la
+    composizione
+    \[
+      X \overset{\begin{pmatrix}
+          1 \\
+          1
+      \end{pmatrix}}{\longrightarrow} X \oplus X \overset{\begin{pmatrix}
+          f & 0 \\
+          0 & g
+      \end{pmatrix}}{\longrightarrow} Y \oplus Y \overset{\begin{pmatrix}
+          1 & 1
+      \end{pmatrix}}{\longrightarrow} Y
+    \]
+    Allora \(F {(f + g)}\) è la composizione
+    \[
+      F{(X)} \overset{\begin{pmatrix}
+          1 \\
+          1
+      \end{pmatrix}}{\longrightarrow} F{(X)} \oplus F{(X)} \overset{\begin{pmatrix}
+          F{(f)} & 0 \\
+          0 & F{(g)}
+      \end{pmatrix}}{\longrightarrow} F{(Y)} \oplus F{(Y)} \overset{\begin{pmatrix}
+          1 & 1
+      \end{pmatrix}}{\longrightarrow} F{(Y)}
+    \]
+    che è \(F{(f)} + F{(g)}\) 
+\end{proof}
+
+\begin{corollary}{}
+    Se \(\mathcal{A}\) è additiva, allora \(\mathcal{A}\) ha un'unica struttura
+    preadditiva.
+\end{corollary}
+\begin{proof}{}
+    Considero \(\mathcal{B} := \mathcal{A}\) come categoria con una qualunque
+    struttura preadditiva e \(F = \mathrm{id}\). Allora per la
+    proposizione~\ref{prop:F_add}, \(F\) è additivo. Poiché \(F\) è pienamente
+    fedele, esiste un'unica struttura preadditiva su \(\mathcal{A}\) tale che \(F=\mathrm{id}\) è additivo, dunque la struttura di \(\mathcal{B}\) coincide con quella di \(\mathcal{A}\) 
+\end{proof}
+\begin{remark}{}
+    Sia \(\mathcal{A}\) un anello commutativo, \(\mathcal{A}\) una categoria
+    \(A\)-lineare e additiva. Allora \emph{non necessariamente} la struttura
+    \(A\)-lineare è unica. Data infatti una struttura \(A\)-lineare posso
+    cambiarla su \(\mathcal{A}{(X, Y)}\), \(\forall X, Y \in \mathcal{A}\). Se è
+    data da omomorfismi di anelli \(\mathcal{A} \overset{\varphi_{X,Y} }{\to } \mathrm{End}{(\mathcal{A}{(X, Y)})}\)
+    considero \(A \overset{\alpha}{\to } A \overset{\varphi_{X, Y} }{\to } \mathrm{End}{(\mathcal{A}{(X, Y)})}\) con \(\alpha\) omomorfismo di anelli non banale. % NOTE: non banale l'ho aggiunto io
+\end{remark}
+\begin{corollary}{}
+    Se \(\mathcal{A}\) e \(\mathcal{B}\) sono categorie equivalenti e \(\mathcal{A}\) è additiva, allora \(B\) è additiva.
+\end{corollary}
+\begin{proof}
+    So già che \(\mathcal{B}\) è preadditiva. Allora \(\exists F: \mathcal{A} \to \mathcal{B}\) equivalenza, additivo per la proposizione~\ref{prop:F_add}.
+    \(F\) è essenzialmente suriettivo, dunque \(\mathcal{B}\) è additivo.
+\end{proof}
+
+\section{Limiti e colimiti}
+
+L'obiettivo nostro è riuscire a generalizzare il concetto di \(\ker\) e \(\mathrm{coker}\)
+che era definito sui moduli. Vedremo che il giusto contesto sarà quello delle
+categorie \emph{abeliane}. (probabilmente) A scopo di definire tale struttura,
+introduciamo i seguenti nuovi concetti
+
+\begin{definition}{}
+    Sia \(\mathcal{C}\) una categoria, \(I : \mathcal{L} \to \mathcal{C}\) un
+    funtore (con \(\mathcal{L}\) piccola).
+
+    Un \emph{limite} di \(I\) è dato da \(X \in \mathcal{C}\) con una
+    trasformazione naturale \(\alpha : K_X \to I\) dove \(K_X : \mathcal{L} \to \mathcal{C}\) è il funtore 
+    costante di valore \(X\), ossia
+\(\begin{tikzcd}
+	\mathcal{L} & \mathcal{C}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "K_X", curve={height=-10pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "I"', curve={height=10pt}, from=1-1, to=1-2]
+	\arrow["\alpha", between={0.1}{0.9}, Rightarrow, from=0, to=1]
+\end{tikzcd}\).
+
+    In altri termini, \(\forall L \in \mathcal{L}\), \(\alpha_L ; X \to I{(L)}\) è tale che \(\forall l : L \to L'\) in \(\mathcal{L}\), il seguente diagramma commuta:
+\[\begin{tikzcd}
+	X \\
+	{I(L)} & {I(L')}
+	\arrow["{\alpha_L}"', from=1-1, to=2-1]
+	\arrow["{\alpha_{L'}}", from=1-1, to=2-2]
+	\arrow["{I(l)}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+
+    Inoltre, vale la seguente proprietà universale:
+    \[
+      \forall Y \in \mathcal{C}, \,\, \forall \beta : K_Y \to I \text{
+      trasformazione naturale, } \, \exists  ! \, f \in \mathcal{C}{(Y, X)} \text{ t.c. } \beta = \alpha \circ K_f
+    \]
+    dove \(K_f : K_Y \to K_X\) è la trasformazione naturale definita da \({(K_f)}_L := f \) per ogni \(L \in \mathcal{L}\). In altre parole \(\beta_L = \alpha_L \circ f\) per ogni \(L \in \mathcal{L}\), ossia il seguente diagramma commuta:
+\[\begin{tikzcd}
+	X \\
+	{I(L)} & {I(L')} \\
+	Y
+	\arrow["{\alpha_L}"', from=1-1, to=2-1]
+	\arrow["{\alpha_{L'}}", from=1-1, to=2-2]
+	\arrow["{I(l)}"', from=2-1, to=2-2]
+    \arrow["{\exists ! f}"', curve={height=-35pt}, dashed, from=3-1, to=1-1]
+	\arrow["{\beta_L}", from=3-1, to=2-1]
+	\arrow["{\beta_{L'}}"', from=3-1, to=2-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{example}[Prodotto]
+    Se \(\mathcal{L} = \Lambda\) insieme (categoria discreta), allora \(I\) è
+    dato dagli \(I{(\lambda)} =: X_\lambda \in \mathcal{C}\) (\(\lambda \in \Lambda\)), e un
+    limite di \(I\) è un prodotto degli \(I{(\lambda)}\) (\(\lambda \in \Lambda\)) perché un limite 
+    è dato da \(X \in \mathcal{C}\) con morfismi \(\alpha_\lambda : X \to X_\lambda\) (qualunque, perché \(l\) può essere solo \(1_\lambda\)) tali che \(\forall Y \in \mathcal{C}\) e \(\forall \beta_\lambda : Y \to X_\lambda\),
+    \[
+      \exists ! \, f \in \mathcal{C}{(Y, X)} : \beta_\lambda  = \alpha_\lambda
+      \circ f \quad \forall \lambda \in \Lambda
+      \quad 
+\begin{tikzcd}
+	X \\
+	{X_\lambda} & {X_\lambda} \\
+	Y
+	\arrow["{\alpha_\lambda}"', from=1-1, to=2-1]
+    \arrow["{\alpha_\lambda}", from=1-1, to=2-2]
+	\arrow["{1_\lambda}"', from=2-1, to=2-2]
+    \arrow["{\exists ! f}"', curve={height=-35pt}, dashed, from=3-1, to=1-1]
+	\arrow["{\beta_\lambda}", from=3-1, to=2-1]
+    \arrow["{\beta_\lambda}"', from=3-1, to=2-2]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{L} = {(\bullet \rightrightarrows \bullet )}\). Allora \(I\) è
+    dato da \( I{(\mathcal{L})} = Y \underset{g}{\overset{f}{\rightrightarrows}} Z\) in \(\mathcal{C}\). Un limite di \(I\) è dato da \(X \in \mathcal{C}\) 
+    con morfismi \(\alpha_{1} : X\to Y\) e \(\alpha_{2}: X \to Z\) tali che
+    \(\alpha_{2} = f \circ \alpha_{1} = g \circ \alpha_{1}\) o equivalentemente
+    \(h: X \to Y\) tale che \(f \circ h = g \circ h\).
+
+    La proprietà universale diventa:
+    \[
+      \forall X' \in \mathcal{C}, \, \forall h' : X' \to Y : f \circ h' = g \circ\,\, \exists ! \,k :
+  X' \to X : h' = h \circ k\]
+\[\text{ossia il diagramma }\begin{tikzcd}
+	X & Y & Z \\
+	X'
+	\arrow["h", from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-2, to=1-3]
+	\arrow["f", shift left, from=1-2, to=1-3]
+	\arrow["{\exists ! \,k}", dashed, from=2-1, to=1-1]
+	\arrow["{h'}"', from=2-1, to=1-2]
+\end{tikzcd} \text{ commuta}\]
+    tale \(h\) si dice \emph{equalizzatore} di \(f\) e \(g\).
+
+    In \(\mathtt{Set}\) si può prendere \(X := \{y \in Y : f{(y)} = g{(y)}\} \overset{i}{\hookrightarrow } Y\).
+    Analogamente in \(\mathtt{Grp}\), \(\mathtt{Rng}\) e \(A\mathtt{-Mod}\) e
+    sarà sottogruppo, sottoanello e sottomodulo come diagramma abbiamo
+\(\begin{tikzcd}
+	X & Y & Z \\
+	X'
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-2, to=1-3]
+	\arrow["f", shift left, from=1-2, to=1-3]
+	\arrow["{\exists ! \,k}", dashed, from=2-1, to=1-1]
+	\arrow["{h'}"', from=2-1, to=1-2]
+\end{tikzcd}\)
+\end{example}
+
+\begin{example}[Prodotto fibrato o \emph{pullback}]
+    Sia \(\mathcal{L} = {(\bullet \to  \bullet \leftarrow \bullet)}\). Allora \(I\) è dato
+    da\(\begin{tikzcd}[baseline=-4.5ex]
+	& {Y_2} \\
+	{Y_1} & Z
+	\arrow["{g_2}"', from=1-2, to=2-2]
+	\arrow["{g_1}", from=2-1, to=2-2]
+\end{tikzcd}\) in \(\mathcal{C}\). Un limite di \(I\) è \(X \in \mathcal{C}\)
+    con morfismi \(f_{1}: X \to Y_{1}\) e \(f_{2}: X \to Y_{2}\) (e \(h: X \to Z\)) tale che
+    \[
+      {(h = )} g_{1} \circ f_{1} = g_{2} \circ f_{2}
+    \]
+    e la proprietà universale diventa: dati \(f_{i}' : X' \to Y_{i}\) tali che
+    \(g_{1} \circ f_{1}' = g_{2} \circ f_{2}'\), allora \(\exists ! f : X' \to X\) tale che
+    \(f_{1}' = f_{1}\circ f\). Equivalentemente si ha che il seguente diagramma
+    commuta:
+    \[\begin{tikzcd}
+	{X'} \\
+	& X & {Y_2} \\
+	& {Y_1} & Z
+	\arrow["{\exists!\, f}"{description}, dashed, from=1-1, to=2-2]
+	\arrow["{f'_2}"', curve={height=-12pt}, from=1-1, to=2-3]
+	\arrow["{f'_1}"', curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["{f_2}"', from=2-2, to=2-3]
+	\arrow["{f_1}", from=2-2, to=3-2]
+	\arrow["{g_2}"', from=2-3, to=3-3]
+	\arrow["{g_1}", from=3-2, to=3-3]
+    \end{tikzcd}\]
+    In tal caso \({(X, f_{1}, f_{2})}\) si dice \emph{prodotto fibrato} di \(g_{1}, g_{2}\) (o \emph{pullback})
+\end{example}
+
+\begin{example}[Prodotto fibrato su \(\mathtt{Set}\)]
+    \(\mathtt{Set}\) (o altre categorie concrete) si può prendere \(X := \{y_{1}, y_{2} \in Y_{1} \times  Y_{2} : g_{1}{(y_{1})} = g_{2}{(y_{2})}\}\) 
+\end{example}
+
+\begin{example}{}
+    Se prendiamo \(\mathcal{L} = \varnothing\) e \(I\) il funtore vuoto, allora
+    la definizione di limite diventa (notare l'assenza di \(\alpha\) e \(\beta\) che sono funzioni vuote)
+    \[
+      X \in \mathcal{C} : \forall Y \in \mathcal{C} \exists ! f \in
+      \mathcal{C}{(Y, X)}
+    \]
+    ossia \(X\) è oggetto terminale
+\end{example}
+
+
+\begin{definition}{Colimite}
+    Un \emph{colimite} di \(I : \mathcal{L} \to \mathcal{C}\) è un limite di \(I^{op} : \mathcal{L}^{op} \to \mathcal{C}^{op}\), cioè è dato da \(X \in \mathcal{C}\) 
+    con una trasformazione naturale \(\alpha : I \to K_X\) tale che \(\forall Y
+    \in \mathcal{C}\), \(\forall \beta: I \to K_Y\) trasformazione naturale,
+    \(\exists ! f \in \mathcal{C}{(X, Y)}\) tale che \(\beta = K_f \circ
+    \alpha\) (cioè \(\beta_L = f \circ \alpha_L\) per ogni \(L \in \mathcal{L}\)
+    ).
+
+    Equivalentemente, \(L, L' \in \mathcal{L}, Y \in \mathcal{C}, \beta_L : I(L) \to Y\) e \(b_{L'} : I(L') \to  Y\), esiste unico \(f : X \to Y\) tale che il seguente diagramma commuta:
+\[\begin{tikzcd}
+	X \\
+	{I(L)} & {I(L')} \\
+	Y
+	\arrow["{\exists!f}", curve={height=35pt}, dashed, from=1-1, to=3-1]
+	\arrow["{\alpha_L}", from=2-1, to=1-1]
+	\arrow["{I(l)}"', from=2-1, to=2-2]
+	\arrow["{\beta_L}"', from=2-1, to=3-1]
+	\arrow["{\alpha_{L'}}"', from=2-2, to=1-1]
+	\arrow["{\beta_{L'}}", from=2-2, to=3-1]
+\end{tikzcd}\]
+\end{definition}
+\begin{example}{}
+    Se \(\mathcal{L} = {(\bullet \rightrightarrows \bullet)}\), allora un
+    colimite di \(I\) (dato da \(Y \underset{g}{\overset{f}{\rightrightarrows}} Z\)) è dato da \(h : Z \to X\) tale che \(h \circ f = h \circ g\) tale che \(\forall h' : Z \to X'\) tale che \(h' \circ f = h' \circ g\), \(\exists  !\, k : X \to X'\) tale che \(h'= k \circ h\). Equivalentemente il diagramma
+\begin{tikzcd}
+	Y & Z & X \\
+	&& {X'}
+	\arrow["f", shift left, from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-1, to=1-2]
+	\arrow["h", from=1-2, to=1-3]
+	\arrow["{h'}"', from=1-2, to=2-3]
+	\arrow["{\exists ! \, k}", dashed, from=1-3, to=2-3]
+\end{tikzcd}
+commuta e \(h\) si dice \emph{coequalizzatore} di \(f\) e \(g\).
+\end{example}
+\begin{eser}{Coprodotto fibrato o \emph{pushout}}
+    Definire il coprodotto fibrato, che è il duale del prodotto fibrato.
+    \tcblower
+    Sia \(\mathcal{L} = {(\bullet \leftarrow \bullet \to \bullet)}\) (duale di
+    quella del prodotto fibrato). Allora una colimite di \(I\) (la cui immagine in \(\mathcal{C}\)  è \(\begin{tikzcd}[baseline=-4.5ex]
+	& {Y_2} \\
+	{Y_1} & Z
+	\arrow["{g_2}"', from=2-2, to=1-2]
+	\arrow["{g_1}", from=2-2, to=2-1])
+\end{tikzcd}\) è dato da \(X \in \mathcal{C}\), \(f_{1} : Y_{1}\to X, f_{2} : Y_{2}\to X(, h : Z \to X)\) morfismi tali che \(f_{1} \circ
+g_{1} = f_{2} \circ g_{2} (= h)\). Inoltre la proprietà universale dice che \(\forall X' \in \mathcal{C}\), \(f_{1}' \in \mathcal{C}{(Y_{1}, X)}\) e \(f_{2}' \in \mathcal{C}{(Y_{2}, X)}\) tali che \(f_{1}' \circ g_{1} = f_{2}' \circ g_{2}\), allora \(\exists ! \, f : X \to Y\) tale che \(f \circ f_i = f_i'\) per \(i \in \{1, 2\}\).
+
+Equivalentemente, il seguente diagramma commuta:
+    \[\begin{tikzcd}
+	{X'} \\
+	& X & {Y_2} \\
+	& {Y_1} & Z
+	\arrow["{\exists!\, f}"{description}, dashed, from=2-2, to=1-1]
+	\arrow["{f'_2}"', curve={height=12pt}, from=2-3, to=1-1]
+	\arrow["{f'_1}", curve={height=-12pt}, from=3-2, to=1-1]
+	\arrow["{f_2}"', from=2-3, to=2-2]
+	\arrow["{f_1}", from=3-2, to=2-2]
+	\arrow["{g_2}"', from=3-3, to=2-3]
+	\arrow["{g_1}", from=3-3, to=3-2]
+    \end{tikzcd}\]
+    In tal caso \({(X, f_{1}, f_{2})}\) si dice \emph{prodotto cofibrato} di \(g_{1}, g_{2}\) (o \emph{pushout})
+\end{eser}
+
+\begin{example}{}
+    In \(\mathtt{Set}\) un coequalizzatore di \(Y \underset{g}{\overset{f}{\rightrightarrows}} Z\) è dato dalla
+    proiezione al quoziente \(Z \to Z/_\sim \) dove \(\sim \) è la più piccola
+    relazione di equivalenza su \(Z\) che contiene \(\{{(f{(y)}, g{(y)})} | y
+    \in Y\} \subseteq Z \times  Z  \)
+\end{example}
+\begin{note}[zione]
+    In alcuni casi invece di \emph{limiti}/\emph{colimiti} si può parlare di \emph{limiti inversi}/\emph{limiti diretti}.
+\end{note}
+
+\begin{example}{}
+    Similmente a prima, prendendo \(\mathcal{L} = \varnothing\) e \(I\) il
+    funtore vuoto, la definizione diventa
+    \[
+      X \in \mathcal{C} : \forall Y \in \mathcal{C}\quad \exists ! f \in \mathcal{C}{(X, Y)}
+    \]
+    ossia \(X\) è un oggetto iniziale.
+\end{example}
+
+\begin{proposition}[Unicità del limite]\label{prop:unic_limite}
+    Se \({(X, \alpha)}\) limite esiste, allora è unico a meno di isomorfismo. In
+    altre parole dati \({(X, \alpha)}\) e \({(Y, \beta)}\) limiti di \(I\),
+    allora \(\exists ! \, f \in C{(X', X)}\) tale che \(\beta = \alpha \circ
+    K_f\) e \(f \) è isomorfismo.
+
+    Viceversa, se \({(X, \alpha)}\) è un limite di \(I\) e \(f : Y \to X\) è
+    isomorfismo, allora anche \({(X', \alpha \circ K_f)}\) è un limite di \(I\) 
+\end{proposition}
+\begin{eser}
+    Dimostrare la proposizione~\ref{prop:unic_limite}
+\end{eser}
+
+\begin{note}[zione]
+    Un limite di \(I\) si indica con \(\lim I \) o \(\displaystyle\lim_{\longleftarrow} I \)
+    e analogamente un colimite di \(I\) si indica con \(\mathrm{colim} \, I\) o
+    \(\displaystyle\lim_{\longrightarrow} I\).
+
+    Un (co)equalizzatore d \(f, g ; Y \to Z\) si indica con \(\mathrm{(co)eq} {(f, g)}\)
+
+
+    Un prodotto fibrato di \(Y_{1} \overset{g_{1}}{\to } Z
+    \overset{g_{2}}{\leftarrow} Y_{2}\) si indica con \(Y_{1} \times_Z Y_{2}\).
+    Similmente per i coprodotti fibrati si usa \(Y_{1} \coprod_Z Y_{2}\) 
+\end{note}
+
+\begin{proposition}{}
+    Sia \(\gamma : I \to I'\) una trasformazione naturale tra funtori \(\mathcal{L} \to \mathcal{C}\) 
+    e sia \({(\lim I )}\) un limite di \(I\). Allora
+\begin{enumerate}[label = \arabic*.]
+    \item Se \({(\lim I ' , \alpha')}\) è un limite di \(I'\) allora \(\exists ! \lim \gamma \in \mathcal{C}{(\lim I, \lim I')}\) tale che \(\alpha' \circ K_{\lim \gamma } = \gamma \circ \alpha \),
+        inoltre se \(\gamma\) è isomorfismo, allora anche \(\lim \gamma\) è
+        isomorfismo.
+\[\begin{tikzcd}
+	{K_{ \lim I}} & {K_{ \lim I'} } \\
+	{I} & {I'}
+	\arrow["{K_{ \lim \gamma} }", from=1-1, to=1-2]
+	\arrow["{\alpha}", from=1-1, to=2-1]
+	\arrow["{\alpha'}", from=1-2, to=2-2]
+	\arrow["{\gamma}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+\item Se \(\gamma\) è isomorfismo, allora \({( \lim I, \gamma \circ \alpha)}\) è
+    un limite di \(I'\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Segue direttamente dal fatto che \({( \lim I', \alpha')}\) è un limite
+        di \(I'\) e \(\gamma \circ \alpha\) è una trasformazione naturale
+    \item Sia \(Y \in \mathcal{C}\) e \(\beta : K_Y \to I'\) trasformazione naturale. Allora \(\gamma^{-1} \circ \beta : K_Y \to I\) è trasformazione naturale e dunque \(\exists !\, f \in C{(Y,  \lim I)} \) tale che \(\gamma^{-1} \circ \beta = \alpha \circ K_f\), da cui \(\beta = \gamma \circ \alpha \circ K_f\) 
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}{Condizione sufficiente per l'esistenza dei limiti}\label{th:suff_coeq_prod}
+    Sia \(\mathcal{L}\) una categoria piccola. Allora esistono tutti i (co)limiti dei funtori \(\mathcal{L} \to \mathcal{C}\) se in \(\mathcal{C}\) esistono tutti i (co)equalizzatori e tutti i (co)prodotti indicizzati dagli oggetti e dai morfismi di \(\mathcal{L}\).
+
+    Più precisamente un (co)limite di \(I : \mathcal{L} \to \mathcal{C}\) è dato
+    da \({(X, \alpha)}\) con
+    \begin{align*}
+    X &= \mathrm{eq}{\left( \prod_{L \in \mathcal{L}} I{(L)} \underset{h}{\overset{g}{\rightrightarrows}} \prod_{{(l : L \to L')} \in \mathrm{Mor}{(\mathcal{L})}} I{(L')}) \right)} \\
+    \text{dove } p_l \circ g &:= p_{L'}, \quad p_l \circ h := I{(l)} \circ p_L \quad \forall {(l : L \to L')} \in \mathrm{Mor}{(\mathcal{L})}
+\end{align*}
+
+Indicando con \(i : X \to \prod_{L \in \mathcal{L}} I{(L)}\) il morfismo
+naturale, 
+\[
+  \forall L \in \mathcal{L} \quad \alpha_L := p_L \circ i : X \to I{(L)}
+\]
+\end{theorem}
+
+\begin{proof}[idea di dimostrazione]
+    \(\alpha\) è naturale perché \(g \circ i = h \circ i\). Più in generale,
+    dato \(j : Y \to \prod_{L \in \mathcal{L}} I{(L)}\) in \(\mathcal{C}\), sia
+    \(\beta_L := p_L \circ j : Y \to I{(L)}\). Allora \(\beta : K_Y \to I\) è
+    una trasformazione naturale se e solo se \(g \circ j = h \circ j\).
+    Osservando questo, una qualunque trasformazione naturale \(\beta : K_Y \to I\) è ottenuta da \(j : Y \to \prod_{L \in \mathcal{L}} I {(L)}\) con \(g \circ j = h \circ j\) ponendo \(\beta_L = p_L \circ j\).
+
+    Per definizione di equalizzatore, \(\exists ! \, f \in \mathcal{C}{(Y, X)}\) tale che \(j = i \circ f\) che è equivalente a \(\beta_L = \alpha_L \circ f\) e \(\beta = \alpha \circ K_f\).
+
+    \(\beta\) è naturale se e solo se \(\forall l : L \to L'\) morfismo di
+    \(\mathcal{L}\), \(I{(l)} \circ \beta_L = \beta_{L'}\) cioè \(I{(l)} \circ p_L \circ j = p_{L'}  \circ j \iff 
+    p_l \circ h \circ j = p_l \circ g \circ j \overset{\text{ propr. univ.
+    prodotto}}{\iff} h \circ j = g \circ j \)
+\end{proof}
+
+\begin{definition}{}
+    Sia \(\mathcal{C}\) una categoria.
+
+    \(\mathcal{C}\) \emph{ha i (co)limiti di forma \(\mathcal{L}\)} se esistono i
+    (co)limiti di tutti i funtori \(\mathcal{L} \to \mathcal{C}\).
+
+    \(\mathcal{C}\) è \emph{(co)completa} se ha i \emph{(co)limiti} di forma \(\mathcal{L}\) per ogni categoria piccola \(\mathcal{L}\).
+
+    \(\mathcal{C}\) è \emph{finitamente (co)completa} se ho i (co)limiti di
+    forma \(\mathcal{L}\) per ogni categoria finita \(\mathcal{L}\) (ossia se \(\mathrm{Mor} \mathcal{L}\) è finito)
+\end{definition}
+
+\begin{corollary}{}
+    \(\mathcal{C}\) categoria è (finitamente) (co)completa se e solo se ha (co)equalizzatori e
+    (co)prodotti (finiti).
+\end{corollary}
+
+\begin{example}{}
+    \(\mathtt{Set}\) è completa e cocompleta (anche \(\mathtt{Grp}\), \(\mathtt{Rng}\) e \(A\mathtt{-Mod}\))
+\end{example}
+
+\begin{definition}{}
+    Sia \(F : \mathcal{C} \to \mathcal{D}\) funtore. \(F\) preserva un
+    (co)limite \({(X, \alpha)}\) di \(I : \mathcal{L} \to \mathcal{C}\) se \({(F{(X)}, F \circ \alpha\footnote{Composizione orizzontale: \(\alpha: K_X \to I \implies F \circ \alpha : F \circ K_X = K_{F{(X)}} \to F \circ I \)})}\) è un (co)limite di \(F \circ I : \mathcal{L} \to \mathcal{D}\)
+\end{definition}
+\begin{remark}{}
+    Se \(F\) preserva un limite di \(I\), allora \(F\) preserva tutti i
+    limiti di \(I\).
+\end{remark}
+
+\(F\) preserva i (co)limiti (finiti) se preserva i (co)limiti di forma \(\mathcal{L}\) per ogni \(\mathcal{L}\) categoria piccola (finita)
+
+\begin{corollary}{}
+    Sia \(\mathcal{C}\) una categoria (finitamente) (co)completa.
+    Allora \(F\) preserva i (co)limiti (finiti) se e solo se \(F\) preserva i
+    (co)prodotti (finiti) e i (co)equalizzatori.
+\end{corollary}
+
+\begin{example}{}
+    I funtori dimenticanti \(\mathtt{Grp} , \mathtt{Rng} , A\mathtt{-Mod} \to \mathtt{Set}\) preservano i limiti ma non i colimiti.
+\end{example}
+
+\begin{example}{}
+    \(\forall X \in \mathcal{C}\) i funtori \(\mathcal{C}{(X, -)} : \mathcal{C} \to \mathtt{Set}\) e \(\mathcal{C}{(-, X)} : C^{op} \to \mathtt{Set}\) preservano i limiti, ma in generale non i colimiti.
+
+    Analogamente se \(\mathcal{A}\) è una categoria preadditiva, allora \(\forall X \in \mathcal{A}\) i funtori \\ \(\mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab}\) e \(\mathcal{A}{(-, X)}
+    : \mathcal{A}^{op} \to \mathtt{Ab}\) preservano i limiti, ma in generale
+    non i colimiti.
+
+\begin{proof}[controesempio colimiti]
+    Se \(\mathcal{C} = \mathtt{Set}\) e \(\# X \ge 2\), allora \(\mathcal{C}{(X, -)}\) non preserva i coprodotti. % TODO: eser
+\end{proof}
+
+\begin{proof}[\(\mathcal{C}{(X, -)}\) preserva i limiti]
+    Infatti sia \(I : \mathcal{L} \to \mathcal{C}\) funtore con limite \({(Y, \alpha)}\). Allora abbiamo che \(\forall L \in \mathcal{L}\) \(\alpha_L \in \mathcal{C}{(Y, I{(L)})}\) tale che \(\forall l : L \to L'\) morfismo di \(\mathcal{L}\), \(I{(l)} \circ \alpha_L = \alpha_L'\). Ma allora
+    \[
+      {(\alpha_L)}_{L \in \mathcal{L}} \in \mathrm{eq}{\left( \prod_{L \in \mathcal{L}} C{(Y, I{(L)})} \underset{h}{\overset{g}{\rightrightarrows}} \prod_{{(l : L \to L')} \in \mathrm{Mor}{(\mathcal{L})}} C{(Y, I{(L')})}) \right)}
+    \]
+    % TODO : aggiustare e finire
+\end{proof}
+\end{example}
+
+\begin{remark}{}
+    Sia \(F, F' : \mathcal{C} \to \mathcal{D}\) con \(F \cong F'\). Se \(F\)
+    preserva un limite \({(X, \alpha)}\) di \(I : \mathcal{L} \to
+    \mathcal{C}\), allora anche \(F'\) lo preserva. 
+
+    Infatti \({(F{(X)}, F \circ \alpha)}\) è un limite di \(F \circ I\) e \(\gamma : F \to F'\) è
+    isomorfismo, dunque \(\gamma \circ I : F \circ I \to  F' \circ I\) è
+    isomorfismo, dunque \({(F{(X)}, {(\gamma \circ I)} \circ {(F \circ \alpha)})}\) è un limite di \(F' \circ I\).
+    Segue dunque che \({(F'{(X)}, {(\gamma \circ I)} \circ {(F \circ \alpha)} \circ K_{\gamma_X^{-1}} = F' \circ \alpha)}\) dove l'ultima uguaglianza è perché \(\alpha\) è naturale.
+\end{remark}
+
+\begin{remark}{}
+    Vedremo che ogni equivalenza di categorie preserva sia i limiti che i
+    colimiti.
+
+    Sgue che se \(\mathcal{C}\) e \(\mathcal{D}\) sono equivalenti e \(\mathcal{C}\) ha i limiti di forma \(\mathcal{L}\), lo stesso vale per \(\mathcal{D}\). Infatti sia \(I : \mathcal{L} \to \mathcal{D}\) funtore e sia \(F : \mathcal{C} \to \mathcal{D}\) equivalenza con quasi-inverso \(G\). 
+    Allora \(G \circ I : \mathcal{L} \to \mathcal{C}\) ha limite \({(X, \alpha)}\) e dunque anche \(F \circ G \circ I \cong I\) ha limite 
+\end{remark}
+
+Siano \(\mathcal{C}\) e \(\mathcal{D}\) categorie (con \(\mathcal{C}\) piccola)
+e sia \(X \in \mathcal{C}\). Allora c'è un funtore di valutazione in \(X\) 
+\begin{align*}
+    \mathrm{ev}_X: \mathtt{Fun}{(\mathcal{C}, \mathcal{D})} &\longrightarrow
+    \mathcal{D} \\
+    F &\longmapsto \mathrm{ev}_X(F) = F{(X)} \\
+    {(\alpha : F \to G)} &\longmapsto {(\alpha_X : F{(X)} \to G{(X)})} \\
+\end{align*}
+E \(\forall f : X \to Y\), \(\mathrm{ev}\) induce una trasformazione naturale
+\(\mathrm{ev}_f : \mathrm{ev}_X \to \mathrm{ev}_Y\) definita da 
+\({(\mathrm{ev_f})}_X : \mathrm{ev}_X{(F)} = F{(X)} \overset{F{(f)}}{\to } \mathrm{ev}_Y{(F)} = F{(Y)}\) 
+
+\begin{proposition}{}
+    Se in \(\mathcal{D}\) esistono i limiti di forma \(\mathcal{L}\), allora
+    esistono anche in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\) e si
+    calcolano ``puntualmente'', cioè, dato \(I: \mathcal{L} \to \mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\)
+    si ha che 
+    \[
+      {( \lim I)}{(X)} =  \lim {(\mathrm{ev}_X \circ I)} % NOTE: canonaco qui
+                                            % aveva usato := invece di =
+    \]
+    e \(\forall f : X \to Y\) morfismo di \(\mathcal{C}\) 
+    \[
+      {( \lim I)}{(f)} =  \lim {(\mathrm{ev}_f \circ I)}
+    \]
+    con trasformazioni naturali \(\alpha{(X)} : K_{ \lim {(\mathrm{ev}_X \circ I)}} \to \mathrm{ev}_X \circ I\) e \(\forall L \in \mathcal{L}\) \(\alpha{(X)}_L :  \lim {(\mathrm{ev}_X \circ I)} \to {(\mathrm{ev}_X \circ I)}{(L)} = I{(L)}{(X)}\).
+
+    La trasformazione naturale \(\alpha: K_{ \lim I} \to I\) è definita \(\forall L \in \mathcal{L}\) da 
+    \[
+      a_L :  \lim I \to I{(L)} \text{ morfismo in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{D})}\) }
+    \]
+    cioè una trasformazione naturale definita \(\forall X \in \mathcal{C}\) da
+    \[
+        \underbrace{{(\alpha_L)}_X}_{\alpha{(X)}_L} :  \underbrace{{( \lim I)}{(X)}}_{ \lim {(\mathrm{ev}_X \circ I)}} \to I{(L)}{(X)}
+    \]
+\end{proposition}
+
+\subsection{Limiti in categorie preadditivive}
+
+\begin{definition}{(co)Nucleo}
+    Sia \(\mathcal{A}\) una categoria preadditiva. Un (co)nucleo di \(f: X \to Y\) morfismo di \(\mathcal{A}\) è un (co)equalizzatore di \(X \underset{0}{\overset{f}{\rightrightarrows}} Y\)
+\end{definition}
+\begin{remark}{}
+    Il (co)equalizzzatore di \(X \underset{g}{\overset{f}{\rightrightarrows}} Y \) è (co)nucleo di \(f-g\) 
+\end{remark}
+Un nucleo di \(f : X \to Y\) è dunque \( i : K \to X\) tale che \(f \circ i = 0\) 
+e \(\forall i', K' \to X\) tale che \(f \circ i' = 0\), allora 
+\(\exists ! \, g : K' \to K\) tale che \(i' = i \circ g\). Equivalentemente il
+seguente diagramma commuta:
+
+\[\begin{tikzcd}
+	K & {i'} & Y \\
+	& {K'}
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\exists! \,g}", dashed, from=2-2, to=1-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=1-3]
+\end{tikzcd}\]
+
+Un conucleo di \(f\) è \(p : Y \to C\) tale che \(p \circ f = 0\) e \(\forall p' : Y\to C'\) tale che
+\(p' \circ f = 0\) allora \(\exists ! \,h : C \to C' \) tale che \(p ' = h \circ p\).
+Equivalentemente il seguente diagramma commuta:
+
+\[\begin{tikzcd}
+	X & Y & C \\
+	& {K'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["p", from=1-2, to=1-3]
+	\arrow["{p'}"', from=1-2, to=2-2]
+	\arrow["{\exists!\,h}", dashed, from=1-3, to=2-2]
+\end{tikzcd}\]
+
+\begin{example}{}
+    In \(A\mathtt{-Mod}\) un nucleo di \(f: M \to N\) è dato dall'inclusione \(\mathrm{Ker}f \hookrightarrow M\).
+
+    Un conucleo di \(f\) è dato invece dalla proiezione a quoziente 
+    \[
+      \pi : N \to \mathrm{coker}f := \frac{N}{\mathrm{Im}f}
+    \]
+    effettivamente 
+\[\begin{tikzcd}
+	M & N & \frac{N}{\mathrm{Im}f} \\
+	& {P}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=1-3]
+	\arrow["{g}"', from=1-2, to=2-2]
+	\arrow["{\exists!\,g'}", dashed, from=1-3, to=2-2]
+\end{tikzcd}\]
+    rappresenta il teorema di omomorfismo per moduli.
+\end{example}
+\begin{remark}{}
+    In quanto limiti, nuclei e conuclei sono unici a meno di unico isomorfismo
+\end{remark}
+
+\begin{definition}{Categoria preabeliana}
+    Una categoria \emph{preabeliana} e una categoria additiva in cui esistono
+    nuclei e conuclei.
+\end{definition}
+\begin{remark}{}
+    Una categoria è preabeliana se e solo se è preadditiva e finitamente
+    completa e cocompleta.
+\end{remark}
+\begin{remark}{}
+    Se \(\mathcal{A}\) è preabeliana, allora \(\mathcal{A}^{op}\) è preabeliana.
+    \(\mathcal{A}' \subseteq \mathcal{A}\) sottocategoria piena è preabeliana se
+    è chiusa per prodotti e coprodotti finiti, per nuclei e per conuclei (cioè
+    \(f: X \to Y\) in \(\mathcal{A}'\) \(\implies \) \(\exists i: K \to X\)
+    nucleo di \(f\) in \(\mathcal{A}\) con \(K \in \mathcal{A}'\)).
+
+    Ad esempio, se \(\mathcal{A} = A\mathtt{-Mod}\) e \(\mathcal{A}'\) con
+    oggetti i moduli noeheriani/artiniani/coerenti, allora \(\mathcal{A}'\) è
+    preabeliana.
+\end{remark}
+
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) una sottocategoria piena di \(A\mathtt{-Mod}\) con
+    oggetti i moduli \emph{finitamente generati}/\emph{finitamente presentati}
+    (è sempre additiva).
+
+    Allora \(\mathcal{A}\) è preabeliana se e solo se \(A\) è
+    \emph{noetheriano}/\emph{coerente}.
+
+    Infatti \(M\) \(A\)-modulo è \emph{f.g.}/\emph{f.p.} se e solo se \(M\) è \emph{noeth.}/\emph{coerente}.
+    Viceversa \(\mathcal{A}\) è in ogni caso chiusa per conuclei in \(A\mathtt{-Mod}\), ma in generale non per nuclei. Sia \(A\) non \emph{noeth.}/\emph{coerente}. Allora in entrambi i casi \(\exists f : M \to N\) in \(\mathcal{A}\) tale che \(\mathrm{Ker}f\) non è f.g.
+    Infatti nel primo caso si può prendere \(f = \pi : A \to A/\mathfrak{I}\) con \(\mathfrak{I}\)
+    ideale sinistro non f.g., mentre nel secondo caso \(\exists  \mathfrak{I} \subseteq A \) ideale sinistro f.f.g. non f.p. se prendo \(f : A^{n} \to A\) con \(\mathrm{im}f = \mathfrak{I}\).
+
+    Per assurdo sia ora \(g : K \to M\) un nucleo di \(f\) in \(\mathcal{A}\)
+    (dunque \(f \circ g = 0\)). In ogni caso \(K\) è f.g. e dunque \(\mathrm{im}g\) è f.g. 
+    \(\implies  x \in \mathrm{Ker}f \sminus \mathrm{im}g\).
+
+    Sia \(h : A \to M\), \(a \mapsto ax\) in \(\mathcal{A}\) tale che \(f \circ h = 0\), ma \(\not
+    \exists  h' : A \to K\) tale che \(h = g \circ h'\), e il che contraddice la
+    proprietà universale.
+\end{example}
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità, \(\mathcal{A} \subseteq A\mathtt{-Mod} \)
+    sottocategoria piena con oggetti i moduli senza torsione, ossia tali che
+    \[
+      T{(M)} := \{x \in M : \mathrm{Ann}{(x)} \neq 0\} = 0 \quad (T{(M)} \subseteq M \text{ sottomodulo})
+    \]
+    Allora \(\mathcal{A}\) è chiusa per nuclei (\(M \in \mathcal{A}, M' \subseteq M \) sottomodulo, allora \(M' \in \mathcal{A}\)),
+    ma non è chiusa per conuclei se \(A\) non è un campo (esiste infatti \(0 \neq I \neq A\)) ideale
+    \(I, A \in \mathcal{A}\) ma \(\mathrm{coker}(I \hookrightarrow A) = A/I
+    \not\in A\).
+
+    \(\mathcal{A}\) è comunque preabeliana, infatti \(\forall f : M \to N\) in
+    \(\mathcal{A}\), un conucleo di \(f\) in \(\mathcal{A}\) è 
+    \[
+      N \overset{\pi}{\to } \mathrm{coker}f \overset{\pi'}{\to } C := \frac{\mathrm{coker}f}{T{(\mathrm{coker}f)}}
+    \]
+    Allora \(\pi' \circ \pi \circ f = 0\) evidentemente. Inoltre vale la
+    proprietà universale, infatti
+\[\begin{tikzcd}
+	M & N & {\mathrm{coker}f} & C \\
+	& {P\in\mathcal{A}}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=1-3]
+	\arrow["g"', from=1-2, to=2-2]
+	\arrow["{\pi'}", from=1-3, to=1-4]
+	\arrow["{\exists!\,g'}"', dashed, from=1-3, to=2-2]
+	\arrow["{\exists!\,g''}", curve={height=-12pt}, dotted, from=1-4, to=2-2]
+\end{tikzcd}\]
+    dove la freccia tratteggiata è dovuta alla proprietà universale del conucleo
+    in \(A\mathtt{-Mod}\) mentre quella puntinata (ossia quella voluta in \(\mathcal{A}\)) è dovuta al fatto, più generale, che dato \(g' : L \to P\) in \(A\mathtt{-Mod}\) con \(P \in \mathcal{A}\) e \(\pi' : L \to L/T{(L)}\) 
+    \[
+      \exists ! \,g'' : \frac{L}{T{(L)}} \to P \text{ t.c. } g' = g'' \circ \pi'
+    \]
+    poiché \(g'{(T{(L)})} \subseteq T{(P)} = 0\) e dunque si può applicare il
+    teorema di omomorfismo.
+\end{example}
+
+\begin{note}{zione}
+    In una categoria preabeliana, \(\forall f : X \to Y\), indico con 
+    \begin{align*}
+      &\mathrm{ker}f : \mathrm{Ker} f \to X \text{ un nucleo di \(f\)} \\
+      &\mathrm{coker}f : Y \to \mathrm{Coker}f \text{ un conucleo di \(f\)}
+    \end{align*}
+\end{note}
+
+\begin{proposition}{}
+    Sia \(C\) una categoria piccola, \(\mathcal{A}\) una categoria preabeliana,
+    allora \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è preabeliana. Se \(\mathcal{C}\) è preadditiva, allora \(\mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}\) (che è additiva) è chiusa per conuclei e nuclei in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) e quindi è preabeliana.
+\end{proposition}
+\begin{proof}{}
+    Sia \(\alpha : F \to G\) un morfismo in \(\mathtt{AddFun}{(\mathcal{C}, \mathcal{A})}\). Devo dimostrare che \(\mathrm{Ker}\alpha\), \(\mathrm{Coker}\alpha\) (in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\)) sono additivi. Effettivamente
+    \[
+      \forall X \in \mathcal{C} \quad \mathrm{Ker}(\alpha) {(X)} = \mathrm{Ker}{(\alpha_X)}
+    \]
+    e \(\forall f : X \to Y\) morfismo di \(C'\), \(\mathrm{Ker}{(\alpha)}{(f)}\) è l'unico morfismo 
+    \(f'\) tale che il seguente diagramma commuta:
+\[\begin{tikzcd}
+	{\mathrm{Ker}(\alpha_X)} & {F(X)} & {G(X)} \\
+	{\mathrm{Ker}(\alpha_X)} & {F(Y)} & {G(Y)}
+	\arrow["{\mathrm{ker}(\alpha_X)}", from=1-1, to=1-2]
+	\arrow["{f'}", dashed, from=1-1, to=2-1]
+	\arrow["{\alpha_X}", from=1-2, to=1-3]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+	\arrow["{G(f)}", from=1-3, to=2-3]
+	\arrow["{\mathrm{ker}(\alpha_Y)}"', from=2-1, to=2-2]
+	\arrow["{\alpha_Y}"', from=2-2, to=2-3]
+\end{tikzcd}\]
+    Analogamente dato \(g: X \to Y\), allora \(\mathrm{Ker}{(\alpha)}{(g)} = g'\) tale che l'analogo diagramma commuta. Dunque abbiamo
+    \[
+      F{(f + g)} = F{(f)} + F{(g)} \,\,,\,\, G{(f + g)} = G{(f)} + G{(g)} \implies
+      f' + g' = {(f + g)}'
+    \]
+\end{proof}
+
+\begin{proposition}{}\label{prop:equal_mono}
+    Sia \(\mathcal{C}\) una categoria. Allora ogni
+    \emph{equalizzatore}/\emph{coequalizzatore} in \(\mathcal{C}\) è un
+    \emph{mono}/\emph{epi}morfismo in \(\mathcal{C}\).
+\end{proposition}
+\begin{proof}{}
+    Sia \(f : X \to Y\) un equalizzatore di \(Y \underset{h}{\overset{g}{\rightrightarrows}} Z\). Dati \(l, l' : W \to X\) tali che \(f \circ l = f \circ l'\). Devo dimostrare che \(l = l'\). 
+    Effettivamente
+    \[
+      g \circ {(f \circ l)} = h \circ {(f \circ l)} \implies \exists ! \, \overline{l} : W \to X \text{ t.c. } f \circ l = f \circ \overline{l} \implies l = \overline{l} = l'
+    \]
+\[\begin{tikzcd}
+	X & Y & Z \\
+	W
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g"', shift right, from=1-2, to=1-3]
+	\arrow["h", shift left, from=1-2, to=1-3]
+	\arrow["{\exists!\,\overline{l}}", dashed, from=2-1, to=1-1]
+	\arrow["{f\circ l}"', from=2-1, to=1-2]
+\end{tikzcd}\]
+    in particolare in una categoria preadditiva i \textbf{nuclei} sono \textbf{mono} e i \textbf{conuclei} sono \textbf{epi}.
+\end{proof}
+\begin{remark}{}
+    In \(\mathcal{A}\) categoria preadditiva, \(f : X \to Y\) è mono \(\iff\)
+    dato \(g : X' \to X\) t.c. \(f \circ g = 0\), allora \(g = 0\). Analogamente
+    per gli epimorfismi.
+\end{remark}
+
+\begin{definition}{Categoria abeliana}
+    Una categoria \emph{abeliana} è una categoria preabeliana in cui ogni
+    monomorfismo è un nucleo e ogni epimorfismo è un conucleo
+\end{definition}
+\begin{remark}{}
+    Per la proposizione~\ref{prop:equal_mono} il viceversa vale sempre.
+\end{remark}
+
+\begin{example}{}
+    \(A\mathtt{-Modl}\) è abeliana \(\forall A\) anello.
+
+    Infatti se \(f : M \to N\) in \(A\mathtt{-Mod}\) è \emph{mono}/\emph{epi} se
+    e solo se \(f\) è \emph{iniettivo}/\emph{suriettivo}.
+
+    Se \(f\) è iniettivo, allora \(\mathrm{im}f \cong M\) e l'inclusione \(\mathrm{im}f \overset{i}{\hookrightarrow } N\) è un nucleo di \(\mathrm{coker}f : N \to \mathrm{Coker}f\). 
+    Dunque anche \(f\) è un nucleo di \(\mathrm{coker}f\) poiché \(f = i \circ f'\) con \(f' : M \to \mathrm{im}f\) isomorfismo.
+
+    Se \(f\) è suriettivo, per il primo teorema di isomorfismo \(N \cong M / \mathrm{Ker}f\) e sia 
+    \(\overline{f}\) l'isomorfismo. Allora
+\[\begin{tikzcd}
+	{\mathrm{Ker}f} & M & N \\
+	&& {\mathrm{Coker}(j)}
+	\arrow["{j:=\mathrm{ker}f}", from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}j}"', from=1-2, to=2-3]
+	\arrow["{\exists!\,\overline{f}}"', dashed, from=2-3, to=1-3]
+\end{tikzcd}\]
+    commuta e dunque \(f\) è un conucleo di \(j\).
+\end{example}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è abeliana, anche \(\mathcal{A}^{op}\) è abeliana.
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria preadditiva con oggetto nullo \(0\).
+    Allora un morfismo \(f : X \to Y\) di \(\mathcal{A}\) è
+    \emph{mono}/\emph{epi}morfismo \(\iff\) \emph{\(\mathrm{Ker}f =
+    0\)}/\emph{\(\mathrm{Coker}f = 0\)}
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Devo dimostrare che \(0 \overset{0}{\hookrightarrow }X \) è un nucleo di \(f\).
+        Se \(f \circ 0 = 0\), dato \(g : Z \to X\) tale che \(f \circ g = 0\),
+        allora \(g = 0\) (perché \(f\) è mono) e dunque fattorizza in modo unico
+        attraverso \(0\).
+    \item[\(\impliedby \)] Se \(\mathrm{Ker}f = 0\) dato \(g : Z \to X\) tale
+        che \(f \circ g = 0\), allora per definizione di nucleo, \(g\) fattorizza in modo unico attraverso \(0 \to X\), dunque \(g = 0\) 
+\end{itemize}
+\end{proof}
+
+\begin{definition}{Immagine e coimmagine}
+    Un'\emph{immagine} di \(f : X \to Y\) in una categoria preabeliana è un
+    nucleo di un conucleo di \(f\). Una \emph{coimmagine} di \(f\) è un conucleo
+    di un nucleo di \(f\). Diagrammaticamente abbiamo
+\[\begin{tikzcd}
+	\mathrm{Ker}f & X & Y & \mathrm{Coker}f \\
+	& \mathrm{Coim}f & \mathrm{Im}f
+	\arrow["{\mathrm{ker}f}", from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}", from=1-3, to=1-4]
+\arrow["{\mathrm{coker}{(\mathrm{ker}f)} = \mathrm{coim}f}"', from=1-2, to=2-2]
+\arrow["{\mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)}}"', from=2-3, to=1-3]
+\end{tikzcd}\]
+\end{definition}
+\begin{note}[zione]
+    Se \(f\) è nucleo di \(g\) si scrive \(f = \mathrm{ker}g\) 
+\end{note}
+\begin{proposition}{}
+    Sia \(f\) un (co)nucleo in una categoria preabeliana. Allora \[f = (co)im(f)\]
+\end{proposition}
+
+\begin{proof}{}
+    Sia \(f :X \implies Y\) un nucleo di \(g : Y \to Z\). Voglio dimostrare che
+    il seguente diagramma commuta:
+    
+\[\begin{tikzcd}
+	X & Y & Z \\
+	& {Y'} & {\mathrm{Coker}f}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}"{description}, from=1-2, to=2-3]
+	\arrow["{\exists!\,h'}", dashed, from=2-2, to=1-1]
+	\arrow["h", from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=2-3]
+	\arrow["{\exists!\,g'}"', dashed, from=2-3, to=1-3]
+\end{tikzcd}\]
+    Ossia \(f\) è nucleo di \(\mathrm{coker}f\). È sempre vero che \(\mathrm{coker}f \circ f = 0\). Dato \(h : Y' \to Y\) tale che \(\mathrm{coker}f \circ h = 0\), devo dire che \(\exists !\, h' : Y'\to X\) tale che \(h = f \circ h'\).
+
+    % TODO : finire
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(f\) \emph{mono}/\emph{epi} in una categoria abeliana. Allora \(f = \text{(co)}\mathrm{im}{(f)}\).
+\end{corollary}
+
+
+\begin{proposition}{}
+    Sia \(\mathcal{A}\) una categoria abeliana. Sia \(\mathcal{A}' \subseteq
+    \mathcal{A}\) una sottocategoria piena chiusa per (co)prodotti finiti,
+    nuclei e conuclei. Allora \(\mathcal{A}'\) è abeliana.
+\end{proposition}
+\begin{proof}{}
+    \(\mathcal{A}'\) è già preabeliana.
+
+    \(f : X \to Y\) mono di \(\mathcal{A}'\) \(\iff\) \(\mathrm{Ker}f = 0\) in
+    \(\mathcal{A}'\) e quindi in \(\mathcal{A}\), ossia \(f\) è mono in \(\mathcal{A}\), ma allora \(f = \mathrm{im}f \) in \(\mathcal{A}\) e quindi in \(\mathcal{A}'\) 
+\end{proof}
+
+\begin{example}{}
+    In particolare le sottocategoria di \(A\mathtt{-Mod}\) con oggetti i moduli
+    \emph{noeth.}/\emph{artin.}/\emph{coerenti} sono abeliane
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{C}\) piccola, \(\mathcal{A}\) categoria abeliana. Allora \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è abeliana.
+    \begin{proof}{}
+        Sappiamo già che \(\mathtt{Fun}{(\mathcal{C},\mathcal{A})}\) è
+        preabeliana.
+
+        ora \(\alpha : F \to G\) è mono in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) \(\iff\) \(\mathrm{Ker}\alpha = 0 \iff \mathrm{Ker}{(\alpha_X)} = 0\) per ogni \(X \in \mathcal{C}\), cioè \(\alpha_X\) mono in \(\mathcal{A}\) abeliana e dunque \(\alpha_X = \mathrm{im}{(\alpha_X)} \implies \alpha = \mathrm{im}\alpha\).
+    \end{proof}
+
+    Se \(\mathcal{C}\) è preadditiva, allora \(\mathtt{AddFun}{(\mathcal{C},\mathcal{A})}\) è chiusa per 
+    nuclei e conuclei in \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) e dunque
+    \(\mathtt{AddFun}{(\mathcal{C},\mathcal{A})}\) è abeliana.
+    In particolare \(\mathcal{A}\mathtt{-Mod} = \mathtt{AddFun}{(\mathcal{A}, \mathtt{Ab})}\) è abeliana \(\forall \mathcal{A}\) preadditiva piccola.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(f: X \to Y\) monomorfismo e epimorfismo in una categoria abeliana.
+    Allora \(f \) è isomorfismo.
+\end{proposition}
+\begin{proof}{}
+    \(f\) è mono, dunque \(f = \mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)}\).
+    Poiché \(f\) è epi, \(\mathrm{Coker}f = 0\), dunque un'immagine di \(f\) è
+    \(1_Y\), e quindi \(f\) è isomorfismo.
+\end{proof}
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) sottocategoria piena di \(A\mathtt{-Mod}\) (\(A\)
+    dominio d'integrità non campo) dei moduli senza torsione. Allora \(\mathcal{A}\) non è abeliana.
+
+    \begin{proof}{}
+        Sia \(0 \neq I \neq A\) ideale. Allora l'inclusione \(i : I \to A\) è
+        mono (\(\mathrm{Ker}i = 0\) ), epi (\(\mathrm{Coker}i = {(A/I)}/{(T{(A /I)})} = 0\) ) ma non è isomorfismo.
+    \end{proof}
+\end{example}
+
+\begin{proposition}{}
+    Se \(\mathcal{A}\) e \(\mathcal{B}\) sono due categorie equivalenti, allora
+    \(\mathcal{A}\) è abeliana se e solo se \(\mathcal{B}\) è abeliana.
+\end{proposition}
+\begin{proof}{}
+    So già che \(\mathcal{B}\) è preabeliana. Per dualità basta dimostrare che
+    se \(f : X \to Y\) è monomorfismo di \(\mathcal{B}\), allora è nucleo.
+
+    Sia \(F : \mathcal{B} \to \mathcal{A}\) un'equivalenza (quindi preserva i
+    (co)nuclei). Allora se \(f\) è mono \(\mathrm{Ker}f = 0\), dunque \(\mathrm{Ker}{(F{(f)})} = F{(0)} = 0\) è dunque \(F{(f)}\) è mono.
+
+    Inoltre \(F{(f)} = \mathrm{im}{(F{(f)})} = \mathrm{Ker}{(\mathrm{coker}{(F{(f)})})}\). Ma \(\mathrm{im}{(F{(f)})} = F{(\mathrm{im}{(f)})}\). A meno di isomorfismo, \(F{(f)} = F{(\mathrm{im}{(f)})}\) e dunque \(f = \mathrm{im}{(f)}\) poiché \(F\) è pienamente fedele.
+\end{proof}
+
+\begin{note}[zione]
+    I mono si possono indicare con \(\rightarrowtail\) e gli epi con \(\) 
+\end{note}
+
+\begin{theorem}{}
+    Sia \(\mathcal{A}\) una categoria preabeliana. Allora
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall f : X \to Y\) di \(\mathcal{A}\), \(\exists !\, s{(f)} : \mathrm{Coim}f \to \mathrm{Im}f\) tale che \(f = \mathrm{im}(f) \circ s{(f)} \circ \mathrm{coim}{(f)}\) 
+    \item \(\mathcal{A}\) è abeliana se e solo se \(s{(f)}\) è isomorfismo per
+        ogni morfismo \(f\) di \(\mathcal{A}\) 
+\end{enumerate}
+\end{theorem}
+\begin{proof}{}
+    \[\begin{tikzcd}
+	\mathrm{Ker}f & X & Y & \mathrm{Coker}f \\
+	& \mathrm{Coim}f & {\mathrm{Im}f}
+	\arrow["\mathrm{ker}f", tail, from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{\mathrm{coim}f}"', two heads, from=1-2, to=2-2]
+	\arrow["\mathrm{coker}f", two heads, from=1-3, to=1-4]
+	\arrow["{f'}", dashed, from=2-2, to=1-3]
+	\arrow["{s(f)}"', dashed, from=2-2, to=2-3]
+	\arrow["{\mathrm{im}f}"', tail, from=2-3, to=1-3]
+    \end{tikzcd}\]
+
+\begin{enumerate}[label = \arabic*.]
+    \item \(f \circ \mathrm{ker}f = 0\) e \(\mathrm{coim}f = \mathrm{coker}{(\mathrm{ker}f)}\). Dunque 
+        esiste unico \(f' : \mathrm{Coim}f \to Y\) tale che \(f = f' \circ \mathrm{coim}f\).
+
+        \[
+          0 = \mathrm{coker}f \circ f = \mathrm{coker}f \circ f' \circ
+            \mathrm{coim}f \implies \mathrm{coker}f \circ f' = 0
+        \]
+        poiché \(\mathrm{coim}\) è epi.
+
+        Inoltre 
+        \[
+        \mathrm{im}f = \mathrm{ker}{(\mathrm{coker}f)} \implies \exists ! \, s{(f)} : \mathrm{Coim}f \to \mathrm{Im}f : f' = \mathrm{im}f \circ s{(f)}
+        \]
+        dove \(s{(f)}\) è unico perché \(\mathrm{im}f\) è mono e \(\mathrm{coim}f\) è epi.
+    \item 
+    \begin{itemize}
+        \item[\(\implies \)] Per dualità basta dimostrare che \(f\) mono \(\implies \) \(f\) nucleo
+            \[
+              \mathrm{coim}f = \mathrm{coker}{(\mathrm{ker}f)} =
+              \mathrm{coker}{(0 \to X)} \implies \mathrm{coim}{(f)} \text{ iso}
+              \implies f = \mathrm{im}f \circ iso
+            \]
+            cioè \(f\,``="\, \mathrm{im}f\) è un nucleo
+        \item[\(\impliedby \)] \(s{(f)}\) è isomorfismo se e solo se \(
+            s{(f)}\) è mono e epi. Per dualità basta dimostrare che \(s{(f)}\) è mono, che è vero se \(f'\) è mono. Dunque dimostreremo che \(f'\) è mono.
+
+            Sia \(g : Z \to \mathrm{Coim}f\) tale che \(f' \circ g = 0\), devo
+            dimostrare che \(g=0\).
+
+            \[\begin{tikzcd}
+	{\mathrm{Ker}f} & X & Y & {\mathrm{Coker}f} \\
+	W & {\mathrm{Coim}f} & {\mathrm{Im}f} \\
+	Z & {\mathrm{Coker}h} & {\mathrm{Coker}g}
+	\arrow["{{\mathrm{ker}f}}", tail, from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{{{\mathrm{coim}f}}}"{description}, two heads, from=1-2, to=2-2]
+	\arrow["{{\mathrm{coker}f}}", two heads, from=1-3, to=1-4]
+	\arrow["{{h'}}", dashed, from=2-1, to=1-1]
+	\arrow["h", from=2-1, to=1-2]
+	\arrow["{{{f'}}}", dashed, from=2-2, to=1-3]
+	\arrow["{{{s(f)}}}", dashed, from=2-2, to=2-3]
+	\arrow["{\mathrm{coker}g}"{description}, from=2-2, to=3-3]
+	\arrow["{{{\mathrm{im}f}}}", tail, from=2-3, to=1-3]
+	\arrow["g", from=3-1, to=2-2]
+	\arrow["q", dashed, from=3-2, to=2-2]
+	\arrow["{=}"{description}, draw=none, from=3-2, to=3-3]
+	\arrow["{f''}"', curve={height=18pt}, dashed, from=3-3, to=1-3]
+\end{tikzcd}\]
+    ma \(f' \circ g = 0 \), quindi \(\exists !\, f'' : \mathrm{Coker}g \to Y\)
+    tale che \(f'= f'' \circ \mathrm{coker}g\).
+
+    Inoltre \(\mathrm{coker}g \circ \mathrm{coim}f : X \to \mathrm{Coker}g\)
+    epi e \(\mathcal{A}\) è abeliana, dunque
+    \[
+      \exists h : W \to X : \mathrm{coker}g \circ \mathrm{coim}f = \mathrm{coker}h
+    \]
+    \(f \circ h = f' \circ \mathrm{coim}f \circ h = f'' \circ \mathrm{coker}g \circ \mathrm{coim}f \circ h = f'' \circ \mathrm{coker}h \circ h = 0\) dunque \(\exists !\, h' : W \to \mathrm{Ker}f\) tale che \(h = \mathrm{Ker}f \circ h'\). 
+    \end{itemize}
+    %TODO finire
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(f: X \to Y\) morfismo in una categoria abeliana. Allora \(f\) si
+    fattorizza come \(X \overset{e}{\to } I \overset{m}{\to } Y\) con \(e\) epi
+    e \(m\) mono. Inoltre tale fattorizzazione è essenzialmente unica, cioè se
+    \(X \overset{e'}{\twoheadrightarrow } I' \overset{}{\rightarrowtail} Y\) è un'altra
+    fattorizzazione simile, allora \(\exists ! \, t : I \to I'\) (iso)morfismo
+    tale che \(e' = t \circ e\) e \(m = m' \circ t\) 
+\end{corollary}
+\begin{proof}[dimostrazione unicità]
+\[\begin{tikzcd}
+	X & I & Y \\
+	Z & {I'}
+	\arrow["e", two heads, from=1-1, to=1-2]
+	\arrow["{e'}", two heads, from=1-1, to=2-2]
+	\arrow["m", tail, from=1-2, to=1-3]
+	\arrow["g", from=2-1, to=1-1]
+	\arrow["t"', dashed, from=2-2, to=1-2]
+	\arrow["{m'}"', tail, from=2-2, to=1-3]
+\end{tikzcd}\]
+    Poiché \(e\) è epi, allora \(e = \mathrm{coker}g \) con \(g : Z \to X\).
+    Allora \(e \circ g = 0 \implies m \circ e \circ g = m' \circ e' \circ g = 0 \implies e' \circ g = 0\) perché \(m'\) è mono. Poiché \(e = \mathrm{coker}g\), 
+    \[
+      \exists ! \, t : I \to I' : e' = t \circ e
+    \]
+    Allora \(m' \circ t \circ e = m' \circ e' = m \circ e\). Inoltre \(e\) è
+    epi, dunque \(m' \circ t = m\).
+
+    Verificare come esercizio che \(t\) è iso.
+\end{proof}
+
+\begin{definition}{Sottoggetto}
+    Un \emph{sottoggetto} di \(X\) è una classe di equivalenza di monomorfismi
+    \(Y \overset{i}{\rightarrowtail } X\), dove \({(Y \overset{i}{\rightarrowtail } X)} \sim {(Y' \overset{i'}{\rightarrowtail } X)}\) se \(\exists t : Y \to Y'\) isomorfismo tale che \(i = i' \circ t\), ossia \(\begin{tikzcd}
+	Y & X \\
+	{Y'}
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["t"', from=1-1, to=2-1]
+	\arrow["{i'}"', from=2-1, to=1-2]
+\end{tikzcd}\) 
+\end{definition}
+\begin{remark}{}
+    Sia \(\mathcal{C}'_X\) la sottocategoria di \(\mathrm{Mor}{(\mathcal{C})}\) con oggetti i mono
+    con codominio \(X\). Sia ora
+    \[
+      \mathcal{C}'_X{({(Y \overset{i}{\rightarrowtail  }X)}, {(Y' \overset{i'}{\rightarrowtail  }X)})} := \{t \in \mathcal{C}{(Y, Y')} : i' \circ t = i\} 
+    \] % NOTE: perché C'_X e non C_X ??
+
+    Inoltre \(t\) è tale che \(i' \circ t = i\) è mono, dunque \(t\) è mono.
+    Inoltre \(t\), se esiste, è unico, quindi \(\mathcal{C}'_X\) è un
+    preordine.
+
+    Una relazione di preordine induce una relazione d'ordine sulle classi di
+    isomorfismo degli oggetti. Quindi ottengo una relazione d'ordine sui
+    sottoggetti di \(X\) (che indico con \(\subseteq \)), cioè se \(Y, Y'\)
+    sottoggetti di \(X\), si scrive \(Y \subseteq Y' \) se \(\exists t \) tale
+    che. % TODO non ho capito.
+    Dualmente si ottiene la nozione di quoziente di \(
+    X\) considerando gli epi \(X \twoheadrightarrow  Y\).
+\end{remark}
+\begin{example}{}
+    Sia \(f : X \to 
+    Y\) un monomorfismo in una categoria abeliana. Allora \(f = \mathrm{im}{(f)}\) come sottoggetti di \(Y\). % NOTE: corretto io 'sottoggetti di X' in 'sottoggetti di Y'
+\end{example}
+\begin{definition}{Complesso}
+    \(X \overset{f}{\to } Y \overset{g}{\to } Z\) in una categoria preadditiva è
+    un \emph{complesso} se \(g \circ f = 0\) 
+\end{definition}
+\begin{proposition}{}
+    In \(\mathcal{A}\) abeliana,
+    \[\begin{tikzcd}
+	X & Y & Z \\
+	{\mathrm{Im}f} && {\mathrm{Ker}g}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\mathrm{coim}f}"', two heads, from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{im}f}"'{pos=0.7}, from=2-1, to=1-2]
+	\arrow["t"', dashed, from=2-1, to=2-3]
+	\arrow["{\mathrm{ker}g}"'{pos=0.3}, tail, from=2-3, to=1-2]
+\end{tikzcd}\]
+    \[
+      g \circ f = 0 \iff \exists (!)\, t : \mathrm{Im} f \to \mathrm{Ker}g \text{ t.c. } \mathrm{im}f = \mathrm{ker}g \circ t
+    \]
+\end{proposition}
+
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\impliedby \)]
+    \[
+        g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f = \underbrace{g \circ \mathrm{ker}g}_0 \circ t \circ \mathrm{coim}f = 0
+    \]
+    \item[\(\implies \)] \[
+      0 = g \circ f = g \circ \mathrm{im}f \circ \mathrm{coim}f \,, \mathrm{coim}f \text{ epi} \implies g \circ \mathrm{im}f = 0
+    \]
+    da cui \(\exists ! \, t : \mathrm{Im}f \to \mathrm{Ker}g\) tale che
+    \(\mathrm{im}f = \mathrm{ker}g \circ t\) per la proprietà universale del
+    nucleo.
+\end{itemize}
+\end{proof}
+\begin{remark}{}
+    In un complesso, esiste sempre tale \(t\), ma non necessariamente è un
+    isomorfismo
+\end{remark}
+
+\begin{definition}{Successione esatta}
+    \(X \overset{f}{\to } Y \overset{g}{\to } Z\) complesso in una categoria
+    abeliana è detta successione \emph{esatta} se \(t : \mathrm{Im}f \to \mathrm{Ker}g \) tale che
+    \(\mathrm{im}f = \mathrm{ker}g \circ t\) è isomorfismo (ossia \(\mathrm{Im}f = \mathrm{Ker}g\) come sottoggetti di \(Y\))
+\end{definition}
+
+\begin{remark}{}
+\[\begin{tikzcd}
+	X & Y & Z \\
+	{\mathrm{Coker}f} && {\mathrm{Coim}g}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{\mathrm{coker}f}"'{pos=0.9}, from=1-2, to=2-1]
+	\arrow["{\mathrm{coim}g}"'{pos=0.3}, from=1-2, to=2-3]
+	\arrow["t"', dashed, from=2-1, to=2-3]
+	\arrow["{\mathrm{im}g}"', tail, from=2-3, to=1-3]
+\end{tikzcd}\]
+   \[
+     g \circ f = 0 \iff \exists (!) t : \mathrm{coim}g \circ t = \mathrm{coker}f
+   \] % NOTE: 'g o f iso' cambiato in 'g o f = 0'
+   e la successione è esatta se e solo se \(
+   t\) è isomorfismo.
+\end{remark}
+
+\begin{proposition}{} \(\) 
+\begin{enumerate}[label = \arabic*.] 
+    \item \(0 \to X \overset{f}{\to } Y\) è esatta \(\iff\) \(\mathrm{Ker}f = 0\) \(\iff f \) mono.
+    \item[\(1^{op}\).] \(X \overset{f}{\to} Y \to 0\) è esatta \(\iff \mathrm{Coker}f = 0 \iff f\) epi
+    \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z\) è esatta (in \(X\) e \(Y\)) \(\iff f = \mathrm{ker}g\)
+    \item[\(2^{op}\).] \(X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta \(\iff g = \mathrm{coker}f\)
+    \item \(\forall f : X \to Y\) la successione \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \overset{f}{\to} Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta. In particolare se \(f\) è mono, allora \(0 \to X \overset{f}{\to } Y \overset{\mathrm{coker}f}{\to } \mathrm{Coker}f \to 0\) è esatta e \(f\) epi, dunque \(0 \to \mathrm{Ker}f \overset{\mathrm{ker}f}{\to } X \to Y \to 0\) è esatta
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+    A quanto pare l'unica non ovvia è la 2.
+    \begin{itemize}
+        \item[\(\implies \)] Se la successione è esatta in \(X\) allora \(f\) è
+            mono, dunque \(f = \mathrm{im}f\). Se la successione è esatta in \(Y\) allora \(\mathrm{im}f = \mathrm{ker}g \implies f = \mathrm{ker}g\) 
+        \item[\(\impliedby \)] Se \(f = \mathrm{ker}g\), allora \(f\) è mono, dunque successione
+    esatta in \(X\). Ma quindi \((\mathrm{ker}f) = f = \mathrm{im}f\) e dunque esatta in \(Y\) 
+    \end{itemize} 
+\end{proof}
+
+\begin{definition}{Successione esatta corta}
+    Le successioni esatte della forma \( 0 \to X \to Y \to Z \to 0\) si dicono
+    esatte corte.
+\end{definition}
+\begin{proposition}{}
+    Una successione esatta corta \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) in una
+    categoria abeliana si spezza se vale una delle seguenti condizioni
+    equivalenti:
+\begin{enumerate}[label = \arabic*.]
+    \item \(f\) è invertibile a sinistra 
+    \item \(g\) è invertibile a destra
+    \item \(\exists r : Y \to X\) e \(s : Z \to Y\) tale che \({(Y, f, s, r, g)}\) è un biprodotto di \(X \) e \(Z\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}[Buona definizione]
+    Per dualità basta dimostrare che \(1. \iff 3.\). Inoltre \(
+    3. \implies 1.\) è ovvia, dunque dimostriamo solo \(1. \implies 3.\).
+
+    Sia \(h:= 1_Y - f \circ r : Y \to Y\). Allora \(h \circ f = f - f \circ
+    \underbrace{r \circ f}_{1_X} = 0\). Allora
+    \[g = \mathrm{coker}f \implies \exists !\, s : Z \to Y : h = s \circ g
+    \implies 1_Y = s \circ g + f \circ r \]
+    Dunque resta da dimostrare che \(g \circ s = 1_Z\). Infatti \(g \circ s \circ g = g \circ h = g - g \circ f \circ r = g = 1_Z \circ g\) e \(g\) è epimorfismo, dunque \(g \circ s = 1_Z\).
+\end{proof}
+
+\begin{definition}{Categoria semisemplice}
+    Una categoria abeliana \(\mathcal{A}\) è detta \emph{semisemplice} se tutte le
+    successioni esatte corte di \(\mathcal{A}\) si spezzano 
+\end{definition}
+
+\begin{example}{}
+    \(A\mathtt{-Mod}\) è semisemplice se e solo se \(A\) è semisemplice.
+\end{example}
+
+\begin{definition}{Funtore esatto}
+    Un funtore \(F : \mathcal{A} \to \mathcal{B}\) tra categorie abeliane si
+    dice \emph{esatto} a \emph{sinistra}/\emph{destra} se \(F\) è additivo e
+    preserva le successioni esatte rispettivamente della forma \(0 \to X \to Y \to Z\) o della forma 
+    \(X \to Y \to Z \to 0\).
+\end{definition}
+
+\begin{remark}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} \(\iff\) \(F\) è additivo
+    e preserva i \emph{nuclei}/\emph{conuclei} \(\iff\) \(F\) preserva i
+    \emph{limiti}/\emph{colimiti} finiti.
+\end{remark}
+
+Usando l'osservazione si potrebbe definire anche \(F : \mathcal{C} \to \mathcal{D}\)
+esatto a \emph{sinistra}/\emph{destra} se \(\mathcal{C}\) è finitamente
+\emph{completa}/\emph{cocompleta} e \(F\) preserva i
+\emph{limiti}/\emph{colimiti}
+
+\begin{definition}{}
+    \(F : \mathcal{A} \to \mathcal{B}\) tra categorie abeliane è detto
+    \emph{esatto} se lo è sia a sinistra che a destra.
+\end{definition}
+
+\begin{remark}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} se \(F\) preserva i
+    \emph{mono}/\emph{epi}morfismi. Infatti se \(f : X \to Y\) è mono, allora
+    esiste una successione esatta \(0 \to X \overset{f}{\to } Y \to Z\) 
+\end{remark}
+
+\begin{proposition}{}\label{prop:fun_exact_iff}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    abeliane. Allora sono equivalenti le seguenti affermazioni:
+\begin{enumerate}[label = \roman*)]
+    \item \(F\) è esatto a \emph{sinistra}/\emph{destra}
+    \item \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) è esatta in
+        \(\mathcal{A} \implies \) 
+        \[0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \quad / \quad F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)} \to 0\]
+        è esatta in \(\mathcal{B}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+    \(i) \implies ii)\) è ovvia. Si supponga ora che valga \(ii)\). Allora sia
+    \(0 \to X \overset{f}{\to} Y \overset{g}{\to } Z\) esatta in \(\mathcal{A}\). si decomponga \(g = i \circ g'\) con \(i\) mono e \(g\) epi, dunque \(Y \overset{g'}{\twoheadrightarrow } Z'
+    \overset{i}{\rightarrowtail } Z\). Allora \(\mathrm{ker}g' = \mathrm{ker}g\) perché \(i\) è mono e \(\mathrm{ker}g = f\), dunque \( 0 \to X \overset{f}{\to } Y \overset{g'}{\to } Z' \to 0\) è esatta. Segue che per ipotesi \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g')}}{\to} F{(Z')}\) è esatta.
+
+    Poiché ora \(i\) è mono, allora \(F{(i)}\) è mono e dunque \[F{(f)} = \mathrm{ker}{(F{(g')})} = \mathrm{ker}{(F{(i)} \circ F{(g')})} = \mathrm{ker}{(F{(g)})}\]
+
+    Ne consegue che \(0 \to F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta.
+\end{proof}
+
+
+\begin{proposition}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categoria
+    abeliane. Allora le seguenti sono equivalenti:
+\begin{enumerate}[label = \roman*)]
+    \item \(F\) preserva le successioni esatte (della forma \(X \to Y \to Z\)).
+    \item \(F\) è esatto.
+    \item \(F\) è esatto a sinistra e preserva gli epimorfismi.
+    \item[iii')] \(F\) è esatto a destra e preserva i monomorfismi.
+    \item \(F\) preserva le successioni esatte corte.
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+    Molte implicazioni sono ovvie, in particolare è evidente che \(i) \implies ii) \implies iii) \implies iv)\) e \(ii) => iii') \implies iv)\). Inoltre \(iv) \implies ii)\) per la proposizione~\ref{prop:fun_exact_iff}.
+    Resta da dimostarre che \(ii) \implies i)\).
+
+    Sia \(X \overset{f}{\to } Y \overset{g}{\to } Z\) esatta in \(\mathcal{A}\).
+
+    Allora \(f = f' \circ p\) con \(p\) epi e \(f'\) mono. Inoltre \(\mathrm{im}f = \mathrm{ker}g\) mma \(\mathrm{im}f = \mathrm{ker}{(\mathrm{coker}{(f)})}\) e poiché \(p\) è epi, allora \(\mathrm{coker}f = \mathrm{coker}f' \implies \mathrm{im}f = \mathrm{im}f'\).
+    Poiché \(f'\) è mono, allora \(\mathrm{im}f' = f'\) e dunque \(\mathrm{ker}g = f'\). Dunque \(0 \to X' \overset{f'}{\to } Y \overset{g}{\to } Z\) è esatta e \(F\) è esatto (a sinistra). Segue che \(0 \to F{(X')} \overset{F{(f')}}{\to } F{(X)} \to F{(Y)} \overset{F{(g)}}{\to } F{(Z)}\) è esatta. Ma \(
+    F{(f)} = F{(f')} \circ F{(p)}\) e \(F{(p)}\) è epi, essendo \(F\) esatto a
+    destra, dunque \(\mathrm{coker}{(F{(f)})} = \mathrm{coker}{(F{(f')})} \implies \mathrm{im}{(F{(f)})} \implies \mathrm{im}{(F{(f')})} = \mathrm{ker}{(F{(g)})} \implies \) 
+    \[
+      F{(X)} \overset{F{(f)}}{\to } F{(Y)} \overset{F{(g)}}{\to } F{(Z)}
+    \]
+    è esatta.
+\end{proof}
+
+\begin{definition}{}
+    \(F: \mathcal{A} \to \mathcal{B}\) funtore tra categorie abeliane è esatto
+    al centro se \(F\) è additivo e per ogni successione esatta \(0 \to X\overset{f}{\to} Y \overset{g}{\to} Z \to 0\) in \(\mathcal{A}\), allora \(F{(X)} \overset{F{(f)}}{\to} F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta in \(\mathcal{B}\).
+\end{definition}
+\begin{corollary}{}
+    \(F\) è esatto a \emph{sinistra}/\emph{destra} \(\iff\) \(F\) è esatto al
+    centro e preserva i \emph{mono}/\emph{epi}morfismi.
+\end{corollary}
+
+\begin{remark}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    abeliane. Allora \(F\) preserva le successioni esatte corte che si spezzano.
+    Dunque se \(\mathcal{A}\) è semisemplice allora \(F\) è esatto.
+\end{remark}
+
+\begin{example}{}
+    Sia \(A \to B\) un omomorfismi di anelli. Allora il funtore di restrizione
+    degli scalari \(B\mathtt{-Mod} \to A\mathtt{-Mod}\) è esatto. 
+\end{example}
+
+\begin{example}{}
+    Se \(\mathcal{A}\) è abeliana e \(\mathcal{A}' \subseteq \mathcal{A} \)
+    sottocategoria piena è chiusa per (co)prodotti finiti, nuclei e conuclei
+    (dunque \(\mathcal{A}'\) è additiva), allora il funtore di inclusione \(\mathcal{A}' \to \mathcal{A}\) è esatto.
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{C}\) una categoria (piccola) e \(\mathcal{A}\) una categoria
+    abeliana (quindi \(\mathtt{Fun}{(\mathcal{C}, \mathcal{A})}\) è abeliana).
+
+    Allora \(\forall X \in \mathcal{C}\) il funtore di valutazione in \(X\)
+    \begin{align*}
+        \mathrm{ev}_X: \mathtt{Fun}{(\mathcal{C}, \mathcal{A})} &\longrightarrow \mathcal{A} \\
+        F &\longmapsto \mathrm{ev}_X(F) = F{(X)}\\
+        \alpha &\longmapsto \mathrm{ev}_X(\alpha) = \alpha_X
+    \end{align*}
+    è esatto
+\end{example}
+
+\begin{example}{}
+    Sia \(\mathcal{A}\) una categoria abeliana e \(X \in \mathcal{A}\). Allora i
+    funtori \(\mathcal{A}{(X, \--)} : \mathcal{A} \to \mathtt{Ab}\) e \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to \mathtt{Ab}\) sono esatti a sinistra (e più in generale preservano i limiti).
+
+    \begin{proof}[Dim. \(\mathcal{A}{(X, -)}\) esatto a sinistra (assumendo
+        additivo)]
+        \(0 \to Y' \overset{f}{\to}  Y \overset{g}{\to}  Y'' {(\to 0)}\) è
+        esatta in \(\mathcal{A}\). Allora \(0 \to \mathcal{A}{(X, Y')} \overset{f_*}{\to} \mathcal{A}{(X, Y)} \overset{g_*}{\to} \mathcal{A}{(X, Y'')}\) è esatta in \(\mathtt{Ab}\).
+
+        Infatti \(g \circ f = 0 \implies g_* \circ f_* = {(g \circ f)}_* = 0_* =
+        0\) e dato \(h \in \mathcal{A}{(X, Y)}\) tale che \(g_*{(h)} = 0\), devo
+        dimostrare che \(\exists ! h' \in \mathcal{A}{(X, Y')}\) tale che \(h =
+        f_*{(h')}\). Questo è vero perché \(0 = g_*{(h)} = g \circ h\). E dunque 
+\begin{tikzcd}
+	{Y'} & Y & {Y''} \\
+	& X
+	\arrow["{f=\mathrm{ker}g}", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["{h'}", dashed, from=2-2, to=1-1]
+	\arrow["h", from=2-2, to=1-2]
+	\arrow["0"', from=2-2, to=1-3]
+\end{tikzcd}
+    e per la proprietà universale del \(\mathrm{ker}\) tale \(h'\) esiste unico.
+    \end{proof}
+
+    In generale \(\mathcal{A}{(X, -)}\) e \(\mathcal{A}{(-, X)}\) non sono
+    esatti a destra (ma lo sono se \(\mathcal{A}\) è semisemplice). In particolare, se \( 0 \to Y' \overset{f}{\to}  Y \overset{g}{\to}  Y'' \to 0\) non si spezza, allora \(\mathcal{A}{(Y'', _)}\) non è esatto a destra, perché \(g\) epi in \(\mathcal{A}\) ma \(g_*\) non è epi (suriettivo) in \(\mathtt{Ab}\). Infatti \(g_* : \mathcal{A}{(Y'', Y)} \to \mathcal{A}{(Y'', Y'')})\) è tale che \(\mathrm{id}_{Y''} \not\in \mathrm{im}{(g_*)}\). Analogamente \(\mathcal{A}{(-, Y')}\) non è esatto a destra.
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) un dominio d'integrità non campo. Consideriamo \(F : A\mathtt{-Mod} \to A\mathtt{-Mod}\) dato da \(F{(M)} ={M}/{T{(M)}}\) e \(
+    F{(f : M\to N)} = \overline{f} : M / T{(M)} \to N / T{(N)}\) omomorfismo
+    indotto. Allora \(F\) è additivo (esercizio) e preserva mono e epi ma \textbf{non è esatto al centro} (e dunque neanche a sinistra o destra).
+
+    Infatti se \(f\) è suriettivo, allora anche \(\overline{f}\) è suriettivo e se \(f\) è iniettivo, allora \(\overline{f}\) è iniettivo poiché \(\overline{x} \in \mathrm{ker}\overline{f} \implies f{(x)} \in T{(N)} \implies \exists 0 \neq a \in A : 0 = a f{(x)} = f{(ax)} \implies ax = 0 \) per iniettività di \(f\). Segue che quindi \(x \in T{(M)} \implies \overline{x} = \overline{0}\).
+
+    Tuttavia nono è esatto al centro, infatti se \(
+    0 \neq I \subsetneq A\) è ideale, allora \(
+    0 \to I \overset{i}{\to} A \overset{\pi}{\to} A / I \to 0\) è esatta in \(A\mathtt{-Mod}\), ma \(T{(I)} = T{(A)} = 0 \) e \(T{(A / I)} = A / I\), dunque \(F{(I)} = I\), \(F{(A)}=A\) e \(F{(A / I)} = 0\), per cui si ottiene \(I \overset{i}{\to} A \overset{F{(\pi)}}{\to} 0\) che \textbf{non} è esatta.
+\end{example}
+
+\begin{proposition}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) esatto e fedele tra categorie
+    abeliane. Sia \(X \overset{f}{\to} Y \overset{g}{\to} Z\) una successione
+    (qualunque) in \(\mathcal{A}\) tale che \(F{(X)} \overset{F{(f)}}{\to} F{(Y)} \overset{F{(g)}}{\to} F{(Z)}\) è esatta in \(\mathcal{B}\), allora \(X \overset{f}{\to} Y \overset{g}{\to}  Z\) è esatta in \(\mathcal{A}\)
+\end{proposition}
+
+\begin{note}[zione]
+    Sia \(X' \subseteq X\) sottoggetto di \(X\). Allora indico con \(X / X'\) un
+    conucleo di \(X' \rightarrowtail X\) 
+\end{note}
+
+\begin{proof}{}
+    \(F{(g \circ f)} = F{(g)} \circ F{(f)} = 0 \overset{\text{additivo}}{=}F{(0)}\), quindi \(
+    g \circ f = 0\) poiché \(F\) è fedele, e dunque \(
+    X \overset{f}{\to} Y \overset{g}{\to} Z\) è un complesso e quindi \(\mathrm{Im}f \subseteq \mathrm{Ker}g \) come sottoggetti.
+    Devo dimostrare quindi che \(C := \mathrm{Ker}g / \mathrm{Im}f = 0\). Poiché
+    \(F\) preserva i nuclei, \(F{(C)} = F{(\mathrm{Ker}g)} / F{(\mathrm{Im}f)} = \mathrm{Ker}{(F{(g)})} / \mathrm{Im}{(F{(f)})} = 0\) perché la successione in \(\mathcal{B}\) è esatta. Segue dunque che \(F{(1_C)} = 0 = F{(0 : C \to C)}\) e \(F\) è fedele, dunque \(1_C = 0\), ossia \(C=0\) è l'oggetto nullo.
+\end{proof}
+
+\begin{theorem}{Freyd - Mitchell}
+    Sia \(\mathcal{A}\) una categoria abeliana (piccola). Allora esiste un
+    anello \(A\) e un funtore esatto pienamente fedele \(\mathcal{A} \to A\mathtt{-Mod}\) 
+\end{theorem}
+\begin{corollary}{}\label{cor:caccia_diag_amod}
+    Le dimostrazioni di caccia al diagramma in \(\mathcal{A}\) abeliana si
+    possono fare in \(A\mathtt{-Mod}\)
+\end{corollary}
+In realtà il teorema precedente si può utilizzare anche se \(\mathcal{A}\) non è
+piccola, perché tanto il diagramma solitamente prende pochi oggetti
+
+\begin{lemmao}{del Serpente}
+    Il seguente diagramma con righe esatte
+\[\begin{tikzcd}
+	{(0} & {)X'} & X & {X''} & 0 \\
+	0 & {Y'} & Y & {Y''(} & {0)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["i", from=1-2, to=1-3]
+	\arrow["{f'}"', from=1-2, to=2-2]
+	\arrow["p", from=1-3, to=1-4]
+	\arrow["f"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{f''}"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["j", from=2-2, to=2-3]
+	\arrow["q", from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+    induce una successione esatta
+    \[
+        (0\to ) \mathrm{Ker}f' \to \mathrm{Ker}f \to \mathrm{Ker}f'' \overset{d}{\to} \mathrm{Coker}f' \to \mathrm{Coker}f \to \mathrm{Coker}f'' (\to 0)
+    \]
+\end{lemmao}
+\begin{proof}{}
+    Corollario~\ref{cor:caccia_diag_amod}. Se invece volessimo dimostrarlo
+    esplicitamente usando solo elementi categorici, si può dimostrare
+    utilizzando prodotti fibrati difficili perché non si può usare la proprietà
+    universale dei ker e coker banalmente (notare che \(d\) è dal lato sbagliato
+    per poterlo fare)
+\end{proof}
+
+\begin{remark}{}
+    Se \(\mathcal{A}\) è una categoria (pre)abeliana, allora ci sono i funtori
+    \(\mathrm{Ker}, \mathrm{Coker} : \mathrm{Mor}{(\mathcal{A})} \to \mathcal{A}\) definita nel
+    modo ovvio per \(\mathrm{Ker}{(f)}\) e per ogni morfismo \\\(\begin{tikzcd}
+	{X'} & X \\
+	{Y'} & Y
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["{f'}", from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{j}", from=2-1, to=2-2]
+\end{tikzcd} : f \to f'\) in \(\mathrm{Mor}{(\mathcal{A})}\), allora \(\mathrm{Ker}{({(i, j)})} := i'\) tale che \(\mathrm{Ker}f \circ i' = i \circ \mathrm{Ker}f'\) o equivalentemente (includendo anche la definizione di \(\mathrm{Coker}\)) il seguente diagramma commuta:
+\[ \begin{tikzcd}
+	{\mathrm{Ker}(f')} & {\mathrm{Ker}(f)} \\
+	{X'} & X \\
+	{Y'} & Y \\
+	{\mathrm{Coker}f'} & {\mathrm{Coker}f}
+	\arrow["{i'}", from=1-1, to=1-2]
+	\arrow["{\mathrm{ker}f'}"', from=1-1, to=2-1]
+	\arrow["{\mathrm{ker}f}", from=1-2, to=2-2]
+	\arrow["i", from=2-1, to=2-2]
+	\arrow["{f'}", from=2-1, to=3-1]
+	\arrow["f", from=2-2, to=3-2]
+	\arrow["j", from=3-1, to=3-2]
+	\arrow["{\mathrm{coker}f'}"', from=3-1, to=4-1]
+	\arrow["{\mathrm{coker}f}", from=3-2, to=4-2]
+	\arrow["{j'}", from=4-1, to=4-2]
+\end{tikzcd} \]
+    e per il lemma del serpente \(\mathrm{Ker}\) è esatto a sinistra e \(\mathrm{Coker}\) è esatto a destra.
+    Non sono però esatti, perché se prendo \(X' = Y'' = 0\), \(p = f\), \(j =
+    1_X\) e \(X \neq 0\), allora ottengo la successione
+
+\[ \begin{tikzcd}
+	0 & 0 & 0 & X & X & 0 & 0 \\
+	&&& {\mathrm{Ker}f''} & {\mathrm{Coker}f'}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-6, to=1-7]
+	\arrow["\cong", from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-4, to=1-4]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-5, to=1-5]
+\end{tikzcd} \]
+
+\end{remark}
+

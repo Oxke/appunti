@@ -1,0 +1,111 @@
+\chapter{Introduzione}
+\section{Metodi cose}
+
+\[
+  \|u - u_x\|_V \le \frac{M}{\alpha} \mathrm{inf}_{v_k \in V_k} \| u - v_k\|_V
+\]
+
+\begin{example}{}
+    Consideriamo il problema di Poisson 
+    \[
+      \begin{cases}{}
+          - \mathrm{div}{(k \nabla u)} = f\\
+          u|_{\mathcal{U}} = 0
+      \end{cases}
+    \]
+    dato da 
+    \[
+      a {(w, v )} = \int _{\Omega} k{(x_{1}, x_{2})} \nabla w {(x_{1}, x_{2})}
+      \cdot \nabla v {(x_{1}, x_{2})} \,dx_{1}\, dx_{2}
+    \]
+    con \(V = H^{1}_0{(\Omega)}\).
+
+    Allora abbiamo che \(a\) è continua:
+    \[
+      | a{(w, v)} | = \left| \int_\Omega \dots \right| \le
+      \|k\|_{L^{\infty}{(\Omega)}}  \, |w|_{H^{1}{(W)}} \, | v | H^{1}{(W)}
+    \]
+    mentre per la coercività:
+    \[
+      a{(w, w)} = \int _\Omega k | \nabla w | ^2 \ge k_\text{min} |w|^2_{H^{1}}
+      \ge \underbrace{\frac{k_\text{min} }{2} \mathrm{min}\left\{1,
+      \frac{1}{c^2_p}\right\}}_{\alpha} 
+      \|w\|^2_{H^{1}} 
+    \]
+    Dunque abbiamo che
+    \[
+      \frac{M}{\alpha} = C \frac{k_\text{max} }{k_\text{min} } \gg 1
+    \]
+\end{example}
+
+\begin{example}{}
+Sia \(u\) la temperatura e \(\mathbf{q} \) il vettore che indica il flusso di
+calore. Abbiamo che il calore ``va dal caldo al freddo'', dunque
+\[
+  \mathbf{q}  = - \kappa \nabla u
+\]
+con \(\kappa\) la \emph{conducibilità} del materiale che è una funzione della
+posizione. Notare che \(\kappa\) potrebbe anche essere una matrice, se il
+materiale è \emph{anisotropo}, perché il calore non conduce in tutte le
+direzioni ugualmente. Un esempio sono i materiali compositi di fibre e colla.
+
+A questo punto in ogni pezzettino di pentola \(\omega \subseteq \Omega \)
+abbiamo che:
+\[
+  \int_{\partial \omega} \mathbf{q} \cdot \mathbf{n}  - \int_{\omega} f = 0
+\]
+per il teorema di Gauss abbiamo che \(\int_\omega f = - \int _{\omega}
+\mathrm{div} k \nabla u\). Se supponiamo che l'uguaglianza valga per ogni
+\(\omega\), allora abbiamo che su tutto \(\Omega\) 
+\[
+  \begin{cases}{}
+      - \mathrm{div} k \nabla u = f & \in \Omega \\    
+      u|_{\Gamma_{0}} & \text{è assegnata} \\
+      - (k \nabla u_{\Gamma_n} \cdot \mathbf{n} )& \text{è assegnato}
+  \end{cases}
+\]
+l'ultima, che è la condizione di Neumann, ad esempio se fosse assegnato a 0
+significherebbe che non conduce calore in alcuni punti?
+\end{example}
+
+Se \(a{(\cdot , \cdot )}\) è anche simmetrica, allora \(\|w\|^2_E = a{(w, w)}
+\ge \alpha \|w\|^2_V\) e notando che \(a{(w, w)} \le M \|w\|^2_V\) allora
+notiamo che \(\|\cdot \|_E\) e \(\|\cdot \|_V\) sono equivalenti.
+
+Allora per il metodo di Galerkin abbiamo che \(a{(w, w)} \ge \|w\|^2_E\) e
+\(a{(w, v)} \le \|w\|_E \|v\|_E\). Segue che
+\[
+  \sqrt{\alpha} \|u - u_k\| \le  \|u - u_k\|_E \le \inf_{v_n \in V_n}
+  \|u - v_n\|_E \le \sqrt{M} \inf \|u - v_n\|_V 
+\]
+da cui infine 
+\[
+  \|u - u_n\|_E \le \frac{\sqrt{M}}{\sqrt{\alpha}} \inf_{v_{n} \in V_n} \|u -
+  v_n\|_V
+\]
+che migliora l'errore.
+
+\section{Metodo degli Elementi Finiti (FEM)}
+
+Per trovare \(V_k\) nel caso dei FEM. 
+
+\begin{enumerate}[label = \arabic*.]
+    \item \(\Omega \approx \Omega_k = \cup_{T \in  \mathcal{T}_h} T\) 
+    \item \(V_k\) sono poligoni 
+\end{enumerate}
+
+La triangolazione è \(\mathcal{T}_h = \{T_{1}, \dots, T_{N_\text{el}} \} \) ed è
+tale che \(\cup_{T \in \mathcal{T}_n} T = \overline{\Omega}\). Perché
+\(\mathcal{T}_k\) sia ammissibile imponiamo che per ogni \(i, j\), \(T_{i}
+\cap T_j\) può solo essere un triangolo intero, un lato intero, un vertice o
+nulla.
+
+Preso ora \(T \in \mathcal{T}_h\), definiamo due valori \(h_T = \mathrm{diam}\,T\)
+e \(\rho_T\) il raggio del più grande cerchio inscrivibile. Allora diciamo che
+la famiglia di triangolazioni \(\{\mathcal{T}_h\}_{h > 0}  \) se esiste una
+\(C_s \in \mathbb{R}\) tale che \(\forall h > 0\) e \(T \in \mathcal{T}_h\),
+abbiamo che \(\frac{h_T}{\rho_T} \le C_s\). Chiaramente le stime di errore
+avranno all'interno la costante \(C_s\). Una buona famiglia di triangolazioni è
+infatti tale che i triangoli tendano a essere circa punti, e non rette o
+segmenti.
+

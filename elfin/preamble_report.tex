@@ -1,0 +1,135 @@
+\documentclass[notitlepage]{report}
+\usepackage{layout}
+\usepackage[a4paper, centering, total={5in,9in}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[many]{tcolorbox}
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{enumitem}
+\usepackage[colorlinks]{hyperref}
+\usepackage{titling}
+\usepackage{quiver}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+
+\newcommand*{\sminus}{\raisebox{1.3pt}{$\smallsetminus$}}
+
+\newcommand*{\transp}[2][-3mu]{\ensuremath{\mskip1mu\prescript{\smash{\mathrm t\mkern#1}}{}{\mathstrut#2}}}%
+
+% newcommand for span with langle and rangle around
+\newcommand{\Span}[1]{{\left\langle#1\right\rangle}}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+\newcounter{COUNTER}\setcounter{COUNTER}{0}
+\renewcommand{\theCOUNTER}{\arabic{COUNTER}}
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{section}.\arabic{theo}}
+% 
+\newcounter{excounter}[section]\setcounter{excounter}{0}
+\renewcommand{\theexcounter}{\arabic{chapter}.\arabic{section}.\arabic{excounter}}
+
+\numberwithin{equation}{section}
+
+\definecolor{thmblue}{RGB}{78, 68, 243}
+\newtcolorbox{theorem}[2][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=blue!1, colframe=blue!30,
+    title=Teorema~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2},
+    coltitle=thmblue!80, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=blue!5}
+}
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\newtcolorbox{lemmao}[2][]{
+    breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
+    colback=applegreen!1, colframe=applegreen!30,
+    title=Lemma~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2},
+    coltitle=applegreen!115, fonttitle=\bfseries,
+    attach boxed title to top left={xshift=3mm,yshift=-3mm},
+    boxed title style={colback=applegreen!5}
+}
+
+\newtcolorbox{definition}[2][]{
+    colframe=violet!0,
+    coltitle=violet, % Title text color
+    fonttitle=\bfseries, % Title font
+    title={Definizione~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2}}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0pt, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=violet!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=violet!0,
+    borderline west={2pt}{-5pt}{violet!40},
+    #1
+}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[COUNTER]{Lemma}
+\newtheorem{corollary}[COUNTER]{Corollario}
+\newtheorem{proposition}[COUNTER]{Proposizione}
+
+\theoremstyle{definition}
+\newtheorem{example}[COUNTER]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Nota}
+\newtheorem*{remark}{Osservazione}
+
+\newtcolorbox{notebox}{
+  colback=gray!10,
+  colframe=black,
+  arc=5pt,
+  boxrule=1pt,
+  left=15pt,
+  right=15pt,
+  top=15pt,
+  bottom=15pt,
+}
+
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}} % beautiful chi
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}} % inner command, used by \rchi
+
+\newtcolorbox{eser}[2][]{
+    colframe=black!0,
+    coltitle=black!70, % Title text color
+    fonttitle=\bfseries\sffamily, % Title font
+    title={Esercizio~\stepcounter{COUNTER}\theCOUNTER~#2}, % Title format
+    sharp corners, % Less rounded corners
+    boxrule=0mm, % Line width of the box frame
+    toptitle=1mm, % Distance from top to title
+    bottomtitle=1mm, % Distance from title to box content
+    colbacktitle=black!5, % Background color of the title bar
+    left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
+    enhanced, % Enable advanced options
+    before skip=10pt, % Space before the box
+    after skip=10pt, % Space after the box
+    breakable, % Allow box to split across pages
+    colback=black!0,
+    borderline west={1pt}{-5pt}{black!70}, 
+    segmentation style={dashed, draw=black!40, line width=1pt} % Dashed dividing line
+}
+\newcommand{\seminorm}[1]{\left\lvert\hspace{-1 pt}\left\lvert\hspace{-1 pt}\left\lvert#1\right\lvert\hspace{-1 pt}\right\lvert\hspace{-1 pt}\right\lvert}

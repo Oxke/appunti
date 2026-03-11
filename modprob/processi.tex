@@ -1,0 +1,181 @@
+\chapter{Intro}
+
+\section{Bernoulli}
+
+La prima lezione che seguo è tipo la quarta o terza, dunque non so dove siamo,
+comincerò a seguire e vedere dove va e come siamo.
+
+\begin{theorem}{}
+    Per ogni \(k \in \{1, 2, \dots \} \), abbiamo che
+    \begin{equation}\label{eq:binom}
+        \mathbb{P}{(T_k \le n)} = \sum_{j=k}^{n} \binom{n}{j} p^{j}
+        {(1-p)}^{n-j} \quad n = k, k+1, \dots
+    \end{equation}
+    e la cosiddetta \emph{binomiale negativa}
+    \begin{equation}\label{eq:negbinom}
+        \mathbb{P}{(T_k = n)} = \binom{n-1}{k-1} p^{k} {(1-p)}^{n-k} \quad n =
+        k, k+1, \dots
+    \end{equation}
+\end{theorem}
+\begin{proof}{}
+    Per dimostrare la~\eqref{eq:binom} fissiamo \(k\) e \(n\ge k\) e sappiamo
+    che
+    \begin{align*}
+        \{T_k \le n\} &= \{N_k \ge k\} \implies \\\implies  \mathbb{P}{(T_k \le
+        n)} &= \mathbb{P}{(N_n\ge k)} = \sum_{j=k}^{n} \mathbb{P}{(N_n = j)} =
+      \sum_{j=k}^{n} \binom{n}{j} p^{j} {(1-p)}^{n-j}
+    \end{align*}
+    Mentre per la~\eqref{eq:negbinom} sappiamo che \(\{T_k = n\}  = \{N_{n-1} =
+    k-1, X_n = 1\} \) e ora possiamo calcolare che
+    \[
+      \mathbb{P}{(T_k = n)} = \mathbb{P}{(N_{n-1} = k-1, X_n = 1)}
+      \overset{\text{indip.}}{=} \mathtt{P}{(N_{n-1} = k-1)}\, \mathbb{P}{(X_n =1)}
+    \]
+    che porta esattamente alla tesi.
+\end{proof}
+
+\paragraph{Motivazione}
+Vogliamo studiare eventi della forma \(\{T_4 = 5, T_{7} = 13\} \). Per farlo
+iniziamo a studiare probabilità condizionate della forma simile a quella del
+seguente risultato:
+
+\begin{theorem}{}
+    Per ogni \(k \in \mathbb{N}\), \(n \ge k\) e \(\{a_{i}\}_{i=0. .k} \in
+    \mathbb{N}^{k} \) abbiamo la seguente proprietà:
+    \begin{equation}\label{eq:prop_markov}
+      \mathbb{P} {(T_{k+1} = n \;|\; T_{0} = a_{0}, \dots, T_k = a_k )} =
+      \mathbb{P}{(T_{k+1} = n \;|\; T_k = a_k)}
+    \end{equation}
+
+\end{theorem}
+\begin{remark}{}
+    La proprietà~\eqref{eq:prop_markov} è detta \textbf{proprietà di Markov}
+\end{remark}
+
+[ mi sono distratto un attimo ]
+
+Possiamo riassumere il tutto nella seguente proposizione:
+\begin{proposition}{}
+    Gli incrementi \(T_{1}, T_{2}-T_{1}, T_{3}, T_{2}, \dots\) sono
+    \emph{indipendenti} e \emph{identicamente distribuiti} come distribuzione
+    \(\mathrm{Geom}{(p)}\): 
+    \[
+      \mathbb{P}{(T_{1} = m)} = p {(1-p)}^{m-1} \quad \forall m = 1, 2, \dots
+    \]
+\end{proposition}
+
+È naturale confrontare i processi \(T_{n}\) e \(N_n\), infatti hanno la stessa
+struttura:
+\begin{align*}
+    N_n &= \sum_{i=1}^{n} X_i \quad X_{i} \sim \mathrm{Be}{(p)}   \\
+    T_k &= \sum_{i=1}^{k} Y_i \quad Y_{i} \sim \mathrm{Geom}{(p)} 
+\end{align*}
+I due processi hanno dunque la stessa struttura, sono somme di V.A. i.i.d. dove
+cambia soltanto la distribuzione scelta. Questi sono detti processi a
+\textbf{incrementi indipendenti}.
+
+\begin{remark}{}
+    Come già fatto per il processo \(N_n\), si può dedurre che gli incrementi
+    \(T_{n_{1}} - T_{n_{0}}, T_{n_{2}} - T_{n_{1}} , \dots\) per \(0 < n_{1} <
+    n_{2}\) sono indipendenti, e la distribuzione dipende soltanto dalla
+    distanza \(n_{i+1} - n_{i}\). In particolare la distribuzione di \(T_{m + n}
+    - T_{m} \) è indipedente da \(m\) e coincide con quella di \(T_{n}\).
+\end{remark}
+
+Dato che la distribuzione è geometrica deduco che 
+\begin{align*}
+    \mathbb{E}{(T_{k+1} - T_k)} &= \mathbb{E}{(T_{1})} = \frac{1}{p} \\
+  \mathrm{Var}{(T_{k+1} - T_k)} &= \mathrm{Var}{(T_{1})} = \frac{1}{p^2}
+\end{align*}
+e di più abbiamo che
+\begin{align*}
+    \mathbb{E}{(T_k)} &= \sum_{i=1}^{k} \mathbb{E}{(T_{i})} = \frac{k}{p} \\ 
+    \mathrm{Var}{(T_k)} &= \frac{k{(1-p)}}{p^2}
+\end{align*}
+
+\begin{example}{}
+    Calcoliamo la seguente probabilità:
+    \[
+      x := \mathbb{P}{(T_{1} = 3, T_{5} = 9, T_{7} = 17)}
+    \]
+    Sappiamo che \(T_{1}\) , \(T_{5} - T_{1}\) e \(T_{7} - T_{5}\) sono
+    indipendenti, dunque
+    \begin{align*}
+        x &= \mathbb{P}{(T_{1} = 3, T_{5} - T_{1} = 6, T_{7} - T_{5} = 8)} \\
+         &= \mathbb{P}{(T_{1}=3)} \, \mathbb{P}{(T_{5}-T_{1}= 6)} \,
+         \mathbb{P}{(T_{7} - T_{5} = 8)} \\
+         &= p {(1-p)}^2 \, \binom{6-1}{4-1} \, p^{4} \, {(1-p)}^2 \,
+         \binom{8-1}{2-1} \, p^2 \, {(1-p)}^{6}
+    \end{align*}
+\end{example}
+
+\begin{example}[Tempo di vita di una componente]
+    Il tempo di vita di una componente è dato da una distribuzione \(\pi{(m)} =
+    p {(1-p)}^{m-1}\) (geometrica). Costruiamo un processo sostituendo una
+    componente appena essa si rompe. Se \(T_{1}, T_{2}, \dots\) sono i tempi di
+    rottura della componente. Allora le variabili \(U_k = T_k - T_{k-1} \) sono
+    i tempi di vita. Supponiamo che \(\mathbb{P}{(U_k = m)} = p {(1-p)}^{m-1}\)
+    per ogni \(k\) (e \(m\ge 1\)). Allora il processo \(\{T_k\} \) è il processo
+    dei tempi di successo associato ad uno schema di Bernoulli. Una quantità di
+    interesse potrebbe essere 
+    \[
+      \mathbb{E}{(T_{5} \;|\; T_{1} = 3, T_{2} = 12, T_{3} = 14)}
+    \]
+    ossia il tempo medio di successo sapendo alcuni tempi precedenti.
+
+    Scrivo \(T_{5}\) in termini di \(T_{3}\), ossia \(T_{5} = T_{3} + {(T_{5} -
+    T_{3})}\).
+
+    Quindi volendo calcolare
+    \[
+      \mathbb{E}{(T_{5} \;|\; T_{1} = 3, T_{2} = 12, T_{3} = 14)} = 14 +
+      \frac{2}{p}
+    \]
+    
+\end{example}
+
+\section{Somme di V.A. i.i.d.}
+Generalizziamo la costruzione fatta per il processo di Bernoulli nel seguente
+modo: sia \(\{Y_{i}\} _{i \in \mathbb{N}} \) di variabili i.i.d. e definiamo
+\[
+  Z_{n} = \sum_{i=1}^{n} Y_{i} 
+\]
+siamo interessati alle proprietà del processo \(\{Z_{n}\} _{n \in \mathbb{N}}
+\). Se \(Y_{i} \sim \mathrm{Ber}{(p)}\) allora \(Z_{n} \equiv \cap\) e se
+\(Y_{i} \sim \mathrm{Geom}{(p)}\) allora \(Z_{n} \equiv T_k\).
+
+\begin{proposition}{}
+    Dato \(Z_{n}\) come prima, allora valgono le seguenti proprietà:
+\begin{itemize}[label = --]
+    \item Il processo \(\{Z_{n}\} \) ha \emph{incrementi indipendenti}, ossia 
+    \[
+      Z_{n_{1}} - Z_{n_{0}} , Z_{n_{2}}  - Z_{n_{1}} , \dots \text{ sono
+      indipendenti } \quad \forall n_{0} < n_{1} < \dots
+    \]
+    \item la distribuzione di \(Z_{n+m} - Z_n\) \textbf{non} dipende da \(m\)
+        (\emph{stazionarietà})
+    \item Vale la \emph{proprietà di Markov}~\eqref{eq:prop_markov}
+\end{itemize}
+\end{proposition}
+
+È chiaro che se supponiamo che \(\mathbb{E}{(Y_{n})}= a\) e
+\(\mathrm{Var}{(Y_{n})} = b^2\) allora \(\mathbb{E}{(Z_{n})} = na\) e
+\(\mathrm{Var}{(Z_{n})} = nb^2\) 
+
+\paragraph{Domanda:} Visto \(\{Z_{n}\} \) come identifico il valore di \(a\)?
+Come possi identificare la distribuzione delle \(Y_{i}\)?
+
+Per rispondere alla prima domanda uso la legge dei grandi numeri in forma
+debole:
+\[
+  \forall \varepsilon > 0 \quad  \lim _{n \to \infty} \mathbb{P}{\left( \left|
+  \frac{Z_{n}}{n} - a \right| > \varepsilon\right)} = 0
+\]
+Dunque il nostro tentativo di stima di \(a\) viene dalla quantità
+\(\frac{Z_{n}}{n}\). Per avere un buon risoltato di convergenza devo considerare
+\(\frac{Z_{n}}{n}{(\omega)}\) per (almeno) q.o. \(\omega \in \Omega\). A questo
+risponde la legge forte, che dice che
+\[
+  \text{per q.o. } \omega \in \Omega \quad  \lim_{n \to \infty}
+  \frac{Z_{n}}{n}{(\omega)} = a 
+\]

@@ -1,0 +1,1728 @@
+\chapter{Algebra Omologica}
+
+Sia \(\mathcal{A}\) una categoria preadditiva, e \(C{(\mathcal{A})}\) la
+categoria dei complessi. Siano \(X^{\cdot }\) e \(Y^{\cdot } \in
+C{(\mathcal{A})}\). Allora dati \(\kappa^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
+per ogni \(i \in \mathbb{Z}\) 
+\begin{equation}{}\label{eq:omotopia-complessi}
+    sono arrivato in ritardo
+\end{equation}
+
+
+\begin{definition}{Omotopia}
+    Sia \(f^\bullet \in C{(\mathcal{A})}{(X^{\cdot }, Y^{\cdot})}\) è
+    \emph{omotopo a 0} se \(\exists k^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
+    tale che vale~\eqref{eq:omotopia-complessi}.
+
+    \(f^{\bullet}\) e \(g^\bullet \in C{(\mathcal{A})}{(X^\bullet, Y^\bullet)}\)
+    sono \emph{omotopi} (denotato con \(f^\bullet \sim g^\bullet\)) se
+    \(f^\bullet - g^\bullet \) è omotopo a 0.
+\end{definition}
+
+\begin{remark}{} 
+    \(\mathtt{Htp}{(X^\bullet, Y^\bullet)} := \{f^\bullet \in C{(\mathcal{A})}
+    {(X^\bullet, Y^\bullet)} | f^\bullet \sim 0\} \) % TODO: cos'è
+\end{remark}
+
+Come conseguenza si ottiene una categoria preadditiva \(K{(\mathcal{A})} :=
+C{(\mathcal{A})} / \mathtt{Htp}\) (categoria \emph{omotopa} di \(\mathcal{A}\))
+con funtore additivo \(Q = Q_{\mathcal{A}} : C{(\mathcal{A})} \to
+K{(\mathcal{A})}\) tale che \(X^\bullet \mapsto X^\bullet\) e \(f^\bullet
+\mapsto [f^\bullet]\) 
+
+\begin{remark}{}
+    Si dimostra che se \(\mathcal{A}\) è abeliana, allora 
+    \[
+      \mathcal{A} \text{ è semisemplice } \iff K{(\mathcal{A})}\text{ è abeliana
+      } \iff K{(\mathcal{A})}\text{ è preabeliana }
+    \]
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F: \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    preadditive. Allora \(F\) induce funtori \(C{(F)} : C{(\mathcal{A})} \to C
+    {(\mathcal{B})}\) e \(K{(F)} : K{(\mathcal{A})} \to K{(\mathcal{B})}\) tali
+    che, per ogni \(X \in C{(\mathcal{A})}\), \(C{(F)} {(X^\bullet)} =
+    K{(F)}{(X^\bullet)} = \) 
+    \[
+       = {\left( \dots \to F{(X^{i-1})} \overset{F{(d^{i-1})}}{\to} F{(X^{i})}
+       \overset{F{(d^{i})}}{\to} F{(X^{i+1})} \right)} 
+    \]
+    e per funtorialità \(F{(d^{i})} \circ F{(d^{i-1})} = F{(d^{i} \circ
+    F^{i-1})} = F{(0)} = 0\) perché è additivo.
+
+    E esplicitamente \(\forall f^\bullet : X^\bullet \to Y^\bullet\),
+    \(C{(F)}{(f^\bullet)}^{i} := F{(f^{i})}\) e \(K{(F)} {([f^\bullet])} :=
+    [C{(F)}{(f^\bullet)}]\) (mostrare per esercizio che è sempre ben
+    definito). Di solito si scrive direttamente \(F\) invece di \(C{(F)}\) o
+    \(K{(F)}\) 
+\end{remark}
+
+\begin{lemma}{}
+    Sia \(\mathcal{A}\) una categoria abeliana. Sia \(f^\bullet \in
+    \mathtt{Htp}{(X^\bullet, Y^\bullet)}\). Allora \(H^{i}{(f^\bullet)} = 0\)
+    per ogni \(i \in Z\) 
+\end{lemma}
+\begin{proof}{}
+    \(f^{i} = d_{Y^\bullet} ^{i-1} \circ k^{i} + k^{i+1} \circ
+    d_{X^\bullet}^{i}\). Osservando il diagramma a righe esatte
+\[ \begin{tikzcd}
+	0 & \mathrm{Im}{(d_{X^\bullet} ^{i-1})} & \mathrm{Ker}{(d_{X^\bullet} ^{i})}
+      & H^{i}{(X^\bullet)} & 0 \\
+	0 & \mathrm{Im}{(d_{Y^\bullet} ^{i-1})} & \mathrm{Ker}{(d_{Y^\bullet} ^{i})}
+      & H^{i}{(Y^\bullet)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["I^{i}{(f^\bullet)}"', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["K^{i}{(f^\bullet)}", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{H^i(f^\bullet)}", dashed, from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd} \]
+
+Ma allora \(H^{i}{(f^\bullet)} = 0 \iff K^{i}{(f^\bullet)}\) fattorizza
+attraverso \(I^{i}{(Y^\bullet)} \to K^{i}{(Y^\bullet)}\) se e solo se
+\(\mathrm{Im}{(K^{i}{(f^\bullet)})} \subseteq \mathrm{Im}{(d_{Y^\bullet}
+^{i-1})} \). Allora \(K^{i}{(f^\bullet)}\) è indotto da \(f^{i}\), quindi da
+\(d_{Y^\bullet} ^{i-1} \circ K^{i}\) (perché \(d_{X^\bullet} ^{i}\) è 0 su
+\(K^{i}{(f^\bullet)}\)).
+\end{proof} 
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) abeliana. Allora \(\forall i \in \mathbb{Z}\) il funtore
+    \(H^{i} : C{(\mathcal{A})} \to \mathcal{A}\) induce un funtore additivo
+    \(H^{i} : K{(\mathcal{A})} \to \mathcal{A}\) 
+\end{corollary}
+
+\begin{definition}{Risoluzione}
+    Sia \(\mathcal{A}\) una categoria abeliana. Una \emph{risoluzione} a
+    \emph{sinistra}/\emph{destra} di un oggetto \(X \in \mathcal{A}\) è una
+    successione esatta 
+    \[
+     \dots \to X^{-2} \to X^{-1} \to X^{0} \to X \to 0 / 0 \to X \to X^{0} \to
+     X_{1} \to X_{2} \to \dots
+    \] 
+    (di solito si scrive \(\dots\to X_2 \to X_{1} \to X_{0} \to X \to
+    0\) nel caso di risoluzione sinistra).
+
+    Inoltre una tale soluzione ha \emph{lunghezza} \(n\) se (ad esempio nel caso
+    di risoluzione destra)
+    \[
+      X^{n} \neq 0 \text{ e } {(X^{i} = 0)} \quad \forall i > n
+    \]
+    Se tale \(n\) non esiste si dice che la lunghezza è \(\infty\) 
+\end{definition}
+
+Esistono diversi tipo di risoluzione a seconda del tipo di problemi che si sta
+affrontando. Per i nostri scopi vedremo di studiare gli oggetti iniettivi e
+suriettivi.
+
+\begin{definition}{}
+    Una risoluzione \emph{proiettiva}/\emph{iniettiva} di \(X \in \mathcal{A}\)
+    è una risoluzione \emph{sinistra}/\emph{destra} \emph{con} \(X_{i}\)
+    \emph{proiettivo} / \emph{con }\(X^{i}\) \emph{iniettivo} per ogni \(i \in
+    \mathbb{N}\).
+\end{definition}
+
+\begin{proposition}{}
+    Ogni \(X \in \mathcal{A}\) ha una risoluzione
+    \emph{proiettiva}/\emph{iniettiva} se e solo se \(\mathcal{A}\) ha
+    abbastanza \emph{proiettivi}/\emph{iniettivi}.
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] ovvio.
+    \item[\(\impliedby \)] \(\exists d^{0} : X^{0} \to X\) epimorfismo, con
+        \(X^{0}\) proiettivo. Allora \(\exists \tilde{d}^{1} : X^{1} \to
+        \mathrm{Ker}{(d^{0})}\) epi con \(X^{1}\) proiettivo. Allora \(d^{1} :=
+        \mathrm{Ker}{(d^{0})} \circ \tilde{d}^{1} : X^{1} \to X^{0}\) e si può
+        proseguire per induzione.
+\end{itemize}
+\end{proof}
+
+\begin{proposition}{}\label{prop:non-so-niente}
+    Sia \(\mathcal{A}\) una categoria abeliana e sia \(f : X \to Y\) un morfismo
+    di \(\mathcal{A}\). E siano
+    \[ \begin{tikzcd}
+	0 & X & X^{0} & X^{1} & \dots \text{ risoluzione di \(X\) }\\
+    0 & Y & I^{0} & I^{1} & \dots \text{ complesso con ogni \(I^{i}\) iniettivo}
+	\arrow[from=1-1, to=1-2]
+	\arrow["s", from=1-2, to=1-3]
+	\arrow["f"', from=1-2, to=2-2]
+	\arrow["d^{0}", from=1-3, to=1-4]
+	\arrow["f^{0}", dashed, from=1-3, to=2-3]
+	\arrow["d^{1}", from=1-4, to=1-5]
+	\arrow["f^{1}", dashed, from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["t",from=2-2, to=2-3]
+	\arrow["\ell^{0}", from=2-3, to=2-4]
+	\arrow["\ell^{1}", from=2-4, to=2-5]
+\end{tikzcd} \]
+    Si denoti inoltre \(X^\bullet := {\left( 0 \to X^{0} \overset{d^{0}}{\to}
+    X^{1} \to \dots \right)} \) e \(I^\bullet := {\left( 0 \to I^{0}
+\overset{\ell^{0}}{\to} I^{1} \to \dots \right)} \).
+    Allora
+\begin{enumerate}[label = \arabic*)]
+    \item \(\exists \, f : X^\bullet \to I^\bullet\) in \(C{(\mathcal{A})}\) che
+        estende \(f\), cioè \(f^0 \circ s = t \circ f\) 
+    \item \([f^\bullet]\) è unico in \(K{(\mathcal{A})}\) 
+\end{enumerate}
+\end{proposition}
+\begin{proof}{}
+    Siano \(\tilde{X}^\bullet\) e \(\tilde{I}^\bullet\) i complessi delle righe
+    del diagramma. In particolare \(\tilde{X}^{-1} = X\), \(\tilde{X}^{i} =
+    X^{i}\) per ogni \(i \in \mathbb{N}\) e \(\tilde{X}^{i} = 0\) per ogni \(i <
+    -1\). Similmente per \(\tilde{I}^{\bullet}\). Inoltre si denoti anche \(s =
+    d^{-1}\) e \(t = \ell^{-1}\).
+
+\begin{enumerate}[label = \arabic*)]
+    \item Cerco \(\tilde{f}^\bullet : \tilde{X}^\bullet \to \tilde{I}^\bullet\)
+        in \(C{(\mathcal{A})}\) tale che \(\tilde{f}^{-1} = f\). Dato \(n \in
+        \mathbb{N}\) e supponendo di avere già definito \(\tilde{f}^{i} \) per
+    ogni \(i < n\) tale che \(\tilde{f}^{i} \circ d^{i-1} = \ell^{i-1} \circ
+    \tilde{f}^{i-1}\) per ogni \(i < n\).
+
+    Cerco ora \(f^{n} = \tilde{f}^{n} : X^{n} \to I^{n}\) tale che \(f^{n} \circ
+    d^{n-1} = \ell^{n-1} \circ \tilde{f}^{n-1}\).
+    \[ \begin{tikzcd}
+	\tilde{X}^{n-2} & \tilde{X}^{n-1} & \tilde{X}^{n} = X^{n} \\
+	& \tilde{I}^{n-1} & I^{n}
+	\arrow["{d^{n-2}}", from=1-1, to=1-2]
+	\arrow["{d^{n-1}}", from=1-2, to=1-3]
+	\arrow["{\tilde{f}^{n-1}}"', from=1-2, to=2-2]
+	\arrow[from=1-2, to=2-3]
+	\arrow["{f^n}", dashed, from=1-3, to=2-3]
+	\arrow["{\ell^{n-1}}"', from=2-2, to=2-3]
+\end{tikzcd} \]
+    è esatto, dunque \(I^{n}\) è iniettivo. Allora
+    \[
+      \mathcal{A}{(X^{n}, I^{n})} \overset{d^{n-1 *}}{\to}
+      \mathcal{A}{(\tilde{X}^{n-1}, I^{n})} \overset{d^{n-2*}}{\to}
+      \mathcal{A}{(\tilde{X}^{n-2}, I^{n})}
+    \] è esatta, e quindi esiste \(f^{n} \in \mathcal{A}{(X^{n}, I^{n})}\) tale
+    che 
+    \begin{align*}
+      &d^{n-1*}{(f^{n})} = f^{n} \circ d^{n-1} = \ell_{n-1}  \circ
+      \tilde{f}^{n-1} \iff \\ \iff &0 = d^{n-2*}{\left( \ell^{n-1} \circ \tilde{f}^{n-1}
+      \right)} = \ell^{n-1} \circ \tilde{f}^{n-1} \circ d^{n-2} =
+      \underbrace{\ell^{n-1} \circ \ell^{n-2}}_{0} \circ \tilde{f}^{n-2}
+    \end{align*}
+
+    \item Dati \(f^\bullet, g^\bullet : X^\bullet \to I\) che estendono \(f\) ,
+        devo dimostrare che \(f^\bullet \sim g^\bullet\). Basta allora
+        dimostarre che dato \(h^\bullet : X^\bullet \to I^\bullet\) che estede
+        \(0 : X \to Y\), allora \(h^\bullet \sim 0\).
+        A tale scopo, sia \(\tilde{h}^\bullet : \tilde{X}^\bullet \to
+        \tilde{I}^\bullet\) dato da \(\tilde{h}^{i} := h^{i}\), \(\forall i \in
+        \mathbb{N}\) e \(\tilde{h}^{i} := 0\), \(\forall i < 0\). Allora
+        \(\tilde{h}^\bullet\) è un morfismo in \(C{(\mathcal{A})}\). Voglio
+        dunque dimostrare che \(\exists k^{i} : \tilde{X}^{i} \to
+        \tilde{I}^{i-1}\) tale che 
+        \begin{equation}\label{eq:helpext1}
+          \tilde{h}^{i} = \ell^{i-1} \circ k^{i} + k^{i+1} \circ d^{i} \quad
+          \forall i \in \mathbb{Z}\text{ , con \(k^{0} = 0\)}
+        \end{equation}
+        (infatti da questo seguirebbe che \(\tilde{h}^\bullet \sim 0 \) e
+        \(h^\bullet \sim 0\)).
+
+        Dato \(n \in \mathbb{N}\) e assumendo di avere già definito i \(k^{i}\)
+        per ogni \(i \le n\) tale che~\eqref{eq:helpext1} valga per ogni \(i <
+        n\). Cerco allora \(k^{n+1} : X^{n+1} \to I^{n}\) tale che
+        valga~\eqref{eq:helpext1} per \(i = n\). Allora il seguente diagramma
+        con prima riga esatta commuta:
+    \[ \begin{tikzcd}
+	\tilde{X}^{n-1} & {X}^{n} & {X}^{n+1} \\
+	& I^{n}
+	\arrow["{d^{n-1}}", from=1-1, to=1-2]
+	\arrow["{d^{n}}", from=1-2, to=1-3]
+	\arrow["{h^{n} - \ell^{n-1} \circ k^{n}}"', from=1-2, to=2-2]
+	\arrow["{k^{n+1}}", dashed, from=1-3, to=2-2]
+\end{tikzcd} \]
+    e come prima dunque \(\exists \, k^{n+1}\) tale che
+    valga~\eqref{eq:helpext1} per \(i = n\) se e solo se 
+    \begin{align*}
+        0 &= \ell^{n-1} \circ k^{n} \circ d^{n-1} = \ell^{n-1} \circ {\left(
+        \tilde{h}^{n-1} - \ell^{n-2} \circ k^{n-1} \right)} = \\ &= \tilde{h}^{n} \circ
+      d^{n-1} - \ell^{n-1} \circ \tilde{h}^{n-1} = 0
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}{}
+    Una risoluzione iniettiva di \(X \in \mathcal{A}\) categoria abeliana (se
+    esiste) è unica a meno di isomorfismo in \(K{(\mathcal{A})}\).
+\end{corollary}
+\begin{proof}{}
+    Siano \(0 \to X \to I^\bullet\) e \(0 \to X \to J^\bullet\) risoluzioni
+    iniettive di \(X\). Allora applico la proposizione~\ref{prop:non-so-niente}
+    con \(f = 1_X\), dunque \(\exists \, f^\bullet : I^\bullet \to J^\bullet\)
+    che estende \(1_X\). Analogamente \(\exists \, g^\bullet : J^\bullet \to
+    I^\bullet\) che estende \(1_X\). Segue che anche \(g^\bullet \circ f^\bullet
+    : I^\bullet \to I^\bullet\) estende \(1_X\), ma anche \(1_{i^\bullet} \)
+    estende \(1_X\), da cui \(g^\bullet \circ f^\bullet \sim 1_{I^\bullet} \) e
+    analogamente \(f^\bullet \circ g^\bullet \sim 1_{J^\bullet} \) da cui
+    \([f^\bullet]\) è isomorfismo.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi. Allora
+    c'è un funtore ``risoluzione iniettiva'' \(I_\mathcal{A} : \mathcal{A} \to
+    K(\mathcal{A})\) tale che \(I_{\mathcal{A}} {(X)} := I^\bullet\) e \(0 \to X
+    \to I^\bullet\) è una risoluzione iniettiva (AoC per poterla scegliere per
+    ogni \(X \in \mathcal{A}\)).
+
+    Inoltre \(\forall f : X \to Y\) in \(\mathcal{A}\), \(I_{\mathcal{A}} {(f)}
+    := [f^\bullet]\) con \(f^\bullet\) che estende \(f\). Si ottiene dunque un
+    funtore (esercizio) la cui classe di isomorfismo non dipende dalle scelte.
+\end{corollary}
+
+
+\begin{theorem}{}\label{thm:funtori-derivati}
+Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+abeliane. Se \(\mathcal{A}\) ha abbastanza iniettivi allora 
+\[
+  R^{i}F :  \mathcal{A}\overset{I_\mathcal{A}}{\to} K{(\mathcal{A})} \overset{F}{\to} 
+  K{(\mathcal{B})} \overset{H^{i}}{\to} \mathcal{B} \quad \forall i \in \mathbb{N}
+\]
+
+e ogni successione esatta \(\Sigma : 0 \to X \overset{f}{\to} Y \overset{g}{\to}
+Z \to 0\) in \(\mathcal{A}\) induce una successione esatta in \(\mathcal{B}\) 
+\[
+  0 \to R^{0}F{(X)} \overset{R^{0}F{(f)}}{\to} R^{0}F{(Y)}
+  \overset{R^{0}F{(g)}}{\to} R^{0}F{(Z)} \overset{w^{0}}{\to} R^{1}F{(X)}
+  \overset{R^{1}F{(f)}}{\to} \dots
+\]
+
+\end{theorem}
+
+% TODO recuperare una lezione da 1h
+
+\begin{corollary}{}
+\begin{enumerate}[label = \arabic*.]
+    \item \(R^{i}F\) è esatto al cntro \(\forall i \in \mathbb{N}\) e \(R^{0}F\)
+        è esatto a sinistra
+    \item \(R^{0}F \cong F \iff F\) è esatto a sinistra 
+    \item \(F\) è eatto se e solo se \(R^{0}F \cong F\) e \(R^{i}F \cong 0\),
+        ossia \(R^{0}F \cong F\) e \(R^{1}F \cong 0\) 
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Chiaro
+    \item Un'implicazione (\(\Rightarrow\)) è una diretta conseguenza di 1. Per
+        \(\impliedby \) invece, sia \(X \in \mathcal{A}\) e sia \(0 \to X \to
+        I^{0} \overset{d^{0}}{\to} I^{1} \to  \dots\) una risoluzione iniettiva
+        di \(X\). Allora
+        \begin{align*}
+            R^{0}F{(X)} &= H^{0}{(F{(I^{\bullet})})} = H^{0}{(0 \to F{(I^{0})}
+            \overset{F{(d^{0})}}{\to} F{(I^{1})} \to \dots)} \cong \\ &\cong
+          \mathrm{Ker}{(F{(d^{0})})} \overset{\text{\(F\) esatto a sx}}{\cong}
+          F{(\mathrm{Ker}{(d^{0})})} \cong F{(X)}
+        \end{align*}
+    \item Se \(R^{0}F \cong F\) e \(R^{i}F \cong 0\) per ogni \(i > 0\), allora
+        \(R^{0}F \cong F\) e \(R^{1} F \cong 0\). Adesso, per il punto 2 \(F\) è
+        esatto a sinsitra e anche a destra (poiché \(R^{1}F \cong 0\)). Resta da
+        dimostrare che se \(F\) è esatto, allora \(R^{i}F \cong 0\) per ogni \(i
+        > 0\). Ma effettivamente abbiamo che
+        \[
+          R^{i}F{(X)} = H^{i}{(F{(I^\bullet)})} = 0 \quad \forall i > 0
+        \]
+        poiché \(F\) è esatto e \(0 \to X \to I^{0} \to I^{1} \to \dots\) è
+        esatta, per cui anche la successione \(0 \to F{(X)} \to F{(I^{0})} \to F{(I^{1})} \to
+        \dots\) è esatta.
+\end{enumerate}
+\end{proof}
+\begin{remark}{}
+    I funtori derivati destri sono interessanti solo per funtori esatti a
+    sinistra (ma non a destra)
+\end{remark}
+
+
+\begin{definition}{Funtore derivato sinistro}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo, con
+    \(\mathcal{A}\) con abbastanza proiettivi. Allora i funtori derivati
+    sinistri di \(F\) sono 
+    \(
+        L_{i}F := {(R^{i}F^{op})}^{op}
+    \).
+
+    In altre parole, \(\forall X \in \mathcal{A}\), presa \(p_\bullet \to X \to
+    0\) una risoluzione proiettiva di \(X\) (con \(p_\bullet = \dots \to p_{1}
+    \to p_{0} \to 0\) e 
+    \[
+      L_{i}F{(X)} := H_{i}{(F{(p_\bullet)})} = H_{i}{(\dots \to F{(p_{1})} \to
+      F{(p_{0})} \to 0)}
+    \]
+\end{definition}
+
+Il teorema~\ref{thm:funtori-derivati} diventa: ogni \(\Sigma : 0 \to X
+\overset{f}{\to} Y \overset{g}{\to} Z \to 0\) in \(\mathcal{A}\) induce una
+successione esatta in \(\mathcal{B}\), data da
+\[
+  \dots \to l_{1}F{(Z)} \overset{w_{0}}{\to} L_{0}F{(X)}
+  \overset{L_{0}F{(f)}}{\to} L_{0}F{(Y)} \overset{L_{0}F{(g)}}{\to} L_{0}F{(Z)}
+  \to 0
+\]
+e il corollario diventa che \(L \circ F\) è esatto a destra, e \(L \circ F \cong
+F\) se e solo se \(F\) è esatto a destra.
+
+\begin{remark}{}
+    Se abbiamo \(F : \mathcal{A}^{op} \to \mathcal{B}\) additivo, con
+    \(\mathcal{A}\) con abbastanza proiettivi, allora gli \(R^{i}F\) si
+    calcolano con le risoluzione proiettive in \(\mathcal{A}\), ossia \(\forall
+    X \in \mathcal{A}\), \(R^{i}F{(X)} = H^{i}{(F{(p_\bullet)})}\) con
+    \(p_\bullet \to X \to 0\) risoluzione proiettiva.
+
+    Presa dunque \(0 \to X \to Y \to Z \to 0\) esatta in \(\mathcal{A}\), questa
+    induce \(0 \to R^{0}F{(Z)} \to R^{0}F{(Y)} \to R^{0}F{(X)} \to R^{1}F{(Z)}
+    \to \dots\) esatta in \(\mathcal{B}\).
+\end{remark}
+
+\begin{remark}{}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) additivo, con \(\mathcal{A}\) con
+    abbastanza iniettivi. Se ho un diagramma commutativo a righe esatte in
+    \(\mathcal{A}\) del tipo
+\[ \begin{tikzcd}
+	{\Sigma:} & 0 & X & Y & Z & 0 \\
+	{\Sigma^\prime:} & 0 & {X^\prime} & {Y^\prime} & {Z^\prime} & 0
+	\arrow[from=1-2, to=1-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+
+allora il seguente diagramma commuta:
+\[ \begin{tikzcd}
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
+    \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
+         R^{i+1}F{(X^{\prime})}& \dots
+	\arrow[from=1-1, to=1-2]
+	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
+	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+
+Inoltre Se \(F, F^{\prime} : \mathcal{A} \to \mathcal{B}\) sono funtori
+additivi, con \(\mathcal{A}\) con abbastanza iniettivi e \(\alpha : F \to
+F^{\prime}\) una trasformazione naturale, allora \(\alpha\)  induce
+\(C{(\alpha)} : C{(F)} \to C{(F')}\) (\(C{(\mathcal{A})} \to C{(\mathcal{B})}\))
+data da \(C{(\alpha)}_X : C{(F)}{(X^\bullet)} \to C{(F)}{(Y^\bullet)}\) definita
+nel modo ovvio. Si scrive per brevità \(\alpha\) al posto di \(C{(\alpha)}\).
+Analogamente \(\alpha\) al posto di \(K{(\alpha)}\) definita nello stesso modo.
+Allora \(\alpha\) induce \(H^{i} \circ \alpha \circ I_{\mathcal{A}} \), \(H^{i}
+\circ F \circ I_\mathcal{A} = R^{i}F \to R^{i}F^{\prime}\) trasformazione
+naturale, per ogni \(i \in \mathbb{N}\). In altre parole, il seguente diagramma
+commuta:
+\[ \begin{tikzcd}
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
+    \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
+         R^{i+1}F{(X^{\prime})}& \dots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{(R^{i}\alpha)}_X"', from=1-2, to=2-2]
+	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
+	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
+	\arrow["f", from=1-3, to=1-4]
+	\arrow["x"', from=1-3, to=2-3]
+	\arrow["g", from=1-4, to=1-5]
+	\arrow["y"', from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["z"', from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f^\prime}", from=2-3, to=2-4]
+	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd} \]
+\end{remark}
+\begin{example}{}
+   Sia \(\mathcal{A}\) una categoria abeliana, \(X \in \mathcal{A}\). Allora i
+   funtori \(\mathcal{A}{(X, -)} : \mathcal{A} \to \mathtt{Ab}\),
+   \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to \mathtt{Ab}\) sono esatti a
+   sinistra. Se \(\mathcal{A}\) ha abbastanza iniettivi si indica con 
+   \[
+     \mathtt{Ext}_{\mathcal{A}}^{i}{(X, -)} := R^{i}{(\mathcal{A})}{(X, -)}
+   \]
+   e per ogni successione esatta in \(\mathcal{A}\), \(0 \to Y^{\prime}
+   \overset{f}{\to} Y \overset{g}{\to} Y'' \to 0\) ottengo una successione
+   esatta in \(\mathtt{Ab}\), 
+   \[
+     \dots \to \mathrm{Ext}_{\mathcal{A}} ^{i}{(X, Y')} \overset{f_*}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i}{(X, Y)} \overset{g_*}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i}{(X, Y'')} \overset{w^{i}}{\to}
+     \mathrm{Ext}_\mathcal{A}^{i+1}{(X, Y')}
+   \]
+   con \(\mathrm{Ext}_\mathcal{A}^{i}{(X, -)} \cong \mathcal{A}{(X, -)} =
+   \mathrm{Hom}_\mathcal{A}{(X, -)}\).
+
+   Se \(\mathcal{A}\) ha abbastanza proiettivi indichiamo con
+\(\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(-, X)} = R^{i}{(\mathcal{A})}{(-,
+   X)}\). Esplicitamente se \(0 \to Y' \overset{f}{\to} Y \overset{g}{\to} Y''
+   \to 0\) è una successione esatta in \(\mathcal{A}\), allora essa induce la
+   successione esatta
+   \[
+    \dots \to \overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y'', X)} \overset{g^{*}}{\to}
+\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y, X)} \overset{f^{*}}{\to}
+\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(Y'', X)}
+\overset{\overline{w}^{i}}{\to}
+ \overline{\mathrm{Ext}}_\mathcal{A}^{i+1}{(Y'', X)} \to \dots
+   \]
+   Se \(\mathcal{A} =A\mathtt{-Mod}\) scrivo \(\mathrm{Ext}_A^{i}\) e
+\(\overline{\mathrm{Ext}}_A^{i}\) invece del più pedante
+   \(\mathrm{Ext}_{A\mathtt{-Mod}} ^{i}\) e
+\(\overline{\mathrm{Ext}}_{A\mathtt{-Mod}} ^{i}\).
+
+Inoltre, \(\forall M \in \mathtt{Mod-}A\), \(M \otimes_A - : A\mathtt{-Mod} \to
+\mathtt{Ab}\) è esatto a destra. Allora si indica \(\mathrm{Tor}_i^{A}{(M, -)}
+:= L_{i}{(M \otimes_A -)}\) e per ogni \(0 \to N' \overset{f}{\to} N
+\overset{g}{\to} N'' \to 0\) esatta in \(A\mathtt{-Mod}\), essa induce
+\[
+  \dots \to \mathrm{Tor}_i^{A}{(M, N')} \overset{f_*}{\to}
+  \mathrm{Tor}_i^{A}{(M, N)} \overset{g_*}{\to} \mathrm{Tor}_i^{A} \to
+  \mathrm{Tor}_{i+1} ^{A}{(M, N')} \to \dots
+\]
+e il funtore \(\mathrm{Tor}_0{(M, -)} \cong M \otimes_A -\).
+
+Dualmente, se \(N \in A\mathtt{-Mod}\), allora \(- \otimes_A N : \mathtt{Mod-}A
+\to \mathtt{Ab}\) è esatto a destra, dunque \(\overline{\mathrm{Tor}}_i^{A}{(-,
+N)} := L_{i}{(- \otimes_A N)}\).
+
+\end{example}
+
+Sia ora \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi, \(f : X
+\to X'\) un morfismo di \(\mathcal{A}\). Allora \(\forall Y \in \mathcal{A}\),
+\(f^{*} : \mathcal{A}{(X', Y)} \to \mathcal{A}{(X, Y)}\) definisce una
+trasformazione naturale \(f^{*} : \mathcal{A}{(X', -)} \to \mathcal{A}{(X, -)}\)
+che induce una trasformazione naturale \(R^{i}f^{*} =: f^{*} :
+\mathrm{Ext}_\mathcal{A}^{i}{(X', -)} \to \mathrm{Ext}^{i}_\mathcal{A}{(X, -)}\)
+per ogni \(i \in \mathbb{N}\). Si ottiene dunque un funtore
+\(\mathrm{Ext}_\mathcal{A}^{i}{(-, =)} : \mathcal{A}^{op} \times \mathcal{A} \to
+\mathtt{Ab}\) tale che \(\mathrm{Ext}_\mathcal{A}^{0}{(-, =)} \cong
+\mathcal{A}{(-, =)}\). 
+
+Analogamente, se \(\mathcal{A}\) ha abbastanza proiettivi, ottengo, per ogni \(i
+\in \mathbb{N}\), un funtore \(
+  \overline{\mathrm{Ext}}_\mathcal{A}^{i} : \mathcal{A}^{op} \times \mathcal{A}
+  \to \mathtt{Ab} \text{ tale che } \overline{\mathrm{Ext}}_\mathcal{A}^{0}{(-,
+  =)} \cong \mathcal{A}{(-, =)}
+\). 
+
+Analogamente (sorry se qui noi si continua a fare analogie), per ogni anello
+\(A\) si ottengono funtori \(\mathrm{Tor}_i^{A}{(-, =)}\),
+\(\overline{\mathrm{Tor}}_i^{A}{(-, =)} : \mathtt{Mod-}A \times A\mathtt{-Mod}
+\to \mathtt{Ab}\) tali che \(\mathrm{Tor}_0^{A}{(-, =)} \cong
+\overline{\mathrm{Tor}}_0^{A}{(-, =)} \cong - \otimes_A =\).
+
+\begin{proposition}{}
+    Siano \(F, F', F'' : \mathcal{A} \to \mathcal{B}\) funtori additivi,
+    \(\mathcal{A}\) con abbastanza iniettivi, \(F' \overset{\alpha}{\to} F
+    \overset{\beta}{\to} F''\) trasformazioni naturali tali che \(\forall I \in
+    \mathcal{A}\) iniettivo, la successione \(0 \to F'{(I)}
+    \overset{\alpha_I}{\to} F{(I)} \overset{\beta_I}{\to} F''{(I)} \to 0\) è
+    esatta in \(\mathcal{B}\)\dots
+    
+    Allora, per ogni \(X \in \mathcal{A}\), la seguente successione è esatta in
+    \(\mathcal{B}\):
+    \[
+      \dots \to R^{i}F'{(X)} \overset{{(R^{i}\alpha)}_X}{\to} R^{i}F{(X)}
+      \overset{{(R^{i}\beta)}_X}{\to} R{(i)}F''{(X)} \to R^{i+1}F''{(X)} \to \dots
+    \]
+\end{proposition}
+
+\begin{proof}{}
+    \(0 \to X \to I^\bullet\) è una risoluzione iniettiva di \(X\). Allora
+    \(R^{i}F^{(', '')}{(X)} := H^{i}{(F^{{(', '')}}{(I^\bullet)})}\). Allora la
+    successione 
+    \[
+      0 \to F'{(I^\bullet)} \overset{\alpha_{I^\bullet} }{\to} F{(I^\bullet)}
+      \overset{\beta_{I^\bullet} }{\to} F''{(I^\bullet)} \to 0
+    \]
+    è esatta in \(C{(\mathcal{B})}\) perché per ipotesi \(0 \to F'{(I^{n})}
+    \overset{\alpha_{I^{n}} }{\to} F{(I^{n})} \overset{\beta_{I^{n}} }{\to}
+    F''{(I^{n})}\) lo è in \(\mathcal{B}\) e appplico la successione esatta di
+    coomologia.
+\end{proof}
+
+\begin{corollary}{}
+    Sia \(\mathcal{A}\) con abbastanza iniettivi. Una successione \(0 \to X''
+    \overset{f}{\to} X \overset{g}{\to} X' \to 0\) esatta in \(\mathcal{A}\)
+    induce, per ogni \(Y \in \mathcal{A}\), la successione esatta in
+    \(\mathtt{Ab}\) 
+    \[
+      \dots \to \mathrm{Ext}_{\mathcal{A}^{i}{(X', Y)}} \overset{g^{*}}{\to} 
+      \mathrm{Ext}_{\mathcal{A}}^{i}{(X, Y)} \overset{f^{*}}{\to}  \mathrm{Ext}_{\mathcal{A}}
+      ^{i}{(X'', Y)} \to \mathrm{Ext}_\mathcal{A}^{i+1}{(X', Y)} \to \dots
+    \]
+    e analogamente, partendo dalla successione esatta corta \(0 \to Y' \to Y \to
+    Y'' \to 0\) esatta in \(\mathcal{A}\), allora \(\forall X \in \mathcal{A}\)
+    la seguente successione è esatta in \(\mathtt{Ab}\):
+\end{corollary}
+
+
+Sia \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi. Allora
+\(\mathrm{Ext}_\mathcal{A}^{i}{(X, -)} := R^{i}\mathcal{A}{(X, -)}\).
+Analogamente se \(\mathcal{A}\) ha abbastanza proiettivi
+\(\overline{\mathrm{Ext}}_{\mathcal{A}} ^{i}{(-, X)} := R^{i}\mathcal{A}{(-,
+X)}\).
+
+\begin{theorem}{}
+    Se \(\mathcal{A}\) ha abbastanza iniettivi e proiettivi, allora
+    \(\mathrm{Ext}_\mathcal{A}^{i} {(-, =)} \cong
+    \overline{\mathrm{Ext}}_\mathcal{A}^{i} {(-, =)}\), \(\forall i \in
+    \mathbb{N}\).
+\end{theorem}
+\begin{remark}{}
+    Sapevamo già che entrambi i (bi)funtori mandano successioni esatte corte in
+    ogni argomento in successioni esatte lunghe.
+\end{remark}
+\begin{proof}{}
+    È necessario trovare un isomorfismo naturale \(\theta^{i} :
+    \mathrm{Ext}^{i}{(-, =)} \to \overline{\mathrm{Ext}}^{i}{(-, =)}\) per ogni \(i \in
+    \mathbb{N}\). Dimostriamone l'esistenza per induzione su \(i\). Se \(i=0\)
+    siamo a cavallo, poiché \(\mathrm{Ext}^{0}{(-, =)} \cong \mathcal{A}{(-, =)}
+    \cong \overline{\mathrm{Ext}}^{0}{(-, =)}\). Supponiamo ora che esista un
+    \(\theta^{i}\) e dimostriamo che esiste \(\theta^{i+1}\).
+
+    A tale scopo sia \(X, Y \in \mathcal{A}\). Sia allora \(0 \to Y \to I \to Z
+    \to 0\) una successione esatta con \(I\) iniettivo (\(I\) esiste perché
+    \(\mathcal{A}\) ha abbastanza iniettivi, \(Z\) è il coker). Applico le
+    successioni esatte lunghe
+
+\[\begin{tikzcd}
+    && \mathrm{CoKer}{(g_*)} & R^{i+1} \mathcal{A}{(X, -)}{(I)} \\
+	\mathrm{Ext}^{i}{(X,I)} & \mathrm{Ext}^{i}{(X,Z)} &
+    \mathrm{Ext}^{i+1}{(X,Y)} & \mathrm{Ext}^{i+1}{(X,I)} = 0 \\
+	\overline{\mathrm{Ext}}^{i}{(X,I)} & \overline{\mathrm{Ext}}^{i}{(X,Z)} &
+    \overline{\mathrm{Ext}}^{i+1}{(X,Y)} & \overline{\mathrm{Ext}}^{i+1}{(X,I)}
+    = 0
+	\arrow["{g_*}", from=2-1, to=2-2]
+	\arrow["{\theta^i_{X,I}}"', from=2-1, to=3-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{\theta^i_{X,Z}}"', from=2-2, to=3-2]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=2-3, to=1-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow["{\theta^{i+1}_{X,Y}}"', dashed, from=2-3, to=3-3]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-4, to=1-4]
+	\arrow["{g_*}", from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+\end{tikzcd}\]
+    Per la proprietà universale del \(\mathrm{CoKer}\), \(\exists !
+    \theta^{i+1}_{X,Y} \) che rende il diagramma commutativo e si verifica che
+    \(\theta^{i+1}\) è naturale. Allora se \(\theta^{i}\) è iso, anche
+    \(\theta^{i+1}\) lo è.
+\end{proof}
+
+\begin{example}{}
+    Sia \(A\) un PID non campo. Allora \(\forall M \in A\mathtt{-Mod}\), esiste
+    una risoluzione proiettiva \(0 \to P_{1} \to P_{0} \to M \to 0\) (perché un
+    sottomodulo di un modulo libero è libero). Analogamente esiste la
+    risoluzione iniettiva \(0 \to M \to I^{0} \to I^{1} \to 0\) (poiché
+    iniettivo significa divisibile e un quozione di un divisibile è divisibile).
+    Quindi \(\forall F : A\mathtt{-Mod} \to \mathcal{A}\) additivo con
+    \(\mathcal{A}\) una categoria abeliana, \(R^{i}F \cong 0 \cong L_{i} F\) per
+    ogni \(i > 1\). 
+
+    Allora come posso trovare \(\mathrm{Ext}_A^{i}\) e \(\mathrm{Tor}_i^{A}\),
+    per \(i = 0, 1\), sui moduli liiii (e quindi sui moduli f.g.)?
+    \[
+      \mathrm{Ext}_A^{i}{(A, -)} = R^{i}\mathrm{Hom}_A{(A,-)} \cong R^{i}
+      \mathrm{id}_{A\mathtt{-Mod}} \cong \begin{cases}{}
+          \mathrm{id}_{A\mathtt{-Mod}} & \text{ se }i = 0\\
+          0 & \text{ se } i > 0
+      \end{cases}
+    \]
+    e a analogamente
+    \[
+      \mathrm{Tor}_i^{A}{(A, -)} \cong \begin{cases}{}
+          \mathrm{id}_{A\mathtt{-Mod}} & \text{ se } i = 0 \\
+          0 & \text{ se } i > 0
+      \end{cases}
+    \]
+
+    Sia ora \(0 \cong a \in A \sminus A^{*}\). Allora per ogni \(M \in
+    A\mathtt{-Mod}\) ci chiediamo cosa siano \(\mathrm{Ext}_a^{i}{(A / {(a)},
+    M)}\) e \(\mathrm{Tor}{(A / {(a)}, M)}\).
+    Consideriamo la risoluzione proiettiva di \(A / {(a)}\), \( 0 \to A
+    \overset{-\cdot a}{\to} A \to A / {(a)} \to 0\). Allora
+    \begin{align*}
+        \mathrm{Ext}_\mathcal{A}^{i} {(A / {(a)}, M )} &\cong
+      H^{i}{\left(\mathrm{Hom}_A{\left( {(0 \to A \overset{-\cdot a}{\to} A \to 0)},
+M\right)} \right)} \cong \\ &\cong H^{i}{\left( 0 \to M \cong \mathrm{Hom}_A{(A, M)}
+      \overset{\cdot a}{\to} M \to 0 \right)} \cong \begin{cases}{}
+          \mathrm{Ker}{(M \overset{-\cdot a}{\to} M)} & \text{ se } i = 0 \\
+          \mathrm{CoKer}{(M \overset{-\cdot a}{\to} M)} & \text{ se } i = 1
+      \end{cases}
+    \end{align*}
+    E abbiamo un risultato analogo per il \(\mathrm{Tor}_i^{A}{(A / {(a)}, M)}\).
+
+    Se \(M = A\), allora \(\mathrm{Ker}{(A \overset{-\cdot a}{\to} A)} = 0\) e
+    \(\mathrm{CoKer}{(A \overset{-\cdot a}{\to} A)} = A / {(a)}\). Quindi
+    \(\mathrm{Hom}_A{(A/{(a)}, A)} = 0 = \mathrm{Tor}_1^{A}{(A / {(a)}, A)}\) e
+    \(\mathrm{Ext}^{1}_A{(A / {(a)}, A)} \cong A /{(a)} \cong A / {(a)}
+    \otimes_A A\). 
+
+    Sia \(M = A / {(b)}\), con \(0 \neq b \in A \sminus A^{*}\).
+    Chi sono allora \(\mathrm{Ker}\) e \(\mathrm{Coker}\) di \(A / {(b)}
+    \overset{-*a}{\to} A / {(b)}\)? Prendiamo \(d := \mathrm{mcd}{(a, b)}\).
+    Allora \(a = da'\) e \(b = db'\) e \(mcd{(a', b')} = 1\). A questo punto è
+    facile vedere che \(\mathrm{Im}{\left( A / {(a)} \overset{\cdot a}{\to} A /
+    {(b)}\right)} {(a,b)}/{(b)} = {(d)}/{(b)} = {(d)}/{(db')}\), dunque il
+    \(\mathrm{Coker}\) di \(A/{(b)} \overset{-\cdot a}{\to} A/{(b)}\) è 
+    \[
+      {\left( \frac{A}{{(b)}} \right)} / {\left( \frac{{(d)}}{{(b)}} \right)} \cong A /
+      {(d)}
+    \]
+    Per il Ker, notiamo che
+    \[
+        \mathrm{Im} {(- \cdot a)} \cong {\left( \frac{A}{{(b)}} \right)} /
+        {\left( \frac{{(b'')}}{{(b)}} \right)} = A / {(b'')} \implies b'' = b'
+    \]
+    Da cui \(\mathrm{Ker}{(- \cdot a)} = \frac{{(b')}}{{(b)}} =
+    \frac{{(b')}}{{(db')}} = A / {(d)}\), per cui
+    \[
+      \mathrm{Ext}_A^{i}{\left( A / {(a)}, A / {(b)} \right)} \cong
+      \mathrm{Tor}_i^{A}{\left( A / {(a)}, A / {(b)} \right)} \cong A / {(d)} =
+      A / {(a, b)} \quad \forall i \in \{0, 1\} 
+    \]
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) un PID non campo, \({(p)} = J \subseteq A \) un ideale massimale,
+    con \({(p)} \in A\) irriducibile. Sia \(\overline{A} := A / J^2\). Allora
+    \(\overline{J} := J / J^2 \subseteq \overline{A} \) è ideale, e in
+    particolare è l'unico non banale. Inoltre \(\overline{J} = \overline{A} /
+    \overline{J} \in \overline{A}\mathtt{-Mod}\). Voglio allora calcolare
+    \(\mathrm{Ext}_{\overline{A}}^{i}{(J, J)}\) e
+    \(\mathrm{Tor}_i^{\overline{A}}{(\overline{J}, \overline{J})}\).
+    \(\overline{A} \overset{-*\overline{p}}{\to} \overline{A}\) ha immagine e
+    nucleo \(\overline{J}\), e conucleo \(\overline{A} / \overline{J} =
+    \overline{J}\). 
+
+    Quindi \(\dots \to \overline{A} \overset{-\cdot \overline{p}}{\to}
+    \overline{A} \overset{-\cdot \overline{p}}{\to} \overline{A} \to
+    \overline{J} \to 0\) è risoluzione proiettiva di \(\overline{J}\). Allora
+    \begin{align*}
+        \mathrm{Ext}_A^{i}{(\overline{J}, \overline{J})} &= H^{i}{\left(
+      \mathrm{Hom}_{\overline{A}} {\left( {\left( \dots \to \overline{A}
+\overset{\overline{p}}{\to} \overline{A} \to 0 \right)} , \overline{J} \right)}
+                \right)} \cong \\ &\cong H^{i} {\left( 0 \to \overline{J} \overset{-\cdot
+\overline{p}=0}{\to} \overline{J} \to \dots\right)} \cong \overline{J} \quad
+\forall i \in \mathbb{N}
+    \end{align*}
+    Analogamente \(\mathrm{Tor}_i^{\overline{A}}{(\overline{J}, \overline{J})}
+    \in \mathbb{N} \cup \{+\infty\} 
+    \cong \overline{J}\), per ogni \(i \in \mathbb{N}\).
+\end{example}
+
+\begin{definition}{Dimensione iniettiva/proiettiva}
+Sia \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi. Sia \(0\neq X \in
+\mathcal{A}\). Allora la \emph{dimensione iniettiva} di \(X\) è
+\[
+  \mathrm{idim}{(X)} := \min \{n \in \mathbb{N} : \exists \text{ risol. inj. di
+  \(X\) di lunghezza \(n\)}\} 
+\]
+e la \emph{dimensione proiettiva} di \(X\), \(\mathrm{pdim}{(X)}\)  è la stessa cosa per risoluzioni
+proiettive.
+
+È facile vedere che \(\mathrm{idim}{(X)} = \sup \{ n \in \mathbb{N} :
+\mathrm{Ext}_\mathcal{A}^{n}{(-, X)} \neq 0\} \). Motivati dalla forma di questa
+espressione equivalente, si definisce la \emph{dimensione globale} di
+\(\mathcal{A}\) come
+\[
+  \mathrm{gldim}{(\mathcal{A})} := \sup \{n \in \mathbb{N} :
+  \mathrm{Ext}_{\mathcal{A}}^{n}{(-, =)} \not\cong 0 \} 
+\]
+e se \(\mathcal{A}\) ha abbastanza iniettivi, \(\mathrm{gldim}{(\mathcal{A})} =
+\sup \{ \mathrm{idim}{(X)} : X \in \mathcal{A}\} \). In particolare dato \(A\)
+anello, si definiscono
+\[
+  \mathrm{lgldim}{(A)} := \mathrm{gldim}{(A\mathtt{-Mod})} \text{  e  }
+  \mathrm{rgldim}{(A)} := \mathrm{gldim}{(\mathtt{Mod-}A)}
+\]
+\end{definition}
+
+\begin{remark}{}
+chiaramente se \(A\) è un anello comutativo o noetheriano (sia a dx che a sx)
+\(\mathrm{lgldim}{(A)} = \mathrm{rgldim}{(A)} =: \mathrm{gldim}{(A)}\). 
+
+Inoltre se \(A\) è commutativo, neotheriano e locale (i.e. con un solo ideale
+massimale \(J\)), Allora \(\dim\footnote{La dimensione (di KRULL) di \(A\neq 0 \) commutativo è definita come
+    \(\dim A = \sup \{n \in \mathbb{N} : \exists P_{0} \subsetneq p_{1} \subsetneq \dots
+\subsetneq p_n \text{ ideali primi di \(A\)}\}\)} A
+\le \dim_{A/J}{(J / J^2)} < \infty\) e \(A\)
+si dice \emph{regolare} se l'uguaglianza si realizza, e dunque non è \(\le \) ma
+\(=\). Si dimostra che \(A\) è regolare se e solo se \(\mathrm{gldim}{(A)} <
+\infty\) e in tal caso \(\mathrm{gldim}{(A)} = \dim A\) 
+\end{remark}
+
+Una definizione alternativa di \(\mathrm{Ext}_\mathcal{A}^{i}\) (anche quando
+\(\mathcal{A}\) non ha abbastana iniettivi o proiettivi) è la seguente. Sia
+\(\mathcal{A}\) una categoria abeliana. Allora \(\forall X, Y \in \mathcal{A}\)
+si definisce
+\[
+  E^{1}_\mathcal{A}{(X, Y)} := \{ \varepsilon : 0 \to Y \overset{f}{\to} Z
+  \overset{g}{\to} X \to 0 \text{ successione esatta}\}/_\sim 
+\]
+dove \(\varepsilon \sim \varepsilon' : 0 \to Y \overset{f'}{\to} Z'
+\overset{g'}{\to} X \to 0\) se e solo se \(\exists h : Z \to Z'\) tale che \(g
+\circ f =f'\) e \(g' \circ h = g\), o in altre parole il seguente diagramma
+commuta
+\[ \begin{tikzcd}
+	0 & Y & Z & X & 0 \\
+	0 & Y & {Z'} & X & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["{1_Y}"', from=1-2, to=2-2]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow["h"', dashed, from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{1_Y}"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f'}", from=2-2, to=2-3]
+	\arrow["{g'}", from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd} \]
+\begin{remark}{}
+    \(h\) è isomorfismo (per il lemma del seprente), dunque \(\sim \) è una
+    relazione di equivalenza.
+\end{remark}
+
+Se \(\mathcal{A}\) ha abbastanza iniettivi o proiettivi allora si dimostra che
+la funzione
+\begin{align*}
+    \mathrm{E}_\mathcal{A}^{1}{(X, Y)} &\to \mathrm{Ext}_\mathcal{A}^{1}{(X, Y)}
+    \\
+    [\varepsilon] \longmapsto \omega^{0}{(\varepsilon)}{(1_X)}
+\end{align*}
+applicando \(\mathcal{A}{(X, -)}\) a \(\varepsilon\) trovo successioni esatte
+corte in \(\mathtt{Ab}\) 
+\[
+  \mathcal{A}{(X, Z)} \overset{g_*}{\to} \mathcal{A}{(X, X)}
+  \overset{w^{0}{(\varepsilon)}}{\to} \mathrm{Ext}^{1}_\mathcal{A}{(X, Y)} \to
+  \dots
+\]
+Si dimostra che \(\mathrm{E}^{1}_\mathcal{A}{(X, Y)}\) ha struttura di gruppo
+abeliano (naturale) in ogni caso dove 0 è la classe di \(\sim \) delle successioni esatte
+corte che si spezzano.
+Più in generale si definisce, \(\forall n \ge  1\),
+\[
+  \mathrm{E}_\mathcal{A}^{n}{(X, Y)} := \{0 \to Y \to Z_{1} \to \dots \to Z_n
+  \to X \to 0 \text{ esatta}\}/_\sim 
+\]
+cno \(\sim \) relazione d'equivalenza generata da \(\sim'\) definita come
+\(\varepsilon \sim' \varepsilon' : 0 \to Y \to Z_{1}' \to \dots Z'_n \to X \to
+0\) e se e solo se \(\exists h_i : Z_{i} \to Z'_i\) per ogni \(i = 1..n\)  che
+rendono il diagramma commutativo.
+
+
+    Dato \(F : \mathcal{A} \to \mathcal{B}\) additivo tra categorie abeliane, si
+    possono definire \(R^{i}F : \mathcal{A} \to \mathcal{B}\) tali che vale il 
+    teorema fondamentale dei funtori derivati. Se \(\exists  \mathcal{J}
+    \subseteq \mathcal{A} \) sottocategoria piena tale che 
+\begin{enumerate}[label = \arabic*)]
+    \item \(\forall X \in \mathcal{A}\), \(\exists 0 \to X \to I^{0} \to I^{1}
+        \to \dots\) risoluzione con \(I^{i} \in \mathcal{J}\) 
+    \item Se la successione \(0 \to I^{0} \to I^{1} \to \dots\) è esatta in \(\mathcal{A}\) con
+        \(I^{i} \in \mathcal{J}\), allora \(0 \to F{(I^{0})} \to F^{I^{1}} \to
+        \dots\) è esatta
+\end{enumerate}
+poi si definisce \(R^{i}F{(X)} := H^{i}{(F{(I)})}\) dove \(0 \to X \to I\) è
+esatta e \(I^{i} \in \mathcal{J}\). Se \(\mathcal{A}\) ha abbastanza inietivi si
+può sempre prendere la sottocatoria data da
+\[
+  \mathrm{Ob}{(J)} = \{X \in \mathcal{A} : X \text{ iniettivo}\} 
+\]
+
+\begin{example}{}
+    Se \(A\) è un anello, allora si può calcolare \(\mathrm{Tor}_i^{A}\) usando
+    le risoluzioni \emph{piatte}.
+\end{example}
+
+
+\subsection{Fasci}
+
+Sia \(X\) uno spazio topologico. Allora l'insieme \(\mathrm{Open}{(X)}\) degli
+aperti di \(X\), ordinato da \(\supseteq\), forma una categoria
+\(\mathrm{Open}{(X)}\).
+
+\begin{definition}{Prefasci}
+    La categoria dei \emph{prefasci} su \(X\) a valori in una categoria
+    \(\mathcal{C}\) è 
+    \[
+      \mathtt{Pfh}{(X, C)} = \mathtt{Fun}{(\mathrm{Open}{(X)}^{op}, \mathcal{C})}
+    \]
+    cioè \(\mathcal{F} \in \mathtt{Pfh}{(X, \mathcal{C})}\) è dato da
+    \(\mathcal{F}{(U)} \in \mathcal{C}\) per ogni \(U \subseteq X \) aperto e da
+    un morfismo di \(\mathcal{C}\), \(\rho_{V,U} : \mathcal{F}{(V)} \to
+    \mathcal{F}{(U)}\) per ogni \(U \subseteq V \subseteq X  \) aperti tale che
+    \(\rho_{U,U} = 1_{\mathcal{F}{(U)}} \) e \(\forall U \subseteq V \subseteq W
+    \) aperti, \(\rho_{W, U} = \rho_{V, U} \circ \rho_{W, V} \). Inoltre per
+    ogni \(\mathcal{F}, \mathcal{G} \in \mathtt{Pfh}{(X, \mathcal{C})}\), un
+    morfismo \(\varphi  : \mathcal{F} \to \mathcal{G}\) è dato da \(\varphi_{U}
+    : \mathcal{F}{(U)} \to \mathcal{G}{(U)}\) morfismo di \(\mathcal{C}\) tale
+    che \(\forall U \subseteq V \subseteq X  \) aperti, 
+    \[
+      \varphi_U \circ \rho_{V,U} ^{\mathcal{F}} = \rho_{V, U} ^{\mathcal{G}}
+      \circ \varphi_V
+    \]
+    o equivalentemente il seguente diagramma commuta:
+\[\begin{tikzcd}
+	{\mathcal{F}{(V)}} & {\mathcal{F}{(U)}} \\
+    {\mathcal{G}{(V)}} & {\mathcal{G}{(U)}}
+	\arrow["{\rho_{V,U} ^{\mathcal{F}}}", from=1-1, to=1-2]
+	\arrow["\varphi_V", from=1-1, to=2-1]
+	\arrow["\varphi_U", from=1-2, to=2-2]
+	\arrow["\rho_{V,U} ^{\mathcal{F}}"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    e per ogni \(U \subseteq V \subseteq X  \) aperti, data \(\sigma \in
+    \mathcal{F}{(V)}\), invece di \(\rho_{V,U} {(\sigma)} \in \mathcal{F}{(U)}\)
+    si scrive \(\sigma_{U}\) 
+\end{definition}
+D'ora in poi assumiamo \(\mathcal{C}\) concreta (in particolare \(\mathtt{Set},
+{(\mathtt{Grp})}, \mathtt{Rng}, A\mathtt{-Mod}\))
+
+\begin{definition}{Fascio}
+    \(\mathcal{F} \subseteq \mathtt{Pfh}{(X, C)} \) è un \emph{fascio} se
+    \(\forall U \subseteq \mathrm{Open}{(X)} \) e per ogni \(\{U_{i}: i \in I\}
+    \) ricoprimento aperto di \(U\) (cioè \(U_{i} \in \mathrm{Open}{(X)}\), per
+    ogni \(i \in I\) e \(U = \bigcup_{i \in I} U_{i}\))).
+
+    Dati \(\sigma_{i} \in \mathcal{F}{(U_{i})}\) (\(\forall i \in I\)) tali che
+    \(\sigma_{i} |_{U_{i} \cap U_{j}} = \sigma_{j} |_{U_{i} \cap U_{j}} \) per
+    ogni \(i, j \in I\), allora \(\exists ! \, \sigma \in \mathcal{F}{(U)}\)
+    tale che \(\sigma_{i} = \sigma|_{U_{i}} \) per ogni \(i \in I\).
+
+    Se Vale solo l'unicità, si dice che il prefascio \(\mathcal{F}\) è
+    \emph{separato}.
+\end{definition}
+
+Siano \(\mathcal{F}, \mathcal{G}\) due fasci. Un morfismo \(\mathcal{F} \to
+\mathcal{G}\) di fasci è un morfismo di prefasci. 
+
+\(\mathtt{Sh}{(X, \mathcal{C})}\) è la sottocategoria piena di
+\(\mathtt{PSh}{(X, \mathcal{C})}\) con oggetti i fasci.
+
+\begin{note}[zione]
+    Invece di \(\mathcal{F}{(U)}\) si può scrivere \(\Gamma_f{(U, % TODO forse no
+    \mathcal{F})}\). Gli elementi di \(\mathcal{F}{(U)}\) si dicono anche
+    \emph{sezioni} di \(\mathcal{F}\) su \(U\).
+\end{note}
+
+\begin{example}{}
+    Sia \(S \in \mathcal{C}\). \(\mathcal{F}_{S} \in \mathtt{Sh}{(X,
+    \mathcal{C})}\) definito da \(\mathcal{F}_S{(U)} := S^{U}\) con \(\rho_{V,U}
+    : \mathcal{F}_S {(V)} \to \mathcal{F}_S{(U)}\) la vera restrizione di
+    funzioni. Questo è un fascio perché, date \(\sigma_{i} : U_{i} \to S\) tali
+    che \(\sigma_{i} |_{U_{i} \cap U_{j}} = \sigma_{j} |_{U_{i} \cap U_{j}}  \),
+    allora esiste unica \(\sigma : U \to S\) tale che \(\sigma|_{U_{1}} =
+    \sigma_{i}\) per ogni \(i \in I\), se \(\{U_{i}\}_{i \in I} \) è un
+    ricoprimento aperto di \(U\).
+
+    Analogamente, se \(S\) è anche uno spazio topologico (tali che le operazioni
+    di gruppo / anello siano continue, ad esempio \(S = \mathbb{R}\) e \(S =
+    \mathbb{C}\) con \(\mathcal{C} = \mathtt{Rng}\)). Posso allora considerare
+    il fascio \(\mathcal{G}_{S} \) definito da \(\mathcal{G}_S {(U)} := \{G \in
+    S^{U} : G\text{ è continua}\}\).
+
+    Ci sono varianti di questo esempio se \(X\) è una varietà
+    \emph{differenziabile}/\emph{complessa}/\emph{algebrica} considerando
+    funzioni \(C^{\infty}\)/\emph{olomorfe}/\emph{regolari}.
+\end{example}
+
+\begin{remark}{}
+    Sia \(\mathcal{F} \in \mathtt{PSh}{(X, \mathcal{C})}\). Se \(\mathcal{F}\) è
+    \emph{separato}/\emph{fascio} allora \(\# \mathcal{F}{(\varnothing)} \le 1 /
+    = 1\). Posso infatti prendere come ricoprimento aperto il ricoprimento
+    vuoto, cioè costituito da nessun aperto, di \(\varnothing\), ottengo che
+    \emph{è unico}/\emph{esiste unico} \(\sigma \in \mathcal{F}{(\varnothing)}\).
+\end{remark}
+
+\begin{example}{}
+    Sia \(S \in \mathcal{C}\) tale che \(\# S > 1\). Allora il prefascio
+    costante di valore \(S\) (cioè \(\mathcal{F}{(U)} = S\) per ogni \(U \in
+    \mathrm{Open}{(X)}\) o \(\rho_{V, U} = 1_S\) per ogni \(U \subseteq V
+    \subseteq X\)) non è separato.
+
+    Il fascio (localmente) costante di valora \(S\) è \(S_X\) definito da \(S_X
+    {(U)} = \{\sigma \in S^{U} : \sigma \text{ è localmente costante}\}\), dove
+    localmente costante significa che \(\sigma\) è continua mettendo su \(S\) la
+    topologia discreta (quindi la controimmagine di ogni sottoinsieme di \(S\) è
+    un aperto)
+\end{example}
+
+\begin{definition}{Spazio anellato}
+    Uno \emph{spazio anellato} è una coppia \({(X, O_X)}\) con \(X\) spazio
+    topologico e \(O_X \in \mathtt{Sh}{(X, \mathtt{Rng})}\) (di solito si
+    considerano anelli commutativi).
+\end{definition}
+
+\begin{definition}{}
+    Sia \({(X, O_X)}\) uno spazio anellato. Un prefascio di \(O_X\)-moduli è un
+    (pre)fascio \(\mathcal{F}\) di gruppi abeliani con una struttura di
+    \(0_X{(U)}\)-modulo su \(\mathcal{F}{(U)}\) per ogni \(U\) aperto tale che
+    \(\forall  U \subseteq V \subseteq X  \) aperti, \(\forall \sigma \in
+    \mathcal{F}{(V)}\) e per ogni \(\alpha \in O_X{(V)} \), \((\alpha
+    \sigma)|_{U}  = \alpha_U \sigma|_U\).
+\end{definition}
+
+SIano \(\mathcal{F}, \mathcal{G}\) (pre)fasci di \(O_X\)-moduli. Un morfismo
+\(\varphi  : \mathcal{F} \to \mathcal{G}\) è un morfismo in \(PSh{(X,
+\mathtt{Ab})}\) tale che \(\varphi _U : \mathcal{F}{(U)} \to \mathcal{G}{(U)}\)
+è \(O_X{(U)}\)-lineare per ogni \(U \in \mathrm{Open}{(X)}\). Si ottiene una
+cateogria \(O_X\mathtt{-PMod}\) dei prefasci di \(O_X\)-moduli con
+sottocategoria piena \(O_X\mathtt{-Mod}\) dei fasci di \(O_X\)-moduli.
+
+\begin{remark}{}
+    So che \(\mathtt{PSh}{(X, \mathtt{Ab})}\) è una categoria abeliana (perché
+    lo è \(\mathtt{Ab}\). Allora anche \(O_X\mathtt{-PMod}\) è abeliana
+    (esercizio). 
+\end{remark}
+
+\begin{example}{}
+    Sia \(X \neq \varnothing\) con la topologia concreta. Allora \(O_X\) è fascio
+    di anelli su \(X\), allora \(O_X{(\varnothing)} = \{0=1\} \) e \(A =
+    O_X{(X)}\) è un anello qualunque.
+\end{example}
+
+Se \(\mathcal{F} \in O_X\mathtt{-Mod}\), allora \(\mathcal{F}{(\varnothing)} =
+O\) e \(\mathcal{F}{(X)}\) è un \(A\)-modulo qualunque. Segue che
+\(O_X\mathtt{-Mod} \cong A\mathtt{-Mod}\). 
+
+\begin{example}{}
+    Sia \(A\) un anello. Allora \(A_X\) è un fascio di anelli su \(X\) tale che
+    \(A_X\mathtt{-Mod}\cong \mathtt{Sh}{(X, A\mathtt{-Mod})}\).
+
+    Infatti sia \(\mathcal{F} \in  A_X\mathtt{-Mod}\). Allora \(\forall U \in
+    \mathrm{Open}{(X)}\), \(\mathcal{F}{(U)}\) è \(A_X{(U)}\)-modulo. Infatti
+    considerando l'omomorfismo di anelli \(A \to A_X{(U)}\) dato da \(a \mapsto
+    {(x \mapsto a)}\), per restrizione degli scalari \(\mathcal{F}{(U)}\) è
+    anche \(A\)-modulo. Viceversa, se \(\mathcal{F} \in \mathtt{Sh}{(X,
+    A\mathtt{-Mod})}\) devo dimostrare che \(\forall U \in
+    \mathrm{Open}{(X)}\), \(\mathcal{F}{(U)}\) è anche \(A_X{(U)}\)-modulo.
+
+    Data \(\sigma \in \mathcal{F}{(U)}\) e \(\alpha \in  A_X{(U)}\) devo
+    definire \(\alpha \sigma \in  \mathcal{F}{(U)}\). \(U = \coprod_{a \in A}
+    \alpha ^{-1}{(a)}\) ricoprimento aperto di \(U\) (perché \(\alpha\) è
+    localmente costante), allora \(\exists ! \, \alpha \sigma \in
+    \mathcal{F}{(U)}\) tale che \({(\alpha \sigma)}|_{\alpha^{-1}{(a)}} = a
+    \sigma|_{\alpha^{-1}{(a)}}  \) .
+\end{example}
+
+\begin{definition}{}
+    Sia \(\varphi : \mathcal{F}\to \mathcal{G}\) un morfismo di prefasci (in
+    \(\mathtt{PSh}{(X, \mathcal{C})}\) o in \(O_X\mathtt{-PMod}\)). Allora
+    \(\varphi \) è \emph{iniettivo}/\emph{suriettivo} se \(\varphi _U\) è
+    \emph{iniettivo}/\emph{suriettivo} per ogni \(U \in \mathrm{Open}{(X)}\)
+    (\(\varphi \text{biunivoco} \iff \varphi \text{iso}\)).
+
+    \(\varphi \) è localmente iniettiva se \(\forall U \in  \mathrm{Open}{(X)}\)
+    e \(\forall  \sigma, \sigma' \in  \mathcal{F}{(U)}\) tale che \(\varphi
+    {(\sigma)} = \varphi {(\sigma')}\), allora \(\exists  \{U_{i} : i \in I\} \)
+    ricoprimento aperto di \(U\) tale che \(\sigma|_{U_{i}} = \sigma'|_{U_{i}}
+    \) per ogni \(i \in I\).
+
+    \(\varphi \) è \emph{localmente suriettivo} se \(\forall U \in
+    \mathrm{Open}{(X)}\) e \(\forall \tau \in \mathcal{G}{(U)}\), esiste un
+    ricoprimento aperto di \(U\) \(\{U_{i}\}_{i \in I}  \) tale che
+    \(\tau|_{U_{i}} \in \mathrm{im}{(\varphi _{U_{i}} )}\) per ogni \(i \in I\) 
+\end{definition}
+
+\begin{remark}{}
+    Se \(\varphi \) è \emph{iniettivo}/\emph{suriettivo}, allora \(\varphi \) è
+    localmente \emph{iniettivo}/\emph{suriettivo}.
+
+    Se \(\varphi \) è localmente iniettivo e \(\mathcal{F}\) è separato, allora
+    \(\varphi \) è iniettivo.
+
+    % nota non suriettivo
+\end{remark}
+
+\begin{proposition}{}
+    Sia \(\varphi : \mathcal{F} \to \mathcal{F}'\) un morfismo localmente
+    biunivoco di prefasci, e sia \(\psi : \mathcal{F} \to \mathcal{G}\) un
+    morfismo di prefasci con \(\mathcal{G}\) fascio. Allora esiste unico \(\psi'
+    : \mathcal{F}^{\prime} \to \mathcal{G}\) morfismo di prefasci tale che
+    \(\psi = \psi' \circ \varphi \) 
+\end{proposition}
+
+\begin{corollary}{}
+    Siano \(\varphi_i : \mathcal{F} \to \mathcal{F}_i\) morfismi localmente
+    biunivoci (per \(i=1,2\)) con \(\mathcal{F}_i\) fasci. Allora esiste unico
+    \(\varphi : \mathcal{F}_1 \to \mathcal{F}_2\) tale che \(\varphi_{2} =
+    \varphi  \circ \varphi_{1}\) e \(\varphi \) è isomorfismo.
+\end{corollary}
+
+\begin{proposition}{}
+    Per ogni prefascio \(\mathcal{F}\) esiste \(\eta = \eta_\mathcal{F} :
+    \mathcal{F} \to \mathcal{F}^{\mathcal{A}}\) localmente biunivoco con
+    \(\mathcal{F}^{\mathcal{A}}\) fascio (detto \emph{fascio associato a}
+    \(\mathcal{F}\))
+\end{proposition}
+
+\begin{corollary}{}
+    Esiste il \emph{funtore associato}
+    \[
+      {(-)}^{\mathcal{A}} : \mathtt{PSh}{(X, \mathcal{C})} \to \mathtt{Sh}{(X,
+      \mathcal{C})}
+    \]
+    (oppure \({(-)}^{\mathcal{A}} : 0_X\mathtt{-PMod} \to 0_X\mathtt{-Mod}\))
+    aggiunto sinistro dell'inclusione \(\mathtt{Sh}{(X, \mathcal{C})}
+    \hookrightarrow \mathtt{Psh}{(X, \mathcal{C})}\) (o rispettivamente
+    \(0_X\mathtt{-Mod} \hookrightarrow 0_X\mathtt{-PMod}\)).
+
+    Inoltre per ogni \(\mathcal{F}\) prefascio, \(\eta_\mathcal{F} : \mathcal{F}
+    \to \mathcal{F}^{\mathcal{A}}\) è la composizione dell'unità
+    dell'aggiunzione
+\end{corollary}
+
+\begin{proof}[Dim. corollario]
+    Per ogni \(\mathcal{F}\) prefascio, sia \(\eta_\mathcal{F} : \mathcal{F} \to
+    \mathcal{F}^{\mathcal{A}}\) localmente biunivoca con
+    \(\mathcal{F}^{\mathcal{A}}\) fascio. Allora per ogni \(\varphi  :
+    \mathcal{F} \to \mathcal{G}\) esiste unico \(\varphi ^{\mathcal{A}} :
+    \mathcal{F} ^{\mathcal{A}} \to \mathcal{G}^{\mathcal{A}}\) tale che il
+    seguente diagramma commuta (per la proposizione). Allora si conclude
+    facilmente (esercizio).
+\[\begin{tikzcd}
+	{\mathcal{F}} & {\mathcal{F}^\mathcal{A}} \\
+	{\mathcal{G}} & {\mathcal{G}^\mathcal{A}}
+	\arrow["{\eta_\mathcal{F}}", from=1-1, to=1-2]
+	\arrow["\varphi"', from=1-1, to=2-1]
+	\arrow["{\varphi^\mathcal{A}}"', from=1-2, to=2-2]
+	\arrow["{\eta_\mathcal{G}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{proof}
+
+\begin{proof}[Idea dim. della proposizione]
+    Per ogni \(\mathcal{F}\) prefascio, sia \(\mathcal{F}^{s}\) (``prefascio
+    separato associato a \(\mathcal{F}\)'') definito come segue:
+    \[
+      \forall U \subseteq X \text{ aperto, }\mathcal{F}^{s}{(U)} :=
+      \mathcal{F}{(U)} /_\sim 
+    \]
+    con \(\sigma \sim \sigma' \in \mathcal{F}{(U)} \iff \exists \{U_{i}\}_{i \in
+    I} \) ricoprimento aperto di \(U\) tale che \(\sigma|_{U_{i}}  =
+    \sigma'|_{U_{i}} \). Allora \(\sim \) è una relazione di equivalenza (per la
+    transitività si usa che dati 2 ricoprimenti aperti \(\{U_{i}\}_{i \in I} \)
+    e \(\{V_{j}\}_{j \in J} \) di \(U\) esiste un ``raffinamento'' comune
+    \(\{W_k\}_{k \in K} \) ricoprimento aperto di \(U\), cioè tale che \(\forall
+    k \in K\) esista \(i \in I\) e \(j \in J\) tali che \(W_k \subseteq U_{i},
+    V_{j} \) e questo è vero poiché si può prendere il ricoprimento dato da
+    \(\{U_{i} \cap V_{j}\}_{i \in I, j \in J}\).
+
+    Allora per ogni \(\varphi : \mathcal{F} \to \mathcal{G}\), abbiamo che
+    \(\varphi_U^{s} : \mathcal{F}^{s}_{{(U)}} \to \mathcal{G}^{s}_{{(U)}} \)
+    data da \([\sigma] \mapsto [\varphi_U{(\sigma)}]\). In tal modo si ottiene
+    un prefascio separato \(\mathcal{F}^{s}\) (esercizio). Il morfismo naturale
+    \(\mathcal{F} \to \mathcal{F}^{s}\) (di componenti le proiezioni al
+    quoziente \(\mathcal{F}{(U)} \to \mathcal{F}^{s}{(U)}\) è suriettivo e
+    localmente iniettivo. 
+
+    Allora definisco \(\mathcal{F}^{\mathcal{A}}\) a partire da
+    \(\mathcal{F}^{s}\) nel modo seguente:
+    \[
+      \mathcal{F}^{\mathcal{A}}{(U)} := \{{(\{U_{i}\}_{i \in I} ,
+      \{\sigma_{i}\}_{i \in I}  )} : \{U_{i}\}_{i \in I} \text{ ric.
+aperto di \(U\), } \sigma_{i} \in \mathcal{F}^{s}{(U_{i})}\,\,\forall i \in I \}/_\sim 
+    \] % TODO agigungere incollamento
+    dove \({(\{U_{i}\} _{i \in I} , \{\sigma_{i}\} _{i \in I} )} \sim
+    {(\{V_{j}\} _{j \in J} , \{\tau_{j}\} _{j \in J} )}\) se e solo se
+    \(\sigma_{i}|_{U_{i} \cap V_{j}} = \tau_{j}|_{U_{i} \cap V_{j}} \), per ogni
+    \(i \in I\) e \(j \in J\). Allora \(\sim \) è relazione d'equivalenza (dove
+    per la transitività si usa che \(\mathcal{F}^{s}\) è separato)
+
+    Allora \(\mathcal{F}^{\mathcal{A}}\) è prefascio poiché \(\forall U
+    \subseteq V \subseteq X  \) aperti, \[[{(\{V_{i}\}_{i \in I}  ,
+        \{\sigma_{i}\}_{i \in I} )}] \in
+    \mathcal{F}^{\mathcal{A}}{(V)} \mapsto [{(\{U_{i}\}_{i \in I} ,
+    \{\sigma_{i}\} _{i \in I} )}] \in
+\mathcal{F}^{\mathcal{A}}{(U)}\] e si verifica che \(\mathcal{F}^{\mathcal{A}}\)
+è un fascio.
+
+    La mappa naturale \(\mathcal{F}^{s} \to \mathcal{F}^{\mathcal{A}}\), data
+    per ogni \(U \in \mathrm{Open}{(X)}\) da \(\sigma \mapsto [{(\{U\} ,
+    \{\sigma\} )}]\) è un morfismo di prefasci localmente suriettivo (per
+    costruzione) e anche iniettivo (perché \(\mathcal{F}^{s}\) è separto).
+    Ottengo allora \(\eta\) come composizione di \(\mathcal{F} \to
+    \mathcal{F}^{s} \to \mathcal{F}^{\mathcal{A}}\). Allora \(\eta\) è
+    localmente biunivoca perché lo sono entrambe.
+\end{proof}
+
+    \begin{lemma}{}
+        Sia \(0 \to \mathcal{F}' \overset{\varphi }{\to} \mathcal{F}
+        \overset{\psi}{\to} \mathcal{F}'' \to 0\) esatta in
+        \(O_X\mathtt{-PMod}\), cioè \(\forall U \in \mathrm{Open}{(X)}\), \(0
+        \to \mathcal{F}'{(U)} \overset{\varphi _U}{\to} \mathcal{F}{(U)}
+        \overset{\psi_U}{\to} \mathcal{F}''{(U)} \to 0\) è esatta in
+        \(O_X{(U)}\mathtt{-Mod}\) o in \(\mathtt{Ab}\).
+
+        Allora:
+\begin{enumerate}[label = \arabic*)]
+    \item Se \(\mathcal{F}\) è separato, anche \(\mathcal{F}'\) è separato
+    \item Se \(\mathcal{F}\) è separato e \(\mathcal{F}'\) è un fascio, allora
+        \(\mathcal{F}''\) è separato
+    \item Se \(\mathcal{F}\) è fascio e \(\mathcal{F}''\) è seaparato, allora
+        \(\mathcal{F}'\) è fascio
+\end{enumerate}
+    \end{lemma}
+
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*)]
+    \item Sia \(U \in \mathrm{Open}{(X)}\) e \(\sigma' \in \mathcal{F}'{(U)}\)
+        tali che esista \(\{U_{i}\}_{i \in I}  \) ricoprimento aperto di \(U\)
+        con \(\sigma'|_{U_{i}} = 0\). Devo dimostrare che \(\sigma' = 0\).
+        Sappiamo che 
+        \[
+            0 = \varphi {(\sigma')}|_{U_{i}}  = \varphi {(\sigma')}|_{U_{i}}
+          \implies \varphi {(\sigma')} = 0 \text{ (perché \(\mathcal{F}\) è
+          separato)}
+        \]
+        poiché \(\varphi \) è iniettivo, allora \(\sigma' = 0\).
+    \item Sia \(U \in \mathrm{Open}{(X)}\), \(\sigma'' \in \mathcal{F}''{(U)}\)
+        tale che esista un ricoprimento aperto \(\{U_{i}\} _{i \in I} \) di
+        \(U\) con \(\sigma''|_{U_{i}} = 0\) per ogni \(i \in I\). Devo
+        dimostrare che \(\sigma'' = 0\). Poiché \(\varphi \) è suriettivo,
+        \(\exists \sigma \in \mathcal{F}{(U)}\) tale che \(\sigma'' = \psi
+        {(\sigma)}\). Allora \(\psi{(\sigma|_{U_{i}})} = \psi{(\sigma)}|_{U_{i}}
+        = \sigma''|_{U_{i}} = 0\). Per l'esattezza, \(\exists !\, \sigma'_i \in
+        \mathcal{F}'{(U_{i})}\) tale che \(\sigma|_{U_{i}}  = \varphi
+        {(\sigma'_i)}\). 
+        Ora abbiamo che per ogni \(i, j \in I\), abbiamo che
+        \[
+          \varphi {(\sigma'_i|_{U_{i, j} })} = \varphi {(\sigma'_i)}|_{U_{i,j}}
+          = {(\sigma|_{U_{i}} )}|_{U_{i,j}} = \sigma|_{U_{i,j}} = \varphi
+          {(\sigma'_j|_{U_{i,j}} )}
+        \]
+        allora, poiché \(\varphi \) è iniettivo, \(\sigma'_j|_{U_{i,j}} =
+        \sigma'_j|_{U_{i,j}}\).
+
+        Infine poiché \(\mathcal{F}\) è fascio, esiste unico \(\sigma' \in
+        \mathcal{F}'{(U)}\) tale che \(\sigma'_i = \sigma'|_{U_{i}} \) per ogni
+        \(i \in I\). Allora
+        \[
+          \varphi {(\sigma)}|_{U_{i}} =\varphi {(\sigma'|_{U_{i}} )} = \varphi {(\sigma'_i)} =
+          \sigma|_{U_{i}} \implies \varphi {(\sigma')} = \sigma
+        \]
+        perché \(\mathcal{F}\) è separato, da cui \(\sigma'' = \psi{(\sigma)} =
+        \psi{(\varphi {(\sigma')})} = 0\) 
+    \item So già che \(\mathcal{F}'\) è separato per il punto 1). Resta da
+        dimostrare che dato \(\{U_{i}\} _{i \in I} \) ricoprimento aperto di
+        \(U\) e \(\sigma'_i \in \mathcal{F}'{(U_{i})}\) tali che
+        \(\sigma'_i|_{U_{i,j}} \) per ogni \(i , j \in I\), allora esiste
+        \(\sigma' \in \mathcal{F}'{(U)}\) tale che \(\sigma'_i =
+        \sigma'|_{U_{i}} \) per ogni \(i \in I\). Ma allora
+        \[
+          \varphi {(\sigma'_i)}|_{U_{i,j}} = \varphi {(\sigma'_i|_{U_{i,j}} )} =
+          \varphi {(\sigma'_j|_{U_{i,j}} )} = \varphi {(\sigma'_j)}|_{U_{i,j}} 
+        \]
+        Poiché \(\mathcal{F}\) è un fascio, allora esiste unico \(\sigma \in
+        \mathcal{F}{(U)}\) tale che \(\sigma|_{U_{i}} = \varphi {(\sigma'_i)}\)
+        per ogni \( i \in I\). Allora
+        \[
+          \psi {(\sigma)}|_{U_{i}} = \psi {(\sigma|_{U_{i}} )} =
+          \psi{(\varphi {(\sigma'_i)})} = 0 \implies \psi{(\sigma)} = 0
+        \]
+        poiché \(\mathcal{F}''\) è separato, allora per l'esattezza esiste unico
+        \(\sigma' \in \mathcal{F}'{(U)}\) tale che \(\varphi {(\sigma')} =
+        \sigma\). Segue che \(\varphi {(\sigma'|_{U_{i}} )} = \varphi
+        {(\sigma')}|_{U_{i}} = \sigma|_{U_{i}}  = \varphi {(\sigma'_i)}\). Segue
+        che \(\sigma'_i = \sigma'|_{U_{i}} \) per ogni \(i \in I\) perché
+        \(\varphi \) è iniettivo.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}{}
+    Sia \({(X, \mathcal{O_X})}\) uno spazio anellato. Allora
+    \(O_X\mathtt{-Mod}\) è una categoria abeliana.
+    \begin{note}[zione]
+        \(\mathrm{(Co)ker}_{\mathcal{P}} \) indica un (co)nucleo in
+        \(O_X\mathtt{-PMod}\), mentre i corrispettivi in \(O_X\mathtt{-Mod}\)
+        saranno indicati con \(\mathrm{(Co)ker}\).
+    \end{note}
+
+    Inoltre \(\forall \varphi : \mathcal{F} \to \mathcal{G}\) in
+    \(O_X\mathtt{-Mod}\), valgono le seguenti:
+\begin{itemize}[label = --]
+    \item \(\mathrm{Ker}{(\varphi )} =
+    \mathrm{Ker}_\mathcal{P}{(\varphi )}\) (e idem per \(\mathrm{ker}\)).
+\item \(\mathrm{Coker}{(\varphi )} = \mathrm{Coker}_\mathcal{P}{(\varphi
+    )}^{\mathcal{A}}\) (e \(\mathrm{coker}\varphi =
+    \eta_{\mathrm{Coker}_\mathcal{P}{(\varphi)}} \circ
+    \mathrm{coker}_{\mathcal{P}}{(\varphi)}\) 
+    \item \(\varphi \) è mono in \(O_X\mathtt{-Mod}\) se e solo se \(\varphi \)
+        è iniettivo (se e solo se \(\varphi \) è loc. iniettivo \(\iff\)
+        \(\varphi \) è mono in \(O_X\mathtt{-PMod}\))
+    \item \(\varphi \) è un epi in \(O_X\mathtt{-Mod}\) se e solo se \(\varphi
+        \) è localmente suriettivo.
+\end{itemize}
+\end{theorem}
+\begin{proof}{}
+    \(O_X\mathtt{-Mod}\) è additivo perché è sottocategoria piena chiusa per per
+    (co)prodotti finiti di \(O_X\mathtt{-PMod}\) (abeliana). In generale per
+    ogni \(\varphi  : \mathcal{F} \to \mathcal{G}\) in \(O_X\mathtt{-PMod}\) si
+    fattorizza in \(O_X\mathtt{-PMod}\)
+    % TODO diagramma
+    e ci sono successioni esatte in \(O_X\mathtt{-PMod}\) 
+    \begin{align*}
+      0 \to \mathrm{Ker}_\mathcal{P}{(\varphi )}
+      \overset{\mathrm{ker}_\mathcal{P}{(\varphi )}}{\to} \mathcal{F}
+      \overset{\mathrm{coim}_\mathcal{P}{(\varphi )}}{\to}
+      \mathrm{Im}_\mathcal{P}{(\varphi )} \to 0 \\
+      0 \to \mathrm{Im}_\mathcal{P}{(\varphi )}
+      \overset{\mathrm{im}_\mathcal{P}{(\varphi )}}{\to} \mathcal{G}
+      \overset{\mathrm{coker}_\mathcal{P}{(\varphi )}}{\to}
+      \mathrm{Coker}_\mathcal{P}{(\varphi )} \to 0
+    \end{align*}
+    assumendo \(\varphi \in O_X\mathtt{-Mod}\), per 1)
+    \(\mathrm{Im}_\mathcal{P}{(\varphi )}\) è separato, e dunque per 3)
+    \(\mathrm{Ker}_\mathcal{P}{(\varphi )}\) è un fascio. Segue che
+    \(\mathrm{ker}{(\varphi )} = \mathrm{ker}_\mathcal{P}{(\varphi )}\) e
+    \(\mathrm{coker}{(\varphi )} = \eta_{\mathrm{Coker}_\mathcal{P}{(\varphi )}}
+    \circ \mathrm{coker}_\mathcal{P}{(\varphi )}\) per la proprietà di
+    aggiunzione di \({(-)}^{\mathcal{A}}\) 
+\[ \begin{tikzcd}
+	\mathcal{F} & \mathcal{G} & \mathrm{Coker}_\mathcal{P}{(\varphi )} &
+    \mathrm{Coker}_\mathcal{P}{(\varphi )}^{\mathcal{A}} \\
+	& \mathcal{H}
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow["0"', from=1-1, to=2-2]
+	\arrow["{\mathrm{coker}_\mathcal{P}(\varphi)}", from=1-2, to=1-3]
+	\arrow["{\psi\in O_X\mathtt{-Mod}}", from=1-2, to=2-2]
+	\arrow["\eta", from=1-3, to=1-4]
+	\arrow["{\varphi'}"{pos=0.3}, curve={height=-6pt}, dashed, from=1-3, to=2-2]
+	\arrow["{\varphi''}"{description}, curve={height=-12pt}, dashed, from=1-4, to=2-2]
+\end{tikzcd}
+\]
+  Allora \(\varphi \) è mono se e solo se \(\mathrm{Ker}{(\varphi )} = 0\)   in
+  \(O_X\mathtt{-Mod}\). Ma \(\mathrm{Ker}{(\varphi )} =
+  \mathrm{Ker}_\mathcal{P}{(\varphi )}\) dunque tale condizione è equivalente a
+  \(\varphi \) mono in \(O_X\mathtt{-PMod}\) (dunque \(\iff\) \(\varphi \) è
+  iniettivo).
+
+  \textbf{SALTATA LA PARTE \(\varphi \) EPI, NON STO CAPENDO CHE STIAMO
+  FACENDO}.
+
+  Sia \(\varphi \) mono, allora \(\varphi =
+  \mathrm{ker}_\mathcal{P}{(\mathrm{coker}_\mathcal{P}{(\varphi )})}\). Inoltre
+  se \(\varphi \) è mono, \(\mathcal{F} \cong \mathrm{Im}_\mathcal{P}{(\varphi
+  )}\) che è allora un fascio. Allora \(\mathrm{Coker}_\mathcal{P} {(\varphi
+  )}\) è separato per 2) del lemma precedente. Allora segue che
+  \(\eta_{\mathrm{Coker}_\mathcal{P}{(\varphi )}} \) è iniettiva. Allora
+  \(\varphi = \mathrm{Ker}_\mathcal{P}{(\mathrm{coker}\varphi )} =
+  \mathrm{ker}{(\mathrm{coker})}{(\varphi)}\).
+
+  Inoltre se \(\varphi \) è epi in \(O_X\mathtt{-Mod}\), allora \(\varphi \) è
+  localmente suriettiva, da cui (ricordando che \(\varphi =
+  \mathrm{im}_\mathcal{P}{(\varphi )} \circ \mathrm{coim}_\mathcal{P}{(\varphi
+  )}\)) \(\mathrm{im}_\mathcal{P}{(\varphi )}\) è
+  localmente suriettiva, ed è iniettiva. Allora posso assumere
+  \(\mathrm{im}_\mathcal{P}{(\varphi )} = \eta_{\mathrm{Im}_\mathcal{P}{(\varphi
+  )}} \), per cui
+  \begin{align*}
+    \mathrm{coim}_\mathcal{P}{(\varphi )} =
+    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}_\mathcal{P}{(\varphi )})} =
+    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} \implies \\ \implies \varphi  =
+    \mathrm{im}_\mathcal{P}{(\varphi )} \circ
+    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} =
+    \eta_{\mathrm{Coker}_\mathcal{P}{(\mathrm{ker} \varphi })} \circ
+    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} =
+    \mathrm{coker}{(\mathrm{ker}{(\varphi )})}
+  \end{align*}
+\end{proof}
+
+\begin{definition}{Sotto(pre)fascio}
+    Sia \(\mathcal{F}\) un (pre)fascio. \(\mathcal{F}' \subseteq \mathcal{F} \)
+    è un \emph{sottoprefascio} se \(\forall U \in \mathrm{Open}{(X)}\),
+    \(\mathcal{F}'{(U)} \subseteq \mathcal{F}{(U)} \) e \(\forall \sigma \in
+    \mathcal{F}'{(U)}\), \(\forall V \subseteq U \) aperto, \(\sigma|_{V} \in
+    \mathcal{F}^{\prime}{(V)}\)
+\end{definition}
+    
+    Se \(\mathcal{F}\) è separato, allora \(\mathcal{F}^{\prime}\) è separato.
+
+    Se \(\mathcal{F}\) è un fascio, allora \(\mathcal{F}'^{a}\) si descrive come
+    \(\mathcal{F}'^{a}{(U)} := \{\sigma \in \mathcal{F}{(U)}: \exists
+    \{U_{i}\}_{i \in I}\\ \text{ ric. aperto di \(U\) t.c. }\sigma|_{U_{i}} \in
+\mathcal{F}'{(U_{i})}, \, \forall i \in I\}\) 
+
+In particolare se \(\varphi : \mathcal{F} \to \mathcal{G}\) è un morfismo di
+\(0_X\mathtt{-Mod}\), allora \(\mathrm{coim}\varphi =
+\mathrm{coker}{(ker{(\varphi )})} = \mathrm{coker}{(ker_\mathcal{P}{(\varphi
+)})} = \eta \circ \mathrm{coker}_\mathcal{P}{(\mathrm{ker}_\mathcal{P}{(\varphi
+)})} = \eta \circ \mathrm{coim}_\mathcal{P}{(\varphi )}\), da cui
+\(\mathrm{Im}{(\varphi )} = \mathrm{Im}_\mathcal{P}{(\varphi )}^{a}\). Allora
+
+Allora \(\mathrm{Im}_\mathcal{P}{(\varphi )} \subseteq \mathcal{G} \) è un
+sottoprefascio (separato).
+\[
+  \implies \mathrm{Im}{(\varphi )}{(U)} = \{\sigma \in \mathcal{G }{(U)} :
+  \exists \{U_{i}\} _{i \in I} \text{ ric. aperto di \(U\) t.c. }\sigma|_{U_{i}}
+\in \mathrm{Im}{(\varphi_{U_{i}}} \, \forall i \in I\} 
+\]
+
+Sia \({(X, 0_X)}\) uno spazio anellato. Per ogni \(U \in \mathrm{Open}{(X)}\)
+c'è un funtore \(\Gamma{(U, -)} : 0_X\mathtt{-Mod} \to 0_X{(U)}\mathtt{-Mod}\).
+Tale funtore è esatto a sinistra perché è composizione dell'inclusione
+\(0_X\mathtt{-Mod} \hookrightarrow 0_X\mathtt{-PMod}\) (che è esatto a sinistra
+perché aggiunto destro di \({(-)}^{a}\)) con \(\Gamma{(U, -)}:
+0_X\mathtt{-PMod} \to 0_X{(U)}\mathtt{-Mod}\), definito da \(\mathcal{F} \mapsto
+\mathcal{F}{(U)}\) che è esatto.
+
+\begin{remark}{}
+    In generale \(\Gamma{(X, -)}\) non è esatto (a destra), cioè non preserva
+    gli epimorfismi. In altre parole esiste \(\varphi  : \mathcal{F} \to
+    \mathcal{G}\) in \(0_X\mathtt{-Mod}\) localmente suriettivo ma tale che
+    \(\varphi _X : \mathcal{F}{(X)} \to \mathcal{G}{(X)}\) non è suriettivo.
+    Il prossimo esempio mostra che questo è vero
+\end{remark}
+
+\begin{example}{}
+    Suppongo che \(\exists A\) anello tale che \(0_X{(U)} \subseteq A^{U} \) per
+    ogni \(U \in \mathrm{Open}{(X)}\). Allora \(\forall Y \subseteq X \) sia
+    \(\mathcal{I}_Y \subseteq 0_X \) sottofascio (di \(0_X\)-moduli, detto di
+    ``ideali''), definito per ogni \(U \in \mathrm{Open}{(X)}\) da
+    \(\mathcal{I}_Y{(U)} := \{\sigma \in 0_X{(U)} : \sigma|_Y = 0\}\). Ottengo
+    allora un epimorfismo in \(0_X\mathtt{-Mod}\) \(\pi: 0_X \to 0_X /
+    \mathcal{I}_Y\). Cerco un esempio in cui \(\pi_X : 0_X {(X)} \to {(0_X /
+    \mathcal{I}_Y)}{(X)}\) non suriettivo. Preso ora \(0_X = A_X \) (fascio
+    localmente costante) con \(A \neq 0\), \(X\) connesso e \(Y = \{x_{1},
+    x_{2}\} \) con \(x_{1} \neq x_{2}\) punti chiusi.
+
+Allora \(U_{1} = X \sminus \{x_{2}\} \) e \(U_{2} = X \sminus \{x_{1}\}\)
+    sono aperti e \(\{U_{1}, U_{2}\} \) è un ricoprimento aperto di \(X\). Sia
+    ora \(a_{1}, a_{2} \in A\) con \(a_{1} \neq a_{2}\). Sia \(\sigma_{i} \in
+    0_X{(U_{i})}\) definito da \(\sigma_i{(x)} := a_{i}\) per ogni \(x \in
+    U_{i}\). Allora \(\sigma_{2}|_{U_{1,2}}, \sigma_{1}|_{U_{1,2}} \in
+    \mathcal{I}_Y{(U_{1,2})} = A_X{(U_{1,2} )}\).
+
+    \begin{align*}
+      &\implies \overline{\sigma}_i := \pi{(\sigma_i)}\in {(0_X /
+      \mathcal{I}_Y)}{(U_{i})} \text{ t.c. } \overline{\sigma}_1 |_{U_{1,2} } =
+        \overline{\sigma}_2|_{U_{1,2}} \\&\implies \exists!\, \tau \in {(0_X /
+      \mathcal{I}_Y)}{(X)} \text{ t.c. } \tau|_{U_{i}} = \overline{\sigma}_i
+    \end{align*}
+
+    Se ora per assurdo \(\exists \sigma \in 0_X{(X)}\) tale che \(\pi{(\sigma)}
+    = \tau\), allora \(\sigma{(x)} = a \in A\) per ogni \(x \in X\). Ma
+    \[
+      \pi{(\sigma|_{U_{i}} )} = \pi{(\sigma)}|_{U_{i}} = \tau|_{U_{i}} =
+      \overline{\sigma}_i = \pi{(\sigma_i)} \implies \sigma|_{U_{i}} - \sigma_i
+      \in \mathcal{I}_Y{(U_{i})}
+    \]
+    dunque \(a = \sigma{(x_{i})} = \sigma_i{(x_{i})} = a_{i}\) che è assurdo.
+\end{example}
+
+\begin{note}[zione]
+    Per ogni \(\mathcal{F}, \mathcal{G} \in 0_X\mathtt{-Mod}\) scrivo
+    \(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}\) o \(\mathrm{Hom}_{0_X}
+    {(\mathcal{F}, \mathcal{G})}\) invece di \(0_X\mathtt{-Mod}{(\mathcal{F},
+    \mathcal{G})}\).
+
+    \(\mathrm{Hom}_X{(0_X, \mathcal{F})}\) è in modo naturale un
+    \(0_X{(X)}\)-modulo.
+\end{note}
+
+\begin{remark}{}
+    Il funtore \(\mathrm{Hom}_X{(0_X, -)} : 0_X\mathtt{-Mod} \to
+    0_X{(X)}\mathtt{-Mod}\) è isomorfo a \(\Gamma{(X, -)}\).
+    Infatti per ogni \(\mathcal{F} \in 0_X\mathtt{-Mod}\),
+    \(\mathrm{Hom}_X{(0_X, \mathcal{F})} \to \mathcal{F}{(X)}\) definito da
+    \(\varphi  \mapsto \varphi _X{(1)}\) ha inversa \(\mathcal{F}{(X)} \to
+    \mathrm{Hom}_X{(0_X, \mathcal{F})}\) dato da \(\sigma \mapsto
+    \widehat{\sigma}\), con \(\widehat{\sigma}_U{(\alpha)} := \alpha \sigma|_U
+    \in \mathcal{F}{(U)}\) (\(\alpha \in 0_X{(U)}\)).
+
+    Quindi in generale \(\mathrm{Hom}_X{(0_X,-)}\) non è esatto, cioè \(0_X\)
+    non è oggetto proiettivo di \(0_X\mathtt{-Mod}\).
+    È possibile dimostrare che non ci sono abbastanza proiettivi in
+    \(0_X\mathtt{-Mod}\). D'altra parte ci sono sempre abbastanza iniettivi
+    (vedremo).
+\end{remark}
+
+\begin{definition}{Coomologia di fasci}
+    Per ogni \(n \in \mathbb{N}\), \(H^{n}{(X, -)} := R^{n}\Gamma{(X, -)} :
+    0_X\mathtt{-Mod} \to 0_X{(X)}\mathtt{-Mod}\).
+
+    Quindi per ogni successione esatta \(0 \to \mathcal{F}' \to \mathcal{F} \to
+    \mathcal{F}'' \to 0\) in \(0_X\mathtt{-Mod}\) ottengo una successione esatta
+    \[
+      0 \to H^{0}{(X, \mathcal{F}')} \to H^{0}{(X, \mathcal{F})} \to H^{0}{(X,
+      \mathcal{F}'')} \to H^{1}{(X, \mathcal{F}')} \to \dots
+    \]
+\end{definition}
+
+\begin{proposition}{}
+    Sia \({(X, O_X)}\) uno spazio anellato. Allora in \(O_X\mathtt{-Mod}\) ci
+    sono prodotti e coprodotti (i.e. è completa e cocompleta).
+\end{proposition}
+\begin{proof}{}
+    È chiaro per \(O_X\mathtt{-PMod}\), infatti
+    \[
+      {(\prod_{\lambda \in \Lambda} \mathcal{F}_\lambda)} {(U)} = \prod_{\lambda
+      \in \Lambda} \mathcal{F}_\lambda{(U)} \in O_X{(U)}\mathtt{-Mod} 
+    \]
+    e analogamente per \(\coprod_{\lambda \in \Lambda} \mathcal{F}_\lambda\) 
+
+    Se \(\mathcal{F}_\lambda\) sono fasci, allora \(prod_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda\) è un fascio (esercizio). %TODO eser
+    Per il coprodotto, risulta che \(\coprod_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda = {\left( \coprod^{\mathcal{P}}_{\lambda \in \Lambda}
+    \mathcal{F}_\lambda \right)} ^{a}\), poiché \({(-)}^{a}\) preserva i
+    colimiti e \(\mathcal{F}_\lambda^{a}\cong \mathcal{F}_\lambda\) se
+    \(\mathcal{F}_\lambda\) è un fascio.
+\end{proof}
+
+\begin{definition}{Spiga}
+    Sia \(\mathcal{F}:\mathrm{Open}{(X)}^{op} \to \mathcal{C} \in \mathtt{PSh}{(X, \mathcal{C})}\). Allora la
+    \emph{spiga} di \(\mathcal{F}\) in \(x \in X\) è 
+    \[
+      \mathcal{F}_x := \mathrm{colim} \,\mathcal{F}|_{\mathrm{Open}_x{(X)}^{op}} \in
+      \mathcal{C}
+    \]
+    dove \(\mathrm{Open}_x{(X)} := \{U \in \mathrm{Open}{(X)} : x \in U\} \).
+    Allora \(\mathrm{Open}_x{(X)}^{op}\) è un \emph{insieme filtrante}, cioè
+    della forma \({(I, \le )}\) insieme (pre)ordinato tale che \(\forall i, j
+    \in I\), \(\exists k \in I\) tale che \(i , j \le k\) (infatti dati \(U, V
+    \in \mathrm{Open}_x{(X)}\) esiste \(W \in \mathrm{Open}_x{(X)}\) tale che
+    \(W \subseteq U, V \)).
+\end{definition}
+
+Sia \(F : {(I, \le )}\to \mathcal{C}\) un funtore con \({(I, \le )}\) filtrante
+e \(\mathcal{C}\) una categoria concreta. Allora
+\[
+  \mathrm{colim}\, F \overset{\text{insieme}}{=} {\left( \coprod_{i \in I} F{(i)}
+  \right)} /_\sim 
+\]
+con \(a \sim b \iff \exists k \in I\) tale che \(i, j \le k\) e \(F{(i\to
+k)}{(a)} = F{(j \to k)}{(b)} \in F{(k)}\) con morfismi naturali \(F{(i)} \to
+\mathrm{colim}\, F\).
+
+Dunque esplicitamente possiamo avere
+\[
+  \mathcal{F}_x = {\left( \coprod_{U \in \mathrm{Open}{(X)}} \mathcal{F}{(U)}
+  \right)}/_\sim 
+\]
+con \(\sigma \in \mathcal{F}{(U)} \sim \tau \in \mathcal{F}{(V)}\iff \exists \,W
+\in \mathrm{Open}_x{(U \cap V)}\) tale
+che \(\sigma|_W = \tau|_W\) e gli elementi di \(\mathcal{F}_x\) vengono detti
+\emph{germi} di sezioni di \(\mathcal{F}\) in \(x\).
+
+\begin{note}[zione]
+    Data \(\sigma \in \mathcal{F}{(U)}\), con \(U \in \mathrm{Open}_x {(X)}\),
+    allora indico con \(\sigma_x = [\sigma] \in  \mathcal{F}_x\).
+\end{note}
+
+Se \(\mathcal{F} \in O_X\mathtt{PMod}\), allora \(\mathcal{F}_x\) è
+\(O_{X,x}\)-modulo.
+
+\(\varphi : \mathcal{F} \to \mathcal{G}\) morfismo di prefasci induce morfismi
+in \(\mathcal{C}\) di \(O_X,x\)-moduli \(\varphi_x : \mathcal{F}_x \to
+\mathcal{G}_x\) per ogni \(x \in X\) tale che \(\forall U \in
+\mathrm{Open}_x{(X)}\) e \(\forall \sigma \in \mathcal{F}{(U)}\),
+\(\mathcal{F}_x{(\sigma_x)} = \varphi _U{(\sigma)}_x\) 
+
+\begin{lemma}{}\label{lem:inj}
+    Sia \(\varphi : \mathcal{F} \to \mathcal{G}\) morfismo di prefasci. Allora
+    \(\varphi \) è localmente \emph{iniettivo}/\emph{suriettivo} se e solo se
+    \(\varphi_x : \mathcal{F}_x \to \mathcal{G}_x\) è
+    \emph{iniettivo}/\emph{suriettivo} per ogni \(x \in X\).
+
+    In particolare \(\eta_\mathcal{F} : \mathcal{F} \to \mathcal{F}^{a}\) induce
+    un isomorfismmo sulle spighe.
+\end{lemma}
+
+\begin{remark}{}
+    Una successione in \(O_X\mathtt{-Mod}\) è esatta se e solo se lo è sulle
+    spighe.
+\end{remark}
+
+\begin{proof}[Dimostrazione lemma (\emph{iniettivo})] \( \) 
+    \begin{itemize}
+        \item[\(\implies \)] Sia \(\sigma_x, \tau_x \in \mathcal{F}_x\), con
+            \(\sigma \in \mathcal{F}{(U)}\), \(\tau \in \mathcal{F}{(V)}\) e
+            \(U, V \in \mathrm{Open}_x{(X)}\) tali che \(\varphi_x{(\sigma_x)} =
+            \varphi _x{(\tau_x)}\). Allora devo dimostrare \(\sigma_x =
+            \tau_x\).
+
+            Sappiamo già che \(\varphi {(\sigma)}_x = \varphi {(\tau)}_x\).
+            Allora esiste \(W \in \mathrm{Open}_x{(U \cap V)}\) tale che
+            \(\varphi {(\sigma)}|_W = \varphi {(\tau)}|_W\) ma allora \(\varphi
+            {(\sigma |_W)} = \varphi {(\tau|_W)}\). Poiché \(\varphi \) è
+            localmente iniettivo, allora esiste un \(W' \in
+            \mathrm{Open}_x{(W)}\) tale che \({(\sigma|_W)}|_{W^{\prime}} =
+        {(\tau|_W)}|_{W^{\prime}} \) da cui \(\sigma |_{W'} = \tau|_{W^{\prime}}
+        \), per cui \(\sigma_x = \tau_x\) 
+        \item[\(\impliedby \)] Sia \(U \in \mathrm{Open}{(X)}\) e siano
+            \(\sigma, \tau \in \mathcal{F}{(U)}\) tali che \(\varphi {(\sigma)} =
+            \varphi {(\tau)}\). Per ogni \(x \in U\), abbiamo che \(\varphi
+            {(\sigma)}_x = \varphi {(\tau)}_x\)  da cui \(\varphi _x{(\sigma_x)}
+            = \varphi _x{(\tau_x)}\) per cui \(\sigma_x = \tau_x\) poiché
+            \(\varphi _x\) è iniettiva. Allora \(\exists \, U_x \in
+            \mathrm{Open}_x{(U)}\) tale che \(\sigma|_{U_x}  = \tau_{U_x}\).
+
+            Adesso però \(\{U_x\}_{x \in U}  \) è un ricoprimento aperto di
+            \(U\) tale che \(\sigma|_{U_x} = \tau|_{U_x} \) per ogni \(x \in
+            U\), e quindi \(\varphi \) è localmente iniettiva.
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}{}
+    Sia \({(X, O_X)}\) uno spazio anellato. Allora \(O_X\mathtt{-Mod}\) ha
+    abbastanza iniettivi.
+\end{proposition}
+\begin{proof}{}
+    Per ogni \(x \in X\), 
+    \begin{align*}
+        O_X\mathtt{-Mod} &\longrightarrow O_{X,x}\mathtt{-Mod} \\
+         \mathcal{F}&\longmapsto \mathcal{F}_x
+    \end{align*}
+    è aggiunto sinistro di 
+    \begin{align*}
+        O_{X,x} \mathtt{-Mod}  &\longrightarrow O_X\mathtt{-Mod} \\
+        M &\longmapsto \widehat{M}
+    \end{align*}
+    con \(\widehat{M}{(U)} = M {(x \in U)}\) con restrizione \(1_M\) quando
+    possibile.
+
+    Questo sono aggiunti perché \(\forall \mathcal{F} \in O_X\mathtt{-Mod}\) e
+    \(\forall M \in O_{X,x}\mathtt{-Mod}\), 
+    \[
+      \mathrm{Hom}_{O_{X,x} } {(\mathcal{F}_x, M)} \cong
+      \mathrm{Hom}_X{(\mathcal{F}, \widehat{M})} \ni \varphi 
+    \]
+    dato da morfismi di \(O_X{(U)}\)-moduli \(\varphi {(U)} \to \widehat{M}{(U)}
+    = M\) per ogni \(U \in \mathrm{Open}_x{(X)}\) tale che \(\forall U \subseteq
+    V \in \mathrm{Open}_x{(X)}\). Per la proprietà universale del colimite,
+    \(\varphi _U{(\sigma|_V)} = \varphi_V{(\sigma)}\) per ogni \(\sigma \in
+    \mathcal{F}{(V)}\).
+
+    L'unità \(\eta\) di questa aggiunzione è tale che \(\forall \mathcal{F} \in
+    O_X\mathtt{-Mod}\) e \(\forall x \in X\)
+    \[
+      \eta_\mathcal{F}{(x)} = \eta_x : \mathcal{F} \to \widehat{\mathcal{F}_x} 
+    \]
+    induce un isomorfismo sulla spiega in \(x\), \(\mathcal{F}_x \to {\left(
+    \widehat{\mathcal{F}_x} \right)}_x\) e ottengo un morfismo in
+    \(O_X\mathtt{-Mod}\) \(\mathcal{F} \to \prod_{x \in X}
+    \widehat{\mathcal{F}_x}\) indotto dalle \(\eta{(x)}\) per ogni \(x \in X\)
+    che è iniettiva su ogni spiga, quindi è (localmente) iniettiva per il
+    lemma~\ref{lem:inj}.
+
+    Se dimostro che esiste un monomorfismo \(\varphi {(x)} : \mathcal{F}_x \to
+    \mathcal{I}_x\) con \(\mathcal{I}_x\) iniettivo, ottengo
+    \[
+      \prod_{x \in X} \varphi {(x)} : \prod_{x \in X} \widehat{\mathcal{F}_x}
+      \to \prod_{x \in X} \mathcal{I}_x
+    \]
+    iniettivo con \(\prod_{x \in X} \mathcal{I}_x\) iniettivo.
+
+Più in generale trovo monomorfismo \(\widehat{\mathcal{M}} \to \mathcal{I}\)
+    con \(\mathcal{I}\) iniettivo per ogni \(M \in O_{X, x}\mathtt{-Mod}\).
+
+    Esiste \(f : M \to I\) mono in \(O_{X, x} \mathtt{-Mod}\) con \(I\)
+    iniettivo. Allora \(\widehat{f} : \widehat{M} \to \widehat{I}\) in
+    \(O_x\mathtt{-Mod}\). Poiché \(\widehat{{(-)}}\) è aggiunto destro, allora
+    preserva i mono e dunque \(\widehat{f}\) è mono.
+
+    Resta da dimostrare che \(\widehat{I}\) è iniettivo in \(O_X\mathtt{-Mod}\)
+    cioè \(\mathrm{Hom}_X{(-, \widehat{I})} \cong\mathrm{Hom}_{O_{X,x} {(-_x,
+    I)}} \) manda mono di \(O_X\mathtt{-Mod}\) in epi (di \(\mathtt{Ab}\)).
+    Questo è vero perché \(-_x\) preserva i mono per il lemma~\ref{lem:inj} e
+    \(\mathrm{Hom}_{O_{X,x} } {(-, I)}\) è esatto perché \(I\) è iniettivo.
+    
+\end{proof}
+
+\begin{example}{}
+    Si può dimostrare che \(\forall A\) anello, \(H^{n}{(X, -)} :
+    A_x\mathtt{-Mod} \to A\mathtt{-Mod}\) conincidono con la coomoologia
+    singolare se \(X\) è localmente contraibile.
+\end{example}
+
+Volendo definire \(\mathrm{Hom}\) in modo che sia un (pre)fascio, possiamo
+farlo. Siano \(\mathcal{F}, \mathcal{G} \in O_X\mathtt{-PMod}\). Allora
+\(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})} \in \mathbb{Z}_X\mathtt{-Mod}\)
+(anche \(O_X\mathtt{-Mod}\) se \(O_X\) è commutativo) definito \(\forall U \in
+\mathrm{Open}{(X)}\) da 
+\[
+  \mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}{(U)} :=
+  \mathrm{Hom}_U{(\mathcal{F}|_U, \mathcal{G}|_U)} \in \mathtt{Ab}
+\]
+dove \(\mathcal{F}|_U\) è prefascio su \(U\) definito per ogni \(V \in
+\mathcal{Open}{(U)}\) da \(\mathcal{F}|_U{(V)} = \mathcal{F}{(V)}\). 
+Se \(\mathcal{F}, \mathcal{G}\) sono fasci, allora
+\(\mathrm{Hom}_X{(\mathcal{F}, \mathcal{G})}\) è un fascio, e si ottiene
+dunque un funtore \(\mathcal{Hom}_X{(-, =)} : O_X\mathtt{-Mod}^{op} \times
+O_X\mathtt{-Mod} \to \mathbb{Z}_X\mathtt{-Mod}\) esatto a sinistra in ciascun
+argomento e si possono considerare i funtori derivati \(\mathtt{Ext}_X^{i}{(-,
+=)}\).
+
+Inoltre dati \(\mathcal{F} \in \mathtt{PMod-}O_X\) e \(\mathcal{G} \in
+O_X\mathtt{-PMod}\), si definisce anche 
+\[
+{(\mathcal{F} \otimes_X^{\mathcal{P}} \mathcal{G})} {(U)} = \mathcal{F}{(U)}
+  \otimes_{O_X{(U)}} \mathcal{G}{(U)}
+\]
+per cui \(\mathcal{F} \otimes_X^{\mathcal{P}} \mathcal{G} \in
+\mathbb{Z}_X\mathtt{-PMod}\). Se \(\mathcal{F}, \mathcal{G}\) sono fasci, allora
+si può prendere \(\mathcal{F} \otimes_X \mathcal{G} := {\left( \mathcal{F}
+\otimes_X^{\mathcal{P}} \mathcal{G}\right)}^{a}\) e si ottiene un funtore 
+\[
+  - \otimes_X = : \mathtt{Mod-}O_X \times O_X\mathtt{-Mod} \to
+  \mathbb{Z}_X\mathtt{-Mod}
+\]
+esatto a destra in ciascun argomento, che si può derivare usando gli
+\(O_X\)-moduli piatti ottenendo \(\mathrm{Tor}_i^{X}{(-, =)}\).
+
+\begin{remark}{}
+    Sia \(f : X \to Y\) continua. Allora essa induce 
+    \begin{align*}
+        f_*: \mathtt{(P)Sh}{(X, \mathcal{C})} &\longrightarrow
+        \mathtt{(P)Sh}{(Y, \mathcal{C})} \\
+        \mathcal{F} &\longmapsto f_*(\mathcal{F}){(V)} := \mathcal{F}{(f^{-1}{(V)})}
+    \end{align*}
+
+    e varianti per i fasci di moduli. Ci sono anche funtori \(\mathtt{(P)Sh}{(Y,
+    \mathcal{C})} \to \mathtt{(P)Sh}{(X, \mathcal{C})}\).
+\end{remark}
+
+\begin{definition}{}
+    \(\mathcal{F} \in O_X\mathtt{-Mod}\) è (localmente) di
+    \emph{tipo}/\emph{presentazione}
+    finita se \(\forall x \in X\) esiste \(U \in \mathrm{Open}_x{(X)}\) e una
+    successione esatta della forma 
+    \[
+      O_U^{n} \to \mathcal{F}|_U \to 0 \quad / \quad O_U^{m} \to O_U^{n} \to
+      \mathcal{F}|_U \to 0
+    \]
+    \(\mathcal{F}\) è \emph{coerente} se è di tipo finito e per ogni \(U \in
+    \mathrm{Open}{(X)}\) e per ogni \(\mathcal{F}^{\prime} \subseteq \mathcal{F}
+    |_U\) sottofascio di tipo finito è di presentazione finita.
+
+    Si ottiene sempre una categoria abeliana \(\mathrm{Coh}{(X)} \subseteq
+    O_X\mathtt{-Mod}\). Essere coerente è equivalente a essere di presentazione
+    finita se e solo se \(O_X\) è coerente (vero ad esempio per varietà
+    complesse)
+\end{definition}
+
+
+
