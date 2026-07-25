@@ -118,7 +118,7 @@ senso.
 \end{proposition}
 
 
-\begin{theorem}{Macchinario dell'algebra omologica}
+\begin{theorem}{Macchinario dell'algebra omologica}\label{thm:LES}
     Sia \(\mathcal{A}\) una categoria abeliana e \(0 \to X^\bullet
     \overset{f}{\to} Y^\bullet \overset{g}{\to} Z^\bullet \to 0\) una
     successione esatta in \(C{(\mathcal{A})}\).
@@ -413,7 +413,7 @@ suriettivi.
 \end{enumerate}
 \end{proof}
 
-\begin{corollary}{}
+\begin{corollary}{}\label{cor:injres_unique}
     Una risoluzione iniettiva di \(X \in \mathcal{A}\) categoria abeliana (se
     esiste) è unica a meno di isomorfismo in \(K{(\mathcal{A})}\).
 \end{corollary}
@@ -441,33 +441,218 @@ suriettivi.
     funtore (esercizio) la cui classe di isomorfismo non dipende dalle scelte.
 \end{corollary}
 
+\begin{definition}{Funtore derivato (destro)}
+    Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
+    abeliane. Sia \(\mathcal{A}\) con abbastanza iniettivi. Allora
+    \(I_\mathcal{A}\) è ben definito e, per \(i \in \mathbb{N}\), la composizione 
+    \[
+      R^{i}F : \mathcal{A} \overset{I_\mathcal{A}}{\to} K{(\mathcal{A})}
+      \overset{F}{\to} K{(\mathcal{B})} \overset{H^{i}}{\to} \mathcal{B}
+    \]
+    è l'\(i\)-esimo \textbf{funtore derivato destro} di \(F\) 
+\end{definition}
+\begin{remark}{}
+    Poiché è composizione di funtori additivi, anche ogni \(R^{i}F\) è additivo.
+    Inoltre per il corollario~\ref{cor:injres_unique} \(R^{i}F\) è ben definito
+    (a meno di isomorfismo).
+\end{remark}
+
+Non ci si mette quasi mai a calcolare esplicitamente questi funtori.
+
+    
+\begin{example}[\(R^{i}F{(I)}\), con \(I\) iniettivo]
+    Se \(I\) è iniettivo, allora una risoluzione iniettiva è \(0 \to I
+    \overset{1_I}{\to} I \to 0\). Segue che 
+    \[
+      R^{i}F{(I)} = H^{i}{(F{(0 \to I \to 0)})} = H^{i}{(0 \to F{(I)} \to 0)} =
+      \begin{cases}{}
+          F{(I)} & i = 0\\
+          0      & i \neq 0
+      \end{cases}
+    \]
+\end{example}
+
 
 \begin{theorem}{}\label{thm:funtori-derivati}
 Sia \(F : \mathcal{A} \to \mathcal{B}\) un funtore additivo tra categorie
-abeliane. Se \(\mathcal{A}\) ha abbastanza iniettivi allora 
-\[
-  R^{i}F :  \mathcal{A}\overset{I_\mathcal{A}}{\to} K{(\mathcal{A})} \overset{F}{\to} 
-  K{(\mathcal{B})} \overset{H^{i}}{\to} \mathcal{B} \quad \forall i \in \mathbb{N}
-\]
+abeliane, con \(\mathcal{A}\) con abbastanza iniettivi.
 
-e ogni successione esatta \(\Sigma : 0 \to X \overset{f}{\to} Y \overset{g}{\to}
-Z \to 0\) in \(\mathcal{A}\) induce una successione esatta in \(\mathcal{B}\) 
+Allora ogni successione esatta (corta) \(\Sigma : 0 \to X \overset{f}{\to} Y \overset{g}{\to}
+Z \to 0\) in \(\mathcal{A}\) induce una successione esatta (lunga) in \(\mathcal{B}\) 
 \[
   0 \to R^{0}F{(X)} \overset{R^{0}F{(f)}}{\to} R^{0}F{(Y)}
   \overset{R^{0}F{(g)}}{\to} R^{0}F{(Z)} \overset{w^{0}}{\to} R^{1}F{(X)}
   \overset{R^{1}F{(f)}}{\to} \dots
 \]
-
 \end{theorem}
 
-% TODO recuperare una lezione da 1h
+\begin{proof}{}
+    Vogliamo applicare il teorema~\ref{thm:LES}. A tale scopo bisogna trovare le
+    risoluzioni iniettive \(0 \to X \to I^\bullet\), \(0 \to Y \to J^\bullet\) e
+    \(0 \to Z \to L^\bullet\) con morfismi \(f^\bullet : I^\bullet \to
+    J^\bullet\), \(g^\bullet : J^\bullet \to L^\bullet\) in \(C{(\mathcal{A})}\)
+    tali che \(0 \to I^\bullet \overset{f^\bullet}{\to} J^\bullet
+    \overset{g^\bullet}{\to} L^\bullet \to 0\) è esatta e \(f^\bullet\) estende
+    \(f\) e \(g^\bullet\) estende \(g\). In tal modo si ottiene
+    \begin{equation}\label{eq:help_esatta_funtorib} 0 \to
+    F{(I^\bullet)} \overset{F{(f^\bullet)}}{\to} F{(J^\bullet)}
+    \overset{F{(g^\bullet)}}{\to} L^\bullet \to 0\end{equation} che è esatta se
+    e solo se ogni \(0 \to F{(I^{i})} \to F{(J^{i})} \to F{(L^{i})} \to 0\) è
+    esatta. Quest'ultima cosa è vera perché \(I^{i}, J^{i}, L^{i}\) sono iniettivi, dunque
+    la successione \(0\to I^{i} \to J^{i} \to L^{i} \to 0 \) si spezza e \(J^{i}
+    \cong I^{i} \oplus L^{i}\), ma allora poiché \(F\) è additivo preserva
+    questo prodotto finito e quindi anche la~\eqref{eq:help_esatta_funtorib} si
+    spezza, e dunque è esatta. A questo punto la successione di cui nella tesi è
+    la successione esatta lunga di coomologia
+    di~\eqref{eq:help_esatta_funtorib}.
+
+    A tale scopo prendiamo per \(X\) e \(Z\) risuluzioni iniettive arbitrarie
+    (esistono perché \(\mathcal{A}\) abbastanza iniettivi e forse AoC)
+    \begin{align*}
+        0 \to X = I^{-1} \overset{i^{-1}}{\to} I^{0} \overset{i^{0}}{\to} I^{1}
+        \overset{i^{1}}{\to} \dots \\
+        0 \to Z = L^{-1} \overset{l^{-1}}{\to} L^{0} \overset{l^{0}}{\to} L^{1}
+        \overset{l^{1}}{\to} \dots \\
+    \end{align*}
+    Volendo costruire \(J^\bullet\) che
+    renda esatta la successione di cui sopra, poniamo \(J^{i} := I^{i}
+    \oplus L^{i}\) (che è iniettivo in quanto somma diretta di iniettivi).
+    Perché sia una risoluzione iniettiva, dobbiamo definire i differenziali
+    \(j^{*}\), \(j^{i} : J^{i} \to J^{i+1}\) in modo che \(0 \to Y = J^{-1}
+    \overset{j^{-1}}{\to} J^{0} \overset{j^{0}}{\to} J^{1} \overset{j^{1}}{\to}
+    \dots\) sia esatta. 
+    Iniziamo ponendo \(f^{i} I^{i} \to J^{i}\) l'inclusione e \(g^{i} : J^{i}
+    \to L^{i}\) la proiezione, con \(f^{-1} := f\) e \(g^{-1} := g\). Ora
+    procediamo definendo \(j^\bullet\) in modo che, oltre a quanto detto prima,
+    \(f^\bullet\) e \(g^\bullet\) siamo morfismi di complessi, in altre parole
+    bisogna trovare \(j^\bullet\) (frecce arancioni) in modo che 
+    il seguente diagrammone commuti e abbia righe e colonne esatte:
+
+    \[\begin{tikzcd}[column sep=small]
+        & 0 & 0 & 0 & 0 & & 0 & 0 & 0 & \\
+        0 & X & {I^0} & {I^1} & {I^2} & \dots & {I^{i-1}} & {I^i} & {I^{i+1}} & \dots \\
+        0 & Y & {J^0} & {J^1} & {J^2} & \dots & {J^{i-1}} & {J^i} & {J^{i+1}} & \dots \\
+        0 & Z & {L^0} & {L^1} & {L^2} & \dots & {L^{i-1}} & {L^i} & {L^{i+1}} & \dots \\
+        & 0 & 0 & 0 & 0 & & 0 & 0 & 0 &
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow[from=1-5, to=2-5]
+        \arrow[from=1-7, to=2-7]
+        \arrow[from=1-8, to=2-8]
+        \arrow[from=1-9, to=2-9]
+        \arrow[from=2-1, to=2-2]
+        \arrow["{i^{-1}}", from=2-2, to=2-3]
+        \arrow["{i^0}", from=2-3, to=2-4]
+        \arrow["{i^1}", from=2-4, to=2-5]
+        \arrow["{i^2}", from=2-5, to=2-6]
+        \arrow["{i^{i-2}}", from=2-6, to=2-7]
+        \arrow["{i^{i-1}}", from=2-7, to=2-8]
+        \arrow["{i^i}", from=2-8, to=2-9]
+        \arrow["{i^{i+1}}", from=2-9, to=2-10]
+        \arrow["f"', from=2-2, to=3-2]
+        \arrow["{f^0}"', color=applegreen, from=2-3, to=3-3]
+        \arrow["{f^1}"', color=applegreen, from=2-4, to=3-4]
+        \arrow["{f^2}"', color=applegreen, from=2-5, to=3-5]
+        \arrow["{f^{i-1}}"', color=applegreen, from=2-7, to=3-7]
+        \arrow["{f^i}"', color=applegreen, from=2-8, to=3-8]
+        \arrow["{f^{i+1}}"', color=applegreen, from=2-9, to=3-9]
+        \arrow[from=3-1, to=3-2]
+        \arrow["{j^{-1}}", color=orange, from=3-2, to=3-3]
+        \arrow["{j^0}", color=orange, from=3-3, to=3-4]
+        \arrow["{j^1}", color=orange, from=3-4, to=3-5]
+        \arrow["{j^2}", color=orange, from=3-5, to=3-6]
+        \arrow["{j^{i-2}}", color=orange, from=3-6, to=3-7]
+        \arrow["{j^{i-1}}", color=orange, from=3-7, to=3-8]
+        \arrow["{j^i}", color=orange, from=3-8, to=3-9]
+        \arrow["{j^{i+1}}", color=orange, from=3-9, to=3-10]
+        \arrow["g"', from=3-2, to=4-2]
+        \arrow["{g^0}"', color=applegreen, from=3-3, to=4-3]
+        \arrow["{g^1}"', color=applegreen, from=3-4, to=4-4]
+        \arrow["{g^2}"', color=applegreen, from=3-5, to=4-5]
+        \arrow["{g^{i-1}}"', color=applegreen, from=3-7, to=4-7]
+        \arrow["{g^i}"', color=applegreen, from=3-8, to=4-8]
+        \arrow["{g^{i+1}}"', color=applegreen, from=3-9, to=4-9]
+        \arrow[from=4-1, to=4-2]
+        \arrow["{l^{-1}}", from=4-2, to=4-3]
+        \arrow["{l^0}", from=4-3, to=4-4]
+        \arrow["{l^1}", from=4-4, to=4-5]
+        \arrow["{l^2}", from=4-5, to=4-6]
+        \arrow["{l^{i-2}}", from=4-6, to=4-7]
+        \arrow["{l^{i-1}}", from=4-7, to=4-8]
+        \arrow["{l^i}", from=4-8, to=4-9]
+        \arrow["{l^{i+1}}", from=4-9, to=4-10]
+        \arrow[from=4-2, to=5-2]
+        \arrow[from=4-3, to=5-3]
+        \arrow[from=4-4, to=5-4]
+        \arrow[from=4-5, to=5-5]
+        \arrow[from=4-7, to=5-7]
+        \arrow[from=4-8, to=5-8]
+        \arrow[from=4-9, to=5-9]
+    \end{tikzcd}\]
+
+    Procediamo per induzione. Dato \(n \ge -1\) suppongo già definiti i
+    \(j^{i}\) per ogni \(i < n\) in modo che \(j^{i} \circ f^{i} = f^{i+1} \circ
+    i^{i}\) e \(l^{i} \circ g^{i} = g^{i+1} \circ j^{i}\) e inoltre
+    \(\mathrm{Coker}{(i^{n-1})} \to \mathrm{Coker}{(j^{n-1})}\) monomorfismo.
+    Allora il seguente diagramma commuta e ha colonne esatte:
+    \[\begin{tikzcd}[column sep=large]
+        & 0 & 0 & 0 \\
+        \dots & {I^n} & {\operatorname{Coker}(i^{n-1})} & {I^{n+1}} \\
+        \dots & {J^n} & {\operatorname{Coker}(j^{n-1})} & {J^{n+1}} \\
+        \dots & {L^n} & {\operatorname{Coker}(l^{n-1})} & {L^{n+1}} \\
+              & 0 & 0 & {0}
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=1-4, to=2-4]
+        \arrow["{i^{n-1}}", from=2-1, to=2-2]
+        \arrow["{\operatorname{coker}(i^{n-1})}"', two heads, from=2-2, to=2-3]
+        \arrow["{i^n}"{pos=0.4}, curve={height=-22pt}, from=2-2, to=2-4]
+        \arrow["{f^n}"', from=2-2, to=3-2]
+        \arrow["{\bar{i}^n}"', dashed, tail, from=2-3, to=2-4]
+        \arrow["{\bar{f}^n}"', from=2-3, to=3-3]
+        \arrow["{f^{n+1}}", from=2-4, to=3-4]
+        \arrow["{j^{n-1}}", from=3-1, to=3-2]
+        \arrow["{\operatorname{coker}(j^{n-1})}", two heads, from=3-2, to=3-3]
+        \arrow["{g^n}"', from=3-2, to=4-2]
+        \arrow["{\bar{j}^n}", dashed, from=3-3, to=3-4]
+        \arrow["{\bar{g}^n}"', from=3-3, to=4-3]
+        \arrow["{g^{n+1}}", from=3-4, to=4-4]
+        \arrow["{l^{n-1}}", from=4-1, to=4-2]
+        \arrow["{\operatorname{coker}(l^{n-1})}", two heads, from=4-2, to=4-3]
+        \arrow["{l^n}"'{pos=0.4}, curve={height=22pt}, from=4-2, to=4-4]
+        \arrow[from=4-2, to=5-2]
+        \arrow["{\bar{l}^n}", tail, from=4-3, to=4-4]
+        \arrow[from=4-3, to=5-3]
+        \arrow["s", curve={height=-12pt}, from=4-4, to=3-4]
+        \arrow[from=4-4, to=5-4]
+    \end{tikzcd}\]
+    Infatti la prima e terza colonna sono esatte per costruzione di \(J^{i}\),
+    la seconda colonna è esatta per ipotesi induttiva. In particolare
+    \(\bar{f}^{n}\) è mono per ipotesi e \(\bar{g}^{n}\) è epi grazie
+    al lemma del serpente applicato al passaggio precedente. 
+
+    Se riesco a trovare \(\bar{j}^{n}\) tale che il diagramma commuti, allora
+    posso porre \(j^{n} := \bar{j}^{n} \circ \mathrm{coker}{(j^{n-1})}\) e per
+    il lemma del serpente (applicato in verticale ai \(\bar{\cdot}^{n}\))
+    \begin{align*}
+        0 &\to \mathrm{Ker}{(\bar{i}^{n})} = 0 \to \mathrm{Ker}{(\bar{j}^{n})} = 0
+      \to \\
+          &\to \mathrm{Coker}{(\bar{i}^{n})} \cong \mathrm{Coker}{(c^{n})} \to
+    \mathrm{Coker}{(\bar{j}^{n})} \cong \mathrm{Coker}{(j^{n})}
+    \end{align*}
+    E dunque esiste \(j^\bullet\) richiesta.
+
+
+\end{proof}
+
 
 \begin{corollary}{}
 \begin{enumerate}[label = \arabic*.]
-    \item \(R^{i}F\) è esatto al cntro \(\forall i \in \mathbb{N}\) e \(R^{0}F\)
+    \item \(R^{i}F\) è esatto al centro \(\forall i \in \mathbb{N}\) e \(R^{0}F\)
         è esatto a sinistra
     \item \(R^{0}F \cong F \iff F\) è esatto a sinistra 
-    \item \(F\) è eatto se e solo se \(R^{0}F \cong F\) e \(R^{i}F \cong 0\),
+    \item \(F\) è esatto se e solo se \(R^{0}F \cong F\) e \(R^{i > 0}F \cong 0\),
         ossia \(R^{0}F \cong F\) e \(R^{1}F \cong 0\) 
 \end{enumerate}
 \end{corollary}
@@ -525,11 +710,11 @@ Il teorema~\ref{thm:funtori-derivati} diventa: ogni \(\Sigma : 0 \to X
 \overset{f}{\to} Y \overset{g}{\to} Z \to 0\) in \(\mathcal{A}\) induce una
 successione esatta in \(\mathcal{B}\), data da
 \[
-  \dots \to l_{1}F{(Z)} \overset{w_{0}}{\to} L_{0}F{(X)}
+  \dots \to L_{1}F{(Z)} \overset{w_{1}}{\to} L_{0}F{(X)}
   \overset{L_{0}F{(f)}}{\to} L_{0}F{(Y)} \overset{L_{0}F{(g)}}{\to} L_{0}F{(Z)}
   \to 0
 \]
-e il corollario diventa che \(L \circ F\) è esatto a destra, e \(L \circ F \cong
+e il corollario diventa che \(L_0 F\) è esatto a destra, e \(L_0 F \cong
 F\) se e solo se \(F\) è esatto a destra.
 
 \begin{remark}{}
@@ -564,23 +749,25 @@ F\) se e solo se \(F\) è esatto a destra.
 	\arrow[from=2-5, to=2-6]
 \end{tikzcd} \]
 
-allora il seguente diagramma commuta:
+allora il seguente diagramma commuta (in particolare anche il terzo quadrato
+commuta e si dimostra per naturalità):
 \[ \begin{tikzcd}
-	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R^{i+1}F{(X)} & \dots \\
     \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
          R^{i+1}F{(X^{\prime})}& \dots
 	\arrow[from=1-1, to=1-2]
 	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
 	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
-	\arrow["f", from=1-3, to=1-4]
-	\arrow["x"', from=1-3, to=2-3]
-	\arrow["g", from=1-4, to=1-5]
-	\arrow["y"', from=1-4, to=2-4]
+	\arrow["R^{i}F{(g)}", from=1-3, to=1-4]
+	\arrow["R^{i}F{(x)}"', from=1-2, to=2-2]
+	\arrow["R^{i}F{(y)}"', from=1-3, to=2-3]
+	\arrow["\omega^{i}{(\Sigma)}", from=1-4, to=1-5]
+	\arrow["R^{i}F{(z)}"', from=1-4, to=2-4]
 	\arrow[from=1-5, to=1-6]
-	\arrow["z"', from=1-5, to=2-5]
+	\arrow["R^{i+1}F{(x)}"', from=1-5, to=2-5]
 	\arrow[from=2-1, to=2-2]
-	\arrow["{f^\prime}", from=2-3, to=2-4]
-	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow["R^{i}F{(g^{\prime})}", from=2-3, to=2-4]
+	\arrow["\omega^{i}{(\Sigma^{\prime})}", from=2-4, to=2-5]
 	\arrow[from=2-5, to=2-6]
 \end{tikzcd} \]
 
@@ -591,27 +778,27 @@ F^{\prime}\) una trasformazione naturale, allora \(\alpha\)  induce
 data da \(C{(\alpha)}_X : C{(F)}{(X^\bullet)} \to C{(F)}{(Y^\bullet)}\) definita
 nel modo ovvio. Si scrive per brevità \(\alpha\) al posto di \(C{(\alpha)}\).
 Analogamente \(\alpha\) al posto di \(K{(\alpha)}\) definita nello stesso modo.
-Allora \(\alpha\) induce \(H^{i} \circ \alpha \circ I_{\mathcal{A}} \), \(H^{i}
+Allora \(\alpha\) induce \(H^{i} \circ \alpha \circ I_{\mathcal{A}}: H^{i}
 \circ F \circ I_\mathcal{A} = R^{i}F \to R^{i}F^{\prime}\) trasformazione
 naturale, per ogni \(i \in \mathbb{N}\). In altre parole, il seguente diagramma
 commuta:
 \[ \begin{tikzcd}
-	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R{(i+1)}F{(X)} & \dots \\
-    \dots& R^{i}F{(X^{\prime})} & R^{i}F{(Y^{\prime})} & R^{i}F{(Z^{\prime})} &
-         R^{i+1}F{(X^{\prime})}& \dots
+	\dots& R^{i}F{(X)} & R^{i}F{(Y)} & R^{i}F{(Z)} & R^{i+1}F{(X)} & \dots \\
+    \dots& R^{i}F'{(X)} & R^{i}F'{(Y)} & R^{i}F'{(Z)} &
+         R^{i+1}F'{(X)}& \dots
 	\arrow[from=1-1, to=1-2]
-	\arrow["{(R^{i}\alpha)}_X"', from=1-2, to=2-2]
 	\arrow["R^{i}F{(f)}", from=1-2, to=1-3]
-	\arrow["R^{i}F{(f^{\prime})}", from=2-2, to=2-3]
-	\arrow["f", from=1-3, to=1-4]
-	\arrow["x"', from=1-3, to=2-3]
-	\arrow["g", from=1-4, to=1-5]
-	\arrow["y"', from=1-4, to=2-4]
+	\arrow["R^{i}F'{(f)}", from=2-2, to=2-3]
+	\arrow["R^{i}F{(g)}", from=1-3, to=1-4]
+	\arrow["{(R^{i}\alpha)}_X"', from=1-2, to=2-2]
+	\arrow["{(R^{i}\alpha)}_Y"', from=1-3, to=2-3]
+	\arrow["\omega^{i}{(F)}", from=1-4, to=1-5]
+	\arrow["{(R^{i}\alpha)}_Z"', from=1-4, to=2-4]
 	\arrow[from=1-5, to=1-6]
-	\arrow["z"', from=1-5, to=2-5]
+	\arrow["{(R^{i+1}\alpha)}_X"', from=1-5, to=2-5]
 	\arrow[from=2-1, to=2-2]
-	\arrow["{f^\prime}", from=2-3, to=2-4]
-	\arrow["{g^\prime}", from=2-4, to=2-5]
+	\arrow["R^{i}F'{(g)}", from=2-3, to=2-4]
+	\arrow["\omega^{i}{(F^{\prime})}", from=2-4, to=2-5]
 	\arrow[from=2-5, to=2-6]
 \end{tikzcd} \]
 \end{remark}
@@ -796,15 +983,15 @@ X)}\).
 \begin{example}{}
     Sia \(A\) un PID non campo. Allora \(\forall M \in A\mathtt{-Mod}\), esiste
     una risoluzione proiettiva \(0 \to P_{1} \to P_{0} \to M \to 0\) (perché un
-    sottomodulo di un modulo libero è libero). Analogamente esiste la
-    risoluzione iniettiva \(0 \to M \to I^{0} \to I^{1} \to 0\) (poiché
-    iniettivo significa divisibile e un quozione di un divisibile è divisibile).
-    Quindi \(\forall F : A\mathtt{-Mod} \to \mathcal{A}\) additivo con
-    \(\mathcal{A}\) una categoria abeliana, \(R^{i}F \cong 0 \cong L_{i} F\) per
-    ogni \(i > 1\). 
+    sottomodulo di un modulo libero è libero e proiettivo equivale libero).
+    Analogamente esiste la risoluzione iniettiva \(0 \to M \to I^{0} \to I^{1}
+    \to 0\) (poiché iniettivo significa divisibile e un quozione di un
+    divisibile è divisibile). Quindi \(\forall F : A\mathtt{-Mod} \to
+    \mathcal{A}\) additivo con \(\mathcal{A}\) una categoria abeliana, \(R^{i}F
+    \cong 0 \cong L_{i} F\) per ogni \(i > 1\). 
 
     Allora come posso trovare \(\mathrm{Ext}_A^{i}\) e \(\mathrm{Tor}_i^{A}\),
-    per \(i = 0, 1\), sui moduli liiii (e quindi sui moduli f.g.)?
+    per \(i = 0, 1\), sui moduli ciclici (e quindi sui moduli f.g.)?
     \[
       \mathrm{Ext}_A^{i}{(A, -)} = R^{i}\mathrm{Hom}_A{(A,-)} \cong R^{i}
       \mathrm{id}_{A\mathtt{-Mod}} \cong \begin{cases}{}
@@ -820,7 +1007,7 @@ X)}\).
       \end{cases}
     \]
 
-    Sia ora \(0 \cong a \in A \sminus A^{*}\). Allora per ogni \(M \in
+    Sia ora \(0 \neq a \in A \sminus A^{*}\) nel PID. Allora per ogni \(M \in
     A\mathtt{-Mod}\) ci chiediamo cosa siano \(\mathrm{Ext}_a^{i}{(A / {(a)},
     M)}\) e \(\mathrm{Tor}{(A / {(a)}, M)}\).
     Consideriamo la risoluzione proiettiva di \(A / {(a)}\), \( 0 \to A
@@ -847,7 +1034,7 @@ M\right)} \right)} \cong \\ &\cong H^{i}{\left( 0 \to M \cong \mathrm{Hom}_A{(A,
     \overset{-*a}{\to} A / {(b)}\)? Prendiamo \(d := \mathrm{mcd}{(a, b)}\).
     Allora \(a = da'\) e \(b = db'\) e \(mcd{(a', b')} = 1\). A questo punto è
     facile vedere che \(\mathrm{Im}{\left( A / {(a)} \overset{\cdot a}{\to} A /
-    {(b)}\right)} {(a,b)}/{(b)} = {(d)}/{(b)} = {(d)}/{(db')}\), dunque il
+    {(b)}\right)} = {(a,b)}/{(b)} = {(d)}/{(b)} = {(d)}/{(db')}\), dunque il
     \(\mathrm{Coker}\) di \(A/{(b)} \overset{-\cdot a}{\to} A/{(b)}\) è 
     \[
       {\left( \frac{A}{{(b)}} \right)} / {\left( \frac{{(d)}}{{(b)}} \right)} \cong A /
@@ -865,6 +1052,7 @@ M\right)} \right)} \cong \\ &\cong H^{i}{\left( 0 \to M \cong \mathrm{Hom}_A{(A,
       \mathrm{Tor}_i^{A}{\left( A / {(a)}, A / {(b)} \right)} \cong A / {(d)} =
       A / {(a, b)} \quad \forall i \in \{0, 1\} 
     \]
+    (per cui se \(a\) e \(b\) sono coprimi viene 0)
 \end{example}
 
 \begin{example}{}
