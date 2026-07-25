@@ -2358,12 +2358,13 @@ Equivalentemente il seguente diagramma commuta:
     \(\mathcal{A}\) è comunque preabeliana, infatti \(\forall f : M \to N\) in
     \(\mathcal{A}\), un conucleo di \(f\) in \(\mathcal{A}\) è 
     \[
-      N \overset{\pi}{\to } \mathrm{coker}f \overset{\pi'}{\to } C := \frac{\mathrm{coker}f}{T{(\mathrm{coker}f)}}
+      N \overset{\pi}{\to } \mathrm{Coker}f \overset{\pi'}{\to } C :=
+      \frac{\mathrm{Coker}f}{T{(\mathrm{Coker}f)}}
     \]
     Allora \(\pi' \circ \pi \circ f = 0\) evidentemente. Inoltre vale la
     proprietà universale, infatti
 \[\begin{tikzcd}
-	M & N & {\mathrm{coker}f} & C \\
+	M & N & {\mathrm{Coker}f} & C \\
 	& {P\in\mathcal{A}}
 	\arrow["f", from=1-1, to=1-2]
 	\arrow["0"', from=1-1, to=2-2]
