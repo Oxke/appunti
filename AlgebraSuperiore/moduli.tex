@@ -1,4 +1,6 @@
 \chapter{Moduli (reprise)}
+
+\section{Bimoduli e omomorfismi}
 \begin{definition}{Bimodulo}
     Siano \(A, B\) anelli. Allora un \({(A,B)}\)\emph{-bimodulo} è un gruppo abeliano
     \({(M, +)}\) con struttura di \(A\)-modulo sinistro e di \(B\)-modulo destro
@@ -115,11 +117,16 @@ una categoria abeliana.
 	\arrow["g", from=1-2, to=2-2]
 	\arrow["{\alpha_N}", from=2-1, to=2-2]
 \end{tikzcd} \]
-    commuta.
-    Questo è vero perché \(\forall f \in \mathrm{Hom}_A{(A, M)}\),
-    \(g{(\alpha_M{(f)})} = g {(f{(1)})}\) e \(\alpha_N{(g_*{(f)})} = a_N{(g
-    \circ f)} = {(g \circ f)}{(1)}\) 
+        commuta. Questo è vero perché, per ogni \(f \in \mathrm{Hom}_A{(A, M)}\),
+    
+        \[
+            g{(\alpha_M{(f)})} = g{(f{(1)})}
+            \qquad\text{e}\qquad
+            \alpha_N{(g_*{(f)})} = {(g \circ f)}{(1)}
+        \]
 \end{example}
+
+\section{Prodotto tensoriale}
 
 \begin{example}{}
     Sia \(A\) commutativo, \(B\) una \(A\)-algebra, \(M, N\) \(B\)-moduli.
@@ -614,8 +621,9 @@ e
     \]
 \end{theorem}
 \begin{proof}{}
+    \sloppy
     Vogliamo dimostrare che, \(\forall N \in A\mathtt{-Mod}\) e \(\forall P \in
-    B\mathtt{-Mod}\), \\\(\mathrm{Hom}_B{(M \otimes_A N, P)} \cong
+    B\mathtt{-Mod}\), \(\mathrm{Hom}_B{(M \otimes_A N, P)} \cong
     \mathrm{Hom}_A{(N, \mathrm{Hom}_B{(M, P)})}\). Questo è vero perché 
     \[ \begin{tikzcd}
 	{\mathrm{Hom}_B{(M \otimes_A N, P)}} & {\mathrm{Bal}_A^{B}{(M \times N, P)}} & {\mathrm{Hom}_A {(N, \mathrm{Hom}_B{(M, P)})}} \\
@@ -646,11 +654,16 @@ N\) è \(A\)-bilanciata universale.
         \]
         e analogamente se \(g\) è \(A\)-lineare, allora \(\tilde{g}\) è
         \(A\)-bilanciata.
-    \item \(\mathrm{Bal}_A^{B}{(M \times N, P)} = \{f \in \mathrm{Bal}_A{(M
-        \times N, P)} | f \text{ è \(B\)-lineare nel primo argomento}\}\) 
+        \item
+        \[
+            \mathrm{Bal}_A^{B}{(M \times N, P)} =
+            \{f \in \mathrm{Bal}_A{(M \times N, P)} \mid
+            f \text{ è \(B\)-lineare nel primo argomento}\}
+        \]
 \end{itemize}
     Le biezioni rimangono nei sottoinsiemi, perché conservano la \(B\)-linearità
     % TODO: detto malissimo e non sono sicuro di aver capito
+    \fussy
 \end{proof}
 
 \begin{corollary}{}
@@ -658,11 +671,11 @@ N\) è \(A\)-bilanciata universale.
     \(\mathrm{Hom}_B{(M, -)}\) è esatto a sinistra e preserva i prodotti)
 \end{corollary}
 \begin{corollary}{}\label{cor:mod_tens}
-    Se \(A\) è commutativo e \(M \in A\mathtt{-Mod}\), allora 
+    Se \(A\) è commutativo e \(M \in A\mathtt{-Mod}\), allora
     \[
-        (M \otimes_A - : A\mathtt{-Mod} \to A\mathtt{-Mod}) \dashv
-        {(\mathrm{Hom}_A{(M, -)} : A\mathtt{-Mod} \to A\mathtt{-Mod})}
+        M \otimes_A - \dashv \mathrm{Hom}_A{(M, -)}
     \]
+    come funtori \(A\mathtt{-Mod} \to A\mathtt{-Mod}\).
 \end{corollary}
 
 \begin{remark}{}
@@ -792,6 +805,8 @@ Come notazione si può usare \(f_*\) invece di \(f^{*}\), \(f^{*}\) invece di
 \begin{corollary}{}
     \(f_!\) è esatto a destra e \(f_*\) è esatto a sinistra
 \end{corollary}
+
+\section{Proiettivi, iniettivi e piatti}
 
 \begin{remark}{}
     \(f_! {(A)} \cong B\) 

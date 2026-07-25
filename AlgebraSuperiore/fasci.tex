@@ -4,6 +4,8 @@ Sia \(X\) uno spazio topologico. Allora l'insieme \(\mathrm{Open}{(X)}\) degli
 aperti di \(X\), ordinato da \(\supseteq\), forma una categoria
 \(\mathrm{Open}{(X)}\).
 
+\section{Prefasci e fasci}
+
 \begin{definition}{Prefasci}
     La categoria dei \emph{prefasci} su \(X\) a valori in una categoria
     \(\mathcal{C}\) è 
@@ -84,8 +86,9 @@ Siano \(\mathcal{F}, \mathcal{G}\) due fasci. Un morfismo \(\mathcal{F} \to
     S^{U} : G\text{ è continua}\}\).
 
     Ci sono varianti di questo esempio se \(X\) è una varietà
-    \emph{differenziabile}/\emph{complessa}/\emph{algebrica} considerando
-    funzioni \(C^{\infty}\)/\emph{olomorfe}/\emph{regolari}.
+    \emph{differenziabile}, \emph{complessa} o \emph{algebrica}. In tal caso
+    si considerano funzioni \(C^{\infty}\), \emph{olomorfe} o
+    \emph{regolari}.
 \end{example}
 
 \begin{remark}{}
@@ -114,6 +117,8 @@ Siano \(\mathcal{F}, \mathcal{G}\) due fasci. Un morfismo \(\mathcal{F} \to
     topologico e \(O_X \in \mathtt{Sh}{(X, \mathtt{Rng})}\) (di solito si
     considerano anelli commutativi).
 \end{definition}
+
+\section{Fasci di moduli}
 
 \begin{definition}{}
     Sia \({(X, O_X)}\) uno spazio anellato. Un prefascio di \(O_X\)-moduli è un
@@ -166,6 +171,8 @@ O\) e \(\mathcal{F}{(X)}\) è un \(A\)-modulo qualunque. Segue che
     \mathcal{F}{(U)}\) tale che \({(\alpha \sigma)}|_{\alpha^{-1}{(a)}} = a
     \sigma|_{\alpha^{-1}{(a)}}  \) .
 \end{example}
+
+\section{Morfismi e fascio associato}
 
 \begin{definition}{}
     Sia \(\varphi : \mathcal{F}\to \mathcal{G}\) un morfismo di prefasci (in
@@ -477,17 +484,20 @@ aperto di \(U\), } \sigma_{i} \in \mathcal{F}^{s}{(U_{i})}\,\,\forall i \in I \}
   localmente suriettiva, ed è iniettiva. Allora posso assumere
   \(\mathrm{im}_\mathcal{P}{(\varphi )} = \eta_{\mathrm{Im}_\mathcal{P}{(\varphi
   )}} \), per cui
-  \begin{align*}
-    \mathrm{coim}_\mathcal{P}{(\varphi )} =
-    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}_\mathcal{P}{(\varphi )})} =
-    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} \implies \\ \implies \varphi  =
-    \mathrm{im}_\mathcal{P}{(\varphi )} \circ
-    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} =
-    \eta_{\mathrm{Coker}_\mathcal{P}{(\mathrm{ker} \varphi })} \circ
-    \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} =
-    \mathrm{coker}{(\mathrm{ker}{(\varphi )})}
-  \end{align*}
+    \begin{align*}
+        \mathrm{coim}_\mathcal{P}{(\varphi )}
+        &= \mathrm{coker}_\mathcal{P}{(\mathrm{ker}_\mathcal{P}{(\varphi )})}
+            = \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} \\
+        &\implies \varphi
+            = \mathrm{im}_\mathcal{P}{(\varphi )} \circ
+                \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} \\
+        &= \eta_{\mathrm{Coker}_\mathcal{P}{(\mathrm{ker} \varphi })} \circ
+             \mathrm{coker}_\mathcal{P}{(\mathrm{ker}{(\varphi )})} \\
+        &= \mathrm{coker}{(\mathrm{ker}{(\varphi )})}
+    \end{align*}
 \end{proof}
+
+\section{Sottoprefasci e coomologia locale}
 
 \begin{definition}{Sotto(pre)fascio}
     Sia \(\mathcal{F}\) un (pre)fascio. \(\mathcal{F}' \subseteq \mathcal{F} \)

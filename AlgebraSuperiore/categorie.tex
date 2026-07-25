@@ -1,5 +1,7 @@
 \chapter{Categorie}
 
+\section{Categorie e funtori}
+
 \begin{definition}{Categoria}
     Una \textbf{categoria} \(\mathcal{C}\) è data da una classe di oggetti \(\mathrm{Ob}{(\mathcal{C})}\) e \(\forall X, Y \in \mathrm{Ob}{(\mathcal{C})}\) da un insieme di morfismi da \(X \) a \(Y\) indicato con
     \(\mathrm{Hom}{(X,Y)} = \mathrm{Hom}_\mathcal{C} {(X, Y)} = \mathcal{C}{(X, Y)}\)  e da una
@@ -1033,8 +1035,9 @@ l'equivalente di categorie è una relazione di equivalenza su \(\mathtt{\mathcal
 
     \(F'\) è essenzialmente biunivoco, \(\mathcal{C}'\) e \(D'\) sono scheletri, dunque \(F'\) è biunivoco, quindi isomorfismo e quindi equivalenza.
     \[
-        F = \mathrm{id}_D \circ F \circ \mathrm{id}_c \cong J \circ Q \circ F
-        \circ I \circ P = J \circ F' \circ P
+        F = \mathrm{id}_D \circ F \circ \mathrm{id}_{\mathcal{C}}
+        \cong J \circ Q \circ F \circ I \circ P
+        = J \circ F' \circ P
     \]
     equivalenza perché lo sono \(J, F'\) e \(P\) 
 \end{itemize}
@@ -2317,9 +2320,9 @@ Equivalentemente il seguente diagramma commuta:
     \(f: X \to Y\) in \(\mathcal{A}'\) \(\implies \) \(\exists i: K \to X\)
     nucleo di \(f\) in \(\mathcal{A}\) con \(K \in \mathcal{A}'\)).
 
-    Ad esempio, se \(\mathcal{A} = A\mathtt{-Mod}\) e \(\mathcal{A}'\) con
-    oggetti i moduli noeheriani/artiniani/coerenti, allora \(\mathcal{A}'\) è
-    preabeliana.
+    Ad esempio, se \(\mathcal{A} = A\mathtt{-Mod}\) e \(\mathcal{A}'\) ha
+    oggetti i moduli noetheriani, artiniani o coerenti, allora
+    \(\mathcal{A}'\) è preabeliana.
 \end{remark}
 
 
@@ -2422,8 +2425,8 @@ Equivalentemente il seguente diagramma commuta:
 
 \begin{proposition}{}\label{prop:equal_mono}
     Sia \(\mathcal{C}\) una categoria. Allora ogni
-    \emph{equalizzatore}/\emph{coequalizzatore} in \(\mathcal{C}\) è un
-    \emph{mono}/\emph{epi}morfismo in \(\mathcal{C}\).
+    \emph{equalizzatore} in \(\mathcal{C}\) è un \emph{mono}morfismo.
+    Dualmente, ogni \emph{coequalizzatore} è un \emph{epi}morfismo.
 \end{proposition}
 \begin{proof}{}
     Sia \(f : X \to Y\) un equalizzatore di \(Y \underset{h}{\overset{g}{\rightrightarrows}} Z\). Dati \(l, l' : W \to X\) tali che \(f \circ l = f \circ l'\). Devo dimostrare che \(l = l'\). 
@@ -2661,11 +2664,13 @@ Equivalentemente il seguente diagramma commuta:
     \item 
     \begin{itemize}
         \item[\(\implies \)] Per dualità basta dimostrare che \(f\) mono \(\implies \) \(f\) nucleo
-            \[
-              \mathrm{coim}f = \mathrm{coker}{(\mathrm{ker}f)} =
-              \mathrm{coker}{(0 \to X)} \implies \mathrm{coim}{(f)} \text{ iso}
-              \implies f = \mathrm{im}f \circ iso
-            \]
+                        \begin{align*}
+                            \mathrm{coim}f
+                            &= \mathrm{coker}{(\mathrm{ker}f)} \\
+                            &= \mathrm{coker}{(0 \to X)} \\
+                            &\implies \mathrm{coim}{(f)} \text{ iso} \\
+                            &\implies f = \mathrm{im}f \circ iso
+                        \end{align*}
             cioè \(f\,``="\, \mathrm{im}f\) è un nucleo
         \item[\(\impliedby \)] \(s{(f)}\) è isomorfismo se e solo se \(
             s{(f)}\) è mono e epi. Per dualità basta dimostrare che \(s{(f)}\) è mono, che è vero se \(f'\) è mono. Dunque dimostreremo che \(f'\) è mono.

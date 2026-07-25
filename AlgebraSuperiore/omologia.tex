@@ -9,6 +9,8 @@ Sia \(\mathcal{A}\) una categoria preadditiva. Indichiamo un complesso in
 dove \(d^{i} \circ d^{i-1} = 0, \;\forall i \in \mathbb{Z}\).
 Spesso quasi tutti gli \(X^{i}\) sono nulli e la catena è dunque limitata.
 
+\section{Complessi e coomologia}
+
 \begin{definition}{Categoria dei Complessi}
     La \textbf{categoria dei complessi} \(C{(\mathcal{A})}\) ha come oggetti i
     complessi di \(\mathcal{A}\) e morfismi
@@ -118,6 +120,8 @@ senso.
 \end{proposition}
 
 
+\section{Omotopia e categoria omotopa}
+
 \begin{theorem}{Macchinario dell'algebra omologica}\label{thm:LES}
     Sia \(\mathcal{A}\) una categoria abeliana e \(0 \to X^\bullet
     \overset{f}{\to} Y^\bullet \overset{g}{\to} Z^\bullet \to 0\) una
@@ -191,6 +195,8 @@ con funtore additivo \(Q = Q_{\mathcal{A}} : C{(\mathcal{A})} \to
 K{(\mathcal{A})}\) tale che \(X^\bullet \mapsto X^\bullet\) e \(f^\bullet
 \mapsto [f^\bullet]\) 
 
+
+
 \begin{remark}{}
     Si dimostra che se \(\mathcal{A}\) è abeliana, allora 
     \[
@@ -258,6 +264,8 @@ attraverso \(I^{i}{(Y^\bullet)} \to K^{i}{(Y^\bullet)}\) se e solo se
     \(H^{i} : C{(\mathcal{A})} \to \mathcal{A}\) induce un funtore additivo
     \(H^{i} : K{(\mathcal{A})} \to \mathcal{A}\) 
 \end{corollary}
+
+\section{Funtori derivati}
 
 \begin{definition}{Risoluzione}
     Sia \(\mathcal{A}\) una categoria abeliana. Una \emph{risoluzione} a
@@ -802,7 +810,9 @@ commuta:
 	\arrow[from=2-5, to=2-6]
 \end{tikzcd} \]
 \end{remark}
-\begin{example}{}
+
+\subsection{Ext / Tor}
+
    Sia \(\mathcal{A}\) una categoria abeliana, \(X \in \mathcal{A}\). Allora i
    funtori \(\mathcal{A}{(X, -)} : \mathcal{A} \to \mathtt{Ab}\),
    \(\mathcal{A}{(-, X)} : \mathcal{A}^{op} \to \mathtt{Ab}\) sono esatti a
@@ -817,7 +827,7 @@ commuta:
      \dots \to \mathrm{Ext}_{\mathcal{A}} ^{i}{(X, Y')} \overset{f_*}{\to}
      \mathrm{Ext}_\mathcal{A}^{i}{(X, Y)} \overset{g_*}{\to}
      \mathrm{Ext}_\mathcal{A}^{i}{(X, Y'')} \overset{w^{i}}{\to}
-     \mathrm{Ext}_\mathcal{A}^{i+1}{(X, Y')}
+     \mathrm{Ext}_\mathcal{A}^{i+1}{(X, Y')} \to \dots
    \]
    con \(\mathrm{Ext}_\mathcal{A}^{i}{(X, -)} \cong \mathcal{A}{(X, -)} =
    \mathrm{Hom}_\mathcal{A}{(X, -)}\).
@@ -854,7 +864,6 @@ Dualmente, se \(N \in A\mathtt{-Mod}\), allora \(- \otimes_A N : \mathtt{Mod-}A
 \to \mathtt{Ab}\) è esatto a destra, dunque \(\overline{\mathrm{Tor}}_i^{A}{(-,
 N)} := L_{i}{(- \otimes_A N)}\).
 
-\end{example}
 
 Sia ora \(\mathcal{A}\) una categoria abeliana con abbastanza iniettivi, \(f : X
 \to X'\) un morfismo di \(\mathcal{A}\). Allora \(\forall Y \in \mathcal{A}\),
@@ -1026,8 +1035,10 @@ M\right)} \right)} \cong \\ &\cong H^{i}{\left( 0 \to M \cong \mathrm{Hom}_A{(A,
     Se \(M = A\), allora \(\mathrm{Ker}{(A \overset{-\cdot a}{\to} A)} = 0\) e
     \(\mathrm{CoKer}{(A \overset{-\cdot a}{\to} A)} = A / {(a)}\). Quindi
     \(\mathrm{Hom}_A{(A/{(a)}, A)} = 0 = \mathrm{Tor}_1^{A}{(A / {(a)}, A)}\) e
-    \(\mathrm{Ext}^{1}_A{(A / {(a)}, A)} \cong A /{(a)} \cong A / {(a)}
-    \otimes_A A\). 
+        \begin{align*}
+            \mathrm{Ext}^{1}_A{(A / {(a)}, A)} &\cong A /{(a)} \\
+            &\cong A / {(a)} \otimes_A A
+        \end{align*}
 
     Sia \(M = A / {(b)}\), con \(0 \neq b \in A \sminus A^{*}\).
     Chi sono allora \(\mathrm{Ker}\) e \(\mathrm{Coker}\) di \(A / {(b)}
