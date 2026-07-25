@@ -125,7 +125,7 @@ una categoria abeliana.
     Sia \(A\) commutativo, \(B\) una \(A\)-algebra, \(M, N\) \(B\)-moduli.
     Allora Poiché \(M, N \in B\mathtt{-Mod-}A\), \(\mathrm{Hom}_B{(M, N)}\) è
     \(A\)-bimodulo simmetrico (ossia tale che \(\forall a \in A\) e \(\forall f
-    \in \mathrm{Hom}_B{(M, N)}\), \({(af)}{(x)} = f{(ax)} = af{(x)}\).
+    \in \mathrm{Hom}_B{(M, N)}\), \({(af)}{(x)} = f{(ax)} = {(fa)}{(x)}\).
 
     In particolare se \(M, N\) sono \(A\)-moduli, allora \(\mathrm{Hom}_A{(M,
     N)}\) è un \(A\)-modulo in questo modo.
@@ -244,7 +244,7 @@ y')} - {(x,y)} - {(x, y')}}_{\text{add. nel secondo arg.}}, \underbrace{{(xa,y)}
 \begin{corollary}{} Esistono i funtori (additivi) \\
 \begin{minipage}{0.48\textwidth}
     \begin{align*}
-        M\otimes_A -: A\text{-Mod} &\longrightarrow \text{Ab} \\
+        M\otimes_A -: A\mathtt{-Mod} &\longrightarrow \text{Ab} \\
         N &\longmapsto  M \otimes_A N \\
         (g : N \to N') &\longmapsto \mathrm{id}_M \otimes g
     \end{align*}
@@ -253,7 +253,7 @@ e
 \hfill
 \begin{minipage}{0.48\textwidth}
     \begin{align*}
-        - \otimes_A N: \text{Mod-}A &\longrightarrow \text{Ab} \\
+        - \otimes_A N: \mathtt{Mod-}A &\longrightarrow \text{Ab} \\
         M &\longmapsto M \otimes_A N \\
         (f : M \to M') &\longmapsto f \otimes \mathrm{id}_N
     \end{align*}
@@ -332,7 +332,7 @@ e
 
 \begin{definition}{Funtore aggiunto}
     Sia \(F : \mathcal{C} \to \mathcal{D}\) e \(G : \mathcal{D} \to
-    \mathcal{D}\) funtori. Si dice che \(F\) è \emph{aggiunto sinistro} di
+    \mathcal{C}\) funtori. Si dice che \(F\) è \emph{aggiunto sinistro} di
     \(G\) (o che \(G\) è \emph{aggiunto destro} di \(F\)) e si indica \(F \dashv
     G\) se \(\forall X \in \mathcal{C}\) e \(\forall Y \in \mathcal{D}\)
     \[
@@ -575,6 +575,35 @@ e
 
     \emph{Suggerimento}: (per \(\mathrm{Ker}\)) considerare il funtore \(\mathcal{A} \to
     \mathtt{Mor}{(\mathcal{A})}\) dato da \(X \mapsto {(X \mapsto 0)}\) 
+
+    \tcblower
+
+    Il suggerimento è molto potente, e ci suggerisce in realtà che
+    se \(\mathrm{Zero}\) è il funtore suggerito, allora
+    \[
+      \mathrm{Zero} \dashv \mathrm{Ker}
+    \]
+    e dunque \(\mathrm{Ker}\) è aggiunto destro tra categorie abeliane, e dunque
+    esatto a sinistra. Siano allora \(X \in \mathcal{A}\) e \(f : Y \to Y' \in
+    \mathtt{Mor}{(\mathcal{A})}\) 
+    \begin{align*}
+        \varphi_{\mathrm{Zero}{(X)}, Y} :
+        \mathtt{Mor}{(\mathcal{A})}{(X \mapsto 0, f)} &\longrightarrow
+        \mathcal{A}{(X, \mathrm{Ker}f)} \\
+         {(g: X \to Y, g' : 0 \to Y')} &\longmapsto \varphi_{\mathrm{Zero}{(X)},
+         Y} (\alpha) = {(\exists !)}\,h \text{ tale che } g = \mathrm{ker}f \circ h
+    \end{align*}
+    Dove per definire \(h\) si è usata la proprietà universale del
+    \(\mathrm{Ker}\), che vale perché \(f \circ g = g' \circ 0 = 0\). Notare che
+    è possibile definire l'inversa di \(\varphi_{\mathrm{Zero}{(X)}, Y} \) come
+    \(g = \mathrm{ker}f \circ h, g' : 0 \to Y'\) poiché \(g'\) esiste unica
+    per le proprietà di 0. Allora si ha che \({(g, g')}\) è una trasformazione
+    naturale di \(X \mapsto 0\) in \(f : Y \to Y'\) perché \(f \circ g = f \circ
+    \mathrm{ker}f \circ h = 0 \circ h = 0 = g' \circ 0\).
+
+    È facile ma contoso mostrare che \(\varphi \) è naturale.
+
+    Per il \(\mathrm{Coker}\) il discorso è analogo e duale.
 \end{eser}
 
 \begin{theorem}{}
@@ -804,9 +833,18 @@ Come notazione si può usare \(f_*\) invece di \(f^{*}\), \(f^{*}\) invece di
 \end{tikzcd}\]
 
 % TODO: aggiustare
-Ma allora \(A / I \otimes_A M \cong \mathrm{Coker}{\left({{I \otimes_A M \to M}\above
-{a\otimes x \mapsto ax}}\right)} =
-    M / IM\) 
+Ma allora \(
+A/I \otimes_A M
+  \cong
+\operatorname{Coker}\!\left(
+\substack{
+I\otimes_A M \to M\\
+a\otimes x \mapsto ax
+}
+\right)
+=
+M/IM.
+\)
 \end{proof}
 
 \begin{definition}{Proiettività e iniettività}
@@ -1082,7 +1120,7 @@ f'|_{N_{0}} =f_{0}\}\end{align*}
 
 \begin{proof}{}
     Sia \(N \in B\mathtt{-Mod}\). Per ipotesi \(\exists i : f^{*}{(N)}
-    \twoheadrightarrow M\) mono in \(A\mathtt{-Mod}\) con \(M\) iniettivo.
+    \rightarrowtail M\) mono in \(A\mathtt{-Mod}\) con \(M\) iniettivo.
     Sappiamo che \(f^{*} \dashv f_* = \mathrm{Hom}_A{(B, -)}\). Allora \(f_*\) è
     esatto a sinistra e dunque \(f_*{(i)}\) è mono. Sia \(\eta :
     \mathrm{id}_{B\mathtt{-Mod}} \to f_* \circ f^{*}\) unità dell'aggiunzione.

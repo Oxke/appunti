@@ -1,16 +1,168 @@
 \chapter{Algebra Omologica}
 
+Sia \(\mathcal{A}\) una categoria preadditiva. Indichiamo un complesso in
+\(\mathcal{A}\) con 
+\[
+  X^\bullet := {(\dots \to X^{i-1} \overset{d_{X^\bullet}^{i-1} }{\to} X^{i}
+  \overset{d_{X^\bullet}^{i}}{\to} X^{i+1} \to \dots)}
+\]
+dove \(d^{i} \circ d^{i-1} = 0, \;\forall i \in \mathbb{Z}\).
+Spesso quasi tutti gli \(X^{i}\) sono nulli e la catena è dunque limitata.
+
+\begin{definition}{Categoria dei Complessi}
+    La \textbf{categoria dei complessi} \(C{(\mathcal{A})}\) ha come oggetti i
+    complessi di \(\mathcal{A}\) e morfismi
+    \[
+      C{(\mathcal{A})}{(X^\bullet, Y^\bullet)} := \{f^\bullet = {(f^{i} \in
+      \mathcal{A}{(X^{i}, Y^{i})})}_{i \in \mathbb{Z}} : d_Y^{i} \circ f^{i} =
+  f^{i+1} \circ d_X^{i} \quad \forall i \in \mathbb{Z}\} 
+    \]
+    Ossia, il seguente diagramma commuta:
+
+    \[\begin{tikzcd}
+        \dots & Y^{i-1} & Y^{i} & Y^{i+1} & \dots\\
+        \dots & X^{i-1} & X^{i} & X^{i+1} & \dots
+        \arrow[from=1-1, to=1-2]
+        \arrow["{d_Y^{i-1}}", from=1-2, to=1-3]
+        \arrow["{d_Y^i}", from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=2-1, to=2-2]
+        \arrow["{f^{i-1}}", from=2-2, to=1-2]
+        \arrow["{d_X^{i-1}}"', from=2-2, to=2-3]
+        \arrow["{f^i}", from=2-3, to=1-3]
+        \arrow["{d_X^i}"', from=2-3, to=2-4]
+        \arrow["{f^{i+1}}", from=2-4, to=1-4]
+        \arrow[from=2-4, to=2-5]
+    \end{tikzcd}\]
+
+    e la composizione \(f^\bullet \circ g^\bullet = {(f^{i} \circ g^{i})}_{i \in
+    \mathbb{Z}}\) è definita componente per componente 
+
+\end{definition}
+
+\begin{remark}{}
+    \(C{(\mathcal{A})}\) è sottocategoria piena di \(S{(\mathcal{A})}\) la
+    categoria delle successioni senza la condizione \(d^{i} \circ d^{i-1} = 0\)
+    e i morfismi definiti nello stesso modo; \(S{(\mathcal{A})} \cong
+    \mathtt{Fun}{({(\mathbb{Z}, \le )}, \mathcal{A})}\). Dunque poiché
+    \(\mathcal{A}\) è preadditiva, anche \(S{(\mathcal{A})}\) lo è e quindi
+    anche \(C{(\mathcal{A})}\). Inoltre se \(\mathcal{A}\) è additiva o
+    (pre)abeliana allora anche \(C{(\mathcal{A})}\) lo è. Infatti
+    \(\mathcal{C}{(\mathcal{A})}\) è chiusa per (co)prodotti finiti, nuclei e
+    conuclei, che esistono in \(S{(\mathcal{A})}\).
+\end{remark}
+
+Se $\mathcal{A}$ è una categoria abeliana, per ogni intero $i \in \mathbb{Z}$
+possiamo definire un funtore ``nucleo'', denotato con $K^i: C(\mathcal{A}) \to
+\mathcal{A}$ come $K^i(X^\bullet) = \operatorname{Ker}(d_X^i)$.
+L'azione sui morfismi è indotta naturalmente: dato un morfismo di complessi
+$f^\bullet: X^\bullet \to Y^\bullet$, esiste un unico morfismo $K^i(f)$ che
+rende commutativo il seguente diagramma:
+
+
+\[\begin{tikzcd}
+    \mathrm{Ker}d_Y^{i} & Y^{i} & Y^{i+1}\\
+    \mathrm{Ker}d_X^{i} & X^{i} & X^{i+1}
+	\arrow["{\mathrm{ker}d_Y^i}", tail, from=1-1, to=1-2]
+	\arrow["{d_Y^i}", from=1-2, to=1-3]
+	\arrow["{\exists!K^i(f)}", from=2-1, to=1-1]
+	\arrow["{\mathrm{ker}d_X^i}"', tail, from=2-1, to=2-2]
+	\arrow["{f^i}"', from=2-2, to=1-2]
+	\arrow["{d_X^i}"', from=2-2, to=2-3]
+	\arrow["{f^{i+1}}"', from=2-3, to=1-3]
+\end{tikzcd}\]
+
+per le proprietà del \(\mathrm{Ker}\).
+
+Analogamente, possiamo definire un funtore ``immagine''
+\begin{align*}
+    I^{i}: C{(\mathcal{A})} &\longrightarrow \mathcal{A} \\
+     X^\bullet &\longmapsto I^{i}(X^\bullet) = \mathrm{Im}{(d_X^{i-1})}
+\end{align*}
+
+Dove sui morfismi è definito grazie alla scomposizione in mono + epi di
+\(d^{i-1}\)\footnote{non sono sicuro di questa cosa, mi è stata rigurgitata da
+    Gemini e mi sembra abbia senso ma non sono sicuro, inoltre potrebbero
+esserci metodi più facili e chiari. L'idea di base è che sia la categorizzazione
+della restrizione di \(f\) sull'immagine di \(d\), ossia \(I^{i}{(f)} =
+f^{i+1}|_{\mathrm{Im}(d_X^{i})} : \mathrm{Im}{(d_X^{i})} \to
+\mathrm{Im}{(d_Y^{i})} \) che è ben definita perché \(f^\bullet\) è morfismo di
+complessi e quindi \(f^{i+1}{(d_X^{i}{(x)})} = d_Y^{i}{(f^{i}{(x)})}\) } 
+
+$$ \begin{tikzcd}[column sep=large, row sep=large]
+    X^{i-1} \arrow[r, "\pi_X", two heads] \arrow[d, "f^{i-1}"'] &
+    I^i(X^\bullet) \arrow[r, "\iota_X", tail] \arrow[d, "\exists! I^i(f)", dashed] & 
+    X^i \arrow[d, "f^i"] \\
+    Y^{i-1} \arrow[r, "\pi_Y"', two heads] & I^i(Y^\bullet) \arrow[r,
+    "\iota_Y"', tail] & Y^i
+\end{tikzcd} $$
+
+Poiché \(d^{i-1} \circ d^{i} = 0\), \(\mathrm{Im}{(d_X^{i-1})} <
+\mathrm{Ker}{(d_X^{i})}\) come sottoggetti, dunque la seguente definizione ha
+senso.
+\begin{definition}{Funtore di coomologia}
+    Esiste una successione esatta in \(\mathcal{A}\) \[ 0 \to I^{i}{(X^\bullet)}
+    \to K^{i}{(X^\bullet)} \to H^{i}{(X^\bullet)} \to 0\]
+    Dove \(H^{i}\) così definito è
+    \begin{align*}
+        H^{i}: C{(\mathcal{A})} &\longrightarrow \mathcal{A} \\
+        X^\bullet &\longmapsto H^{i}(X^\bullet) =
+        \frac{K^{i}{(X^\bullet)}}{I^{i}{(X^\bullet)}}
+    \end{align*}
+    l'\(i\)-esimo \emph{funtore di coomologia} di \(\mathcal{A}\).
+\end{definition}
+
+\begin{proposition}{}
+    Tutti i funtori \(H^{i}\), \(K^{i}\) e \(I^{i}\) sono naturalmente
+    additivi.
+\end{proposition}
+
+
+\begin{theorem}{Macchinario dell'algebra omologica}
+    Sia \(\mathcal{A}\) una categoria abeliana e \(0 \to X^\bullet
+    \overset{f}{\to} Y^\bullet \overset{g}{\to} Z^\bullet \to 0\) una
+    successione esatta in \(C{(\mathcal{A})}\).
+
+    Allora questa induce una \textbf{successione esatta lunga di coomologia}:
+    \[
+      \dots \to H^{i-1}{(Z^\bullet)} \to H^{i}{(X^\bullet)}
+      \overset{H^{i}{(f)}}{\to} H^{i}{(Y^\bullet)} \to H^{i}{(Z^\bullet)} \to
+      H^{i+1}{(X^\bullet)} \to \dots
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    % TODO: aggiungere dim
+\end{proof}
+
+\begin{corollary}{}
+    I funtori \(H^{i}\) sono esatti al centro.
+\end{corollary}
+
+
+
+
+
+
 Sia \(\mathcal{A}\) una categoria preadditiva, e \(C{(\mathcal{A})}\) la
 categoria dei complessi. Siano \(X^{\cdot }\) e \(Y^{\cdot } \in
 C{(\mathcal{A})}\). Allora dati \(\kappa^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
-per ogni \(i \in \mathbb{Z}\) 
+per ogni \(i \in \mathbb{Z}\), si definisca \(f^\bullet\) come
 \begin{equation}{}\label{eq:omotopia-complessi}
-    sono arrivato in ritardo
+    f^{i} := d_Y^{i-1} \circ \kappa^{i} + \kappa^{i+1} \circ d_X^{i} 
 \end{equation}
+
+Allora segue che \(f^\bullet \in C{(\mathcal{A})}{(X^\bullet, Y^\bullet)}\),
+infatti
+\begin{align*}{}
+   d_Y^{i} \circ f^{i} &= d_Y^{i} \circ \kappa^{i+1} \circ
+   d_X^{i} = f^{i+1} \circ d_X^{i} = \\&={(d_Y^{i} \circ \kappa^{i+1} + \kappa^{i+2}
+   \circ d_X^{i+1})} \circ d_X^{i} = f^{i+1} \circ d_X^{i}
+\end{align*}
 
 
 \begin{definition}{Omotopia}
-    Sia \(f^\bullet \in C{(\mathcal{A})}{(X^{\cdot }, Y^{\cdot})}\) è
+    \(f^\bullet \in C{(\mathcal{A})}{(X^{\bullet }, Y^{\bullet})}\) è
     \emph{omotopo a 0} se \(\exists k^{i} \in \mathcal{A}{(X^{i}, Y^{i-1})}\)
     tale che vale~\eqref{eq:omotopia-complessi}.
 
@@ -21,7 +173,16 @@ per ogni \(i \in \mathbb{Z}\)
 
 \begin{remark}{} 
     \(\mathtt{Htp}{(X^\bullet, Y^\bullet)} := \{f^\bullet \in C{(\mathcal{A})}
-    {(X^\bullet, Y^\bullet)} | f^\bullet \sim 0\} \) % TODO: cos'è
+    {(X^\bullet, Y^\bullet)} | f^\bullet \sim 0\} \). Allora \(\mathtt{Htp}
+    \subseteq C{(\mathcal{A})} \) è ideale, ossia \(\mathtt{Htp}{(X^\bullet,
+    Y^\bullet)} < C{(\mathcal{A})}{(X^\bullet, Y^\bullet)}\) e \(g^\bullet \circ
+    f^\bullet \in \mathtt{Htp}{(X^\bullet, Z^\bullet)}\) se \(f^\bullet \in
+    \mathtt{Htp}{(X^\bullet, Y^\bullet)}\) o \(g^\bullet \in
+    \mathtt{Htp}{(Y^\bullet, Z^\bullet)}\).
+
+    Questo vale perché se \(f^\bullet \sim 0\) con \(\kappa^{i}\), allora
+    \(g^\bullet \circ f^\bullet \sim 0\) con \(\overline{\kappa}^{i} = g^{i-1}
+    \circ \kappa^{i}\) 
 \end{remark}
 
 Come conseguenza si ottiene una categoria preadditiva \(K{(\mathcal{A})} :=
@@ -859,7 +1020,7 @@ può sempre prendere la sottocatoria data da
 \end{example}
 
 
-\subsection{Fasci}
+\chapter{Fasci}
 
 Sia \(X\) uno spazio topologico. Allora l'insieme \(\mathrm{Open}{(X)}\) degli
 aperti di \(X\), ordinato da \(\supseteq\), forma una categoria

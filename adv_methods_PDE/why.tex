@@ -273,3 +273,72 @@ indicare lo spostamento \(\mathbf{x}  \mapsto \mathbf{x} + \mathbf{U}
     di problemi di Helmholtz. Ovviamente nella pratica non se ne fanno infiniti.
 \end{remark}
 
+\section{Elettromagnetismo}
+
+Ora modelliamo il campo elettromagnetico. Abbiamo che se
+\(\mathcal{E}{(\mathbf{x} , t)}\) è il campo elettrico e
+\(\mathcal{H}{(\mathbf{x} , t)}\) è quello magnetico, \(\varepsilon > 0\) è la
+\emph{permittività elettrica}, \(\mu > 0\) è la permeabilità magnetica e
+\(\sigma \ge 0\) è la conduttività, allora valgono le equazioni (terza e quarta
+di Maxwell)
+\begin{align}\label{eq:Maxwell_last2}
+    &\mathrm{curl} \,\mathcal{E} + \mu \frac{\partial \mathcal{H}}{\partial t} =
+    \mathbf{0}  \\
+    &\mathrm{curl} \,\mathcal{H} - \varepsilon \frac{\partial \mathcal{E}}{\partial
+    t} - \sigma \mathcal{E} = \mathbf{0} 
+\end{align}
+
+Se ora assumiamo che siano della forma
+\[
+  \mathcal{E}{(\mathbf{x} , t)} = \Re {\left( \mathbf{E} {(\mathbf{x} )}
+  e^{-i\omega t} \right)}  \quad\quad\quad \mathcal{H}{(\mathbf{x} , t)} = \Re {\left(
+\mathbf{H} {(\mathbf{x} )} e^{-i \omega t}\right)} 
+\]
+allora le due equazioni diventano
+\begin{align*}
+  &\mathrm{curl}\, \mathbf{E} - i \omega \mu \mathbf{H}  = \mathbf{0} \\
+  &\mathrm{curl}\, \mathbf{H} + {(i \omega \varepsilon - \sigma)} \mathbf{E}  =
+  \mathbf{0} 
+\end{align*}
+
+Da cui prendendo il \(\mathrm{curl}\) della prima e sostituendo
+\begin{equation}\label{eq:pre_helm_elettro}
+    \mathrm{curl}\,\mathrm{curl}\, \mathbf{E} - \underbrace{\left( \omega^2 \mu
+            \varepsilon - i \omega \mu \sigma
+    \right)}_{k^2} \mathbf{E} = \mathbf{0} 
+\end{equation}
+dove ricordando che \(k = \frac{\omega}{c}\), abbiamo che nel caso dielettrico
+(ossia con \(\sigma=0\)) abbiamo che \(k = \omega \sqrt{\mu \varepsilon}\), per
+cui \(c = \frac{1}{\sqrt{\mu\varepsilon}}\) che è effettivamente la velocità
+della luce nel vuoto. Prendendo ora la~\eqref{eq:pre_helm_elettro} possiamo
+applicare il rotore del rotore, ossia che \(\mathrm{curl}\, \mathrm{curl} \,
+\mathbf{V} = \nabla \mathrm{div}\,\mathbf{V} + \nabla ^2\mathbf{V} \), e
+osservando dalla prima legge di Maxwell (senza sorgenti!) che \(\mathrm{div}
+\mathbf{E} = 0\) abbiamo che troviamo che
+\begin{equation}\label{eq:helmholtz_elettrom}
+  \nabla ^2 \mathbf{E} + k^2 \mathbf{E}  = 0
+\end{equation}
+
+\subsection{Condizioni al bordo}
+La condizione al bordo più comune è la PEC, Perfect Electric Conductor. In tal
+caso se \(\mathbf{n} \) è il vettore normale, Allora abbiamo che
+\[
+  \mathbf{E} \times \mathbf{n} := \begin{pmatrix}
+      E _{2}n _{3} -E_{3}n_2 \\
+      E _{3}n_1 -E_1 n_3 \\
+      E _{1}n_2 -E_2 n_1 \\
+  \end{pmatrix} = \mathbf{0} 
+\]
+Equivalentemente per il campo magnetico si può avere che \(\mathbf{H} \cdot
+\mathbf{n} =0\) 
+
+Se queste due sono le condizioni di Dirichlet e di Neumann, una condizione di
+impedenza che varia al variare di \(\theta\), come per l'acustica, è 
+\[
+  \mathbf{H} \times n - \theta \,{(\mathbf{n} \times \mathbf{E} )} \times
+  \mathbf{n} = \mathbf{g} (= \mathbf{0})
+\]
+dove \({(\mathbf{n} \times \mathbf{E} )} \times \mathbf{n} = {(\mathbf{n} \cdot
+\mathbf{E} )}\,\mathbf{n} \) è il triplo prodotto.
+
+

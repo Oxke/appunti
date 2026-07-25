@@ -1,7 +1,7 @@
 \section{Richiami sui Moduli}
 \begin{definition}{\(A\)-modulo}
-    Un \(A\)-modulo (di default sinistro) \(M\) è un gruppo abeliano \({(M, +)}\) con una
-    moltiplicazione per scalare definita da 
+    Un \(A\)-modulo (se non dico niente sinistro) \(M\) è un gruppo abeliano
+    \({(M, +)}\) con una moltiplicazione per scalare definita da 
     \begin{align*}
         \cdot : A\times M &\longrightarrow M \\
         {(a,x)}&\longmapsto ax \in M
@@ -32,8 +32,203 @@
 Dalla 2,3,4 \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di anelli.
 \end{remark}
 
+\begin{remark}{}
+    Per ogni anello \(B\) esiste un unico omomorfismi di anelli \(\mathbb{Z} \to
+    B\), dunque ogni gruppo abeliano \({(M, +)}\) ammette un'unica struttura di
+    \(\mathbb{Z}\)-modulo (data da \(nx = \underbrace{x + \dots + x}_{n
+    \text{ termini}}\),
+    \(\forall n \in \mathbb{Z}\) e \(\forall x \in M\)).
+\end{remark}
 
-\begin{theorem}{Secondo teorema di isomorfismo}
+\begin{definition}{}
+    Un \(A\)-modulo \emph{destro} è un gruppo abeliano \({(M, +)}\) con una
+    moltiplicazione per scalare \(M \times A \to M\), \({(x, a)} \mapsto xa \in
+    M\) e tale che, \(\forall a, b \in A\) e \(\forall x, y \in M\) 
+\begin{enumerate}[label = \arabic*')]
+    \item \({(x + y)}a = xa + ya\) 
+    \item \(x{(a + b)} = xa + xb\) 
+    \item \(x{(ab)} = {(xa)}b\) 
+    \item \(x1 = x\) 
+\end{enumerate}
+\end{definition}
+
+\begin{remark}{}
+    Notare che in generale un \(A\)-modulo destro non è sinistro con \(ax :=
+    xa\). In particolare non è vero il punto \(3)\), che vale soltanto se \(ab =
+    ba\), \(\forall a, b \in A\), ossia se \(A\) è commutativo. In generale
+    denoterò con \({}_AM\) un modulo sinistro e con \(M_A\) un modulo destro su
+    \(A\), se sarà necessario disambiguare.
+\end{remark}
+
+\begin{example}{}
+    \(A\) è sia modulo destro che sinistro su \(A\).
+\end{example}
+
+\begin{definition}{Sottomodulo}
+    Un sottomodulo \(M' \subseteq M \) è tale che \({(M', +)} < {(M, +)}\) è
+    sottogruppo e \(AM' \subseteq M'\).
+\end{definition}
+\begin{remark}{}
+    Ovviamente \(AM' = M'\) poiché \(1x = x\) 
+\end{remark}
+
+\begin{example}{}
+    I sottomoduli di \({}_AA\) \((A_A)\) sono esattamente gli ideali sinistri
+    (destri).
+\end{example}
+
+\begin{definition}{Modulo semplice}
+    Un modulo è detto \textbf{semplice} se \(M \neq 0\) e i suoi unici
+    sottomoduli sono \(0\) e \(M\) 
+\end{definition}
+
+\begin{proposition}{}
+    \({}_AA\) è un \(A\)-modulo semplice se e solo se \(A\) è un anello con
+    divisione (in particolare non basta che \(A\) sia un anello semplice)
+\end{proposition}
+
+\begin{proof}
+    Innanzitutto, dire che \({}_AA\) è un \(A\)-modulo semplice è equivalente a
+    dire che gli unici ideali \emph{sinistri} sono \(A\) e \(0\), dunque ora
+    mostriamo che quest'ultima condizione è equivalente a essere un anello con
+    divisione.
+\begin{itemize}
+    \item[\(\implies \)] Sia \(0 \neq a \in A\). Allora l'ideale \(Aa\) è non
+        vuoto, dunque deve essere \(A\). Questo significa che esiste \(a' \in
+        A\) tale che \(a'a =1\).
+    \item[\(\impliedby \)] Se \(I \cap A^* \neq \varnothing\), allora \(I = A\).
+        Dunque se \(A^* = A \sminus \{0\}\), \(I \cap A^* = \varnothing \iff I =
+        \varnothing\).
+\end{itemize}
+\end{proof}
+
+Considerato \({}_AM\), \(U \subseteq M \) e \(I \subseteq A \) ideale sinistro,
+allora \(IU = \{\sum_{i=1}^{n} a_{i}u_{i}: a_{i} \in I \,,\, u_{i} \in U\} \) è
+un sottomodulo di \(U\). Se in particolare \(I = A\), allora si dice che è il
+sottomodulo \emph{generato} da \(U\): 
+
+\begin{definition}{Sottomodulo generato, finitamente generato}
+    Sia \(_AM\) un \(A\)-modulo, \(U \subseteq M \) e \(I \subseteq A\) un
+    ideale sinistro. Allora
+        \[
+          IU = \{\sum_{i=1}^{n} a_{i} u_{i} : a_{i} \in I, \; u_{i} \in U \}
+          \subseteq M 
+        \]
+    è un sottomodulo. In particolare anche \(IM \subseteq M \) è sottomodulo.
+
+    \(AU \subseteq M \) è detto sottomodulo \emph{generato da \(U\) }.
+
+    \(M\) è \emph{finitamente generato} se esiste \(U\) finito tale che \(AU =
+    M\).
+
+    \(M\) è \emph{ciclico} se esiste \(x \in M\) tale che \(Ax = M\) 
+\end{definition}
+
+\begin{definition}{Annullatore}
+    Sia \(U \subseteq {}_AM \) un sottoinsieme. Allora l'\emph{annullatore} di
+    \(U\) 
+        \[
+            \mathrm{Ann}{(U)} := \{a \in A: aU = 0\} 
+        \]
+    è un ideale sinistro. 
+\end{definition}
+\begin{remark}{}
+    Se \(U\) è sottomodulo allora \(\mathrm{Ann}{(U)}\) è anche ideale destro.
+    In particolare \(\mathrm{Ann}{(M)} \subseteq A\) è ideale bilatero.
+\end{remark}
+\begin{note}{}
+        \[
+          \mathrm{Ann}{(M)} = \mathrm{Ker}{(\alpha : A \to \mathrm{End}{(M)})}
+        \]
+\end{note}
+\begin{definition}{Modulo fedele}
+    \({}_AM\) è \emph{fedele} se \(\mathrm{Ann}{(M)} = 0\) 
+\end{definition}
+
+\begin{definition}{Omomorfismo di \(A\)-moduli }
+    Sia \(A\) anello e \(M, N\) \(A\)-moduli. Allora \(f: M \to N\) è
+    \emph{omomorfismo di moduli} (o \(A\)-lineare) se è omomorfismo di gruppi e
+    \(f{(ax)} = af{(x)}\) per ogni \(a \in A\) e \(x \in M\). Se \(f\) è
+    omomorfismo biunivoco è \emph{isomorfismo}.
+\end{definition}
+\begin{example}{}
+    \(f \equiv 0 : M \to N\) tale che \(x \mapsto 0\) per ogni \(x\) è
+    l'omomorfismo banale.
+\end{example}
+\begin{example}{}
+    Per ogni \(x \in M\) esiste un \textbf{unico} omomorfismo \(f_x : {}_AA \to
+    M\) tale che \(f_x{(1)} = x\) 
+\end{example}
+\begin{proposition}{}
+    Sia \(f : M \to N\) omomorfismo. Allora
+\begin{enumerate}[label = \arabic*)]
+    \item se \(M' \subseteq M \) sottomodulo, allora \(f{(M')} \subseteq N\) è
+        sottomodulo (in particolare \(\mathrm{Im}f\) è sottomodulo.
+    \item se \(N' \subseteq N \) sottomodulo, allora \(f^{-1}{(N')}\) è
+        sottomodulo (in particolare \(\mathrm{Ker}f\) è sottomodulo.
+    \item se \(U \subseteq M \) sottoinsieme, allora \(f{(AU)} = Af{(U)}\) 
+\end{enumerate}
+\end{proposition}
+\begin{remark}{}
+    Notare che le precedenti non valgono in generale per gli anelli: infatti
+    l'immagine è generalmente solo un sottoanello mentre il nucleo è
+    generalmente solo un ideale.
+\end{remark}
+
+Se \(M' \subseteq M \) è sottomodulo, allora il gruppo abeliano quoziente \(M /
+M'\) è anche \(A\)-modulo con \(a{(x + M')} = ax + M'\). In particolare \(I
+\subseteq {}_AA\) ideale sinistro è un sottomodulo, dunque \({}_AA / I\) è un \(A\)-modulo
+(sinistro).
+
+\begin{lemma}{}
+    \(\mathrm{Ann}_A{(A / I)}\) è il più grande ideale bilatero contenuto in \(I\).
+\end{lemma}
+\begin{proof}{}
+    \(\mathrm{Ann}{(A / I)}\) è ideale di \(A\). Inoltre \(\mathrm{Ann}{(A /I) }
+    \subseteq I \) perché \(\forall a \in \mathrm{Ann}{(A /I)}\), per
+    definizione di annullatore \(\overline{a} = a \overline{1} = \overline{0}\),
+    ossia \(a \in I\). Resta da dimostrare che se \(J \subseteq A\) è ideale
+    bilatero e \(J \subseteq I \), allora \(J \subseteq \mathrm{Ann}{(A / I)}
+    \). Questo è vero perché 
+        \[
+          J \subseteq  \mathrm{Ann}{(A / I)} \iff J\overline{a} = \overline{0}
+          \quad \forall \overline{a} \in  A/I \iff Ja \in I \impliedby Ja
+          \subseteq J \subseteq I  
+        \]
+\end{proof}
+
+\begin{proposition}{}
+    I sottomoduli di \(M / M'\) sono tutti e solo della forma \(M'' / M'\) con
+    \(M'' \subseteq M \) sottomodulo tale che \(M' \subseteq M'' \) 
+\end{proposition}
+
+\begin{theorem}{Teorema di Omomomorfismo}\label{thm:omomo}
+    Sia \(f : M \to N\) omomorfismo e \(M' \subseteq \mathrm{Ker}{(f)} \)
+    sottomodulo. Allora
+    \[
+      \exists ! \overline{f}: M / M' \to N \text{ tale che }
+      \overline{f}{(\overline{x})} = f{(x)} \quad \forall x \in M
+    \]
+\end{theorem}
+
+\begin{theorem}{Primo teorema di Isomorfismo}
+    Sia \(f : M \to N\) omomorfismo. Allora
+    \[M / \mathrm{Ker}f \cong \mathrm{Im}f\]
+\end{theorem}
+\begin{proof}{}
+    Voglio mostrare che l'omomorfismo unico \(\overline{f}: M/\mathrm{Ker}f \to
+    N\) che esiste per il teorema~\ref{thm:omomo} è in realtà un isomorfismo su
+    \(f{(M)}\). Intanto è evidente che \(\mathrm{Im}f = \mathrm{Im}f'\). Resta
+    da dimostrare che \(\overline{f}\) è iniettivo. Questo è ovvio perché 
+    \[
+      \overline{f}{(\overline{x})} = 0 \iff f{(x)} = 0 \iff x \in \mathrm{Ker}f
+      \iff \overline{x} = \overline{0}
+    \]
+\end{proof}
+
+
+
+\begin{theorem}{Secondo teorema di isomorfismo}\label{thm:iso2}
     Sia \(M\) un modulo, con \(M', M'' \subseteq M \) sottomoduli. Allora 
     \[
       M' / (M' \cap  M'') \cong {(M' + M'')} / M''
@@ -76,7 +271,7 @@ Dalla 2,3,4 \(\alpha : A \to \mathrm{End}{(M)}\) è omomorfismo di anelli.
 \begin{proof}{}
 \begin{enumerate}[label = \arabic*.]
     \item \({(\impliedby)}\) \(A / I\) è ciclico (generato da \(\overline{1}\)). Viceversa per \({(\implies )}\) so che \(M = Ax\) per un qualche \(x \in M\). Considerata \(
-        f : _AA \to M\) data da \(a \mapsto ax\), \(\mathrm{Ker}f\) è
+        f : {}_AA \to M\) data da \(a \mapsto ax\), \(\mathrm{Ker}f\) è
         sottomodulo di \(A\), ovvero ideale sinistro. Concludo per il primo
         teorema di isomorfismo.
     \item Se \(M\) è semplice allora \(\forall 0 \neq x \in M\), \(M = Ax\),
@@ -198,9 +393,18 @@ che è \(A\)-lineare e iniettivo.
     Siano \(L, M\) \(A\)-moduli, con \(L\) libero con base \(\{l_\lambda : \lambda \in \Lambda\} \) tale che \(l_\lambda \neq l_\mu\) se \(\lambda \neq \mu\), allora
     \[
       \forall \lambda \in  \Lambda \,\,\,\, \exists ! f :
-  L\to M \,\, A\text{-lineare t.c. }f{(l_\lambda)} = x_\lambda
+  L\to M \,\, A\text{-lineare t.c. }f{(l_\lambda)} = x_\lambda \quad \forall
+  \{x_\mu\}_{\mu \in \Lambda}  
     \]
 \end{proposition}
+\begin{proof}{}
+    Basta notare che \(L \cong \bigoplus_{\lambda \in \Lambda} L_\lambda
+    \) con \(L_\lambda = Al_\lambda \) il modulo generato da
+    \(l_\lambda\). Definiti poi \(f_\lambda : L_\lambda \to M\) con
+    \(al_\lambda \mapsto ax_\lambda\), la tesi segue dalla proprietà
+    universale della somma diretta.
+\end{proof}
+
 \begin{corollary}{}
     Un \(A\)-modulo è libero se e solo se è isomorfo a \(A^{{(\Lambda)}}\) per
     qualche \(\Lambda\) 
@@ -224,12 +428,15 @@ che è \(A\)-lineare e iniettivo.
 \end{corollary}
 \begin{proof}{}
     Sia \(\{x_{\lambda} \}_{\lambda \in \Lambda}  \) un insieme di generatori di
-    un modulo \(M\). Per la proposizione \(\exists ! f: A^{{(\Lambda)}}\to M\)
-    \(A\)-lineare tale che f\(l_\lambda = x_\lambda\) per ogni \(\lambda \in
-    \Lambda\). Allora \(\mathrm{Im}f = M\) e dunque per il primo teorema di
-    isomorfismo \(M\neq A^{{(\Lambda)}} / \mathrm{ker}f\).
+    un modulo \(M\). Per la proposizione univerale \(\exists ! f:
+    A^{{(\Lambda)}}\to M\) \(A\)-lineare tale che \(f(l_\lambda) = x_\lambda\)
+    per ogni \(\lambda \in \Lambda\). Allora \(\mathrm{Im}f = M\) e dunque per
+    il primo teorema di isomorfismo \(M \cong A^{{(\Lambda)}} / \mathrm{ker}f\).
 
-    Per la seconda parte se \(M\) è finitamente generato posso scegliere \(\Lambda\) finito e viceversa \(M\neq A^{n} / N\) è finitamente generato perché \(A^{n}\) lo è e \(\pi : A^{n}\to A^{n} / N\) è un omomorfismo suriettivo.
+    Per la seconda parte se \(M\) è finitamente generato posso scegliere
+    \(\Lambda\) finito e viceversa \(M\cong A^{n} / N\) è finitamente generato
+    perché \(A^{n}\) lo è e \(\pi : A^{n}\to A^{n} / N\) è un omomorfismo
+    suriettivo.
 
 \end{proof}
 
@@ -253,7 +460,7 @@ che è \(A\)-lineare e iniettivo.
 Si può dimostrare che se \(A\) è con divisione, allora tutte le basi di un \(A\)-modulo (libero) \(M\) hanno la stessa cardinalità, che viene detta rango e indicata con \(\mathrm{rk}_A M\).
 
 In generale non tutte le basi di un \(A\)-modulo libero hanno la stessa
-cardinalità, esistono infatti anelli \(A\) non banali tali che \(\prescript{A}{A} \cong _AA
+cardinalità, esistono infatti anelli \(A\) non banali tali che \({}_{A}{A} \cong _AA
 %TODO pedice giusto
 ^{n}\) per \emph{ogni} \(n \in \mathbb{N}\).
 
@@ -262,7 +469,7 @@ cardinalità, esistono infatti anelli \(A\) non banali tali che \(\prescript{A}{
 \end{example}
 
 
-Si dimostra che se \(A \to  B\) è omomorfismo di anelli e il rango dei \(B\)-modulli
+Si dimostra che se \(A \to  B\) è omomorfismo di anelli e il rango dei \(B\)-moduli
 liberi è ben definito allora anche il rango degli \(A\)-moduli liberi è ben
 definito. Di conseguenza se \(A\neq 0 \) è commutativo allora il rango degli \(A\)-moduli liberi è ben definito (\(\exists I \subseteq A \) ideale massimale e \(\pi : A \to A/I\) omomorfismo con \(A / I\) campo)
 
@@ -328,284 +535,226 @@ Se \(f\) è evidente si dice che \(B\) è una \(A\)-algebra
     \]
 \end{remark}
 
-% TODO UN BEL PO' di ROBA
-
-
-\begin{lemma}{}\label{lem:com}
-    Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) una successione
-    esatta di \(A\)-moduli. Siano \(f': A^{m} \to M'\) e \(f'' : A^{n}\to M''\)
-    omomorfismi. Allora esiste un diagramma commutativo con righe esatte
-\[\begin{tikzcd}
-	0 & A^{m} & A^{m+n} & A^{n} & 0 \\
-	0 & M' & M & M'' & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow["{f'}", from=1-2, to=2-2]
-	\arrow[from=1-3, to=1-4]
-	\arrow["f", from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow["{f''}", from=1-4, to=2-4]
-	\arrow[from=2-1, to=2-2]
-	\arrow["i"', from=2-2, to=2-3]
-	\arrow["p"', from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-\end{tikzcd}\]
-\end{lemma}
-
-\begin{proof}{}
-    % TODO manca
-\end{proof}
-
-\begin{proposition}{}
-\label{prop:varie}
-    Sia \(0 \to M' \overset{i}{\to } M \overset{p}{\to } M''\) esatta di
-    \(A\)-moduli. Allora
-\begin{enumerate}[label = \arabic*.]
-    \item \(M f.g. \implies M'' f.g.\) 
-    \item \(M', M'' f.g. \implies M f.g.\) 
-    \item \(M', M'' f.p. \implies M f.p.\) 
-    \item \(M f.g., M'' f.p. \implies M' f.g.\) 
-    \item \(M' f.g., M f.p. \implies M'' f.g.\) 
-\end{enumerate}
-\end{proposition}
-\begin{proof}{} \( \) 
-\begin{enumerate}[label = \arabic*.]
-    \item già visto
-    \item In esercizio la dimostrazione diretta. In alternativa possiamo
-        applicare il lemma~\ref{lem:com}. Infatti esistono \(f': A^{m} \to M'\) e \(f'' : A^{n} \to M''\) omomorfismi suriettivi e per il lemma~\ref{lem:com} il diagramma
-\[\begin{tikzcd}
-	0 & A^{m} & A^{m+n} & A^{n} & 0 \\
-	0 & M' & M & M'' & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow["{f'}", from=1-2, to=2-2]
-	\arrow[from=1-3, to=1-4]
-	\arrow["f", from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow["{f''}", from=1-4, to=2-4]
-	\arrow[from=2-1, to=2-2]
-	\arrow["i"', from=2-2, to=2-3]
-	\arrow["p"', from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-\end{tikzcd}\]
-    commuta. Applicando ora il lemma del serpente otteniamo la successione
-    esatta 
-    \[
-      \mathrm{coKer}f' = 0 \to \mathrm{coKer}f \to  0= \mathrm{coKer} f'' \implies \mathrm{coKer} f = 0 \implies M f.g.
-    \]
-    \item Si può fare una dimostrazione simile a quella precedente e applicando
-        il lemma del serpente troviamo la successione esatta
-    \[
-    0 \to \mathrm{Ker} f' \to \mathrm{Ker} f \to \mathrm{Ker}f'' \to 0 = \mathrm{coKer} f'
-    \]
-    per il punto 1. \(M\) è finitamente generato e dunque \(M\) è finitamente
-    presentato.
-    \item \(M'' f.p. \implies \exists \) successione esatta \(A^{m} \overset{g}{\to } A^{n} \overset{h}{\to }M'' \to 0\). Esiste dunque il diagramma commutativo
-\[\begin{tikzcd}
-	 & A^{m} & A^{n} & M'' & 0 \\
-	0 & M' & M & M'' & 0
-	\arrow["g", from=1-2, to=1-3]
-	\arrow["{f'}", from=1-2, to=2-2]
-	\arrow["h", from=1-3, to=1-4]
-	\arrow["f", from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow["{\mathrm{id}}", from=1-4, to=2-4]
-	\arrow[from=2-1, to=2-2]
-	\arrow["i"', from=2-2, to=2-3]
-	\arrow["p"', from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-\end{tikzcd}\]
-    infatti voglio \(f\) tale che \(p \circ f = h\) e posso come prima (esercizio).
-    % TODO controllare che esista f' e che funzioni tutto
-    allora per il lemma del serpente trovo che
-    \[
-      0 \to \mathrm{coKer}f' \to \mathrm{coKer}f \to 0 = \mathrm{coKer_{
-              \mathrm{id}_{M''}
-      } }
-    \]
-    è una successione esatta, e dunque \(\mathrm{coKer}f' \cong \mathrm{coKer}f = M / \mathrm{Im} f\) per cui
-    \[
-    0 \to \mathrm{Im}f' \to M' \to \mathrm{coKer}f' \to 0
-    \]
-    è esatta. Concludiamo che \(\mathrm{Im} f' \cong A^{m} / \mathrm{Ker} f'\) e
-    dunque è \(f.g.\), da cui anche \(M'\) è finitamente generato per il punto
-    1.
-    \item \(M\) è finitamente generato, dunque \(M''\) è finitamente generato
-        per il punto 0. Come prima \(\exists\,\, A^{m} \to A^{n}, A^{n} \to M''\)
-        omomorfismi suriettivi e trovo il diagramma del lemma~\ref{lem:com} e
-        applicando il lemma del serpente ottengo la successione esatta
-        \[
-          \mathrm{Ker} f \to \mathrm{Ker}f'' \to 0 = \mathrm{coKer}f'
-        \]
-        Sia ora \(f: A^{m+n}\to M\) suriettiva, allora 
-        \[
-          0 \to \mathrm{Ker} f \to A^{m+n} \to M \to 0
-        \]
-        è esatta, \(A^{m+n}\) è finitamente generata, \(M\) è finitamente
-        presentato, dunque \(\mathrm{Ker}f\) è f.g., quindi per il punto 3. \(\mathrm{Ker}f''\) è f.g. e per il punto 0. \(M\) è f.p.
-\end{enumerate}
-\end{proof}
-
-\begin{eser}{}
-    Dimostrare il punto 1. della dimostrazione precedente direttamente.
-\end{eser}
-\begin{corollary}{}
-    Sia \(M = \bigoplus_{i=1}^{n} M_i \). Allora \(M\) è f.g. / f.p. se e solo
-    se \(M_{i} \) è f.g. / f.p. per ogni \(i\).
-\end{corollary}
-\begin{proof}{}
-    La successione \(0 \to \bigoplus_{i=1} ^{n-1}M_i \to M \to M_{n} \to 0\) è
-    esatta, dunque
-    \begin{itemize}
-        \item[\(\implies \)] unsando induzione su \(n\) e i punti 1. e 2. della
-            proposizione precedente
-        \item[\(\impliedby \)] \(M_n\) è f.g. per il punto 0., ed è f.p. per il
-            punto 4.
-    \end{itemize}
-\end{proof}
-\begin{remark}{}
-    per il punto 3., se \(M\) è f.p. allora ogni \(A^{n} \overset{p}{\to } M \to 0\) esatta si estende a 
-    \[
-      A^{m} \to A^{n} \overset{p}{\to } M \to 0
-    \]
-\end{remark}
-
-\begin{remark}{}
-    Sia \(A\) non noetheriano. Allora \(\exists M\) \(A\)-modulo f.g. non
-    noetheriamo, ad esempio \(M = A\), ossia \(\exists  M' \subseteq M \)
-    sottomodulo non f.g. e in tal caso anche quando \(M\) è finitamente
-    presentato, ad esempio nel caso \(M=A\), \(M/M'\) non è f.p. perché
-    contraddirrebbe il punto 3.
-\end{remark}
-
-Uno può chiedersi dato un modulo se i suoi sottomoduli finitamente generati
-siano anche moduli finitamente presentati. Quessto non è in generale vero ma
-motiva la seguente definizione
-
-\begin{definition}{Modulo coerente}
-    Uno modulo \(M\) è detto \textbf{coerente} se è finitamente generato e tutti
-    i suoi sottomoduli finitamente generati sono finitamente presentati.
+\begin{definition}{Addendo diretto}
+    Sia \(M\) un \(A\)-modulo e \(M' \subseteq M \). Allora \(M'\) è
+    \textbf{addendo diretto} se esiste \(M'' \subseteq M \) sottomodulo tale che
+    \(M = M' \oplus M''\). In tal caso dico che \(M''\) è \emph{complementare}
+    di \(M'\).
 \end{definition}
 \begin{remark}{}
-    Chiaramente essendo \(M \subseteq M \) un sottomodulo, se è coerente è anche
-    f.p.
-\end{remark}
-\begin{definition}{Anello coerente}
-    Un anello \(A\) è \textbf{coerente} (a sinistra) se \(_AA\) è \(A\)-modulo
-    coerente (ossia tutti gli ideali sinistri f.g. di \(A\) sono f.p.)
-\end{definition}
-\begin{remark}{}
-    Se \(A\) è noetheriano e \(M\) è un \(A\)-modulo, allora
-    \[
-      M \text{ coerente } \iff M \text{ f.p. } \iff M \text{ f.g. } \iff M
-      \text{ noetheriano }
-    \]
-    in particolare \(A\) è coerente. 
-\end{remark}
-\begin{proof}{}
-    Sappiamo già che \(M\) noetheriano se e solo se \(M\) f.g. Resta da
-    dimostrare dunque che \(M\) noetheriano se e solo se \(M\) è coerente. So
-    che \(M' \subseteq M \) f.g. è noetheriano (perché \(M\) lo è). Allora esiste la successione esatta 
-    \[
-      0 \to \mathrm{Ker} p \to A^{n} \overset{p}{\to } M' \to 0
-    \]
-    Ora poiché \(A\) è noetheriano, anche \(A^{n}\) lo è, e dunque \(\mathrm{Ker} p \) è noetheriano, dunque \(\mathrm{Ker}p\) è f.g. e infine \(M'\) è f.p.
-\end{proof}
-\begin{remark}{}
-    Sia \(A\) coerente non noetheriano, allora \(_AA\) è coerente non
-    noetheriano
+    In generale tale \(M''\) non è unico, neanche per gli spazi vettoriali.
+    Tuttavia, è unico a meno di isomorfismo, infatti \(M'' \cong M / M'\) per il
+    secondo teorema di isomorfismo (teorema~\ref{thm:iso2})
 \end{remark}
 \begin{example}{}
-    Sia \(A\) non noetheriano, \(I \subseteq A \) ideale sinistro non f.g.,
-    allora \(A/I\) è f.g. non f.p. e \(A / I\) può anche essere notheriano.
-
-    Un esempio è \(A = \mathbb{K}[X_n | n \in \mathbb{N}]\), \(I = {(X_n | n \in \mathbb{N})}\), \(A / I = \mathbb{K}\) 
-
+    Se \(A = M = \mathbb{Z}\) allora \(M' = n \mathbb{Z}\) non è mai addendo
+    diretto a meno che \(n=0\) o \(n=1\).
 \end{example}
-
-\begin{remark}{}
-    Sia \(f : M \to N\) \(A\)-lineare, con \(M, N\) finitamente generati. Allora
-    \(\mathrm{Im} f \cong M / \mathrm{Ker} f\) e \(\mathrm{coKer} f \cong N / \mathrm{Im} f \)
-    sono finitamente generati (punto 0. della proposizione) ma non
-    necessariamente anche \(\mathrm{Ker} f\) se \(A\) è non noetheriano.
-    % TODO inserire esempio
-\end{remark}
-
 
 \begin{proposition}{}
-    Sia \(0 \to M' \overset{i}{\to } m \overset{p}{\to } M'' \to 0\) esatta di
-    \(A\)-moduli.
-\begin{enumerate}[label = \arabic*.]
-    \item \(M'\) f.g. e \(M\) coerente, allora \(M''\) è coerente
-    \item \(M', M''\) coerenti, allora \(M\) è coerente
-    \item \(M\) è coerente, \(M''\) è f.p., allora \(M'\) è coerente
+    Sia \(M' \subseteq M \) sottomodulo. Allora le seguenti sono equivalenti:
+\begin{enumerate}[label = (\roman*)]
+    \item \(M'\) è addendo diretto
+    \item \(\exists r : M \to M'\) tale che \(r|_{M'} = r \circ i = \mathrm{Id}_{M'}\) 
+    \item \(\exists s : M / M' \to M\) tale che \(\pi \circ s = \mathrm{Id}_{M /
+        M'} \) 
 \end{enumerate}
-in particolare \(M', M, M''\) sono coerenti se due di essi lo sono.
 \end{proposition}
-\begin{proof}{}
-\begin{enumerate}[label = \arabic*.]
-    \item \(M''\) è f.g. per il punto 0. della proposizione~\ref{prop:varie}.
-        \(N'' \subseteq M'' \)  è f.g., allora c'è una successione esatta
+\begin{proof}{} \(\) 
+\begin{itemize}
+    \item[\((i) \implies (ii)\)] Esiste \(M''\) tale che \(M' \oplus M'' = M\).
+        Esiste almeno un omomorfismo \(M'' \to M'\) (quello banale). Concludo
+        per la proprietà universale della somma diretta.
+    \item[\({(ii)} \implies {(iii)}\)] Sia \(f : M \to M\), \(f{(x)} = x -
+        r{(x)}\). Allora \(f\) è omomorfismo con \(f|_{M'} \equiv 0\). Per il
+        teorema~\ref{thm:omomo} di omomorfismo esiste \(s : M / M' \to M\) tale
+        che \(s{(\overline{x})} = f{(x)}\) per ogni \(x \in M\), cioè \(s \circ
+        \pi = f\) e dunque 
         \[
-          0 \to M' \to N := p^{-1}{(N'')} \to N'' \to 0
+          {(\pi \circ s)}{(\pi{(x)})} = \pi{(f{(x)})} = \pi{(x)} - {(\pi \circ
+          r)}{(x)} = \pi{(x)}
         \]
-        Allora \(N\) è f.g. per 1. di~\ref{prop:varie} e dunque \(N\) è f.p.
-        perché \(M\) è coerente, da cui \(N''\) è f.p. per 4. di \ref{prop:varie}
-    \item \(M\) è f.g. per 1. di~\ref{prop:varie}, se \(N \subseteq M \)
-        sottomodulo finitamente generato, allora esiste la successione esatta
-        \[
-          0 \to N' := i^{-1}{(N)} \to N \to N'' := p{(N)} \to 0
-        \]
-        Allora \(N''\) è f.g. per 0. di~\ref{prop:varie} da cui \(N''\) è f.p.
-        per la coerenza di \(M\), dunque \(N'\) è f.g. per 3. di~\ref{prop:varie}. Segue dalla oerenza di \(M'\) che \(N'\) è f.p. e dunque \(N\) lo è per 2. di~\ref{prop:varie}
-    \item M' è f.g. per 3. di~\ref{prop:varie} dunque \(M'\) è coerente perché
-        \(M' \cong i{(M')} \subseteq M \) sottomodulo è f.g. e \(M\) è coerente.
-\end{enumerate}
+        dove l'ultimo passaggio è perché \(r{(x)} \in M'\) 
+    \item[\((iii) \implies (i)\)] \(\mathrm{Im}s =: M'' \subseteq M\) è
+        sottomodulo. Allora se \(x \in M' \cap M''\), esiste \(\overline{y} \in
+        M/M'\) tale che \(s{(\overline{y})} = x\) e \(\pi{(x)} = 0\). Segue che
+        \(0 = {(\pi \circ s)}{(\overline{y})} = \overline{y}\), per cui \(x =
+        0\).
+
+        Inoltre se \(x \in M\), allora \(x = {(s \circ \pi)}{(x)} + {(x - {(s
+        \circ \pi)}{(x)})}\). È evidente che il primo termine è in \(M''\), e il
+        secondo è in \(M'\), infatti
+        \(
+          \pi{(x)} - {(\pi \circ s \circ \pi)}{(x)} = \pi{(x)} - \pi{(x)} = 0
+        \)
+\end{itemize}
 \end{proof}
-\begin{eser}{}
-    mostrare che
-    \[
-      \bigoplus_{i=1} ^{n} M_i \text{ coerente } \iff M_{i} \text{ coerente } \forall i
-    \]
-\end{eser}
 
 \begin{corollary}{}
-    Sia \(f: M \to N\) \(A\)-lineare, \(M, N\) coerenti, allora \\ \(\mathrm{Ker}f, \mathrm{Im}f, \mathrm{coKer}f\) sono coerenti.
+    Sia \(M' \subseteq M \) sottomodulo tale che \(M / M'\) è libero. Allora
+    \(M'\) è addendo diretto
 \end{corollary}
 \begin{proof}{}
-    \(\mathrm{Im}f \cong M / \mathrm{Ker} f\) è f.g. per 0. di~\ref{prop:varie}
+    Sia \(\{\overline{x}_\lambda : \lambda \in \Lambda\} \) una base. Per ogni \(\lambda
+    \in \Lambda\) si scelga \(x_\lambda \in M\) tale che \(\overline{x}_\lambda =
+    \pi{(x_\lambda)}\) (\(\pi\) è suriettiva). Allora esiste un unico
+    omomorfismo \(s : M / M' \to M\) tale che \(s{(\overline{x}_\lambda)} =
+    x_\lambda\) per ogni \(\lambda \in \Lambda\). Poiché
+    \(\{\overline{x}_\lambda\} \) è una base, concludiamo che \(\pi \circ s =
+    \mathrm{Id}_{M / M'} \) 
 \end{proof}
-\begin{corollary}{}
-    Se \(A\) è coerente e \(M\) è un \(A\)-modulo f.p., allora \(M\) è coerente.
-\end{corollary}
-\begin{proof}{}
-    Basta osservare che per definizione esiste una successione esatta 
-    \[
-      A^{m} \overset{f}{\to } A^{n} \to M \to 0
-    \]
-    e in particolare dunque \(M \cong \mathrm{coKer}f\) e poiché \(A^{m}\) e \(A^{n}\) sono coerenti, lo è pure \(M\) 
-\end{proof}
+
 \begin{example}{}
-    Sia \(A\) commutativo tale che \(A[X_{1}, \dots, X_{n}]\) sia coerente \(\forall n \in \mathbb{N}\) (ad esempio \(A\) noetheriano, per il teorema della base di Hilbert)
-    Allora \(A[X_{\lambda} | \lambda \in \Lambda]\) è coerente \(\forall \Lambda\), anche se non è noetheriano per \(\# \Lambda = +\infty\) e \(A \neq 0\).
-    \begin{proof}[Idea della dimostrazione]
-        Sia \(I \subseteq B \) ideale f.g., ossia \(I = {(f_{1}, \dots, f_{n})}\). Allora \(\exists \Lambda_{0} \subseteq \Lambda \) finito tale che \(f_{1} \in B_{0} := A[X_\lambda | \lambda \in \Lambda_{0}]\) 
-    \end{proof}
+    Se \(A\) è con divisione, allora ogni sottomodulo è addendo diretto, perché
+    tutti gli \(A\)-moduli sono liberi.
 \end{example}
-\begin{example}[Anello non coerente]
-    Presi \(A\) e \(B\) come prima, ma supponiamo che \(A = \mathbb{K}\) campo.
-    Prendiamo dunque \(J := {(X_{\lambda} | \lambda \in \Lambda)}\), con \(\#
-    \Lambda = +\infty\). Allora preso
-    \[
-      C = B / J^2
-    \]
-    non è coerente. Preso infatti ad esempio 
-    \[
-      I = C \overline{X_{\lambda} } \text{  con }\lambda \in \Lambda
-    \]
-    è f.g. ma non f.p. perché c'è la successione esatta 
-    \[
-      0 \to J / J^2 \to C \to I \to 0
-    \]
-    e \(J / J^2\) è \(C\)-modulo annullato da \(J / J^2\) e come \(C / {(J / J^2)} \cong B / J \cong \mathbb{K}\)-modulo ha dimensione \(\infty\)  con base \(\{\overline{x_{\lambda} }| \lambda \in \Lambda \} \) 
+
+\begin{definition}{Modulo indecomponibile}
+    Un \(A\)-modulo \(M\) è \textbf{indecomponibile} se \(M \neq 0\) e gli unici
+    addendi diretti sono 0 e \(M\).
+\end{definition}
+\begin{definition}{Modulo semisemplice}
+    Un \(A\)-modulo \(M\) è \textbf{semisemplice} se tutti i suoi sottomoduli
+    sono addendi diretti.
+\end{definition}
+\begin{remark}{}
+    0 è semisemplice ma non indecomponibile
+\end{remark}
+\begin{remark}{}
+    \(M\) è semplice se e solo se è semisemplice e indecomponibile
+\end{remark}
+\begin{example}{}
+    Se \(A\) è con divisione, allora ogni \(A\)-modulo è semisemplice.
+\end{example}
+\begin{example}{}
+    \({}_\mathbb{Z} \mathbb{Z}\) non è semisemplice.
+\end{example}
+
+\begin{proposition}{}\label{prop:semisemplice_sumsemplice}
+    Un modulo è semisemplice se e solo se è isomorfo a una somma diretta di
+    moduli semplici in modo sostanzialmente unico, ossia a meno di ordine e
+    isomorfismo
+\end{proposition}
+\begin{proof}{}
+    difficile, fatta in complementi di algebra
+\end{proof}
+
+\begin{example}{}
+    Se \(A\) è con divisione, allora 0 è l'unico ideale sinistro massimale,
+    dunque \(A \cong A / 0\) è l'unico \(A\)-modulo semplice. In questo caso la
+    proposizione~\ref{prop:semisemplice_sumsemplice} equivale a dire che ogni
+    \(A\)-modulo è libero e di rango ben definito.
+
+    Si dimostra che tutti gli \(A\)-moduli sono semisemplici \(\iff\) \(A\) è
+    \(A\)-modulo sinistro semisemplice \(\iff\) \(A\) è \(A\)-modulo destro
+    semisemplice \(\iff\) \(A \cong \prod_{i=1}^{r} M_{n_i}{(D_i)}\) cioè \(A\)
+    è prodotto finito di anelli di matrici a coefficienti in anelli con
+    divisione.
+\end{example}
+
+\begin{definition}{Anello semisemplice}
+    Nel caso definito dalle equivalenze dalle equivalenze dell'esempio
+    precedente, l'anello \(A\) è detto \textbf{semisemplice}.
+\end{definition}
+
+\begin{remark}{}
+    Se \(A\) è semisemplice e commutativo, allora è prodotto finito di campi.
+\end{remark}
+\begin{example}{}
+    \(\mathbb{Z} / n \mathbb{Z}\) è semisemplice \(\iff\) \(n\) è prodotto di
+    primi distinti. Infatti per il teorema cinese del resto se \(p =
+    \prod_{i=1}^{r}p_i\) allora \(\mathbb{Z} / n \mathbb{Z} \cong
+    \prod_{i=1}^{r} \mathbb{Z} / p_i \mathbb{Z} \); e viceversa se esiste \(p\)
+    primo tale che \(p^2 | n\) allora \(\Span{\overline{p}} < \mathbb{Z} / n
+    \mathbb{Z}\) non è addendo diretto.
+\end{example}
+
+\begin{example}{}
+    Se \(A\) è con divisione e \(M\) è un \(A\)-modulo, allora esiste
+    \(\Lambda\) tale che \(M \cong A^{{(\Lambda)}}\). Se \(M\) è
+    indecomponibile, allora \(\# \Lambda = 1\), per cui \(M \cong {}_AA\) e
+    dunque esiste un unico \(A\)-modulo indecomponibile a meno di isomorfismo.
+\end{example}
+
+\begin{example}{}
+    Se \(A\) è un dominio d'integrità e \(0 \neq I \subseteq A \) è un ideale,
+    allora \(I\) è \(A\)-modulo indecomponibile. In particolare \(A\) è
+    indecomponibile.
+
+    Infatti, se \(I = I' \oplus I''\) con \(I', I'' \subseteq I \)
+    \(A\)-sottomoduli (ossia ideali). Allora siano \(a' \in I'\) e \(a'' \in 
+    I''\) tali che \(a' a'' \in I' \cap I'' \iff a a' = 0\). Allora \(a' = 0\)
+    oppure \(a'' = 0\), dunque \(I' = 0\) oppure \(I'' = 0\) 
+\end{example}
+
+\begin{example}{}
+    Sia \(A\) PID non campo. Sia \(P \subsetneq A \) ideale massimale. Allora
+    \(A / P\) è semplice, quindi anche indecomponibile. Inoltre, per ogni \(n >
+    0\) \(A / P^{n}\) è indecomponibile perché i suoi sottomoduli sono tutti e
+    soli i \(P^{k} / P^{n}\) per \(0 \le k\le n\). Per quest'ultima cosa uso
+    che \(A\) è anche UFD e che \(\forall P \) massimale esiste \(p\)
+    irriducibile tale che \({(p)} = P\). Allora gli ideali che contengono
+    \({(p^{n})} = P^{n}\) sono quelli generati dai divisori di \(p^{n}\).
+    Infine, \(P^{k} + P^{k'} = P^{\min \{ k, k'\} }\).
+
+    In più, vale il prossimo teorema
+\end{example}
+
+\begin{theorem}{di struttura per moduli fin. gen. su un PID}
+    Sia \(A\) un PID. Ogni \(A\)-modulo finitamente generato è somma diretta
+    finita di indecomponibili finitamente generati in modo essenzialmente unico,
+    e gli unici indecomponibili finitamente generati sono \(A\) e \(A / P^{n}\)
+    per \(P\) massimale. In particolare ogni \(A\)-modulo è somma diretta di
+    moduli ciclici.
+\end{theorem}
+
+\begin{example}{}
+    Sia \(A\) un PID non campo. Allora \(Q{(A)}\) è indecomponibile non
+    finitamente generato. Inoltre esistono \(A\)-moduli che non sono somma
+    diretta di indecomponibili (neanche \(\infty\)-generati). Ad esempio,
+    \(A^{\Lambda}\) con \(\# \Lambda = \infty\) che in particolare non è libero.
+\end{example}
+
+\begin{example}{}
+    Si può dimostrare che esistono \(\mathbb{Z}[X]\)-moduli che sono somma
+    diretta di indecomponibili con scrittura non unica.
+\end{example}
+
+\begin{example}
+Si può dimostrare che esistono $\mathbb{Z}[X]$-moduli che sono somma diretta di
+moduli indecomponibili, ma tale scrittura non è unica.
+\end{example}
+
+\begin{remark}
+Sia $(M_\lambda)_{\lambda\in\Lambda}$ una famiglia di moduli non nulli.
+Se $\#\Lambda=\infty$ e \( M=\bigoplus_{\lambda\in\Lambda} M_\lambda\), 
+allora $M$ non è finitamente generato.
+Infatti, per ogni $x\in M$, poniamo \( S(x)=\{\lambda\in\Lambda :
+x_\lambda\neq0\}\).
+Poiché $x$ ha solo un numero finito di componenti non nulle,
+$S(x)$ è un insieme finito.
+Se ora \( x_1,\dots,x_n\in M\), allora \( S(x)\subseteq \bigcup_{i=1}^n S(x_i)
+\) per ogni \( x\in\langle x_1,\dots,x_n\rangle \).
+Essendo \( \bigcup_{i=1}^n S(x_i) \)
+finito, esiste $\lambda\in\Lambda$ che non appartiene a tale unione.
+Quindi nessun elemento di $\langle x_1,\dots,x_n\rangle$ ha componente non nulla
+in posizione $\lambda$, da cui \( \langle x_1,\dots,x_n\rangle\neq M \).
+\end{remark}
+
+\begin{example}
+Il prodotto \( \prod_{\lambda\in\Lambda} M_\lambda \)
+può invece essere finitamente generato.
+
+Ad esempio, sia
+\( A=\prod_{\lambda\in\Lambda} A_\lambda \), 
+dove gli $A_\lambda$ sono anelli non nulli e $\Lambda$ è infinito.
+Ponendo \( M_\lambda=A_\lambda\) si ha
+\( M=\prod_{\lambda\in\Lambda} A_\lambda=A \).
+Come $A$-modulo, $A$ è ciclico (generato da $1$), quindi è finitamente
+generato.
+
+D'altra parte,
+\( \bigoplus_{\lambda\in\Lambda} A_\lambda \)
+è un sottomodulo (è un ideale) di $A$, ma non è finitamente generato.
+Questo mostra anche che $A$ non è un anello noetheriano.
 \end{example}
