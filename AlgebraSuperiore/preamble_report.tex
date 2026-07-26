@@ -18,7 +18,8 @@
 \usepackage{pdfpages}
 \usepackage{transparent}
 \usepackage{enumitem}
-\usepackage[colorlinks]{hyperref}
+
+
 \usepackage{titling}
 \usepackage{quiver}
 \usepackage{mathrsfs}
@@ -90,6 +91,15 @@
     #1
 }
 
+\usepackage[
+    colorlinks=true,
+    linkcolor=twilight-indigo,
+    citecolor=burned-peach,
+    urlcolor=applegreen,
+    filecolor=twilight-indigo,
+    menucolor=twilight-indigo
+]{hyperref}
+
 \theoremstyle{plain}
 \newtheorem{lemma}[COUNTER]{Lemma}
 \newtheorem{corollary}[COUNTER]{Corollario}
@@ -136,3 +146,4 @@
     segmentation style={dashed, draw=black!40, line width=1pt} % Dashed dividing line
 }
 \newcommand{\seminorm}[1]{\left\lvert\hspace{-1 pt}\left\lvert\hspace{-1 pt}\left\lvert#1\right\lvert\hspace{-1 pt}\right\lvert\hspace{-1 pt}\right\lvert}
+
