@@ -135,17 +135,124 @@ senso.
     \]
 \end{theorem}
 
-\begin{proof}{}
-    % TODO: aggiungere dim
+\begin{proof}
+La dimostrazione si articola in tre fasi principali: la costruzione delle mappe indotte tra conuclei e nuclei, l'applicazione del Lemma del Serpente, e l'identificazione dei nuclei/conuclei con i gruppi di coomologia.
+
+Consideriamo un generico complesso $X^\bullet$ con differenziali $d_X^i$. Poiché
+$d_X^{i+1} \circ d_X^i = 0$, la proprietà universale del nucleo garantisce
+l'esistenza di un'unica mappa $\tilde{d}_X^i: X^i \to
+\operatorname{Ker}(d_X^{i+1})$ tale che:
+\[
+d_X^i = \operatorname{ker}(d_X^{i+1}) \circ \tilde{d}_X^i
+\]
+Si osserva inoltre che:
+\[
+0 = d_X^i \circ d_X^{i-1} = \operatorname{ker}(d_X^{i+1}) \circ \tilde{d}_X^i \circ d_X^{i-1}
+\]
+Poiché $\operatorname{ker}(d_X^{i+1})$ è un monomorfismo, ne segue che $\tilde{d}_X^i \circ d_X^{i-1} = 0$. 
+
+Per la proprietà universale del conucleo, esiste un unico morfismo $\bar{d}_X^i: \operatorname{Coker}(d_X^{i-1}) \to \operatorname{Ker}(d_X^{i+1})$ che rende commutativo il seguente schema di fattorizzazione:
+
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X^{i-1} \arrow[r, "d_X^{i-1}"] & X^i \arrow[r, "d_X^i"] \arrow[d, "\operatorname{coker}(d_X^{i-1})"', two heads] \arrow[rd, "\tilde{d}_X^i"] & X^{i+1} \arrow[r, "d_X^{i+1}"] & X^{i+2} \\
+& \operatorname{Coker}(d_X^{i-1}) \arrow[r, "\bar{d}_X^i"', dashed] &
+\operatorname{Ker}(d_X^{i+1}) \arrow[u, "\operatorname{ker}(d_X^{i+1})"', tail] &
+\end{tikzcd}
+\]
+
+Applichiamo la costruzione di $\bar{d}^i$ a tutti e tre i complessi $X^\bullet,
+Y^\bullet, Z^\bullet$. Sfruttando la funtorialità di nuclei e conuclei, la
+successione esatta corta dei complessi si proietta nel seguente diagramma
+commutativo a righe esatte:
+
+\[\begin{tikzcd}
+    {0} & {X^i} & {Y^i} & {Z^i} & {0} \\
+    {0} & {\operatorname{Coker}(d_X^{i-1})} & {\operatorname{Coker}(d_Y^{i-1})}
+        & {\operatorname{Coker}(d_Z^{i-1})} & {0}\\
+    {0} & {\operatorname{Ker}(d_X^{i+1})} & {\operatorname{Ker}(d_Y^{i+1})}
+        & {\operatorname{Ker}(d_Z^{i+1})} & 0\\
+	0 & {X^{i+1}} & {Y^{i+1}} & {Z^{i+1}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f^i}", from=1-2, to=1-3]
+	\arrow[two heads, from=1-2, to=2-2]
+	\arrow["{d^i_X}"', color={rgb,255:red,200;green,200;blue,200},
+        curve={height=20pt}, from=1-2, to=4-2]
+	\arrow["{g^i}", from=1-3, to=1-4]
+	\arrow[two heads, from=1-3, to=2-3]
+    \arrow["{d^i_Y}"', color={rgb,255:red,200;green,200;blue,200},
+        curve={height=20pt}, from=1-3, to=4-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[two heads, from=1-4, to=2-4]
+    \arrow["{d^i_Z}"', color={rgb,255:red,200;green,200;blue,200},
+        curve={height=20pt}, from=1-4, to=4-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["\bar{f}^i", color=burned-peach, from=2-2, to=2-3]
+	\arrow["\bar{d}_X^i"', applegreen, dashed, from=2-2, to=3-2]
+	\arrow["\bar{g}^i", burned-peach, from=2-3, to=2-4]
+	\arrow["\bar{d}_Y^i"', applegreen, dashed, from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-5]
+	\arrow["\bar{d}_Z^i"', applegreen, dashed, from=2-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow["\hat{f}^i", burned-peach, from=3-2, to=3-3]
+	\arrow[tail, from=3-2, to=4-2]
+	\arrow["\hat{g}^i", burned-peach, from=3-3, to=3-4]
+	\arrow[tail, from=3-3, to=4-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[tail, from=3-4, to=4-4]
+	\arrow[from=4-1, to=4-2]
+	\arrow["{f^{i+1}}"', from=4-2, to=4-3]
+	\arrow["{g^{i+1}}"', from=4-3, to=4-4]
+	\arrow[from=4-4, to=4-5]
+\end{tikzcd}\]
+
+L'esattezza delle due righe centrali (in arancione) è garantita
+dall'esattezza delle righe esterne e dalle proprietà dei funtori conucleo
+(esatto a destra) e nucleo (esatto a sinistra), uniti all'uso del Lemma del
+Serpente sui rettangoli superiore e inferiore.
+
+Considerando la parte centrale formata dalle due righe esatte e dai morfismi
+verticali $\bar{d}_X^i, \bar{d}_Y^i, \bar{d}_Z^i$ (frecce verdi), possiamo
+applicare direttamente il Lemma del Serpente. Otteniamo così la successione
+esatta:
+\[
+\begin{tikzcd}[column sep=small, row sep=5pt]
+    \mathrm{Ker}{(\bar{d}^{i}_X)} & \mathrm{Ker}{(\bar{d}^{i}_Y)} &
+    \mathrm{Ker}{(\bar{d}^{i}_Z)} & \mathrm{Coker}{(\bar{d}^{i}_X)} &
+    \mathrm{Coker}{(\bar{d}^{i}_Y)} & \mathrm{Coker}{(\bar{d}^{i}_Z)}\\
+    H^{i}{(X^\bullet)} & H^{i}{(Y^\bullet)} & H^{i}{(Z^\bullet)} &
+    H^{i+1}{(X^\bullet)} & H^{i+1}{(Y^\bullet)} & H^{i+1}{(Z^\bullet)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-5, to=2-5]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-6, to=2-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}\]
+
+concludiamo dimostrando la correttezza di questi isomorfismi in \(A\)-Mod (e
+dunque concludiamo per Freyd-Mitchell, teorema~\ref{thm:freyd-mitchell})
+    \[
+    \operatorname{Ker}(\bar{d}_X^i) = \left\{ \bar{x} \in \frac{X^i}{\operatorname{Im}(d_X^{i-1})} \;\middle|\; \bar{d}_X^i(\bar{x}) = 0 \right\} = \frac{\operatorname{Ker}(d_X^i)}{\operatorname{Im}(d_X^{i-1})} = H^i(X^\bullet)
+    \]
+    \[
+    \operatorname{Coker}(\bar{d}_X^i) = \frac{\operatorname{Ker}(d_X^{i+1})}{\operatorname{Im}(\bar{d}_X^i)} = \frac{\operatorname{Ker}(d_X^{i+1})}{\operatorname{Im}(d_X^i)} = H^{i+1}(X^\bullet)
+    \]
 \end{proof}
 
 \begin{corollary}{}
     I funtori \(H^{i}\) sono esatti al centro.
 \end{corollary}
-
-
-
-
 
 
 Sia \(\mathcal{A}\) una categoria preadditiva, e \(C{(\mathcal{A})}\) la
@@ -566,14 +673,14 @@ Z \to 0\) in \(\mathcal{A}\) induce una successione esatta (lunga) in \(\mathcal
         \arrow["{f^i}"', color=applegreen, from=2-8, to=3-8]
         \arrow["{f^{i+1}}"', color=applegreen, from=2-9, to=3-9]
         \arrow[from=3-1, to=3-2]
-        \arrow["{j^{-1}}", color=orange, from=3-2, to=3-3]
-        \arrow["{j^0}", color=orange, from=3-3, to=3-4]
-        \arrow["{j^1}", color=orange, from=3-4, to=3-5]
-        \arrow["{j^2}", color=orange, from=3-5, to=3-6]
-        \arrow["{j^{i-2}}", color=orange, from=3-6, to=3-7]
-        \arrow["{j^{i-1}}", color=orange, from=3-7, to=3-8]
-        \arrow["{j^i}", color=orange, from=3-8, to=3-9]
-        \arrow["{j^{i+1}}", color=orange, from=3-9, to=3-10]
+        \arrow["{j^{-1}}", color=burned-peach, from=3-2, to=3-3]
+        \arrow["{j^0}", color=burned-peach, from=3-3, to=3-4]
+        \arrow["{j^1}", color=burned-peach, from=3-4, to=3-5]
+        \arrow["{j^2}", color=burned-peach, from=3-5, to=3-6]
+        \arrow["{j^{i-2}}", color=burned-peach, from=3-6, to=3-7]
+        \arrow["{j^{i-1}}", color=burned-peach, from=3-7, to=3-8]
+        \arrow["{j^i}", color=burned-peach, from=3-8, to=3-9]
+        \arrow["{j^{i+1}}", color=burned-peach, from=3-9, to=3-10]
         \arrow["g"', from=3-2, to=4-2]
         \arrow["{g^0}"', color=applegreen, from=3-3, to=4-3]
         \arrow["{g^1}"', color=applegreen, from=3-4, to=4-4]
@@ -655,7 +762,7 @@ Z \to 0\) in \(\mathcal{A}\) induce una successione esatta (lunga) in \(\mathcal
 \end{proof}
 
 
-\begin{corollary}{}
+\begin{corollary}{}\label{cor:R0F-F-esatto}
 \begin{enumerate}[label = \arabic*.]
     \item \(R^{i}F\) è esatto al centro \(\forall i \in \mathbb{N}\) e \(R^{0}F\)
         è esatto a sinistra
@@ -829,8 +936,9 @@ commuta:
      \mathrm{Ext}_\mathcal{A}^{i}{(X, Y'')} \overset{w^{i}}{\to}
      \mathrm{Ext}_\mathcal{A}^{i+1}{(X, Y')} \to \dots
    \]
-   con \(\mathrm{Ext}_\mathcal{A}^{i}{(X, -)} \cong \mathcal{A}{(X, -)} =
-   \mathrm{Hom}_\mathcal{A}{(X, -)}\).
+   con \(\mathrm{Ext}_\mathcal{A}^{0}{(X, -)} \cong \mathcal{A}{(X, -)} =
+   \mathrm{Hom}_\mathcal{A}{(X, -)}\) poiché \(\mathcal{A}{(X, -)}\) è esatto a
+   sinistra (corollario~\ref{cor:R0F-F-esatto}).
 
    Se \(\mathcal{A}\) ha abbastanza proiettivi indichiamo con
 \(\overline{\mathrm{Ext}}_\mathcal{A}^{i}{(-, X)} = R^{i}{(\mathcal{A})}{(-,

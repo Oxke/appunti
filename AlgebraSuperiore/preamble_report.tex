@@ -49,17 +49,17 @@
 
 \numberwithin{equation}{section}
 
-\definecolor{thmblue}{RGB}{78, 68, 243}
+\definecolor{burned-peach}{RGB}{188, 69, 36}
 \newtcolorbox{theorem}[2][]{
     breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
-    colback=blue!1, colframe=blue!30,
+    colback=burned-peach!1, colframe=burned-peach!30,
     title=Teorema~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2},
-    coltitle=thmblue!80, fonttitle=\bfseries,
+    coltitle=burned-peach!80, fonttitle=\bfseries,
     attach boxed title to top left={xshift=3mm,yshift=-3mm},
-    boxed title style={colback=blue!5}
+    boxed title style={colback=burned-peach!5}
 }
 
-\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{applegreen}{RGB}{94, 122, 0}
 \newtcolorbox{lemmao}[2][]{
     breakable, enhanced jigsaw, left=10pt, right=2pt, top=10pt, bottom=2pt, 
     colback=applegreen!1, colframe=applegreen!30,
@@ -69,23 +69,24 @@
     boxed title style={colback=applegreen!5}
 }
 
+\definecolor{twilight-indigo}{RGB}{98, 103, 147}
 \newtcolorbox{definition}[2][]{
-    colframe=violet!0,
-    coltitle=violet, % Title text color
+    colframe=twilight-indigo!0,
+    coltitle=twilight-indigo, % Title text color
     fonttitle=\bfseries, % Title font
     title={Definizione~\stepcounter{COUNTER}\theCOUNTER\ifstrempty{#2}{}{:~#2}}, % Title format
     sharp corners, % Less rounded corners
     boxrule=0pt, % Line width of the box frame
     toptitle=1mm, % Distance from top to title
     bottomtitle=1mm, % Distance from title to box content
-    colbacktitle=violet!5, % Background color of the title bar
+    colbacktitle=twilight-indigo!5, % Background color of the title bar
     left=0mm, right=0mm, top=1mm, bottom=1mm, % Padding around content
     enhanced, % Enable advanced options
     before skip=10pt, % Space before the box
     after skip=10pt, % Space after the box
     breakable, % Allow box to split across pages
-    colback=violet!0,
-    borderline west={2pt}{-5pt}{violet!40},
+    colback=twilight-indigo!0,
+    borderline west={2pt}{-5pt}{twilight-indigo!40},
     #1
 }
 
