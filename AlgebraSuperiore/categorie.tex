@@ -2333,19 +2333,26 @@ Equivalentemente il seguente diagramma commuta:
 
     Allora \(\mathcal{A}\) è preabeliana se e solo se \(A\) è
     \emph{noetheriano}/\emph{coerente}.
+    Infatti tutti gli \(M\) \(A\)-moduli sono \emph{f.g.}/\emph{f.p.} se e solo
+    se \(A\) è \emph{noeth.}/\emph{coerente}.
 
-    Infatti \(M\) \(A\)-modulo è \emph{f.g.}/\emph{f.p.} se e solo se \(M\) è \emph{noeth.}/\emph{coerente}.
-    Viceversa \(\mathcal{A}\) è in ogni caso chiusa per conuclei in \(A\mathtt{-Mod}\), ma in generale non per nuclei. Sia \(A\) non \emph{noeth.}/\emph{coerente}. Allora in entrambi i casi \(\exists f : M \to N\) in \(\mathcal{A}\) tale che \(\mathrm{Ker}f\) non è f.g.
-    Infatti nel primo caso si può prendere \(f = \pi : A \to A/\mathfrak{I}\) con \(\mathfrak{I}\)
-    ideale sinistro non f.g., mentre nel secondo caso \(\exists  \mathfrak{I} \subseteq A \) ideale sinistro f.f.g. non f.p. se prendo \(f : A^{n} \to A\) con \(\mathrm{im}f = \mathfrak{I}\).
+    Viceversa \(\mathcal{A}\) è in ogni caso chiusa per conuclei in
+    \(A\mathtt{-Mod}\), ma in generale non per nuclei. Sia \(A\) non
+    \emph{noeth.}/\emph{coerente}. Allora in entrambi i casi \(\exists f : M \to
+    N\) in \(\mathcal{A}\) tale che \(\mathrm{Ker}f\) non è f.g.
+    Infatti nel primo caso si può prendere \(f = \pi : A \to A/{I}\)
+    con \({I}\)
+    ideale sinistro non f.g., mentre nel secondo caso \(\exists  {I}
+    \subseteq A \) ideale sinistro f.g. non f.p. se prendo \(f : A^{n} \to A\)
+    con \(\mathrm{im}f = {I}\).
 
     Per assurdo sia ora \(g : K \to M\) un nucleo di \(f\) in \(\mathcal{A}\)
     (dunque \(f \circ g = 0\)). In ogni caso \(K\) è f.g. e dunque \(\mathrm{im}g\) è f.g. 
     \(\implies  x \in \mathrm{Ker}f \sminus \mathrm{im}g\).
 
-    Sia \(h : A \to M\), \(a \mapsto ax\) in \(\mathcal{A}\) tale che \(f \circ h = 0\), ma \(\not
-    \exists  h' : A \to K\) tale che \(h = g \circ h'\), e il che contraddice la
-    proprietà universale.
+    Sia \(h : A \to M\), \(a \mapsto ax\) in \(\mathcal{A}\) tale che \(f \circ
+    h = 0\), ma \(\nexists  h' : A \to K\) tale che \(h = g \circ h'\), e il
+    che contraddice la proprietà universale.
 \end{example}
 \begin{example}{}
     Sia \(A\) un dominio d'integrità, \(\mathcal{A} \subseteq A\mathtt{-Mod} \)
@@ -2465,7 +2472,7 @@ Equivalentemente il seguente diagramma commuta:
     Infatti sappiamo che \(f : M \to N\) in \(A\mathtt{-Mod}\) è \emph{mono}/\emph{epi} se
     e solo se \(f\) è \emph{iniettivo}/\emph{suriettivo}.
 
-    Se \(f\) è iniettivo, allora \(\mathrm{im}f \cong M\) e l'inclusione \(\mathrm{im}f \overset{i}{\hookrightarrow } N\) è un nucleo di \(\mathrm{coker}f : N \to \mathrm{Coker}f\). 
+    Se \(f\) è iniettivo, allora \(\mathrm{Im}f \cong M\) e l'inclusione \(\mathrm{Im}f \overset{i}{\hookrightarrow } N\) è un nucleo di \(\mathrm{coker}f : N \to \mathrm{Coker}f\). 
     Dunque anche \(f\) è un nucleo di \(\mathrm{coker}f\) poiché \(f = i \circ f'\) con \(f' : M \to \mathrm{im}f\) isomorfismo.
 
     Se \(f\) è suriettivo, per il primo teorema di isomorfismo \(N \cong M / \mathrm{Ker}f\) e sia 
@@ -2870,7 +2877,7 @@ Equivalentemente il seguente diagramma commuta:
         \item[\(\implies \)] Se la successione è esatta in \(X\) allora \(f\) è
             mono, dunque \(f = \mathrm{im}f\). Se la successione è esatta in \(Y\) allora \(\mathrm{im}f = \mathrm{ker}g \implies f = \mathrm{ker}g\) 
         \item[\(\impliedby \)] Se \(f = \mathrm{ker}g\), allora \(f\) è mono, dunque successione
-    esatta in \(X\). Ma quindi \((\mathrm{ker}f) = f = \mathrm{im}f\) e dunque esatta in \(Y\) 
+    esatta in \(X\). Ma quindi \(\mathrm{ker}g = f = \mathrm{im}f\) e dunque esatta in \(Y\) 
     \end{itemize} 
 \end{proof}
 
@@ -2878,7 +2885,7 @@ Equivalentemente il seguente diagramma commuta:
     Le successioni esatte della forma \( 0 \to X \to Y \to Z \to 0\) si dicono
     esatte corte.
 \end{definition}
-\begin{proposition}{}
+\begin{definition}{Successione ``si spezza'' (splits)}
     Una successione esatta corta \(0 \to X \overset{f}{\to } Y \overset{g}{\to } Z \to 0\) in una
     categoria abeliana si spezza se vale una delle seguenti condizioni
     equivalenti:
@@ -2887,7 +2894,7 @@ Equivalentemente il seguente diagramma commuta:
     \item \(g\) è invertibile a destra
     \item \(\exists r : Y \to X\) e \(s : Z \to Y\) tale che \({(Y, f, s, r, g)}\) è un biprodotto di \(X \) e \(Z\) 
 \end{enumerate}
-\end{proposition}
+\end{definition}
 \begin{proof}[Buona definizione]
     Per dualità basta dimostrare che \(1. \iff 3.\). Inoltre \(
     3. \implies 1.\) è ovvia, dunque dimostriamo solo \(1. \implies 3.\).
