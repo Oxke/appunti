@@ -1,0 +1,665 @@
+\chapter{Number fields and their rings of integers}
+
+\section{Integrality}
+
+\begin{definition}{}
+    Take \(A \subseteq B \) an inclusion of domains. An element \(x \in B\) is
+    said to be \textbf{integral over \(A\)} if it is a root of a monic
+    polynomial in \(A[X]\).
+
+    The ring \(B\) is said to be \textbf{integral} over \(A\) if all elements of
+    \(B\) are integral.
+\end{definition}
+
+\begin{example}{}
+    The complex numbers \(\overline{\mathbb{Z}}\) that are integral over
+    \(\mathbb{Z}\) are called the \emph{algebraic integers}.
+\end{example}
+
+\begin{example}{}
+    Let \(d \neq 0, 1\) squarefree. Then
+    \[
+        \mathbb{Z}[\sqrt{d}] = \{a + b \sqrt{d} : a, b \in \mathbb{Z}\} 
+    \]
+    is integral over \(\mathbb{Z}\). Indeed if \(x = a + b \sqrt{d}\), then
+    \({(x - a)}^2 - b^2 d = 0\) 
+\end{example}
+
+\begin{example}{}
+    If \(\zeta = e^{\frac{2\pi i}{n}}\) then \(\zeta^{n} = 1\), thus \(\zeta \in
+    \overline{\mathbb{Z}}\) 
+\end{example}
+
+\begin{proposition}{}
+    Let \(A\) be a UFD. Let \(k = \mathcal{Q}{(A)}\) the fraction field of
+    \(A\). An element \(x \in K\) is integral over \(A\) if and only if \(x \in
+    A\) 
+\end{proposition}
+\begin{proof}{}
+    Write \(x = \frac{p}{q}\), with \(p, q \in A\) and \(\mathrm{mcd}{(p, q)} =
+    1\). Then in \(x\) is integral over \(A\), it satisfies an equation
+    \[
+      x^{d} + a_{d-1} x^{d-1} + \dots + a_{0} = 0 \quad a_{i} \in A \; \forall i
+    \]
+    Then
+    \begin{align*}
+       &{\left( \frac{p}{1} \right)} ^{d} + a_{d-1} {\left( \frac{p}{q}
+       \right)}^{d-1} + \dots + a_{0} = 0\\
+        \implies &p^{d} + a_{d-1} p^{d-1}q + \dots a_{0} q^{d} = 0
+    \end{align*}
+    hence \(q | p^{d}\) but they are coprime, hence \(q \in  A^{*}\) and thus
+    \(x \in A\) 
+\end{proof}
+
+Conversely, if \(x \in  A\), it is a root of \(X - x\).
+
+\begin{corollary}{}
+    \(\mathbb{Q} \cap \overline{\mathbb{Z}} = \mathbb{Z}\) 
+\end{corollary}
+
+\begin{proposition}{}
+    Let \(A \subseteq B \) inclusion of domains. Fix \(b_{1}, \dots, b_{n} \in
+    B\) not all zero. Set \(P = \sum_{i=1}^{n} A b_{i} \) and take \(b\) such
+    that \(bP \subseteq P \).
+
+    We can write
+    \[
+      b b_{i} = \sum_{i=1}^{n} a_{ij} b_{j} \quad a_{ij} \in A
+    \]
+    Then introduce \(M = {(a_{ij})} \in \mathcal{M}_n{(A)}\) and let 
+    \[
+      \rchi_{M} {(T)} = \mathrm{det}{(TI_k - M)}
+    \]
+    then \(\rchi_M {(b)} = 0\) 
+\end{proposition}
+\begin{remark}{}
+    \(M^{t} \) 
+\end{remark}
+
+\begin{proof}{}
+    Set \(N = bI_n - M\). We have
+    \[
+      N \begin{pmatrix}
+          b_{1} \\
+          \vdots \\
+          b_n
+      \end{pmatrix} = 0
+    \]
+    So
+    \[
+      \mathrm{det} N \begin{pmatrix}
+          b_{1} \\
+          \vdots \\
+          b_n
+          \end{pmatrix} = {(\transp{\mathrm{Conj}N})} N \begin{pmatrix}
+          b_{1} \\
+          \vdots \\
+          b_n
+      \end{pmatrix} = 0
+    \]
+    Hence, since there exists \(i_{0}\) with \(b_{i_{0}} \neq 0\), 
+    \[
+      \mathrm{det}N = 0 = \rchi_M{(b)}
+    \]
+\end{proof}
+
+\begin{example}{}
+    Let \(A = \mathbb{Z}\), \(B = \mathbb{C}\) 
+    If we let \(b_{1} = 1, b_{2} = \sqrt[3]{2}, b_{3} = \sqrt[3]{4}\). Then we
+    can take \(b = 1 + 3 \sqrt[3]{2} - \sqrt[3]{4}\) 
+\end{example}
+
+\begin{corollary}{}
+    Let \(A \subseteq B \) inclusion of domains. Take \(x_{1}, \dots, x_{r} \in
+    B\). Then \(x_{1}, \dots, x_r\) are integral over \(A\) if and only if
+    \(A[x_{1}, \dots, x_r]\) is finitely generated as an \(A\)-module.
+\end{corollary}
+
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Assume \(x_{1}, \dots, x_r\) are integral over \(A\).
+        By induction, we may and do assume that \(r=1\). Take \(\mu \in A[X]\)
+        monic with \(\mu {(x_{1})} = 0\). Take \(f{(x_{1})} = x \in A[x_{1}]\),
+        with \(f \in A[X]\). Since \(\mu\) is monic, we can write
+        \[
+          f = \mu Q + R
+        \]
+        with \(\mathrm{deg}R < \mathrm{deg} \mu\) and \(Q, R \in A[X]\).
+        Finally, \(f{(x_{1})} = R{(x_{1})} \in \sum_{i=1}^{\mathrm{deg}\mu - 1}
+        Ax_{1}^{i}\) hence \(A[x_{1}]\) is finitely generated.
+    \item[\(\impliedby \)] Assume \(A[x_{1}, \dots, x_r\) is finitely generated
+        as an \(A\)-module. Let \(b_{1}, \dots, b_n\) be generators and set \(b
+        = x_{i}\). Apply the previous proposition to this setting and get a
+        monic \(\rchi \in A[X]\) with \(\rchi {(x_{i})} = 0\). Hence, \(x_{i}\)
+        is integral over \(A\).
+\end{itemize}
+\end{proof}
+
+\begin{corollary}{}
+    Let \(A \subseteq B \) inclusion of domains. Let \(\overline{A}\) be the set
+    of elements of \(B\) that are integral over \(A\) then \(\overline{A}\) is a
+    subring of \(B\) 
+\end{corollary}
+\begin{proof}{}
+    Take \(x, y \in \overline{A}\) and consider \(C = A[x, y]\). Then \(C\) is
+    finitely generated as an \(A\)-module. But \(C = A[x, y, x+y, xy]\), hence
+    \(x+y, xy \in \overline{A}\) 
+\end{proof}
+In particular, \(\overline{\mathbb{Z}}\) is a ring.
+\begin{corollary}{}
+    Take \(A \subseteq B \subseteq C  \) a tower of inclusion of domains. Assume
+    \(C\) is integral over \(b\) and \(B\) is integral over \(A\). Then \(C\) is
+    integral over \(A\).
+\end{corollary}
+\begin{proof}{}
+    Take \(x \in C\) Let \(f \in B[X]\) monic with \(f{(x)} = 0\) let \(b_{1},
+    \dots, b_{n}\) be the coefficients of \(f\) and set \(B' = A[b_{1}, \dots,
+    b_{n}] \subseteq B \). Since \(b_{1}, \dots, b_{n}\) are integral over
+    \(A\), \(B'\) is a finitely generated \(A\)-module. Since \(x\) is integral
+    over \(B'\), \(B'[x]\) is a finitely generated \(B'\)-module. Hence,
+    \(B'[x]\) is finitely generated as \(A\)-module, so \(x\) is integral over
+    \(A\).
+\end{proof}
+
+In particular, if \(\overline{A} = \{x \in B : x \text{ integral over \(A\)}\}
+\), then \(\{x \in C : x \text{ integral over \(A\)}\} = \{x \in C : x \text{
+integral over \(\overline{A}\)}\} \) 
+
+\begin{definition}{}
+    Let \(A \subseteq B \subseteq C  \) domains. 
+\begin{enumerate}[label = \arabic*.]
+    \item The \textbf{integral closure} of \(A\) in \(B\) is the ring
+        \[
+          \overline{A} = \{x \in B : x \text{ integral over \(A\)}\} 
+        \]
+    \item If \(B = \mathcal{Q}{(A)}\), then \(\overline{A}\) is called the
+        \textbf{integral closure of \(A\)}.
+    \item If \(\overline{A} = A\) we say that \(A\) is \textbf{integrally
+        closed} or \textbf{normal}
+    \item If \(k\) is a finite extension of \(\mathbb{Q}\) (i.e. a number field)
+        then the integral closure of \(\mathbb{Z}\) in \(k\) is called the
+        \textbf{ring of integers} of \(k\) and is denoted \(\mathcal{O}_k :=
+        i(K) \cap \overline{\mathbb{Z}}\) with \(i : K \hookrightarrow  \mathbb{C}\)
+        injective.
+\end{enumerate}
+\end{definition}
+
+\begin{example}{}
+UFDs are integrally closed. In particular, \(\mathcal{O}_{\mathbb{Q}} = \mathbb{Z}\) 
+\end{example}
+
+\begin{example}{}
+    If \(k = \mathbb{Q}(\sqrt{d)}\) with \(d \neq 0, 1\) squarefree, then
+    \(\mathbb{Z}[\sqrt{d}] \subseteq \mathcal{O}_k \). In general (depending on
+    the value of \(d\)), \(\mathbb{Z}[\sqrt{d}]\) is not necessarily equal to
+    \(\mathcal{O}_k\). If \(d \equiv 1 \mathrm{mod} 4\) then \(\frac{1 +
+    \sqrt{d}}{2} \in \mathcal{O}_k \sminus \mathbb{Z}[\sqrt{d}]\) 
+\end{example}
+
+\paragraph{The Reference Framework (RF)} is having
+\begin{itemize}[label = --]
+    \item \(A\) a domain with \(\mathcal{Q}{(A)} = K\) 
+    \item \(L / K\) a finite separable extension
+    \item \(B \subseteq L \) the integral closure of \(A\)  in \(L\) 
+\end{itemize}
+In particular, we are interested in the cases with \(A = \mathbb{Z}\) and \(K =
+\mathbb{Q}\) 
+
+\section{How to compute rings of integers}
+During this section we work with RF.
+\begin{proposition}{}
+    Take \(x \in L\). Then \(x \in B\) if and only if the minimal polynomial
+    \(\mu\) of \(x\) has coefficient in \(A\).
+\end{proposition}
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Assume \(x \in B\). Take \(f \in A[X]\) monic with
+        \(b(x) = 0\). Then \(\mu | f\) in \(K[X]\). So the roots \(z_{1}, \dots,
+        z_{n}\) of \(\mu\) are roots of \(f\). Hence, \(z_{1}, \dots, z_{n}\)
+        are integral over \(A\). But the coefficients of \(\mu\) are in
+        \(A[z_{1}, \dots, z_{n}]\) hence they are integral over \(A\). But they
+        are in \(K\) and \(A\) is integrally closed, hence they are in \(A\) and
+        \(\mu \in A[X]\) 
+    \item[\(\impliedby \)] obvious
+\end{itemize}
+\end{proof}
+
+\begin{corollary}{}
+    Take \(A = \mathbb{Z}\), \(K = \mathbb{Q}\) and \(L = \mathbb{Q}(\sqrt{d})\)
+    with \(d \neq 0,1\) squarefree. Then
+    \[
+      \mathcal{O}_L = \begin{cases}{}
+          \mathbb{Z}[sqrt{d}] & d = 2, 3 \text{ mod } 4\\
+          \mathbb{Z}{\left(\frac{1 + \sqrt{d}}{2}  \right]} & d \equiv 1 \text{
+          mod } 4
+      \end{cases}
+    \]
+\end{corollary}
+\begin{proof}{}
+    Take \(a + b \sqrt{d} \in L\), with \(a, b \in \mathbb{Q}\) and \(b \neq
+    0\). The minimal polynomial is 
+    \[
+      \mu = {(X - a)}^2 - b^2d = X^2 - 2aX + a^2 - db^2 
+    \]
+    Hence \(x \in \mathcal{O}_L \iff \mu \in \mathbb{Z}[X] \iff 2a \in
+    \mathbb{Z}\) and \(a^2 - db^2 \in \mathbb{Z}\).
+    If \(x \in \mathcal{O}_L\), then
+    \[
+      {(2a)}^2 - 4 {(a^2 - db^2)} = 4db^2 = d{(2b)}^2
+    \]
+    Since \(d\) is squarefree, \(2b \in \mathbb{Z}\). Write \(a = \frac{m}{z}\),
+    \(b = \frac{n}{z}\) with \(m, n \in \mathbb{Z}\). We conclude in the two
+    cases with the thesis.
+\end{proof}
+
+We introduce some algebraic tools. \(L / K\) is finite separable. By the
+primitive element theorem we know \(L = K(\alpha)\), with \(\alpha \in L\) and
+\(L = K{(\alpha)} \cong K[X] / {(\mu)}\) where \(\mu\) is the minimal polynomial
+of \(\alpha\).
+
+Take \(L^s\) a separable closure of \(L\). \(\mathrm{Hom}_K {(L, L^s)} =
+\{\sigma : L \hookrightarrow L^s : \sigma|_K = \mathrm{id}_K\} \cong
+\{\text{roots of \(\mu\) in \(L^s\)}\}\). In particular, \(|\mathrm{Hom}_K{(L,
+L^s)}| = [L : K]\). Coming back to the question of finding out if some
+elements of \(L\) are integral or not over \(A\), we know how to compute
+polynomials that vanish at some \(x \in L\):
+\[
+  \begin{align*}
+      m_x: L &\longrightarrow L \\
+      y &\longmapsto m_x(y) = xy
+  \end{align*}
+\]
+and \(\rchi_{m_x} {(x)} = 0\) 
+
+\begin{definition}{}
+    \(\rchi_{m_x} =: \rchi_x\) is called the characteristic polynomial of \(x\).
+    \[
+      \rchi_x = X^{n} - a_{n-1} X^{n-1} + \dots + {(-1)}^{n} a_{0} 
+    \]
+    and \(a_{n-1} = \mathrm{Tr}_{L / K} {(x)} \) the trace of \(x\) , \(a_{0} =
+    N_{L / K}{(x)}\) the norm of \(x\).
+\end{definition}
+
+\begin{proposition}{}
+    We have: \(\mu_x\) minimal polynomial of \(x\). Then
+    \[
+        \rchi_x = {(\mu_x)}^{[L  K(x)]} = \prod_{\sigma \in  \mathrm{Hom}_K{(L,
+        L^s)}} {(X - \sigma {(x)})}
+    \]
+    and 
+    \[
+      \mathrm{Tr}_{L / K} {(x)} = \sum_{\sigma \in \mathrm{Hom}_{K} {(L,
+      L^s)}} \sigma {(x)} \quad; \quad N_{L / K} {(x)} = \prod_{\sigma \in
+  \mathrm{Hom}_K{(L, L^s)}} \sigma {(x)}
+    \]
+\end{proposition}
+
+\begin{proof}{}
+    %TODO integrare con foto
+    \[
+      \begin{pmatrix}
+          0 & 0 & \dots & 0 & -a_{n-1} \\
+          1 & 0 & \dots & 0 & -a_{n-2} \\
+          0 & 1 & \dots & \vdots & \vdots \\
+          \vdots & \vdots & \ddots & 0 & \vdots \\
+          0 & 0 & \dots & 1 & -a_{0}
+      \end{pmatrix}
+    \]
+    where \(\mu = X^{n} + a_{n-1} X^{n-1} + \dots + a_{0}\). Since the
+    characteristic poly of tthis matrix is \(\mu\), we get
+    \[
+      \rchi_x = \mu_x^{v} = \mu_x^{[L : K{(x)}}
+    \]
+    We know:
+    \begin{align*}
+        \mu_x &= \prod_{\tau \in \mathrm{Hom}_K{(K{(x)}, L^{s})}} {(X -
+      \tau{(x)})}\\
+            \rchi_x &= \prod_{\tau \in \mathrm{Hom}_K{(K{(x)}, L^{s})}} {(X -
+            \tau {(x)})}^{[L : K{(x)}]}
+    \end{align*}
+    We have to check that, for each \(\tau \in \mathrm{Hom}_K {(K{(x)},
+    L^{s})}\), there exists exactly \([L : K{(x)}]\) elements \(\sigma \in
+    \mathrm{Hom}_K{(L, L^{s})}\) with \(\sigma|_{K{(x)}} = \tau\).
+
+    Then, by PET, \(L = K{(x, y)}\) with some \(y \in L\).
+    Let \(\mu_y\) be the minimal polynomial of \(y\) over \(K{(x)}\).
+    Fixing \(\tau \in  \mathrm{Hom}_K{(K{(x)}, L^{s})}\), 
+    \[
+    \mathrm{Hom}_{K{(x)}} {(L, L^{s}})} = \{\sigma : L \hookrightarrow L^{s} :
+\sigma|_{K{(x)}} = \tau\} \text{ has } [L : K{(x)}] = \mathrm{deg}\mu_y \text{
+elements }
+    \]
+
+\end{proof}
+
+\begin{corollary}{}
+    Take \(x \in L\). Then \(x \in B\) if and only if \(\rchi_x \in A[X]\). In
+    particular, if \(x \in B\), then \(\mathrm{Tr}_{L / K} {(x)} \in A\) and
+    \(N_{L / K} {(x)} \in  A\) 
+\end{corollary}
+\begin{proof}{}
+    
+\end{proof}
+Fix \(\mathbf{x} = {(x_{1}, \dots, x_{n})}\) a \(K\)-basis of \(L\). Given \(x =
+\sum_{i=1}^{n} d_{i} x_{i} \), \(d_{i} \in K\), I want to express in terms of
+the \(d_{i}\)'s whether \(x \in B\) or \(x \not\in B\).
+
+\begin{lemma}{}
+    \(\mathcal{Q}{(B)} = L\). Better, for each \(x \in L\), there exists \(y \in
+    A \sminus \{0\} \) such that \(yx \in B\).
+\end{lemma}
+\begin{proof}{}
+    Take \(\mu_x \in K[X]\) the minimal polynomial of \(x\). Write \(a_{i} =
+    b_{i} / c_{i}\), with \(b_{i}, c_{i} \in A\). Set \(c := {(c_{0}, \dots,
+    c_{m-1} )}\) and \(z := cx\). Then
+    \[
+      {\left( \frac{z}{c} \right)}^{m} + a_{m-1} {\left( \frac{z}{c} \right)}
+      ^{m-1} + \dots + a_{0} = 0
+    \]
+    by multiplying everything times \(c^{m}\) we find \(z \in B\), hence \(x =
+    \frac{z}{c}\) with \(z \in B\) and \(c \in A\).
+\end{proof}
+
+Up to multiplying \(\mathbf{x} \) by some well-chosen \(a \in A\), we may assume
+\(x_{1}, \dots, x_{n} \in B\). We come back to 
+\[
+  x = \sum_{i=1}^{n} \lambda_{i} x_{i}, \quad \lambda_{i} \in K 
+\]
+If \(x \in B\), then \(\forall i\), \(x x_{i} \in B_n\) and \(\mathrm{Tr}_{L /
+K} {(x x_{i})} = \sum_{j=1}^{n} \lambda_{i} \mathrm{Tr}_{L / K} {(x_{i} x_{j})}
+\in A\).
+
+If we set \(M_{\mathbf{x} } = {\left( \mathrm{Tr}_{L / K} {(x_{i}x_{j})}
+\right)} \in \mathcal{M}_n{(A)} \), then \(M_{\mathbf{x} } \begin{pmatrix}
+    \lambda_{1} \\
+    \lambda_{2} \\
+    \vdots \\
+    \lambda_n
+\end{pmatrix} \in A^{n}\) and hence its determinant is in \(A^{n}\).
+
+\begin{proposition}{}
+    If \(d{(\mathbf{x} )} = \mathrm{det}{(M_{\mathbf{x} } )} =
+    \mathrm{det}{\left( \mathrm{Tr}_{L / K} {(x_{i}x_{j})} \right)} \) and
+    \(d{(\mathbf{x} )} B \subseteq \sum_{i=1}^{n} Ax_{i}  \) 
+\end{proposition}
+
+\begin{definition}{discriminant}
+    d\(\mathbf{x} \) is called the \textbf{discriminant} of \(\mathbf{x} \) 
+\end{definition}
+
+\paragraph{Computation of the discriminant}
+\begin{align*}{}
+    d{(\mathbf{x} )} &= \mathrm{det}{\left( \mathrm{Tr}_{L / K} {(x_{i}x_{j})}
+    \right)} = \\
+                     &= \mathrm{det} {\left( \sum_{\sigma \in
+                     \mathrm{Hom}_K{(L, L^{s})}} \sigma{(x_{i})}\sigma{(x_{j})}
+             \right)} =\\
+                     &= {\left( \mathrm{det}{(\sigma {(x_{j})})}_{\sigma, j}
+                     \right)}^2
+\end{align*}
+% If \(\mathbf{x}  = {(1, x, x^2, \dots, x^{n-1})}\) then
+
+\subsection{Theoretical algorithm to compute rings of integer}
+
+Take \(A = \mathbb{Z}\), \(K = \mathbb{Q}\), \(L\) a number field and \(B =
+\mathcal{O}_L\), then
+\begin{enumerate}[label = \arabic*)]
+    \item Find a \(\mathbb{Q}\)-basis \(\mathbf{x} = {(x_{1}, \dots, x_{n})}\)
+        of \(L\) contained in \(B\) e.g. \(\mathbf{x} = {(1, x, x^2, \dots,
+        x^{n-1})}\) with \(x \in B\) a primitive element for \(L / \mathbb{Q}\) 
+    \item Compute \(d{(\mathbf{x} )}\) 
+    \item Say that
+        \[
+          \bigoplus_{i} \mathbb{Z} x_{i} \subseteq B \subseteq
+          \frac{1}{d{(\mathbf{x} )}} \bigoplus \mathbb{Z}x_{i}
+        \]
+    \item Compute representation \(y_{1}, \dots, y_{n}\) of the quotient
+        \[
+          {\left( \frac{1}{d{(\mathbf{x} )}} \bigoplus \mathbb{Z} x_{i}\right)}
+          / {\left( \bigoplus \mathbb{Z} x_{i}\right)} 
+        \]
+\end{enumerate}
+
+\begin{proposition}{}
+    In the RF. Assume \(A\) is a PID. Then
+\begin{enumerate}[label = \arabic*.]
+    \item There exists a \(K\)-basis \(\mathbf{x} = {(x_{1}, \dots, x_{n})}\) of
+        \(L\) contained in \(B\) such that
+        \[
+          B = \bigoplus_{i} A x_{i}
+        \]
+        such a basis \(\mathbf{x} \) is called an \textbf{integral basis} of \(B\) 
+    \item Assume further that \(A = \mathbb{Z}\). Then \(d{(\mathbf{x} )}\) is
+        independant of the choice of an integral basis \(\mathbf{x} \) and if
+        \(\mathbf{y} \) is any \(K\)-basis of \(L\) contained in \(B\), then 
+        \[
+            d{(\mathbf{y} )} = [ B : \Gamma_\mathbf{y} ]^{2} \cdot d{(\mathbf{x} )}
+        \]
+\end{enumerate}
+\end{proposition}
+\begin{remark}{}
+    If \(A = \mathbb{Z}\) and \(K = \mathbb{Q}\). Say you have a
+    \(\mathbb{Q}\)-basis \(\mathbf{y} \) of \(L\) contained in \(\mathcal{O}_L\)
+    such that \(d{(\mathbf{y} )}\) is squarefree. Then \(\mathcal{O}_L =
+    \bigoplus \mathbb{Z} y_{i}\) 
+\end{remark}
+
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*)]
+    \item Take \(\mathbf{y} \) a \(K\)-basis of \(L\) contained in \(B\). We
+        know
+        \[
+          \bigoplus_i A y_{i} \subseteq B \subseteq \frac{1}{d{(\mathbf{y} )}}
+          \bigoplus_i A y_{i}
+        \]
+        By classication of finitely generated modules over PIDs, \(B\) is a free
+        \(A\)-module of rank \([L : K]\). Hence, there exists \(\mathbf{x}  =
+        {(x_{1}, \dots, x_{n})}\) such that \(B = \bigoplus_i A x_{i}\).
+        Necessarily, \(\mathbf{x} \) is also a \(K\)-basis of \(L\) 
+    \item Let \(\mathbf{x} \) be an integral basis of \(B = \mathcal{O}_L\). Let
+        \(\mathbf{y} \) be any \(\mathbb{Q}\)-basis of \(L\) contained in
+        \(\mathcal{O}_L\). We know that \(d{(\mathbf{x})}\) (resp. d\(\mathbf{y}
+        \)) is the determinant of the trace form \(\mathrm{Tr}_{L / K} \) on the
+        basis \(\mathbf{x} \) (resp. \(\mathbf{y} \)). If \(P\) is the
+        transition matrix from \(\mathbf{x} \) to \(\mathbf{y} \), then
+        \(d{(\mathbf{y} )} = d{(\mathbf{x} )} {\left( \mathrm{det} P \right)}^2
+        \). By Smith's nor form theorem (théorème de la base adaptée),
+        \(|\mathrm{det}P| = [ \bigoplus_{i} \mathbb{Z} x_{i} : \bigoplus_{i}
+        \mathbb{Z}y_{i} ] = [\mathcal{O}_L : \Gamma_\mathbf{y} ]\). We conclude
+        with the equivalence in the thesis. Moreover, if \(\mathbf{y} \) was an
+        integral basis, then \(\Gamma_\mathbf{y} = \mathcal{O}_L\) and thus
+        \(d{(\mathbf{y} )} = d{(\mathbf{x} )}\) 
+\end{enumerate}
+
+\end{proof}
+
+\begin{definition}{}
+    Let \(L\) be a number field. The discriminant of an integral basis of \(L\)
+    is called \textbf{discriminant} of \(L\) and it's noted \(\Delta_L\) 
+\end{definition}
+
+\section{Algebraic properties}
+
+Rings of integers do not satisfy many properties. They are not PID generally for
+instance.
+\begin{definition}{Dedekind domains}
+    A domain \(A\) is said to be a \textbf{Dedekind domain} if it is Noeherian,
+    integrally closed and every non-zero prime ideal in \(A\) is maximal.
+    Equivalently, it's a Noetherian domain with Krull dimension at most 1.
+\end{definition}
+
+\begin{example}{}
+    PIDs are Dedekind domains. UFDs are not all Dedekind domains. For instance,
+    in \(A = \mathbb{C}[x, y] \) \((x)\) is not maximal.
+\end{example}
+
+\begin{theorem}{}
+    Working in the Framework RF (even though separability of \(L / K\) is not
+    needed). Assume \(A\) is a Dedekind domain. Then \(B\) is also a Dedekind
+    domain.
+\end{theorem}
+\begin{remark}{}
+    In particular, rings of integers in number fields are Dedekind domains.
+\end{remark}
+\begin{proof}{}
+    (We use the assumption of separability of \(L / K\)). We already know that
+    \(B\) is integrally closed. We know that, if \(\mathbf{x} = {(x_{1}, \dots,
+    x_{n})}\) is a \(K\)-basis of \(L\) contained in \(B\) and \(B \subseteq
+    \frac{1}{d{(\mathbf{x} )}} \bigoplus A x_{i} \) which is a finitely
+    generated \(A\)-module, hence noetherian. It follows that \(B\) is a
+    noetherian ring.
+
+    Take a non-zero prime ideal \(\mathfrak{p}\) in \(B\). Set \(\mathfrak{q} =
+    \mathfrak{p}^{c} = \mathfrak{p} \cap A\). Then \(\mathfrak{q}\) is a prime
+    ideal in \(A\). Moreover, if one takes \(x \in \mathfrak{p} \sminus \{0\}
+    \), then \(x\) satisfies some equation
+    \[
+      x^{n} + a_{n-1} x^{n-1} + \dots + a_{0} = 0 \quad a_{i} \in  A, \; a_{0}
+      \neq 0
+    \]
+    Hence 
+    \[
+      a_{0} = -x^{n} - a_{n-1} x^{n-1} - \dots - a_{1} x \in  \mathfrak{p} \cap
+      A = \mathfrak{q}
+    \]
+    thus \(\mathfrak{q}\) is non-zero, hence maximal. 
+    \(B / \mathfrak{p}\) is a domain which is also a finite-dimensional \({(A /
+    \mathfrak{q})}\)-vector space (\(B\) is finitely generated \(A\)-module).
+    Hence, \(B / \mathfrak{p}\) is a field and \(\mathfrak{p}\) is maximal.
+\end{proof}
+
+\subsection{Fractional ideals}
+\begin{definition}{}
+    Let \(A\) be a domain with \(\mathcal{Q}{(A)} = K\). \(A\) fractional ideal
+    \(I\) in \(K\) is an \(A\)-submodule of \(K\) such that there exists \(a \in
+    A \sminus \{0\} \) satisfying \(aI \subseteq A \) 
+\end{definition}
+
+\begin{example}{}
+    If \(A\) is a PID, fractional ideals are the \(xA\) with \(x \in K \sminus
+    \{0\} \). In particular if \(A\) is not a field, \(K\) is not a fractional
+    ideal.
+\end{example}
+
+\begin{theorem}{}
+    Let \(A\) be a Dedekind domain. All non-zero prime ideals in \(A\) are
+    invertible.
+\end{theorem}
+Take \(\mathfrak{p}\) a non-zero prime ideal in \(A\). If \(J\) is a frctional
+ideal such that \(\mathfrak{p}J \subseteq A \), then we define
+\[
+  J \subseteq \{ x \in  K : x \mathfrak{p} \subseteq A \} =: \mathfrak{p}^{-1}  
+\]
+Note that if \(y \in  \mathfrak{p} \sminus \{0\} \), then \(y\mathfrak{p}^{-1}
+\subseteq A \), hence \(\mathfrak{p}^{-1}\) is a fractional ideal.
+
+The theorem will then follow from the following 
+\begin{proposition}{}
+    Let \(A\) be a Dedekind domain, \(\mathfrak{p}\) a non-zero prime ideal in
+    \(A\) and \(I\) any non-zero ideal in \(A\) and \(I\) any non-zero ideal in
+    \(A\). Then \(I \subsetneq \mathfrak{p}^{-1} I \). In particular,
+    \(\mathfrak{p}^{-1} \mathfrak{p} = A\) 
+\end{proposition}
+\begin{remark}{}
+    In particular, \(\mathfrak{p} \subsetneq \mathfrak{p}^{-1} \mathfrak{p}
+    \subseteq A  \) since \(\mathfrak{p}\) is maximal, \(\mathfrak{p}^{-1}
+    \mathfrak{p} = A\) 
+\end{remark}
+\begin{proof}{}
+    \emph{Step 1:}
+    We prove that every nonzero ideal \(I \subseteq A \) contains a product of
+    nonzero prime ideals. Assume by contradiction this is wrong. Consider
+    \(\mathcal{E}\) a set of nonzero ideals \(I \subseteq A \) that do not
+    contain a product of nonzero prime ideals.
+    By assumption \(\mathcal{E} \neq \varnothing\) and using Notherianity, it
+    has a maximal element \(I_{0}\). \(I_{0}\) is not prime, so we can find \(a,
+    b \in A \sminus I_{0}\) such that \(ab \in I_{0}\). Then \(I_{0} + {(a)}\)
+    and \(I_{0} + {(b)}\) both contain product of nonzero prime ideals.
+    Hence, \({(I_{0} + {(a)})}{(I_{0} + {(b)})} \subseteq I_{0} \) contains a
+    product of nonzero prime ideals, which leads to a contradiction.
+
+    \emph{Step 2:} We prove that \(A \subsetneq \mathfrak{p}^{-1} \).
+    \(\supseteq  \) is obvious. Take now \(a inn \mathfrak{p} \sminus \{0\} \);
+    by \emph{Step 1} we can write \(\mathfrak{p}_1 \dots \mathfrak{p}_r
+    \subseteq {(a)} \subseteq  \mathfrak{p} \) and we suppose \(r\) as small as
+    possible, with all \(\mathfrak{p}_i\) prime ideals. There exists \(i_{0}\)
+    such that \(\mathfrak{p}_{i_{0}} \subseteq \mathfrak{p} \) and we may assume
+    \(i_{0} = r\). Since \(\mathfrak{p}_r\) is maximal, \(\mathfrak{p}_r =
+    \mathfrak{p}\). Moreover, since \(r\) is as small as possible, we can find
+    \(b \in  \mathfrak{p}_1 \dots \mathfrak{p}_{r-1} \sminus {(a)} \). Then
+    \(a^{-1}b \not\in A\) and \(\forall x \in \mathfrak{p}\), \(a^{-1}b x \in
+    a^{-1} \mathfrak{p}_1 \dots \mathfrak{p}_{r-1} \mathfrak{p} =
+    a^{-1}\mathfrak{p}_1 \dots \mathfrak{p}_r \subseteq a^{-1} {(a)} =  A\).
+    Hence, \(a^{-1}b \in  \mathfrak{p}^{-1}\).
+
+    \emph{Step 3:} We prove the proposition \(\mathfrak{p}^{-1} I \supsetneq I
+    \) by contradiction. Assume \(\mathfrak{p}^{-1} I = I\) and take \(x \in
+    \mathfrak{p}^{-1}\). Then \(x \in \mathfrak{p}^{-1}\). Then \(xI \subseteq I
+    \) and by Notherianity of \(A\), \(I\) is finitely generated. By a previous
+    proposition, this allows to find a monic \(\rchi \in  A[X]\) such that
+    \(\rchi {(x)} = 0\). But \(A\) is integrally closed, hence \(x \in A\).
+    Hence \(\mathfrak{p}^{-1} = A\) which contradicts \emph{Step 2}.
+\end{proof}
+
+\subsection{Factorization of ideals}
+\begin{theorem}{}
+    Let \(A\) be a Dedekind domain. Then every nonzero ideal of \(A\) can be
+    written as a product of nonzero prime ideals, in a unique way up to the
+    order.
+\end{theorem}
+\begin{proof}{}
+    \emph{Existence:} Let \(\mathcal{E}\) be the family of ideals in \(A\) other
+    than \({(0)}\) and \({(1)}\) that are not product of prime ideals. By
+    contradiction, assume \(\mathcal{E} \neq 0\). By Notherianity, we can find a
+    maximal element \(I_{0} \in \mathcal{E}\). Since \(I_{0} \neq A\) we can
+    find a maximal ideal \(\mathfrak{p}\) of \(A\) containing \(I_{0}\). Set \(J
+    = \mathfrak{p}^{-1} I_{0}\).
+
+    Then
+    \[
+      i_{0} \subsetneq \mathfrak{p}^{-1}I_{0} \subseteq \mathfrak{p}^{-1}
+      \mathfrak{p} = A 
+    \]
+    So \(\mathfrak{p}^{-1}I_{0}\) is an ideal of \(A\) not in \(\mathcal{E}\).
+    So \(\mathfrak{p}^{-1} I_{0} = \mathfrak{p}_1 \dots \mathfrak{p}_r\) for
+    some prime ideals \(\mathfrak{p}_1, \dots, \mathfrak{p}_r\). We conclude
+    \(I_{0} = \mathfrak{p} \mathfrak{p}^{-1} I_{0} = \mathfrak{p} \mathfrak{p}_1
+    \dots \mathfrak{p}_r\) 
+
+\end{proof}
+
+
+
+\section{Ramification}
+
+\begin{definition}{}
+    In the RF with \(A\) Dedekind, take \(\mathfrak{p}\) a prime ideal in \(A\).
+    Write the factorization of \(\mathfrak{p}B = p_{1}^{e_{1}} \dots p_g
+    ^{e_g}\).
+\begin{enumerate}[label = \arabic*.]
+    \item 
+\end{enumerate}
+
+\end{definition}
+
+
+\begin{proposition}{}
+    Almost all prime ideals of \(A\) are unramified in \(L\).  
+\end{proposition}
+\begin{proof}{}
+    Let \(\alpha \in
+    B\) a primitive element for \(L / K\) and take \(\mu\) its minimal
+    polynomial. Set
+\end{proof}
+
+\begin{theorem}{}
+    Consider the \emph{discriminant ideal} \(\mathfrak{d}_{B / A} \) of \(A\)
+    generated by the discriminants of all \(K\)-bases of \(L\) contained in
+    \(B\).
+
+    A prime ideal \(\mathfrak{p}\) of \(A\) is ramified in \(L\) \(\iff\)
+    \(\mathfrak{p} | \mathfrak{d}_{B / A} \) 
+\end{theorem}
+
+
+

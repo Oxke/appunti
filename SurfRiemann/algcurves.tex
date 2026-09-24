@@ -1,0 +1,146 @@
+\chapter{Algebraic Curves}
+\section{Main Tools}
+
+The main tool we will use in this chapter is the following, and will be
+stated and proved for polynomials, even though it would be more general.
+
+\begin{theorem}{Implicit function theorem}\label{thm:ift}
+    Let \(f \in  \mathbb{C}[z, w]\). Consider \(\mathcal{C} = \{{(x, y)} \in
+    \mathbb{C}^2 : f{(x, y)} = 0\} \). Assume then \({(z_{0}, w_{0})} \in
+    \mathcal{C}\) and \(\frac{\partial f}{\partial w} {(z_{0}, w_{0})} \neq 0\).
+    Then there exists \(U \ni z_{0}\) and \(V \ni w_{0}\) open sets and an
+    holomorphic map \(g : U \to \mathbb{C}\) holomorphic such that
+    \[
+      \mathcal{C} \cap U \times  V = \{{(z, g{(z)})} : z \in U\} 
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    Use first the \(C^{\infty}\)-implicit function theorem. Write then \(f {(z,
+    w)} = \sum \alpha_{l,j} z^{l} w^{j} \) and we have 
+    \[
+      \partial_w f = \sum \alpha_{l, j} z^{l} j w^{j-1} dw = \frac{\partial
+      f}{\partial w} dw \implies \partial_w f{(z_{0}, w_{0})} = \underbrace{\frac{\partial
+      f}{\partial w}{(z_{0}, w_{0})}}_{\neq 0} dw
+    \]
+    hence \(\partial_w f{(z_{0}, w_{0})}\) is invertible and thus there exists
+    \(U, V\) open sets and \(g : U \to \mathbb{C}\), \(g \in C^{\infty}\) such
+    that \(\mathcal{C} \cap {(U \times  V)} = \{{(z, g{(z)})} : z \in U\} \).
+
+    We just now need to show that \(g\) is holomorphic. Set \(F : U \to
+    \mathbb{C}\) given by \(F{(z)} := f{(z, g{(z)})} = 0\) on \(U\). Then
+    \[
+      d_z F = 0 \iff \frac{\partial F}{\partial z} dz + \frac{\partial
+      F}{\partial \overline{z}} \overline{z} = 0
+    \]
+    Hence
+    \[
+      \frac{\partial F}{\partial \overline{z}} = 0 = \frac{\partial f}{\partial
+      w} {(z, g{(z)})} \cdot \frac{\partial g}{\partial \overline{z}}{(z)}
+      \implies \frac{\partial g}{\partial \overline{z}} \equiv 0 \text{ near }
+      z_{0}
+    \]
+    hence \(g\) is holomorphic.
+\end{proof}
+
+\begin{theorem}{}
+    Let \(f \in \mathbb{C}[z,w]\) such that 
+\begin{enumerate}[label = \arabic*.]
+    \item \(\forall {(z, w)} \in \mathcal{C}\), \({\left( \frac{\partial
+        f}{\partial z}, \frac{\partial f}{\partial w} \right)}\neq {(0, 0)}  \) 
+    \item \(f\) is irreducible in \(\mathbb{C}[z,w]\) 
+\end{enumerate}
+Then there exists a complex structure on \(\mathcal{C}\) such that the two
+projections \(p_{1}, p_{2} : \mathcal{C} \to \mathbb{C}\), given by \({(z, w)}
+\mapsto z\) and \({(z, w)} \mapsto w\) respectively, are holomorphic.
+
+\end{theorem}
+
+\begin{remark}{}
+    The two regularity requisistes ensure that (1.) we can use the implicit
+    function theorem and (2.) that \(\mathcal{C}\) is connected. This second
+    result would require a deeper explanation coming from algebraic geometry.
+\end{remark}
+
+\begin{proof}{}
+    By \({(1.)}\) if \({(z_{0}, w_{0})} \in \mathcal{C}\) then one of the two
+    derivatives is nonzero, let's assume \(\frac{\partial f}{\partial w} \neq
+    0\). Using the IFT (theorem~\ref{thm:ift}) we know that 
+    \[
+        \underbrace{\mathcal{C} \cap {(U \times  V)}}_{\mathcal{O}_0}  = \{{(z, g{(z)})} : z \in U\} \text{ with
+      \(g\) holomorphic}
+    \]
+    Then define \(\varphi_{0} : \mathcal{O}_0 \to \mathbb{C}\) by
+    \(\varphi_{0}{(z, w)} = z = p_{1}{(z)}\). Then \({(\mathcal{O}_0,
+    \varphi_{0})}\) is a chart. Similarly, if \(\frac{\partial f}{\partial z}
+    \neq 0\) then the cart will be \({(\mathcal{O}_0, \varphi_{0} = p_{2})}\).
+
+    We say that
+    \[
+      \bigcup_{{(z_{0}, w_{0})} \in  \mathcal{C}} {(\mathcal{O}_0, \varphi_{0})}
+      \text{ is an atlas}
+    \]
+    indeed, if \(\mathcal{O} \cap \mathcal{O}' \neq \varnothing\), then
+    \(\varphi' \circ \varphi ^{-1}{(z)} = g{(z)}\) holomorphic. %TODO exercise
+
+    Finally, note that \(p_{1}\) and \(p_{2}\) are holomorphic because they are
+    charts.
+\end{proof}
+
+\section{Projective Curves}
+
+Let \(F \in  \mathbb{C}[x, y, z]\) such that \(F\) is homogenous, i.e. \(\forall
+\lambda \in \mathbb{C}\), \(F{(\lambda x, \lambda y, \lambda z)} =
+\lambda^{d}F{(x, y, z)}\) with \(d \in \mathbb{Z}_{\ge 0} \). Then we define
+\[
+    \mathcal{C} = \{[x, y, z] \in \mathbb{P}^2 \mathbb{C} : F{(x, y, z)} = 0\} 
+\]
+which makes sense because \(F\) is homogenous.
+
+\begin{definition}{Smooth}
+    A projective curve \(\mathcal{C}\) is said to be \textbf{smooth} if
+    \(\forall [x, y, z] \in \mathcal{C}\), \(dF \neq 0\) 
+\end{definition}
+
+\begin{theorem}{}
+    Assume \(\mathcal{C}\) is \emph{smooth}. Then there exists a complex
+    structure on \(\mathcal{C}\) such that \(\mathcal{C}\) is a compact
+    connected Riemann Surface. 
+\end{theorem}
+
+\begin{proof}{}
+    v. \cite{miranda} p. 15
+\end{proof}
+
+\begin{eser}{}
+    \(\mathcal{C} \subseteq \mathbb{P}^2 \mathbb{C} \) is smooth
+    \(\iff\) \(\forall i=1,2,3\), \(U_{i} \cap \mathcal{C}\) is \emph{affine
+    smooth}.
+\end{eser}
+
+\begin{example}{}
+    Let \(F{(x, y, z)} = x^{d} + y^{d} + z^{d}\). Then \(F\) is homogenous of
+    degree \(d\), hence it defines a projective curve \(\mathcal{C}\).
+    Moreover, \(\mathcal{C}\) is smooth, since \(\frac{\partial F}{\partial
+    \star} = d \star^{d-1}\), with \(\star = x, y, z\).
+\end{example}
+
+\begin{remark}{}
+    If \(\mathcal{C} = \{f{(u, v)} = 0\} \subseteq \mathbb{C}^2 \) is affine,
+    one can consider \(F{(x, y, z)} = z^{d} f{(\frac{x}{z}, \frac{y}{z})}\) and
+    \(\widehat{\mathcal{C}} = \{[x, y, z] \in \mathbb{P}^2 \mathbb{C} : F{(x, y,
+    z)} = 0\} \) and \(\widehat{\mathcal{C}} \cap U_{3} ``= \mathcal{C}''\). If
+    \(\mathcal{C}\) is smooth, then \(\widehat{\mathcal{C}}\) is in general non
+    smooth.
+\end{remark}
+
+\begin{eser}{}
+    Consider \(\mathcal{C} = \{{(x,y)} \in \mathbb{C}^2 : y^2 = P{(x)}\} \)
+    where \(P \in \mathbb{C}[X]\) non constant and \(P\) has simple roots.
+\begin{enumerate}[label = \arabic*.]
+    \item Check that \(P\) is smooth
+    \item Check that \(\widehat{\mathcal{C}}\) is smooth \(\iff d \le 3\) 
+\end{enumerate}
+
+\end{eser}
+

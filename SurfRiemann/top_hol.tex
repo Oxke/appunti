@@ -1,0 +1,438 @@
+\chapter{Topology and Holomorphic maps}
+
+\begin{lemma}[Normal form of holomorphic maps]
+    Let \(f : X \to Y\) a non-constant holomorphic map. % between compact Riemann surfaces. ?
+    Fix \(P \in X\). Then there exists \(m_P \in \mathbb{Z}_{\ge 1} \) such that
+    for all charts \({(U_{2}, \varphi_{2} )} \ni f{(P)}\), \(\varphi {(f{(P)})} = 0\).
+    Then one can find a chart \({(U_{1}, \varphi_{1})} \ni P\) with
+    \(\varphi_{1}{(P)} = 0\) such that near 0, we have 
+    \[
+      \varphi_{2} \circ f \circ \varphi_{1}^{-1} {(z)} = z^{m_p}
+    \]
+    
+\end{lemma}
+
+\begin{proof}{}
+    We start with two charts \({(U_{1}, \varphi_{1})} \ni P\) and \({(U_{2},
+    \varphi_{2})} \ni f{(P)}\) such that \(\varphi_{1}{(P)} = 0\) and
+    \(\varphi_{2}{(f{(P)})} = 0\).
+
+    Near 0, we have that \(\varphi_{2} \circ f \circ \varphi_{1}^{-1}{(w)} =
+    w^{m} S{(w)}\), with \(S {(0)} \neq 0\) and \(S\) analytic. We can use a
+    complex logarithm to write \(S{(w)} = {\left( h{(w)} \right)} ^{m}\), hence
+    \[
+      \varphi_{2} \circ f \circ \varphi_{1}^{-1}{(w)} = {\left( \underbrace{w h{(w)}
+      }_{=:\psi {(w)}} \right)} ^{m}
+    \]
+    but \(\varphi'{(0)} = h{(0)} \neq 0\) thus by local inverse theorem
+    \(\varphi \) has a holomorphic inverse near 0, hence
+    \[
+        \varphi_{2} \circ f \circ {(\psi  \circ\varphi_{1})}^{-1}{(z)} = z^{m}
+    \]
+    and the chart is actually \(\psi \circ \varphi_{1}\) on a subset of \(U_{1}\) 
+\end{proof}
+
+\begin{definition}{}
+    \(m_P := \mathrm{mult}_P{(f)}\) the \textbf{multiplicity}. If \(m > 1\),
+    then \(P\) is called a \textbf{ramification point}.
+\end{definition}
+
+\begin{proposition}{}
+    Ramification points corresponds to the set of vanishing points of \({\left(
+    \varphi_{2} \circ f \circ \varphi_1^{-1}\right)}' \) at 0, hence it is in
+    particular discrete.
+\end{proposition}
+
+\begin{theorem}{Definition of degree}
+    Let \(f : X \to Y\), X, Y connected and \(f\) a \emph{proper} nonconstant
+    holomorphic map.
+
+    Then, for all \(y \in Y\),
+    \[
+      d_y{(f)} = \sum_{f{(x)} = y} \mathrm{mult}_x{(f)} \text{ is constant and
+      finite}
+    \]
+    It is denoted \(\mathrm{deg}{(f)}\) and called the \textbf{degree} of \(f\).
+\end{theorem}
+
+\begin{proof}{}
+    \(f\) being proper implies that
+    \(f^{-1}{(\{y\} )}\) is compact. If it had infinitely many elements then I
+    can construct a converging sequence. The local behavior on the accumulation
+    point instead says that there should be only finitely many points in a
+    neighborhood. Hence \(f^{-1}{(\{y\} )}\) is finite and thus also
+    \(d_y{(f)}\).
+
+    We want to show that \(y \mapsto d_y\) is locally constant. Because \(X\) is
+    connected, this would imply \(y \mapsto d_y\) is constant. With this in
+    mind, fix \(y \in Y\) and pick a chart \({(V, \psi)}\) at \(y\). Let
+    \(f^{-1}{(\{y\} )} = \{x_{1}, \dots, x_{n}\} \). For all \(i = 1\dots n\)
+    there exists \({(U_{i}, \varphi_{i})} \ni x_{i}\) such that \(\psi \circ f
+    \circ \varphi_{i}^{-1}{(z)} = z^{m_{i}}\) and \(m_{i} =
+    \mathrm{mult}_{x_{i}} {(f)}\). \\
+    Now, for all \(y' \in V\),
+    \[
+      \sum_{x \in \bigcup_{i}^{n} U_{i} : f{(x)} = y'} \mathrm{mult}_x {(f)} = d_y{(f)} =
+      \sum_{i=1}^{n} m_{i} 
+    \]
+    To show that \(d_{y'} {(f)} = d_y{(f)}\), we need to check that \[\{x \in X
+        : f{(x)} = y'\} = \{x \in \bigcup_{i} ^{n} : f{(x)} = y'\} \]. We show
+        this by contradiction. Suppose indeed there exists some \({(x'_k)}_{k
+        \in \mathbb{N}} \in 
+        f^{-1}{(\{y'_k\} )} \sminus \bigcup_{i} ^{n} U_{i} \) for all \(y'_k \to
+        y\) as \(k\to \infty\) . By properness one
+        can extract \(x'_k\) convergent.
+
+
+
+\end{proof}
+
+\begin{eser}{(T2 E1)}
+    Soit \(n\ge 1\). Montrer que la courbe projective \(\mathcal{C} \subseteq
+    \mathbb{P}^2{(\mathbb{C})} \) de Fermat d'équation homogène \(x^{n} + y^{n}
+    + z^{n} = 0\) est non singulière.
+
+    \tcblower
+
+    Since the equation is symmetric in the coordinates it suffices to check one
+    affine chart, say \(z \neq 0\). Hence \(g{(x, y)} = x^{n} + y^{n} + 1 = 0\) in
+    \(\mathbb{C}^2\).
+    \[
+      \frac{\partial g}{\partial x} = n x^{n-1} = 0 \implies x = 0 \quad ; \quad
+      \frac{\partial g}{\partial y} = n y^{n-1} = 0 \implies y = 0
+    \]
+    but \({(0, 0)} \not\in  \mathcal{C}\) 
+
+
+    Another possibility is using Euler's formula, and is left as an exercise.
+\end{eser}
+
+
+\begin{eser}{(T2 E2)}
+    Consider \(\mathcal{C} = \{y ^2 = f{(x)}\} \subseteq \mathbb{C}^2 \) where
+    \(f \in  \mathbb{C}[x]\) of degree at least 3. Montrer les suivants:
+\begin{enumerate}[label = (\arabic*)]
+    \item affine curve \(\mathcal{C}\) is nonsingular \(\iff\) \(f\) doesn't
+        have multiple roots
+    \item  \(\mathcal{C} \subseteq \mathbb{P}^2{(\mathbb{C})} \) is a projective
+        curve with affine equation \(y^2 = f{(x)}\) 
+    \item The point \(\infty\) is nonsingular \(\iff\) \(d= 3\) 
+\end{enumerate}
+    \tcblower
+\begin{enumerate}[label = (\arabic*)]
+    \item \[
+      \begin{cases}{}
+          \frac{\partial }{\partial x} : f'{(x)} = 0\\
+          \frac{\partial }{\partial y} : 2y = 0 \implies y = 0
+      \end{cases}
+    \]
+    if \({(x, y)} \in \mathcal{C}\) then \(f{(x)} = 0\). Hence we get that
+    \(f{(x)} = f'{(x)} = 0\) but then this means that \({(x, y)}\) is a singular
+    point \(\iff\) \(y = 0\) and \(x\) is a multiple root of \(f\).
+    \item Homogenizing we consider \(x = \frac{x_{1}}{x_{0}}\) and \(y =
+        \frac{x_{2}}{x_{0}}\) and we get that \({\left(\frac{x_{2}}{x_{0}}\right)}^2 =
+        f{\left(\frac{x_{1}}{x_{0}}\right)} = \frac{1}{x_{0}^{d}} F{(x_{1}, x_{0})}\) where
+        \(F\) is the homogenization of \(f\).
+
+        Now the equation becomes \(x_{0}^{d-2}x_{2} = F{(x_{1}, x_{0})}\).
+
+        To now find the points at infinity consider \(x_{0}=0\) thus \(F{(x_{1},
+        0)} = 0\) but \(F{(x_{1}, x_{0})} = a_d x_{1}^{d} + a_{d-1} x_{1}^{d-1} x_{0} + \dots 
+        + a_{0} x_{0}^{d}\) hence \(x_{1}=0\). We get that the only point at
+        infinity is \([0 : 0 : 1] \in  \mathcal{C}\) 
+    \item Let's look at the affine chart \(\{x_{2} \neq 0\} \). Let's call \(u
+        := \frac{x_{1}}{x_{2}}\) and \(v := \frac{x_{0}}{x_{2}}\).
+
+        The equation in the coordinates \({(u,v)}\) is \(v^{d-2} = F{(u,v)}\).
+        Let's check singularity:
+        \[
+          \begin{cases}{}
+              \frac{\partial }{\partial u} : \frac{\partial F}{\partial u} = 0\\
+              \frac{\partial }{\partial v} : {(d-2)}v^{d-3} - \frac{\partial
+              F}{\partial v} = 0
+          \end{cases}
+        \]
+        Since \(F\) is homogenous, then its partial derivates are also, hence
+        \(\frac{\partial F}{\partial u} {(0, 0)} = \frac{\partial F}{\partial
+        v}{(0,0)} = 0\). Then, if \(d > 3\) \({(0,0)}\) is a singular point and
+        it is not if \(d = 3\). Note that in these coordinates \({(0,0)}\) is
+        \(\infty\).
+
+\end{enumerate}
+\end{eser}
+
+\begin{eser}{(T2 E3)}
+    Consider \(a_{0}, \dots, a_{n} \ge 1\) integers. Consider the
+    \emph{projective space à poids} the quotient \(X := \) 
+    \[
+      \mathbb{P}{(a_{0}, \dots, a_{n})} = {(\mathbb{C}^{n+1} \sminus \{0\} )} /
+      \mathbb{C}^{\times } \text{ via the action } t{(x_{0}, .., x_{n})} = {(t
+      ^{a_{0}} x_{0}, \dots, t ^{a_{n}} x_{n})}
+    \]
+
+    In the following consider \(a_{0} = a_{1} = \dots = a_{n}\) 
+
+\begin{enumerate}[label = (\arabic*)]
+    \item \(U_{0} = \{x_{0} \neq 0 \} \subseteq X \) is an affine chart and
+        \(U_{0} \cong \mathbb{C}^{n}\) if \(a_{i} = 1\) for all \(i \ge  1\).
+\end{enumerate}
+
+\end{eser}
+
+\begin{eser}{(T2 E5)}
+    Let \(w_{1}, w_{2}\) a base of \(\mathbb{C}\) as a real vector space. Let
+    \(f : \mathbb{C} \to \mathbb{C}\) be holomorphic such that \(f{(z + w_{i})}
+    = \alpha_{i} f{(z)}\) for all \(z \in \mathbb{C}\) and \(i = 1, 2\). 
+
+    Prove that \(f{(z)} = \lambda e^{\mu z}\) for some \(\lambda, \mu \in \mathbb{C}\) 
+
+    \tcblower
+
+    First note that
+    \[
+      f{(z + a_{1}\omega_{1} + a_{2}\omega_{2})} = \alpha_{1}^{a_{1}}
+      \alpha_{2}^{a_{2}} f{(z)} \quad a_{1}, a_{2} \in \mathbb{Z}
+    \]
+
+    we may suppose that \(\alpha_{1}, \alpha_{2} \neq 0\) since otherwise \(f =
+    0\). Note then that
+    \[
+      f'{(z + \omega_{i})} = \alpha_{i}f'{(z)}
+    \]
+    Let's then look at \(F = f'/f\) (knowing that the answer we are trying to find
+    is the exponential) which is invariant under \(\Lambda\) and meromorphic. If
+    \(f\) is invertible, the \(F\) is an holomorphic elliptic function, hence is
+    constant. But then clearly \(f\) is of the form \(\lambda e ^{\mu z}\) for
+    some \(\lambda and \mu\).
+
+    We still need to show that \(f \neq 0\). If \(f{(z_{0})} = 0\). 
+\end{eser}
+
+\begin{corollary}{}
+    Assume \(f : X \to Y\) holomorphic between \(X, Y\) compact connected
+    Riemann Surfaces. Suppose \(f\) is non constant. Then 
+    \[
+      \mathrm{deg}{(f)} = 1 \iff f \text{ is biholomorphic}
+    \]
+\end{corollary}
+\begin{proof}{}
+    If the \(\mathrm{deg}{(f)} = 1\) then it must be injective by definition of
+    degree.
+\end{proof}
+
+\begin{example}{}
+    If \(X\) is compact connected and \(f : X \to \mathbb{C}\) is
+    meromorphic with a unique simple pole. Then \(X \cong
+    \widehat{\mathbb{C}}\).
+
+    Indeed \(f^{-1}{(\{\infty\} )} = \{P\} \) hence \(\mathrm{deg}{(f)} = 1\) thus
+    \(f\) is actually biholomorphic.
+\end{example}
+
+\section{\(\Delta\)-Complexes}
+It doesn't work that well, that is why generally singular homology is used.
+
+\begin{definition}{}
+    A \textbf{simplex} is \(\Delta^{n} = \{{(x_{0}, \dots, x_{n})} \in \mathbb{R}^{n+1} :
+    \sum_{i=0}^{n} x_{i} = 1, \, x_{i} \ge 0 \} \). \textbf{faces} are 
+    \(F_{i} = \{{(\mathbf{x}  \in \Delta^{n} : x_{i} = 0)}\} \). There is a
+    \textbf{face map} \(d_{i} : \Delta^{n-1} \to \Delta^{n}\) mapping \({(x_{0},
+    \dots, x_{n-1} )}\) to \({(x_{0}, \dots, x_{i-1}, 0, x_{i}, \dots, x_{n-1}
+    )}\). The \textbf{boundary map} is \(\partial \Delta^{n} = \bigcup_{i=0}
+    ^{n}F_{i}\) 
+\end{definition}
+
+\begin{definition}{\(\Delta\)-complex}
+    Let \({(\Delta, X)} = \{\sigma_{\alpha} : \Delta^{n_{\alpha} } \to
+    X\}_{\alpha \in I}  \) with \(I\) \emph{finite}. These properties must be
+    valid:
+\begin{enumerate}[label = \arabic*.]
+\item each map \(\sigma_{\alpha}|_{\mathring{\Delta}^{n_{\alpha} }}\) is injective and \(X = \bigcup_{\alpha
+\in I} \sigma_{\alpha} {\left( \mathring{\Delta}^{n_{\alpha} } \right)} \) 
+    \item  \(\forall \alpha \in I\), and \(\forall i\), \(\sigma_{\alpha} \circ
+        d_{i} : \Delta^{n_{\alpha} - 1} \to X\) belong to \({(\Delta, X)}\) 
+    \item The topology on \(X\) is such that \(A \subseteq X \) is open if and
+        only if \(\forall \alpha \in I\), \(\sigma_{\alpha} ^{-1}{(A)} \subseteq
+        \Delta^{n_{\alpha} }\) is open 
+\end{enumerate}
+    Hence each \(\sigma_{\alpha} : \overset{o}{\Delta^{n_{\alpha} }} \to
+    \sigma_{\alpha} {\left( \mathring{\Delta}^{n_{\alpha} } \right)} \) is a
+    homeo, and \(X \cong \coprod_{\alpha \in I} \Delta^{n_{\alpha} } /_\sim \)
+    identification of faces.
+
+\end{definition}
+\begin{remark}{}
+    the simplexes in the complex are not all the same.
+\end{remark}
+
+\begin{example}{}
+    Let \(\tilde{X} = \Delta^2 \times \{1,2\} \) and \(\pi_{1} : \tilde{X} \to
+    \Delta^2\) given by the projection \({(x, i)} \mapsto x\). Define next the
+    relation
+    \[
+      x  \sim  y \iff \exists {(i, t)} \in \{0,1,2\} \times \Delta^{1} \text{ s.t. }
+      \pi_{1}{(x)} = \pi_{1}{(y)} = d_{i}{(t)}
+    \]
+    Finally \(X = \tilde{X} /_\sim \) and let's note \([x,i] \in X\) the
+    equivalence class.
+
+    At this point there are the following
+\begin{itemize}[label = --]
+    \item[0-Simplexes:] \(\sigma_{i}^{0} : e_{i} \mapsto [e_{i}, 1]\) for \(i =
+        0,1,2\) 
+    \item[1-Simplexes:] \(\sigma_{i}^{1} : \Delta^{1} \ni t \mapsto [d_{i}{(t)},
+        1\) for \(i = 0,1,2\) 
+    \item[2-Simplexes:] \(\sigma_{i}^2 : \Delta^2 \ni t \mapsto [t, i] \) for
+        \(i = 1,2\) 
+\end{itemize}
+\end{example}
+
+\subsection{Homology of \(\Delta\)-simplexes}
+
+Consider the complex \({(\Delta, X)} = \{\sigma_{\alpha} \} _{\alpha \in I} \)
+and \(n := \max_{\alpha \in I} n_{\alpha} < \infty\). For all \(k = 0, \dots,
+n\) let \(C_k\) be the free abelian group generated by \(\{\sigma_{\alpha}
+{(\Delta^{n_{\alpha} })} : n_{\alpha} = k\} \).
+
+Then the boundary map \(\partial_k : C_k \to C_{k-1} \) is \textbf{defined} by
+\[
+  \partial_k \{\sigma_{\alpha} {(\Delta^{n_{\alpha} })}\} = \sum_{i=0}^{k}
+  {(-1)}^{i} \sigma_{\alpha} \circ F_{i}{\left( \Delta^{k-1} \right)}  
+\]
+
+\begin{example}{}
+    Let \(\partial^{0} = \{1\} \), \(\partial^{1} = \mathrm{conv}{(e_{0},
+    e_{1})} = [e_{0}, e_{1}]\) and \(\Delta^2 = \mathrm{conv} \{e_{0}, e_{1},
+e_{2}\} = [e_{0}, e_{1}, e_{2}]\).
+
+    Hence, the boundery maps give \(\partial_{1}\Delta^{1} = \{e_{1}\} -
+    \{e_{0}\} \) and \(\partial_{2}\Delta^2 = [e_{1}, e_{2}] - [e_{0}, e_{2}] +
+    [e_{0}, e_{1}]\) 
+\end{example}
+
+\begin{proposition}{}
+    If we look at the sequence
+    \[
+      \{0\} \to C_{n} \overset{\partial_{n}}{\to} C_{n-1}
+      \overset{\partial_{n-1} }{\to} \dots \overset{\partial_{2}}{\to} C_{1}
+      \overset{\partial_{1}}{\to} C_{0}
+    \]
+    is a complex of abelian groups, i.e. \(\partial_{k-1} \circ \partial_k = 0\)
+    for all \(k\) 
+\end{proposition}
+
+\begin{definition}{}
+    We define the \textbf{homology groups}
+    \[
+      H_{k} ^{\Delta} = \frac{\mathrm{Ker}\partial_k}{\mathrm{Im} \partial_{k+1} }
+    \]
+\end{definition}
+
+\begin{theorem}{}
+    \(\Delta\)-complex homology is isomorphic to \emph{singular} homology.
+\end{theorem}
+
+\begin{definition}{}
+    The Euler characteristic
+    \[
+      \rchi_{{(\Delta, X)}} = \sum_{i=0}^{n} {(-1)}^{i} \mathrm{rk}_{\mathbb{Z}}
+      {\left( H_{i}^{\Delta} \right)} = \sum_{i=0}^{n} {(-1)}^{i}
+      \mathrm{rk}_{\mathbb{Z}} {(C_{i})} 
+    \]
+    is a topological invariant
+\end{definition}
+
+\begin{theorem}{}
+\begin{enumerate}[label = \arabic*)]
+    \item All connected compact Riemann Surfaces are \(\Delta\)-complexes with \(n=2\) 
+    \item If \(\mathcal{F} \subseteq X \) is finite, one can choose \({(\Delta, X)}\) such
+        that \(\mathcal{F} \subseteq \bigcup_{n_{\alpha} = 0} \sigma_{\alpha}
+        {\left( \Delta^{0} \right)}  \) 
+    \item \(\rchi_X = \sum_{i=0}^{2} {(-1)}^{i} \mathrm{rk}{(C_{i})} = 2 - 2g \)
+        is a topological invariant, where \(g\) is called \emph{genus}.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}{Riemann-Hurwitz}\label{thm:RH}
+    Let \(X, Y\) be compact connected Riemann surfaces and \(f : X \to Y\) holomorphic
+    non-constant. Then
+    \[
+      2g{(X)} - 2 = \mathrm{deg}{(f)} \, {(2 g{(Y)} - 2)} + \sum_{P \in X}
+      {\left( \mathrm{mult}_P{(f)} - 1 \right)} 
+    \]
+\end{theorem}
+\begin{proof}{}
+    We want to avoid somehow the ramification points, since without them it
+    would be a topological covering and much easier. 
+
+    Let's call \(R{(f)} := \{x \in X : \mathrm{mult}_x{(f)} > 1\} \) and \(B{(f)}
+    := f{(R{(f)})}\).
+    We know that \(f : X \sminus f^{-1}\{B{(f)}\} \to Y \sminus B{(f)}\) is a
+    topological covering of degree \(\mathrm{deg}\,f\). Take a
+    \(\Delta\)-complex on \(Y\) such that \(B{(f)} \subseteq {(\Delta, Y)}_0 \).
+    Remark that \(\overbrace{\sigma_{\alpha} {\left( \Delta^2 \right)} }^{o}
+    \subseteq {(\Delta, Y)}_2 \) are simply connected.
+
+    Above each \(\overbrace{\sigma_{\alpha} {\left( \Delta^2 \right)} }^{o}\),
+    \(f\) is a trivial covering. Denoting by \(f^{-1}_{j,\alpha} :
+    \overbrace{\sigma_{\alpha} {\left( \Delta^2 \right)}}^{o} \to X\) all \(d =
+    \mathrm{deg}{(f)}\) local inverses of \(f\).
+
+    The collection \(\left\{f_{j,\alpha} ^{-1} \circ \sigma_{\alpha} {\left(
+    \mathring{\Delta}^2 \right)} \right\}_{j=1. .d}  \) can be completed as a
+    \(\Delta\)-complex on \(X\). In particular, one need to add 0-simplexes and
+    1-simplexes. We note that \(f^{-1}\{B{(f)}\} \subseteq {(\Delta, X)}_0 \).
+
+    By the covering property, \(\# {(D, X)}_2 = d \# {(\Delta, Y)}_2\) and
+    similarly \(\# {(\Delta, X)}_1 = d \# {(\Delta, Y)}_1\).
+
+    The part to count are \(\# {(\Delta, X)}_0\). Pick \(q \in  {(\Delta,
+    Y)}_0\) and \[\# f^{-1}{(\{q\} )} = \sum_{f{(p)} = q} 1 = \sum_{f(p) = q}
+    {\left( 1 - \mathrm{mult}_{p} {(f)} + \mathrm{mult}_p {(f)} \right)} = d +
+\sum_{f{(p)} = q} {\left( 1 - \mathrm{mult}_p{(f)} \right)}   \]
+    Hence 
+    \[
+      \# {(\Delta, X)}_0 = \sum_{q \in  {(\Delta, Y)}_0} \# f^{-1}{(\{q\} )} = d
+      \# {(\Delta, Y)}_0 + \sum_{q \in {(\Delta, Y)}_0} \sum_{f{(p)} = q}
+      {\left( 1 - \mathrm{mult}_p{(f)} \right)}
+    \]
+    but the last double sum is just \(\sum_{p \in X} {\left( 1 - \mathrm{mult}_p
+    {(f)}\right)} \). Finally,
+    \[
+      \rchi {(X)} = \# {(\Delta, X)}_2 - \# {(\Delta, X)}_1 + \# {(\Delta, X)}_0
+      = d \rchi{(Y)} + \sum_{P \in X} {\left( 1 - \mathrm{mult}_p {(f)} \right)} 
+    \]
+\end{proof}
+
+\subsection{Applications of R.H.}
+
+\begin{theorem}{Placker's formula}
+    let \(\mathcal{C}\) be a (smooth) projective curve of degree \(d\).
+    then \[g{(\mathcal{C})} = \frac{{(d-1)}{(d-2)}}{2}\] 
+\end{theorem}
+\begin{proof}[proof sketch]
+    Consider \(\mathcal{C} = \{{(x, y, z)} \in  \mathbb{P}^2\mathbb{C} : F{(x,
+    y, z)} = 0\} \) and the projection \(\pi : \mathcal{C} \to
+    \mathbb{P}^{1}\mathbb{C} \cong \widehat{\mathbb{C}}\) given by \(\pi{([x : y
+    : z])} = [x : z]\). Then \(\pi\) is a holomorphic map of degree \(d\).
+
+    Ramification points are the points \(\{[x : y : z] \in \mathcal{C} :
+    \frac{\partial F}{\partial y} = 0\} \). Then from R.H. (theorem~\ref{thm:RH})
+    we get that 
+    \begin{equation}\label{eq:help1}
+      2g{(\mathcal{C})} - 2 = d{(-2)} + \sum_{x \in \mathcal{C}} {\left(
+      \mathrm{mult}_x{(\pi)} -1 \right)} 
+    \end{equation}
+    Then, by Bézout (a geometric algebra theorem),
+    \begin{equation}\label{eq:help2}
+      \sum_{x \in  \mathcal{C}} {\left( \mathrm{mult}_x{(\pi)} -1 \right)} =
+      \deg {(F)} \cdot \deg {\left( \frac{\partial F}{\partial y} \right)} = d
+      {(d-1)}
+    \end{equation}
+    By equations~\eqref{eq:help1} and~\eqref{eq:help2} we get that
+    \[
+      g{(\mathcal{C})} = \frac{1}{2} {\left( 2 - 2d + d{(d-1)} \right)} =
+      \frac{{(d-1)}{(d-2)}}{2}
+    \]
+\end{proof}
+

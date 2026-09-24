@@ -1,0 +1,258 @@
+\chapter{Introduction}
+
+\section{Varietés affines}
+
+On prend un corps \(k\) (suivent \(k = \overline{k}\)). L'objective c'est
+d'étudier les systemes des equations polynomiales:
+\[
+  P_{1}{(x_{1}, \dots, x_{n})} = \dots = P_{m}{(x_{1}, \dots, x_{n})}
+\]
+où \(P_{i} \in k[X_{1}, \dots, X_{n}]\).
+
+Si \(k = \mathbb{C}\) il s'agit de géometrie complexe. Si \(k = \mathbb{Q}\) de
+géometrie arythmétique.
+
+\begin{definition}{fonctionne polynomials}
+    Une fonctionne polynomiale c'est une fonctionne \(f : k^{n} \to k\) tale
+    qu'existe un polynome \(p \in k[X_{1}, \dots, X_{n}]\) et \(f{(x_{1}, \dots,
+    x_{n})} = p{(x_{1}, \dots, x_{n})}\).
+
+    On va écrire (\textbf{notation}): \(p {(X_{1}, \dots, X_{n})} =
+    \sum_{i=1}^{n} c_{i} x^{n} \).
+
+    On va appeler \(\mathcal{O}{(k^{n})}\) l'ensemble des fonctions polynomiales
+\end{definition}
+\begin{remark}{}
+    \(\mathcal{O}{(k^{n})}\) est une sous-\(k\)-algèbre de \(\mathrm{Fon}{(k^{n}, k)}\) 
+\end{remark}
+
+\begin{definition}{Morphisme d'évaluation}
+    Soit \(A\) une \(k\)-algèbre (commutative). Soit \(a = {(a_{1}, \dots,
+    a_{n})} \in A^{n}\), il y a un morphisme d'évaluation
+    \begin{align*}
+        \mathrm{ev}_a: k[X_{1}, \dots, X_{n}] &\longrightarrow A \\
+        p {(X_{1}, \dots, X_{n})} &\longmapsto   \mathrm{ev}_a(p {(X_{1}, \dots,
+        X_{n})}) = p {(a_{1}, \dots, \alpha_{n})}
+    \end{align*}
+\end{definition}
+
+\begin{proposition}{}\label{prop:nat_inf}
+    Si \(k\) è infini, le morphisme (surjectif) naturel \(\varphi : k[X_{1},
+    \dots, X_{n}] \to \mathcal{O}{(k^{n})}\) est bijectif. 
+
+    Au contraire, si \(k = \mathbb{F}_q\) est un corps fini,
+    \(\mathrm{Ker}\varphi = \Span{x_{i}^{q} - x_{i}} \) 
+\end{proposition}
+\begin{eser}{}
+    Démontre proposition~\ref{prop:nat_inf}
+\end{eser}
+
+\subsection{Remarque}
+
+Il y a un bigection (si \(k\) infini).
+\begin{align*}{}
+    k^{n} &\leftrightarrow \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(k^{n})},
+    k)}\\
+        a &\mapsto \mathrm{ev}_a \\
+        a = {(\varphi {(x_{i})})} &\mapsfrom  \varphi 
+\end{align*}
+
+\subsection{Sous-ensemble algébrique}
+
+Soit \(F \subseteq \mathcal{O}{(k^{n})}\). On définit ``le lieu des zéros de \(F\)''
+\[
+  V_F = \{x = {(x_{1}, \dots, x_{n})} \in k^{n} : \forall f \in F, f{(x)} = 0\} 
+\]
+c'est un sous-ensemble algebrique de \(k^{n}\).
+
+\begin{example}{}
+    Si on prend \(n=2\) e \(F = \{xy - 1\}\), le lieu de zeros c'est simplement
+    l'hyperbole \(xy = 1\).
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -4, xmax= 4,
+                ymin= -4, ymax = 4,
+                axis lines = middle,
+            ]
+                \addplot[domain=-4:4, samples=100]{1/x};
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+    Où des courbes elliptique affine c'est courbes d'equation \(y^2 = x^3 + 1\) 
+\end{example}
+
+Si on prend \(n=1\) e \(F = \{x^2 + 1\} \) et \(k = \mathbb{R}\), on trouve
+\(V_F = \circ = V_{1} \). Mais si \(k = \mathbb{C}\), \(V_F = \{i, -i\} \neq
+\varnothing\). En autres mots, \(\mathbb{C}\) is mieu car il y a une
+correspondence entre les \(F\)s et les \(V_F\)s.
+
+\begin{note}[zione]
+    \(F \subseteq  \Span{F} \subseteq \mathcal{O}{(k^{n})} \) est l'idéal
+    engenré par \(F\).
+\end{note}
+
+\begin{proposition}{}
+    \(V_F = V_{\Span{F} } \) 
+\end{proposition}
+
+\begin{definition}{Hypersurface}
+    Soit \(f \in \mathcal{O}{(\kappa^{n})}\) non constante. Alors \(V_f
+    \subseteq k^{n} \) est une \textbf{hypersurface}
+\end{definition}
+
+L'idée c'est que si on prends \(n\) hypersurfaces générales, on defini un point.
+Il faut comprendre qu'est-ce que ça signifie.
+
+\begin{definition}{}
+    Pris un point \(x = {(x_{1}, \dots, x_{n})} \in k^{n}\). Alors \(x = V_{M_x}
+    \) où 
+    \[
+      M_x = \Span{X_{1} - x_{1}, \dots, X_{n} - x_{n}} =
+      \mathrm{Ker}\mathrm{ev}_x
+    \]
+    et \(M_x \subseteq \mathcal{O}{(k^{n})} \) est un idéal maximal.
+
+\end{definition}
+\begin{remark}{}
+    En effet, \(\mathcal{O}{(k^{n})} = k \oplus M_x\), parce que
+    \[
+      f = f{(x)} + {(f - f{(x)})}
+    \]
+\end{remark}
+
+\section{Algèbre commutative}
+
+\begin{definition}{}
+    Si \(I\) est un idéal, on defini
+    \[
+      \sqrt{I} := \{f \in \mathcal{O}{(k^{n})}: \exists n \ge 1 : f^{n} \in I\} 
+    \]
+    la ``racine de \(I\)''
+\end{definition}
+\begin{example}{}
+\begin{itemize} \(\) 
+    \item \( I \subseteq \sqrt{I} \) 
+    \item Si \(n = 1\) et \(I = {(X^2)}\), \(\sqrt{I} = {(X)}\) 
+\end{itemize}
+\end{example}
+
+\begin{eser}{Proprietés}
+\begin{itemize}
+    \item \(\sqrt{\sqrt{I}} = \sqrt{I}\) 
+    \item \(V_I = V_{\sqrt{I}}\) 
+\end{itemize}
+\end{eser}
+
+\begin{note}[zione]
+    Si \(X \subseteq k^{n} \), on note
+    \[
+      \mathcal{I}{(X)} = \{f \in \mathcal{O}{(k^{n})} : f|_X = 0\} 
+    \]
+\end{note}
+
+\begin{theorem}{Théorem des zéros}
+    Si \(k = \overline{k}\), alors \(\sqrt{I} = \mathcal{I}{(V_I)}\)  
+\end{theorem}
+
+\subsection{Fonctionne polynomiale}
+
+\begin{definition}{fonctionne polynomiale}
+    Soit \(V \subseteq k^{n} \) un ensemble algèbrique. Une fonction \(f : V \to
+    k\) est (régulière) polynomiale si c'est la restriction à \(V\) d'un élément
+    du \(\mathcal{O}{(k^{n})}\) 
+\end{definition}
+
+\begin{remark}{}
+    On note \(\mathcal{O}{(V)}\) la \(k\)-algèbre des fonctions polynomiales sur
+    \(V\).
+    Par définition, il y a un morfphisme surjectif de \(k\)-algèbres 
+    \begin{align*}
+        \varphi_V : \mathcal{O}{(k^{n})} &\to \mathcal{O}{(V)}\\
+        f &\mapsto f|_V
+    \end{align*}
+
+    Notamment, \(\mathrm{Ker}{(\varphi_V )} = \mathcal{I}{(V)}\) et donc
+    \[
+     \frac{\mathcal{O}{(k^{n})}}{I{(V)}} \cong \mathcal{O}{(V)} 
+    \]
+    c'est une \(k-algèbre\) de type fini (et donc noethérienne)
+\end{remark}
+
+On a donc une bijection (valable \(\forall k\))
+\begin{align*}
+    V &\leftrightarrow \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(V)},k)} \\
+    x = {(x_{1}, \dots, x_{n})} &\mapsto {(\mathrm{ev}_x : f \mapsto f{(x)})}\\
+    {(f{(\overline{x_{1}}, \dots, \overline{x_{n}})})} &\mapsfrom f
+\end{align*}
+\begin{eser}{}
+Si \(V \subseteq k^{n} \) est algebrique, \(V{(\mathcal{I}{(V)})} = V\) 
+\end{eser}
+
+\begin{remark}{}
+    On a la correspondance entre point et fonctions, et donc
+    \[
+      \mathrm{Hom}_{k-\text{alg}} {(\mathcal{O}{(V)}, k)} \leftrightarrow
+      \{\text{ideaux max. }\mathfrak{m} \subseteq \mathcal{O}{(V)} \text{ tal que }
+      \mathcal{O}{(V)} / \mathfrak{m} \cong k\}
+    \]
+\end{remark}
+
+\begin{example}{}
+    C'est important de specifier car si \(n = 1\), \(k = \mathbb{R}\) et
+    \(\mathfrak{m} = \Span{x^2 + 1} \subseteq \mathcal{O}{(\mathbb{R})} \) est
+    un idéal maximal de camps résidual \(\mathbb{C} \neq \mathbb{R}\) 
+\end{example}
+
+\section{Topologie de Zariski}
+
+Si on a \(A\) anneau commutatif et \(I, J \subseteq A \) idéaux, on a
+\[
+  I + J = \{ i + j, \; i \in I \; j \in J\} 
+\]
+et 
+\[
+  IJ = \Span{\sum_{k=1}^{n} i_k j_k, \; i_k \in I \; j_k \in J } 
+\]
+idéaux de \(A\). Notamment, ça fait du sense de faire une somme infinie, mais
+pas un produit. 
+
+\begin{lemma}{}
+    Soit \(A = \mathcal{O}{(k^{n})} \text{ ou } \mathcal{O}{(V)}\) et \(I, J\)
+    idéaux. Alors
+
+\begin{itemize}
+    \item \(I \subseteq J \implies  V{(I)} \supseteq V{(J)}  \) 
+    \item \(V{(I + J)} = V{(I)} \cap V{(J)}\) et aussi \(V{\left( \sum_{j} I_j \right)} = \bigcap_{j} V{(I_j)}\) 
+    \item \(V{(IJ)} = V{(I \cap J)} = V{(I)} \cup V{(J)}\) 
+    \item \(V{(1)} = \varnothing\) et \(V{(0)} = k^{n}\) 
+\end{itemize}
+\end{lemma}
+
+\begin{corollary}{}
+    Les \(V{(I)}\) forment les fermés d'une topologie sur \(k^{n}\) , appélée
+    \textbf{topologie de Zariski}
+\end{corollary}
+
+
+\begin{definition}{}
+    Si on a \(f \in \mathcal{O}{(k^{n})}\), alors \(U_f = k^{n} \sminus V{(f)} =
+    \{x \in k^{n} : f{(x)} \neq 0\} \).
+
+    Les \(U_f\) sont ouvert et dit \textbf{principal}.
+\end{definition}
+
+\begin{proposition}{}
+    Les ouverts principaux forment une \textbf{base d'ouverts}.
+\end{proposition}
+
+\begin{example}{}
+    Si \(n = 1\), la topologie de Zariski sur \(k\) est quels des parties finies
+    (cofinita). Les fermés sont seulement les sous-ensemble finis ou \(k\).
+
+    C'est une topologie très grossière: il ne conserve de \(k\) que la
+    cardinalité.
+\end{example}
+
+

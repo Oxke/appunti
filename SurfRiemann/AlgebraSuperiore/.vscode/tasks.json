@@ -1,0 +1,85 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "compile-main-tex",
+			"type": "shell",
+			"command": "latexmk",
+			"args": [
+				"-pdf",
+				"-interaction=nonstopmode",
+				"-halt-on-error",
+				"main.tex"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		},
+		{
+			"label": "compile-main-tex",
+			"type": "shell",
+			"command": "latexmk",
+			"args": [
+				"-pdf",
+				"-interaction=nonstopmode",
+				"-halt-on-error",
+				"main.tex"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		},
+		{
+			"label": "compile-main-tex",
+			"type": "shell",
+			"command": "latexmk",
+			"args": [
+				"-pdf",
+				"-interaction=nonstopmode",
+				"-halt-on-error",
+				"main.tex"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		},
+		{
+			"label": "compile-main-tex",
+			"type": "shell",
+			"command": "latexmk",
+			"args": [
+				"-pdf",
+				"-interaction=nonstopmode",
+				"-halt-on-error",
+				"main.tex"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		},
+		{
+			"label": "compile-main-tex",
+			"type": "shell",
+			"command": "latexmk",
+			"args": [
+				"-pdf",
+				"-interaction=nonstopmode",
+				"-halt-on-error",
+				"main.tex"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$latex"
+			],
+			"group": "build"
+		}
+	]
+}

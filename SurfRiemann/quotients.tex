@@ -1,0 +1,138 @@
+\chapter{Quotients}
+Soit \(X\) une Riemann Surface. \(\mathrm{Aut}{(X)} = \{\varphi : X \to X \text{
+holomorphic}\}\). Si on prends \(\Gamma \subseteq \mathrm{Aut}{(X)} \) subgroup,
+can \(X / \Gamma\) the set of orbits be equipped with a complex structure?
+
+\begin{definition}{}
+\begin{enumerate}[label = \arabic*.]
+    \item The action of \(\Gamma\) on \(X\) is \textbf{proper} \(\iff\) for all
+        compact \(K \subseteq X \), then \(\{\gamma \in \Gamma : \gamma {(K)}
+        \cap K \neq \varnothing\} \) is finite.
+    \item The action is \textbf{free} if there are no fixed points, i.e.
+        \[\forall \gamma \in \Gamma \sminus \{\mathrm{Id}\}, \forall x \in X, \,
+        \gamma x \neq x\]
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}{}
+    If the action of \(\Gamma\) on \(X\) is proper, then \(X / \Gamma\) is
+    Hausdorff. If it is also free, then \(\pi : X \to X / \Gamma\) is a
+    topological covering, i.e. \(\forall a \in X\) there exists \(U_a \ni a\)
+    open such that \(\pi|_{U_a} \) is a homemorphism and \(\pi
+    ^{-1}{(\pi{(U_a)})} \coprod_{\gamma \in \Gamma} \gamma {(U_a)}\) 
+\end{proposition}
+
+\begin{theorem}{Complex structure on \(X / \Gamma\)
+    }\label{thm:struct_on_quotient}
+    Let \(X\) be a Riemann Surface. Assume \(\Gamma \subseteq \mathrm{Aut}{(X)}
+    \) has a proper action on \(X\). Then there is a unique complex structures
+    on the quotients such that \(\pi : X \to X / \Gamma\) is holomorphic.
+\end{theorem}
+
+\begin{proof}[proof if also free action]
+Assume the action to be also free. For all \(p \in X\), choose a chart on \(X\)
+\({(U_p, \varphi _p)} \ni p\) such that \(\pi|_{U_p} \) is a homeomorphism and
+\(\pi ^{-1} \pi{(U_p)} = \bigcup_{\gamma \in  \Gamma} \gamma{(U_p)}\) and call
+\(\pi{(U_p)} =: V_{\pi{(p)}} \). Then \({(V_{\pi{(p)}}, \varphi _p \circ \pi
+^{-1}|_{V_{\pi{(p)}} } )}\) is an atlas on \(X / \Gamma\).
+    
+If \(V_{\pi{(p)}} \cap V_{\pi{(p')}} \neq \varnothing\) then
+\[\psi_{\pi{(p)}} \circ \psi ^{-1}_{\pi{(p')}} = {\left( \varphi _p \circ \pi
+^{-1}|_{V_{\pi{(p)}} }  \right)} \circ {\left( \pi|_{U_{p'} } \circ \varphi
+^{-1}_{p'}   \right)}  \]
+and the middle two composed make a function \(\gamma_{p, p'} \) holomorphic.
+\end{proof}
+
+\paragraph{If instead there are fixed points} then we set \(\Gamma_x =
+\{\gamma \in \Gamma : \gamma x = x\} \) the \emph{stabilizer} of \(x\).
+
+\begin{proposition}{}
+    \(\Gamma_x\) is a finite subgroup.
+\end{proposition}
+\begin{proposition}{}
+    \(\{x \in X : \Gamma_x \neq \{\mathrm{Id}\} \} \) is a discrete set. 
+\end{proposition}
+
+Then to prove the theorem~\ref{thm:struct_on_quotient} we will consider that the
+action is proper and the fixed points for \(\gamma \neq \mathrm{Id}\) are isolated.
+
+\begin{proposition}{}
+    If \(x \in F\), one can find \(U \ni x\) such that
+\begin{enumerate}[label = \arabic*.]
+    \item \(\gamma {(U)} \cap U = \varnothing \quad \forall \gamma \not\in
+        \Gamma_x\) 
+    \item \(\Gamma_x {(U)} \subseteq U \) 
+    \item \(\pi {(U)} \cong U / \Gamma_x\) 
+\end{enumerate}
+\end{proposition}
+
+Pick a chart \({(U, \varphi )}\) and define a map \begin{align*}
+    \lambda: \Gamma_x &\longrightarrow \mathbb{C}^{*} \\
+    \gamma &\longmapsto \lambda(\gamma) = {\left( \varphi \circ \gamma \circ
+    \varphi ^{-1} \right)}^{\prime} {(0)}
+\end{align*}
+then \(\lambda\) is a group homomorphism and it is injective, indeed if
+\(\lambda {(\gamma)} = 1\), then \(\varphi  \circ \gamma \circ \varphi
+^{-1}{(z)} = z + \alpha z^{k} + O{(z^{k+1})}\). Calling \(n = |\Gamma_a|\) and
+observing that \(\gamma^{n} = \mathrm{Id}\), we have
+\[
+  \varphi \circ \gamma^{n} \circ \varphi ^{-1}{(z)} = z = z + n \alpha z^{k} + O
+  {(z^{k+1})}
+\]
+which means that \(\alpha = 0\). Hence, we have that finite \(\Gamma_x \cong \lambda
+{(\Gamma_x)} \le \mathbb{C}^{*}\) hence \(\Gamma_x\) is cyclic. 
+
+
+Set \(\omega_x {(p)} = \frac{1}{n}\sum_{\gamma \in \Gamma_x}
+\lambda{(\gamma)}^{-1} \cdot \varphi {(\gamma {(p)})}\). We have \(\omega_x{(x)}
+= 0\) and \(\omega_x\) is indeed a chart (by shrinking \(U\)).
+
+\begin{proposition}{}
+    \(\forall \gamma \in \Gamma_x\), \(\omega_x {(\gamma {(p)})} =
+    \lambda{(\gamma)} \cdot \omega_x{(p)}\) 
+\end{proposition}
+
+Since \(\Gamma_x\) is cyclic, we can pick a generator \(\gamma_{0}\) of
+\(\Gamma_x\) such that \(\lambda{(\gamma_0)} = e^{\frac{2i\pi}{n}}\). In
+conclusion, in the chart \(U / \Gamma_x\) is \(\omega_x{(U)} / \Span{z \mapsto
+e^{\frac{2i\pi}{n}} z} \). We will call \(U_n := \Span{z \mapsto
+e^{\frac{2i\pi}{n}} z} \) 
+
+Then \(p \mapsto \omega_x^{n}{(p)}\) is a chart on \(U / \Gamma_{x} \). We would
+only need to check that it makes an atlas. (v. Miranda Ch. 3 p 75).
+
+\begin{eser}{}
+    Let \(X, Y\) be Hausdorff topological spaces and \(\pi : X \to Y\) a local
+    homeomorphism. If \(Y\) has a complex atlas, then there exists a complex
+    atlas on \(X\) such that \(\pi\) is holomorphic.
+\end{eser}
+
+
+\subsection{Example of Quotients}
+
+\paragraph{Tori:} Let \(w_{1}, w_{2}\) be two \(\mathbb{R}\)-independent
+        and set \(\Lambda = \mathbb{Z}\omega_{1} \oplus \mathbb{Z}\omega_{2}\).
+        Then \(\Lambda\) acts by translation on \(\mathbb{C}\). Then \(\Lambda\)
+        is discrete and the action is proper.
+
+        Then \(X = \mathbb{C} / \Lambda\) is called a \textbf{torus}, a compact
+        Riemann surface and it's not homeomorphic to \(\widehat{\mathbb{C}}\) 
+
+\paragraph{Modular Surface:} Let \(\mathbb{H} = \{z \in \mathbb{C} :
+        \mathrm{Im} z > 0\} \). Set \(\mathrm{PSL}_2{(\mathbb{Z})} \cong \Gamma
+        := \{h{(z)} = \frac{az + b}{cz + d} : ad - bc = 1, \; a,b,c,d \in
+        \mathbb{Z}\} \). Then \(\Gamma\) leaves \(\mathbb{H}\) invariant.
+        \(\Gamma\) acts properly on \(\mathbb{H}\).
+
+        \(\Gamma\) has fixed points. For example \((S : z \mapsto -\frac{1}{z}) \in
+        \Gamma\) and \(S{(i)} = i\). Setting \((T : z \mapsto z+1) \in \Gamma\)
+        then \(ST{(z)} = -\frac{1}{z + 1}\) and \(ST{(e^{\frac{2i\pi}{3}})} =
+        e^{\frac{2i\pi}{3}}\)
+
+
+\begin{proposition}{}
+    \(F = {\left( \Gamma \cdot i \right)} \cup {\left( \Gamma \cdot
+    e^{\frac{2i\pi}{3}} \right)} \) 
+\end{proposition}
+
+

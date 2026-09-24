@@ -15,4 +15,65 @@
 
 \input{./intro.tex}
 
+\chapter{Test}
+
+\begin{theorem}{}
+    Sia \(S = \{Ax \le b\} \) un poliedro con variabili indicizzate da \(I\) e \(C\) per le
+    variabili rispettivamente intere e continue, e sia \(P\) la sua LP
+    relaxation.
+    Sia \({(\pi, \pi_{0})}\) una split e \(\overline{x} \in P\) tale che \(\pi_{0} <
+    \pi^{T}\overline{x} < \pi_{0} + 1\). Allora \(\overline{x} \in P^{{(\pi,
+    \pi_{0})}}\) se e solo se esiste \(\tilde{x} \in \Pi_2 \) tale che 
+    \[
+     b - A\tilde{x} \le \frac{b - A\overline{x}}{\pi^{T}\overline{x} - \pi_{0}} 
+    \]
+\end{theorem}
+
+\begin{proof}\( \)
+\begin{itemize}
+    \item[\(\implies \)] Supponiamo esistano \(x_{1}, x_{2}\) e \(\lambda \in
+        {(0, 1)}\) tali che \(\overline{x} = {(1 - \lambda)} x_{1} +
+        \lambda x_{2}\), \(x_{1} \in \Pi_{1}\) e \(x_{2} \in \Pi_{2}\). In
+        particolare scegliamo \(x_{1}\) e \(x_{2}\) in modo che \(\pi^{T}x_{1} =
+        \pi_{0}\) e \(\pi^{T}x_{2} = \pi_{0} + 1\). Allora \(\pi^{T}\overline{x}
+        = \pi_{0} + \lambda\), ossia \(\lambda = \pi^{T}\overline{x} -
+        \pi_{0}\). Vogliamo mostrare che \(x_{2} = \tilde{x}\) dell'enunciato.
+        \[
+          b - Ax_{2} = b - \frac{A \overline{x} - {(1 - \lambda)}A
+          x_{1}}{\lambda} = \frac{b - A\overline{x} + {(1 - \lambda)}{(Ax_{1} -
+          b)}}{\lambda} \le \frac{b - A\overline{x}}{\pi^{T}\overline{x} - \pi_{0}}
+        \]
+    \item[\(\impliedby \)] Sia \(\tilde{x}\) come nell'enunciato e \(\lambda :=
+        \frac{\pi^{T}{\overline{x}} - \pi_{0}}{1 - \pi^{T}\overline{x} +
+    \pi_{0}}\). Allora \(\lambda > 0\). e vogliamo mostrare che \(\overline{x}
+    \in P^{{(\pi, \pi_{0})}}\). A tale scopo mostriamo che \(\widehat{x} :=
+    \overline{x} + \lambda{(\overline{x} - \tilde{x})} \in \Pi_{1}\), e dunque
+    \(\overline{x}\) è combinazione convessa di \(\tilde{x}, \widehat{x} \in
+    P^{{(\pi, \pi_{0})}}\). E in effetti
+    \[
+      \pi^{T}\widehat{x} = \pi^{T}\overline{x} + \lambda {(\pi^{T}\overline{x} -
+      \pi^{T}\tilde{x})} \le \pi^{T}\overline{x} + \lambda {(\pi^{T}\overline{x}
+      - 1 - \pi_{0})} = \pi_{0}
+    \]
+    \begin{align*}
+        A\widehat{x} - b &= {(1 + \lambda)}A \overline{x} - \lambda A\tilde{x} - b
+      = {(1 + \lambda)}{(A\overline{x} - b)} - \lambda {(b - A\tilde{x})} \le \\
+         &\le {(1 + \lambda)}{(A\overline{x} - b)} -
+         \frac{\lambda}{\pi^{T}\overline{x} - \pi_{0}}{(b - A\overline{x})} = \\
+     &= {\left( 1 + \lambda + \frac{1}{1 - \pi^{T}\overline{x} + \pi_{0}} \right)} 
+     {(A\overline{x} - b)} = 0
+    \end{align*}
+    Allora poiché \(\overline{x} = \frac{\widehat{x} + \lambda \tilde{x}}{1 +
+    \lambda}\), \(\overline{x} \in P^{{(\pi, \pi_{0})}}\) 
+\end{itemize}
+\end{proof}
+
+\begin{theorem}{}
+    
+\end{theorem}
+
+
+
+
+
 \end{document}

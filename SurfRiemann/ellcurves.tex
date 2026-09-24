@@ -1,0 +1,202 @@
+\chapter{Elliptic Curves}
+
+\section{Tori}
+
+Let \(\Lambda = \mathbb{Z} \omega_{1} + \mathbb{Z} w_{2}\), with \(w_{1}, w_{2}
+\in \mathbb{C}\) \(\mathbb{R}\)-independent.
+
+\begin{proposition}{}
+    For all \(\alpha > 2\), the sum \(\sum_{0 \neq w \in \Lambda}
+    \frac{1}{\|w\|^\alpha} \) converges
+\end{proposition}
+\begin{proof}[short proof]
+    Set \(N{(R)} = |\{w \in \Lambda : \|w\| \le R\}|\). Then \(N{(R)} =
+    o{(R^2)}\). Then
+    \[
+      \sum_{0 \neq w \in \Lambda} \frac{1}{\|w\|^{\alpha}} =
+      \int_{0^{+}}^{\infty} \frac{dN{(r)}}{r^{\alpha}} = O{(1)} +
+      \underbrace{\int_{0^{+}}^{\infty} \frac{\alpha}{u^{\alpha+1}}N{(u)}
+      \,du}_\text{convergent \(\iff \alpha > 2\)} 
+    \]
+\end{proof}
+
+Consider \(\mathbb{T} = \mathbb{C}/\Lambda\). Then the Weierstrass function,
+\(\forall z \in  \mathbb{C} \sminus \Lambda\), is defined by
+\[
+  \mathfrak{p}{(z)} = \frac{1}{z^2} + \sum_{0 \neq w \in \Lambda} {\left(
+  \frac{1}{{(z-w)}^2} - \frac{1}{w^2} \right)} 
+\]
+
+\begin{proposition}[Properties of Weierstrass functions] \( \) 
+\begin{itemize}
+    \item On compact subsets \(K \subseteq \mathbb{C} \wedge \Lambda \) the formula
+is convergent, since \(\left| \frac{1}{{(z-w)}^2} - \frac{1}{w^2} \right| = O_K
+{(\frac{1}{\|w\|^3})}\).
+    \item \(\mathfrak{p}\) is holomorphic on \(\mathbb{C}
+\sminus \Lambda\) and meromorphic on \(\mathbb{C}\), with poles exactly on
+\(\Lambda\).
+    \item \(\mathfrak{p}\) is \(\Lambda\)-invariant. We can look at
+        \(\mathfrak{p}'\).
+        \[
+          \mathfrak{p}'{(z)} = -\frac{2}{z^3} + \sum_{w \neq 0}
+          -\frac{2}{{(z-w)}^3} = - \sum_{w \in \Lambda} \frac{2}{{(z-w)}^3}
+        \]
+        and clearly \(\mathfrak{p}'{(z + w_{0})} = \mathfrak{p}'{(z)}\) for all
+        \(w_{0} \in \Lambda\).
+        
+        Now fix \(w_{0} \in \Lambda\) and look at \(F : \mathfrak{p}{(z + w_{0})}
+        - \mathfrak{p}{(z)}\) on \(\mathbb{C} \sminus\Lambda\). Then \(F'{(z)} =
+        0\) on \(\mathbb{C} \sminus\Lambda\) which is connected. We get that
+        \(F{(z)} = C_{w_{0}} \) some costant. To prove that \(C_{w_{0}} = 0\) we
+        can observe that \(\mathfrak{p}{(z)} = \mathfrak{p}{(-z)} \forall z \in
+        \mathbb{C} \sminus\Lambda\) 
+
+\end{itemize}
+\end{proposition}
+
+\begin{note}[ation]
+    For \(p > 2\), we set
+    \[
+      S_p := \sum_{w \in \Lambda \sminus \{0\} } \frac{1}{w^{p}}
+    \]
+\end{note}
+
+hence near \(z=0\), the Laurent expansion of \(\mathfrak{p}\) gives
+\begin{align*}
+    \mathfrak{p}{(z)} = \frac{1}{z^2} + \sum_{p=1}^{\infty} {(2p+1)}S_{2p+2} z^{2p}
+  = \frac{1}{z^2} &+ a_{1}z^2 + a_{2}z^{4} + O{(z^{6})} \\
+  a_{1} = 3S_{4} \quad a_{2} = 5S_{6} \quad;\quad
+    \mathfrak{p}'{(z)} = -\frac{2}{z^3} &+ 2a_{1} z + 4a_{2} z^3 + O{(z^5)} =
+\end{align*}
+
+Hence we get that 
+\begin{equation}{}\label{eq:pol_pp}
+    {(\mathfrak{p}'{(z)})}^2 = P {(\mathfrak{p}{(z)})}
+\end{equation}
+with \(P\) a polynomial of degree 3.
+
+Now we can define
+\begin{align*}
+    \varphi : X &\longrightarrow \mathbb{P}^2 \mathbb{C} \\
+    z &\longmapsto \varphi (z) = \begin{cases}{}
+        [\mathfrak{p}{(z)}, \mathfrak{p}'{(z)}, 1] & \text{if } z \neq \pi
+        {(0)}\\
+        [0, 1, 0] & \text{if } z = \pi {(0)}
+    \end{cases}
+\end{align*}
+
+\begin{theorem}{}
+    \(\varphi : X \to \widehat{\mathcal{C}}\) is biholomorphic, with
+    \(\mathcal{C} = \{ {(x,y)} \in \mathbb{C}^2 : y^2 = P{(x)}\}  \) and
+    \(\widehat{\mathcal{C}}\) is the projectification of \(\mathcal{C}\) in
+    \(\mathbb{P}^2 \mathbb{C}\) 
+\end{theorem}
+
+\begin{proof}{}
+    We know that \(\frac{\mathfrak{p}{(z)}}{\mathfrak{p}'{(z)}} \to 0\) as \(z
+    \to 0\). Hence for \(z \sim 0\) 
+    \[
+        \left[ \mathfrak{p}{(z)}, \mathfrak{p}'{(z)}, 1 \right] = \left[
+        \frac{\mathfrak{p}{(z)}}{\mathfrak{p}'{(z)}}, 1,
+    \frac{1}{\mathfrak{p}'{(z)}} \right] \to [0, 1, 0]
+    \]
+    as \(z \to 0\) 
+    and we need to show that \(\varphi \) is injective, because then it is
+    automatically surjective and biholomorphic. %TODO complete
+
+    Suppose now \(z, z' \in \mathcal{F}\), \(\mathfrak{p}{(z)} =
+    \mathfrak{p}{(z')}\) and \(\mathfrak{p}'{(z)} = \mathfrak{p}'{(z')}\).
+\begin{itemize}[label = --]
+    \item If \(\mathfrak{p}'{(z)} = 0\), then \(\{z, z'\} \subseteq \{z_{1},
+        z_{2}, z_{3}\}\), however if \(z \neq z'\) then \(\mathfrak{p}{(z)} \neq
+        \mathfrak{p}{(z')}\), thus \(z = z'\).
+    \item If instead \(\mathfrak{p}'{(z)} \neq 0\), then \(z = -z' \mod
+        \Lambda\) and by the oddness of \(\mathfrak{p}'\) we get that
+        \(\mathfrak{p}'{(z)} = \mathfrak{p}'{(z')} = 0\) which is absurd.
+\end{itemize}
+
+
+\end{proof}
+
+\begin{theorem}{Residue}
+    Assume \(f : \mathbb{C} \to \mathbb{C}\) is meromorphic and
+    \(\Lambda\)-invariant. 
+
+    Set \(\mathcal{F} = [0, 1)w_{1} + [0, 1)w_{2}\) and let \(z_{1}, \dots,
+    z_{n}\) be poles of \(f\) in \(\mathcal{F}\). Then 
+    \[
+      \sum_{i=1}^{n} \mathrm{Res}_{z_{i}} {(f)} = 0
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    Up to translating the fundamental domain slightly we can assume that there
+    are no poles on \(\partial \mathcal{F}\), then let's take the contour
+    \(\gamma = \partial F\) 
+    We get that 
+    \[
+      \frac{1}{2\pi} \int_{\gamma} f{(z)}  \,dz = \sum_{i=1}^{n}
+      \mathrm{Res}_{z_{i}} {(f)}  
+    \]
+    By the usual residue theorem. However \(f\) is \(\Lambda\)-periodic, hence
+    ``opposite sides'' in \(\int _{\gamma} f\) cancel out and thus we get the
+    thesis.
+\end{proof}
+\begin{remark}{}
+    Applying the residue theorem to \(\frac{f'}{f}\), we get that \(Z{(f)} -
+    P{(f)} = 0\), where \(Z{(f)}\) is the number of zeros and \(P{(f)}\) the
+    number of poles inside \(\mathcal{F}\).
+\end{remark}
+
+\begin{corollary}[Consequence 1]
+    \(\mathfrak{p}'\) has 3 zeros in \(\mathcal{F}\). Since \(\mathfrak{p}\) is
+    an even function, \(\mathfrak{p}'\) is odd. Hence, since \(\mathfrak{p}'\)
+    is \(\Lambda\)-invariant, we get that it has three zeros:
+    \[
+      z_{1} = \frac{w_{1}}{2} \quad ; \quad z_{2} = \frac{w_{2}}{2} \quad ;
+      \quad z_{3} = \frac{w_{1} + w_{2}}{2}
+    \]
+    which thus are simple zeros.
+\end{corollary}
+
+\begin{corollary}[Consequence 2]
+    For all \(w \in \mathbb{C}\), \(\mathfrak{p}{(z)} = w\) has two zeros in
+    \(\mathcal{F}\).
+
+    If moreover \(\mathfrak{p}'{(z)} \neq 0\), then there are two different
+    solutions.
+\end{corollary}
+
+\paragraph{In summary,} if \(w \not\in  \mathfrak{p}{(\{z_{1}, z_{2}, z_{3}\}
+)}\) (not in the image of the ramification points), then \(\left|
+\mathfrak{p}^{-1}{(\{w\} )} \right| = 2\) 
+
+Moreover, in this situation, if \(\mathfrak{p}{(z)} = \mathfrak{p}'{(z)} =w\),
+then \(z = -z' \mod \Lambda\) 
+
+\begin{proposition}[Obvious Fact]
+    \(\mathbb{C} / \Lambda\) is an \emph{abelian} group.
+\end{proposition}
+
+One can now transport via \(\varphi \) this group structure on \(\mathcal{C}\).
+Call \(\oplus \) the addition on \(\mathcal{C}\), then \(A_{1} \oplus A_{2} =
+\overline{A_{3}}\) as in the %TODO FIGURE
+
+Moreover, if \(A_{i} = {(\mathfrak{p}{(w_{i})}, \mathfrak{p}'{(w_{i})})} \in
+\mathbb{C}^2\) then \(A_{1} \oplus  A_{2} = \overline{A_{3}} \iff w_{1} + w_{2}
++ w_{3} = 0 \mod \Lambda\) 
+
+\paragraph{ideas:}
+\begin{itemize}[label = --]
+    \item Write \(y = ax + b\) for the equation of \(\mathcal{D}\) in
+        \(\mathbb{C}^2\) 
+    \item Consider \(\psi {(z)} = \mathfrak{p}'{(z)} - a\mathfrak{p}{(z)} - b\) 
+    \item \(w_{1}, w_{2}, w_{3}\) are zeros of \(\psi\) in\(\mathcal{F}\) 
+    \item Apply \textbf{Abel's identity for elliptic functions:}
+        \[
+          z_{1} + \dots + z_{n} - p_{1} - \dots - p_{m} = 0 \mod \Lambda
+        \]
+        where \(z_{1}, \dots, z_{n}\) are the zeros and \(p_{1}, \dots, p_{m}\)
+        are the poles of \(\psi\) inside \(\mathcal{F}\).
+\end{itemize}
+

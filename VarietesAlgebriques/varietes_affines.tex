@@ -1,0 +1,1002 @@
+\chapter{Introduction}
+
+\section{Varietés affines}
+
+On prend un corps \(k\) (suivent \(k = \overline{k}\)). L'objective c'est
+d'étudier les systemes des equations polynomiales:
+\[
+  P_{1}{(x_{1}, \dots, x_{n})} = \dots = P_{m}{(x_{1}, \dots, x_{n})}
+\]
+où \(P_{i} \in k[X_{1}, \dots, X_{n}]\).
+
+Si \(k = \mathbb{C}\) il s'agit de géometrie complexe. Si \(k = \mathbb{Q}\) de
+géometrie arythmétique.
+
+\begin{definition}{fonctionne polynomials}
+    Une fonctionne polynomiale c'est une fonctionne \(f : k^{n} \to k\) tale
+    qu'existe un polynome \(p \in k[X_{1}, \dots, X_{n}]\) et \(f{(x_{1}, \dots,
+    x_{n})} = p{(x_{1}, \dots, x_{n})}\).
+
+    On va écrire (\textbf{notation}): \(p {(X_{1}, \dots, X_{n})} =
+    \sum_{i=1}^{n} c_{i} x^{n} \).
+
+    On va appeler \(\mathcal{O}{(k^{n})}\) l'ensemble des fonctions polynomiales
+\end{definition}
+\begin{remark}{}
+    \(\mathcal{O}{(k^{n})}\) est une sous-\(k\)-algèbre de \(\mathrm{Fon}{(k^{n}, k)}\) 
+\end{remark}
+
+\begin{definition}{Morphisme d'évaluation}
+    Soit \(A\) une \(k\)-algèbre (commutative). Soit \(a = {(a_{1}, \dots,
+    a_{n})} \in A^{n}\), il y a un morphisme d'évaluation
+    \begin{align*}
+        \mathrm{ev}_a: k[X_{1}, \dots, X_{n}] &\longrightarrow A \\
+        p {(X_{1}, \dots, X_{n})} &\longmapsto   \mathrm{ev}_a(p {(X_{1}, \dots,
+        X_{n})}) = p {(a_{1}, \dots, \alpha_{n})}
+    \end{align*}
+\end{definition}
+
+\begin{proposition}{}\label{prop:nat_inf}
+    Si \(k\) è infini, le morphisme (surjectif) naturel \(\varphi : k[X_{1},
+    \dots, X_{n}] \to \mathcal{O}{(k^{n})}\) est bijectif. 
+
+    Au contraire, si \(k = \mathbb{F}_q\) est un corps fini,
+    \(\mathrm{Ker}\varphi = \Span{x_{i}^{q} - x_{i}} \) 
+\end{proposition}
+\begin{eser}{}
+    Démontre proposition~\ref{prop:nat_inf}
+\end{eser}
+
+\subsection{Remarque}
+
+Il y a un bigection (si \(k\) infini).
+\begin{align*}{}
+    k^{n} &\leftrightarrow \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(k^{n})},
+    k)}\\
+        a &\mapsto \mathrm{ev}_a \\
+        a = {(\varphi {(x_{i})})} &\mapsfrom  \varphi 
+\end{align*}
+
+\subsection{Sous-ensemble algébrique}
+
+Soit \(F \subseteq \mathcal{O}{(k^{n})}\). On définit ``le lieu des zéros de \(F\)''
+\[
+  V_F = \{x = {(x_{1}, \dots, x_{n})} \in k^{n} : \forall f \in F, f{(x)} = 0\} 
+\]
+c'est un sous-ensemble algebrique de \(k^{n}\).
+
+\begin{example}{}
+    Si on prend \(n=2\) e \(F = \{xy - 1\}\), le lieu de zeros c'est simplement
+    l'hyperbole \(xy = 1\).
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xmin= -4, xmax= 4,
+                ymin= -4, ymax = 4,
+                axis lines = middle,
+            ]
+                \addplot[domain=-4:4, samples=100]{1/x};
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+    Où des courbes elliptique affine c'est courbes d'equation \(y^2 = x^3 + 1\) 
+\end{example}
+
+Si on prend \(n=1\) e \(F = \{x^2 + 1\} \) et \(k = \mathbb{R}\), on trouve
+\(V_F = \circ = V_{1} \). Mais si \(k = \mathbb{C}\), \(V_F = \{i, -i\} \neq
+\varnothing\). En autres mots, \(\mathbb{C}\) is mieu car il y a une
+correspondence entre les \(F\)s et les \(V_F\)s.
+
+\begin{note}[zione]
+    \(F \subseteq  \Span{F} \subseteq \mathcal{O}{(k^{n})} \) est l'idéal
+    engenré par \(F\).
+\end{note}
+
+\begin{proposition}{}
+    \(V_F = V_{\Span{F} } \) 
+\end{proposition}
+
+\begin{definition}{Hypersurface}
+    Soit \(f \in \mathcal{O}{(\kappa^{n})}\) non constante. Alors \(V_f
+    \subseteq k^{n} \) est une \textbf{hypersurface}
+\end{definition}
+
+L'idée c'est que si on prends \(n\) hypersurfaces générales, on defini un point.
+Il faut comprendre qu'est-ce que ça signifie.
+
+\begin{definition}{}
+    Pris un point \(x = {(x_{1}, \dots, x_{n})} \in k^{n}\). Alors \(x = V_{M_x}
+    \) où 
+    \[
+      M_x = \Span{X_{1} - x_{1}, \dots, X_{n} - x_{n}} =
+      \mathrm{Ker}\mathrm{ev}_x
+    \]
+    et \(M_x \subseteq \mathcal{O}{(k^{n})} \) est un idéal maximal.
+
+\end{definition}
+\begin{remark}{}
+    En effet, \(\mathcal{O}{(k^{n})} = k \oplus M_x\), parce que
+    \[
+      f = f{(x)} + {(f - f{(x)})}
+    \]
+\end{remark}
+
+\section{Algèbre commutative}
+
+\begin{definition}{}
+    Si \(I\) est un idéal, on defini
+    \[
+      \sqrt{I} := \{f \in \mathcal{O}{(k^{n})}: \exists n \ge 1 : f^{n} \in I\} 
+    \]
+    la ``racine de \(I\)''
+\end{definition}
+\begin{example}{}
+\begin{itemize} \(\) 
+    \item \( I \subseteq \sqrt{I} \) 
+    \item Si \(n = 1\) et \(I = {(X^2)}\), \(\sqrt{I} = {(X)}\) 
+\end{itemize}
+\end{example}
+
+\begin{eser}{Proprietés}
+\begin{itemize}
+    \item \(\sqrt{\sqrt{I}} = \sqrt{I}\) 
+    \item \(V_I = V_{\sqrt{I}}\) 
+\end{itemize}
+\end{eser}
+
+\begin{note}[zione]
+    Si \(X \subseteq k^{n} \), on note
+    \[
+      \mathcal{I}{(X)} = \{f \in \mathcal{O}{(k^{n})} : f|_X = 0\} 
+    \]
+\end{note}
+
+\begin{theorem}{Théorem des zéros}
+    Si \(k = \overline{k}\), alors \(\sqrt{I} = \mathcal{I}{(V_I)}\)  
+\end{theorem}
+
+\subsection{Fonctionne polynomiale}
+
+\begin{definition}{fonctionne polynomiale}
+    Soit \(V \subseteq k^{n} \) un ensemble algèbrique. Une fonction \(f : V \to
+    k\) est (régulière) polynomiale si c'est la restriction à \(V\) d'un élément
+    du \(\mathcal{O}{(k^{n})}\) 
+\end{definition}
+
+\begin{remark}{}
+    On note \(\mathcal{O}{(V)}\) la \(k\)-algèbre des fonctions polynomiales sur
+    \(V\).
+    Par définition, il y a un morfphisme surjectif de \(k\)-algèbres 
+    \begin{align*}
+        \varphi_V : \mathcal{O}{(k^{n})} &\to \mathcal{O}{(V)}\\
+        f &\mapsto f|_V
+    \end{align*}
+
+    Notamment, \(\mathrm{Ker}{(\varphi_V )} = \mathcal{I}{(V)}\) et donc
+    \[
+     \frac{\mathcal{O}{(k^{n})}}{I{(V)}} \cong \mathcal{O}{(V)} 
+    \]
+    c'est une \(k-algèbre\) de type fini (et donc noethérienne)
+\end{remark}
+
+On a donc une bijection (valable \(\forall k\))
+\begin{align*}
+    V &\leftrightarrow \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(V)},k)} \\
+    x = {(x_{1}, \dots, x_{n})} &\mapsto {(\mathrm{ev}_x : f \mapsto f{(x)})}\\
+    {(f{(\overline{x_{1}}, \dots, \overline{x_{n}})})} &\mapsfrom f
+\end{align*}
+\begin{eser}{}
+Si \(V \subseteq k^{n} \) est algebrique, \(V{(\mathcal{I}{(V)})} = V\) 
+\end{eser}
+
+\begin{remark}{}
+    On a la correspondance entre point et fonctions, et donc
+    \[
+      \mathrm{Hom}_{k-\text{alg}} {(\mathcal{O}{(V)}, k)} \leftrightarrow
+      \{\text{ideaux max. }\mathfrak{m} \subseteq \mathcal{O}{(V)} \text{ tal que }
+      \mathcal{O}{(V)} / \mathfrak{m} \cong k\}
+    \]
+\end{remark}
+
+\begin{example}{}
+    C'est important de specifier car si \(n = 1\), \(k = \mathbb{R}\) et
+    \(\mathfrak{m} = \Span{x^2 + 1} \subseteq \mathcal{O}{(\mathbb{R})} \) est
+    un idéal maximal de camps résidual \(\mathbb{C} \neq \mathbb{R}\) 
+\end{example}
+
+\section{Topologie de Zariski}
+
+Si on a \(A\) anneau commutatif et \(I, J \subseteq A \) idéaux, on a
+\[
+  I + J = \{ i + j, \; i \in I \; j \in J\} 
+\]
+et 
+\[
+  IJ = \Span{\sum_{k=1}^{n} i_k j_k, \; i_k \in I \; j_k \in J } 
+\]
+idéaux de \(A\). Notamment, ça fait du sense de faire une somme infinie, mais
+pas un produit. 
+
+\begin{lemma}{}
+    Soit \(A = \mathcal{O}{(k^{n})} \text{ ou } \mathcal{O}{(V)}\) et \(I, J\)
+    idéaux. Alors
+
+\begin{itemize}
+    \item \(I \subseteq J \implies  V{(I)} \supseteq V{(J)}  \) 
+    \item \(V{(I + J)} = V{(I)} \cap V{(J)}\) et aussi \(V{\left( \sum_{j} I_j \right)} = \bigcap_{j} V{(I_j)}\) 
+    \item \(V{(IJ)} = V{(I \cap J)} = V{(I)} \cup V{(J)}\) 
+    \item \(V{(1)} = \varnothing\) et \(V{(0)} = k^{n}\) 
+\end{itemize}
+\end{lemma}
+
+\begin{corollary}{}
+    Les \(V{(I)}\) forment les fermés d'une topologie sur \(k^{n}\) , appélée
+    \textbf{topologie de Zariski}
+\end{corollary}
+
+
+\begin{definition}{}
+    Si on a \(f \in \mathcal{O}{(k^{n})}\), alors \(U_f = k^{n} \sminus V{(f)} =
+    \{x \in k^{n} : f{(x)} \neq 0\} \).
+
+    Les \(U_f\) sont ouvert et dit \textbf{principal}.
+\end{definition}
+
+\begin{proposition}{}
+    Les ouverts principaux forment une \textbf{base d'ouverts}.
+\end{proposition}
+
+\begin{example}{}
+    Si \(n = 1\), la topologie de Zariski sur \(k\) est quels des parties finies
+    (cofinita). Les fermés sont seulement les sous-ensemble finis ou \(k\).
+
+    C'est une topologie très grossière: il ne conserve de \(k\) que la
+    cardinalité.
+\end{example}
+
+\begin{example}{}
+    Sur \(k^2\) un fermé de Zariski est une réunion finie de points et courbes
+    irréductibles, i.e. \(V{(f)}\) ou \(f \in k[X, Y]\) est un polynome
+    irréductible.
+\end{example}
+
+\begin{lemma}{}
+    \(k^{n}\) avec la topologie de Zariski est un éspace Noethérien. Cela
+    signifie que toute suite décrescente de fermés est stationnaire.
+\end{lemma}
+\begin{proof}{}
+    Si \(Z_{1} \supseteq Z_{2} \supseteq Z_{2} \supseteq \dots\) est une suite
+    de fermés, alors chaque \(Z_{j} = V{(I_{j})}\) ou \(I_{1} \subseteq I_{2}
+    \subseteq \dots   \subseteq \mathcal{O}{(k^{n})} \) qui est Nothérien, donc
+    la suite est stationnaire, et donc aussi la suite de fermés.
+\end{proof}
+
+\begin{eser}{}
+    Soit \(X\) un éspace topologique. Alors \(X\) est noethérien \(\iff\) tous
+    les ouverts de \(X\) sont quasi-compact (compatti)
+\end{eser}
+
+\begin{eser}{}
+    Soit \(S \subseteq k^{n} \). Alors \(\overline{S} = V{(\mathcal{I}{(S)})}\) 
+\end{eser}
+
+\begin{lemma}{}\label{lem:irreduct}
+    Soit \(X\) un éspace topologique. Alors les suivants sont équivalents:
+\begin{enumerate}[label = (\roman*)]
+    \item \(X\) n'est pas réunion \(F_{1} \cup F_{2}\) ou \(F_{i} \subsetneq X\)
+        fermés
+    \item \(\forall \, U, V \subseteq X \) ouverts \(\neq \varnothing\), on a \(U
+        \cap V \neq \varnothing\) 
+    \item Tout overt de \(X\) est dense
+\end{enumerate}
+\end{lemma}
+\begin{proof}{}
+    \(X = F_{1} \cup F_{2} \iff \varnothing = U_{1} \cap U_{2}\) 
+\end{proof}
+
+\begin{definition}{}
+    Si \(X\) verifie les conditions équivalentes du lemma~\ref{lem:irreduct}, on
+    dit que \(X\) è irréductible.
+\end{definition}
+
+\begin{lemma}{}
+    Soit \(V \subseteq k^{n} \) un sous-ensemble algébrique. Alors \(V\) est
+    irréductible \(\iff\) \(\mathcal{O}{(V)}\) est intégre (dominio
+    d'integrità).
+\end{lemma}
+\begin{remark}{}
+    Dans ce cours, touts les \(k\)-algèbres \(\mathcal{O}{(V)}\) sont réduits
+    (i.e. \(x^2 = 0 \implies x=0\)). En effet \(\mathcal{O}{(V)}
+    \overset{\text{sous-anneau}}{\subseteq  } \mathrm{Fon}{(V, k)}\) qui est
+    réduit car \(k\) est réduit.
+\end{remark}
+
+\begin{proof}{}
+    Supposant que \(\mathcal{O}{(V)}\) ne soit pas intègre. Soit \(f,g \in
+    \mathcal{O}{(V)}\) et \(fg = 0\). Alors \(V{(0)} = V{(fg)} = V{(f)} U
+    V{(g)}\) et donc \(V\) n'est pas irréducible.
+
+    Par contre, si \(V = V_I \cup V_J\) avec \(V_I, V_J \neq V\) et donc \(I
+    \neq 0 \neq J\), alors \(V_{IJ} = V_I \cup V_J = V \) et donc \(IJ = 0 \) et
+    \(\mathcal{O}{(V)}\) n'est pas intègre.
+\end{proof}
+
+\begin{proposition}{}
+    Soit \(X\) un éspace topologique Noethérien. Alors il exists une
+    décomposition \(X = C_{1} \cup C_{2} \cup \dots \cup C_n\) tels que \(C_i\)
+    est fermé irréductible et \\\(\forall i, j \quad C_{i} \not\subseteq C_j\).
+
+    Telle décomposition est en \emph{composantes irréductible}.
+\end{proposition}
+
+\begin{proof}{}
+    Pour l'\emph{existence}: Soit \(\Phi \) l'ensemble des fermés de \(X\). Soit
+    \(N = \{x' \in \Phi : x' \text{ n'a pas de décomposition en réunion finie de
+    fermés irréducibles}\}\). Si \(N \neq \varnothing\), il admet (au moins) un
+    élément minimal pour l'inclusion (\(X\) Noethérien) que l'on note \(X_{0}\).
+    Alors \(X_{0}\) n'est pas irréductible car \(X_{0} \in N\). Donc, on peut
+    écrire \(X_{0} = X_{1} \cup X_{2}\) où \(X_{1}, X_{2} \subsetneq X_{0} \)
+    sont fermés. Pour minimalité de \(X_{0}\), \(X_{1}, X_{2} \not\in N\) donc
+    ils verifient las proposition: Donc
+    \[
+      X_{0} = {(C_{1} \cup \dots \cup C_{r})} \cup {(D_{1} \cup \dots D_{s} )}
+    \]
+    où tous les \(C_{i}\) et \(D_{j}\) sont irréducibles. Alors \(X_{0} \not\in
+    N\) et \(N = \varnothing\) 
+\end{proof}
+
+En particulier, un ensemble algébrique \(V\) s'écrit \(V = C_{1} \cup \dots \cup
+C_r\) où \(C_{i}\) sont irréducibles et \(C_{i} \not\subseteq C_{j} \) si \(i
+\neq j\).
+
+\begin{eser}{}
+    Soit \(V = k\). Les fermés irréductibles sont les singletons et \(k\) (si
+    \(k\) est infini)
+
+    Si \(V = k^2\), les fermés irréducibles sont les singletons, les varietés
+    \(V{(f)}\) où \(f \in k[X, Y]\) est irréducible et \(k^2\).
+\end{eser}
+
+\begin{eser}{}
+    Si \(V \subseteq k^{n} \) et \(W \subseteq k^{m}  \) sont sous-ensembles
+    algébriques, alors \(V \times  W \subseteq k^{n+m} \) est aussi algébrique.
+\end{eser}
+
+\begin{theorem}{Théorème des zéros (Nullstellensatz)}
+    Si \(\mathfrak{m} \subseteq \mathbb{C}[X_{1}, \dots, X_{n}] \) est un idéal
+    maximal, alors \\\(\mathfrak{m} = \Span{X_{1} - x_{1}, \dots, X_{n} - x_{n}}
+    = \mathrm{Ker}\,\mathrm{ev}_x\) où \(x = {(x_{1}, \dots, x_{n})} \in \mathbb{C}\).
+
+    De façon équivalente, si \(k\) est algèbriquement fermé, \(\forall
+    \mathfrak{m} \subseteq \mathcal{O}{(k^{n})}
+    \) idéal maximal, 
+    \[
+      \frac{\mathcal{O}{(k^{n})}}{\mathfrak{m}} \cong k
+    \]
+\end{theorem}
+
+\begin{theorem}{Théorème des zéros, version plus général}
+    Soit \(k\) un corps quelconque et soit \(\mathfrak{m} \subseteq k[X_{1},
+    \dots, X_{n}] \) un idéal maximal. Alors \(K := k[X_{1}, \dots, X_{n}] /
+    \mathfrak{m}\) est de dimension finie comme \(k\)-éspace vectorial. Ça
+    signifie que \(K / k\) est une extension finie de corps.
+\end{theorem}
+
+\begin{remark}{}
+    Si \(k = \overline{k}\) alors \(k\) n'admet pas d'extension finie
+    non-triviale, donc \(K = k\) 
+\end{remark}
+
+\begin{note}{}
+    Dit autrement, une extension de corps \(K / k\) qui est un \(k\)-algèbre de
+    type fini est une extension finie.
+\end{note}
+
+\begin{proof}{}
+    Soit \(x_{i} = \overline{X_{i}} \in K\). Alors \(K = k{(x_{1}, \dots,
+    x_{n})} = k[x_{1}, \dots, x_{n}]\). Par induction, on peut supposer que le
+    résultat vaut pour \(n-1\) (le cas \(n=1\) est facile: si \(k{(x)} = k[x]\)
+    alors \(x\) est algébrique sur \(k\)). %TODO finir la démo 
+\end{proof}
+
+\begin{eser}{}
+\begin{enumerate}[label = \arabic*.]
+    \item \(k{(x)} / k\) n'est pas une \(k\)-algèbre de type finie.
+    \item \(\mathbb{Q}\) n'est pas une \(\mathbb{Z}\)-algèbre de type finie.
+\end{enumerate}
+\end{eser}
+
+\begin{corollary}{}\label{cor:premax}
+    Soit \(\varphi : A \to A'\) un morphisme de \(k\)-algèbre de type fini. Soit
+    \(\mathfrak{m}' \subseteq A' \) un idéal maximal. Alors \(\varphi
+    ^{-1}{(\mathfrak{m}')} \subseteq A \) est maximal.
+    
+\end{corollary}
+\begin{proof}{}
+\[
+\begin{tikzcd}
+	A & A' \\
+	A / \varphi ^{-1}{(\mathfrak{m}')} & A' / \mathfrak{m}'
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\psi", hook, from=2-1, to=2-2]
+\end{tikzcd}
+\] 
+\(\psi \) est un morfphisme injectif de \(k\)-algèbre. \(A'/\mathfrak{m}' \,/ k\) est
+une extension fini et donc \(A / \varphi ^{-1}{(\mathfrak{m}')}\) est de
+dimension fini sur \(k\) et il est intègre, donc un corps.
+\end{proof}
+
+\begin{proposition}{}
+    Soit \(A\) une \(k\)-algèbre de type fini et \(I \subseteq A \) idéal. Alors
+    \[\sqrt{I} = \bigcap_{I \subseteq \mathfrak{m} \text{ maximal }} \mathfrak{m}\]
+\end{proposition}
+
+\begin{note}[zione]
+    Si \(f \in A\), on dénote \(A[f^{-1}] := A[X] / {(Xf - 1)}\) et \(f^{-1} :=
+    \overline{X}\).
+\end{note}
+\begin{proof}{}
+    Il y a un morphisme naturel \(F: A \to A[f^{-1}]\) composition de l'inclusion
+    \(A \to A[X]\) et la projection \(A[X] \to A[f^{-1}]\).
+
+    On se ramène à \(I = 0\) en quotientant par \(I\).
+
+    On doit montrer que si \(f \not\in  \sqrt{0}\) il existe \(\mathfrak{m}
+    \subseteq A \) idéal maximal tel que \(f \not\in  \mathfrak{m}\). Par
+    l'exercise~\ref{eser:nulle} on a que \(A[f^{-1}] \neq 0\) si \(f\) n'est pas
+    nilpotent. Il existe \(\mathfrak{m}' \subseteq A[f^{-1}] \) idéal maximal et
+    par le corollaire, \(\mathfrak{m} := F^{-1}{(\mathfrak{m}')}\) est un idéal
+    maximal et il ne contain pas \(f\).
+\end{proof}
+%TODO EXERCISk
+
+\begin{corollary}{}
+    Soient \(I, I' \subseteq \mathcal{O}{(k^{n})} \). Alors, si \(k =
+    \overline{k}\), on a que \(\sqrt{I} = \sqrt{I'} \iff V_I = V_{I'} \) 
+\end{corollary}
+
+\begin{proof}{}
+    Comme \(k = \overline{k}\), 
+    \[
+      \sqrt{I} = \bigcap_{x \in V_I} M_x \quad \text{ où } \quad M_x = \{f \in
+      \mathcal{O}{(k^{n})} : f{(x)} = 0\} 
+    \]
+\end{proof}
+
+\begin{corollary}{}
+    Si \(k = \overline{k}\) et \(n \in \mathbb{N}_{\ge 1} \) il y a un bijection
+    entre les idéaux radiciels de \(\mathcal{O}{(k^{n})}\) et les variétés
+    algébriques.
+    \[
+\{I \subseteq \mathcal{O}{(k^{n})}\text{ idéal } : \sqrt{I} = I \}
+\leftrightarrow \{ V \subseteq k^{n} \text{ variété algébrique} \} 
+    \]
+    et si \(V\) est algébrique, les components irréducibles de \(V\)
+    corréspondent aux idéals premiers minimaux contenants \(I{(V)}\).
+    Similement, les points de \(V\) corréspondent aux idéal maximaux contenant
+    \(I{(V)}\).
+\end{corollary}
+
+\begin{eser}{}
+    Suppose \(n=2\). Considère \(V = V{(XY)}\). Alors 
+
+\begin{tikzpicture}[scale=1.2]
+    % Axes
+    \draw[->] (-2.2,0) -- (2.2,0) node[right] {$X$};
+    \draw[->] (0,-2.2) -- (0,2.2) node[above] {$Y$};
+
+    % Labels for components
+    \node[left] at (-0.15,1.5) {$C_1$};
+    \node[below] at (1.5,-0.15) {$C_2$};
+
+    % Component labels
+    \node[right] at (3,1.5) {$C_1=V(X)$};
+    \node[right] at (3,1) {$C_2=V(Y)$};
+
+    % Origin
+    \node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+\end{eser}
+
+
+\begin{theorem}{Th. Ax-Groethendieck}
+    Si on prend \(f : \mathbb{C}^{n} \to \mathbb{C}^{n}\) une application
+    polynomiale. Si \(f\) est injective, alors \(f\) est bijective.
+\end{theorem}
+
+
+\begin{remark}{}
+    Soient \(f_{1}, \dots, f_{m} \in k[X_{1}, \dots, X_{n}\) et \(F =
+    \Span{f_{1}, \dots, f_{m}} \). Alors si \(k = \overline{k}\), 
+    \[
+      V{(F)} = \varnothing \iff \exists a_{1}, \dots, a_{n} \in k[X_{1} , \dots,
+      X_{n}] : a_{1} f_{1} + \dots + a_{n} f_{n} = 1
+    \]
+    une partition de l'unité
+\end{remark}
+
+\section{Applications polynomiales}
+
+\begin{definition}{}
+    Suppose \(k = \overline{k}\) et soient \(V \subseteq k^{n} \) et \(W
+    \subseteq k^{m} \) duex ensembles algébriques. Une application \(\varphi  :
+    V \to W\) est polynomiale s'il existe \(\tilde{\varphi} : k^{n} \to k^{m}\)
+    polynomiale telle que le diagramme suivant commute:
+    
+\[
+\begin{tikzcd}
+	V & W \\
+	{k^n} & {k^m}
+	\arrow["\varphi", from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow[hook, from=1-2, to=2-2]
+	\arrow["{\tilde{\varphi}}"', from=2-1, to=2-2]
+\end{tikzcd}
+\]
+\end{definition}
+
+
+\begin{eser}{}
+    \(\varphi \) polynomiale est continue pour la topologie de Zarisky.
+\end{eser}
+
+\begin{note}[zione]
+    \(\mathrm{Poly}{(V, W)} = \{ \varphi  : V \to W, \text{ \(\varphi \)
+    polynomiale}\} \)     
+\end{note}
+
+\begin{proposition}{}
+    \(\mathrm{Poly}{(V, W)}\) ne dépend pas des plogements \(V \subseteq k^{n}
+    \) et \(W \subseteq k^{m} \).
+\end{proposition}
+
+\begin{proposition}{}\label{prop:poly-kalg}
+    Soit \(k\) qqc.
+    Soient \(V \subseteq k^{n} \) et \(W \subseteq k^{m} \) algébrique.
+    Alors soit
+    \[
+      \mathcal{O}{(V)} = \frac{\mathcal{O}{(k^{n})}}{I{(V)}}
+    \]
+    l'anneau des fonctions (réguliers) sur \(V\). 
+
+    Il y a une bijèction:
+    \[
+      \begin{align*}
+          \mathrm{Poly}{(V, W)} &\longrightarrow
+          \mathrm{Hom}_{k\text{-alg}}{(\mathcal{O}{(W)}, \mathcal{O}{(V)})}  \\
+           \varphi &\longmapsto \varphi ^{*} = {(f \mapsto f \circ \varphi )}
+      \end{align*}
+    \]
+\end{proposition}
+\begin{proof}{}
+    Nous pouvons construire la bijèction inverse. Soit \(F : \mathcal{O}{(W)}
+    \to \mathcal{O}{(V)}\) un morfphisme de \(k\)-algèbres. Soit \(v \in V\),
+    alors
+    \[
+      \{\mathrm{Ker}\,\mathrm{ev}_v\} =: \mathcal{M}_v \subseteq
+      \mathcal{O}{(V)} \text{ est un idéal maximal de corps résiduel \(k\)} 
+    \]
+    Alors \(F^{-1}{(\mathcal{M}_v)} \subseteq \mathcal{O}{(W)} \) est un idéal
+    maximal de corps résiduel \(k\) pour le corollaire~\ref{cor:premax}.
+
+    Donc \(\exists ! w \in W : F^{-1}{(\mathcal{M}_v)} = \mathcal{M}_w\). On
+    pose alors \(\varphi {(w)} := w\). Vérifions ue la fonction \(\varphi  : V
+    \to W\) ainsi définée est polynomiale.
+    \[
+    \begin{tikzcd}
+        \mathcal{O}{(V)} & \mathcal{O}{(W)} \\
+        {\mathcal{O}{(k^{n})}} & {\mathcal{O}{(k^m)}}
+        \arrow["F", from=1-2, to=1-1]
+        \arrow[two heads, from=2-1, to=1-1]
+        \arrow["{\tilde{F}}"', from=2-2, to=2-1]
+        \arrow[two heads, from=2-2, to=1-2]
+    \end{tikzcd}
+    \]
+
+    et \(\tilde{F}\) est defini en choisissant des preimages de
+    \(F{(\overline{f_{i}}})\), où \(f_{i}\) sont des (finis) generateurs de
+    \(\mathcal{O}{(k^{m})}\). En appliquant la même construction à \(\tilde{F}\)
+    on trouve le diagramme de la definition, mail il faut encore verifier que
+    \(\tilde{\varphi}\) soit polynomiale. Mais si \(\tilde{F}{(X_{i})} =
+    P_{i}{(X_{1} , \dots, X_{n})}\) alors \(\tilde{\varphi}{(x_{1}, \dots,
+x_{n})} = {(P_{1}{(x_{1}, \dots, x_{n})}, \dots, P_{m}{(x_{1}, \dots, x_{n})})}\) 
+\end{proof}
+
+\begin{proposition}{}
+    Le foncteur
+    \[
+      \begin{align*}
+          F: {(\mathtt{ens.alg.}, \mathtt{ Poly})} &\longrightarrow
+          {(\mathtt{k-alg} \, \mathtt{TF})}^{op}\\
+           {(V \subseteq k^{n})}&\longmapsto \mathcal{O}{(V)}
+      \end{align*}
+    \]
+    qui va de la catégorie des ensembles algébriques, avec morphismes les
+    fonctionnes polynomiales, vers la catégorie opposée de celle des
+    \(k\)-algèbres de type fini réduites.
+
+    Alors \(F\) est pleinement fidèle et, si \(k = \overline{k}\), essentiellement surjectif.
+
+    Donc, si \(k = \overline{k}\), \(F\) est une équivalences de catégorie.
+\end{proposition}
+
+
+\subsection{\(\mathcal{O}{(V \times  W)}\)}
+
+On a vu déjà que si \(V\) e \(W\) sont des ensembles algébriques, alors \(V
+\times  W\) est un ensemble algébrique aussi. De plus, on a la suivante
+équivalence:
+\[
+  \mathcal{O}{(V \times W)} = \mathcal{O}{(V)} \otimes_k \mathcal{O}{(W)}
+\]
+
+\begin{lemma}{}
+    Soit \(A, B\) deux \(k\)-alg réduites. Si \(k = \overline{k}\) (où
+    \(k\) parfait), alors \(A
+    \otimes_k B\) est réduit.
+\end{lemma}
+
+\begin{proof}{}
+    Suppose \(k = \overline{k}\). Soit \(x \in A \otimes B\) telle que \(x^2 =
+    0\). On veut montrer \(x = 0\).
+
+    On écrit 
+    \[
+      x = \sum_{i=1}^{N} a_{i} \otimes b_{i} 
+    \]
+    où \(a_{i} \in A\) et \(b_{i} \in B\), alors \({(a_{1}, \dots, a_N)}\) est
+    \(k\)-linéarment indépendente dans \(A\) (et même avec les \(b_{i}\) et
+    \(B\)).
+    Quitte à remplacer \(A\) par \(k[a_{1}, \dots, a_N] \subseteq A \) et \(B\)
+    par \(k[b_{1}, \dots, b_N] \subseteq A \) et on peut réconduire au cas où
+    \(A, B\) sont de TF. %TODO finir (dispense)
+\end{proof}
+
+\begin{corollary}{}
+    \(\mathcal{O}{(V \times  W)} = \mathcal{O}{(V)} \otimes_k \mathcal{O}{(W)}\) 
+\end{corollary}
+\begin{proof}{}
+    Nous savons \(\mathcal{O}{(V)} = k[X_{1}, \dots, X_n] / I_V\) et
+    \(\mathcal{O}{(W)} = k[Y_{1}, \dots, Y_m] / I_W\). Alors on a montré que \(V
+    x W = V{(\Span{I_V, I_W} )} \). Alors
+    \[
+        \mathcal{O}{(V)} \otimes_k \mathcal{O}{(W)} = {\left( \frac{k[X_{1},
+            \dots, X_n]}{I_V}\right)} \otimes_k {\left( \frac{k[Y_{1}, \dots,
+        Y_m}{I_W} \right)} \cong \frac{k[X_{1}, \dots, X_{n}, Y_{1}, \dots,
+    Y_m}{\Span{I_V, I_W} }
+    \]
+    Donc \(\Span{I_V, I_W} \) est radiciel donc pour le th des zéros on a que
+    \[
+      I{(V \times  W)} = \sqrt{\Span{I_V, I_W} } = \Span{I_V, I_W} =
+      \mathcal{O}{(V \times  W)} = \frac{\mathcal{O}{(k^{n+m})}}{I{(V \times  W)}} =
+      \mathcal{O}{(V)} \otimes_k \mathcal{O}{(W)}
+    \]
+\end{proof}
+
+\begin{proposition}[Universal property of \(\otimes\)]
+
+    \begin{itemize}[label=\bullet] \( \) 
+    \item Dans la catégorie de \(k\)-espaces vectoriels, \(\forall A, B, C\)
+        espaces vectoriels, 
+        \[
+          \mathrm{Hom}_{k\text{-alg}} {(A \otimes_k B, C)} =
+          \mathrm{Hom}_{k\text{-alg}} {(A, \mathrm{Hom}_{k\text{-vect}} {(B,
+          C)})} = \mathrm{Bilin}{(A \times  B, C)}
+        \]
+    \item Dans \(\mathtt{k-alg}\) si \(A, B, C\) sont \(k\)-algèbres, alors
+        \[
+          \mathrm{Hom}_{\text{k-alg}} {(A \otimes_k B, C)} \cong
+          \mathrm{Hom}_\text{k-alg} {(A, C)} \times  \mathrm{Hom}_\text{k-alg}
+          {(B, C)}
+        \]
+\end{itemize}
+
+Et donc \(\otimes\) est un coproduit dans \({(\mathtt{k-alg})}\).
+
+    
+\end{proposition}
+
+\begin{definition}{}
+    Un morphisme d'anneaux commutatifs \(f : A \to B\) est \textbf{fini} si
+    \(B\) est un \(A\)-module fini via \(f\).
+
+    De plus \(f\) est \textbf{entier} si \(\forall b \in B\), \(\exists a_{0},
+    \dots, a_{n-1} \in A\) telle que \(0 = f{(a_{0})}+ f{(a_{1})}b + \dots +
+    f{(a_{n-1} )}b^{n-1} + b^{n}\) (i.e. tout élément de \(B\) est racine d'une
+    polynome monique de \(A[X]\))
+
+    \(f\) est \textbf{de type fini} si \(B = \Span{A, b_{1}, \dots, b_{n}} \)
+    comme \(A\)-algèbre.
+\end{definition}
+
+\begin{remark}{}
+    \(f\) est fini \(\iff\) \(f\) est entier et de type fini.
+\end{remark}
+
+\begin{definition}{}
+    \(\varphi \in \mathrm{Poly}{(V, W)}\) est dit \textbf{fini} si \(\varphi ^*
+    : \mathcal{O}{(W)} \to \mathcal{O}{(V)}\) est fini.
+\end{definition}
+
+\begin{eser}{}
+    Soit \(\varphi : V \to W\) polynomiale. Alors \(\overline{\varphi {(V)}} =
+    V{(\mathrm{Ker}\varphi ^{*})}\) 
+\end{eser}
+
+\section{Faisceaux de fonctions régulières}
+
+Tous nos faisceaux seront des faisceaux de fonctions au sens usuel.
+
+\begin{definition}{}
+    Soit \(k\) un corps et \(X\) un éspace topologique. Un faisceaux de
+    fonctions est la donée, \(\forall U \subseteq X \) ouvert d'une
+    sous-\(k\)-algèbre \(\mathcal{A}{(U)} \subseteq k^{U} \) tel que pour tout
+    recouvrement ouvert \(U = \bigcup_{i \in  I} U_{i}\) et \(\forall f \in
+    k^{U}\),
+    \[
+      f \in \mathcal{A}{(U)} \iff \forall i \in I \;, \; f|_{U_{i}} \in
+      \mathcal{A}{(U_{i})}
+    \]
+    Cela implique que si \(V \subseteq U \) et \(f \in  \mathcal{A}{(U)}\) alors
+    on a \(f|_{V} \in  \mathcal{A}{(V)}\) 
+\end{definition}
+
+\begin{definition}{Fonction régulière}
+    Soit \(V \subseteq k^{n} \) un ensemble algébrique avec la topologie de
+    Zariski.  Soit \(U \subseteq V \) un ouvert et \(f : U \to k\) une fonction.
+    Soit \(x \in U\). On dit que \(f\) est \textbf{regulière en \(x\)} s'il
+    existe \(g, h \in \mathcal{O}{(V)} = \text{Poly}{(V, k)}\) tel que \(h{(x)}
+    \neq 0\) et \(f = \frac{g}{h}\) sur un ouvert \(U'\) tel que \(x \in U'
+    \subseteq U \) (donc \(h\) ne s'annule pas sur \(U'\)).
+
+    Si \(f\) est régulière en \(x\), \(\forall x \in U\), alors \(f\) est dite
+    régulière.
+\end{definition}
+
+    On pose \(\mathcal{O}_V{(U)} = \{f \in  k^{U} : f \text{ régulière sur
+    \(U\)}\} \). Alors \(U \mapsto \mathcal{O}_V{(U)}\) est un faisceau sur
+    \({(V, \text{Zar})}\) 
+\begin{note}[ation]
+    \[
+      \mathcal{A}{(U)} = \{\text{\emph{sections} de \(\mathcal{A}\) sur \(U\)
+      }\} = \Gamma{(U, \mathcal{A})} = H^{0}{(U, \mathcal{A})}
+    \]
+\end{note}
+
+\begin{proposition}{}
+    Le morphisme naturel
+    \begin{align*}
+        \Phi : \mathcal{O}{(V)}  &\longrightarrow \mathcal{O}_V{(V)} \\
+        x &\longmapsto \frac{x}{1}
+    \end{align*}
+    est un isomorphisme (en vrai \(\mathcal{O}{(V)} = \mathcal{O}_V{(V)}
+    \subseteq k^{V} \)).
+\end{proposition}
+\begin{proof}{}
+    Soit \(f \in \mathcal{O}_V{(V)}\). Pour définition, et en utilisant la
+    quasi-compacité de \(V\), il existe un recouvrement ouvert \(V =
+    \bigcup_{i=1}^{n} U_{i}\) tel que \(\forall i = 1, \dots, n\) il existe
+    \(g_{i}, h_{i} \in \mathcal{O}{(V)}\) telle que \(f = \frac{g_{i}}{h_{i}}\)
+    sur \(U_{i}\).
+
+    On peut supposer que chaque \(U_{i}\) soit principale car les ouverts
+    principaux forme une base de la topologie de Zariski. Donc \(U_{i} =
+    D{(\ell_{i})} = V \sminus V{(\ell_{i})} = \{v \in V : \ell_{i}{(v)} \neq
+    {0}\} \).
+
+    Remplacent \(\ell_{i}\) par \(\ell_{i}h_{i}\) (puisque \(D{(\ell_{i} h_{i})}
+    = D{(\ell_{i})}\) car \(h_{i} \neq 0\) sur \(U_{i}\)) on se ramène au cas
+    \(U_{i} = D{(h_{i})}\) et \(f = \frac{g_{i}}{h_{i}}\).
+
+    Sur \(U_{i} \cap U_{j}\), on a
+    \[
+        \frac{g_{i}}{h_{i}} = \frac{g_{j}}{h_{j}} \implies g_{i}h_{j} -
+        g_{j}h_{i} = 0
+    \]
+    % TODO : mi sono distratto
+
+\end{proof}
+
+\begin{eser}{}
+    \[
+        \mathcal{O}_V {(D{(f)})} = \mathcal{O}{(V)}[f^{-1}]
+    \]
+\end{eser}
+
+Soit \(\tilde{D}{(f)} \subseteq V \times k \) le fermé donnée par \(f{(v)}x - 1
+= 0\), i.e. \(V{(fx - 1)}\) 
+
+\section{Variétés algébriques}
+
+Dans toute cette section, on va considerer \(k = \overline{k}\).
+
+\begin{definition}{}
+    Un \(k\)-éspace annelé est un couple \({(X, O_X)}\) formé d'un éspace
+    (localement)
+    topologique \(X\) et d'un faisceau de fonction \(O_X\) sur \(X\) à valeurs
+    en \(k\) (tel que \(\forall x \in X\), \(\mathcal{O}_{X, x} \) est un anneau
+    local)
+
+    Un morphisme \({(X, \mathcal{O}_X)} \to {(Y, \mathcal{O}_Y)}\) est une
+    application continue \(\varphi : X \to Y\) tell que \(\forall U \subseteq Y \),
+    \(\forall f \in \mathcal{O}_Y{(U)}\), on a 
+    \[
+      {(f \circ \varphi )} \in \mathcal{O}_X{(\varphi ^{-1}{(U)})}
+    \]
+    et on pose
+    \begin{align*}
+        \varphi ^{*}_U: \mathcal{O}_Y{(U)} &\longrightarrow
+        \mathcal{O}_X{(\varphi ^{-1}{(U)})} \\
+        f &\longmapsto \varphi ^{*}_U(f) = {(f \circ \varphi )}
+    \end{align*}
+\end{definition}
+
+Par passage à la limite, on en déduit que \(\forall x \in X\),
+\[
+  \varphi^{*}_x : \mathcal{O}_{Y, \varphi {(x)}} \to \mathcal{O}_{X, x} 
+\]
+
+Soit \(V\) un éspace algébrique. Alors \({(V, \mathcal{O}_V)}\) est un
+\(k\)-éspace annelé.
+
+\begin{lemma}{}
+    Soient \(V, W\) deux ensembles algébriques. Alors on a une bijéction
+    \[
+      \mathrm{Poly}{(V, W)} \longleftrightarrow \mathrm{Hom}_{k\text{-espace
+      annelés}} {({(V, \mathcal{O}_V)}, {(W, \mathcal{O}_W)})}
+    \]
+\end{lemma}
+
+\begin{proof}{}
+    We already know that \(\mathrm{Poly}{(V, W)} \leftrightarrow
+    \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(W)}, \mathcal{O}{(V)})}\) from
+    Proposition~\ref{prop:poly-kalg}. It suffices to show that \(\varphi \mapsto
+    \varphi _W^{*}\) is injective.
+\end{proof}
+
+\begin{definition}{Variété algébrique affine}
+    Une \(k\)-variété algébrique affine est un espace annelé \({(X,
+    \mathcal{O}_X)}\) qui est isomorphe à un \({(V, \mathcal{O}_V)}\) pour \(V
+    \subseteq k^{n} \) un ensemble algébrique.
+\end{definition}
+
+Donc, les suivantes trois catégories sont équivalentes:
+\begin{itemize}[label=\bullet]
+    \item La catégorie \(k\text{-}\mathtt{Var}\) des \(k\)-variétés affines
+    \item La catégorie \({(k\text{-}\mathtt{ens.alg.}, \mathrm{Poly})}\) des
+        \(k\)-ensembles algébriques munis des applications polynomiales
+    \item La catégorie \({(k\text{-}\mathtt{Alg})}^{op}\) opposée des
+        \(k\)-algèbres réduites de type fini.
+\end{itemize}
+
+\begin{lemma}[Versione prof 1.7.4]
+    Soit \({(X, \mathcal{O}_X)}\) une variété algébrique affine.
+\begin{enumerate}[label = \roman*)]
+    \item Les immersions fermés \({(Z, \mathcal{O}_Z)} \hookrightarrow {(X,
+        \mathcal{O}_X)}\) sont de la forme \(\mathrm{Spm}{\left( A / I \right)}
+        \hookrightarrow \mathrm{Spm}{(A)}\) où \(I = \sqrt{I}\) est un idéal
+        radiciel de \(A\) 
+    \item Si \(f \in A\), alors \(\mathrm{Spm}{(A[f^{-1}])} \hookrightarrow
+        \mathrm{Spm}{(A)}\) est une immersion ouvert
+\end{enumerate}
+
+\end{lemma}
+
+\begin{definition}{Variété algébrique}
+    Une variété algébrique sur \(k = \overline{k}\) est un \(k\)-space annelé
+    \({(X, \mathcal{O}_X)}\) tel que \(X\) admet un recouvrement ouvert fini \(X
+    = \bigcup_{i=1} ^{N}X_{i}\) tel que \({(X_{i}, \mathcal{O}_{X | X_{i}} )}\)
+    est une variété algébrique affine.
+\end{definition}
+
+\begin{note}{}
+    On peut dire aussi qu'il s'agit d'un \emph{\(k\)-schema de type fini réduit}
+\end{note}
+
+\begin{eser}{}
+    Soit \(X\) une VA et \(f \in  \mathcal{O}_X{(X)}\). Alors \(f\) est
+    inversible sur \(D{(f)}\), i.e. \(f \in  \Gamma{(X, D{(f)})}^{*}\) 
+    \tcblower
+
+\end{eser}
+
+
+\begin{proposition}{}
+    Une telle donnée de recollement est effective, dans le sense qu'il existe
+    une unique variété algébrique \(X\) avec des ouverts \(\tilde{X}_i \subseteq
+    X\) qui le recouvrent tel que la donnée de recollant est celle obtenu par
+    ``décompose''.
+    \[
+      X = \coprod X_{i} / \sim 
+    \]
+\end{proposition}
+
+\paragraph{Construction de \(\mathbb{P}^{n}\) comme variété algébrique} en
+récollant.
+\[
+  \mathbb{P}^{n} = \{{(x_{0}, \dots, x_{n})} \in  k^{n+1} \sminus \{0\} \} /
+  k^{*}
+\]
+Les ouvert principaux \(U_{i} := \{x \in \mathbb{P}^{n} : x_{i} \neq 0\} =
+\{[x_{0}, \dots, x_{i-1} , 1, x_{i+1} , \dots, x_{n}]\} \cong \mathbb{A} ^{n}
+\). On travail sur l'anneau \(R = k \left[ \frac{X_{i}}{X_{j}} : 0 \le i, j \le
+n\right] \) (Laurent). On considère les sous-algèbres de \(R\) données par
+\(R_{i} = k \left[ \frac{X_{j}}{X_{i}} : j \neq i \right] \). Alors
+\(\mathrm{Spm}{(R_{i})} \cong \mathbb{A}^{n}\) qui va correspondre à \(U_{i}\). 
+\[
+  R_{i,j} \overset{{(i \neq j)}}{=} \Span{R_{i}, R_{j}} = R_{i} \left[
+  \frac{X_{i}}{X_{j}} \right] = R_{j} \left[ \frac{X_{j}}{X_{i}} \right]
+\]
+et donc il est évident que \(R_{i,j} = R_{j, i} \).
+Alors \(\mathrm{Spm}{(R_{i,j} )} = \mathbb{A}^{n-1} \times \mathbb{G}_m\) où
+\(\mathbb{G}_m := {(k^{*}, \mathcal{O}_{k^{*}} )}\). Pour récoller on peut
+prendre les \(\varphi_{i,j} : X_{i,j} \to X_{j,i} \) donnée par
+\(\mathrm{Id}_{R_{i,j} } \) 
+
+\begin{proposition}{}
+    La catégorie des variétés algébriques admet des produits finis
+\end{proposition}
+\begin{proof}{}
+    Soit \(V, W\) deux VA. On va munir l'ensemble \(V \times W\) d'une topologie
+    et d'un faisceau de fonctions \(\mathcal{O}_{V \times  W} \) qui fait de
+    \({(V \times  W, \mathcal{O}_{V \times  W} )}\) le produit catégorique de
+    \(V\) e \(W\).
+
+    Soient \({(V_{i})}_{i = 1. .n} \) et \({(W_{j})}_{j = 1. .m} \) des
+    recouvrements de \(V\) et \(W\) par des ouverts affins. on a vu la
+    construction de la variété affine \({(V_{i} \times  W_{i})}\) où
+    \(\mathcal{O}{(V_{i} \times W_{j})} = \mathcal{O}{(V_{i})} \otimes_k
+    \mathcal{O}{(W_{j})}\). Reste à recoller les \(V_{i} \times  W_{j}\). On a
+    que
+    \[
+      {(V_{i}\times W_{j})} \cap {(V_{i'}\times W_{j'})} = {\left( V_{i} \cap
+      V_{i'}  \right)} \times  {\left( W_{j} \cap W_{j'}  \right)} \subseteq
+      V_{i} \times W_{j} \text{ est ouvert}
+    \]
+    car \(V_{i} \cap V_{i} \subseteq V_{i}  \) et \(W_{j} \cap W_{j'}
+    \subseteq W_{j} \) sont ouverts.
+
+    Il faut verifier que sur \({(V_{i} \cap V_{i'} )} \times {(W_{j} \cap W_{j'}
+    )}\) la topologie induite par celle de \(V_{i} \times W_{j}\) coincide avec
+    celle induite par l'autre ouvert \(V_{i'}  \times W_{j'} \) et aussi que les
+    fonctions réguliers sont les mêmes.
+
+    Il suffit de vérifier que \(\forall U_V \subseteq V_{i} \cap V_{i'}  \) et
+    \(\forall U_W \subseteq W_j \cap W_{j'}  \) ouverts affins le morphisme
+    naturel \(U_V \times  U_W \to V_{i} \times  W_j\) est une immersion ouverte.
+
+    Comme vu en TD, \(V_{i} \cap V_{i'} \) est recouvert par des ouverts affins
+    qui sont principaux dans \(V_{i}\) et \(V_{i'}\). Reste à prouver
+    l'assertion dans ce cas.
+
+    Au final, reste à preuver que si \(X, Y\) sont variétés affines, et \(f \in
+    \mathcal{O}{(X)}\), alors le morphisme naturel \(D{(f)} \times  Y \to X
+    \times Y\) est une immersion ouverte et en effet
+    \[
+        \mathcal{O}{(X)} \otimes_k \mathcal{O}{(Y)} \to \mathcal{O}{(X)}[f^{-1}]
+        \otimes_k \mathcal{O}{(Y)} = {\left( \mathcal{O}{(X)} \otimes_k
+        \mathcal{O}{(Y)}\right)}\left[ {(f \otimes 1)}^{-1} \right] 
+    \]
+    Cette description montre que le morphisme en question est l'immersion de
+    l'ouvert principal \(D{(f \otimes 1)} \subseteq X \times Y \) 
+\end{proof}
+
+\begin{proposition}[Proprieté universelle]
+Les projections \(\pi_X\) et \(\pi_Y\) sont morphismes et
+l'application
+\begin{align*}
+    \mathrm{Hom}_{VA} {(Z, X \times  Y)} &\longrightarrow \mathrm{Hom}_{VA}
+    {(Z, X)} \times  \mathrm{Hom}_{VA} {(Z, Y)} \\
+    h &\longmapsto {(\pi_X \circ h, \pi_Y \circ h)}
+\end{align*} 
+est bijective.
+\end{proposition}
+
+
+
+
+
+

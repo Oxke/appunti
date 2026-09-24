@@ -1,0 +1,53 @@
+\chapter{Géometrie des variétés algébriques}
+
+\section{Dimension}
+
+Soit \(k = \overline{k}\). Soit \(V\) une VA irréductible. On veut definir
+\(\dim V \in \mathbb{N}\) telle que:
+\begin{enumerate}[label = \roman*.]
+    \item \(\dim \mathbb{A}^{n} = n\) 
+    \item Si \(V\) est irréductible et \(f \in \mathcal{O}{(V)}\), \(f \neq 0 \)
+        et \(f \not\in  \mathcal{O}{(V)}^{*}\), alors \(V{(f)}\) a toutes ses
+        componenets irréductible de dimension \(\dim V - 1\).
+    \item (en conséquence de \(ii.\)) \(\dim V\) est la longueur maximale d'une
+        chaîne de fermés irréductibles
+        \[
+          \varnothing \subsetneq V_d \subsetneq V_{d-1} \subsetneq \dots
+          \subsetneq V_{1} \subsetneq V_{0} = V
+        \]
+\end{enumerate}
+
+La condition \(iii.\) est donc prise comme definition de dimension, si l'espace
+est Noetherien.
+
+\begin{example}[de ii.]
+    Soit \(V = \mathbb{A}^{n}\) et \(f \in \mathcal{O}{(V)}\). Alors \(f =
+    f_{1}^{a_{1}} \dots f_r^{a_r}\) une décomposition en produits d'éléments
+    premiers. Alors \(V{(f)} = \bigcup_{i=1} ^{n} V{(f_{i})}\) qui ont dimension
+    \(n-1\).
+\end{example}
+
+On rappel que si \(K / k \) est une extension de corps de type fini (i.e. \(K =
+k{(y_{1}, \dots, y_{n})}\)), alors il existe des éléments \(x_{1}, \dots, x_d
+\in K\) tels que \( k \subseteq k{(x_{1}, \dots, x_d)} \subseteq K  \) où la
+première extension est transcenante pure (i.e. les \(x_{i}\) sont algébriquement
+indépendents) et la deuxième est une extension finie (séparable?) de corps.
+Alors \(d =: \mathrm{deg}\,\mathrm{tr}_k K\) est le dégree de trancendance de
+\(K\).
+
+\begin{definition}{(algébrique)}
+    Soit \(V\) une variété algébrique sur \(k\) de type fini. Si \(V\) est
+    irréductible, alors \(\dim V = \mathrm{deg}\,\mathrm{tr}_k {(\mathcal{M}{(V)})}\) 
+
+    En général, on pose \(\dim V := \max \{\dim W, W \subseteq V \text{
+    component irréductible} \} \) 
+\end{definition}
+
+\begin{example}{}
+    En effet
+    \[
+      \dim \mathbb{A}^{n} = \mathrm{deg}\,\mathrm{tr}_k \mathrm{Frac}{\left(
+      k[X_{1}, \dots, X_{n}] \right)} = k{(X_{1}, \dots, X_{n})} = n
+    \]
+\end{example}
+

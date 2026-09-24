@@ -1,0 +1,261 @@
+\chapter{Differential forms and Stokes}
+
+\paragraph{Notations} Some common notations in this chapter are, if \(U
+\subseteq \mathbb{C} \) is an open set, \(f \in C^{1}{(U)}\), then
+\[
+  \frac{\partial f}{\partial z} := \frac{1}{2}{\left( \frac{\partial f}{\partial
+  x} - i \frac{\partial f}{\partial y} \right)} \quad ; \quad \frac{\partial
+f}{\partial \bar{z}} := \frac{1}{2} {\left( \frac{\partial f}{\partial x} +
+i \frac{\partial f}{\partial y}\right)} \quad ; \quad df := \frac{\partial f}{\partial z} dz + \frac{\partial f}{\partial
+\bar{z}} d\bar{z}\] 
+
+If \(\varphi : V \to U\) is holomorphic, then
+\[
+  \frac{\partial f \circ \varphi}{\partial z} = \varphi'{(z)} {\left( \frac{\partial
+  f}{\partial z} \circ \varphi \right)}  \quad ; \quad \frac{\partial f \circ
+\varphi}{\partial \bar{z}} = \overline{\varphi'{(z)}} {\left( \frac{\partial
+f}{\partial \bar{z}} \circ \varphi \right)} 
+\]
+\begin{definition}{}
+    A \(1\)-form on \(U\) is \(\omega = p{(z)} \,dz + q {(z)}
+    \,d\bar{z}\) and
+    \[
+      \varphi^{*} \omega \overset{\text{def}}{=} p{(\varphi {(z)})} \varphi'{(z)} dz +
+      q{(\varphi{(z)})} \overline{\varphi'{(z)}} d\bar{z}
+    \]
+\end{definition}
+
+\begin{remark}{}
+    \[
+      d{(f \circ \varphi)} = \varphi^{*}{(df)}
+    \]
+\end{remark}
+\begin{definition}{}
+    Let \({(U_{\alpha} , \varphi _{\alpha} )}\) be an atlas on \(X\). Then
+\begin{itemize}[label = \bullet]
+    \item A 1-form \(\omega\) is a collection \(\omega_{\alpha} \) of 1-form on
+        \(\varphi _{\alpha} {(U_{\alpha} )} \subseteq \mathbb{C} \) 
+    \item \(\omega_{\alpha_{2}} = {\left( \varphi _{\alpha_{1}} \circ \varphi
+        _{\alpha_{2}}^{-1} \right)}^{*} \omega_{\alpha_{1}}  \) whenever
+        \(U_{\alpha_{1}} \cap U_{\alpha_{2}} \neq \varnothing\) 
+\end{itemize}
+    Such that \(\omega\) is well defined on \(X\).
+
+\end{definition}
+
+
+\begin{definition}{2-forms}
+    If \(\eta = f{(z)}dz \wedge d\bar{z}\) (on \(U \subseteq \mathbb{C} \)) and
+    \(\varphi : V \to U\) is \emph{holomorphic}, then
+    \[
+      \varphi ^{*} \eta = f \circ \varphi \left| \varphi '{(z)} \right| ^2 dz
+      \wedge d\bar{z}
+    \]
+\end{definition}
+\begin{remark}{}
+    Let \(\omega = p dz + q d\bar{z}\) be a 1-form. Then
+    \[
+      d {\left( \varphi ^{*} \omega \right)} = {\left( \frac{\partial \varphi
+      }{\partial z} \circ q  - \frac{\partial p}{\partial \bar{z}}
+\circ \varphi \right)} \left| \varphi ' \right| ^2 dz \wedge d\bar{z}
+\implies d {\left( \varphi ^{*}\omega \right)} = \varphi ^{*}{(d\omega)}
+    \]
+\end{remark}
+
+
+\begin{definition}{2-forms}
+    Let \({(U_{\alpha} , \varphi _{\alpha} )}\) be an atlas on \(X\). Then
+\begin{itemize}[label = \bullet]
+    \item A 2-form \(\eta\) is a collection \(\eta_{\alpha} \) of 2-forms on
+        \(\varphi _{\alpha} {(U_{\alpha} )} \subseteq \mathbb{C} \) 
+    \item \(\eta_{\alpha_{2}} = {\left( \varphi _{\alpha_{1}} \circ \varphi
+        _{\alpha_{2}}^{-1} \right)}^{*} \eta_{\alpha_{1}}  \) whenever
+        \(U_{\alpha_{1}} \cap U_{\alpha_{2}} \neq \varnothing\) 
+\end{itemize}
+    Such that \(\eta\) is well defined on \(X\).
+\end{definition}
+
+We will denote by
+\begin{itemize}[label = --]
+    \item \(\Omega^{0}{(X)}\) the set of \(C^{\infty}\) functions on
+\(X\)
+    \item \(\Omega^{1}{(X)}\) the set of \(C^{\infty}\) 1-forms on \(X\) 
+    \item \(\Omega^{2}{(X)}\) the set of \(C^{\infty}\) 2-forms on \(X\) 
+\end{itemize}
+
+The operator \(d\) is well defined
+\[
+  \Omega^{0}{(X)} \overset{d}{\to} \Omega^{1}{(X)} \overset{d}{\to}
+  \Omega^{2}{(X)}
+\]
+and moreover \(d\circ d = 0\) 
+
+\paragraph{Formulas:} if I take \(f \in \Omega^{0}{(X)}\), then I can set
+locally \(\partial f = \frac{\partial f}{\partial z} dz\) and
+\(\bar{\partial} f = \frac{\partial f}{\partial \bar{z}}
+d\bar{z}\). Similarly, if \(\omega = p\, dz + q\, d\bar{z}\) is a 1-form,
+then I can set locally
+\[
+  \partial \omega = \frac{\partial q}{\partial z} dz \wedge d\bar{z} \quad
+  ; \quad \bar{\partial} \omega = -\frac{\partial p}{\partial \bar{z}}
+  dz \wedge d\bar{z}
+\]
+So we have \(d = \partial + \bar{\partial}\) and \(d^2 = 0 = \partial^2 =
+\bar{\partial}^2\).
+
+For \emph{1-forms}, we have a decomposition. Let us denote by
+\(\Omega^{{(1,0)}}{(X)}\) the set of 1-forms such that \(\omega = p{(z)}dz\)
+locally and similarly by \(\Omega^{{(0,1)}}{(X)}\) the set of 1-forms such that
+locally \(\omega = q{(z)} d\bar{z}\). If \(p\) is holomorphic (meromorphic), then \(\omega\)
+is called holomorphic (meromorphic).
+
+The following diagram holds:
+\[
+\begin{tikzcd}
+	& {\Omega^0(X)} & \\
+	{\Omega^{(1,0)}(X)} && {\Omega^{(0,1)}(X)} \\
+	{\{0\}} & {\Omega^2(X)} & {\{0\}}
+	\arrow["\partial"', from=1-2, to=2-1]
+	\arrow["{\bar{\partial}}", from=1-2, to=2-3]
+	\arrow["\partial"', from=2-1, to=3-1]
+	\arrow["{\bar{\partial}}", from=2-1, to=3-2]
+	\arrow["\partial"', from=2-3, to=3-2]
+	\arrow["{\bar{\partial}}", from=2-3, to=3-3]
+\end{tikzcd}
+\]
+
+\section{Integration and differential forms}
+
+Let \(\omega \in \Omega^{1}{(X)}\) and \(C : [0, 1] \to X\) be smooth. We want
+to get to a sensible definition of \(\int _C \omega\).
+
+Pick a partition \(0 = t_{0} < t_{1} < \dots < t_{n} = 1\) of \([0, 1]\) such
+that \(\forall k = 0, \dots, n-1\) we have \(C{([t_k, t_{k+1}])} \subseteq
+{(U_k, \varphi _k)} \) a chart. At this point we can define
+\begin{equation}\label{eq:defin_int}
+    \int _C \omega = \sum_{k=0}^{n-1} \int_{\underbrace{\varphi_k {(C[t_k,
+    t_{k+1} ])}}_{\text{curve in \(\mathbb{C}\)}}}
+    \overbrace{{\left( \varphi ^{-1}_k \right)}^{*} \omega}^\text{1-form on
+    \(\varphi _k{(U_k)} \subseteq \mathbb{C} \)} 
+\end{equation}
+which in particular \emph{does not} depend on \emph{charts} and
+\emph{subdivision}. 
+
+In \textbf{local coordinates}, we have
+\[
+  \int_{\gamma} {\left( p \,dx + \varphi \,dy \right)} \overset{\text{def}}{=}
+  \int_{0}^{1} {\left( {\left( p \circ \gamma{(t)} \right)} \gamma_1'{(t)} +
+  {\left( q \circ \gamma{(t)} \right)} \gamma'_2 {(t)} \right)} \, dt
+\]
+where \(\gamma = {(\gamma_{1}, \gamma_{2})}: [0, 1] \to \mathbb{R}^2\).
+
+For 2-forms it's a bit harder.
+
+Let \(K \subseteq X \) be \emph{compact}, \(\eta \in \Omega^2{(X)}\) with 
+\({(U_{i}, \varphi_i)}_{i \in I} \) a locally finite atlas on \(X\). Let
+\({(p_{i})}_{i \in I} \) be a \emph{partition of unity} such that
+\begin{enumerate}[label = \arabic*., nosep]
+    \item \(\forall i\), \(p_{i} \in C^{\infty}{(X)}\), 
+        \(\mathrm{supp}{(p_{i})} \subseteq U_{i} \) and \(p_{i} \ge 0\) 
+    \item \(\forall x \in X\), \(\sum_{i \in I} p _i {(x)} = 1\) 
+\end{enumerate}
+Then we can define
+\[
+  \int_K \eta = \sum_{i \in I} \int_{\varphi_i {(K \cap U_{i})}} {\left( p_{i}
+  \circ \varphi_i ^{-1} \right)} {\left( \varphi_i ^{-1} \right)}^{*} \eta
+\]
+which does not depend on \({(p_{i})}_{i \in I} \) or \({(U_{i}, \varphi_i)}_{i
+\in I}\).
+
+Let \(K \subseteq X \) compact such that \(\mathring{K} \neq \varnothing\) and
+\(\partial K\) is a finite disjoint union of simple loops, i.e. \(\partial K\)
+is a 1-dimensional submanifold of \(X\).
+
+\begin{proposition}{}
+    Riemann Surfaces are orientable
+\end{proposition}
+Hence \(\partial K\) is naturally oriented.
+
+\begin{theorem}{Stokes}
+    Let \(K \subseteq X \) as in the previous paragraph and \(\omega \in
+    \Omega^{1}{(X)}\), then
+    \[
+      \int_K d\omega = \int _{\partial K} \omega
+    \]
+\end{theorem}
+
+\begin{corollary}[Consequences of Stokes]
+    Let \(X\) compact, \(f \in \Omega^{0}{(X)}\) and \(\omega \in
+    \Omega^{1}{(X)}\). Then
+\begin{itemize}[label = --, nosep]
+    \item if \(\displaystyle \omega \in \Omega^{{(0, 1)}{(X)}}\), then \(\displaystyle \int_X
+        f \, \partial \omega = - \int _X \partial f \wedge \omega\) 
+    \item if \(\displaystyle \omega \in \Omega^{{(1,0)}}{(X)}\), then
+        \(\displaystyle \int_X f \, \bar{\partial} \omega  = - \int _X
+        \bar{\partial} f \wedge \omega\) 
+\end{itemize}
+\end{corollary}
+
+\begin{proof}{}
+    In general, \(d{(f \omega)} = {(df)} \wedge \omega + f \, d\omega\).
+    Integrating, we get
+    \[
+        \int _X f \, d\omega = \underbrace{\int_X d{(f \omega)}}_\text{= 0 by
+        Stokes \((\partial X = \varnothing)\) }   - \int_X {(df)} \wedge \omega 
+    \]
+    and if \(\omega \in \Omega^{{(0, 1)}}{(X)}\), then \(d\omega =
+    \partial\omega\) and (not obvious) \({(df)} \wedge \omega = \partial f
+    \wedge \omega\).  % TODO: prof wrote f in WW !!
+    Analogously with \(\omega \in \Omega^{{(1, 0)}{(X)}}\).
+
+\end{proof}
+
+\begin{definition}{Laplacian}
+    Let \(f \in \Omega^{0}{(X)}\). Then the \textbf{laplacian}
+    \[
+      \Delta f := 2i \bar{\partial} \partial f = - 2i \partial \bar{\partial} f
+      \in  \Omega^2{(X)}
+    \]
+    which in local charts is
+    \[
+      \Delta f = - {\left( \frac{\partial^2 f}{\partial x ^2} + \frac{\partial
+      ^2 f}{\partial y^2}\right)} dx \wedge dy
+    \]
+\end{definition}
+\begin{note}{}
+    \(\Delta f\) is a 2-form, not a function
+\end{note}
+
+
+Which leads to this rephrasing of Stokes:
+\begin{theorem}{Green's formula}
+    For all \(f, g \in \Omega^{0}{(X)}\) (\(X\) compact), we have
+    \[
+      \int_X {(\Delta f)} g = \int_X f \Delta g = -\frac{1}{2i} \int_X
+      \bar{\partial} f \wedge \partial g
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    Integration by parts.
+\end{proof}
+
+\begin{corollary}{}
+    Assume \(X\) compact connected. Let \(f \in \Omega^{0}{(X)}\) be such that
+    \(\Delta f = 0\). Then \(f\) is constant.
+\end{corollary}
+
+\begin{proof}{}
+    Integrating \({(\Delta f)} \bar{f}\) we get
+    \[
+      0 = \int_X {(\Delta f)} \bar{f} = - \frac{1}{2i} \int_X \bar{\partial} f
+      \wedge \partial \bar{f} = \frac{1}{2i} \int_X \partial f \wedge
+      \bar{\partial} \bar{f}
+    \]
+    and in local coordinates, \(\bar{\partial} f \wedge \partial \bar{f} =
+    \left| \frac{\partial f}{\partial \bar{z}} \right| ^2 d\bar{z}\). Since
+    \(\int_X {(\Delta f)} \bar{f}\) is a sum of positive terms, we get that
+    locally \(\frac{\partial f}{\partial \bar{z}} = 0\). Hence, \(f\) is
+    holomorphic, thus constant.
+\end{proof}
+
