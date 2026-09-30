@@ -51,3 +51,236 @@ Alors \(d =: \mathrm{deg}\,\mathrm{tr}_k K\) est le dégree de trancendance de
     \]
 \end{example}
 
+\begin{theorem}{}
+    Soit \(V\) une variété affine irréductible et \(f \in \mathcal{O}{(V)}\) non
+    nulle et non inversible. Alors \(V_f\) est de pure dimension \(\dim V - 1\) 
+\end{theorem}
+
+\begin{corollary}{}
+    Soit \(V\) une variété affine irréducible. Alors \(\dim V\) (défini
+    algébriquement) est la dimension topologique.
+\end{corollary}
+
+\begin{corollary}{}
+    Soient \(f_{1}, \dots, f_{n} \in \mathcal{O}{(V)}\). Alors toute componantes
+    irréductibles de \(V{(f_{1}, \dots, f_{n}))}\) est de codimension au maximum \(n\).
+\end{corollary}
+
+\begin{corollary}{}
+    Soient \(V, W \in \mathbb{A}^{n}\) fermés tels que \( V \cap W \neq
+    \varnothing\). Alors \(\forall Z \subseteq V \cap W \) composante
+    irréductible, \(\mathrm{codim}\,Z \le \mathrm{codim}\, V + \mathrm{codim}\,
+    W\) 
+\end{corollary}
+
+Note that puisque \(V \cap W = {(V \times  W)} \cap \Delta \subseteq
+\mathbb{A}^{n} \times  \mathbb{A}^{n} = \mathbb{A}^{2n} \) 
+
+\begin{proposition}{}
+    Soient \(W \subseteq V \) VA affines et irréductibles et soit \(r :=
+    \mathrm{codim}_V W\). Alors \(\exists f_{1}, \dots, f_{r} \in
+    \mathcal{O}{(V)}\) tels que \(V{({(f_{i})}_{i=1. .r} )}\) est purement de
+    codimension \(r\) et \(W\) est l'une d'entre ses composantes irréductibles.
+\end{proposition}
+
+\begin{proof}{}
+    Considère une chaîne maximale de fermés irréductibles
+    \[
+      W = V_r \subseteq V_{r-1} \subseteq \dots \subseteq V_{1} \subseteq V_{0}
+      = V
+    \]
+    tels que \(\mathrm{codim}_V V_{i} = i\). Par récurrence sur \(s\), on
+    construit \(f_{1}, \dots, f_s \in \mathcal{O}{(V)}\) tel que \(V_s \subseteq
+    V{({(f_{1},\dots, f_s)})}\) soit purement de dimension \(s\) (i.e. toutes
+    composantes irréuctibles sont de dimension \(n-s\)). % TODO finish
+\end{proof}
+
+
+\begin{definition}{}
+    Soit \(V \subseteq \mathbb{A} ^{n}\) une sous-variété fermé de codimension
+    \(r\) (i.e. \(\dim V = n - r\)). Alors on dit que
+\begin{itemize}[label = --]
+    \item \(V\) est une \emph{intersection complète ensembliste} s'il existe
+        \(f_{1}, \dots, f_{r} \in \mathcal{O}{(\mathbb{A}^{n})}\) tels que \(V =
+        V{({(f_{1}, \dots, f_r)})}\) 
+    \item \(V\) est une \emph{intersection schématique} (IC) s'il existe \(f_{1},
+        \dots, f_r\) tels que \(\mathcal{I}{(V)} = (f_{1},\dots, f_r)\) 
+    \item \(V\) est une intersection complète localement au point \(x\) (LIC)
+        s'il existe un voisinage ouvert affine \(U\) de \(x\) tel que \(U \cap
+        V\) soit une intersection complète schématique dans \(U\).
+\end{itemize}
+
+\end{definition}
+
+\section{Applications (bi)rationnelles}
+
+Dans cette section \(V, W\) sont des variétés algébriques irréductibles (i.e.
+comme espace topologique)
+
+\begin{definition}{}
+    Une application rationnelle
+    \(
+      \Phi  : V \dashrightarrow W
+    \) est une classe d'équivalence de couples \({(U, \varphi )}\) où \(U
+    \subseteq V \) est un ouvert non vide, et \(\varphi : U \to W\) un
+    morphisme. Alors \({(U, \varphi)} \sim {(U', \varphi ')}\) s'il existe \(U''
+    \subseteq U \cap U' \) ouvert dense tel que \(\varphi|_{U''} =
+    \varphi'|_{U''} \).
+\end{definition}
+\begin{remark}{}
+    Si \(W\) est séparée on peut prendre \(U'' = U' \cap U\) 
+\end{remark}
+On dit que \(\Phi\) est dominante si toutes ses représentantes lo sont
+\(\iff\) l'une de ses représentantes \(\varphi  : U \to W\) est dominant. Dans
+ce cas, puisque \(\mathcal{M}{(U)} = \mathcal{M}{(V)}\), on obtient un morphisme
+(injectif) de \(k\)-algèbres \(\Phi^{*}\) 
+\[
+\begin{tikzcd}
+	\mathcal{M}{(W)} & \mathcal{M}{(V)} \\
+	\mathrm{Frac}\, \mathcal{O}{(W')} & \mathrm{Frac}\, \mathcal{O}{(V')} \\
+	\mathcal{O}{(W')} & \mathcal{O}{(V')}
+	\arrow["{\Phi^*}", hook, from=1-1, to=1-2]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=1-1, to=2-1]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow[hook, from=2-1, to=2-2]
+	\arrow[hook, from=3-1, to=2-1]
+	\arrow["{\varphi^*}", hook, from=3-1, to=3-2]
+	\arrow[hook, from=3-2, to=2-2]
+\end{tikzcd}
+\]
+
+\begin{lemma}{}
+    Soient \(V, W\) VA irréductibles. Alors \(\Phi \mapsto \Phi^{*}\) induit une
+    bijection
+    \[
+      \{\text{app. rat. dominantes \(V \to W\)}\} \leftrightarrow
+      \mathrm{Hom}_{k\text{-alg}} {(\mathcal{M}{(W)}, \mathcal{M}{(V)})}
+    \]
+\end{lemma}
+
+\begin{definition}{}
+    On dit que \(V\) et \(W\) sont \(k\)-birationnelles s'il existe un
+    isomorphisme rationale dominant \(V \to W\), où equivalentement un
+    isomorphisme des extensions du corps \(k\) \(\mathcal{M}{(W)} \to \mathcal{M}{(V)}\) 
+\end{definition}
+
+
+\begin{proposition}{}
+    Soit \(k\) parfait. \(V\) une VA irréductible de dimension \(d\). Alors \(V\) est
+    birationnelle à un hypersurface \(V{(f)} = H \subseteq \mathbb{A}^{d+1} \)
+    où \(f \in  k[X_{1}, \dots, D_{d+1}]\) 
+\end{proposition}
+\begin{proof}{}
+    On peut décomposer l'extension de corps \(k \hookrightarrow
+    \mathcal{M}{(V)}\) dans un extension fini séparable de \(k{(x_{1}, \dots,
+    x_d)}\) qui est extension transcendent pure de \(k\).
+    En utilisant le theorème de l'élément primitif on trouve que
+    \(\mathcal{M}{(V)} = k{(x_{1}, \dots, x_d)}[T] / {(F)}\) où \(F \in
+    k{(x_{1}, \dots, x_d)}[T]\) est irréductible. On peut supposer \(F =
+    k[x_{1},\dots, x_d][T]\). Alors soit \(f = F{(x_{1}, \dots, x_d, x_{d+1}
+    )}\) est irréductible.
+\end{proof}
+
+\section{Théorème de constructibilité}
+
+\begin{eser}{}
+    Soit \(X\) une variété algébrique, \(n \ge 1\). Alors le morphisme \(X
+    \times \mathbb{A}^{n} \to X\) est ouvert.
+    \tcblower
+
+\end{eser}
+\begin{lemma}{}
+    Soit \(\varphi  : V \to W\) un morphisme dominant entre variétés affines
+    irréductibles. Alors \(\varphi {(V)} \supseteq W \neq \varnothing\) ouvert.
+\end{lemma}
+\begin{proof}{}
+\[
+\begin{tikzcd}
+	B = \mathcal{O}{(V)} & \mathcal{O}{(W)} = A & V & W \\
+                         & A[x_{1},\dots, x_{r}] && W \times \mathbb{A}^{r}\\
+	\arrow["{\varphi^*=f}"', hook', from=1-2, to=1-1]
+	\arrow["x_{i} \text{ alg ind sur \(A\)}", hook, from=1-2, to=2-2]
+	\arrow["\varphi", from=1-3, to=1-4]
+	\arrow["\psi"', from=1-3, to=2-4]
+	\arrow[hook', from=2-2, to=1-1]
+	\arrow["\pi"', from=2-4, to=1-4]
+\end{tikzcd}
+\] 
+    Car \(\pi\) est ouvert, il suffit d'avoir un ouvert non vide dans
+    \(\psi{(V)} \subseteq W \times \mathbb{A}^{r}\).
+\end{proof}
+
+\section{Espace (co)tangent}
+
+Soit \(v \in V\) un point dans un VA.
+
+\begin{example}[Courbe plane]
+    Soit \(k[x,y] \ni f{(x, y)} = 0\). Pris un point (nonsingulière) \({(a,
+    b)}\) on voudrait observer que
+    \[
+      f{(a + x, b + y)} = f{(a,b)} + x \frac{\partial f}{\partial x}{(a,b)} + y
+      \frac{\partial f}{\partial y}{(a,b)} + \dots
+    \]
+    où ``\dots'' signifie des addends d'ordre majeur, qui ne sont pas
+    importantes pour la definition de l'espace tangent.
+\end{example}
+
+\begin{definition}{}
+    Soit \(V \subseteq k^{n} \) une VA affine. Soit \(P = {(a_{1}, \dots,
+    a_{n})} \in V\). On définit 
+    \[
+      T_P{(V)} = \{{(x_{1}, \dots, x_{n})} \in k^{n} : \sum_{i=1}^{n} x_{i}
+      \frac{\partial f}{\partial x_{i}} {(P)} = \Span{x, \mathrm{grad}_P\,f} =0
+      ,\; \forall f \in \mathcal{I}{(V)}  \} 
+    \]
+    l'espace (vectoriel) tangent en \(P\) et \(T_P^{a} {(V)} = P + T_P{(V)}\).
+
+    Le point \(P\) est dit \emph{non-singuler} (où lisse) si \(\dim {(T_P{(V)})}
+    = \dim_P{(V)}\) où \(\dim_P{(V)}\) désigne la max dimension des componentes
+    irréductibles de \(V\) qui contiennent \(P\).
+\end{definition}
+
+\begin{note}[tion]
+    Si \(dx_{i}\) est une base duale sur \(k^{n}\), alors 
+    \[
+      df = \Span{x, \mathrm{grad}_P{(f)}} = \sum_{i=1}^{n} \frac{\partial
+      f}{\partial x_{i}} dx_{i} \quad \text{et} \quad
+      d_Pf = \Span{x, \mathrm{grad}_P{(f)}} = \sum_{i=1}^{n} \frac{\partial
+      f}{\partial x_{i}} {(P)} dx_{i} 
+    \]
+
+et donc, si \(\Span{f_{1}, \dots, f_{r}} = \mathcal{I}{(V)}\) 
+\[
+  T_P{(V)} = \bigcap_{f \in \mathcal{I}{(V)}} \mathrm{Ker} \,d_Pf =
+  \bigcap_{i=1}^{r}\mathrm{ker} \, d_P f_{i} = \mathrm{Ker} \, \mathrm{Jac}_P
+  {(f_{1}, \dots, f_{n})}
+\]
+\end{note}
+
+\begin{definition}{Dérivation}
+    Soit \(A\) une \(k\)-algèbre et \(M\) un \(A\)-module. Une \(k\)-dérivation
+    \(\partial : A \to M\) est une application \(k\)-linéaire telle que 
+    \[
+      \forall a, b \in A \quad \partial{(ab)} = a\,\partial{(b)} + b \,\partial{(a)}
+    \]    
+    On note \(\mathrm{Der}_k{(A, M)}\) l'ensemble de toutes dérivations.
+\end{definition}
+
+\begin{example}{}
+    Soit \(A = \mathcal{O}{(V)}\) et \(V\) VA affine. Soit \(M = k\) vu comme
+    \(A\)-module via \(\mathrm{ev}_v : A \to k\), avec \(v \in V\). Je vais
+    remarquer la structure de module sur \(k\) comme \(k_{{(v)}} \)
+    Alors \(\mathrm{Der}_k{(A, M)} = \mathrm{Der}_k {(\mathcal{O}{(V)},
+    k_{{(v)}} )} \cong T_v{(V)}\). 
+
+    Pour le montrer, supposons \(v = \mathbf{0} \). Notons que
+    \(\mathrm{Ker}{(\mathrm{ev}_v)} = \mathfrak{m}_v \subseteq \mathcal{O}{(V)}
+    \) et \(\mathcal{O}{(V)} = k \oplus \mathfrak{m}_v\) car chaque fonction
+    peut etre traslée tellement que \(f{(v)} = 0\). Alors si \(v = \mathbf{0}
+    \), \(\mathcal{O}{(V)} = k \oplus \Span{\overline{X_{1}}, \dots,
+    \overline{X_{n}}}\) 
+\end{example}
+
+
+
+

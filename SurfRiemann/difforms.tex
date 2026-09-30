@@ -1,4 +1,4 @@
-\chapter{Differential forms and Stokes}
+\chapter{Differential forms and Stokes}\label{chp:difforms}
 
 \paragraph{Notations} Some common notations in this chapter are, if \(U
 \subseteq \mathbb{C} \) is an open set, \(f \in C^{1}{(U)}\), then
@@ -169,7 +169,8 @@ which does not depend on \({(p_{i})}_{i \in I} \) or \({(U_{i}, \varphi_i)}_{i
 
 Let \(K \subseteq X \) compact such that \(\mathring{K} \neq \varnothing\) and
 \(\partial K\) is a finite disjoint union of simple loops, i.e. \(\partial K\)
-is a 1-dimensional submanifold of \(X\).
+is a 1-dimensional submanifold of \(X\). We will call al of this being a
+\emph{nice} compact set.
 
 \begin{proposition}{}
     Riemann Surfaces are orientable
@@ -177,8 +178,8 @@ is a 1-dimensional submanifold of \(X\).
 Hence \(\partial K\) is naturally oriented.
 
 \begin{theorem}{Stokes}
-    Let \(K \subseteq X \) as in the previous paragraph and \(\omega \in
-    \Omega^{1}{(X)}\), then
+    Let \(K \subseteq X \) \emph{nice} as in the previous paragraph and \(\omega
+    \in \Omega^{1}{(X)}\), then
     \[
       \int_K d\omega = \int _{\partial K} \omega
     \]
@@ -258,4 +259,107 @@ Which leads to this rephrasing of Stokes:
     locally \(\frac{\partial f}{\partial \bar{z}} = 0\). Hence, \(f\) is
     holomorphic, thus constant.
 \end{proof}
+
+\subsection{Meromorphic 1-forms}
+\begin{definition}{Residue}
+    Let \(\omega\) be a meromorphic 1-form on \(X\). Let \(p\) be a pole and
+    \({(U, \varphi )}\) be a chart such that \(p\) is the only pole in \(U\).
+    Then we set \[\mathrm{Res}_p {(\omega)} := \frac{1}{2\pi i} \int_{\gamma_p} {\left(
+    \varphi ^{-1} \right)}^{*} \omega\] where \(\gamma_p\) is a simple loop
+    (with positive orientation) around \(\varphi {(p)}\) in \(\varphi {(U)}
+    \subseteq \mathbb{C} \).
+\end{definition}
+\begin{proposition}[Bonne definition] Considering the previous definition,
+\begin{enumerate}[label = \arabic*.]
+    \item It does not depend on \({(U, \varphi )}\) and \(\gamma_p\).
+    \item If in \({(U, \varphi )}\), \({(\varphi ^{-1})}^{*} \omega = {\left(
+        \frac{a_{0}}{z} + \dots + \frac{a_k}{z^{k}} + H{(z)}\right)} dz\) where
+        \(H\) is holomorphic, then \(\mathrm{Res}_p{(\omega)} = a_{0}\) 
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}{Residue}
+    Let \(\omega\) be a meromorphic 1-form on \(X\) compact. Then 
+    \[
+      \sum_{p \text{ pole}} \mathrm{Res}_p{(\omega)} = 0
+    \]
+\end{theorem}
+
+\begin{proof}{}
+    Let \(p_{1}, \dots, p_{n}\) be all of the (distinct) poles of \(\omega\).
+    pick charts \({(U_k, \varphi_k)} \ni p_k\) such that \(\overline{U_{i}} \cap
+    \overline{U_{j}} = \varnothing\) for all \(i \neq j\). Assume that
+    \(\partial U_k\) is a simple loop around \(p_k\). Then
+    \[
+      X \sminus \bigcup_{i=1} ^{n} U_{i} =: K
+      \quad \text{ is \emph{nice}, hence by Stokes }\quad
+      \int_K d \omega = \int_{\partial K} \omega
+    \]
+    But \(d\omega = \bar{\partial} \omega = 0\) since \(\omega\) is
+    \textbf{holomorphic} on \(K\). It follows that
+    \[
+      0 = \int_{\partial K} \omega = - \sum_{i=1}^{n} \int_{\partial U_{i}}
+      \omega = - \sum_{i=1}^{n} \mathrm{Res}_{p_{i}} {(\omega)} 
+    \]
+\end{proof}
+
+\begin{corollary}{}\label{cor:ZP0}
+    Let \(f\) be a non-constant meromorphic function on \(X\) compact.
+    Then \(\# Z{(f)} - \# P{(f)} = 0\) where \(Z{(f)}\) is the set of zeros of
+    \(f\) and \(P{(f)}\) is the set of poles of \(f\) 
+\end{corollary}
+\begin{proof}{}
+    Consider \(\frac{\partial f}{f}\) which is a meromorphic 1-form. By the
+    residue theorem, \(\sum_{p \text{ pole}} \mathrm{Res}_p{(\omega)} = 0\).
+    Then poles of \(\omega\) come from poles and zeros of \(f\). Indeed if \(x\)
+    is a zero, then \(\mathrm{Res}_x \omega = \mathrm{mult}_x {(f)}\) nad if
+    \(p\) is a pole, then \(\mathrm{Res}_p \omega = - \mathrm{mult}_p{(f)}\) 
+\end{proof}
+
+\begin{theorem}{Degree of the canonical divisor}
+    Let \(\omega \neq 0\) be a 1-form, then
+    \[
+      \# Z{(\omega)} - \#P{(\omega)} = 2g{(X)} - 2
+    \]
+    where \(Z{(\omega)}\) is set of zeros, \(P{(\omega)}\) is the set of poles
+    and \(g{(X)}\) is the genus of \(X\).
+\end{theorem}
+\begin{proof}[Proof sketch]
+    This is an application of Theorem~\ref{thm:RH}.
+\begin{enumerate}[label = \arabic*.]
+    \item If \(\omega, \omega'\) are two meromorphic 1-forms, say \(\omega =
+        P{(z)}\,dz\) and \(\omega' = Q{(z)}\,dz\) locally. Set \(f =
+        P{(z)}/Q{(z)}\), then when changing coordinates
+        \[
+          f{(\varphi {(z)})} = \frac{P{(\varphi {(z)})}}{Q{(\varphi {(z)})}} =
+          \frac{P{(z)}\varphi '{(z)}}{Q{(z)}\varphi '{(z)}} =
+          \frac{P{(z)}}{Q{(z)}}
+        \]
+        making \(f\) well-defined. Hence, \(\omega = fw'\) where \(f\) is a well
+        deined meromorphic function on \(X\). Hence
+        \[
+            \# Z{(\omega)} - \# P{(\omega)} = \underbrace{\#Z{(f)} - \#
+            P{(f)}}_{=0 \text{ by Corollary~\ref{cor:ZP0}}}  + \#
+          Z{(\omega')} - \# Z P{(\omega')}
+        \]
+    \item We use the fact that on any \(X\) there exists a non trivial
+        meromorphic function \(h : X \to \widehat{\mathbb{C}}\) (holomorphic).
+        On \(\widehat{\mathbb{C}}\), \(dz\) has a double pole at \(\infty\) and
+        is nonvanishing.
+    \item Consider \(\omega = h^{*}{(dz)}\). Note that the zeros of \(\omega\)
+        are exactly the ramification points of \(h\), and have order
+        \(\mathrm{mult}_x{(h)} - 1\). As for the poles, \(P{(\omega)} =
+        h^{-1}{(\{\infty\} )}\) with multiplicity \(2\,\mathrm{mult}_x{(h)}\),
+        whenever \(h{(x)} = \infty\). At this point, we can apply the Riemann
+        Hurwitz formula (theorem~\ref{thm:RH}) obtaining
+        \begin{align*}
+            \# Z{(\omega)} - \# P {(\omega)} &= \sum_{p \in X} {\left(
+          \mathrm{mult}_p {(h)} - 1 \right)} -
+          \overbrace{2}^{=\rchi{(\widehat{\mathbb{C}})}}  \underbrace{\deg
+          {(h)}}_{\sum_{x \in h^{-1}{(\infty)}} \mathrm{mult}_x{(h)} } =\\
+                                             &\overset{R.H.}{=} - \rchi{(X)} = 2g{(X)} - 2
+        \end{align*}
+\end{enumerate}
+\end{proof}
+
 

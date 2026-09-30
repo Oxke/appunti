@@ -1,0 +1,205 @@
+\chapter{Geometry of numbers}
+\section{Completions}
+Let \({(K, |\cdot|)}\) a valued field and let \(R\) be the ring of all
+Cauchy sequences in \(K\). let \(\mathfrak{m} \subseteq R \) be the ideal of
+sequences converging to 0.
+
+\begin{lemma}{}
+    \(\mathfrak{m}\) is a maximal ideal in \(R\) 
+\end{lemma}
+\begin{proof}{}
+    Take \({(a_{n})}_n \in  R \sminus \mathfrak{m} \) Since \({(a_{n})}_n
+    \not\in \mathfrak{m}\), there exists \(\varepsilon > 0\) and \(N \ge 0\)
+    such that \(\forall n \ge N\), \(|a_{n}| \ge \varepsilon\). Now take
+    \({(b_{n})}_n\) a sequence such that \(\forall n \ge N\), \(a_{n}b_{n} =
+    1\). Then \({(b_{n})}_n \in R\) and hence \({(b_{n})}_n\) in an inverse for
+    \({(a_{n})}\) in \(R / \mathfrak{m}\). So \({(R / \mathfrak{m})}\) is a
+    field and \(\mathfrak{m}\) is maximal.
+\end{proof}
+
+\begin{definition}{}
+    The \textbf{completion} of \({(K, |\cdot|)}\) is the field \(\widehat{K} = R
+    /\mathfrak{m}\). \(K\) is embedded in \(\widehat{K}\) by sending \(a \in K\)
+    to the sequence that is constant equal to \(a\).
+\end{definition}
+
+Take \({(a_{n})}_n \in R\). We know \(||a_{m}| - |a_{n}|| \le |a_{m} - a_{n}|\)
+so \({(|a_{n}|)}_n \subseteq \mathbb{R} \) is Cauchy. Let \(|{(a_{n})}_n|\) be
+its limit. If we take \({(b_{n})}_n \in R\) with \({(a_{n})}_n - {(b_{n})}_n \in
+\mathfrak{m}\), then \(||a_{n}| - |b_{n}|| \le |a_{n} - b_{n}|\), so
+\({(|a_{n}|)}_n\) and \({(b_{n}|)}_n\) have the same limit. Hence \({(a_{m})}_n
+\to |{(a_{n})}_n|\) is an absolute value of \(\widehat{K}\) hat extends the
+absolute value of \(K\). If \({(a_{n})}_n \in R\), then \(a_{n} \to
+{(a_{n})}_n\) in \(\widehat{K}\).
+
+\begin{proposition}{}
+    \({(\widehat{K}, |\cdot |)}\) is complete.
+\end{proposition}
+
+\begin{remark}{}
+    Let \({(\widehat{K}', |\cdot |')}\) be another complete value field such
+    that \(|\cdot |'\) extends the absolute value of \(K\) and \(K\) is dense in
+    \(\widehat{K}'\) and \(\widehat{K}'\) is complete. Then there exists a
+    unique \(K\)-isomorphism \(\sigma : \widehat{K} \to \widehat{K}'\) such that
+    \(|\cdot |' \circ \sigma = |\cdot |\).
+\end{remark}
+
+\subsection{Completion of archimedean valued fields}
+
+\begin{theorem}{Ostrowski 2}
+    Let \({(K, |\cdot |)}\) be an archimedean complete valued field. There is an
+    isomorphism \(\sigma : K \to \mathbb{R}\) or \(K \to \mathbb{C}\) such that 
+    \[
+      |\cdot | = {(|\cdot|_{\circ} \circ \sigma)}^{s}
+    \]
+    for some \(\mathbb{R} \ni s \ge 1\) 
+\end{theorem}
+
+\subsection{Completion of nonarchimedean valued fields}
+
+\begin{proposition}{}
+    Let \({(K, |\cdot|)}\) be a valued field with discrete normalized absolute
+    field. Then
+
+\begin{enumerate}[label = \arabic*.]
+    \item The valueation on \(\widehat{K}\) is still discrete normalized.
+    \item Let \(and {(\widehat{\mathcal{O}})}\) valuation rings of \(K\) and
+        \(\widehat{K}\) and \(\mathfrak{p}\) and \(\widehat{\mathfrak{p}}\) the
+        maximal ideals. Then
+        \[
+          \forall n \ge 1 ,\quad \mathcal{O}/\mathfrak{p}^{n} \cong
+          \widehat{\mathcal{O}} / \mathfrak{p}^{n}
+        \]
+        Moreover the diagonal map
+        \begin{align*}
+            \partial: \widehat{\mathcal{O}} &\longrightarrow
+            \lim_{\longleftarrow_{n \ge 1}}  \mathcal{O} / \mathfrak{p}^{n} \\
+             a &\longmapsto {(a \mod \mathfrak{p}, a \mod \mathfrak{p}^2,
+             \dots)}
+        \end{align*}
+        is an isomorphism and a homeomrphism (with \(\mathcal{O} /
+        \mathfrak{p}^{n}\) endowed with discrete topology).
+    \item Let \(\mathcal{R} \subseteq \mathcal{O} \) be a system of
+        representatives of the residue field \(k := \mathcal{O} / \mathfrak{p}\)
+        containing 0. Let \(\pi\) be a uniformizer of \(K\). Then every element
+        \(x \in \widehat{\mathcal{O}}\) can be uniquely written as 
+        \[
+          x = \sum_{n=0}^{\infty} a_{n} \pi^{n} 
+        \]
+        with \(a_{0}, a_{1}, \dots \in \mathcal{R}\) 
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}{}
+\begin{enumerate}[label = \arabic*.]
+    \item Take \(x \in \widehat{K} \sminus \{0\} \). We can find \(y \in K\)
+        with \(|x-y| < |x|\). Then \(|y| = |x|\). Hence \(v {\left(
+        \widehat{K}^{\times } \right)} = v {\left( K^{\times } \right)}  \) 
+    \item Consider the inclusion \(i : \mathcal{O} \to \widehat{\mathcal{O}}\).
+        We have 
+        \[
+            \mathfrak{p}^{n} = \{x \in \mathcal{O} : v{(x)} \ge n\} = \{x \in
+            \widehat{\mathcal{O}} : v{(x)} \ge n\} \cap \mathcal{O} =
+            \widehat{\mathfrak{p}}^{n} \cap \mathcal{O}
+        \]
+        So \(i\) induces an injective morphism \(\widehat{i} : O /
+        \mathfrak{p}^{n} \to \widehat{\mathcal{O}} /
+        \widehat{\mathfrak{p}}^{n}\). For surjectivity, take \(y \in
+        \widehat{\mathcal{O}}\). Since \(K\) is dense in \(\widehat{K}\), we can
+        find \({(y_{m})}_m\) with values in \(K\) such that \(y_{m}\to y\).
+        \(y + \widehat{\mathfrak{p}}^{n}\) is open. So \(y_{m} \in y +
+        \widehat{\mathfrak{p}}^{n}\) for \(m \gg 0\). So \(\widehat{i}{(y_{n})}
+        = \widehat{i}{(y)}\) for \(m \gg 0\) and \(\widehat{i}\) is an
+        isomorphism.
+
+        Consider the map of the statement \(\partial\). Then \(\mathrm{ker}\,
+        \partial = \bigcap_{n \ge 0} \widehat{\mathfrak{p}}^{n} =
+        v^{-1}{(\infty)} = 0\). For surjectivity, take \({(\bar{a}_n)}_n\)
+        in the limit. Let \(a_{n}\) be a lift of \(\bar{a}_n\) to
+        \(\mathcal{O}\) for each \(n\).
+        We have \(v{(a_{m} - a_{n})} \ge \min \{m, n\} \), hence \({(a_{n})}_n\)
+        is Cauchy. Let \(a\) be its limit in \(\widehat{K}\). Since \(a_{n} \in
+        \mathcal{O}\) for all \(n\), \(a \in \widehat{\mathcal{O}}\).
+        The inequality \(v{(a_{m} - a_{n})} \ge \min \{m,n\} \) gives \(v{(a -
+        a_{n})} \ge n\) for each \(n\), hence \(\partial{(a)} =
+        {(\bar{a}_n)}_n\), so \(\partial\) is an isomorphism.
+
+        For the \emph{homeo}, \(\mathfrak{p}^{n}\) form a basis of open
+        neighborhoods of \(0\) in \(\widehat{K}\). Then
+        \[
+          \partial {\left( \mathfrak{p}^{n} \right)} = \mathrm{ker} {\left(
+          \lim_{\longleftarrow n} \mathcal{O} / \mathfrak{p}^{n}
+  \overset{\text{proj}}{\to} \mathcal{O} / \mathfrak{p}^{n}  \right)} =
+  \{{(\bar{0}, \dots, \bar{0}, \bar{a}_{n+1} , \dots)} \in
+  \lim_{\longleftarrow n} \mathcal{O} / \mathfrak{p}^{n}\} 
+        \]
+        which form a basis of open neighborhoods of 0 in the inverse limit,
+        hence \(\partial\) is a homeomorphism.
+
+    \item We inductively construct a sequence \({(a_{n})}_n\) with values in
+        \(\mathcal{R}\) such that \(\forall m\), \(v{\left( x -
+        \sum_{i=0}^{m} a_{i} \pi^{i}  \right)} \ge  m+1\). For \(m=0\), we
+        take \(a_{0} \in \mathcal{R}\) such that \(a_{0} \equiv x \mod
+        \widehat{\mathfrak{p}}\). Now assume \(a_{m}\) is already constructed.
+        Then
+        \[
+          v {\left( x - \sum_{i=0}^{m} a_{i} \pi^{i}  \right)} \ge m+1 \implies
+          x - \sum_{i=0}^{m} a_{i} \pi^{i} = b \pi^{m+1} \quad \text{ with } b
+          \in \widehat{\mathcal{O}}
+        \]
+        Choose \(a_{m+1} \in \mathcal{R}\) such that \(a_{m+1} \equiv b \mod
+        \mathfrak{p}\). Then
+        \[
+          v {\left( x - \sum_{i=0}^{m+1} a_{i} \pi^{i}  \right)} = v {\left(
+          \pi^{m+1} {(b - a_{m+1} )} \right)} \ge m+2
+        \]
+        which finishes the induction.
+
+        Then \(x = \sum_{i=0}^{\infty} a_{i} \pi^{i}\). Take \(b_{i} \in
+        \mathcal{R}\) such that \(x = \sum_{i=0}^{\infty} b_{i} \pi^{i} \) and
+        assume \({(b_{i})}_i \neq {(a_{i})}_i\).
+        Take \(i_{0}\) minimal index with \(b_{i_{0}} \neq a_{i_{0}} \). Then
+        \[
+          0 = {(a_{i_{0}} - b_{i_{0}} )} \pi^{i_{0}} + \sum_{i \ge b+1}
+          {(a_{i} - b_{i} )} \pi^{i}
+        \]
+        where the first addend has valuation \(i_{0}\) and the second has
+        valuation \(\ge i_{0} + 1\). This is a contradiction and thus
+        \({(a_{n})}_n\) is unique.
+\end{enumerate}
+
+\end{proof}
+
+\begin{definition}{}
+    Given \(p\) prime, the completion of \({(\mathbb{Q}, |\cdot |_{v_p} )}\) is
+    denoted \(\mathbb{Q}_p\) and is called the \textbf{field of \(p\)-adic
+    numbers}. Its valuation ring is denoted \(\mathbb{Z}_p\) and is called the
+    \textbf{ring of \(p\)-adic integers}. \(p \mathbb{Z}_p\) is the unique
+    maximal ideal of \(\mathbb{Z}_p\) and for all \(n\),
+    \[
+      \mathbb{Z}_p \cong  \lim_{\longleftarrow n} \mathbb{Z} / p^{n} \mathbb{Z}  \quad \frac{\mathbb{Z}_p}{p^{n}\mathbb{Z}_p} \cong \frac{\mathbb{Z}}{p^{n}\mathbb{Z}} 
+    \]
+    and an element \(x \in \mathbb{Z}_p\) can be uniquely written as \(x =
+    \sum_{i=0}^{\infty} a_{i} p^{i} \), with \(a_{i} \in  \{0, \dots, p-1\} \) 
+\end{definition}
+
+\begin{lemmao}{Hensel}
+    Let \({(K, |\cdot|)}\) be a complete nonarchimedean valued field with
+    valuation ring \(\mathcal{O}\). Take \(f \in  \mathcal{O}[X]\) a polynomial
+    and \(a \in \mathcal{O}\) such that \(f'{(a)} \neq 0\) and \(c =
+    \frac{|f{(a)}|}{|f'{(a)}|^2} < 1\). Consider the sequence \({(a_{n})}_n\)
+    defined as
+    \[
+      \begin{cases}{}
+          a_{0} = a\\
+          a_{n+1} = a_{n} - \frac{f{(a_{n})}}{f'{(a_{n})}}
+      \end{cases}
+    \]
+    This sequence is well-defined and converges to a root \(b\) of \(f\) in
+    \(\mathcal{O}\) such that \(|b-a| \le c < 1\) 
+\end{lemmao}
+
+\begin{eser}{2.2.10}
+    
+\end{eser}
+

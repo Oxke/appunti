@@ -1,0 +1,106 @@
+\chapter{Cohomology and Serve duality}
+
+Before approaching this chapter, it's useful to remind all of the notations that
+will be used, introduced in Chapter~\ref{chp:difforms}.
+
+\begin{itemize}[label = --]
+    \item \(\Omega^{0}{(X)}\) the set of \(C^{\infty}\) functions on
+\(X\)
+    \item \(\Omega^{1}{(X)}\) the set of \(C^{\infty}\) 1-forms on \(X\) 
+    \item \(\Omega^{2}{(X)}\) the set of \(C^{\infty}\) 2-forms on \(X\) 
+    \item \(\Omega^{{(1,0)}} = \{\omega \in \Omega^{1}{(X)} : \omega = P{(z)}\,dz\} \) 
+    \item \(\Omega^{{(0,1)}} = \{\omega \in \Omega^{1}{(X)} : \omega = Q{(z)}\,d\bar{z}\} \) 
+\end{itemize}
+
+Finally, the following diagram holds:
+\[
+\begin{tikzcd}
+	& {\Omega^0(X)} & \\
+	{\Omega^{(1,0)}(X)} && {\Omega^{(0,1)}(X)} \\
+	{\{0\}} & {\Omega^2(X)} & {\{0\}}
+	\arrow["\partial"', from=1-2, to=2-1]
+	\arrow["{\bar{\partial}}", from=1-2, to=2-3]
+	\arrow["\partial"', from=2-1, to=3-1]
+	\arrow["{\bar{\partial}}", from=2-1, to=3-2]
+	\arrow["\partial"', from=2-3, to=3-2]
+	\arrow["{\bar{\partial}}", from=2-3, to=3-3]
+\end{tikzcd}
+\]
+
+\section{De Rham Cohomology}
+Let \(X\) be a connected compact Riemann Surface. Then The following sequence is
+a complex
+\[
+  \{0\} \hookrightarrow \Omega^{0}{(X)} \overset{d_{1}}{\to} \Omega^{1}{(X)}
+  \overset{d_{2}}{\to} \Omega^2{(X)} \to \{0\} \quad \text{(as \(\mathbb{C}\)-vector
+  spaces)}
+\]
+And it leads to the following cohomology spaces
+\begin{itemize}[label = --]
+    \item \(H^{0}_{DR} = \{f \in  \Omega^{0}{(X)} : df = 0\} \cong \mathbb{C}\) 
+    \item \(H^{1}_{DR} = \{\omega \in \Omega^{1}{(X)} : d\omega = 0\} /
+        \{df : f \in \Omega^{0}{(X)}\} \) 
+    \item \(H^{2}_{DR} = \{\eta \in \Omega^2{(X)}\} / \{d\omega : \omega \in
+        \Omega^{1}{(X)}\}  \) 
+\end{itemize}
+
+\begin{theorem}{De Rham for Surfaces}
+    It holds that 
+    \[
+      H^{0}_{DR} \cong H^2_{DR} \cong \mathbb{C} \quad \text{ and } \quad
+      \mathbb{H}^{1}_{DR} \cong \mathbb{C}^{2g}
+    \]
+    where \(g\) is the genus of \(X\) 
+\end{theorem}
+
+\section{Dolbeault Cohomology}
+
+The cohomology spaces are
+\begin{itemize}[label = --]
+    \item \(H^{{(1,0)}}{(X)} = \{\omega \in \Omega^{{(1,0)}}{(X)} :
+        \bar{\partial}\omega = 0\} \) which is exactly the set of holomorphic
+        1-forms
+    \item \(H^{{(0,1)}}{(X)} = \{\omega \in \Omega^{{(0,1)}}{(X)}\} /
+        \{\partial f : f \in \Omega^{0}{(X)}\}\) 
+\end{itemize}
+
+And there are some observations to make.
+
+\begin{enumerate}[label = \arabic*.]
+    \item \(H^{{(1,0)}}{(X)} \hookrightarrow H^{1}_{DR}{(X)} \). Indeed, if \(\omega\) is
+        a holomorphic 1-form and if \(\omega = df\), then in local coordinates
+        \[
+          \omega = P{(z)} \, dz = \frac{\partial f}{\partial z} dz +
+          \underbrace{\frac{\partial f}{\partial \bar{z}}}_{=0}  d\bar{z}
+          \implies f \text{ is holomorphic } \implies f \text{ is constant}
+        \]
+        hence \(\omega = df = 0\) 
+    \item Similarly, setting \(\overline{H^{{(1,0)}}}{(X)} = \{\omega \in
+        \Omega^{{(0,1)}} {(X)} : \partial \omega = 0\} \) the set of
+        anti-holomorphic 1-forms, then we also have
+    \(\overline{H^{{(1,0)}}} {(X)} \hookrightarrow H^{1}_{DR}{(X)} \) which
+        is shown using the same logic.
+\end{enumerate}
+
+Indeed, there is a stronger relationship
+
+\begin{theorem}{}
+    The following equivalences hold:
+    \begin{align}
+      H^{1}_{DR} {(X)} = H^{{(1,0)}}{(X)} \oplus \overline{H^{{(1,0)}}}{(X)}\\
+    \dim H^{{(1,0)}}{(X)} = \dim
+      \overline{H^{{(1,0)}}}{(X)} = g
+    \end{align}    
+\end{theorem}
+
+\begin{proof}{}
+    The proof starts by constructing the isomorphism \(\omega \mapsto
+    \bar{\omega}\) which maps
+    \(\omega \in H^{{(1,0)}}\) with \(\omega = P{(z)} \, dz\), to 
+    \(\bar{\omega} = \bar{P}{(z)} \, d\bar{z} \in \overline{H^{{(1,0)}}}{(X)}\).
+    It's easy to show that this is an anti-linear isomorphism, reaching the
+    second equation as a consequence.
+
+    % TODO finish
+\end{proof}
+
