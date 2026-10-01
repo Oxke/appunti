@@ -1,4 +1,4 @@
-\chapter{Cohomology and Serve duality}
+\chapter{Cohomology and Serre duality}
 
 Before approaching this chapter, it's useful to remind all of the notations that
 will be used, introduced in Chapter~\ref{chp:difforms}.
@@ -93,6 +93,41 @@ Indeed, there is a stronger relationship
     \end{align}    
 \end{theorem}
 
+\begin{lemma}{}
+    Assume \(\eta \in \Omega^2{(X)}\) such that \(\int_X \eta = 0\). Then there
+    exists \(f \in C^{\infty}{(X)}\) such that \(\Delta f = \eta\) 
+\end{lemma}
+The proof is be articulated in a \emph{soft proof} with techniques used in
+Hilbert spaces (Lax-Milgram) and an argument about local ellipticity.
+
+Another possibility is to use PDEs.
+
+\begin{proof}[End of proof]
+    Fix \(\omega \in \Omega^{1}{(X)}\) such that \(d\omega = 0\). We look for
+    \(\omega = df + h + g\), where \(h\) is holomorphic and \(g\)
+    anti-holomorphic. Say \(\omega = \omega^{{(1,0)}} + \omega^{{(0,1)}}\).
+    Since \(d\omega = 0\), then \(\bar{\partial}\omega^{{(1,0)}} = -\partial
+    \omega^{{(0,1)}}\). Let \(f \in C^{\infty}{(X)}\) and write \[\omega - df =
+        \underbrace{{\left(  \omega^{{(1,0)}} - \partial f \right)}}_{=:h}  +
+        \underbrace{{\left( \omega^{{(0,1)}} -
+    \bar{\partial} f\right)}}_{=:g}  \] 
+    and we want to have \(h\) holomorphic and \(g\) anti-holomorphic. However,
+    \(\bar{\partial}h = 0 \iff \bar{\partial} \omega^{{(1,0)}} -
+    \bar{\partial}\partial f = 0 \iff \partial \omega^{{(0,1)}} - \partial
+    \bar{\partial} f = 0\), hence all is left is to solve
+    \[
+      \bar{\partial} \omega^{{(1,0)}} = \bar{\partial} \partial f
+    \]
+    But 
+    \[
+      \int_X \bar{\partial} \omega^{{(1,0)}} = \int_{X} d \omega^{{(1,0)}} = 0
+      \text{ by Stokes}
+    \]
+    Hence \(\exists f \) such that \(\Delta f = \bar{\partial}
+    \omega^{{(1,0)}}\) by solving Poisson's equation
+\end{proof}
+
+
 \begin{proof}{}
     The proof starts by constructing the isomorphism \(\omega \mapsto
     \bar{\omega}\) which maps
@@ -101,6 +136,138 @@ Indeed, there is a stronger relationship
     It's easy to show that this is an anti-linear isomorphism, reaching the
     second equation as a consequence.
 
-    % TODO finish
+    % TODO ehh??
+
+    In conclusion, we have \(\dim H^{{(1,0)}}{(X)} = g\) 
 \end{proof}
+
+\begin{proposition}{}
+    On \(H^{{(1,0)}}{(X)}\), 
+    \[
+      \Span{\omega_{1}, \omega_{2}} := -\frac{1}{2i} \int_X \omega_{1} \wedge
+      \overline{\omega_{2}}
+    \]
+    is an inner product
+\end{proposition}
+\begin{proof}{}
+    To show that is \emph{positive definite}, note that locally \(-\frac{1}{2i}
+    \omega \wedge \bar{\omega} = |P|^2 dx \wedge dy\), hence \(\Span{\omega,
+    \omega} = 0\) implies \(\omega = 0\). Everything else is obvious.
+\end{proof}
+
+\subsection{Serre's Duality}
+\begin{theorem}{}\label{thm:serre}
+    \[
+      \left[ \beta \right] = 0 \text{ in } H^{{(0,1)}}{(X)} \iff \forall \alpha
+      \in H^{{(1,0)}}{(X)}, \; \int_X \alpha \wedge \beta = 0
+    \]
+\end{theorem}
+\begin{corollary}{}
+    \[
+      H^{{(0,1)}}{(X)} \cong {\left( H^{{(1,0)}}{(X)} \right)}^{*} \quad \text{
+      and } \quad \dim H^{{(0,1)}}{(X)} = g
+    \]
+\end{corollary}
+\begin{proof}[Proof of corollary]
+    Note that \begin{align*}
+        \zeta : H^{{(0,1)}} &\longrightarrow {\left( H^{{(1,0)}} \right)} ^{*} \\
+        [\beta] &\longmapsto \zeta ([\beta]) = \left(L_\beta : \alpha \mapsto \int_X
+        \alpha \wedge \beta \right)
+    \end{align*}
+    By the theorem, \(\zeta\) is injective. By Riesz on \({(H^{{(1,0)}},
+    \Span{\cdot , \cdot } )}\), for any \(\varphi  \in {\left( H^{{(1,0)}}{(X)}
+    \right)}^{*} \), there exist \(\omega_{0} \in H^{{(1,0)}}\) such that
+    \[
+      \varphi {(\omega)} = \Span{\omega, \omega_{0}} = -\frac{1}{2i} \int_X
+      \omega \wedge \overline{\omega_{0}} = \int_X \omega \wedge \left[
+      -\frac{1}{2i} \overline{\omega_{0}} \right] 
+    \]
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:serre}]
+    \begin{itemize}
+        \item[\(\implies \)] Obvious by Stokes
+        \item[\(\impliedby \)] Let \([\beta] \in H^{{(0,1)}}{(X)}\) such that
+            \(\forall \alpha \in H^{{(0,1)}}{(X)}\), \(\int_X \alpha \wedge
+            \beta = 0\). Note that \(d \beta = \partial \beta\), hence \(\int_X
+            \partial \beta = 0\), which implies that \(\exists f \in
+            C^{\infty}{(X)}\) such that \(\partial \bar{\partial} f = \partial
+            \beta\), hence \(\partial {(\bar{\partial}f - \beta)} = 0\) and thus
+            \(\bar{\partial} {(\bar{\beta} - \partial \bar{f})} = 0\). Note that
+            the argument \(\bar{\beta} - \partial \bar{f} \in
+            H^{{(1,0)}}{(X)}\). We conclude
+            \[
+              \|\bar{\beta} - \partial \bar{f}\|^2 =  \int_X {\left( \bar{\beta}
+                      - \partial \bar{f} \right)} \wedge {\left( \beta -
+                      \bar{\partial} f \right)} = \int_X {\left( \bar{\beta} -
+              \partial \bar{f} \right)} \wedge \beta = 0
+            \]
+            hence \(\bar{\beta} - \partial \bar{f} = 0\) which implies that
+            \(\bar{\partial}f = \beta\) 
+    \end{itemize}
+\end{proof}
+
+\subsection{Application: Existence of meromorphic functions}
+
+\begin{theorem}{}
+    Let \(X\) be a compact connected Riemann Surface. Let \(p \in X\). Then
+    there exists \(f\) meromorphic function on \(X\) non-constant, such that
+    \(f\) has a single pole at \(p\) with \(\mathrm{mult}_p {(f)} \le g + 1\) 
+\end{theorem}
+\begin{proof}{}
+    Let \({(U, \varphi )} \ni p\). Let \(q_{0} \in C^{\infty}{(X)}\) such
+    that \(\mathrm{Supp}{(q_{0})} \subseteq U \) and \(q_{0} \equiv
+    1\) on \(p \in \overline{V} \subseteq U \) and \(V\) open.
+
+    For all \(\mathbf{a}  = {(a_{1}, \dots, a_{g+1} )} \in \mathbb{C}^{g+1}\),
+    set \[g_\mathbf{a}{(z)} := q_{0}{(z)} {\left( \sum_{k=1}^{g+1}
+    \frac{a_k}{\left[ \varphi {(z)} \right] ^{k}}  \right)} \]
+    and extend it by 0 outside \(U\).
+
+    Then \(g_\mathbf{a}\) is meromoprhic on \(V\), but not on \(X\). However, 
+    \[
+      \bar{\partial} g_\mathbf{a} = {\left( \bar{\partial} q_{0} \right)}
+      \sum_{k=1}^{g+q} \frac{a_k}{[\varphi {(z)}]^{k}}
+    \]
+    and this is all equal to 0 on \(V\), since \(g_\mathbf{a} \equiv 1\). This
+    means that \(\bar{\partial} g_\mathbf{a} \in \Omega^{1}{(X)}\).
+
+    The map
+    \begin{align*}
+        \mathbb{C}^{g+1} &\longrightarrow H^{{(0,1)}}{(X)} \\
+         \mathbf{a}  &\longmapsto \left[ \bar{\partial} g_\mathbf{a}  \right] 
+    \end{align*}
+    is a linear map, and \(\dim H^{{(0,1)}}{(X)} = g < g + 1\), hence there
+    exists \(\mathbf{a}  \in \mathbb{C}^{g+1} \sminus \{0\} \) such that
+    \(\left[ \bar{\partial} g_\mathbf{a}  \right] = 0\), hence there exists \(f
+    \in C^{\infty}{(X)}\) such that \(\bar{\partial} g_\mathbf{a} =
+    \bar{\partial} f\) 
+
+    Now observe that \(\mathfrak{f} := g_\mathbf{a} - f\) is holomorphic on \(X \sminus
+    \{p\} \) (\(\bar{\partial} \mathfrak{f} = 0\)). Near \(p\) (on \(V\)), this
+    can be expressed as \(\underbrace{\mathfrak{f}{(z)}}_{\bar{\partial} = 0}  =
+    \underbrace{\sum_{k=1}^{g+1} \frac{a_k}{\left[
+    \varphi {(z)}\right] ^{k}}}_{\bar{\partial} = 0}  +
+    \underbrace{f{(z)}}_\text{holo near \(p\)}\). Hence, \(\mathfrak{f}\) is
+    meromorphic.
+
+\end{proof}
+
+\begin{corollary}{}
+    If \(X\) is a compact connected Riemann Surface and \(g{(X)} = 0\), then \(X
+    \cong \widehat{\mathbb{C}}\) as Riemann Surfaces.
+\end{corollary}
+\begin{proof}{}
+    Since \(g=0\), there exists a meromorphic map with a single simple pole \(f
+    : X \to \widehat{\mathbb{C}}\). Hence \(\deg f = 1\), then \(f\) is an
+    isomorphism.
+\end{proof}
+
+\begin{eser}{Variant}
+    Let \(X\) compact connected Riemann Surface with genus \(g\).
+    Show that given \(p_{1}, \dots, p_{g+1} \) different points on \(X\), then
+    there exists a meromorphic function such that the set of poles is a subset
+    of \(\{p_{1}, \dots, p_{g+1}\} \) and all poles are simple.
+\end{eser}
+
+
 

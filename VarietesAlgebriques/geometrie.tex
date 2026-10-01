@@ -281,6 +281,100 @@ et donc, si \(\Span{f_{1}, \dots, f_{r}} = \mathcal{I}{(V)}\)
     \overline{X_{n}}}\) 
 \end{example}
 
+\begin{lemmao}{}
+    Si \(V \subseteq k^{n}\) une VA affine et \(v \in V\), alors
+    \[
+      T_v V \cong \mathrm{Der}_k {\left( \mathcal{O}{(V)}, k{(v)} \right)} 
+    \]
+\end{lemmao}
+
+Afin de construire l'isomorphisme, on va definir les nombres duaux \(R = k[X] /
+{(X^2)} = k[\varepsilon]\) avec \(\varepsilon = \bar{X}\) et \(\varepsilon^2 =
+0\).
+
+Pour toute \(k\)-alg (pas nécessairement réduite), on pose \(V{(R)} =
+\mathrm{Hom}_{k\text{-alg}} {\left( \mathcal{O}{(V)}, R \right)} \). Si \(R\) TF
+et réduite, alors \(V{(R)} = \mathrm{Hom}_{\text{VA}} {(\mathrm{Spm}{(R)},
+V)}\). Alors \(R \mapsto V{(R)}\) est le functeur \emph{des points de \(V\)}. Si
+\(V = V {(f_{1}, \dots, f_{n})} \subseteq \mathbb{A}^{n} \), alors \(V{(R)} =
+\{\text{solutions à coefficients dans \(R\) du système \(f_{1}=\dots=f_{n} =
+0\)}\}\).
+
+Dans les nombres duaux, 
+\[V{(k[\varepsilon])} = \{\mathbf{x} = {(x_{i} + \varepsilon y_{i})} \in
+k[\varepsilon] : f_{1}{(\mathbf{x} )} = \dots = f_{n}{(\mathbf{x} )} = 0\} \]
+et 
+\[
+  f{(\mathbf{x} )} = f{(\mathbf{x} )} + \varepsilon \sum_i \frac{\partial
+  f}{\partial i} y_{i}
+\]
+donc \(\mathbf{x} \in V{(k[\varepsilon])}\) if and only if \(x \in V{(k)}\) et
+\(y \in T_x V\) 
+
+
+\begin{lemma}{}
+    Soit \(A\) une \(k\)-algèbre et \(f : A \to k[\varepsilon]\) une application
+    \(k\)-linéaire. Alors \(f{(a)} = f_{1}{(a)} + f_{2}{(a)} \varepsilon\) où
+    \(f_{1}, f_{2}\) sont \(A \to k\) \(k\)-linéaire. Alors les suivantes sont
+    équivalentes
+\begin{enumerate}[label = \roman*)]
+    \item \(f\) est un morphism de \(k\)-algèbres
+    \item \(f_{1}\) est un morphism de \(k\)-algèbres \emph{et} \(f_{2} \in
+        \mathrm{Der}_k {(A, k{(f_{1})})}\) 
+\end{enumerate}
+\end{lemma}
+\begin{proof}{}
+    \[
+      f{(a)}f{(b)} = {\left( f_{1}{(a)} + \varepsilon f_{2}{(a)} \right)}
+      {\left( f_{1}{(b)} + \varepsilon f_{2}{(b)} \right)} = f_{1}{(a)}
+      f_{1}{(b)} + \varepsilon {\left( f_{1}{(a)} f_{2}{(b)} + f_{2}{(a)}
+      f_{1}{(b)} \right)} 
+    \]
+    et noter che \(i) \iff f{(a)}f{(b)} = f{(ab)}\) et \(ii) \iff f_{1}{(a)}
+    f_{1}{(b)} = f_{1}{(ab)}\) \emph{et} \(f_{2}\) a la propriété montré.
+\end{proof}
+
+\begin{proof}[Démonstration lemma]
+    Si on considére l'évaluation 
+    \begin{align*}
+        \mathrm{ev} : V{(k[\varepsilon])} &\longrightarrow V{(k)} = V \\
+        \varepsilon &\longmapsto \mathrm{ev} (\varepsilon) = 0
+    \end{align*}
+    \(k[\varepsilon] = k[X] / {(X^2)}\) est l'anneu des nombre duaux et
+    \(V{(k[\varepsilon])} = \mathrm{Hom}_{k\text{-alg}} {(\mathcal{O}{(V)},
+    k[\varepsilon])} = \mathrm{Hom}_\text{VA} {(\mathrm{Spm {(k[\varepsilon])}},
+    V)} \) est la variété des points de \(V\) en \(k[\varepsilon]\), alors
+    \[
+      T_v V = \mathrm{ev}^{-1} {(\{v\} )}
+    \]
+
+\end{proof}
+
+
+\begin{theorem}{}
+    Soit \(V\) une VA. Alors \(\forall P \in V\) on a
+    \[
+      \dim T_P V \ge \dim_P V
+    \]
+    avec égalité pour \(P \in U_\text{lisse} \) un ouvert dense.
+\end{theorem}
+\begin{proof}[Dém. \(V\) irréductible]
+    On sait que \(d = \dim V = \dim_P V\). Nous savons déjà que \(\{P \in \dim_k
+    T_P V \ge s\} \) est fermé
+\end{proof}
+
+\section{Points non-singulers}
+Soit \(V\) une VA et \(P \in V\) et \(M = M_{V, P} \subseteq \mathcal{O}_{V, P}
+\). Alors soit \({(\overline{x_{1}}, \dots,
+\overline{x_{n}})}\) une base du \(k\)-space vectoriel \(M / M^2\). ALors \(M =
+\Span{x_{1}, \dots, x_{n}} \) comme \(\varnothing_{V, P} \)-module (Nakayama).
+
+Si \(P \in V\) est non-singulier, alors \(N = \dim_P V = d\). Dans ce cas, on
+dit que \({(x_{1}, \dots, x_d)}\) forment un système de paramètres réguilers
+
+\begin{lemma}[p. 37]
+    Soit \({(f_{1}, \dots, f_d)}\) un système de paramètres réguliers en \(P\).
+\end{lemma}
 
 
 

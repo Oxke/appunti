@@ -203,3 +203,260 @@ absolute value of \(K\). If \({(a_{n})}_n \in R\), then \(a_{n} \to
     
 \end{eser}
 
+\subsection{Extensions of complete valued fields}
+
+\begin{definition}{}
+    Let \({(K, |\cdot |)}\) be a valued field. Let \(V\) be a finite dimensional
+    \(K\)-vector space. A norm \(\|\cdot \|\) on \(V\) is a map \(\|\cdot \| :
+    V \to \mathbb{R}_{\ge 0} \) such that \(\forall x \in V\), \(\|x\| = 0 \iff
+    x = 0\), it homogeneous and sublinear.
+
+    Another norm \(\|\cdot \|'\) is equivalent to \(\|\cdot \|\) if there exist
+    constants \(C_{1}, C_{2} \in \mathbb{R}\) such that \(C_{1}\|\cdot \|' \le
+    \|\cdot \| \le C_{2} \|\cdot \|'\) 
+\end{definition}
+
+\begin{proposition}{}
+    If \(\dim V < \infty\) and \(K\) is complete, then all norms on \(V\) are
+    equivalent. In particular, whatever the norm on \(V\), \(V\) is complete.
+\end{proposition}
+\begin{proof}{}
+    Seen a lot of times, just use \(\|\cdot \|_1\).
+\end{proof}
+
+\begin{theorem}{}
+    Let \({(K, |\cdot |)}\) be a complete valued field. Let \(L\) be a finite
+    extension. There exists a unique extension \(|\cdot |_L\) of \(|\cdot |\).
+    For all \(x \in L\), 
+    \[
+    |x|_L = {| N_{L / K} {(x)} |}^{1 / [L:K]}
+    \]
+    for all \(x \in L\) and \({(L, |\cdot |_L)}\) is complete.
+\end{theorem}
+\begin{remark}{}
+    The archimedean case immediately follows from Ostrowski's theorem.
+\end{remark}
+\begin{proof}[Proof (assuming \({(K, |\cdot |)}\) discrete
+    valued field and \(L / K\)separate)] First let's prove \textbf{existence}.
+    Let \(v\) be a valuation on \(K\). The valuation ring \(\mathcal{O}\) of
+    \(K\) is a PID. So its integral closure \(B\) in \(L\) is a Dedekind domain.
+    We moreover know that \(B\) contains a prime ideal \(\mathfrak{q}\) lying
+    above the maximal ideal \(\mathfrak{p}\) of \(\mathcal{O}\). We have the
+    \(\mathfrak{q}\)-adic valuation \(v_\mathfrak{q}\) on \(L\), which satisfies
+    \( v_\mathfrak{q}|_K = e {(\mathfrak{q}|\mathfrak{p})} v \)
+    so \(\frac{v_\mathfrak{q}}{e{(\mathfrak{q}|\mathfrak{p})}}\) is a discrete
+    complete valuation on \(L\) that extends \(v\).
+
+    For the \textbf{uniqueness}, let \(|\cdot |_1\) and \(|\cdot|_2\) be two
+    absolute values on \(L\) extending \(|\cdot |\). Then \({(L, |\cdot |_1)}\)
+    and \({(L,|\cdot |_2)}\) are normed spaces over \({(K, |\cdot |)}\). Since
+    \({(K, |\cdot |)}\) is complete and \(L/K\) are finite, \(|\cdot |_1\) and
+    \(|\cdot |_2\) are equivalent \emph{norms}, hence equivalent absolute
+    values.
+    So \(|\cdot|_1 = |\cdot|_2^{s}\) for some \(s\ge 0\). Since \(|\cdot |_1 |_K
+    = |\cdot | |_K\), then \(s=1\), hence \(|\cdot |_1 = |\cdot |_2\).
+
+    Let's call \(|\cdot |_L\) the unique extension of \(|\cdot |\) to \(L\). We
+    want to prove the equality in the thesis. Let \(M / K\) be the Galois
+    closure of \(L / K\), let \(|\cdot |_M\) be the unique extension of \(|\cdot
+    |\) to \(M\). For \(\sigma \in \mathrm{Gal}{(M /K)}\), since \(|\cdot |_M\)
+    is the \emph{only} extension of \(|\cdot |\) to \(M\), then \(|\cdot |_M
+    \circ \sigma = |\cdot |_M\). So, for \(x \in L\),
+    \[
+        |x|_L = {\left( |x|_L ^{[L:K} \right)}^{1 / [L:K]} = {\left(
+        \prod_{\sigma \in \mathrm{Hom}_K {(L, M)}} |\sigma{(x)}|_L \right)} ^{ 1
+    / [L:K]} = {|N_{L / K}|}^{1 / [L : K]}
+    \]
+
+\end{proof}
+
+\begin{corollary}{}
+    Let \({(K, |\cdot |)}\) be a valued field with completion \({(\widehat{K},
+    |\cdot |_{\widehat{K}} )}\). Let \(\Omega\) be an algebraic closure of
+    \(\widehat{K}\). Let \(L / K\) be a finite extension. Then
+\begin{enumerate}[label = \arabic*.]
+    \item The absolute value \(|\cdot |_{\widehat{K}}\) has a unique extension
+        to \(\Omega\), \(|\cdot|_{\Omega} \) 
+    \item The absolute values on \(L\) extending \(|\cdot |\) are the \(|\cdot
+        |_\Omega \circ \sigma\), with \(\sigma \in  \mathrm{Hom}_K {(L, \Omega)}\) 
+    \item For \(\sigma, \tau \in \mathrm{Hom}_K{(L, \Omega)}\), we have \(|\cdot
+        |_\Omega \circ \sigma = |\cdot |_\Omega \circ \tau\) if and only if
+        there exists \(\rho \in \mathrm{Gal}{( \Omega / \widehat{K})}\) such
+        that \(\tau = \rho \circ \sigma\) 
+\end{enumerate}
+\end{corollary}
+\begin{proof}{} \(\) 
+\begin{enumerate}[label = \arabic*.]
+    \item For each finite subextension \(M / \widehat{K}\) of \(\Omega /
+        \widehat{K}\), the absolute value \(|\cdot |_\widehat{K}\) has a unique
+        extension \(|\cdot |_M\) to \(M\). If \(M \subseteq N \) are two finite
+        extensions of \(\widehat{K}\) contained in \(\Omega\), then 
+        \[
+          |\cdot |_N \big|_M = |\cdot |_M
+        \]
+        This allows to define and absolute value \(|\cdot |_\Omega\) on
+        \(\Omega\) extending \(|\cdot |_\widehat{K}\). If \(|\cdot |_{\Omega}
+        ^{\prime}\) is another one, then for each \(\Omega / M / \widehat{K}\)
+        finite, 
+        \[
+          |\cdot |^{\prime}_{\Omega} \big|_M = |\cdot |_M = |\cdot |_\Omega
+          \big|_M
+        \]
+        So \(|\cdot |^{\prime}_\Omega = |\cdot |_\Omega\) 
+    \item Let \(|\cdot |_L\) be some extension of \(|\cdot |\) on \(L\). Let
+        \({\left(\widehat{L}, |\cdot |_\widehat{L}\right)}\) be the completion of \({(L,
+        |\cdot |_L)}\). The completion \(\widehat{K}\) of \(K\) identifies with
+        the closure of \(K\) in \(\widehat{L}\).
+    \[
+\begin{tikzcd}
+	& {\widehat{L}} & \\
+	L & {L\widehat{K}} & {\widehat{K}} \\
+	& K
+	\arrow[no head, from=2-1, to=1-2]
+	\arrow[no head, from=2-1, to=2-2]
+	\arrow[no head, from=2-3, to=1-2]
+	\arrow[no head, from=2-3, to=2-2]
+	\arrow[no head, from=3-2, to=2-1]
+	\arrow[no head, from=3-2, to=2-3]
+	\arrow[no head, from=2-2, to=1-2]
+\end{tikzcd}
+    \]
+        The know that \(L\widehat{K}\) is complete (finite dimensional over
+        \(\widehat{K}\)) and contains \(L\) as a dense subfield, hence
+        \(L\widehat{K} = \widehat{L}\).
+
+        So \(\widehat{L} / \widehat{K}\) is finite and we can find \(\sigma \in
+        \mathrm{Hom}_\widehat{K} {(\widehat{L}, \Omega)}\) such that \(|\cdot
+        |_\widehat{L}\) and \(|\cdot |_\Omega \circ \sigma\) are absolute values
+        on \(\widehat{L}\) extending \(|\cdot |_\widehat{K}\). So
+        \[
+        |\cdot |_{\widehat{L}} = |\cdot |_\Omega \circ \sigma \quad \text{ and }
+          \quad |\cdot |_L = |\cdot |_\Omega \circ \sigma|_L
+        \]
+    \item Assume \(\sigma = \rho \circ \tau\), with \(\rho \in
+        \mathrm{Aut}{(\Omega / \widehat{K})}\). Then \(|\cdot |_\Omega \circ
+        \sigma = |\cdot |_\Omega \circ \rho \circ \tau\). But \(|\cdot |_\Omega
+        \circ \rho\) is an absolute value on \(\Omega\). So, by 1), \(|\cdot
+        |_\Omega \circ \rho = |\cdot |_\Omega\). So \(|\cdot |_\Omega \circ
+        \sigma = |\cdot |_\Omega \circ \tau\).
+
+        Conversely, assume \(|\cdot |_\Omega \circ \sigma = |\cdot |_\Omega
+        \circ \tau\). Then set \(\rho_0 := \tau \circ \sigma^{-1} : \sigma {(L)}
+        \to \tau {(L)}\). We claim that \(\rho_{0}\) can be extended to some
+        \(\widehat{\rho_{0}} : \sigma{(L)} \widehat{K} \to \tau{(L)}
+        \widehat{K}\). To do so, take \(x \in \sigma{(L)}\widehat{K} \to \tau
+        {(L)} \widehat{K}\) continuously.
+        To do so, take \(x \in \sigma{(L)}\widehat{K}\) and choose
+        \({(x_{n})}_n\) a sequence in \(\sigma{(L)}\) converging to \(x\). For
+        \(m, n \ge 1\), 
+        \begin{align*}
+            |\rho_{0}{(x_{m})} - \rho_{0}{(x_{n})}|_{\Omega} &= |\tau \circ
+            \sigma^{-1}{(x_{m})} - \tau \circ \sigma^{-1}{(x_{n})}|_\Omega =
+            |\tau \circ \sigma^{-1}{(x_{m} - x_{n})}|_{W} = \\
+             &= |\sigma \circ \sigma^{-1} {(x_{m} - x_{n})} |_\Omega = |x_{m} -
+             x_{n}|_\Omega
+        \end{align*}
+        Hence \({(\rho_{0}{(x_{n})})}_n\) is Cauchy, hence it has a limit
+        \(\rho_{0}{(x)}\) in \(\sigma{(L)}{(\widehat{K})}\) (which is complete).
+
+        One then checks that \(\widehat{\rho_{0}}{(x)}\) only depends on \(x\)
+        and that \(\widehat{\rho_{0}}\) is a \(\widehat{K}\)-isomorphism
+        (exercise). We end by extending \(\widehat{\rho_{0}}\) to some \(\rho
+        \in \mathrm{Aut}{(\Omega / \widehat{K})}\). Then we can conclude that
+        \[
+          \sigma \circ \rho = \tau
+        \]
+    
+\end{enumerate}
+
+\end{proof}
+
+\section{Ramification Theory}
+\subsection{Complete discrete valued fields}
+
+Here we fix \({(K, |\cdot |_K)}\) a complete discretely valued field. We denote
+by \(v_K\) the associated valuation. Let \(L\) be a finite extension of \(K\).
+We denote by \(|\cdot | = |\cdot |_L\) the extension of \(|\cdot |_K\) to \(L\)
+and \(v = v_L\) the extension of \(v_K\) to \(L\).
+
+We assume \(L / K\) is \emph{separable} (not always needed, but leads to easier
+proofs).
+
+\begin{lemma}{}
+    The valuation ring \(\mathcal{O}_L\) of \(L\) is the integral closure of the
+    valuation ring \(\mathcal{O}_K\) of \(K\) in \(L\).
+\end{lemma}
+
+\begin{proof}{}
+    Since \(\mathcal{O}_L\) is integrally closed, it contains the integral
+    closure of \(\mathcal{O}_K\) in \(L\). Take \(x \in \mathcal{O}_L\). Since
+    \(|\cdot |_L = {\left( |\cdot |_K \circ N_{L / K} \right)}^{1 / [L : K]} \).
+    We have
+    \[1 \ge  |N_{L / K} {(x)}|_K = \left| \prod_{\sigma \in \mathrm{Hom}_{K}
+    {(L, K^{\text{sep}})}} \sigma{(x)} \right|_K \] 
+
+    Let \(\Omega\) be an algebraic closure of \(K\). Let \(|\cdot |_\Omega\) be
+    the extension of \(|\cdot |_K\) to \(\Omega\). By uniqueness, for \(\sigma
+    \in \mathrm{Hom}_K{(L, \Omega)}\), we have that \(|\sigma{(x)}|_\Omega =
+    |x|_{\Omega} \). So \(N_{L/K}{(x)}|_K = |x|_L^{[L : K]} \), and so
+    \(|\sigma{(x)}|_L \le 1\) for all \(\sigma \in \mathrm{Hom}_K {(L,
+    \Omega)}\).
+
+    Using the relations of roots and coefficients, we deduce that the minimal
+    polynomial \(\mu_x\) of \(x\) is in \(\mathcal{O}_K[X]\), so \(x\) is
+    integral over \(\mathcal{O}_K\).
+\end{proof}
+
+In the following, we will use the following notations:
+\begin{itemize}[label = --]
+    \item \(\mathcal{O}_K, \mathcal{O}_L\) valuation rings
+    \item \(\mathfrak{p}_K, \mathfrak{p}_L\) maximal ideals
+    \item \(\kappa_K, \kappa_L\) the residue fields
+    \item \(e = e{(L/K)} = e {(\mathfrak{p}_L | \mathfrak{p}_K)}\) the
+        ramification index: \(\mathfrak{p}_K \mathcal{O}_L = \mathfrak{p}_L^{e}\) 
+    \item \(f = f{(L / K)} = f{(\mathfrak{p}_L | \mathfrak{p}_K)}\) the residual
+        degree \(f = [\kappa_L : \kappa_K]\) 
+\end{itemize}
+\begin{remark}{}
+    \(e = \left[ v_L{(L^{\times })} : v_K{(\kappa^{\times })} \right] \) 
+\end{remark}
+And recall that \(ef = [L : K]\), that \(L / K\) unramified means that
+\(\kappa_L / \kappa_K\) is separable and \(e=1\), and that \(L / K\) is totally
+ramified if \(f=1\) 
+
+\begin{lemma}{}
+    Take \(a \in \mathcal{O}_L\). Assume that \(f{(a)} = 0\) for some monic \(f
+    \in \mathcal{O}_K[X]\) and that \(\bar{a} \in \kappa_L\) is a simple root of
+    \(\bar{f} \in \kappa_K[X]\). Then \(\kappa{(a)} / \kappa\) is unramified,
+    i.e.
+    \[
+      \kappa_{K{(a)}} = \kappa_K {(\bar{a})} \quad \text{ and } \quad \left[
+      \kappa_{K{(a)}} : \kappa_K \right] = \left[ K{(a)} : K \right] 
+    \]
+\end{lemma}
+\begin{proof}{}
+    Let \(\bar{g} \in \kappa_K[X]\) be the minimal polynomial of \(\bar{a}\).
+    Let \(g \in \mathcal{O}_K[X]\) be a monic lifting. Since \(\bar{a}\) is a
+    simple root of \(\bar{f}\), it is also a simple root of \(\bar{g}\). It is
+    separable over \(\kappa_K\), so \(\kappa_K{(\bar{a})} / \kappa_K\) is
+    separable, and by Hensel's lemma we can find \(b \in \mathcal{O}_L\) such
+    that \(g{(b)} = 0\) and \(\bar{b} = \bar{a}\).
+    \[
+      \deg g = \deg \bar{g} \le  \left[ \kappa_{K{(b)}} : \kappa \right] \le  \left[
+      K{(b)} : K \right] \le  \deg g
+    \]
+    So \([K{(b)} : K] = \left[ \kappa_{K{(b)}} : \kappa_K \right] \). So
+    \(K{(b)} / K\) is unramified and \(\kappa_{K{(b)}} = \kappa{(\bar{a})}\).
+    Applying Hensel's lemma to \(f\) over \(K{(b)}\), we can find a root \(c \in
+    \mathcal{O}_{K{(b)}} \) of \(f\) lifting \(\bar{a}\). Such a root is
+    necessarily unique. So we get that \(c=a\), hence \(a \in K{(b)}\).
+
+    Finally
+    \[
+      \deg \bar{g} \overset{\bar{a} \in \kappa_{K{(a)}} }{\le }  \left[
+      \kappa_{K{(a)}} : \kappa_K \right] \le \left[ K{(a)} : K \right] \le
+      \left[ K{(b)} : K \right] = \deg g
+    \]
+    Hence \(K{(a)} = K{(b)}\) 
+\end{proof}
+
